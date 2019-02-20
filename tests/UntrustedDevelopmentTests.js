@@ -37,4 +37,4 @@ gpii.tests.untrusted.development.testDefs = fluid.transform(gpii.tests.developme
     return testDef;
 });
 
-gpii.test.bootstrapServer(gpii.tests.untrusted.development.testDefs);
+gpii.test.runCouchTestDefs(gpii.tests.untrusted.development.testDefs);

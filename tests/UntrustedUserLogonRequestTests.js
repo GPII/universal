@@ -13,7 +13,6 @@
 "use strict";
 
 var fluid = require("infusion"),
-    kettle = fluid.registerNamespace("kettle"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.require("%gpii-universal");
@@ -25,7 +24,7 @@ gpii.loadTestingSupport();
 fluid.registerNamespace("gpii.tests.untrusted.userLogonRequest");
 
 // 1. Tests for general user logon request tests
-gpii.test.bootstrapServer(gpii.tests.userLogonRequest.buildTestDefs(gpii.tests.userLogonRequest.testDefs, "untrusted"));
+gpii.test.runCouchTestDefs(gpii.tests.userLogonRequest.buildTestDefs(gpii.tests.userLogonRequest.testDefs, "untrusted"));
 
 // 2. Specific tests for untrusted environment only.
 // Test the user report on NoConnection when the cloud cannot be accessed
@@ -38,53 +37,20 @@ gpii.tests.untrusted.userLogonRequest.buildTestDefs = function (testDefs) {
     return fluid.transform(testDefs, function (testDef) {
         return fluid.extend(true, {
             config: config,
-            gpiiKey: testDefs.gpiiKey || gpii.tests.userLogonRequest.gpiiKey,
-            distributeOptions: {
-                "flowManager.escalate": {
-                    "record": {
-                        "resetAtStartSuccess.escalate": "{testEnvironment}.events.resetAtStartSuccess"
-                    },
-                    "target": "{that gpii.flowManager.local}.options.listeners"
-                }
-            }
+            gpiiKey: testDefs.gpiiKey || gpii.tests.userLogonRequest.gpiiKey
         }, gpii.tests.userLogonRequest.commonTestConfig, testDef);
     });
-};
-
-// Override the original "kettle.test.testDefToServerEnvironment" function provided by kettle library to boil a new
-// aggregate event "onAllReady" that listens to both "onServerReady" and "{flowManager}.events.resetAtStartSuccess" events
-kettle.test.testDefToServerEnvironment = function (testDef) {
-    var configurationName = testDef.configType || kettle.config.createDefaults(testDef.config);
-    return {
-        type: "kettle.test.serverEnvironment",
-        options: {
-            configurationName: configurationName,
-            components: {
-                tests: {
-                    options: kettle.test.testDefToCaseHolder(configurationName, testDef)
-                }
-            },
-            events: {
-                resetAtStartSuccess: null
-            }
-        }
-    };
 };
 
 gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests = [{
     name: "GPII-3529: report NoConnection user error when no cloud connection",
     expect: 2,
     sequence: [{
-        event: "{kettle.test.serverEnvironment}.events.resetAtStartSuccess",
-        listener: "fluid.identity"
-    }, {
         // standard login without a cloud
-        func: "gpii.tests.invokePromiseProducer",
-        args: ["{lifecycleManager}.performLogin", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
-    }, {
-        event: "{that}.events.onError",
-        listener: "gpii.tests.userLogonRequest.testUserError",
-        args: ["{arguments}.0",
+        task: "{lifecycleManager}.performLogin",
+        args: [gpii.tests.userLogonRequest.gpiiKey],
+        reject: "gpii.tests.userLogonRequest.testUserError",
+        rejectArgs: ["{arguments}.0",
             {
                 "code": "ECONNREFUSED",
                 "errno": "ECONNREFUSED",
@@ -110,4 +76,4 @@ gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests = [{
     }]
 }];
 
-kettle.test.bootstrapServer(gpii.tests.untrusted.userLogonRequest.buildTestDefs(gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests));
+gpii.test.runCouchTestDefs(gpii.tests.untrusted.userLogonRequest.buildTestDefs(gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests));

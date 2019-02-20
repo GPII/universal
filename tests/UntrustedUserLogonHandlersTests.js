@@ -41,4 +41,4 @@ gpii.tests.untrusted.userLogonHandling.testDefs =
         return testDef;
     });
 
-gpii.test.bootstrapServer(gpii.tests.untrusted.userLogonHandling.testDefs);
+gpii.test.runCouchTestDefs(gpii.tests.untrusted.userLogonHandling.testDefs);

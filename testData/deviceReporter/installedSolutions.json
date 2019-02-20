@@ -33,6 +33,10 @@
     },
 
     {
+        "id": "com.freedomscientific.magic"
+    },
+
+    {
         "id": "com.microsoft.windows.cursors"
     },
 
@@ -61,6 +65,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.mouseSettings"
+    },
+
+    {
         "id": "com.microsoft.windows.mouseTrailing"
     },
 
@@ -86,6 +94,10 @@
 
     {
         "id": "com.microsoft.windows.stickyKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.touchPadSettings"
     },
 
     {
@@ -148,5 +160,7 @@
         "id": "org.gnome.orca"
     },
 
-    {"id": "org.nvda-project"}
+    {
+        "id": "org.nvda-project"
+    }
 ]

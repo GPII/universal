@@ -9,7 +9,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 // This script reads files from an input directory that contains preferences JSON5 files and convert them to JSON files of GPII keys and
-// preferences safes suitable for direct loading into CouchDB or PouchDB, which comply with the new GPII data model:
+// preferences safes suitable for direct loading into CouchDB, which comply with the new GPII data model:
 // https://wiki.gpii.net/w/Keys,_KeyTokens,_and_Preferences in the target directory
 // Usage: node scripts/convertPrefs.js {input_path} {target_path} {prefsSafeType}, where {prefsSafeType} is one of "snapset" or "user" and defaults to "user"
 //
@@ -21,8 +21,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fs = require("fs"),
     rimraf = require("rimraf"),
     mkdirp = require("mkdirp"),
-    JSON5 = require("json5");
+    JSON5 = require("json5"),
+    fluid = require("infusion"),
+    gpii = fluid.registerNamespace("gpii");
 
+require("./shared/prefsSetsDbUtils.js");
 var inputDir = process.argv[2];
 var targetDir = process.argv[3];
 var prefsSafeType = process.argv[4] || "user";
@@ -44,38 +47,11 @@ rimraf(targetDir, function () {
     mkdirp(targetDir, function () {
         filenames.forEach(function (filename) {
             if (filename.endsWith(".json5")) {
-                var gpiiKey = filename.substr(0, filename.length - 6);
+                var gpiiKeyId = filename.substr(0, filename.length - 6);
                 var preferences = fs.readFileSync(inputDir + "/" + filename, "utf-8");
-                var currentTime = new Date().toISOString();
-                var prefsSafeId = "prefsSafe-" + gpiiKey;
-
-                var oneGpiiKey = {
-                    "_id": gpiiKey,
-                    "type": "gpiiKey",
-                    "schemaVersion": "0.1",
-                    "prefsSafeId": prefsSafeId,
-                    "prefsSetId": "gpii-default",
-                    "revoked": false,
-                    "revokedReason": null,
-                    "timestampCreated": currentTime,
-                    "timestampUpdated": null
-                };
-                gpiiKeys.push(oneGpiiKey);
-
-                var onePrefsSafe = {
-                    "_id": prefsSafeId,
-                    "type": "prefsSafe",
-                    "schemaVersion": "0.1",
-                    "prefsSafeType": prefsSafeType,
-                    "name": gpiiKey,
-                    "password": null,
-                    "email": null,
-                    "preferences": JSON5.parse(preferences),
-                    "timestampCreated": currentTime,
-                    "timestampUpdated": null
-                };
-                prefsSafes.push(onePrefsSafe);
-
+                var keyData = gpii.prefsSetsDbUtils.generateKeyData(gpiiKeyId, JSON5.parse(preferences), prefsSafeType);
+                gpiiKeys.push(keyData.gpiiKey);
+                prefsSafes.push(keyData.prefsSafe);
             }
         });
 

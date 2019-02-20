@@ -21,4 +21,4 @@ var fluid = require("infusion"),
 
 require("./shared/UserLogonHandlersTestDefs.js");
 
-gpii.test.bootstrapServer(gpii.tests.userLogonHandlers.buildTestDefs(gpii.tests.userLogonHandlers.testDefs));
+gpii.test.runCouchTestDefs(gpii.tests.userLogonHandlers.buildTestDefs(gpii.tests.userLogonHandlers.testDefs));

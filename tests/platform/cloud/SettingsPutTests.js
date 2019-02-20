@@ -58,88 +58,122 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.requests", {
 
 // For successful workflows that update user settings from /settings endpoint
 // using access tokens granted by /access_token endpoint
-gpii.tests.cloud.oauth2.settingsPut.mainSequence = [
-    {
-        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
-        args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
-    },
-    {
-        event: "{accessTokenRequest}.events.onComplete",
-        listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse",
-        args: ["{arguments}.0", "{accessTokenRequest}"]
-    },
-    {
-        funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
-        args: ["{settingsPutRequest}", "{accessTokenRequest}.access_token", "{testCaseHolder}.options.updatedPrefsSet"]
-    },
-    {
-        event: "{settingsPutRequest}.events.onComplete",
-        listener: "gpii.tests.cloud.oauth2.settingsPut.verifyUpdateResponse",
-        args: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey", "{testCaseHolder}.options.expectedMsg"]
-    }
-];
+fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.mainSequence", {
+    gradeNames: ["fluid.test.sequenceElement"],
+    sequence: [
+        {
+            funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
+            args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
+        },
+        {
+            event: "{accessTokenRequest}.events.onComplete",
+            listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse",
+            args: ["{arguments}.0", "{accessTokenRequest}"]
+        },
+        {
+            funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
+            args: ["{settingsPutRequest}", "{accessTokenRequest}.access_token", "{testCaseHolder}.options.updatedPrefsSet"]
+        },
+        {
+            event: "{settingsPutRequest}.events.onComplete",
+            listener: "gpii.tests.cloud.oauth2.settingsPut.verifyUpdateResponse",
+            args: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey", "{testCaseHolder}.options.expectedMsg"]
+        }
+    ]
+});
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.mainSequence", {
-    gradeNames: ["gpii.test.disruption"],
+    gradeNames: ["gpii.test.disruption.sequenceGrade"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsPut.requests",
-    sequenceName: "gpii.tests.cloud.oauth2.settingsPut.mainSequence"
+    sequenceElements: {
+        mainSequence: {
+            priority: "after:startServer",
+            gradeNames: "gpii.tests.cloud.oauth2.settingsPut.mainSequence"
+        }
+    }
 });
 
 // For failed test case that are rejected by /settings endpoint
 // 1. rejected when requesting /settings without providing an access token
-gpii.tests.cloud.oauth2.settingsPut.settingsPutNoAccessTokenSequence = [
-    {
-        func: "{settingsPutRequest}.send"
-    },
-    {
-        event: "{settingsPutRequest}.events.onComplete",
-        listener: "gpii.test.verifyStatusCodeResponse",
-        args: ["{arguments}.0", "{settingsPutRequest}", "{testCaseHolder}.options.expectedStatusCode"]
-    }
-];
+fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutNoAccessTokenSequence", {
+    gradeNames: ["fluid.test.sequenceElement"],
+    sequence: [
+        {
+            func: "{settingsPutRequest}.send"
+        },
+        {
+            event: "{settingsPutRequest}.events.onComplete",
+            listener: "gpii.test.verifyStatusCodeResponse",
+            args: ["{arguments}.0", "{settingsPutRequest}", "{testCaseHolder}.options.expectedStatusCode"]
+        }
+    ]
+});
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNoAccessTokenSequence", {
-    gradeNames: ["gpii.test.disruption"],
+    gradeNames: ["gpii.test.disruption.sequenceGrade"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsPut.requests",
-    sequenceName: "gpii.tests.cloud.oauth2.settingsPut.settingsPutNoAccessTokenSequence"
+    sequenceElements: {
+        settingsPutNoAccessTokenSequence: {
+            priority: "after:startServer",
+            gradeNames: "gpii.tests.cloud.oauth2.settingsPut.settingsPutNoAccessTokenSequence"
+        }
+    }
 });
 
 // 2. rejected when requesting /settings by providing a wrong access token
-gpii.tests.cloud.oauth2.settingsPut.settingsPutWrongAccessTokenSequence = [
-    {
-        funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
-        args: ["{settingsPutRequest}", "a_wrong_access_token"]
-    },
-    {
-        event: "{settingsPutRequest}.events.onComplete",
-        listener: "gpii.test.verifyStatusCodeResponse",
-        args: ["{arguments}.0", "{settingsPutRequest}", "{testCaseHolder}.options.expectedStatusCode"]
-    }
-];
+fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutWrongAccessTokenSequence", {
+    gradeNames: ["fluid.test.sequenceElement"],
+    sequence: [
+        {
+            funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
+            args: ["{settingsPutRequest}", "a_wrong_access_token"]
+        },
+        {
+            event: "{settingsPutRequest}.events.onComplete",
+            listener: "gpii.test.verifyStatusCodeResponse",
+            args: ["{arguments}.0", "{settingsPutRequest}", "{testCaseHolder}.options.expectedStatusCode"]
+        }
+    ]
+});
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutWrongAccessTokenSequence", {
-    gradeNames: ["gpii.test.disruption"],
+    gradeNames: ["gpii.test.disruption.sequenceGrade"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsPut.requests",
-    sequenceName: "gpii.tests.cloud.oauth2.settingsPut.settingsPutWrongAccessTokenSequence"
+    sequenceElements: {
+        settingsPutWrongAccessTokenSequence: {
+            priority: "after:startServer",
+            gradeNames: "gpii.tests.cloud.oauth2.settingsPut.settingsPutWrongAccessTokenSequence"
+        }
+    }
+
 });
 
 // 3. rejected by requesting /settings with a GPII key that does not exist in the database
-gpii.tests.cloud.oauth2.settingsPut.settingsPutNonExistentGpiiKey = [
-    {
-        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
-        args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
-    },
-    {
-        event: "{accessTokenRequest}.events.onComplete",
-        listener: "gpii.test.verifyStatusCodeResponse",
-        args: ["{arguments}.0", "{accessTokenRequest}", "{testCaseHolder}.options.expectedStatusCode"]
-    }
-];
+fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutNonExistentGpiiKey", {
+    gradeNames: ["fluid.test.sequenceElement"],
+    sequence: [
+        {
+            funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
+            args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
+        },
+        {
+            event: "{accessTokenRequest}.events.onComplete",
+            listener: "gpii.test.verifyStatusCodeResponse",
+            args: ["{arguments}.0", "{accessTokenRequest}", "{testCaseHolder}.options.expectedStatusCode"]
+        }
+    ]
+});
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNonExistentGpiiKey", {
-    gradeNames: ["gpii.test.disruption"],
+    gradeNames: ["gpii.test.disruption.sequenceGrade"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsPut.requests",
-    sequenceName: "gpii.tests.cloud.oauth2.settingsPut.settingsPutNonExistentGpiiKey"
+    sequenceElements: {
+        settingsPutNonExistentGpiiKey: {
+            priority: "after:startServer",
+            gradeNames: "gpii.tests.cloud.oauth2.settingsPut.settingsPutNonExistentGpiiKey"
+        }
+    }
+
 });
 
 // Main tests that contain all test cases
@@ -161,7 +195,7 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
             expectedMsg: gpii.flowManager.cloudBased.settings.put.messages.success
         },
         disruptions: [{
-            gradeName: "gpii.tests.cloud.oauth2.settingsPut.disruption.mainSequence"
+            sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.mainSequence"
         }]
     },
 
@@ -181,7 +215,7 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
             expectedMsg: gpii.flowManager.cloudBased.settings.put.messages.success
         },
         disruptions: [{
-            gradeName: "gpii.tests.cloud.oauth2.settingsPut.disruption.mainSequence"
+            sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.mainSequence"
         }]
     },
 
@@ -192,7 +226,7 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
             gpiiKey: "settingsUser"
         },
         disruptions: [{
-            gradeName: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNoAccessTokenSequence",
+            sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNoAccessTokenSequence",
             expectedStatusCode: 401
         }]
     },
@@ -202,7 +236,7 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
             gpiiKey: "settingsUser"
         },
         disruptions: [{
-            gradeName: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutWrongAccessTokenSequence",
+            sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutWrongAccessTokenSequence",
             expectedStatusCode: 401
         }]
     },
@@ -217,17 +251,10 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
             password: "dummy"
         },
         disruptions: [{
-            gradeName: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNonExistentGpiiKey",
+            sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNonExistentGpiiKey",
             expectedStatusCode: 401
         }]
     }
 ];
 
-fluid.each(gpii.tests.cloud.oauth2.settingsPut.disruptedTests, function (oneTest) {
-    gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-        oneTest.testDef,
-        {},
-        oneTest.disruptions,
-        __dirname
-    );
-});
+gpii.test.cloudBased.oauth2.runDisruptedTests(gpii.tests.cloud.oauth2.settingsPut.disruptedTests, __dirname);

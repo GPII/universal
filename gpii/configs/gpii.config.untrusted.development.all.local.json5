@@ -3,7 +3,7 @@
  * It starts these servers:
  * 1. Untrusted Local Flow Manager on port 8081
  * 2. Cloud Based Flow Manager and Preferences Server on port 8084
- * 3. PouchDB on port 8058
+ * 3. CouchDB on port 25984
  *
  * * The following components are running:
  * ** Auth Server
@@ -12,7 +12,7 @@
  * ** Untrusted Local Flow Manager
  * ** MatchMaker Framework
  * ** Ontology Handler
- * ** Pouch Manager
+ * ** Couch Connector
  * ** Preferences Server
  * ** Solutions Registry (reading registry from file)
  * ** Static Device Reporter (reading from file)
@@ -21,6 +21,6 @@
     "type": "gpii.config.untrusted.development.all.local",
     "mergeConfigs": [
         "./gpii.config.untrusted.development.local.json5",
-        "%pouchManager/configs/gpii.pouchManager.config.base.json5"
+        "%gpii-couch-connector/configs/gpii.couchConnector.config.base.json5"
     ]
 }

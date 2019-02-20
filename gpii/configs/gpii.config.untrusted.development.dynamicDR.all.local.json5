@@ -3,7 +3,7 @@
  * It starts these servers:
  * 1. Untrusted Local Flow Manager on port 8081
  * 2. Cloud Based Flow Manager and Preferences Server on port 8084
- * 3. PouchDB on port 8058
+ * 3. CouchDB running in Docker, available on port 25984
  *
  * * The following components are running:
  * ** Auth Server
@@ -15,12 +15,12 @@
  * ** Ontology Handler
  * ** Preferences Server
  * ** Solutions Registry (reading registry from file)
- * ** Pouch Manager
+ * ** Couch Connector
  */
 {
     "type": "gpii.config.untrusted.development.dynamicDR.all.local",
     "mergeConfigs": [
         "./gpii.config.untrusted.development.dynamicDR.local.json5",
-        "%pouchManager/configs/gpii.pouchManager.config.base.json5"
+        "%gpii-couch-connector/configs/gpii.couchConnector.config.base.json5"
     ]
 }

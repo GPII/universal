@@ -5,11 +5,15 @@
             "acceptance.defaultSettings": {
                 "source": "{that}.options.flowManagerOptions",
                 "target": "{that gpii.flowManager.local}.options"
+            },
+            "acceptance.resetAtStart": {
+                "record": true,
+                "target": "{that gpii.flowManager.local}.options.resetAtStart"
             }
         }
     },
     "mergeConfigs": [
         "%gpii-universal/gpii/configs/gpii.config.development.local.json5",
-        "./shared/gpii.tests.resetAtStart.config.json5"
+        "./shared/gpii.tests.resetDefaultSettings.config.json5"
     ]
 }

@@ -34,4 +34,5 @@ gpii.tests.pspIntegration.buildTestDefs = function (testDefs) {
         }, testDef);
     });
 };
-gpii.test.bootstrapServer(gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.testDefs));
+var builtTestDefs = gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.testDefs);
+gpii.test.runCouchTestDefs(builtTestDefs);
