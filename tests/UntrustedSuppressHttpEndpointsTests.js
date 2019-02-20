@@ -17,7 +17,7 @@ var fluid = require("infusion"),
 
 require("./shared/SuppressHttpEndpointsTestDefs.js");
 
-gpii.test.bootstrapServer(gpii.tests.suppressHttpEndpoints.buildTestDefs({
+gpii.test.runCouchTestDefs(gpii.tests.suppressHttpEndpoints.buildTestDefs({
     configName: "gpii.tests.acceptance.untrusted.suppressHttpEndpoints.config.json5",
     configPath: "%gpii-universal/tests/configs"
 }));
