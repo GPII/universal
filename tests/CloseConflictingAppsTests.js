@@ -213,5 +213,4 @@ module.exports = gpii.test.runTests({
     testDefs:  "gpii.tests.conflictingApps.testDefs",
     configName: "gpii.tests.multiScreenreader.config",
     configPath: "%gpii-universal/tests/configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
-    module, require, __dirname);
+}, ["gpii.test.integration.testCaseHolder.windows"]);

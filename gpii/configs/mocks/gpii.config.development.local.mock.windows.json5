@@ -4,8 +4,8 @@
  *
  * This configuration runs the entire system, in the "trusted local FlowManager" configuration, locally and in development mode.
  * This configuration is used for testing PSP channel, which means that the fetch of solutions is sourced from the filesystem,
- * and the fetch of preferences is sourced from the pouchDB that is constructed at the start of each test sequence and demolished
- * at the end of each test sequence.
+ * and the preferences are fetched from a CouchDB instance that is created if needed and provisioned at the start of
+ * each test sequence.
  */
 {
     "type": "gpii.config.development.local.mock.windows",

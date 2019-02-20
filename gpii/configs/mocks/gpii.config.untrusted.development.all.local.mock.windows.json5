@@ -8,7 +8,7 @@
  * * The cloud on port 8084
  *
  * This mean that:
- * * The keys, preferences and authentication data is stored locally in a pouchDB
+ * * The keys, preferences and authentication data is stored locally in a CouchDB instance.
  * * The following components are running on the local machine:
  * ** flowManager
  * ** preferencesServer
@@ -16,7 +16,7 @@
  * ** solutionsRegistry (reading registry from file)
  * ** flatMatchMaker
  * ** matchMakerFramework
- * ** pouchManager
+ * ** CouchDB
  *
  * Note that this config incorrectly derives from the deviceReporter development config. This is because of a dependency error
  * in the system design where the cloudBased flowManager still attempts to query the platform deviceReporter rather than
@@ -50,6 +50,6 @@
         }
     },
     "mergeConfigs": [
-        "%pouchManager/configs/gpii.pouchManager.config.base.json5"
+        "%gpii-couch-connector/configs/gpii.couchConnector.config.base.json5"
     ]
 }

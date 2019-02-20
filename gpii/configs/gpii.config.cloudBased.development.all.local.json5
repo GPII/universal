@@ -1,6 +1,6 @@
 /**
  * This configuration runs a GPII cloud including a cloud based flow manager and a preferences server, locally
- * on port 8081. It also runs and loads test data into pouchDB on port 8058 for data persistence.
+ * on port 8081. It also uses a CouchDB Docker test harness for persistence, which is available at port 25984.
  *
  * * The following components are running:
  * ** Auth Server
@@ -10,12 +10,12 @@
  * ** Ontology Handler
  * ** Preferences Server
  * ** Solutions Registry (reading registry from file)
- * ** Pouch Manager
+ * ** Couch Connector
  */
 {
     "type": "gpii.config.cloudBased.development.all.local",
     "mergeConfigs": [
         "%gpii-universal/gpii/configs/gpii.config.cloudBased.development.json5",
-        "%pouchManager/configs/gpii.pouchManager.config.base.json5"
+        "%gpii-couch-connector/configs/gpii.couchConnector.config.base.json5"
     ]
 }

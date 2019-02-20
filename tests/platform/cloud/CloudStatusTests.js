@@ -134,5 +134,5 @@ fluid.each(gpii.tests.cloudStatus.testCases, function (oneCase) {
         config: oneCase.config
     });
 
-    gpii.test.bootstrapServer([oneTestDef]);
+    gpii.test.runCouchTestDefs([oneTestDef]);
 });
