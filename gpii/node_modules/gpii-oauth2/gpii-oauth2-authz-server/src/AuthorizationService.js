@@ -22,6 +22,13 @@ var fluid = fluid || require("infusion");
 
     var gpii = fluid.registerNamespace("gpii");
 
+    fluid.registerNamespace("gpii.oauth2.authorizationService");
+
+    // Small function to return the current date.  Used in part to ensure that we can compare canned dates in tests.
+    gpii.oauth2.authorizationService.getCurrentDate = function () {
+        return new Date();
+    };
+
     fluid.defaults("gpii.oauth2.authorizationService", {
         gradeNames: ["fluid.component"],
         components: {
@@ -41,6 +48,9 @@ var fluid = fluid || require("infusion");
             getAuthorizationByAccessToken: {
                 func: "{dataStore}.findAuthorizationByAccessToken"
                     // accessToken
+            },
+            getCurrentDate: {
+                funcName: "gpii.oauth2.authorizationService.getCurrentDate"
             }
         }
     });
