@@ -378,7 +378,7 @@
         },
         "http://registry.gpii.net/common/punctuationVerbosity": {
             "title": "Punctuation verbosity",
-            "description": "Level of puctuacion verbosity when producing text to speech",
+            "description": "Level of punctuation verbosity when producing text to speech",
             "default": "some",
             "enum": [
                 "none",
