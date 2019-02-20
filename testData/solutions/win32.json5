@@ -7572,6 +7572,7 @@
                 },
                 "supportedSettings": {
                     "DoubleClickWidthConfig": {
+                        // This setting has no documented range, see https://issues.gpii.net/browse/GPII-3732 for explanation of current range.
                         "schema": {
                             "title": "Double-click rectangle width",
                             "description": "Changes the width of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
@@ -7604,6 +7605,7 @@
                 },
                 "supportedSettings": {
                     "DoubleClickHeightConfig": {
+                        // This setting has no documented range, see https://issues.gpii.net/browse/GPII-3732 for explanation of current range.
                         "schema": {
                             "title": "Double-click rectangle height",
                             "description": "Changes the height of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
