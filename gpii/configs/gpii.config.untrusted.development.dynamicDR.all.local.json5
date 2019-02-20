@@ -15,7 +15,7 @@
  * ** Ontology Handler
  * ** Preferences Server
  * ** Solutions Registry (reading registry from file)
- * ** Pouch Manager
+ * ** Couch Connector
  */
 {
     "type": "gpii.config.untrusted.development.dynamicDR.all.local",

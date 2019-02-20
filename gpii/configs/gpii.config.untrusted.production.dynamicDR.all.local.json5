@@ -6,7 +6,7 @@
  * It starts these servers:
  * 1. Untrusted Local Flow Manager on port 8081
  * 2. Cloud Based Flow Manager and Preferences Server on port 8084
- * 3. PouchDB on port 25984
+ * 3. CouchDB on port 25984
  *
  * * The following components are running:
  * ** Auth Server
@@ -18,7 +18,7 @@
  * ** Ontology Handler
  * ** Preferences Server
  * ** Solutions Registry (reading registry from file)
- * ** Pouch Manager
+ * ** Couch Connector
  */
 {
     "type": "gpii.config.untrusted.production.dynamicDR.all.local",
