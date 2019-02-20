@@ -6633,7 +6633,15 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/highContrast/enabled": "HighContrastOn.value"
+                    "http://registry\\.gpii\\.net/common/mouseEmulation/enabled": "MouseKeysOn.value",
+                    "http://registry\\.gpii\\.net/common/cursorSpeed": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "MaxSpeed.value",
+                            "factor": 0.00285714285714,
+                            "offset": -0.0285714285714
+                        }
+                    }
                 }
             }
         },
@@ -7258,7 +7266,7 @@
             }
         ]
     },
-    "com.microsoft.windows.mouseTrailing`": {
+    "com.microsoft.windows.mouseTrailing": {
         "name": "Windows Mouse Trailing",
         "contexts": {
             "OS": [
@@ -7278,18 +7286,18 @@
                     "uiParam": 0,
                     "pvParam": {
                         "type": "UINT"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "MouseTrails": {
                         "schema": {
                             // Exactly the same schema as mouseTrailing common term
                             "title": "Mouse trails",
-                            "description": "Amount of mouse trailing.",
-                            "type": "integer",
-                            "minimum": 0,
-                            "maximum": 10
+                            "description": "Amount of mouse trailing",
+                            "type": "number",
+                            "min": 0,
+                            "max": 10,
+                            "divisibleBy": 1
                         }
                     }
                 },
