@@ -95,7 +95,10 @@ There are currently 3 different sets of tests:
 * Production tests, that run in node.js, but which interact with external services.
 
 The `npm test` command will run the browser and Node based tests.  Please note, the node tests may behave oddly if you
-have set the `NODE_ENV` variable.
+have set the `NODE_ENV` variable.  The last two types of tests require you to have either Docker or Vagrant installed
+and available on your path.  If you are using Vagrant, you'll need to set the `GPII_TEST_COUCH_USE_VAGRANT` environment
+variable to `true`.  See [the documentation for the gpii-couchdb-test-harness package](https://github.com/GPII/gpii-couchdb-test-harness)
+for more details.
 
 ### Convert Preferences Data
 
@@ -112,21 +115,21 @@ The preferences files in `%gpii-universaluniversal/testData/preferences/` are co
 
 The above `snapset` preferences safes and GPII keys are:
 
-1. loaded into the production and the staging CouchDB in cloud environments.
-2. loaded into the PouchDB when GPII runs locally, regardless of which configuration is used.
+1. loaded into production and staging CouchDB instances in cloud environments.
+2. loaded into a local CouchDB instance when GPII runs locally, regardless of which configuration is used.
 
-The above `user` preferences are loaded into the local PouchDB for running GPII integration tests.
+The above `user` preferences are loaded into the local CouchDB for running GPII integration tests.
 
 The preferences in `%gpii-universal/tests/data/preferences/` are converted into `user` preferences:
 
 * `%gpii-universal/build/tests/dbData/user/gpiiKeys.json`
 * `%gpii-universal/build/tests/dbData/user/prefsSafes.json`
 
-These `user` preferences and the above `snapset` preferences are used with a PouchDB when GPII runs in a development configuration.
+These `user` preferences and the above `snapset` preferences are used with CouchDB when GPII runs in a development configuration.
 
 When any preferences file in either one of the two source directories (`%gpii-universaluniversal/testData/preferences/`
 or `%gpii-universal/tests/data/preferences/`) are modified, running `npm run postinstall` will generate
-gpiiKeys.json and prefsSafes.json files, whose contents are structured for loading into PouchDB/CouchDB.
+gpiiKeys.json and prefsSafes.json files, whose contents are structured for loading into CouchDB.
 This step is needed for any preferences modifications that are to be applied to GPII.
 
 ### Running browser tests

@@ -55,7 +55,7 @@ gpii.tests.resetDefaultSettings.testSequenceWithEnvReport = {
 
 // 2.2 The testCaseHolder grade for testing GPI-3539
 fluid.defaults("gpii.tests.resetDefaultSettings.testCaseHolderWithEnvReport", {
-    gradeNames: ["gpii.test.common.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
+    gradeNames: ["gpii.test.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
     components: {
         environmentChangedRequest: {
             type: "kettle.test.request.http",
@@ -145,7 +145,7 @@ gpii.tests.resetDefaultSettings.testCasesWithEnvReport = [{
 
 gpii.tests.resetDefaultSettings.buildTestDefs = function (testCases, config) {
     return fluid.transform(testCases, function (oneTestCase) {
-        var gradeNamesForTest = oneTestCase.gradeNames ? oneTestCase.gradeNames : ["gpii.test.common.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"];
+        var gradeNamesForTest = oneTestCase.gradeNames ? oneTestCase.gradeNames : ["gpii.test.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"];
         var testSequence = oneTestCase.testSequence ? oneTestCase.testSequence : gpii.tests.resetDefaultSettings.testSequence;
         var testCaseOptions = fluid.censorKeys(oneTestCase, ["gradeNames", "defaultSettings", "testSequence"]);
         return fluid.extend(true, {

@@ -24,4 +24,4 @@ require("./shared/DevelopmentTestDefs.js");
 
 gpii.loadTestingSupport();
 
-gpii.test.bootstrapServer(gpii.tests.development.testDefs);
+gpii.test.runCouchTestDefs(gpii.tests.development.testDefs);
