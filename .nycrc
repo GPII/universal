@@ -80,6 +80,7 @@
     "!**/gpii/node_modules/preferencesServer/index.js",
     "!**/gpii/node_modules/preferencesServer/src/preferencesGetHandler.js",
     "!**/gpii/node_modules/preferencesServer/src/preferencesPostHandler.js",
+    "!**/gpii/node_modules/preferencesServer/src/preferencesPostPrefsHandler.js",
     "!**/gpii/node_modules/preferencesServer/src/preferencesPutHandler.js",
     "!**/gpii/node_modules/preferencesServer/src/preferencesServer.js",
     "!**/gpii/node_modules/preferencesServer/src/preferencesServerConst.js",

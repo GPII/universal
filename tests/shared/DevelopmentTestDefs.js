@@ -27,35 +27,47 @@ var fluid = require("infusion"),
 
 fluid.registerNamespace("gpii.tests.development");
 
-gpii.tests.development.gpiiKey = "testUser1";
-
-gpii.tests.development.testLoginResponse = function (data) {
+gpii.tests.development.testLoginResponse = function (response, gpiiKey) {
     jqUnit.assertEquals("Response is correct", "User with GPII key " +
-        gpii.tests.development.gpiiKey + " was successfully logged in.", data);
+        gpiiKey + " was successfully logged in.", response);
 };
 
-gpii.tests.development.testLogoutResponse = function (data) {
+gpii.tests.development.testLogoutResponse = function (response, gpiiKey) {
     jqUnit.assertEquals("Response is correct", "User with GPII key " +
-        gpii.tests.development.gpiiKey + " was successfully logged out.", data);
+        gpiiKey + " was successfully logged out.", response);
 };
+
+gpii.tests.development.commonTestSequence = [{
+    func: "{loginRequest}.send"
+}, {
+    event: "{loginRequest}.events.onComplete",
+    listener: "gpii.tests.development.testLoginResponse",
+    args: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey"]
+}, {
+    func: "{logoutRequest}.send"
+}, {
+    event: "{logoutRequest}.events.onComplete",
+    listener: "gpii.tests.development.testLogoutResponse",
+    args: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey"]
+}];
+
 
 gpii.tests.development.testDefs = [{
-    name: "Flow Manager development tests",
+    name: "Flow Manager test: Key in and key out with an existing GPII key",
     expect: 2,
     config: {
         configName: "gpii.config.development.local",
         configPath: "%gpii-universal/gpii/configs"
     },
-    gpiiKey: gpii.tests.development.gpiiKey,
-    sequence: [{
-        func: "{loginRequest}.send"
-    }, {
-        event: "{loginRequest}.events.onComplete",
-        listener: "gpii.tests.development.testLoginResponse"
-    }, {
-        func: "{logoutRequest}.send"
-    }, {
-        event: "{logoutRequest}.events.onComplete",
-        listener: "gpii.tests.development.testLogoutResponse"
-    }]
+    gpiiKey: "testUser1",
+    sequence: gpii.tests.development.commonTestSequence
+}, {
+    name: "Flow Manager test: Key in and key out with a nonexistent GPII key",
+    expect: 2,
+    config: {
+        configName: "gpii.config.development.local",
+        configPath: "%gpii-universal/gpii/configs"
+    },
+    gpiiKey: "nonexistent_gpii_key",
+    sequence: gpii.tests.development.commonTestSequence
 }];

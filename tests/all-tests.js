@@ -43,7 +43,6 @@ var testIncludes = [
     "./PSPIntegrationTests.js",
     "./ResetWithEnvReportTests.js",
     "./ResetAtStartTests.js",
-    "./PreferencesServerErrorTests.js",
     "./StartupAPITests.js",
     "./SuppressHttpEndpointsTests.js",
     "./UntrustedBrowserChannelTests.js",
