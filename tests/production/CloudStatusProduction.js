@@ -25,8 +25,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii");
 
 fluid.require("%gpii-universal");
 
@@ -70,6 +69,7 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
         }
     });
     gpii.test.push(testDef.sequence, [
+        { funcName: "fluid.log", args: ["Cloud status tests:"]},
         {
             func: "{healthRequest}.send"
         }, {
@@ -80,9 +80,10 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
         }, {
             event: "{readyRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testResponse"
-        }
+        },
+        { funcName: "fluid.log", args: ["Cloud status tests end"]}
     ]);
     return testDef;
 });
 
-kettle.test.bootstrapServer(gpii.tests.productionConfigTesting.testDefs);
+gpii.test.runServerTestDefs(gpii.tests.productionConfigTesting.testDefs);

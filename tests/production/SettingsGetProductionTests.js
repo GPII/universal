@@ -69,12 +69,8 @@ fluid.defaults("gpii.tests.productionConfigTesting.settingsGet.testCaseHolder", 
     }
 });
 
-fluid.each(gpii.tests.cloud.oauth2.settingsGet.disruptedTests, function (oneTest) {
-    gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-        oneTest.testDef,
-        {},
-        oneTest.disruptions,
-        gpii.tests.productionConfigTesting.config,
-        "gpii.tests.productionConfigTesting.settingsGet.testCaseHolder"
-    );
-});
+gpii.test.cloudBased.oauth2.runDisruptedTests(
+    gpii.tests.cloud.oauth2.settingsGet.disruptedTests,
+    gpii.tests.productionConfigTesting.config,
+    "gpii.tests.productionConfigTesting.settingsGet.testCaseHolder"
+);

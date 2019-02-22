@@ -77,15 +77,11 @@ fluid.defaults("gpii.tests.productionConfigTesting.settingsPut.testCaseHolder", 
     }
 });
 
-fluid.each(gpii.tests.cloud.oauth2.settingsPut.disruptedTests, function (oneTest) {
-    gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-        oneTest.testDef,
-        {},
-        oneTest.disruptions,
-        gpii.tests.productionConfigTesting.config,
-        "gpii.tests.productionConfigTesting.settingsPut.testCaseHolder"
-    );
-});
+gpii.test.cloudBased.oauth2.runDisruptedTests(
+    gpii.tests.cloud.oauth2.settingsPut.disruptedTests,
+    gpii.tests.productionConfigTesting.config,
+    "gpii.tests.productionConfigTesting.settingsPut.testCaseHolder"
+);
 
 /*
  * ========================================================================
@@ -93,16 +89,8 @@ fluid.each(gpii.tests.cloud.oauth2.settingsPut.disruptedTests, function (oneTest
  * ========================================================================
  */
 
-fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.updateSnapsetFailure", {
-    gradeNames: ["gpii.test.disruption"],
-    testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsPut.updateSnapsetTests.requests",
-    sequenceName: "gpii.tests.cloud.oauth2.settingsPut.updateSnapset.sequence"
-});
-
-gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-    gpii.tests.cloud.oauth2.settingsPut.updateSnapsetTest.testDef,
-    {},
-    gpii.tests.cloud.oauth2.settingsPut.updateSnapsetTest.disruptions,
+gpii.test.cloudBased.oauth2.runDisruptedTests(
+    gpii.tests.cloud.oauth2.settingsPut.updateSnapsetTest,
     gpii.tests.productionConfigTesting.config,
     "gpii.tests.productionConfigTesting.settingsPut.testCaseHolder"
 );
