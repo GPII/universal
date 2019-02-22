@@ -141,7 +141,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruptionsWithMissingGrantArgs", {
-    gradeNames: ["gpii.test.disruption"],
+    gradeNames: ["gpii.test.disruption.sequenceGrade"],
     disruptions: [
         {
             name: "Attempt to get access token without sending client_id",
