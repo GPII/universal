@@ -31,67 +31,98 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     });
 
-    gpii.startupAPI.tests.ConfigName = function () {
+    gpii.startupAPI.tests.DefaultConfigName = function () {
         var configs = gpii.queryConfigs();
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
 
+        jqUnit.stop();
         gpii.start();
 
-        configs = gpii.queryConfigs();
-        jqUnit.assertEquals("One Kettle Server should be started on.", configs.length, 1);
-        jqUnit.assertEquals("Default Config should be dev all local.", configs[0].typeName,
-                "gpii.config.development.all.local");
+        // In our main tests, we wait for server.onReady.  From the outside, we have nothing known to listen to,
+        // so we use a timeout instead.
+        setTimeout(function () {
+            jqUnit.start();
+            configs = gpii.queryConfigs();
+            jqUnit.assertEquals("One Kettle Server should be started on.", configs.length, 1);
+            jqUnit.assertEquals("Default Config should be dev all local.", configs[0].typeName,
+                    "gpii.config.development.all.local");
 
-        gpii.stop();
-        configs = gpii.queryConfigs();
+            gpii.stop();
+            configs = gpii.queryConfigs();
+            jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
+        }, 5000);
+    };
+
+    gpii.startupAPI.tests.CustomConfigName = function () {
+        var configs = gpii.queryConfigs();
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
 
+        jqUnit.stop();
         gpii.start({
             configName: "gpii.config.development.dynamicDR.local"
         });
 
-        configs = gpii.queryConfigs();
-        jqUnit.assertEquals("One Kettle Server should be started on.", configs.length, 1);
-        jqUnit.assertEquals("Default Config should be dev all dr prod.", configs[0].typeName,
+        // In our main tests, we wait for server.onReady.  From the outside, we have nothing known to listen to,
+        // so we use a timeout instead.
+        setTimeout(function () {
+            jqUnit.start();
+            configs = gpii.queryConfigs();
+            jqUnit.assertEquals("One Kettle Server should be started on.", configs.length, 1);
+            jqUnit.assertEquals("Default Config should be dev all dr prod.", configs[0].typeName,
                 "gpii.config.development.dynamicDR.local");
 
-        gpii.stop();
-        configs = gpii.queryConfigs();
-        jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
+            gpii.stop();
+            configs = gpii.queryConfigs();
+            jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
+        }, 5000);
     };
 
     gpii.startupAPI.tests.ConfigPath = function () {
         var configs = gpii.queryConfigs();
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
 
+        jqUnit.stop();
         gpii.start({
             configPath: "%gpii-universal/gpii/configs",
             configName: "gpii.config.development.local"
         });
 
-        configs = gpii.queryConfigs();
-        jqUnit.assertEquals("One Kettle Server should be started on.", configs.length, 1);
-        jqUnit.assertEquals("Default Config should be local install.", configs[0].typeName,
-                "gpii.config.development.local");
+        // In our main tests, we wait for server.onReady.  From the outside, we have nothing known to listen to,
+        // so we use a timeout instead.
+        setTimeout(function () {
+            jqUnit.start();
+            configs = gpii.queryConfigs();
+            jqUnit.assertEquals("One Kettle Server should be started on.", configs.length, 1);
+            jqUnit.assertEquals("Default Config should be local install.", configs[0].typeName,
+                    "gpii.config.development.local");
 
-        gpii.stop();
-        configs = gpii.queryConfigs();
-        jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
+            gpii.stop();
+            configs = gpii.queryConfigs();
+            jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
+        }, 5000);
     };
 
     fluid.defaults("gpii.startupAPI.tests.testCaseHolder", {
         gradeNames: ["fluid.test.testCaseHolder"],
         modules: [{
             name: "StartupAPITests",
-            tests: [{
-                expect: 7,
-                name: "gpii.startupAPI.tests.ConfigName tests",
-                func: "gpii.startupAPI.tests.ConfigName"
-            }, {
-                expect: 4,
-                name: "gpii.startupAPI.tests.ConfigPath tests",
-                func: "gpii.startupAPI.tests.ConfigPath"
-            }]
+            tests: [
+                {
+                    expect: 4,
+                    name: "gpii.startupAPI.tests.ConfigName - default config",
+                    func: "gpii.startupAPI.tests.DefaultConfigName"
+                },
+                {
+                    expect: 4,
+                    name: "gpii.startupAPI.tests.ConfigName - custom config",
+                    func: "gpii.startupAPI.tests.CustomConfigName"
+                },
+                {
+                    expect: 4,
+                    name: "gpii.startupAPI.tests.ConfigPath tests",
+                    func: "gpii.startupAPI.tests.ConfigPath"
+                }
+            ]
         }]
     });
 
