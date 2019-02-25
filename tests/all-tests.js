@@ -61,6 +61,7 @@ var testIncludes = [
     "../gpii/node_modules/accessRequester/test/AccessRequesterTests.js",
     "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
     "../gpii/node_modules/couchConnector/test/couchConnectorTests.js",
+    "../gpii/node_modules/deviceReporter/test/StaticDeviceReporter.js",
     "../gpii/node_modules/eventLog/test/all-tests.js",
     "../gpii/node_modules/flatMatchMaker/test/FlatMatchMakerTests.js",
     "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
