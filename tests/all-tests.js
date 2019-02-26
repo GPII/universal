@@ -44,7 +44,7 @@ var testIncludes = [
     "./ResetWithEnvReportTests.js",
     "./ResetAtStartTests.js",
     "./PreferencesServerErrorTests.js",
-    //"./StartupAPITests.js",
+    "./StartupAPITests.js",
     "./SuppressHttpEndpointsTests.js",
     "./UntrustedBrowserChannelTests.js",
     "./UntrustedContextIntegrationTests.js",
