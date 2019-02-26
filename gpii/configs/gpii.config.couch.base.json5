@@ -1,0 +1,40 @@
+/*
+
+    This configuration is common to both the tests and "development" configs, and adds a local CouchDB instance
+    provided by the gpii-couchdb-test-harness package.  Note, you can control how Couch is started/stopped using an
+    environment variable:
+
+    * (nothing, the default): Start a Docker container running CouchDB.
+    * `GPII_TEST_COUCH_USE_VAGRANT`: If this is set, a Vagrant VM will be created that is running Docker and CouchDB.
+    * `GPII_TEST_COUCH_USE_EXTERNAL`: If this is set, an external instance of CouchDB running on port 25984 will be
+      used.
+
+    For more information, see the documentation for the gpii-couchdb-test-harness package:
+
+    https://github.com/GPII/gpii-couchdb-test-harness
+
+*/
+{
+    "type": "gpii.config.couch.base",
+    "options": {
+        "components": {
+            "harness": {
+                "type": "gpii.test.couchdb.harness.persistent",
+                "options": {
+                    "databases": {
+                        "gpii": {
+                            "data": [
+                                "%gpii-universal/testData/dbData/clientCredentials.json",
+                                "%gpii-universal/testData/dbData/gpiiAppInstallationClients.json",
+                                "%gpii-universal/build/dbData/snapset/gpiiKeys.json",
+                                "%gpii-universal/build/dbData/snapset/prefsSafes.json",
+                                "%gpii-universal/testData/dbData/views.json"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "require": ["gpii-couchdb-test-harness", "journal"]
+}

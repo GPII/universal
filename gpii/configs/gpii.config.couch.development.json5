@@ -1,7 +1,7 @@
 /*
 
-    The "development" configuration for the Couch Connector, which also starts a Couch instance if needed.  Note,
-    you can control how Couch is started/stopped using an environment variable:
+    The "development" configuration that starts a Couch instance if needed.  Note, you can control how Couch is
+    started/stopped using an environment variable:
 
     * (nothing, the default): Start a Docker container running CouchDB.
     * `GPII_TEST_COUCH_USE_VAGRANT`: If this is set, a Vagrant VM will be created that is running Docker and CouchDB.
@@ -14,12 +14,12 @@
 
 */
 {
-    "type": "gpii.couchConnector.config.development",
+    "type": "gpii.config.couch.development",
     "options": {
         "components": {
             "harness": {
+                "type": "gpii.test.couchdb.harness.persistent",
                 "options": {
-                    // Avoid clobbering the data each time we start up.
                     "cleanDbs": false,
                     // Start the harness on startup.
                     "listeners": {
@@ -32,6 +32,6 @@
         }
     },
     "mergeConfigs": [
-        "%gpii-couch-connector/configs/gpii.couchConnector.config.base.json5"
+        "%gpii-universal/gpii/configs/gpii.config.couch.base.json5"
     ]
 }

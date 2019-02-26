@@ -50,6 +50,6 @@
         }
     },
     "mergeConfigs": [
-        "%gpii-couch-connector/configs/gpii.couchConnector.config.development.json5"
+        "%gpii-universal/gpii/configs/gpii.config.couch.development.json5"
     ]
 }

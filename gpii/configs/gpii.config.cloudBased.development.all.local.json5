@@ -16,6 +16,6 @@
     "type": "gpii.config.cloudBased.development.all.local",
     "mergeConfigs": [
         "%gpii-universal/gpii/configs/gpii.config.cloudBased.development.json5",
-        "%gpii-couch-connector/configs/gpii.couchConnector.config.development.json5"
+        "%gpii-universal/gpii/configs/gpii.config.couch.development.json5"
     ]
 }

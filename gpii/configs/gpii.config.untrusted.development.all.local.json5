@@ -21,6 +21,6 @@
     "type": "gpii.config.untrusted.development.all.local",
     "mergeConfigs": [
         "./gpii.config.untrusted.development.local.json5",
-        "%gpii-couch-connector/configs/gpii.couchConnector.config.development.json5"
+        "%gpii-universal/gpii/configs/gpii.config.couch.development.json5"
     ]
 }
