@@ -1686,7 +1686,7 @@ gpii.tests.windows.builtInHighContrast = [
     }
 ];
 
-gpii.tests.windows.builtIn.testDefs = gpii.tests.windows.builtIn.concat(gpii.tests.windows.builtInHighContrast);
+gpii.tests.windows.builtIn.testDefs = gpii.tests.windows.builtInHighContrast.concat(gpii.tests.windows.builtIn);
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.builtIn.testDefs",
