@@ -25,7 +25,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.linux.builtIn");
 
-gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
+gpii.tests.linux.builtIn = [
     {
         name: "Testing os_common using default matchmaker",
         gpiiKey: "os_common",
@@ -67,8 +67,6 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 }],
                 "org.gnome.desktop.interface": [{
                     "settings": {
-                        "gtk-theme": "HighContrast",
-                        "icon-theme": "HighContrast",
                         "text-scaling-factor": 0.75,
                         "cursor-size": 41
                     },
@@ -139,8 +137,6 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 }],
                 "org.gnome.desktop.interface": [{
                     "settings": {
-                        "gtk-theme": "HighContrast",
-                        "icon-theme": "HighContrast",
                         "text-scaling-factor": 0.75,
                         "cursor-size": 41
                     },
@@ -211,8 +207,6 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 }],
                 "org.gnome.desktop.interface": [{
                     "settings": {
-                        "gtk-theme": "HighContrast",
-                        "icon-theme": "HighContrast",
                         "text-scaling-factor": 0.75,
                         "cursor-size": 41
                     },
@@ -318,8 +312,8 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
         }
     },
     {
-        name: "Testing os_win7 using default matchmaker",
-        gpiiKey: "os_win7",
+        name: "Testing os_win using default matchmaker",
+        gpiiKey: "os_win",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.desktop.a11y.magnifier": [{
@@ -348,8 +342,6 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                     }
                 }, {
                     "settings": {
-                        "gtk-theme": "HighContrast",
-                        "icon-theme": "HighContrast",
                         "cursor-size": 41
                     },
                     "options": {
@@ -370,7 +362,156 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
             }
         }
     }
-]);
+];
+
+gpii.tests.linux.builtInHighContrast = [
+    {
+        name: "Testing os_common_highContrast using default matchmaker",
+        gpiiKey: "os_common_highContrast",
+        initialState: {
+            "gpii.gsettings.launch": {
+                "org.gnome.desktop.a11y.magnifier": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-magnifier-enabled"
+                    }
+                }],
+                "org.gnome.desktop.a11y.applications.onscreen-keyboard": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-keyboard-enabled"
+                    }
+                }]
+            }
+        },
+        settingsHandlers: {
+            "gpii.gsettings": {
+                "org.gnome.desktop.interface": [{
+                    "settings": {
+                        "gtk-theme": "HighContrast",
+                        "icon-theme": "HighContrast"
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.interface"
+                    }
+                }]
+            }
+        }
+    }, {
+        name: "Testing os_common_highContrast - magnifier running on startup",
+        gpiiKey: "os_common_highContrast",
+        initialState: {
+            "gpii.gsettings.launch": {
+                "org.gnome.desktop.a11y.magnifier": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-magnifier-enabled"
+                    }
+                }],
+                "org.gnome.desktop.a11y.applications.onscreen-keyboard": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-keyboard-enabled"
+                    }
+                }]
+            }
+        },
+        settingsHandlers: {
+            "gpii.gsettings": {
+                "org.gnome.desktop.interface": [{
+                    "settings": {
+                        "gtk-theme": "HighContrast",
+                        "icon-theme": "HighContrast"
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.interface"
+                    }
+                }]
+            }
+        }
+    }, {
+        name: "Testing os_common_highContrast - magnifier and keyboard running on startup",
+        gpiiKey: "os_common_highContrast",
+        initialState: {
+            "gpii.gsettings.launch": {
+                "org.gnome.desktop.a11y.magnifier": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-magnifier-enabled"
+                    }
+                }],
+                "org.gnome.desktop.a11y.applications.onscreen-keyboard": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-keyboard-enabled"
+                    }
+                }]
+            }
+        },
+        settingsHandlers: {
+            "gpii.gsettings": {
+                "org.gnome.desktop.interface": [{
+                    "settings": {
+                        "gtk-theme": "HighContrast",
+                        "icon-theme": "HighContrast"
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.interface"
+                    }
+                }]
+            }
+        }
+    }, {
+        name: "Testing os_win_highContrast using default matchmaker",
+        gpiiKey: "os_win_highContrast",
+        initialState: {
+            "gpii.gsettings.launch": {
+                "org.gnome.desktop.a11y.magnifier": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-magnifier-enabled"
+                    }
+                }]
+            }
+        },
+        settingsHandlers: {
+            "gpii.gsettings": {
+                "some.app.id": [{
+                    "settings": {
+                        "gtk-theme": "HighContrast",
+                        "icon-theme": "HighContrast"
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.interface"
+                    }
+                }]
+            }
+        }
+    }
+];
+
+gpii.tests.linux.builtIn.testDefs = gpii.tests.linux.builtIn.concat(gpii.tests.linux.builtInHighContrast);
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.linux.builtIn.testDefs",
