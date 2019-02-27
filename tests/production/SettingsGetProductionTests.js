@@ -72,5 +72,6 @@ fluid.defaults("gpii.tests.productionConfigTesting.settingsGet.testCaseHolder", 
 gpii.test.cloudBased.oauth2.runDisruptedTests(
     gpii.tests.cloud.oauth2.settingsGet.disruptedTests,
     gpii.tests.productionConfigTesting.config,
+    "gpii.test.serverEnvironment",
     "gpii.tests.productionConfigTesting.settingsGet.testCaseHolder"
 );

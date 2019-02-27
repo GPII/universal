@@ -25,12 +25,20 @@ gpii.tests.cloud.oauth2.settingsPut.config = {
     configPath: "%gpii-universal/gpii/configs"
 };
 
+// Grade for "disruptions" that are also proper sequence grades.  Use the grade
+// for couch test harness for development config
+fluid.defaults("gpii.test.disruption.sequenceGrade", {
+    gradeNames: ["gpii.test.disruption", "gpii.test.couchSequenceGrade"]
+});
+
 gpii.test.cloudBased.oauth2.runDisruptedTests(
     gpii.tests.cloud.oauth2.settingsPut.disruptedTests,
-    gpii.tests.cloud.oauth2.settingsPut.config
+    gpii.tests.cloud.oauth2.settingsPut.config,
+    "gpii.test.couchEnvironment"
 );
 
 gpii.test.cloudBased.oauth2.runDisruptedTests(
     gpii.tests.cloud.oauth2.settingsPut.updateSnapsetTest,
-    gpii.tests.cloud.oauth2.settingsPut.config
+    gpii.tests.cloud.oauth2.settingsPut.config,
+    "gpii.test.couchEnvironment"
 );

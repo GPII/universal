@@ -24,6 +24,12 @@ gpii.tests.productionConfigTesting.config = {
     configPath: "%gpii-universal/tests/configs"
 };
 
+// Grade for "disruptions" that are also proper sequence grades.  Use the
+// standard server sequence
+fluid.defaults("gpii.test.disruption.sequenceGrade", {
+    gradeNames: ["gpii.test.disruption", "gpii.test.standardServerSequenceGrade"]
+});
+
 gpii.tests.productionConfigTesting.getKeyOrPrefsFromFile = function (filePath, id) {
     var dataArray = fluid.require(filePath);
     return fluid.find(dataArray, function (anEntry) {
