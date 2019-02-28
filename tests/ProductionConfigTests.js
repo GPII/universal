@@ -44,7 +44,7 @@ gpii.test.runServerTestDefs(fluid.transform(gpii.tests.development.testDefs, fun
     var testDef = fluid.extend(true, {}, testDefIn, {
         config: {
             configName: "gpii.config.untrusted.development.json5",
-            configPath: "%gpii-universal/gpii/configs"
+            configPath: "%gpii-universal/gpii/configs/shared"
         }
     });
     return testDef;

@@ -31,7 +31,7 @@ gpii.test.runCouchTestDefs(gpii.tests.userLogonRequest.buildTestDefs(gpii.tests.
 gpii.tests.untrusted.userLogonRequest.buildTestDefs = function (testDefs) {
     var config = {
         configName: "gpii.config.untrusted.development",
-        configPath: "%gpii-universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs/shared"
     };
 
     return fluid.transform(testDefs, function (testDef) {

@@ -5,11 +5,20 @@ This directory and its subdirectories contain variants of the configs that are u
 1. Start GPII application in development or production modes;
 2. Write integration and acceptance tests.
 
-## The "local" Configurations and Database Content
+The "production" configurations are intended for use in production deployments.  The "development" configurations are
+used in the acceptance tests in this package. The "manualTesting" configurations provided in this directory are intended
+for use in manual QA, troubleshooting, demos, et cetera.
 
-The "local" configurations make use of the gpii-couchdb-test-harness package, which ensures that a CouchDB instance is
-available and provisioned with the required data if no data is found.  Note, you can control how Couch is
-started/stopped using an environment variable:
+## The Couchdb Test Harness
+
+The "development" and "manualTesting" configurations in this package make use of the gpii-couchdb-test-harness package,
+which ensures that a CouchDB instance is available and provisioned with the required data if no data is found.  The
+caseHolder used in with most "development" configurations has sequence steps that start the harness and wait for CouchDB
+to be ready.  The "manualTesting" configurations provided in this directory immediately start the CouchDB harness (see
+below) on startup, and are intended for use in manual QA, troubleshooting, demos, et cetera.
+
+For all configurations that use the CouchDB test harness, you can control how Couch is started/stopped using an
+environment variable:
 
 * (nothing, the default): Start a Docker container running CouchDB.
 * `GPII_TEST_COUCH_USE_VAGRANT`: If this is set, a Vagrant VM will be created that is running Docker and CouchDB.

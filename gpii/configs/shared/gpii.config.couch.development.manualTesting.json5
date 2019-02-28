@@ -1,12 +1,11 @@
 /*
 
-    The "development" configuration that starts a Couch instance if needed.  Note, you can control how Couch is
-    started/stopped using an environment variable:
+    The "manual testing" configuration that attempts to start a Couch instance if needed on startup.  Note, you can
+    control how Couch is started/stopped using an environment variable:
 
     * (nothing, the default): Start a Docker container running CouchDB.
-    * `GPII_TEST_COUCH_USE_VAGRANT`: If this is set, a Vagrant VM will be created that is running Docker and CouchDB.
-    * `GPII_TEST_COUCH_USE_EXTERNAL`: If this is set, an external instance of CouchDB running on port 25984 will be
-      used.
+    * `GPII_TEST_COUCH_USE_VAGRANT`: If this is set, create a Vagrant VM that runs Docker and CouchDB.
+    * `GPII_TEST_COUCH_USE_EXTERNAL`: If this is set, connect to an external instance of CouchDB running on port 25984.
 
     For more information, see the documentation for the gpii-couchdb-test-harness package:
 
@@ -32,6 +31,6 @@
         }
     },
     "mergeConfigs": [
-        "%gpii-universal/gpii/configs/gpii.config.couch.base.json5"
+        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.base.json5"
     ]
 }

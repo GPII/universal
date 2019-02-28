@@ -15,7 +15,7 @@
 
 */
 {
-    "type": "gpii.config.couch.base",
+    "type": "gpii.config.couch.development.base",
     "options": {
         "components": {
             "harness": {

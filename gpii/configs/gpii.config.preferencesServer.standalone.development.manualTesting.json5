@@ -4,17 +4,17 @@
  *
  * * The following components are running:
  * ** Preferences Server
- * ** Couch Connector
+ * ** gpii-couchdb-test-harness
  *
  * Note: this config is created for testing PPT locally. Currently it's not used by any other configs and tests.
  */
 {
-    "type": "gpii.config.preferencesServer.standalone.development.all.local",
+    "type": "gpii.config.preferencesServer.standalone.development.manualTesting",
     "options": {
         "dbServerPort": 25984
     },
     "mergeConfigs": [
         "%preferencesServer/configs/gpii.preferencesServer.config.base.json5",
-        "%gpii-universal/gpii/configs/gpii.config.couch.development.json5"
+        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.manualTesting.json5"
     ]
 }

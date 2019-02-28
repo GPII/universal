@@ -10,12 +10,12 @@
  * ** Ontology Handler
  * ** Preferences Server
  * ** Solutions Registry (reading registry from file)
- * ** Couch Connector
+ * ** gpii-couchdb-test-harness
  */
 {
-    "type": "gpii.config.cloudBased.development.all.local",
+    "type": "gpii.config.cloudBased.development.manualTesting",
     "mergeConfigs": [
-        "%gpii-universal/gpii/configs/gpii.config.cloudBased.development.json5",
-        "%gpii-universal/gpii/configs/gpii.config.couch.development.json5"
+        "%gpii-universal/gpii/configs/shared/gpii.config.cloudBased.development.json5",
+        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.manualTesting.json5"
     ]
 }

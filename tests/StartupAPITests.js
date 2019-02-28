@@ -38,7 +38,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         configs = gpii.queryConfigs();
         jqUnit.assertEquals("One Kettle Server should be started on.", configs.length, 1);
         jqUnit.assertEquals("Default Config should be dev all local.", configs[0].typeName,
-                "gpii.config.development.all.local");
+                "gpii.config.development.manualTesting");
 
         gpii.stop();
         configs = gpii.queryConfigs();
@@ -50,7 +50,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
 
         gpii.start({
-            configName: "gpii.config.development.dynamicDR.local"
+            configName: "gpii.config.development.dynamicDR.local",
+            configPath: "%gpii-universal/gpii/configs/shared"
         });
 
         configs = gpii.queryConfigs();
@@ -68,7 +69,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
 
         gpii.start({
-            configPath: "%gpii-universal/gpii/configs",
+            configPath: "%gpii-universal/gpii/configs/shared",
             configName: "gpii.config.development.local"
         });
 
