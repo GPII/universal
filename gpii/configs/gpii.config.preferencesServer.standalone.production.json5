@@ -23,6 +23,6 @@
         }
     },
     "mergeConfigs": [
-        "%preferencesServer/configs/shared/gpii.preferencesServer.config.base.json5"
+        "%preferencesServer/configs/gpii.preferencesServer.config.base.json5"
     ]
 }
