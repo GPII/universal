@@ -42,4 +42,3 @@ gpii.test.cloudBased.oauth2.runDisruptedTests(
     gpii.tests.cloud.oauth2.settingsPut.config,
     "gpii.test.couchEnvironment"
 );
-
