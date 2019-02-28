@@ -96,10 +96,10 @@ There are currently 3 different sets of tests:
 
 The `npm test` command will run the browser and Node based tests.  Please note, the node tests may behave oddly if you
 have set the `NODE_ENV` variable. The last two types of tests require you to have either Docker or Vagrant installed
-and available on your path, or else have a local instance of CouchDB listening on port 25984. 
+and available on your path, or else have a local instance of CouchDB listening on port 25984.
 If you are using Vagrant, you'll need to set the `GPII_TEST_COUCH_USE_VAGRANT` environment
 variable to `true`, or if you wish to bind tests against a local CouchDB on port 25984, you can
-set the `GPII_TEST_COUCH_USE_EXTERNAL` environment variable to `true`. See [the documentation for the 
+set the `GPII_TEST_COUCH_USE_EXTERNAL` environment variable to `true`. See [the documentation for the
 gpii-couchdb-test-harness package](https://github.com/GPII/gpii-couchdb-test-harness) for more details.
 
 ### Convert Preferences Data
