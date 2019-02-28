@@ -37,7 +37,6 @@ gpii.tests.cloudStatus.configs = {
 };
 
 gpii.tests.cloudStatus.commonTestDefs = {
-//    expect: 2,
     testUrl: null,    // provided by each test run
     expectedStatusCode: 200,   // provided by each test run
     expectedPayload: {},       // provided by each test run

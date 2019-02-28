@@ -15,30 +15,20 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.require("%gpii-universal");
+require("./DisruptionSequenceGradeConfig.js");
 require("../../shared/FlowManagerSettingsPutTestDefs.js");
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.settingsPut");
 gpii.loadTestingSupport();
 
-gpii.tests.cloud.oauth2.settingsPut.config = {
-    configName: "gpii.config.cloudBased.development",
-    configPath: "%gpii-universal/gpii/configs"
-};
-
-// Grade for "disruptions" that are also proper sequence grades.  Use the grade
-// for couch test harness for development config
-fluid.defaults("gpii.test.disruption.sequenceGrade", {
-    gradeNames: ["gpii.test.disruption", "gpii.test.couchSequenceGrade"]
-});
-
 gpii.test.cloudBased.oauth2.runDisruptedTests(
     gpii.tests.cloud.oauth2.settingsPut.disruptedTests,
-    gpii.tests.cloud.oauth2.settingsPut.config,
+    gpii.tests.cloud.oauth2.settings.config,
     "gpii.test.couchEnvironment"
 );
 
 gpii.test.cloudBased.oauth2.runDisruptedTests(
     gpii.tests.cloud.oauth2.settingsPut.updateSnapsetTest,
-    gpii.tests.cloud.oauth2.settingsPut.config,
+    gpii.tests.cloud.oauth2.settings.config,
     "gpii.test.couchEnvironment"
 );
