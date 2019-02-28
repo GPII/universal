@@ -4,7 +4,7 @@
  *
  * * The following components are running:
  * ** Preferences Server
- * ** Pouch Manager
+ * ** Couch Connector
  *
  * Note: this config is created for testing PPT locally. Currently it's not used by any other configs and tests.
  */
@@ -15,6 +15,6 @@
     },
     "mergeConfigs": [
         "%preferencesServer/configs/gpii.preferencesServer.config.base.json5",
-        "%couchConnector/configs/gpii.couchConnector.config.base.json5"
+        "%gpii-couch-connector/configs/gpii.couchConnector.config.base.json5"
     ]
 }

@@ -117,7 +117,7 @@ gpii.tests.conflictingApps.testDefs = [
                             "Options.TypingEcho": 2
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
@@ -143,7 +143,7 @@ gpii.tests.conflictingApps.testDefs = [
                             "ENU-MenuAndDialog.Pitch": 16
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
@@ -171,7 +171,7 @@ gpii.tests.conflictingApps.testDefs = [
                             "Options.TypingEcho": 2
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
@@ -197,7 +197,7 @@ gpii.tests.conflictingApps.testDefs = [
                             "ENU-MenuAndDialog.Pitch": 16
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]

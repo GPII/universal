@@ -10,12 +10,12 @@
  * ** Ontology Handler
  * ** Preferences Server
  * ** Solutions Registry (reading registry from file)
- * ** Pouch Manager
+ * ** Couch Connector
  */
 {
     "type": "gpii.config.cloudBased.development.all.local",
     "mergeConfigs": [
         "%gpii-universal/gpii/configs/gpii.config.cloudBased.development.json5",
-        "%couchConnector/configs/gpii.couchConnector.config.base.json5"
+        "%gpii-couch-connector/configs/gpii.couchConnector.config.base.json5"
     ]
 }
