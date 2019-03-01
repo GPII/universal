@@ -228,7 +228,7 @@ gpii.tests.errors.coreTestDef = {
     expect: 7,
     config: {
         configName: "gpii.config.development.local",
-        configPath: "%gpii-universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs/shared"
     },
     sequence: [],
     gradeNames: ["gpii.test.integration.testCaseHolder.windows", "gpii.tests.errors.mixin"],

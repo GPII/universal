@@ -1,5 +1,5 @@
 /**
- * This configuration is the production version of `gpii.config.untrusted.development.dynamicDR.all.local`.
+ * This configuration is the production version of `gpii.config.untrusted.development.dynamicDR.manualTesting`.
  * It runs the entire system locally under the untrusted Flow Manager architecture and includes an extra feature
  * that resets the system on system startup. See documentation/ResetComputer.md.
  *
@@ -18,12 +18,12 @@
  * ** Ontology Handler
  * ** Preferences Server
  * ** Solutions Registry (reading registry from file)
- * ** Couch Connector
+ * ** gpii-couchdb-test-harness
  */
 {
-    "type": "gpii.config.untrusted.production.dynamicDR.all.local",
+    "type": "gpii.config.untrusted.production.dynamicDR.manualTesting",
     "mergeConfigs": [
         "%flowManager/configs/gpii.flowManager.config.production.base.json5",
-        "%gpii-universal/gpii/configs/gpii.config.untrusted.development.dynamicDR.all.local"
+        "%gpii-universal/gpii/configs/gpii.config.untrusted.development.dynamicDR.manualTesting"
     ]
 }

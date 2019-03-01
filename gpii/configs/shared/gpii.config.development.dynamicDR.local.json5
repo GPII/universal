@@ -27,6 +27,6 @@
     },
     "mergeConfigs": [
         "%deviceReporter/configs/gpii.deviceReporter.config.dynamic.json5",
-        "%gpii-universal/gpii/configs/gpii.config.development.base.local.json5"
+        "%gpii-universal/gpii/configs/shared/gpii.config.development.base.local.json5"
     ]
 }
