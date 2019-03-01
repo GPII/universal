@@ -7,11 +7,11 @@ This directory contains a tiny sample client for the pspChannel WebSockets conne
 It can be tested by firing up any configuration of the GPII which includes a local FlowManager. Particularly
 suitable are the mock configurations in %gpii-universal/gpii/configs/mocks - for example you can type
 
-    `node gpii.js gpii/configs/mocks gpii.config.development.all.local.mock.windows`
+    `node gpii.js gpii/configs/mocks gpii.config.development.manualTesting.mock.windows`
 
 or
 
-    `node gpii.js gpii/configs/mocks gpii.config.untrusted.development.all.local.mock.windows`
+    `node gpii.js gpii/configs/mocks gpii.config.untrusted.development.manualTesting.mock.windows`
 
 from the root of this repository. This will start up the servers in trusted or untrusted mode, respectively.
 

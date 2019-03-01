@@ -57,7 +57,7 @@ gpii.tests.development.testDefs = [{
     expect: 2,
     config: {
         configName: "gpii.config.development.local",
-        configPath: "%gpii-universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs/shared"
     },
     gpiiKey: "testUser1",
     sequence: gpii.tests.development.commonTestSequence
@@ -66,7 +66,7 @@ gpii.tests.development.testDefs = [{
     expect: 2,
     config: {
         configName: "gpii.config.development.local",
-        configPath: "%gpii-universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs/shared"
     },
     gpiiKey: "nonexistent_gpii_key",
     sequence: gpii.tests.development.commonTestSequence

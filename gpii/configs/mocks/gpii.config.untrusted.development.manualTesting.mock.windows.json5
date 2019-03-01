@@ -24,7 +24,7 @@
  */
 
 {
-    "type": "gpii.config.untrusted.development.all.local.mock.windows",
+    "type": "gpii.config.untrusted.development.manualTesting.mock.windows",
     "options": {
         "gradeNames": ["kettle.multiConfig.config"],
         "configs": {
@@ -34,7 +34,7 @@
             },
             "cloudBasedConfig": {
                 "configName": "gpii.config.cloudBased.development",
-                "configPath": "%gpii-universal/gpii/configs"
+                "configPath": "%gpii-universal/gpii/configs/shared"
             }
         },
         "distributeOptions": {
@@ -50,6 +50,6 @@
         }
     },
     "mergeConfigs": [
-        "%gpii-couch-connector/configs/gpii.couchConnector.config.base.json5"
+        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.base.json5"
     ]
 }
