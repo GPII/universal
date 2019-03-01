@@ -111,78 +111,6 @@ Return payload:
 }
 ```
 
-### POST /preferences/:gpiiKey[?view=:view]
-
-This is used to post new preferences for a to-be-created GPII key to the Preferences Server. A new GPII key with the
-given key will be created and returned in the payload along with the saved preferences.
-
-As with GET, this takes an optional `view` parameter denoting the ontology of the provided settings. If no `view` is
-provided, the preferences will be stored and interpreted as being in the `flat` format.
-
-#### Example POST query
-
-Below is an example of a post query to the following url (given that a Preferences Server is available at
-preferences.gpii.net):
-
-`http://preferences.gpii.net/preferences/nonexistentKey?view=flat`
-
-The body of the POST should contain the preferences to be stored. They should be in the format specified by `view` or,
-if no `view` is provided, in the flat format.
-
-Example POST body:
-
-```json
-{
-    "contexts": {
-        "gpii-default": {
-            "name": "Default preferences",
-            "preferences": {
-                "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
-                "http://registry.gpii.net/common/initDelay": 0.120,
-                "http://registry.gpii.net/common/cursorSpeed": 0.850,
-                "http://registry.gpii.net/common/cursorAcceleration": 0.800,
-                "http://registry.gpii.net/common/mouseEmulation/enabled": true,
-                "http://registry.gpii.net/common/unknown": true,
-                "http://registry.gpii.net/applications/org.alsa-project": {
-                    "volume": 14,
-                    "pitch": 100
-                }
-            }
-        }
-    }
-}
-```
-
-The return payload will contain the created GPII key (keyed by `gpiiKey`) and its associated stored preferences
-(keyed by `preferences`).
-
-Given that the above preferences was stored with the GPII key `nonexistentKey` the return payload would be:
-
-```json
-{
-    "gpiiKey": "nonexistentKey",
-    "preferences": {
-        "contexts": {
-            "gpii-default": {
-                "name": "Default preferences",
-                "preferences": {
-                    "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
-                    "http://registry.gpii.net/common/initDelay": 0.120,
-                    "http://registry.gpii.net/common/cursorSpeed": 0.850,
-                    "http://registry.gpii.net/common/cursorAcceleration": 0.800,
-                    "http://registry.gpii.net/common/mouseEmulation/enabled": true,
-                    "http://registry.gpii.net/common/unknown": true,
-                    "http://registry.gpii.net/applications/org.alsa-project": {
-                        "volume": 14,
-                        "pitch": 100
-                    }
-                }
-            }
-        }
-    }
-}
-```
-
 ### POST /preferences/[?view=:view]
 
 This is used to post new preferences to the Preferences Server. A new GPII key will automatically be generated and
@@ -258,21 +186,22 @@ payload would be:
 
 ### PUT /preferences/:gpiiKey[?merge=:mergeview=:view]
 
-This is used to update an existing preference set to the Preferences Server. In case no preference set exists associated
-with that GPII key, a new one will be created.
+This is used to create a new GPII key with its preferences, or update preferences for an existing GPII key to the
+Preferences Server. At the update, if no preferences safe is associated with the provided GPII key, a new safe will
+be automatically created.
 
 As with GET and PUT, this takes an optional `view` parameter denoting the ontology of the settings provided in the
 payload of the request body. If no `view` is provided, the preferences will be stored and interpreted as being in the
 `flat` format.
 
-As with PUT, this takes an optional boolean `merge` parameter denoting whether the incoming preferences should be merged
-with the existing preferences. If `merge` is `true`, the incoming preferences will be merged with the existing ones.
-Otherwise, the incoming preferences will override the existing ones. If no `merge` is provided, the default value will
-be `false`.
+As for the update, this takes an optional boolean `merge` parameter denoting whether the incoming preferences should be
+merged with the existing preferences. If `merge` is `true`, the incoming preferences will be merged with the existing
+ones. Otherwise, the incoming preferences will override the existing ones. If no `merge` is provided, the default value
+will be `false`.
 
-When settings are PUT to the preferences server, all the settings in that view will be overwritten. In other words, if I
-have some settings A, B and C already existing in my preference set (in a given view), and a put request is made
-containing only settings B and D, the resulting preference set will contain only settings B and D.
+When preferences are PUT to the preferences server, all the preferences in that view will be overwritten. In other
+words, if I have preferences A, B and C already existing in my preference set (in a given view), and a put request is
+made containing only settings B and D, the resulting preference set will contain only settings B and D.
 
 The preferences are allowed to be stored in different ontologies. A (transformable) user preference will only be stored
 once in the preference set. This also means that if a put request is make containing a preference A1, which already
