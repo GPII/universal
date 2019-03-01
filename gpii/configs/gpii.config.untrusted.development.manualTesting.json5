@@ -12,15 +12,15 @@
  * ** Untrusted Local Flow Manager
  * ** MatchMaker Framework
  * ** Ontology Handler
- * ** Couch Connector
+ * ** gpii-couchdb-test-harness
  * ** Preferences Server
  * ** Solutions Registry (reading registry from file)
  * ** Static Device Reporter (reading from file)
  */
 {
-    "type": "gpii.config.untrusted.development.all.local",
+    "type": "gpii.config.untrusted.development.manualTesting",
     "mergeConfigs": [
-        "./gpii.config.untrusted.development.local.json5",
-        "%gpii-couch-connector/configs/gpii.couchConnector.config.base.json5"
+        "%gpii-universal/gpii/configs/shared/gpii.config.untrusted.development.local.json5",
+        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.manualTesting.json5"
     ]
 }

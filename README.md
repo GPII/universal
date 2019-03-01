@@ -309,7 +309,7 @@ Running `./scripts/vagrantCloudBasedContainers.sh`:
 2. In the case that you would like to start these 3 servers without rebuilding the universal docker image, run the
    script with `--no-rebuild` option: `./scripts/vagrantCloudBasedContainers.sh --no-rebuild`
 
-#### Method 2: On the host machine that has docker installed
+#### Method 2: On a host machine that has docker installed
 
 To build a Docker image simply run: `docker build -t my-universal .`
 

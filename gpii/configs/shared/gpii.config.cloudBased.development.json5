@@ -1,5 +1,5 @@
 /**
- * This configuration acts as a base for `gpii.config.cloudBased.development.all.local`.
+ * This configuration acts as a base for `gpii.config.cloudBased.development.manualTesting`.
  *
  * * The following components are running:
  * ** Auth Server
