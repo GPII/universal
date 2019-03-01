@@ -30,7 +30,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     });
 
-    gpii.startupAPI.tests.DefaultConfigName = function () {
+    gpii.startupAPI.tests.defaultConfigName = function () {
         var configs = gpii.queryConfigs();
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
 
@@ -45,7 +45,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
     };
 
-    gpii.startupAPI.tests.CustomConfigName = function () {
+    gpii.startupAPI.tests.customConfigName = function () {
         var configs = gpii.queryConfigs();
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
 
@@ -64,7 +64,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
     };
 
-    gpii.startupAPI.tests.ConfigPath = function () {
+    gpii.startupAPI.tests.configPath = function () {
         var configs = gpii.queryConfigs();
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
 
@@ -91,17 +91,17 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 {
                     expect: 4,
                     name: "gpii.startupAPI.tests.ConfigName - default config",
-                    func: "gpii.startupAPI.tests.DefaultConfigName"
+                    func: "gpii.startupAPI.tests.defaultConfigName"
                 },
                 {
                     expect: 4,
                     name: "gpii.startupAPI.tests.ConfigName - custom config",
-                    func: "gpii.startupAPI.tests.CustomConfigName"
+                    func: "gpii.startupAPI.tests.customConfigName"
                 },
                 {
                     expect: 4,
-                    name: "gpii.startupAPI.tests.ConfigPath tests",
-                    func: "gpii.startupAPI.tests.ConfigPath"
+                    name: "gpii.startupAPI.tests.configPath tests",
+                    func: "gpii.startupAPI.tests.configPath"
                 }
             ]
         }]
