@@ -24,7 +24,7 @@ fluid.registerNamespace("gpii.tests.cloudStatus");
 gpii.tests.cloudStatus.configs = {
     allLocalWithPrefsServer: {
         configName: "gpii.config.cloudBased.development",
-        configPath: "%gpii-universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs/shared"
     },
     allLocalWithoutPrefsServer: {
         configName: "gpii.flowManager.config.cloud.base",

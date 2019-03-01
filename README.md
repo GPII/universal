@@ -95,10 +95,12 @@ There are currently 3 different sets of tests:
 * Production tests, that run in node.js, but which interact with external services.
 
 The `npm test` command will run the browser and Node based tests.  Please note, the node tests may behave oddly if you
-have set the `NODE_ENV` variable.  The last two types of tests require you to have either Docker or Vagrant installed
-and available on your path.  If you are using Vagrant, you'll need to set the `GPII_TEST_COUCH_USE_VAGRANT` environment
-variable to `true`.  See [the documentation for the gpii-couchdb-test-harness package](https://github.com/GPII/gpii-couchdb-test-harness)
-for more details.
+have set the `NODE_ENV` variable. The last two types of tests require you to have either Docker or Vagrant installed
+and available on your path, or else have a local instance of CouchDB listening on port 25984.
+If you are using Vagrant, you'll need to set the `GPII_TEST_COUCH_USE_VAGRANT` environment
+variable to `true`, or if you wish to bind tests against a local CouchDB on port 25984, you can
+set the `GPII_TEST_COUCH_USE_EXTERNAL` environment variable to `true`. See [the documentation for the
+gpii-couchdb-test-harness package](https://github.com/GPII/gpii-couchdb-test-harness) for more details.
 
 ### Convert Preferences Data
 
@@ -307,7 +309,7 @@ Running `./scripts/vagrantCloudBasedContainers.sh`:
 2. In the case that you would like to start these 3 servers without rebuilding the universal docker image, run the
    script with `--no-rebuild` option: `./scripts/vagrantCloudBasedContainers.sh --no-rebuild`
 
-#### Method 2: On the host machine that has docker installed
+#### Method 2: On a host machine that has docker installed
 
 To build a Docker image simply run: `docker build -t my-universal .`
 

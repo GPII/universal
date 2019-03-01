@@ -1,5 +1,5 @@
 /**
- * This configuration acts as a base for `gpii.config.untrusted.evelopment.all.local`.
+ * This configuration acts as a base for `gpii.config.untrusted.development.manualTesting`.
  *
  * It uses a multi-server Kettle configuration to run the Untrusted Flow Manager and
  * a local version of the Cloud Based Flow Manager within the same Kettle process, but on different ports:
@@ -29,6 +29,6 @@
         }
     },
     "mergeConfigs": [
-        "%gpii-universal/gpii/configs/gpii.config.untrusted.development.local.json5"
+        "%gpii-universal/gpii/configs/shared/gpii.config.untrusted.development.local.json5"
     ]
 }

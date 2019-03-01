@@ -6214,11 +6214,7 @@
         ],
         "isInstalled": [
             {
-                "type": "gpii.deviceReporter.registryKeyExists",
-                "hKey": "HKEY_LOCAL_MACHINE",
-                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
-                "subPath": "",
-                "dataType": "REG_SZ"
+                "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
     },

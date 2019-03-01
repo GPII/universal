@@ -15,12 +15,12 @@
  * ** Ontology Handler
  * ** Preferences Server
  * ** Solutions Registry (reading registry from file)
- * ** Couch Connector
+ * ** gpii-couchdb-test-harness
  */
 {
-    "type": "gpii.config.untrusted.development.dynamicDR.all.local",
+    "type": "gpii.config.untrusted.development.dynamicDR.manualTesting",
     "mergeConfigs": [
-        "./gpii.config.untrusted.development.dynamicDR.local.json5",
-        "%gpii-couch-connector/configs/gpii.couchConnector.config.base.json5"
+        "%gpii-universal/gpii/configs/shared/gpii.config.untrusted.development.dynamicDR.local.json5",
+        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.manualTesting.json5"
     ]
 }
