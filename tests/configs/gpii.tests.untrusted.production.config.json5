@@ -3,5 +3,5 @@
     "options": {
         "mainServerPort": 9082
     },
-    "mergeConfigs": "%gpii-universal/gpii/configs/gpii.config.untrusted.development.json5"
+    "mergeConfigs": "%gpii-universal/gpii/configs/shared/gpii.config.untrusted.development.json5"
 }
