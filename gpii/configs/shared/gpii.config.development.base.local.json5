@@ -28,6 +28,7 @@
         "%flowManager/configs/gpii.flowManager.config.cloud.base.json5",
         "%flowManager/configs/gpii.flowManager.config.local.base.json5",
         "%preferencesServer/configs/gpii.preferencesServer.config.base.json5",
-        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.base.json5"
+        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.base.json5",
+        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.base.json5"
     ]
 }

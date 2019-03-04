@@ -9,6 +9,6 @@
         }
     },
     "mergeConfigs": [
-        "%gpii-universal/gpii/configs/gpii.config.untrusted.development.local.json5"
+        "%gpii-universal/gpii/configs/shared/gpii.config.untrusted.development.local.json5"
     ]
 }

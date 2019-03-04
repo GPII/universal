@@ -11,7 +11,6 @@
                     "http://registry.gpii.net/common/cursorSize": 0.9,
                     "http://registry.gpii.net/common/fontSize": 9,
                     "http://registry.gpii.net/common/mouseTrailing": 10,
-                    "http://registry.gpii.net/common/highContrast/enabled": true,
                     "http://registry.gpii.net/common/mouseEmulation/enabled": true,
                     "http://registry.gpii.net/common/cursorAcceleration": 1,
                     "http://registry.gpii.net/common/cursorSpeed": 1,

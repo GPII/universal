@@ -6053,6 +6053,10 @@
                         }
                     }
                 },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                    "http://registry\\.gpii\\.net/common/highContrastTheme"
+                ],
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
                         // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
@@ -6133,6 +6137,10 @@
                         }
                     }
                 },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                    "http://registry\\.gpii\\.net/common/highContrastTheme"
+                ],
                 "capabilitiesTransformations": {
                     "LastHighContrastTheme": {
                         "transform": {
@@ -6167,6 +6175,10 @@
                 "supportedSettings": {
                     "Pre-High Contrast Scheme": {}
                 },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                    "http://registry\\.gpii\\.net/common/highContrastTheme"
+                ],
                 "capabilitiesTransformations": {
                     "Pre-High Contrast Scheme": {
                         "transform": {
@@ -6202,11 +6214,7 @@
         ],
         "isInstalled": [
             {
-                "type": "gpii.deviceReporter.registryKeyExists",
-                "hKey": "HKEY_LOCAL_MACHINE",
-                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
-                "subPath": "",
-                "dataType": "REG_SZ"
+                "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
     },

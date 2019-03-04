@@ -33,7 +33,6 @@ require("./gpii/node_modules/matchMakerFramework");
 require("./gpii/node_modules/flatMatchMaker");
 require("./gpii/node_modules/contextManager");
 require("./gpii/node_modules/journal");
-require("./gpii/node_modules/couchConnector");
 require("./gpii/node_modules/eventLog");
 require("./gpii/node_modules/processReporter");
 require("./gpii/node_modules/gpii-db-operation");
@@ -78,7 +77,7 @@ gpii.queryConfigs = function () {
  */
 gpii.start = function (options) {
     options = options || {};
-    var configName = options.configName || "gpii.config.development.all.local";
+    var configName = options.configName || "gpii.config.development.manualTesting";
     var configPath = options.configPath || __dirname + "/gpii/configs";
     kettle.config.loadConfig({
         configName: kettle.config.getConfigName(configName),

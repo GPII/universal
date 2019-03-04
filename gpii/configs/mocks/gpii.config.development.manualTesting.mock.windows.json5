@@ -1,17 +1,17 @@
 /**
- * A variety of gpii.config.development.all.local.json5 which supplies mock implementations of all settings handlers
+ * A variety of gpii.config.development.manualTesting which supplies mock implementations of all settings handlers
  * supported on the Windows platform.
  *
  * This configuration runs the entire system, in the "trusted local FlowManager" configuration, locally and in development mode.
  * This means that fetches of solutions, preferences, etc. are sourced from the filesystem rather than from CouchDB URLs.
  */
 {
-    "type": "gpii.config.development.all.local.mock.windows",
+    "type": "gpii.config.development.manualTesting.mock.windows",
     "options": {
         "gradeNames": "gpii.test.integration.mockHolder.windows"
     },
     "mergeConfigs": [
-        "%gpii-universal/gpii/configs/gpii.config.development.all.local"
+        "%gpii-universal/gpii/configs/gpii.config.development.manualTesting"
     ],
     "require": [
         "%gpii-universal/gpii/node_modules/testing/src/Mocks.js"
