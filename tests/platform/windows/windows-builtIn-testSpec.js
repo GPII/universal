@@ -78,6 +78,26 @@ gpii.tests.windows.builtIn = [
                         "options": {
                             "functionName": "DoubleClickTime"
                         }
+                    },
+                    {
+                        "settings": {
+                            "DoubleClickWidthConfig": {
+                                "value": 32
+                            }
+                        },
+                        "options": {
+                            "functionName": "DoubleClickWidth"
+                        }
+                    },
+                    {
+                        "settings": {
+                            "DoubleClickHeightConfig": {
+                                "value": 32
+                            }
+                        },
+                        "options": {
+                            "functionName": "DoubleClickHeight"
+                        }
                     }
                 ]
             },
