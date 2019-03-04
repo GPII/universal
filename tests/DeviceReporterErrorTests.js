@@ -36,7 +36,7 @@ fluid.defaults("gpii.tests.deviceReporterErrorTests.testCaseHolder", {
 gpii.tests.deviceReporterErrorTests.testDefCommon = {
     config: {
         configName: "gpii.config.development.local",
-        configPath: "%gpii-universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs/shared"
     },
     gradeNames: "gpii.tests.deviceReporterErrorTests.testCaseHolder"
 };
@@ -48,7 +48,7 @@ gpii.tests.deviceReporterErrorTests.testDefs = [
         gpiiKey: "testUser1",
         config: {
             configName: "gpii.config.development.local",
-            configPath: "%gpii-universal/gpii/configs"
+            configPath: "%gpii-universal/gpii/configs/shared"
         },
         gradeNames: "gpii.tests.deviceReporterErrorTests.testCaseHolder",
         sequence: [{

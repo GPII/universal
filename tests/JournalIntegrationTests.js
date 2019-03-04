@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.tests.journal");
 
 gpii.tests.journal.testSpec = fluid.require("%gpii-universal/tests/platform/windows/windows-builtIn-testSpec.js");
 
-// The os_win7 entry forms the spine of our test. This user has 4 application-specific preferences encoded
+// The os_win entry forms the spine of our test. This user has 4 application-specific preferences encoded
 // for Windows built-in a11y features - mouse trailing (SPI), high contrast (SPI), large cursors (registry), magnifier (registry)
 // our test strategy involves overriding the mock implementation for the large cursors solutions registry entry to instead invoke an
 // exploding settings handler
@@ -166,6 +166,26 @@ gpii.tests.journal.initialSettings = {
                 },
                 "options": {
                     "functionName": "DoubleClickTime"
+                }
+            },
+            {
+                "settings": {
+                    "DoubleClickWidthConfig": {
+                        "value": 4
+                    }
+                },
+                "options": {
+                    "functionName": "DoubleClickWidth"
+                }
+            },
+            {
+                "settings": {
+                    "DoubleClickHeightConfig": {
+                        "value": 4
+                    }
+                },
+                "options": {
+                    "functionName": "DoubleClickHeight"
                 }
             }
         ]

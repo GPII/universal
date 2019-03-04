@@ -43,12 +43,6 @@
                             "value": 1000
                         }
                     },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
-                        "HighContrastOn": {
-                            "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
-                            "value": true
-                        }
-                    },
                     "http://registry.gpii.net/applications/com.microsoft.windows.cursors": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
                         "Hand": "",
@@ -200,6 +194,12 @@
                         "MouseSonarConfig": {
                             "path": "pvParam",
                             "value": 1
+                        },
+                        "DoubleClickWidthConfig": {
+                            "value": 32
+                        },
+                        "DoubleClickHeightConfig": {
+                            "value": 32
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.language": {

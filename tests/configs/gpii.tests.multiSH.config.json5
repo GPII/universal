@@ -14,5 +14,5 @@
             }
         }
     },
-    "mergeConfigs": "%gpii-universal/gpii/configs/gpii.config.development.local.json5"
+    "mergeConfigs": "%gpii-universal/gpii/configs/shared/gpii.config.development.local.json5"
 }
