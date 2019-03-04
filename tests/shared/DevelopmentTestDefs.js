@@ -44,9 +44,8 @@ gpii.tests.development.testDefs = [{
     expect: 2,
     config: {
         configName: "gpii.config.development.local",
-        configPath: "%gpii-universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs/shared"
     },
-    gradeNames: ["gpii.test.common.testCaseHolder"],
     gpiiKey: gpii.tests.development.gpiiKey,
     sequence: [{
         func: "{loginRequest}.send"

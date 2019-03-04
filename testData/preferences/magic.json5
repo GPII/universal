@@ -1,0 +1,94 @@
+/*
+
+    A fixture to test all supported MAGic settings at once by setting them to something other than the default.
+
+*/
+{
+    "flat": {
+        "name": "MAGic",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.magic": {
+                        "mag.caretbutton": 1,
+                        "mag.colorbutton": 1,
+                        "mag.cursorbutton": 1,
+                        "mag.detectKeyboardInputLanguage": 0,
+                        "mag.DisabledScreenSaver": 0,
+                        "mag.dynlensbordercolor": 9,
+                        "mag.dynlensborderwidth": 5,
+                        "mag.enablebilingual": 1,
+                        "mag.enablemagicfrmsystray": 1,
+                        "mag.Focus Enhancement Enabled": 1,
+                        "mag.IndicateCaps": 2,
+                        "mag.IndicateCapsBy": 2,
+                        "mag.lensbordercolor": 9,
+                        "mag.lensborderwidth": 5,
+                        "mag.LowerOtherAppsVolumeWhileMagicIsRunning": 1,
+                        "mag.overlaybordercolor": 9,
+                        "mag.overlayborderwidth": 5,
+                        "mag.promptmagictosave": 1,
+                        "mag.promptoverwriteschemes": 0,
+                        // This may be problematic, as it is associated with a common term.
+                        "mag.size": 2,
+                        "mag.speechbutton": 0,
+                        "mag.splitlocation": 2,
+                        "mag.splitsize": 0,
+                        "mag.splitbordercolor": 9,
+                        "mag.splitframesize": 5,
+                        "mag.splitwindowheight": 20,
+                        "mag.splitwindowwidth": 20,
+                        "mag.startmagicminimized": 1,
+                        // This may be problematic, as it is associated with a common term.
+                        "mag.startmagnified": 1,
+                        "mag.TextViewerCharSpace": 1,
+                        "mag.TextViewerFontBkgColorIndex": 13,
+                        "mag.TextViewerFontColorIndex": 14,
+                        // This may be problematic, as it is associated with a common term.
+                        "mag.TextViewerFontFaceName": "Comic Sans",
+                        // This may be problematic, as it is associated with a common term.
+                        "mag.TextViewerFontSize": 45,
+                        "mag.TextViewerFontStyle": 2,
+                        "mag.TextViewerFontEffect": 1,
+                        "mag.TextViewerOn": 0,
+                        "mag.TextViewerPosition": 1,
+                        "mag.TextViewerSpotlightStyle": 1,
+                        "mag.TextViewerSpotlightTransparency": 25,
+                        "mag.TextViewerSpotlightColorIndex": 9,
+                        "mag.TextViewerSpotlightWordColorIndex": 15,
+                        "mag.TextViewerSpotlightThickness": 5,
+                        "mag.TextViewerTrackingMode": 1,
+                        "mag.TextViewerWordSpace": 1,
+                        // This is problematic because it is transformed into a JAWS setting via the common term.
+                        // TODO: Discuss the matchmaker's current behaviour and whether it can change.
+                        // "mag.typingecho": 3,
+                        "mag.typeechobutton": 0,
+                        "mag.viewtype": 1,
+                        "Options.SkipILM": 1,
+                        "Options.AllowMouseEchoWhenMuted": 1,
+                        "Options.AllowSpeechOnDemandWhenMuted": 0,
+                        "Options.AllowTypingEchoWhenMuted": 1,
+                        "Options.IndicateCaps": 1,
+                        "Options.InitialNumlockState": 2,
+                        "Options.MouseMovementStopsSpeech": 0,
+                        "Options.MouseSpeechDelay": 2,
+                        "Options.MouseSpeechEchoUnit": 1,
+                        "Options.MouseSpeechEnabled": 1,
+                        // This is problematic because it is transformed into a JAWS setting via the common term.
+                        // TODO: Discuss the matchmaker's current behaviour and whether it can change.
+                        // "Options.TypingEcho": 2,
+                        "scheme.ColorSchemeModified": 1,
+                        "scheme.Color_Scheme": "Grayscale (Inverted)+Color",
+                        "scheme.CursorSchemeModified": 1,
+                        "scheme.Cursor_Scheme": "Purple Long Box+Cursor",
+                        "scheme.MouseSchemeModified": 1,
+                        // This may be problematic, as it is associated with a common term (crosshairs).
+                        "scheme.Mouse_Scheme": "Scope When Moving+Mouse"
+                    },
+                    "http://registry.gpii.net/applications/com.freedomscientific.magic/enabled": true
+                }
+            }
+        }
+    }
+}

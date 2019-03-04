@@ -28,9 +28,9 @@ fluid.registerNamespace("gpii.tests.preferencesServerErrorTests");
 gpii.tests.preferencesServerErrorTests.testDefCommon = {
     config: {
         configName: "gpii.config.development.local",
-        configPath: "%gpii-universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs/shared"
     },
-    gradeNames: ["gpii.test.common.testCaseHolder"]
+    gradeNames: ["gpii.test.testCaseHolder"]
 };
 
 
@@ -61,4 +61,4 @@ gpii.tests.preferencesServerErrorTests.buildAllTestDefs = function () {
     });
 };
 
-gpii.test.bootstrapServer(gpii.tests.preferencesServerErrorTests.buildAllTestDefs());
+gpii.test.runCouchTestDefs(gpii.tests.preferencesServerErrorTests.buildAllTestDefs());
