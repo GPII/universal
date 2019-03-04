@@ -7030,7 +7030,7 @@
                 },
                 "capabilitiesTransformations": {
                     "DoubleClickTimeConfig": {
-                            "transform": {
+                        "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickTime",
                             "outputPath": "value"
@@ -7263,7 +7263,7 @@
                 },
                 "capabilitiesTransformations": {
                     "DoubleClickWidthConfig": {
-                            "transform": {
+                        "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickWidth",
                             "outputPath": "value"
@@ -7296,7 +7296,7 @@
                 },
                 "capabilitiesTransformations": {
                     "DoubleClickHeightConfig": {
-                            "transform": {
+                        "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickHeight",
                             "outputPath": "value"
@@ -7346,7 +7346,7 @@
         ],
         "isInstalled": [
             {
-                 "type": "gpii.deviceReporter.alwaysInstalled"
+                "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
     },
