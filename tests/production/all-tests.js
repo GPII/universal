@@ -23,7 +23,7 @@ fluid.require("%gpii-universal", require);
 
 var testIncludes = [
     "./AddUserSettingsToCouchTests.js",
-    "./CloudStatusProduction.js",
+    "./CloudStatusProductionTests.js",
     "./SettingsGetProductionTests.js",
     "./SettingsPutProductionTests.js",
     "./DeleteUserSettingFromCouchTests.js"
