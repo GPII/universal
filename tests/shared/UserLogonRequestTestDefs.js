@@ -230,7 +230,6 @@ gpii.tests.userLogonRequest.buildTestDefs = function (testDefs, testType) {
     };
 
     return fluid.transform(testDefs, function (testDef) {
-        var extraTestDef = testType === "untrusted" ? testDef.untrustedExtras : {};
         return fluid.extend(true, {
             config: config,
             gpiiKey: testDefs.gpiiKey || gpii.tests.userLogonRequest.gpiiKey,
@@ -248,7 +247,7 @@ gpii.tests.userLogonRequest.buildTestDefs = function (testDefs, testType) {
                     "target": "{that gpii.flowManager.local lifecycleManager}.options"
                 }
             }
-        }, gpii.tests.userLogonRequest.commonTestConfig, testDef, extraTestDef);
+        }, gpii.tests.userLogonRequest.commonTestConfig, testDef);
     });
 };
 
@@ -699,36 +698,27 @@ gpii.tests.userLogonRequest.testDefs = [
         ]
     },
     {
-        name: "Testing standard error handling: invalid user URLs",
-        expect: 4,
+        name: "Testing login and logout with a nonexistent GPII key",
+        expect: 2,
         gpiiKey: "bogusToken",
-        untrustedExtras: {
-            statusCode: 401,
-            errorText: "server_error while executing HTTP POST on url http://localhost:8084/access_token"
-        },
-        errorText: "Error when retrieving preferences: GPII key \"bogusToken\" does not exist while executing HTTP GET on url http://localhost:8081/preferences/bogusToken?merge=%merge",
-        statusCode: 404,
         sequence: [
             {
                 // login with a non-existing GPII key
                 task: "{lifecycleManager}.performLogin",
                 args: ["{testCaseHolder}.options.gpiiKey"],
-                reject: "jqUnit.assertDeepEq",
-                rejectArgs: ["Received error when logging in non-existing GPII key", {
-                    "isError": true,
-                    "statusCode": "{testCaseHolder}.options.statusCode",
-                    "message": "{testCaseHolder}.options.errorText"
-                }, "{arguments}.0"]
+                resolve: "gpii.tests.userLogonRequest.testLoginResponse",
+                resolveArgs: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey"]
             },
             {
-                // "noUser" is still keyed in when a logon request is rejected
                 event: "{lifecycleManager}.events.onQueueEmpty",
-                listener: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-                args: ["{lifecycleManager}", "noUser"]
+                listener: "fluid.identity"
             },
             {
-                funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.noUserLogin"] // trackedLogonChange, expectedModelChanges)
+                // logout of different user
+                task: "{lifecycleManager}.performLogout",
+                args: ["{testCaseHolder}.options.gpiiKey"],
+                resolve: "gpii.tests.userLogonRequest.testLogoutResponse",
+                resolveArgs: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey"]
             }
         ]
     },

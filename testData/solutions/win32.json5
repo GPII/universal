@@ -6660,7 +6660,7 @@
         ]
     },
     "com.microsoft.windows.mouseSettings": {
-        "name": "Windows typing autocorrection",
+        "name": "Windows Mouse settings",
         "contexts": {
             "OS": [
                 {
@@ -6682,14 +6682,20 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
-                // TODO: Schema data
                 "supportedSettings": {
                     "SwapMouseButtonsConfig": {
                         "schema": {
                             "title": "Swap mouse primary button",
                             "description": "Swap mouse left/right buttons",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
                         }
                     }
                 },
@@ -6861,8 +6867,8 @@
                             "description": "Changes the number of chars that are scrolled horizontally.",
                             "type": "number",
                             "default": 3,
-                            "min": 1,
-                            "max": 100,
+                            "minimum": 1,
+                            "maximum": 100,
                             "divisibleBy": 1
                         }
                     }
@@ -6939,8 +6945,8 @@
                 "supportedSettings": {
                     "ActiveZOrder": {
                         "schema": {
-                            "title": "Mouse wheel horizontal scroll",
-                            "description": "Changes the number of chars that are scrolled horizontally.",
+                            "title": "Windows Tracking",
+                            "description": "Windows receive focus when mouse hovers over them.",
                             "type": "boolean",
                             "default": 0
                         }
@@ -7014,10 +7020,10 @@
                         "schema": {
                             "title": "Double click time",
                             "description": "Changes the amount of time that can elapse between a first click and a second click for the OS to consider the mouse action a double-click.",
-                            "type": "number",
+                            "type": "integer",
                             "default": 500,
-                            "min": 500,
-                            "max": 5000,
+                            "minimum": 500,
+                            "maximum": 5000,
                             "divisibleBy": 1
                         }
                     }
@@ -7234,6 +7240,72 @@
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseSonar": "MouseSonarConfig.value"
                 }
+            },
+            "configureDoubleClickWidth": {
+                "type": "gpii.windows.nativeSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "functionName": "DoubleClickWidth"
+                },
+                "supportedSettings": {
+                    "DoubleClickWidthConfig": {
+                        // This setting has no documented range, see https://issues.gpii.net/browse/GPII-3732 for explanation of current range.
+                        "schema": {
+                            "title": "Double-click rectangle width",
+                            "description": "Changes the width of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
+                            "type": "integer",
+                            "default": 4,
+                            "minimum": 1,
+                            "maximum": 64,
+                            "divisibleBy": 1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "DoubleClickWidthConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickWidth",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickWidth": "DoubleClickWidthConfig.value"
+                }
+            },
+            "configureDoubleClickHeight": {
+                "type": "gpii.windows.nativeSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "functionName": "DoubleClickHeight"
+                },
+                "supportedSettings": {
+                    "DoubleClickHeightConfig": {
+                        // This setting has no documented range, see https://issues.gpii.net/browse/GPII-3732 for explanation of current range.
+                        "schema": {
+                            "title": "Double-click rectangle height",
+                            "description": "Changes the height of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
+                            "type": "integer",
+                            "default": 4,
+                            "minimum": 1,
+                            "maximum": 64,
+                            "divisibleBy": 1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "DoubleClickHeightConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickHeight",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickHeight": "DoubleClickHeightConfig.value"
+                }
             }
         },
         "configure": [
@@ -7250,7 +7322,9 @@
             "settings.configurePointerPrecision",
             "settings.configureSnapToDefButton",
             "settings.configureHidePointer",
-            "settings.configureMouseSonar"
+            "settings.configureMouseSonar",
+            "settings.configureDoubleClickWidth",
+            "settings.configureDoubleClickHeight"
         ],
         "restore": [
             "settings.configureScrollWheelMode",
@@ -7266,7 +7340,9 @@
             "settings.configurePointerPrecision",
             "settings.configureSnapToDefButton",
             "settings.configureHidePointer",
-            "settings.configureMouseSonar"
+            "settings.configureMouseSonar",
+            "settings.configureDoubleClickWidth",
+            "settings.configureDoubleClickHeight"
         ],
         "isInstalled": [
             {

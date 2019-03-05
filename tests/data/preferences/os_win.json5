@@ -194,6 +194,12 @@
                         "MouseSonarConfig": {
                             "path": "pvParam",
                             "value": 1
+                        },
+                        "DoubleClickWidthConfig": {
+                            "value": 32
+                        },
+                        "DoubleClickHeightConfig": {
+                            "value": 32
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.language": {

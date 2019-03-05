@@ -24,7 +24,7 @@
         "configs": {
             "localConfig": {
                 "configName": "gpii.config.untrusted.development.dynamicDR",
-                "configPath": "%gpii-universal/gpii/configs"
+                "configPath": "%gpii-universal/gpii/configs/shared"
             }
         }
     },

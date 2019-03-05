@@ -73,26 +73,20 @@ var fluid = fluid || require("infusion");
             var error = gpii.dbOperation.composeError(gpii.dbOperation.errors.missingInput, {fieldName: "GPII key, client ID or client credential ID"});
             promiseTogo.reject(error);
         } else {
-            var gpiiKeyPromise = dataStore.findGpiiKey(gpiiKey);
             var clientPromise = dataStore.findClientById(clientId);
             var clientCredentialPromise = dataStore.findClientCredentialById(clientCredentialId);
 
             // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
-            var sources = [gpiiKeyPromise, clientPromise, clientCredentialPromise];
+            var sources = [clientPromise, clientCredentialPromise];
             var promisesSequence = fluid.promise.sequence(sources);
 
             promisesSequence.then(function (responses) {
-                var gpiiKeyRec = responses[0];
-                var clientRec = responses[1];
-                var clientCredentialRec = responses[2];
+                var clientRec = responses[0];
+                var clientCredentialRec = responses[1];
 
                 var error;
 
-                if (!gpiiKeyRec) {
-                    fluid.log("authorizationService, granting GPII app installation authorization: invalid GPII key - ", gpiiKey);
-                    error = gpii.dbOperation.composeError(gpii.dbOperation.errors.unauthorized);
-                    promiseTogo.reject(error);
-                } else if (!clientRec || clientRec.type !== gpii.dbOperation.docTypes.gpiiAppInstallationClient) {
+                if (!clientRec || clientRec.type !== gpii.dbOperation.docTypes.gpiiAppInstallationClient) {
                     fluid.log("authorizationService, granting GPII app installation authorization: invalid client or the type of the client with the client id (" + clientId + ") is not \"" + gpii.dbOperation.docTypes.gpiiAppInstallationClient + "\"");
                     error = gpii.dbOperation.composeError(gpii.dbOperation.errors.unauthorized);
                     promiseTogo.reject(error);

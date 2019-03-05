@@ -36,7 +36,7 @@ gpii.tests.untrusted.userLogonHandling.testDefs =
             },
             gradeNames: ["gpii.tests.userLogonHandlers.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
             gpiiKey: testDefIn.gpiiKey || gpii.tests.userLogonHandlers.gpiiKey
-        }, testDefIn.untrustedExtras || {});
+        });
 
         return testDef;
     });
