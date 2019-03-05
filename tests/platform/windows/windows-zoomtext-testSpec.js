@@ -18,142 +18,146 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.windows");
+fluid.registerNamespace("gpii.tests.windows.zoomtext");
 
-gpii.tests.windows.zoomtext = [
+// To avoid duplicating this entire piece in each test. Given a true or false value
+// as input, this will return a settingshandler entry, containing all the options from
+// the solutions registry entry for NVDAs launchHandler, with a settings block with
+// running: X - where X is replaced with the input parameter
+gpii.tests.windows.zoomtext.flexibleHandlerEntry = function (running) {
+    return {
+        "com.aisquared.zoomtext": [{
+            "settings": {
+                "running": running
+            },
+            "options": {
+                "getState": [
+                    {
+                        "type": "gpii.processReporter.find",
+                        "command": "AiSquared.ZoomText.UI.exe"
+                    }
+                ],
+                "setTrue": [
+                    {
+                        "type": "gpii.launch.exec",
+                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\ZoomText2019.exe\\}\""
+                    }
+                ],
+                "setFalse": [
+                    {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "Zt.exe",
+                        "options": {
+                            "message": "WM_CLOSE"
+                        }
+                    }
+                ]
+            }
+        }]
+    };
+};
+
+gpii.tests.windows.zoomtext.testDefs = [
     {
         name: "Testing NP set \"zoomtext_application\" using Flat matchmaker",
-        userToken: "zoomtext_application",
+        gpiiKey: "zoomtext_application",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.zoomtext.flexibleHandlerEntry(false)
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "com.aisquared.zoomtext": [
                     {
                         "settings": {
-                            "ZT\\.Enabled": true,
-                            "ZT\\.Speech\\.CurrentVoice\\.Rate": 22,
-                            "ZT\\.Speech\\.CurrentVoice\\.Volume": 64,
-                            "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": 1,
-                            "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Increase": true,
-                            "ZT\\.GPII\\.CenterMouse": true
+                            // [Preferences]
+                            "Preferences.SmartInvert": 1,
+
+                            // [ZtSpeech]
+                            "ZtSpeech.SapiProductName": "VocalizerExpressive-Dutch",
+                            "ZtSpeech.Language": 12,
+
+                            // [VocalizerExpressive-Dutch Speech - Screen Reader]
+                            // ==================================================================
+                            "VocalizerExpressive-Dutch Speech - Screen Reader.Speaker": "Default",
+                            "VocalizerExpressive-Dutch Speech - Screen Reader.Valid": 1,
+                            "VocalizerExpressive-Dutch Speech - Screen Reader.SettingsValid": 1,
+                            "VocalizerExpressive-Dutch Speech - Screen Reader.Muted": 0,
+                            "VocalizerExpressive-Dutch Speech - Screen Reader.Voice": 0,
+                            "VocalizerExpressive-Dutch Speech - Screen Reader.Rate": 120,
+                            "VocalizerExpressive-Dutch Speech - Screen Reader.Volume": 70,
+                            "VocalizerExpressive-Dutch Speech - Screen Reader.Pitch": 35,
+
+                            // [VocalizerExpressive-Dutch Speech - DocReader]
+                            "VocalizerExpressive-Dutch Speech - DocReader.Speaker": "Default",
+                            "VocalizerExpressive-Dutch Speech - DocReader.Valid": 1,
+                            "VocalizerExpressive-Dutch Speech - DocReader.SettingsValid": 1,
+                            "VocalizerExpressive-Dutch Speech - DocReader.Muted": 0,
+                            "VocalizerExpressive-Dutch Speech - DocReader.Voice": 0,
+                            "VocalizerExpressive-Dutch Speech - DocReader.Rate": 120,
+                            "VocalizerExpressive-Dutch Speech - DocReader.Volume": 70,
+                            "VocalizerExpressive-Dutch Speech - DocReader.Pitch": 35,
+
+                            // [Magnifier]
+                            "PRIMARY.magPower": 140,
+                            "STATIC 1.magPower": 140,
+
+                            // [EchoTyping]
+                            "EchoTyping.Mode": 32769,
+
+                            // [EchoMouse]
+                            "EchoMouse.HoverMode": 1,
+                            "EchoMouse.LineMode": 0,
+
+                            // [PointerScheme]
+                            "PointerScheme.PtrEnhEnable": 1,
+                            "PointerScheme.PtrEnhIndex": 2,
+
+                            // [Tracking]
+                            "Tracking.RouteMouse": 0
                         },
                         "options": {
-                            "filename": ".\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtext_settings.ini"
+                            "filename": "${{environment}.AppData}\\Freedom Scientific\\ZoomText\\2019\\Config\\zten-US.zxc",
+                            "encoding": "utf16le"
                         }
                     }
                 ]
-            }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq zt.exe\" | find /I \"zt.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0",
-                "maxTimeouts": "40"
-            }
-        ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.zoomtext.flexibleHandlerEntry(true)
+        }
     },
     {
         name: "Testing NP set \"zoomtext_common\" using Flat matchmaker",
-        userToken: "zoomtext_common",
+        gpiiKey: "zoomtext_common",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.zoomtext.flexibleHandlerEntry(false)
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "com.aisquared.zoomtext": [
                     {
                         "settings": {
-                            "ZT\\.Enabled": true,
-                            "ZT\\.Speech\\.CurrentVoice\\.Rate": 22,
-                            "ZT\\.Speech\\.CurrentVoice\\.Volume": 88,
-                            "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": 1,
-                            "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Increase": true,
-                            "ZT\\.GPII\\.CenterMouse": true
+                            "PRIMARY.magPower": 160,
+                            "STATIC 1.magPower": 160
                         },
                         "options": {
-                            "filename": ".\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtext_settings.ini"
+                            "filename": "${{environment}.AppData}\\Freedom Scientific\\ZoomText\\2019\\Config\\zten-US.zxc",
+                            "encoding": "utf16le"
                         }
                     }
                 ]
-            }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq zt.exe\" | find /I \"zt.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0",
-                "maxTimeouts": "40"
-            }
-        ]
-    },
-    {
-        name: "Testing NP set \"zoomtext_common\" using Flat matchmaker",
-        userToken: "zoomtext_common2",
-        settingsHandlers: {
-            "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
-                    {
-                        "settings": {
-                            "ZT\\.Enabled": false,
-                            "ZT\\.Speech\\.CurrentVoice\\.Rate": 50,
-                            "ZT\\.Speech\\.CurrentVoice\\.Volume": 100,
-                            "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": 3,
-                            "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Decrease": true,
-                            "ZT\\.Mouse\\.Location\\.Y": 200
-                        },
-                        "options": {
-                            "filename": ".\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtext_settings.ini"
-                        }
-                    }
-                ]
-            }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq zt.exe\" | find /I \"zt.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0",
-                "maxTimeouts": "40"
-            }
-        ]
-    },
-    {
-        name: "Testing NP set \"zoomtext_common\" using Flat matchmaker",
-        userToken: "zoomtext_common3",
-        settingsHandlers: {
-            "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
-                    {
-                        "settings": {
-                            "ZT\\.Enabled": true,
-                            "ZT\\.Speech\\.CurrentVoice\\.Rate": 33,
-                            "ZT\\.Speech\\.CurrentVoice\\.Volume": 44,
-                            "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": 2,
-                            "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Increase": true,
-                            "ZT\\.Mouse\\.Location\\.XY": "200,300"
-                        },
-                        "options": {
-                            "filename": ".\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtext_settings.ini"
-                        }
-                    }
-                ]
-            }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq zt.exe\" | find /I \"zt.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0",
-                "maxTimeouts": "40"
-            }
-        ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.zoomtext.flexibleHandlerEntry(true)
+        }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.windows.zoomtext",
+    testDefs:  "gpii.tests.windows.zoomtext.testDefs",
     configName: "gpii.tests.acceptance.windows.zoomtext.config",
-    configPath: "%universal/tests/platform/windows/configs"
+    configPath: "%gpii-universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);

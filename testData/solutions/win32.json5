@@ -160,6 +160,26 @@
                             "default": 1
                         }
                     },
+                    "ColorScheme.ColorSchBrightness": {
+                        "schema": {
+                            "title": "Color schema brightness",
+                            "description": "Specifies the brightness of the screen to use.",
+                            "type": "integer",
+                            "minimum": 40,
+                            "maximum": 160,
+                            "default": 100
+                        }
+                    },
+                    "ColorScheme.ColorSchContrastScalar": {
+                        "schema": {
+                            "title": "Color schema contrast",
+                            "description": "Specifies the contrast of the screen to use.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 190,
+                            "default": 100
+                        }
+                    },
                     // [FocusScheme]
                     "FocusScheme.FocusENHEnable": {
                         "schema": {
@@ -293,7 +313,20 @@
                                 "VocalizerExpressive-German",                                   // Language: 7
                                 "VocalizerExpressive-Spanish",                                  // Language: 10
                                 "VocalizerExpressive-French",                                   // Language: 12
-                                "VocalizerExpressive-Dutch"                                     // Language: 19
+                                "VocalizerExpressive-Dutch",                                    // Language: 19
+                                "VocalizerExpressive-Arabic",                                   // Language: 1
+                                "VocalizerExpressive-Portuguese",                               // Language: 22
+                                "VocalizerExpressive-Czech",                                    // Language: 5
+                                "VocalizerExpressive-Danish",                                   // Language: 6
+                                "VocalizerExpressive-Finnish",                                  // Language: 11
+                                "VocalizerExpressive-Hebrew",                                   // Language: 13
+                                "VocalizerExpressive-Hungarian",                                // Language: 13
+                                "VocalizerExpressive-Italian",                                  // Language: 16
+                                "VocalizerExpressive-Korean",                                   // Language: 18
+                                "VocalizerExpressive-Norwegian",                                // Language: 20
+                                "VocalizerExpressive-Polish",                                   // Language: 21
+                                "VocalizerExpressive-Romanian",                                 // Language: 24
+                                "VocalizerExpressive-Slovak"                                    // Language: 27
                             ],
                             "enumLabels": [
                                 "VocalizerExpressive-English",
@@ -302,7 +335,19 @@
                                 "msmobile-English",
                                 "VocalizerExpressive-German",
                                 "VocalizerExpressive-French",
-                                "VocalizerExpressive-Dutch"
+                                "VocalizerExpressive-Dutch",
+                                "VocalizerExpressive-Arabic",
+                                "VocalizerExpressive-Portuguese",
+                                "VocalizerExpressive-Czech",
+                                "VocalizerExpressive-Danish",
+                                "VocalizerExpressive-Hebrew",
+                                "VocalizerExpressive-Hungarian",
+                                "VocalizerExpressive-Italian",
+                                "VocalizerExpressive-Korean",
+                                "VocalizerExpressive-Norwegian",
+                                "VocalizerExpressive-Polish",
+                                "VocalizerExpressive-Romanian",
+                                "VocalizerExpressive-Slovak"
                             ],
                             "default": "VocalizerExpressive-English"
                         }
@@ -316,18 +361,43 @@
                                 7,
                                 10,
                                 12,
-                                1033
+                                1033,
+                                19,
+                                1,
+                                22,
+                                5,
+                                6,
+                                11,
+                                13,
+                                14,
+                                16,
+                                18,
+                                20,
+                                24,
+                                27
                             ],
                             "enumLabels": [
                                 "msmobile-English",
-                                "VocalizerExpressive-German",
-                                "VocalizerExpressive-Spanish",
-                                "VocalizerExpressive-French",
-                                "English"
+                                "German",
+                                "Spanish",
+                                "French",
+                                "English",
+                                "Dutch",
+                                "Arabic",
+                                "Portuguese",
+                                "Czech",
+                                "Danish",
+                                "Finnish",
+                                "Hebrew",
+                                "Hungarian",
+                                "Italian",
+                                "Korean",
+                                "Norwegian",
+                                "Romanian",
+                                "Slovak"
                             ],
-                            "default": "VocalizerExpressive-English"
+                            "default": 9
                         }
-
                     },
                     // VOICES SECTION
                     // ==================================================================
@@ -2058,23 +2128,3242 @@
                         }
                     },
 
+                    // [VocalizerExpressive-Arabic Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Arabic Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Tarik Compact"
+                            ],
+                            "enumLabels": [
+                                "Tarik Compact"
+                            ],
+                            "default": "Tarik Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Tarik Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Arabic Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Arabic Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Tarik Compact"
+                            ],
+                            "enumLabels": [
+                                "Tarik Compact"
+                            ],
+                            "default": "Tarik Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Tarik Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Arabic Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Portuguese Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Portuguese Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Felipe Compact, Brazilian",
+                                "Catarina Compact"
+                            ],
+                            "enumLabels": [
+                                "Felipe Compact, Brazilian",
+                                "Catarina Compact"
+                            ],
+                            "default": "Felipe Compact, Brazilian"
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Felipe Compact, Brazilian",
+                                "Catarina Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Portuguese Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Portuguese Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Felipe Compact, Brazilian",
+                                "Catarina Compact"
+                            ],
+                            "enumLabels": [
+                                "Felipe Compact, Brazilian",
+                                "Catarina Compact"
+                            ],
+                            "default": "Felipe Compact, Brazilian"
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Felipe Compact, Brazilian",
+                                "Catarina Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Portuguese Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Czech Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Czech Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Zuzana Compact"
+                            ],
+                            "enumLabels": [
+                                "Zuzana Compact"
+                            ],
+                            "default": "Zuzana Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Zuzana Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Czech Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Czech Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Zuzana Compact"
+                            ],
+                            "enumLabels": [
+                                "Zuzana Compact"
+                            ],
+                            "default": "Zuzana Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Zuzana Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Czech Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Danish Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Danish Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Sara Compact"
+                            ],
+                            "enumLabels": [
+                                "Sara Compact"
+                            ],
+                            "default": "Sara Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Sara Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Danish Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Danish Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Sara Compact"
+                            ],
+                            "enumLabels": [
+                                "Sara Compact"
+                            ],
+                            "default": "Sara Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Sara Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Danish Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Finnish Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Finnish Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Satu Compact"
+                            ],
+                            "enumLabels": [
+                                "Satu Compact"
+                            ],
+                            "default": "Satu Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Satu Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Finnish Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Finnish Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Satu Compact"
+                            ],
+                            "enumLabels": [
+                                "Satu Compact"
+                            ],
+                            "default": "Satu Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Satu Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Finnish Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Hebrew Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Hebrew Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Carmit Compact"
+                            ],
+                            "enumLabels": [
+                                "Carmit Compact"
+                            ],
+                            "default": "Carmit Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Carmit Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Hebrew Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Hebrew Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Carmit Compact"
+                            ],
+                            "enumLabels": [
+                                "Carmit Compact"
+                            ],
+                            "default": "Carmit Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Carmit Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Hebrew Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Hungarian Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Hungarian Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Mariska Compact"
+                            ],
+                            "enumLabels": [
+                                "Mariska Compact"
+                            ],
+                            "default": "Mariska Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Mariska Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Hungarian Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Hungarian Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Mariska Compact"
+                            ],
+                            "enumLabels": [
+                                "Mariska Compact"
+                            ],
+                            "default": "Mariska Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Mariska Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Hungarian Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Italian Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Italian Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Alice Compact"
+                            ],
+                            "enumLabels": [
+                                "Alice Compact"
+                            ],
+                            "default": "Alice Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Alice Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Italian Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Italian Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Alice Compact"
+                            ],
+                            "enumLabels": [
+                                "Alice Compact"
+                            ],
+                            "default": "Alice Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Alice Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Italian Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Korean Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Korean Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Sora Compact"
+                            ],
+                            "enumLabels": [
+                                "Sora Compact"
+                            ],
+                            "default": "Sora Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Sora Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Korean Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Korean Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Sora Compact"
+                            ],
+                            "enumLabels": [
+                                "Sora Compact"
+                            ],
+                            "default": "Sora Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Sora Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Korean Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Norwegian Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Norwegian Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Henrik Compact"
+                            ],
+                            "enumLabels": [
+                                "Henrik Compact"
+                            ],
+                            "default": "Henrik Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Henrik Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Norwegian Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Norwegian Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Henrik Compact"
+                            ],
+                            "enumLabels": [
+                                "Henrik Compact"
+                            ],
+                            "default": "Henrik Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Henrik Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Norwegian Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Polish Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Polish Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Krzysztof Compact"
+                            ],
+                            "enumLabels": [
+                                "Krzysztof Compact"
+                            ],
+                            "default": "Krzysztof Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Krzysztof Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Polish Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Polish Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Krzysztof Compact"
+                            ],
+                            "enumLabels": [
+                                "Krzysztof Compact"
+                            ],
+                            "default": "Krzysztof Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Krzysztof Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Polish Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Romanian Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Romanian Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Ioana Compact"
+                            ],
+                            "enumLabels": [
+                                "Ioana Compact"
+                            ],
+                            "default": "Ioana Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Ioana Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Romanian Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Romanian Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Ioana Compact"
+                            ],
+                            "enumLabels": [
+                                "Ioana Compact"
+                            ],
+                            "default": "Ioana Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Ioana Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Romanian Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Swedish Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Swedish Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Oskar Compact"
+                            ],
+                            "enumLabels": [
+                                "Oskar Compact"
+                            ],
+                            "default": "Oskar Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Oskar Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Swedish Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Swedish Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Oskar Compact"
+                            ],
+                            "enumLabels": [
+                                "Oskar Compact"
+                            ],
+                            "default": "Oskar Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Oskar Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Swedish Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+
+                    // [VocalizerExpressive-Slovak Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Slovak Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Laura Compact"
+                            ],
+                            "enumLabels": [
+                                "Laura Compact"
+                            ],
+                            "default": "Laura Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Laura Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Slovak Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Slovak Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Laura Compact"
+                            ],
+                            "enumLabels": [
+                                "Laura Compact"
+                            ],
+                            "default": "Laura Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Laura Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Slovak Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
+                    // [VocalizerExpressive-Turkish Speech - Screen Reader]
+                    // ==================================================================
+                    "VocalizerExpressive-Turkish Speech - Screen Reader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Yelda Compact"
+                            ],
+                            "enumLabels": [
+                                "Yelda Compact"
+                            ],
+                            "default": "Yelda Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - Screen Reader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - Screen Reader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - Screen Reader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - Screen Reader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Yelda Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - Screen Reader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - Screen Reader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - Screen Reader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - Screen Reader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - Screen Reader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // [VocalizerExpressive-Turkish Speech - DocReader]
+                    // ==================================================================
+                    "VocalizerExpressive-Turkish Speech - DocReader.Speaker": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                "Yelda Compact"
+                            ],
+                            "enumLabels": [
+                                "Yelda Compact"
+                            ],
+                            "default": "Yelda Compact"
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - DocReader.Valid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - DocReader.SettingsValid": {
+                        "schema": {
+                            "title": "Valid",
+                            "description": "Unknown, always 1 when setting is selected.",
+                            "default": 1
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - DocReader.Muted": {
+                        "schema": {
+                            "title": "Muted",
+                            "description": "Mutes audio output for this synthesizer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Muted"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - DocReader.Voice": {
+                        "schema": {
+                            "title": "Voice Name",
+                            "description": "Specifies the voice name to use.",
+                            "enum": [
+                                0
+                            ],
+                            "enumLabels": [
+                                "Yelda Compact"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - DocReader.Rate": {
+                        "schema": {
+                            "title": "Speech Rate (WPM)",
+                            "description": "Specifies speech rate for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 400,
+                            "default": 100
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - DocReader.Volume": {
+                        "schema": {
+                            "title": "Voice volume",
+                            "description": "Specifies the voice volume for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 75
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - DocReader.Pitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Specifies the voice pitch for the current synthesizer.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 33
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - DocReader.CapPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a capital",
+                            "description": "Specifies a percentage change in pitch while reading capital letters.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "VocalizerExpressive-Turkish Speech - DocReader.LinkPitchDelta": {
+                        "schema": {
+                            "title": "Pitch when reading a link",
+                            "description": "Specifies a percentage change in pitch while reading links.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+
                     // [Tracking]
                     "Tracking.AlignFlags": {
-                        "schema": {
-                            "title": "Alignment",
-                            "description": "Specifies the 'Mouse pointer', 'Text cursor' and 'Control and menu item alignment'.",
-                            "type": "array",
-                            "default": [
-                                "Within edge margins",
-                                "Within edge margins",
-                                "Smart alignment with parent window"
-                            ],
-                            "values": [
-                                ["Within edge margins", "Centered within the zoom window"],
-                                ["Within edge margins", "Centered within the zoom window"],
-                                ["Smart alignment with parent window", "Centered within the zoom window"]
-                            ]
-                        }
                     },
                     "Tracking.RouteMouse": {
                         "schema": {
@@ -2395,13 +5684,36 @@
                         }
                     }
                 },
-                "capabilities": [],
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/magnification"
+                ],
                 "capabilitiesTransformations": {
                     "Preferences\\.PromptOnExit": {
                         "literalValue": 0
+                    },
+                    "PRIMARY\\.magPower": {
+                        transform: {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/magnification",
+                            "factor": 100
+                        }
+                    },
+                    "STATIC 1\\.magPower": {
+                        transform: {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/magnification",
+                            "factor": 100
+                        }
                     }
                 },
                 "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/magnification": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "PRIMARY\\.magPower",
+                            "factor": 0.01
+                        }
+                    }
                 }
             }
         },
