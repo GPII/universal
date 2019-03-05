@@ -142,6 +142,7 @@
                             "title": "Color schema",
                             "description": "Specifies the color schema to use.",
                             "enum": [
+                                0,
                                 1,
                                 2,
                                 3,
@@ -150,6 +151,7 @@
                                 6
                             ],
                             "enumLabels": [
+                                "Custom",
                                 "Invert Brightness",
                                 "Invert Colors",
                                 "Yellow on Black",
@@ -160,6 +162,7 @@
                             "default": 1
                         }
                     },
+                    // [ColorScheme] Custom settings
                     "ColorScheme.ColorSchBrightness": {
                         "schema": {
                             "title": "Color schema brightness",
@@ -178,6 +181,152 @@
                             "minimum": 10,
                             "maximum": 190,
                             "default": 100
+                        }
+                    },
+                    "ColorScheme.ColorSchType": {
+                        "schema": {
+                            "title": "Color effect",
+                            "description": "Selects a effect to be used in screen colors.",
+                            "enum": [
+                                0,
+                                2048,
+                                16,
+                                1,
+                                2,
+                                4
+                            ],
+                            "enumLabels": [
+                                "Invert Brightness",
+                                "Invert Colors",
+                                "Dyed",
+                                "Two-Color",
+                                "Replace Color"
+                            ]
+                        }
+                    },
+                    "ColorScheme.ColorSchDye": {
+                        "schema": {
+                            "title": "Color hue map",
+                            "description": "Selects a color hue in which all screen colors are going to be mapped.",
+                            "enum": [
+                                16740194,
+                                65535,
+                                65280,
+                                16776960,
+                                6451199,
+                                16744703
+                            ],
+                            "enumLabels": [
+                                "Light Red",
+                                "Yellow",
+                                "Green",
+                                "Cyan",
+                                "Light Blue",
+                                "Light Magenta"
+                            ]
+                        }
+                    },
+                    "ColorScheme.ColorSchTwoColorOne": {
+                        "schema": {
+                            "title": "Two-Color effect foreground color",
+                            "description": "Color to be selected as foreground color in the two-color effect.",
+                            "enum": [
+                                32768,
+                                8388736,
+                                8388608,
+                                128,
+                                4934475,
+                                0
+                            ],
+                            "enumLabels": [
+                                "Dark Green",
+                                "Dark Magenta",
+                                "Dark Blue",
+                                "Dark Red",
+                                "Dark Gray",
+                                "Black"
+                            ]
+                        }
+                    },
+                    "ColorScheme.ColorSchTwoColorTwo": {
+                        "schema": {
+                            "title": "Two-Color effect background color",
+                            "description": "Color to be selected as background color in the two-color effect.",
+                            "enum": [
+                                65535,
+                                8454016,
+                                16776960,
+                                16762566,
+                                16762623,
+                                11842740,
+                                16777215
+                            ],
+                            "enumLabels": [
+                                "Yellow",
+                                "Ligth Green",
+                                "Cyan",
+                                "Slate Blue",
+                                "Rose",
+                                "Ligth Gray",
+                                "White"
+                            ]
+                        }
+                    },
+                    "ColorScheme.ColorSchReplaceColor": {
+                        "schema": {
+                            "title": "Color to be replaced",
+                            "description": "Color that is going to be replaced.",
+                            "enum": [
+                                255,
+                                65535,
+                                65280,
+                                16776960,
+                                16711935,
+                                49344752
+                            ],
+                            "enumLabels": [
+                                "Default",
+                                "Red",
+                                "Yellow",
+                                "Green",
+                                "Cyan",
+                                "Magenta",
+                                "Dialogbox Gray"
+                            ],
+                            "default": 49344752
+                        }
+                    },
+                    "ColorScheme.ColorSchWithColor": {
+                        "schema": {
+                            "title": "Color to be replaced",
+                            "description": "Color that is going to be replaced.",
+                            "enum": [
+                                255,
+                                65535,
+                                65280,
+                                16776960,
+                                16711680,
+                                16711935
+                            ],
+                            "enumLabels": [
+                                "Red",
+                                "Yellow",
+                                "Green",
+                                "Cyan",
+                                "Blue",
+                                "White"
+                            ],
+                            "default": 16711935
+                        }
+                    },
+                    "ColorScheme.ColorSchReplaceLevel": {
+                        "schema": {
+                            "title": "Two-Color effect background color",
+                            "description": "Color to be selected as background color in the two-color effect.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 255,
+                            "default": 87
                         }
                     },
                     // [FocusScheme]
