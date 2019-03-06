@@ -730,6 +730,46 @@ gpii.tests.windows.builtIn = [
             }
         }
     }, {
+        name: "Testing os_win7_2 using default matchmaker",
+        gpiiKey: "os_win7_2",
+        initialState: {},
+        settingsHandlers: {
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.desktopBackgroundColor": [{
+                    "settings": {
+                        "ImageConfig": {
+                            "path": "pvParam",
+                            "value": ""
+                        }
+                    },
+                    "options": {
+                        "getAction": "SPI_GETDESKWALLPAPER",
+                        "setAction": "SPI_SETDESKWALLPAPER",
+                        "uiParam": 260,
+                        "pvParam": {
+                            "type": "array",
+                            "valueType": "TCHAR",
+                            "length": 260
+                        }
+                    }
+                }]
+            },
+            "gpii.windows.nativeSettingsHandler": {
+                "com.microsoft.windows.desktopBackgroundColor": [{
+                    "settings": {
+                        "SolidColorConfig": {
+                            "value": {
+                                "r": 67, "g": 187, "b": 19
+                            }
+                        }
+                    },
+                    "options": {
+                        "functionName": "SolidColor"
+                    }
+                }]
+            }
+        }
+    }, {
         name: "Testing os_common using default matchmaker",
         gpiiKey: "os_common",
         initialState: {
