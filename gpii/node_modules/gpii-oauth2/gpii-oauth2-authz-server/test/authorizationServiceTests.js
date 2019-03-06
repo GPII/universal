@@ -154,6 +154,20 @@ fluid.defaults("gpii.tests.oauth2.authorizationService.withData.grantGpiiAppInst
                             }]
                         },
                         {
+                            name: "grantGpiiAppInstallationAuthorization() returns an access token when the gpii key record is not found in the database",
+                            sequenceGrade: "gpii.tests.oauth2.sequenceGrade",
+                            sequence: [{
+                                task: "{authorizationService}.grantGpiiAppInstallationAuthorization",
+                                args: ["non-existent-gpii-key", "gpiiAppInstallationClient-1", "clientCredential-1"],
+                                resolve: "jqUnit.assertDeepEq",
+                                resolveArgs: [
+                                    "The access token should be received in an expected format",
+                                    gpii.tests.oauth2.authorizationService.expected.success,
+                                    "{arguments}.0"
+                                ]
+                            }]
+                        },
+                        {
                             name: "grantGpiiAppInstallationAuthorization() returns error when a gpii key is not provided in the argument list",
                             sequenceGrade: "gpii.tests.oauth2.sequenceGrade",
                             sequence: [{
@@ -191,20 +205,6 @@ fluid.defaults("gpii.tests.oauth2.authorizationService.withData.grantGpiiAppInst
                                 rejectArgs: [
                                     "The error is returned when a client credential id is missing",
                                     gpii.tests.oauth2.authorizationService.expected.missingInput,
-                                    "{arguments}.0"
-                                ]
-                            }]
-                        },
-                        {
-                            name: "grantGpiiAppInstallationAuthorization() returns error when the gpii key record is not found in the database",
-                            sequenceGrade: "gpii.tests.oauth2.sequenceGrade",
-                            sequence: [{
-                                task: "{authorizationService}.grantGpiiAppInstallationAuthorization",
-                                args: ["non-existent-gpii-key", "gpiiAppInstallationClient-1", "clientCredential-1"],
-                                reject: "jqUnit.assertDeepEq",
-                                rejectArgs: [
-                                    "The error is returned when the gpii key record is not found in the database",
-                                    gpii.tests.oauth2.authorizationService.expected.unauthorized,
                                     "{arguments}.0"
                                 ]
                             }]
