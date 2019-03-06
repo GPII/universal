@@ -167,6 +167,26 @@ gpii.tests.journal.initialSettings = {
                 "options": {
                     "functionName": "DoubleClickTime"
                 }
+            },
+            {
+                "settings": {
+                    "DoubleClickWidthConfig": {
+                        "value": 4
+                    }
+                },
+                "options": {
+                    "functionName": "DoubleClickWidth"
+                }
+            },
+            {
+                "settings": {
+                    "DoubleClickHeightConfig": {
+                        "value": 4
+                    }
+                },
+                "options": {
+                    "functionName": "DoubleClickHeight"
+                }
             }
         ]
     }
