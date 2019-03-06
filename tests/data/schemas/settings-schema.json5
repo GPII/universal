@@ -1,0 +1,38 @@
+{
+    "$schema": "gss-v7-full#",
+    "type": "object",
+    "properties": {
+        "flat": {
+            "required": true,
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "contexts": {
+                    // "gpii-default" and all other variations on sub-properties.
+                    additionalProperties: {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "required": true
+                            },
+                            "preferences": {
+                                "type": "object",
+                                "required": true,
+                                "propertyNames": {
+                                    "type": "string",
+                                    "format": "uri"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            additionalProperties: false
+        },
+        additionalProperties: false
+    }
+}

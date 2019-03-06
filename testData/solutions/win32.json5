@@ -5849,19 +5849,17 @@
                         "schema": {
                             "title": "Slow keys interval",
                             "description": "Slow keys interval time in milliseconds",
-                            "type": "number",
-                            "default": 0,
+                            "type": "integer",
+                            "default": 0
                             // 0 means no interval time
-                            "divisibleBy": 1
                         }
                     },
                     "BounceKeysInterval": {
                         "schema": {
                             "title": "Bounce keys interval",
                             "description": "Bounce keys interval time in milliseconds",
-                            "type": "number",
-                            "default": 0,
-                            "divisibleBy": 1
+                            "type": "integer",
+                            "default": 0
                         }
                     }
                 },
@@ -6365,50 +6363,48 @@
                         "schema": {
                             "title": "Invert Colours",
                             "description": "Enable colour inversion for Magnifier",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "Magnification": {
                         "schema": {
                             "title": "Magnification",
                             "description": "Set up magnification level",
-                            "type": "number",
+                            "type": "integer",
                             "default": 200,
                             "min": 100,
-                            "max": 1600,
-                            "divisibleBy": 1
+                            "max": 1600
                         }
                     },
                     "FollowFocus": {
                         "schema": {
                             "title": "Magnifier follows focus",
                             "description": "Magnifier follows the keyboard focus",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "FollowCaret": {
                         "schema": {
                             "title": "Magnifier follows caret",
                             "description": "Magnifier follows the text insertion point",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "FollowMouse": {
                         "schema": {
                             "title": "Magnifier follows mouse",
                             "description": "Magnifier follows the mouse pointer",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "MagnificationMode": {
                         "schema": {
                             "title": "Magnifier position",
                             "description": "Position of the magnified area",
-                            "type": "number",
                             "default": 2,
                             "enum": [
                                 1,
@@ -6563,7 +6559,7 @@
                             "title": "Mouse keys speed",
                             "description": "Speed of mouse keys",
                             "type": "number",
-                            "divisibleBy": 10
+                            "multipleOf": 10
                         }
                     },
                     "Acceleration": {
@@ -6683,7 +6679,6 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
-                // TODO: Schema data
                 "supportedSettings": {
                     "SwapMouseButtonsConfig": {
                         "schema": {
@@ -6783,7 +6778,6 @@
                         "schema": {
                             "title": "Mouse scroll focus routing",
                             "description": "Changes the way mouse scrolling is passed to applications.",
-                            "type": "string",
                             "enum": [0, 1],
                             "enumLabels": ["RoutingFocus", "RoutingHybrid"]
                         }
@@ -6860,11 +6854,10 @@
                         "schema": {
                             "title": "Mouse wheel horizontal scroll",
                             "description": "Changes the number of chars that are scrolled horizontally.",
-                            "type": "number",
+                            "type": "integer",
                             "default": 3,
                             "min": 1,
-                            "max": 100,
-                            "divisibleBy": 1
+                            "max": 100
                         }
                     }
                 },
@@ -6905,7 +6898,7 @@
                             "title": "Mouse Windows tracking",
                             "description": "Windows are focused when mouse is stopped over them.",
                             "enum": [0, 1],
-                            "enumLabels": ["On", "Off"],
+                            "enumLabels": ["Off", "On"],
                             "default": 0
                         }
                     }
@@ -6944,7 +6937,7 @@
                             "title": "Mouse wheel horizontal scroll",
                             "description": "Changes the number of chars that are scrolled horizontally.",
                             "enum": [0, 1],
-                            "enumLabels": ["On", "Off"],
+                            "enumLabels": ["Off", "On"],
                             "default": 0
                         }
                     }
@@ -6983,7 +6976,7 @@
                             "title": "Configures Window arrangement",
                             "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
                             "enum": [0, 1],
-                            "enumLabels": ["On", "Off"],
+                            "enumLabels": ["Off", "On"],
                             "default": 1
                         }
                     }
@@ -7018,11 +7011,10 @@
                         "schema": {
                             "title": "Double click time",
                             "description": "Changes the amount of time that can elapse between a first click and a second click for the OS to consider the mouse action a double-click.",
-                            "type": "number",
+                            "type": "integer",
                             "default": 500,
                             "min": 500,
-                            "max": 5000,
-                            "divisibleBy": 1
+                            "max": 5000
                         }
                     }
                 },
@@ -7099,7 +7091,7 @@
                             "title": "Enhance pointer precision",
                             "description": "Enable/Disables enhanced pointer precision.",
                             "enum": [0, 1],
-                            "enumLabels": ["On", "Off"],
+                            "enumLabels": ["Off", "On"],
                             "default": 1
                         }
                     }
@@ -7141,7 +7133,7 @@
                             "title": "Snap To",
                             "description": "Automatically move pointer to the default button in a dialogue.",
                             "enum": [0, 1],
-                            "enumLabels": ["On", "Off"],
+                            "enumLabels": ["Off", "On"],
                             "default": 0
                         }
                     }
@@ -7183,7 +7175,7 @@
                             "title": "Hide pointer while typing",
                             "description": "Enable/Disables hiding the pointer while typing.",
                             "enum": [0, 1],
-                            "enumLabels": ["On", "Off"],
+                            "enumLabels": ["Off", "On"],
                             "default": 1
                         }
                     }
@@ -7222,7 +7214,7 @@
                             "title": "Mouse sonar",
                             "description": "Enable/Disable showing mouse location when pressing the CTRL key.",
                             "enum": [0, 1],
-                            "enumLabels": ["On", "Off"],
+                            "enumLabels": ["Off", "On"],
                             "default": 0
                         }
                     }
@@ -7310,10 +7302,9 @@
                             // Exactly the same schema as mouseTrailing common term
                             "title": "Mouse trails",
                             "description": "Amount of mouse trailing",
-                            "type": "number",
+                            "type": "integer",
                             "min": 0,
-                            "max": 10,
-                            "divisibleBy": 1
+                            "max": 10
                         }
                     }
                 },
@@ -7392,7 +7383,7 @@
                             "title": "Couple Narrator Cursor Keyboard",
                             "description": "Whether to couple the narrator cursor to the keyboard",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "CoupleNarratorCursorMouse": {
@@ -7400,7 +7391,7 @@
                             "title": "Narrator cursor follow the mouse",
                             "description": "Have the narrator cursor follow the mouse.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "EchoChars": {
@@ -7408,7 +7399,7 @@
                             "title": "Echo Characters",
                             "description": "Whether to echo characters typed.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "EchoWords": {
@@ -7416,7 +7407,7 @@
                             "title": "Echo Words",
                             "description": "Whether to echo words typed.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "ErrorNotificationType": {
@@ -7424,7 +7415,7 @@
                             "title": "Speak narrator errors",
                             "description": "Narrator announces errors such as 'no next landmark' or 'no next item.'",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "FastKeyEntryEnabled": {
@@ -7432,7 +7423,7 @@
                             "title": "Touch keyboard keys activated on finger lift",
                             "description": "Make key insertion work on finger lift on touch keyboards",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     // CoupleNarratorCursorKeyboard, FollowInsertion, and InteractionMouse are mapped to one common term, maybe we should have individual schemas, maybe not.
@@ -7441,7 +7432,7 @@
                             "title": "Couple Narrator Cursor Keyboard",
                             "description": "Whether to couple the narrator cursor to the keyboard.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     // CoupleNarratorCursorKeyboard, FollowInsertion, and InteractionMouse are mapped to one common term, maybe we should have individual schemas, maybe not.
@@ -7450,7 +7441,7 @@
                             "title": "Interaction Mouse",
                             "description": "",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "IntonationPause": {
@@ -7458,7 +7449,7 @@
                             "title": "Narrator intonation pauses",
                             "description": "Enable intonation pauses for Narrator",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "LockNarratorKeys": {
@@ -7466,7 +7457,7 @@
                             "title": "Lock Narrator keys",
                             "description": "Lock the Narrator key so you don't have to press it with each command.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "NarratorCursorHighlight": {
@@ -7474,7 +7465,7 @@
                             "title": "Cursor Highlight",
                             "description": "Enable cursor highlighting with a blue focus box",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "PlayAudioCues": {
@@ -7482,7 +7473,7 @@
                             "title": "Read audio cues",
                             "description": "Enable sound playing when you do things like perform a Narrator command or when suggestions are available",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "ReadingWithIntent": {
@@ -7490,7 +7481,7 @@
                             "title": "Emphasize formatted text",
                             "description": "Narrator’s voice will put more emphasis on formatted text.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "ReadHints": {
@@ -7498,7 +7489,7 @@
                             "title": "Read hints for controls and buttons",
                             "description": "Enable narrator announcing how to interact with items",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "SpeechSpeed": {
@@ -7710,7 +7701,8 @@
                             "title": "Speech volume",
                             "description": "Changes the Narrator voice volume",
                             "type": "number",
-                            "range": "0.01..1"
+                            "minimum": 0.01,
+                            "maximum": 1
                         }
                     },
                     "SpeechVoice": {
@@ -7743,12 +7735,12 @@
                             "default": 2,
                             "enum": [0, 1, 2, 3, 4, 5],
                             "enumLabels": [
-                                "0 - No context reading",
-                                "1 - Sounds only",
-                                "2 - Immediate context",
-                                "3 - Immediate context name and type",
-                                "4 - Full context of new control",
-                                "5 - Full context of both the old control and new control"
+                                "No context reading",
+                                "Sounds only",
+                                "Immediate context",
+                                "Immediate context name and type",
+                                "Full context of new control",
+                                "Full context of both the old control and new control"
                             ]
                         }
                     },
@@ -7804,8 +7796,9 @@
                         "schema": {
                             "title": "Additional feedback",
                             "description": "Use caps lock + E to send additional feedback",
-                            "type": "boolean",
-                            "default": true
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 1
                         }
                     }
                 },
@@ -7885,7 +7878,7 @@
                             "title": "Auto Start Narrator",
                             "description": "Start Narrator after sign-in.",
                             "enum": [0, 1],
-                            "enumLabels": ["On", "Off"],
+                            "enumLabels": ["Off", "On"],
                             "default": 0
                         }
                     },
@@ -7894,7 +7887,7 @@
                             "title": "Auto Start Narrator for everyone",
                             "description": "Start Narrator before sign-in.",
                             "enum": [0, 1],
-                            "enumLabels": ["On", "Off"],
+                            "enumLabels": ["Off", "On"],
                             "default": 0
                         }
                     }
@@ -7993,7 +7986,7 @@
                             "title": "Night Screen",
                             "description": "Reduce the blue emitted from the screen.",
                             "enum": [0, 1],
-                            "enumLabels": ["On", "Off"],
+                            "enumLabels": ["Off", "On"],
                             "default": 0
                         }
                     }
@@ -8061,32 +8054,35 @@
                         "schema": {
                             "title": "On-Screen Keyboard",
                             "description": "Enable/Disable On-Screen Keyboard",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "ClickSound": {
                         "schema": {
                             "title": "Use click sound",
                             "description": "Makes click sound when pressing OSK keys",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "ShowClearKeyboard": {
                         "schema": {
                             "title": "Show position keys",
                             "description": "Show keys to make it easier to move around the screen",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "ShowNumPad": {
                         "schema": {
                             "title": "Numeric key pad",
                             "description": "Turn on numeric key pad",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "Mode": {
@@ -8130,16 +8126,18 @@
                         "schema": {
                             "title": "Scan using gaming device",
                             "description": "Use joystick, game pad or other gaming device",
-                            "type": "boolean",
-                            "default": true
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 1
                         }
                     },
                     "UseKB": {
                         "schema": {
                             "title": "Scan using keyboard key",
                             "description": "Use specific keyboard key for scanning",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "ScanKey": {
@@ -8179,32 +8177,36 @@
                         "schema": {
                             "title": "Scan using mouse click",
                             "description": "Use mouse clicks to for scanning",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "UseTextPrediction": {
                         "schema": {
                             "title": "Text prediction",
                             "description": "Use OSK text prediction to show suggestions while typing",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "InsertSpace": {
                         "schema": {
                             "title": "Auto insert space",
                             "description": "Insert space after predicted word",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "Dock": {
                         "schema": {
                             "title": "Dock",
                             "description": "Dock the OSK at the bottom of the screen",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     }
                 },
@@ -8829,7 +8831,7 @@
                             "min": 12,
                             "max": 96,
                             "default": 48,
-                            "divisibleBy" : 2
+                            "multipleOf" : 2
                         }
                     },
                     "SynthRate": {
@@ -9025,12 +9027,11 @@
                         "schema": {
                             "title": "Font Size",
                             "description": "The font size in which text is preferred to be presented",
-                            "type": "number",
+                            "type": "integer",
                             // TODO: We should present the value in a homogeneus speech rate
                             "default": 10,
                             "min": 0,
-                            "max": 20,
-                            "divisibleBy": 1
+                            "max": 20
                         }
                     },
                     "ReadingModeSyllables": {
@@ -9177,12 +9178,11 @@
                         "schema": {
                             "title": "Font Size",
                             "description": "The font size in which text is preferred to be presented",
-                            "type": "number",
+                            "type": "integer",
                             // TODO: We should present the value in a homogeneous speech rate
                             "default": 10,
                             "min": 0,
-                            "max": 20,
-                            "divisibleBy": 1
+                            "max": 20
                         }
                     },
                     "ReadingModeSyllables": {
@@ -9489,7 +9489,6 @@
                         "schema": {
                             "title": "Explode Method",
                             "description": "The strategy to be used when exploding",
-                            "type": "string",
                             "enum": [
                                 "reject",
                                 "fail",
@@ -9506,14 +9505,17 @@
                         "schema": {
                             "title": "Explode On",
                             "description": "Whether to explode during the get or set settingsHandler method",
-                            "type": "string",
                             "enum": [
                                 "get",
-                                "set"
+                                "set",
+                                "launch",
+                                "stop"
                             ],
                             "enumLabels": [
                                 "get",
-                                "set"
+                                "set",
+                                "launch",
+                                "stop"
                             ]
                         }
                     }
@@ -9559,7 +9561,6 @@
                 "options": {
                     "path": "net.gpii.uioPlus"
                 },
-                // TODO: Schema data
                 "supportedSettings": {
                     "captionsEnabled": {
                         "schema": {
@@ -11517,7 +11518,7 @@
                             "default": "True"
                         }
                     },
-                    "mouse.audioCoordinates_detectm.": {
+                    "mouse.audioCoordinates_detectBrightness": {
                         "schema": {
                             "title": "Brightness controls audio coordinates volume",
                             "description": "Whether the volume of the audio coordinates beeps is controled by how bright the screen is under the mouse. This setting is turned off by default.",

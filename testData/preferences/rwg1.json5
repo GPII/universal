@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Read Write Gold 1",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

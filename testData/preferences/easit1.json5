@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "easit1",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

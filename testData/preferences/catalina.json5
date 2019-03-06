@@ -7,11 +7,12 @@
 //For this to work correctly, the es-ES language pack needs to be installed on Windows. See GPII-2212.
 {
     "flat": {
+        "name": "Catalina",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/language": "es-ES"
+                    "http://registry.gpii.net/common/language": "es"
                 }
             }
         }
