@@ -109,6 +109,18 @@
     },
 
     {
+        "id": "com.microsoft.windows.desktopBackground"
+    },
+
+    {
+        "id": "com.microsoft.windows.desktopBackgroundColor"
+    },
+
+    {
+        "id": "com.microsoft.windows.brightness"
+    },
+
+    {
         "id": "fakemag2"
     },
 
