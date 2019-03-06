@@ -24,7 +24,7 @@ fluid.require("%gpii-universal");
 gpii.loadTestingSupport();
 
 fluid.defaults("gpii.tests.deviceReporterErrorTests.testCaseHolder", {
-    gradeNames: ["gpii.test.common.testCaseHolder"],
+    gradeNames: ["gpii.test.testCaseHolder"],
     distributeOptions: {
         "development.installedSolutionsPath": {
             "record": "%gpii-universal/tests/data/faultyDeviceReport.jsonx",
@@ -47,7 +47,7 @@ gpii.tests.deviceReporterErrorTests.gpiiKey = "testUser1";
 gpii.tests.deviceReporterErrorTests.testDefCommon = {
     config: {
         configName: "gpii.config.development.local",
-        configPath: "%gpii-universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs/shared"
     },
     gradeNames: "gpii.tests.deviceReporterErrorTests.testCaseHolder"
 };
@@ -74,7 +74,7 @@ gpii.tests.deviceReporterErrorTests.testDefs = [
         expect: 4,
         config: {
             configName: "gpii.config.development.local",
-            configPath: "%gpii-universal/gpii/configs"
+            configPath: "%gpii-universal/gpii/configs/shared"
         },
         gradeNames: [ "gpii.tests.deviceReporterErrorTests.testCaseHolder" ],
         sequence: [{
@@ -97,4 +97,4 @@ gpii.tests.deviceReporterErrorTests.buildAllTestDefs = function () {
     });
 };
 
-gpii.test.bootstrapServer(gpii.tests.deviceReporterErrorTests.buildAllTestDefs());
+gpii.test.runCouchTestDefs(gpii.tests.deviceReporterErrorTests.buildAllTestDefs());

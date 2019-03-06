@@ -17,7 +17,7 @@ var fluid = require("infusion"),
 
 require("./shared/ResetDefaultSettingsTestDefs.js");
 
-gpii.test.bootstrapServer(gpii.tests.resetDefaultSettings.buildTestDefs(gpii.tests.resetDefaultSettings.resetAtStartTestCases, {
+gpii.test.runCouchTestDefs(gpii.tests.resetDefaultSettings.buildTestDefs(gpii.tests.resetDefaultSettings.resetAtStartTestCases, {
     configName: "gpii.tests.acceptance.untrusted.resetAtStart.config",
     configPath: "%gpii-universal/tests/configs"
 }));
