@@ -1,0 +1,67 @@
+[
+    {
+        "_id": "alice_gpii_key",
+        "type": "gpiiKey",
+        "schemaVersion": "0.1",
+        "prefsSafeId": "prefsSafe-1",
+        "prefsSetId": "gpii-default",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "gpiiAppInstallationClient-1",
+        "type": "gpiiAppInstallationClient",
+        "schemaVersion": "0.1",
+        "name": "AJC1",
+        "computerType": "public",
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "clientCredential-1",
+        "type": "clientCredential",
+        "schemaVersion": "0.1",
+        "clientId": "gpiiAppInstallationClient-1",
+        "oauth2ClientId": "client_id_AJC1",
+        "oauth2ClientSecret": "client_secret_AJC1",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampRevoked": null
+    },
+    {
+        "_id": "gpiiAppInstallationClient-2",
+        "type": "unknownClient",
+        "schemaVersion": "0.1",
+        "name": "test",
+        "computerType": "public",
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "clientCredential-2",
+        "type": "clientCredential",
+        "schemaVersion": "0.1",
+        "clientId": "gpiiAppInstallationClient-2",
+        "oauth2ClientId": "client_id_test",
+        "oauth2ClientSecret": "client_secret_test",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampRevoked": null
+    },
+    {
+        "_id": "clientCredential-3",
+        "type": "unknownClientCredential",
+        "schemaVersion": "0.1",
+        "clientId": "gpiiAppInstallationClient-2",
+        "oauth2ClientId": "client_id_test-3",
+        "oauth2ClientSecret": "client_secret_test-3",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-22T18:11:22.101Z",
+        "timestampRevoked": null
+    }
+]
