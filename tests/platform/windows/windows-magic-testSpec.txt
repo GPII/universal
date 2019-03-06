@@ -1,0 +1,7 @@
+windows-magic-testSpec.js
+
+Descriptions:
+This will run the acceptance tests for MAGic (Freedom Scientific).
+
+Prerequisites:
+* MAGic 14.0 needs to be installed

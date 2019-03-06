@@ -1,0 +1,27 @@
+/**
+ * This configuration acts as a base for `gpii.config.cloudBased.development.manualTesting`.
+ *
+ * * The following components are running:
+ * ** Auth Server
+ * ** Flat MatchMaker
+ * ** Flow Manager
+ * ** MatchMaker Framework
+ * ** Ontology Handler
+ * ** Preferences Server
+ * ** Solutions Registry (reading registry from file)
+ *
+ * Notes on testing:
+ * This setup is used by the acceptance tests in universal testing the cloudBased applications.
+ * Each individual acceptance test may override some elements of this config, e.g. the folder
+ * to be used for reading prefs and solutionsRegistry).
+ * For more details, see the txt files describing the configs in the acceptance tests folder.
+ *
+ */
+{
+    "type": "gpii.config.cloudBased.development",
+    "mergeConfigs": [
+        "%flowManager/configs/gpii.flowManager.config.cloud.base.json5",
+        "%preferencesServer/configs/gpii.preferencesServer.config.base.json5",
+        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.base.json5"
+    ]
+}

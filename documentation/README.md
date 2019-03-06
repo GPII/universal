@@ -8,7 +8,7 @@
 * [Preferences Server Framework](PreferencesServerFramework.md)
   * [Preferences Server](PreferencesServer.md)
 * [Data Model for Preferences and OAuth Data](DataModel.md)
-  * [Pouch Manager](PouchManager.md)
+  * [Couch Connector](CouchConnector.md)
   * [Data Loader](DataLoader.md)
 * [MatchMakerFramework](MatchMakerFramework.md)
   * [Flat Match Maker](FlatMatchMaker.md)

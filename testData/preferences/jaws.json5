@@ -161,22 +161,7 @@
                         "Touch.TapTranslationMax": 99
                     }
                 },
-                "metadata": [
-                    {
-                        "type": "required",
-                        "scope": [
-                            "http://registry.gpii.net/common/screenReaderTTS/enabled"
-                        ],
-                        "value": 1024
-                    },
-                    {
-                        "type": "priority",
-                        "scope": [
-                            "http://registry.gpii.net/applications/com.freedomScientific.jaws"
-                        ],
-                        "value": 1024
-                    }
-                ]
+                "http://registry.gpii.net/applications/com.freedomscientific.jaws/enabled": true
             }
         }
     }
