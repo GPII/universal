@@ -35,7 +35,7 @@ fluid.defaults("gpii.tests.userLogonHandlers.proximityTriggered", {
 });
 
 fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
-    gradeNames: [ "gpii.test.common.lifecycleManagerReceiver", "gpii.test.common.testCaseHolder" ],
+    gradeNames: [ "gpii.test.common.lifecycleManagerReceiver", "gpii.test.testCaseHolder" ],
     components: {
         resetRequest: {
             type: "kettle.test.request.http",
@@ -82,6 +82,18 @@ fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
                 path: "/user/adjustCursor/logout"
             }
         },
+        loginNonexistentRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                path: "/user/nonexistent-gpii-key/login"
+            }
+        },
+        logoutNonexistentRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                path: "/user/nonexistent-gpii-key/logout"
+            }
+        },
         logoutNoUserRequest: {
             type: "kettle.test.request.http",
             options: {
@@ -96,9 +108,9 @@ fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
 
 gpii.tests.userLogonHandlers.gpiiKey = "adjustCursor";
 
-gpii.tests.userLogonHandlers.testLoginResponse = function (data) {
+gpii.tests.userLogonHandlers.testLoginResponse = function (data, gpiiKey) {
     jqUnit.assertEquals("Response is correct", "User with GPII key " +
-        gpii.tests.userLogonHandlers.gpiiKey + " was successfully logged in.", data);
+        gpiiKey + " was successfully logged in.", data);
 };
 
 gpii.tests.userLogonHandlers.testLogoutResponse = function (data, gpiiKey) {
@@ -139,7 +151,8 @@ gpii.tests.userLogonHandlers.testDefs = [{
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         // wait for the debounce period to pass so that the following /proximityTriggered request is not rejected
         func: "setTimeout",
@@ -163,7 +176,8 @@ gpii.tests.userLogonHandlers.testDefs = [{
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         // wait within the debounce period to trigger the debounce logic so that the following /proximityTriggered request will be rejected
         func: "setTimeout",
@@ -194,7 +208,8 @@ gpii.tests.userLogonHandlers.testDefs = [{
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         // wait for the debounce period to pass so that the following /proximityTriggered request is not rejected
         func: "setTimeout",
@@ -238,7 +253,8 @@ gpii.tests.userLogonHandlers.testDefs = [{
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         // wait for the debounce period to pass
         func: "setTimeout",
@@ -262,7 +278,8 @@ gpii.tests.userLogonHandlers.testDefs = [{
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         // wait within the debounce period
         func: "setTimeout",
@@ -286,7 +303,8 @@ gpii.tests.userLogonHandlers.testDefs = [{
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         // resetting with user logged in (part 2: reset and check that user is logged out)
         func: "{resetRequest2}.send"
@@ -308,26 +326,21 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }]
 }, {
     name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
-    expect: 11,
+    expect: 9,
     sequence: [{
         // standard login
         func: "{loginRequest}.send"
     }, {
         event: "{loginRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         // standard login with an already logged in user:
         func: "{loginAdjustCursorRequest}.send"
     }, {
         event: "{loginAdjustCursorRequest}.events.onComplete",
-        listener: "kettle.test.assertErrorResponse",
-        args: {
-            message: "Received 409 error when logging in user who is already logged in",
-            errorTexts: "Got log in request from user adjustCursor, but the user adjustCursor is already logged in. So ignoring login request.",
-            statusCode: 409,
-            string: "{arguments}.0",
-            request: "{loginAdjustCursorRequest}"
-        }
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         // logout of different user
         func: "{logoutSammyRequest}.send"
@@ -343,48 +356,42 @@ gpii.tests.userLogonHandlers.testDefs = [{
         }
     }, {
         // logout of the correct user
-        func: "{logoutRequest}.send"
-    }, {
-        event: "{logoutRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
-        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
-    }, {
-        // logout of user when none is logged in
         func: "{logoutAdjustCursorRequest}.send"
     }, {
         event: "{logoutAdjustCursorRequest}.events.onComplete",
+        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
+        args: ["{arguments}.0", "adjustCursor"]
+    }, {
+        // logout of user when none is logged in
+        func: "{logoutRequest}.send"
+    }, {
+        event: "{logoutRequest}.events.onComplete",
         listener: "kettle.test.assertErrorResponse",
         args: {
             message: "Received 409 error when logging out user when no user is logged in",
             errorTexts: "Got logout request from user adjustCursor, but the user noUser is logged in. So ignoring the request.",
             statusCode: 409,
             string: "{arguments}.0",
-            request: "{logoutAdjustCursorRequest}"
+            request: "{logoutRequest}"
         }
     }]
 }, {
-    name: "Testing standard error handling: invalid user URLs",
-    expect: 3,
-    gpiiKey: "bogusToken",
-    untrustedExtras: {
-        statusCode: 401,
-        errorText: "server_error while executing HTTP POST on"
-    },
-    errorText: "Error when retrieving preferences: GPII key \"bogusToken\" does not exist",
-    statusCode: 404,
+    name: "Testing login and logout with a nonexistent GPII key",
+    expect: 2,
     sequence: [{
         // login with a non-existing GPII key
-        func: "{proximityTriggeredRequest}.send"
+        func: "{loginNonexistentRequest}.send"
     }, {
-        event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "kettle.test.assertErrorResponse",
-        args: {
-            message: "Received error when logging in non-existing GPII key",
-            errorTexts: "{testCaseHolder}.options.errorText",
-            string: "{arguments}.0",
-            request: "{proximityTriggeredRequest}",
-            statusCode: "{testCaseHolder}.options.statusCode"
-        }
+        event: "{loginNonexistentRequest}.events.onComplete",
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse",
+        args: ["{arguments}.0", "nonexistent-gpii-key"]
+    }, {
+        // logout with a non-existing GPII key
+        func: "{logoutNonexistentRequest}.send"
+    }, {
+        event: "{logoutNonexistentRequest}.events.onComplete",
+        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
+        args: ["{arguments}.0", "nonexistent-gpii-key"]
     }]
 }, {
     name: "noUser logs back in after an explicit request to logout noUser",

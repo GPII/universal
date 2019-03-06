@@ -30,11 +30,11 @@ gpii.tests.untrusted.development.testDefs = fluid.transform(gpii.tests.developme
     var testDef = fluid.extend(true, {}, testDefIn, {
         config: {
             configName: "gpii.config.untrusted.development.local",
-            configPath: "%gpii-universal/gpii/configs"
+            configPath: "%gpii-universal/gpii/configs/shared"
         }
     });
 
     return testDef;
 });
 
-gpii.test.bootstrapServer(gpii.tests.untrusted.development.testDefs);
+gpii.test.runCouchTestDefs(gpii.tests.untrusted.development.testDefs);
