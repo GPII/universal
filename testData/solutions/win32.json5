@@ -4962,7 +4962,7 @@
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             "type": "string",
-                            "default": "C:\\Windows\\Web\\Wallpaper\\Windows\\img0.jpg"
+                            "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg"
                         }
                     }
                 },
