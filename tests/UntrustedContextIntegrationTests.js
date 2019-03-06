@@ -40,4 +40,4 @@ gpii.tests.untrusted.contextIntegration.testDefs = fluid.transform(gpii.tests.un
     return testDef;
 });
 
-gpii.test.bootstrapServer(gpii.tests.untrusted.contextIntegration.testDefs);
+gpii.test.runCouchTestDefs(gpii.tests.untrusted.contextIntegration.testDefs);

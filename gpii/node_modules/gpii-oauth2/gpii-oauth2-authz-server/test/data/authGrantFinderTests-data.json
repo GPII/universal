@@ -1,0 +1,36 @@
+[
+    {
+        "_id": "gpiiKey-1",
+        "type": "gpiiKey",
+        "gpiiKey": "carol_gpii_key"
+    },
+    {
+        "_id": "client-1",
+        "type": "gpiiAppInstallationClient",
+        "name": "Bakersfield AJC - PC1",
+        "oauth2ClientId": "Bakersfield-AJC-client-id",
+        "oauth2ClientSecret": "Bakersfield-AJC-client-secret"
+    },
+    {
+        "_id": "gpiiAppInstallationAuthorization-1",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-1",
+        "gpiiKey": "carol_gpii_key",
+        "accessToken": "Bakersfield_AJC_access_token",
+        "revoked": false,
+        "timestampCreated": "2019-01-17T07:00:00.001Z",
+        "timestampRevoked": null,
+        "timestampExpires": "2019-01-17T07:01:40.001Z"
+    },
+    {
+        "_id": "gpiiAppInstallationAuthorization-expired",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-1",
+        "gpiiKey": "carol_gpii_key",
+        "accessToken": "Bakersfield_AJC_access_token_expired",
+        "revoked": false,
+        "timestampCreated": "2019-01-17T07:00:00.001Z",
+        "timestampRevoked": null,
+        "timestampExpires": "2019-01-17T07:00:40.001Z"
+    }
+]
