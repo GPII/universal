@@ -86,6 +86,158 @@
                             "default": 6
                         }
                     },
+                    // [PointerScheme] (Custom settings)
+                    "PointerScheme.PtrEnhSmooth": {
+                        "schema": {
+                            "title": "Pointer smooth",
+                            "description": "Use ZoomText smooth pointer scheme.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "PointerScheme.PtrEnhSize": {
+                        "schema": {
+                            "title": "Pointer size",
+                            "description": "Change pointer size.",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Standard",
+                                "Large",
+                                "ExtraLarge"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "PointerScheme.PtrEnhPointerColor": {
+                        "schema": {
+                            "title": "Pointer color",
+                            "description": "Change pointer color.",
+                            "enum": [
+                                255,
+                                65535,
+                                65280,
+                                16776960,
+                                16711680,
+                                16711935
+                            ],
+                            "enumLabels": [
+                                "Red",
+                                "Yellow",
+                                "Green",
+                                "Cyan",
+                                "Blue",
+                                "Magenta"
+                            ],
+                            "default": 65535
+                        }
+                    },
+                    "PointerScheme.PtrEnhEffect": {
+                        "schema": {
+                            "title": "Pointer locator type",
+                            "description": "Change the type of locator for the pointer.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                4,
+                                5,
+                                3
+                            ],
+                            "enumLabels": [
+                                "None",
+                                "Circle",
+                                "Sonar",
+                                "Short Crosshairs",
+                                "Long Crosshairs",
+                                "Full Crosshairs"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "PointerScheme.PtrEnhThickness": {
+                        "schema": {
+                            "title": "Pointer locator thickness",
+                            "description": "Change the thickness of the pointer locator.",
+                            "enum": [
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "Thin",
+                                "Medium",
+                                "Thick"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "PointerScheme.PtrEnhColor": {
+                        "schema": {
+                            "title": "Pointer locator color",
+                            "description": "Selects a color for the pointer locator.",
+                            "enum": [
+                                255,
+                                65535,
+                                65280,
+                                16776960,
+                                16711680,
+                                16711935
+                            ],
+                            "enumLabels": [
+                                "Red",
+                                "Yellow",
+                                "Green",
+                                "Cyan",
+                                "Blue",
+                                "Magenta"
+                            ],
+                            "default": 65535
+                        }
+                    },
+                    "PointerScheme.PtrEnhTransparency": {
+                        "schema": {
+                            "title": "Pointer locator transparency",
+                            "description": "Specifies the pointer locator transparency to use. From 'Clear' to 'Solid'.",
+                            "type": "integer",
+                            "minimum": 31,
+                            "maximum": 255,
+                            "default": 143
+                        }
+                    },
+                    "PointerScheme.PtrEnhApply": {
+                        "schema": {
+                            "title": "Pointer locator display mode",
+                            "description": "Changes when to display the pointer locator.",
+                            "type": "integer",
+                            "enum": [
+                                1,
+                                3,
+                                2,
+                                4
+                            ],
+                            "enumLabels": [
+                                "Always",
+                                "When pointer is stationary",
+                                "When pointer is moving",
+                                "When modifier key is pressed"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    // Bitmask Setting
+                    "PointerScheme.PtrEnhModifier": {
+                    },
                     // [CursorScheme]
                     "CursorScheme.CursorEnhEnable": {
                         "schema": {
@@ -107,12 +259,14 @@
                             "title": "Cursor color schema",
                             "description": "Specifies the cursor color schema to use.",
                             "enum": [
+                                0,
                                 1,
                                 2,
                                 3,
                                 4
                             ],
                             "enumLabels": [
+                                "Custom",
                                 "Blue Wedge",
                                 "Green Circle",
                                 "Red Frame",
@@ -121,6 +275,95 @@
                             "default": 1
                         }
                     },
+                    // [CursorScheme] (Custom settings)
+                    "CursorScheme.CursorEnhType": {
+                        "schema": {
+                            "title": "Cursor locator type",
+                            "description": "Selects the type of cursor locator.",
+                            "enum": [
+                                1,
+                                3,
+                                8
+                            ],
+                            "enumLabels": [
+                                "Wedges",
+                                "Circle",
+                                "Frame"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "CursorScheme.CursorEnhSize": {
+                        "schema": {
+                            "title": "Cursor locator size",
+                            "description": "Selects the size of the cursor locator.",
+                            "enum": [
+                                1,
+                                2,
+                                4
+                            ],
+                            "enumLabels": [
+                                "Thin",
+                                "Medium",
+                                "Thick"
+                            ],
+                            "default": 2
+                        }
+                    },
+                    "CursorScheme.CursorEnhColor": {
+                        "schema": {
+                            "title": "Cursor locator color",
+                            "description": "Selects the color to use for the cursor locator.",
+                            "enum": [
+                                255,
+                                65535,
+                                65280,
+                                16776960,
+                                16711680,
+                                16711935
+                            ],
+                            "enumLabels": [
+                                "Red",
+                                "Yellow",
+                                "Green",
+                                "Cyan",
+                                "Blue",
+                                "Magenta"
+                            ],
+                            "default": 16711680
+                        }
+                    },
+                    "CursorScheme.CursorEnhTransparency": {
+                        "schema": {
+                            "title": "Cursor locator transparency",
+                            "description": "Specifies the cursor locator transparency to use. From 'Clear' to 'Solid'.",
+                            "type": "integer",
+                            "minimum": 31,
+                            "maximum": 255,
+                            "default": 143
+                        }
+                    },
+                    "CursorScheme.PtrEnhApply": {
+                        "schema": {
+                            "title": "Cursor locator display mode",
+                            "description": "Changes when to display the cursor locator.",
+                            "enum": [
+                                1,
+                                3,
+                                2,
+                                4
+                            ],
+                            "enumLabels": [
+                                "Always",
+                                "When pointer is stationary",
+                                "When pointer is moving",
+                                "When modifier key is pressed"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    // Bitmask Setting
+                    "CursorScheme.PtrEnhModifier": {},
                     // [ColorScheme]
                     "ColorScheme.ColorSchEnable": {
                         "schema": {
@@ -350,12 +593,14 @@
                             "title": "Focus color schema",
                             "description": "Specifies the Focus color schema to use.",
                             "enum": [
+                                0,
                                 1,
                                 2,
                                 3,
                                 4
                             ],
                             "enumLabels": [
+                                "Custom",
                                 "Red Rectangle",
                                 "Thick Green Underline",
                                 "Yellow Block",
@@ -363,6 +608,110 @@
                             ],
                             "default": 1
                         }
+                    },
+                    // [FocusScheme] (Custom settings)
+                    "FocusScheme.FocusENHShape": {
+                        "schema": {
+                            "title": "Focus locator type",
+                            "description": "Specifies the Focus locator type to use.",
+                            "enum": [
+                                1,
+                                3,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Block",
+                                "Underline",
+                                "Frame"
+                            ],
+                            "default": 2
+                        }
+                    },
+                    "FocusScheme.FocusENHColor": {
+                        "schema": {
+                            "title": "Focus locator color",
+                            "description": "Specifies the locator color.",
+                            "enum": [
+                                -2147483648,
+                                0,
+                                255,
+                                65535,
+                                65280,
+                                16776960,
+                                16711680,
+                                16711935,
+                                16777215
+                            ],
+                            "enumLabels": [
+                                "Invert",
+                                "Black",
+                                "Red",
+                                "Yellow",
+                                "Green",
+                                "Cyan",
+                                "Blue",
+                                "Magenta",
+                                "White"
+                            ],
+                            "default": 255
+                        }
+                    },
+                    "FocusScheme.FocusENHThickness": {
+                        "schema": {
+                            "title": "Focus locator thickness",
+                            "description": "Specifies the thickness of the focus locator.",
+                            "enum": [
+                                1,
+                                5,
+                                9
+                            ],
+                            "enumLabels": [
+                                "Thin",
+                                "Medium",
+                                "Thick"
+                            ],
+                            "default": 5
+                        }
+                    },
+                    "FocusScheme.FocusENHTransparency": {
+                        "schema": {
+                            "title": "Focus locator transparency",
+                            "description": "Specifies the transparency of the focus locator. Range goes from 'Clear' to 'Solid'.",
+                            "type": "integer",
+                            "minimum": 31,
+                            "maximum": 255,
+                            "default": 143
+                        }
+                    },
+                    "FocusScheme.FocusENHPadding": {
+                        "schema": {
+                            "title": "Focus locator margin",
+                            "description": "Specifies the margin for the focus locator. Range goes from 'Narrow' to 'Wide'.",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 9,
+                            "default": 1
+                        }
+                    },
+                    "FocusScheme.FocusENHMode": {
+                        "schema": {
+                            "title": "Focus locator display mode",
+                            "description": "Specifies how and when the focus locator is displayed.",
+                            "enum": [
+                                2,
+                                1,
+                                3
+                            ],
+                            "enumLabels": [
+                                "Continuosly",
+                                "Briefly",
+                                "When the modifier key is pressed"
+                            ],
+                            "default": 2
+                        }
+                    },
+                    // Bitmask setting
+                    "FocusScheme.FocusENHModifier": {
                     },
                     // [EchoTyping]
                     "EchoTyping.Mode": {
