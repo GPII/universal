@@ -23,7 +23,7 @@
 {
     "type": "gpii.config.untrusted.production.dynamicDR.manualTesting",
     "mergeConfigs": [
-        "%flowManager/configs/gpii.flowManager.config.production.base.json5",
+        "%flowManager/configs/gpii.flowManager.config.suppressHttpEndpoints.base.json5",
         "%gpii-universal/gpii/configs/gpii.config.untrusted.development.dynamicDR.manualTesting.json5"
     ]
 }
