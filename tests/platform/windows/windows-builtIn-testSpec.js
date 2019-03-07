@@ -419,25 +419,6 @@ gpii.tests.windows.builtIn = [
                         }
                     }
                 ],
-                "com.microsoft.windows.highContrast": [
-                    { // high contrast settings
-                        "settings": {
-                            "HighContrastOn": {
-                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
-                                "value": true
-                            }
-                        },
-                        "options": {
-                            "getAction": "SPI_GETHIGHCONTRAST",
-                            "setAction": "SPI_SETHIGHCONTRAST",
-                            "uiParam": "struct_size",
-                            "pvParam": {
-                                "type": "struct",
-                                "name": "HIGHCONTRAST"
-                            }
-                        }
-                    }
-                ],
                 "com.microsoft.windows.toggleKeys": [
                     {
                         "settings": {
