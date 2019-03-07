@@ -730,8 +730,8 @@ gpii.tests.windows.builtIn = [
             }
         }
     }, {
-        name: "Testing os_win7_2 using default matchmaker",
-        gpiiKey: "os_win7_2",
+        name: "Testing os_win_2 using default matchmaker",
+        gpiiKey: "os_win_2",
         initialState: {},
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {

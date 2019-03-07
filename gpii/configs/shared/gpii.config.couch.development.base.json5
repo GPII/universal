@@ -13,6 +13,9 @@
 
     https://github.com/GPII/gpii-couchdb-test-harness
 
+    See "gpii.test.couchEnvironment" grade in gpii/node_modules/testing/src/Fixutres.js for the CouchDB data loader
+    used for running acceptance and integration tests.
+
 */
 {
     "type": "gpii.config.couch.development.base",
