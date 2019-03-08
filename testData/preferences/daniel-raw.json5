@@ -1,0 +1,30 @@
+// # Daniel-raw.json5
+//
+// This preference sets the desktop background to a solid color. This is the same
+// preference set as Daniels one, but without using the convenience transforms.
+//
+// ## Testing
+//
+// Windows desktop background should be replace by a green image.
+//
+{
+    "flat": {
+        "name": "Daniel-raw",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.desktopBackgroundColor": {
+                        "ImageConfig": {
+                            "path": "pvParam",
+                            "value": ""
+                        },
+                        "SolidColorConfig": {
+                            "value": { "r": 67, "g": 187, "b": 19 }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

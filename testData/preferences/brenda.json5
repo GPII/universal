@@ -1,0 +1,23 @@
+// # Bryan.json5
+//
+// This preference sets changes the desktop wallpaper with another default Windows 10 one.
+//
+// ## Testing
+//
+// Windows desktop background should be replaced by with other one.
+//
+{
+    "flat": {
+        "name": "Bryan",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.desktopBackground": {
+                        "Image": "C:\\Windows\\Web\\Wallpaper\\Theme1\\img3.jpg"
+                    }
+                }
+            }
+        }
+    }
+}

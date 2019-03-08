@@ -13,11 +13,8 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/applications/com.microsoft.windows.desktopBackground": {
-                        "BackgroundTypeVal": "SolidColor",
-                        "InputVal": {
-                            "Color": {"r": 67, "g": 187, "b": 19}
-                        }
+                    "http://registry.gpii.net/applications/com.microsoft.windows.desktopBackgroundColor": {
+                        "SolidColor": { "r": 67, "g": 187, "b": 19 }
                     }
                 }
             }
