@@ -4811,7 +4811,8 @@
                     "path": "Control Panel\\Desktop",
                     "dataTypes": {
                         "TileWallpaper": "REG_SZ",
-                        "WallpaperStyle": "REG_SZ"
+                        "WallpaperStyle": "REG_SZ",
+                        "Scaling": "REG_SZ"
                     }
                 },
                 "supportedSettings": {
@@ -4897,15 +4898,15 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Scaling",
                             "match": {
-                                "Fill": "6",
-                                "Fit": "10",
+                                "Fill": "10",
+                                "Fit": "6",
                                 "Stretch": "2",
                                 "Tile": "0",
                                 "Center": "0",
                                 "Span": "22"
                             },
                             "noMatch": {
-                                "outputValue": "6"
+                                "outputValue": "10"
                             }
                         }
                     }
@@ -4916,8 +4917,8 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "WallpaperStyle",
                             "match": {
-                                "6": "Fill",
-                                "10": "Fit",
+                                "10": "Fill",
+                                "6": "Fit",
                                 "2": "Stretch",
                                 "0": {
                                     "outputValue": {
@@ -5028,9 +5029,12 @@
                 },
                 "capabilitiesTransformations": {
                     "ImageConfig": {
+                        // This transform is necessary due to issue GPII-3784.
                         "transform": {
-                            "type": "fluid.transforms.literalValue",
-                            "input": "",
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor.r",
+                            "true": "",
+                            "false": "",
                             "outputPath": "value"
                         },
                         "path": {
@@ -5040,9 +5044,6 @@
                             }
                         }
                     }
-                },
-                "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.Image": "ImageConfig.value"
                 }
             },
             "configureSolidColor": {
@@ -5086,9 +5087,23 @@
                 },
                 "capabilitiesTransformations": {
                     "SolidColorConfig": {
+                        // This transform is necessary due to issue GPII-3784.
                         "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor",
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "SolidColor",
+                            "condition": true,
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.value",
+                                    "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor"
+                                }
+                            },
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.value",
+                                    "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor"
+                                }
+                            },
                             "outputPath": "value"
                         }
                     }
@@ -5099,6 +5114,10 @@
             }
         },
         "configure": [
+            "settings.configureImage",
+            "settings.configureSolidColor"
+        ],
+        "restore": [
             "settings.configureImage",
             "settings.configureSolidColor"
         ],
