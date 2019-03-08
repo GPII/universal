@@ -1,0 +1,15 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.desktopBackground": {
+                        "Scaling": "Tile",
+                        "Image": "C:\\Windows\\Web\\Wallpaper\\Theme1\\img4.jpg"
+                    }
+                }
+            }
+        }
+    }
+}
