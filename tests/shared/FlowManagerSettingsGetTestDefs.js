@@ -94,7 +94,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.mainSequence", {
         {
             event: "{settingsRequest}.events.onComplete",
             listener: "gpii.tests.cloud.oauth2.settingsGet.verifyPayloadMatchMakerOutput",
-            args: ["{arguments}.0", "{testCaseHolder}.options.expectedMatchMakerOutput"]
+            args: ["{arguments}.0", "{testCaseHolder}.options.expectedPreferences", "{testCaseHolder}.options.expectedMatchMakerOutput"]
         }
     ]
 });
@@ -136,6 +136,33 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode", {
         mainSequence: {
             priority: "after:startServer",
             gradeNames: "gpii.tests.cloud.oauth2.settingsGet.statusCode"
+        }
+    }
+});
+
+// For successful test cases that are accepted by /access_token endpoint
+fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.accessTokenResponse", {
+    gradeNames: ["fluid.test.sequenceElement"],
+    sequence: [{
+        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
+        args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
+    },
+    {
+        event: "{accessTokenRequest}.events.onComplete",
+        listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse",
+        args: ["{arguments}.0", "{accessTokenRequest}"]
+    }]
+});
+
+fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.accessTokenResponse", {
+    gradeNames: ["gpii.test.disruption.sequenceGrade"],
+    recordName: "accessTokenForm",
+    expect: 4,
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsGet.requests",
+    sequenceElements: {
+        mainSequence: {
+            priority: "after:startServer",
+            gradeNames: "gpii.tests.cloud.oauth2.settingsGet.accessTokenResponse"
         }
     }
 });
@@ -254,10 +281,10 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.settingsWrongAcce
 
 // Main tests that contain all test cases
 gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
-    // Successful use cases that request user settings with proper access tokens granted via Resource Owner GPII key grant
+    // Successful use cases that request settings for an existing GPII key with proper access tokens granted via Resource Owner GPII key grant
     {
         testDef: {
-            name: "A successful workflow for retrieving settings",
+            name: "A successful workflow for retrieving settings for an existing GPII key",
 
             // The options below are for sending /access_token request
             client_id: "pilot-computer",
@@ -267,6 +294,26 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
 
             // The options below are required for sending /settings
             gpiiKey: "os_gnome",
+            expectedPreferences: {
+                "contexts": {
+                    "gpii-default": {
+                        "name": "Default preferences",
+                        "preferences": {
+                            "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                                "mag-factor": 1.5,
+                                "screen-position": "full-screen"
+                            },
+                            "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
+                                "cursor-size": 90,
+                                "text-scaling-factor": 0.75
+                            },
+                            "http://registry.gpii.net/applications/org.alsa-project": {
+                                "masterVolume": 50
+                            }
+                        }
+                    }
+                }
+            },
             expectedMatchMakerOutput: {
                 "inferredConfiguration": {
                     "gpii-default": {
@@ -312,6 +359,45 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
         }]
     },
 
+    // Successful use cases that request settings for a non-existent GPII key with proper access tokens granted via Resource Owner GPII key grant
+    {
+        testDef: {
+            name: "A successful workflow for retrieving settings for an existing GPII key",
+
+            // The options below are for sending /access_token request
+            client_id: "pilot-computer",
+            client_secret: "pilot-computer-secret",
+            username: "nonexistent_gpii_key",
+            password: "dummy",
+
+            // The options below are required for sending /settings
+            gpiiKey: "nonexistent_gpii_key",
+            expectedPreferences: {
+            },
+            expectedMatchMakerOutput: {
+                "inferredConfiguration": {
+                }
+            }
+        },
+        disruptions: [{
+            sequenceGrade: "gpii.tests.cloud.oauth2.settingsGet.disruption.mainSequence"
+        }]
+    },
+
+    // Accepted by /access_token endpoint
+    {
+        testDef: {
+            name: "Attempt to get access token by sending a wrong GPII key",
+            client_id: "pilot-computer",
+            client_secret: "pilot-computer-secret",
+            username: "nonexistent_gpii_key",
+            password: "dummy"
+        },
+        disruptions: [{
+            sequenceGrade: "gpii.tests.cloud.oauth2.settingsGet.disruption.accessTokenResponse"
+        }]
+    },
+
     // Rejected by /access_token endpoint
     {
         testDef: {
@@ -339,16 +425,6 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
             client_id: "nonexistent-client",
             client_secret: "client_secret_easit4all",
             username: "gpii_key_no_prefs_safe",
-            password: "dummy"
-        },
-        disruptions: gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs
-    },
-    {
-        testDef: {
-            name: "Attempt to get access token by sending a wrong GPII key",
-            client_id: "pilot-computer",
-            client_secret: "pilot-computer-secret",
-            username: "nonexistent_gpii_key",
             password: "dummy"
         },
         disruptions: gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs
@@ -382,7 +458,8 @@ gpii.tests.cloud.oauth2.settingsGet.verifyRefetchedAccessToken = function (body,
     jqUnit.assertNotEquals("A new access token is issued at the refetch", initialAccessTokenRequest.access_token, refetchAccessTokenRequest.access_token);
 };
 
-gpii.tests.cloud.oauth2.settingsGet.verifyPayloadMatchMakerOutput = function (body, expectedMatchMakerOutput) {
+gpii.tests.cloud.oauth2.settingsGet.verifyPayloadMatchMakerOutput = function (body, expectedPreferences, expectedMatchMakerOutput) {
     var payload = JSON.parse(body);
+    jqUnit.assertDeepEq("Verify expected preferences", expectedPreferences, payload.preferences);
     jqUnit.assertDeepEq("Verify expected matchMakerOutput", expectedMatchMakerOutput, payload.matchMakerOutput);
 };

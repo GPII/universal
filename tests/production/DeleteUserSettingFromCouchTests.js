@@ -23,10 +23,12 @@ fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
 require("./Common.js");
 
+gpii.tests.productionConfigTesting.noPath = "/gpii/nO_wHeRe";
+
 // Tests for deleting test 'user' preferences from the database
 gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
     name: "Flow manager production tests - delete test GPII keys and PrefsSafe",
-    expect: 4,
+    expect: 7,
     config: gpii.tests.productionConfigTesting.config,
     gradeNames: ["gpii.test.common.testCaseHolder"],
     components: {
@@ -38,7 +40,7 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
                 path: "/gpii/os_gnome",
                 method: "GET",
                 expectedStatusCodes: [200],
-                docToRemove: null    // set by successful request.
+                docToRemove: null       // set by successful request.
             }
         },
         getSettingsUserPrefsSafe: {
@@ -49,10 +51,10 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
                 path: "/gpii/prefsSafe-os_gnome",
                 method: "GET",
                 expectedStatusCodes: [200],
-                docToRemove: null    // set by successful request.
+                docToRemove: null       // set by successful request.
             }
         },
-        getChromeAndFirefoxKey: {
+        getGpiiKeyNoPrefsSafe: {
             type: "kettle.test.request.http",
             options: {
                 port: "5984",
@@ -60,7 +62,46 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
                 path: "/gpii/gpii_key_no_prefs_safe",
                 method: "GET",
                 expectedStatusCodes: [200],
-                docToRemove: null    // set by successful request.
+                docToRemove: null       // set by successful request.
+            }
+        },
+        getGpiiKeyNoPrefsSafePrefsSafe: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+
+                // set at gpii.tests.productionConfigTesting.sendPrefsSafeId()
+                path: gpii.tests.productionConfigTesting.noPath,
+
+                method: "GET",
+                expectedStatusCodes: [200, 404],
+                docToRemove: null       // set by successful request.
+            }
+        },
+        getNonExistentGpiiKey: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+                path: "/gpii/nonexistent_gpii_key",
+                method: "GET",
+                expectedStatusCodes: [200, 404],
+                docToRemove: null       // set by successful request.
+            }
+        },
+        getNonExistentGpiiKeyPrefsSafe: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+
+                // set at gpii.tests.productionConfigTesting.sendPrefsSafeId()
+                path: gpii.tests.productionConfigTesting.noPath,
+
+                method: "GET",
+                expectedStatusCodes: [200, 404],
+                docToRemove: null       // set by successful request.
             }
         },
         deleteInBulk: {
@@ -89,20 +130,41 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
             event: "{getSettingsUserPrefsSafe}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetForDeletion"
         }, {
-            func: "{getChromeAndFirefoxKey}.send",
+            func: "{getGpiiKeyNoPrefsSafe}.send",
             args: [null, { port: "5984" }]
         }, {
-            event: "{getChromeAndFirefoxKey}.events.onComplete",
+            event: "{getGpiiKeyNoPrefsSafe}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetForDeletion"
         }, {
-            func: "{deleteInBulk}.send",
+            funcName: "gpii.tests.productionConfigTesting.sendPrefsSafeId",
+            args: ["{getGpiiKeyNoPrefsSafePrefsSafe}", "{getGpiiKeyNoPrefsSafe}"]
+        }, {
+            event: "{getGpiiKeyNoPrefsSafePrefsSafe}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testGetForDeletion"
+        }, {
+            func: "{getNonExistentGpiiKey}.send",
+            args: [null, { port: "5984" }]
+        }, {
+            event: "{getNonExistentGpiiKey}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testGetForDeletion"
+        }, {
+            funcName: "gpii.tests.productionConfigTesting.sendPrefsSafeId",
+            args: ["{getNonExistentGpiiKeyPrefsSafe}", "{getNonExistentGpiiKey}"]
+        }, {
+            event: "{getNonExistentGpiiKeyPrefsSafe}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testGetForDeletion"
+        }, {
+            funcName: "gpii.tests.productionConfigTesting.bulkDelete",
             args: [
-                {"docs": [
+                "{deleteInBulk}",
+                [
                     "{getSettingsUserKey}.options.docToRemove",
                     "{getSettingsUserPrefsSafe}.options.docToRemove",
-                    "{getChromeAndFirefoxKey}.options.docToRemove"
-                ]},
-                { port: "5984" }
+                    "{getGpiiKeyNoPrefsSafe}.options.docToRemove",
+                    "{getGpiiKeyNoPrefsSafePrefsSafe}.options.docToRemove",
+                    "{getNonExistentGpiiKey}.options.docToRemove",
+                    "{getNonExistentGpiiKeyPrefsSafe}.options.docToRemove"
+                ]
             ]
         }, {
             event: "{deleteInBulk}.events.onComplete",
@@ -111,5 +173,23 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
         { funcName: "fluid.log", args: ["Deleted 'user' test prefs safes"]}
     ]
 }];
+
+gpii.tests.productionConfigTesting.sendPrefsSafeId = function (prefsSafeRequest, gpiiKeyRequest) {
+    var gpiiKeyToRemove = gpiiKeyRequest.options.docToRemove;
+    if (gpiiKeyToRemove && gpiiKeyToRemove.prefsSafeId) {
+        prefsSafeRequest.options.path = "/gpii/" + gpiiKeyToRemove.prefsSafeId;
+    }
+    prefsSafeRequest.send(null, { port: 5984 });
+};
+
+gpii.tests.productionConfigTesting.bulkDelete = function (bulkDeleteRequest, docsToRemove) {
+    var bulkDocsArray = { "docs": [] };
+    fluid.each(docsToRemove, function (aDocToRemove) {
+        if (aDocToRemove) {
+            bulkDocsArray.docs.push(aDocToRemove);
+        }
+    });
+    bulkDeleteRequest.send(bulkDocsArray, { port: 5984 });
+};
 
 gpii.test.runServerTestDefs(gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests);

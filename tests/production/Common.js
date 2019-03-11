@@ -136,6 +136,8 @@ gpii.tests.productionConfigTesting.testGetForDeletion = function (data, request)
     if (actual === 201 || actual === 200) {
         request.options.docToRemove = JSON.parse(data);
         request.options.docToRemove._deleted = true;
+        fluid.log("Will remove ", request.options.docToRemove.type, " ", request.options.docToRemove._id);
+    } else {
+        fluid.log("Nothing to remove at ", request.options.path);
     }
-    fluid.log("Will remove ", request.options.docToRemove.type, " ", request.options.docToRemove._id);
 };
