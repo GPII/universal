@@ -23,98 +23,8 @@ fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
 require("./Common.js");
 
-gpii.tests.productionConfigTesting.noPath = "/gpii/nO_wHeRe";
-
-// Tests for deleting test 'user' preferences from the database
-gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
-    name: "Flow manager production tests - delete test GPII keys and PrefsSafe",
-    expect: 7,
-    config: gpii.tests.productionConfigTesting.config,
-    gradeNames: ["gpii.test.common.testCaseHolder"],
-    components: {
-        getSettingsUserKey: {
-            type: "kettle.test.request.http",
-            options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/os_gnome",
-                method: "GET",
-                expectedStatusCodes: [200],
-                docToRemove: null       // set by successful request.
-            }
-        },
-        getSettingsUserPrefsSafe: {
-            type: "kettle.test.request.http",
-            options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/prefsSafe-os_gnome",
-                method: "GET",
-                expectedStatusCodes: [200],
-                docToRemove: null       // set by successful request.
-            }
-        },
-        getGpiiKeyNoPrefsSafe: {
-            type: "kettle.test.request.http",
-            options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/gpii_key_no_prefs_safe",
-                method: "GET",
-                expectedStatusCodes: [200],
-                docToRemove: null       // set by successful request.
-            }
-        },
-        getGpiiKeyNoPrefsSafePrefsSafe: {
-            type: "kettle.test.request.http",
-            options: {
-                port: "5984",
-                hostname: "couchdb",
-
-                // set at gpii.tests.productionConfigTesting.sendPrefsSafeId()
-                path: gpii.tests.productionConfigTesting.noPath,
-
-                method: "GET",
-                expectedStatusCodes: [200, 404],
-                docToRemove: null       // set by successful request.
-            }
-        },
-        getNonExistentGpiiKey: {
-            type: "kettle.test.request.http",
-            options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/nonexistent_gpii_key",
-                method: "GET",
-                expectedStatusCodes: [200, 404],
-                docToRemove: null       // set by successful request.
-            }
-        },
-        getNonExistentGpiiKeyPrefsSafe: {
-            type: "kettle.test.request.http",
-            options: {
-                port: "5984",
-                hostname: "couchdb",
-
-                // set at gpii.tests.productionConfigTesting.sendPrefsSafeId()
-                path: gpii.tests.productionConfigTesting.noPath,
-
-                method: "GET",
-                expectedStatusCodes: [200, 404],
-                docToRemove: null       // set by successful request.
-            }
-        },
-        deleteInBulk: {
-            type: "kettle.test.request.http",
-            options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/_bulk_docs",
-                method: "POST",
-                expectedStatusCode: 201
-            }
-        }
-    },
+fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
+    gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
         { funcName: "fluid.log", args: ["Delete 'user' test prefs safes tests:"]},
         {
@@ -172,12 +82,121 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
         },
         { funcName: "fluid.log", args: ["Deleted 'user' test prefs safes"]}
     ]
+});
+
+fluid.defaults("gpii.tests.productionConfigTesting.deleteRecordsSequence", {
+    gradeNames: ["fluid.test.sequence"],
+    sequenceElements: {
+        deleteRecords: {
+            gradeNames: "gpii.tests.productionConfigTesting.deleteUserSettings"
+        }
+    }
+});
+
+// Tests for deleting test 'user' preferences from the database
+gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
+    name: "Flow manager production tests - delete test GPII keys and PrefsSafe",
+    expect: 7,
+    config: gpii.tests.productionConfigTesting.config,
+    gradeNames: ["gpii.test.common.testCaseHolder"],
+    components: {
+        getSettingsUserKey: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+                path: "/gpii/os_gnome",
+                method: "GET",
+                expectedStatusCodes: [200, 404],
+                docToRemove: null       // set by successful request.
+            }
+        },
+        getSettingsUserPrefsSafe: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+                path: "/gpii/prefsSafe-os_gnome",
+                method: "GET",
+                gpiiKey: "os_gnome",
+                expectedStatusCodes: [200, 404],
+                docToRemove: null       // set by successful request.
+            }
+        },
+        getGpiiKeyNoPrefsSafe: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+                path: "/gpii/gpii_key_no_prefs_safe",
+                method: "GET",
+                expectedStatusCodes: [200, 404],
+                docToRemove: null       // set by successful request.
+            }
+        },
+        getGpiiKeyNoPrefsSafePrefsSafe: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+
+                // set at gpii.tests.productionConfigTesting.sendPrefsSafeId()
+                path: null,
+
+                method: "GET",
+                gpiiKey: "gpii_key_no_prefs_safe",
+                expectedStatusCodes: [200, 404],
+                docToRemove: null       // set by successful request.
+            }
+        },
+        getNonExistentGpiiKey: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+                path: "/gpii/nonexistent_gpii_key",
+                method: "GET",
+                expectedStatusCodes: [200, 404],
+                docToRemove: null       // set by successful request.
+            }
+        },
+        getNonExistentGpiiKeyPrefsSafe: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+
+                // set at gpii.tests.productionConfigTesting.sendPrefsSafeId()
+                path: null,
+
+                method: "GET",
+                gpiiKey: "gpii_key_no_prefs_safe",
+                expectedStatusCodes: [200, 404],
+                docToRemove: null       // set by successful request.
+            }
+        },
+        deleteInBulk: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+                path: "/gpii/_bulk_docs",
+                method: "POST",
+                expectedStatusCode: 201
+            }
+        }
+    },
+    sequenceGrade: "gpii.tests.productionConfigTesting.deleteRecordsSequence"
 }];
 
 gpii.tests.productionConfigTesting.sendPrefsSafeId = function (prefsSafeRequest, gpiiKeyRequest) {
     var gpiiKeyToRemove = gpiiKeyRequest.options.docToRemove;
     if (gpiiKeyToRemove && gpiiKeyToRemove.prefsSafeId) {
         prefsSafeRequest.options.path = "/gpii/" + gpiiKeyToRemove.prefsSafeId;
+    } else {
+        // This path should force a 404
+        prefsSafeRequest.options.path = "/gpii/prefsSafe-" + prefsSafeRequest.options.gpiiKey;
+        fluid.log("No Prefs Safe to retrieve for GPII key " + prefsSafeRequest.options.gpiiKey);
     }
     prefsSafeRequest.send(null, { port: 5984 });
 };

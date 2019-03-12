@@ -24,6 +24,53 @@ fluid.registerNamespace("gpii.tests.productionConfigTesting");
 require("./Common.js");
 
 // Tests that add 'user' preferences to the data base
+fluid.defaults("gpii.tests.productionConfigTesting.addUserSettings", {
+    gradeNames: ["fluid.test.sequenceElement"],
+    sequence: [
+        { funcName: "fluid.log", args: ["Add 'user' test prefs safes tests:"]},
+        {
+            func: "{addSettingsUserKey}.send",
+            args: [
+                gpii.tests.productionConfigTesting.settingsUserKey,
+                { port: "5984" }
+            ]
+        }, {
+            event: "{addSettingsUserKey}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testAddedToDatabase"
+        }, {
+            func: "{addSettingsUserPrefsSafe}.send",
+            args: [
+                gpii.tests.productionConfigTesting.settingsUserPrefsSafe,
+                { port: "5984" }
+            ]
+        }, {
+            event: "{addSettingsUserPrefsSafe}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testAddedToDatabase"
+        },
+        {
+            func: "{addGpiiKeyNoPrefsSafe}.send",
+            args: [
+                gpii.tests.productionConfigTesting.gpiiKeyNoPrefsSafe,
+                { port: "5984" }
+            ]
+        },
+        {
+            event: "{addGpiiKeyNoPrefsSafe}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testAddedToDatabase"
+        },
+        { funcName: "fluid.log", args: ["Added 'user' test prefs safe"]}
+    ]
+});
+
+fluid.defaults("gpii.tests.productionConfigTesting.addRecordsSequence", {
+    gradeNames: ["fluid.test.sequence"],
+    sequenceElements: {
+        addRecords: {
+            gradeNames: "gpii.tests.productionConfigTesting.addUserSettings"
+        }
+    }
+});
+
 gpii.tests.productionConfigTesting.addTestRecordsToDatabaseTests = [{
     name: "Flow manager production tests - add test GPII keys and PrefsSafe",
     expect: 3,
@@ -69,40 +116,7 @@ gpii.tests.productionConfigTesting.addTestRecordsToDatabaseTests = [{
             }
         }
     },
-    sequence: [
-        { funcName: "fluid.log", args: ["Add 'user' test prefs safes tests:"]},
-        {
-            func: "{addSettingsUserKey}.send",
-            args: [
-                gpii.tests.productionConfigTesting.settingsUserKey,
-                { port: "5984" }
-            ]
-        }, {
-            event: "{addSettingsUserKey}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testAddedToDatabase"
-        }, {
-            func: "{addSettingsUserPrefsSafe}.send",
-            args: [
-                gpii.tests.productionConfigTesting.settingsUserPrefsSafe,
-                { port: "5984" }
-            ]
-        }, {
-            event: "{addSettingsUserPrefsSafe}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testAddedToDatabase"
-        },
-        {
-            func: "{addGpiiKeyNoPrefsSafe}.send",
-            args: [
-                gpii.tests.productionConfigTesting.gpiiKeyNoPrefsSafe,
-                { port: "5984" }
-            ]
-        },
-        {
-            event: "{addGpiiKeyNoPrefsSafe}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testAddedToDatabase"
-        },
-        { funcName: "fluid.log", args: ["Added 'user' test prefs safe"]}
-    ]
+    sequenceGrade: "gpii.tests.productionConfigTesting.addRecordsSequence"
 }];
 
 gpii.test.runServerTestDefs(gpii.tests.productionConfigTesting.addTestRecordsToDatabaseTests);
