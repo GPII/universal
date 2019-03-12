@@ -26,7 +26,7 @@ var testIncludes = [
     "./CloudStatusProductionTests.js",
     "./SettingsGetProductionTests.js",
     "./SettingsPutProductionTests.js",
-    "./DeleteUserSettingFromCouchTests.js"
+    "./DeleteUserSettingsFromCouchTests.js"
 ];
 
 fluid.each(testIncludes, function (path) {
