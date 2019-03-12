@@ -70,7 +70,6 @@ gpii.prefsSetsDbUtils.generateKeyData = function (gpiiKeyId, preferences, prefsS
         "schemaVersion": "0.1",
         "prefsSafeType": prefsSafeType || "user",
         "name": gpiiKeyId,
-        "password": null,
         "email": null,
         "preferences": preferences || gpii.prefsSetsDbUtils.emptyPreferencesBlock,
         "timestampCreated": currentTime,

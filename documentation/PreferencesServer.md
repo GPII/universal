@@ -367,7 +367,6 @@ Example Success Payload:
     "schemaVersion": "0.1",
     "prefsSafeType": "user",
     "name": "alice",
-    "password": null,
     "email": null,
     "preferences": {
         "flat": {
@@ -417,7 +416,6 @@ Example returned item:
         "schemaVersion": "0.1",
         "prefsSafeType": "user",
         "name": "alice",
-        "password": null,
         "email": null,
         "preferences": {
             "flat": {
@@ -485,7 +483,6 @@ The POST payload should be a full preferences safe without an `id`:
     "schemaVersion": "0.1",
     "prefsSafeType": "user",
     "name": "Steve",
-    "password": null,
     "email": null,
     "preferences": {
         "flat": {
@@ -534,7 +531,6 @@ Example PUT body:
     "schemaVersion": "0.1",
     "prefsSafeType": "user",
     "name": "alice",
-    "password": null,
     "email": null,
     "preferences": {
         "flat": {
