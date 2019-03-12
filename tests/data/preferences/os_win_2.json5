@@ -1,0 +1,20 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.desktopBackgroundColor": {
+                        "SolidColorConfig": {
+                            "value": { "r": 67, "g": 187, "b": 19 }
+                        },
+                        "ImageConfig": {
+                            "path": "pvParam",
+                            "value": ""
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
