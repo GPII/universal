@@ -1,0 +1,55 @@
+/**
+ * A variant of gpii.config.untrusted.development which includes mock definitions for all builtin settings handlers
+ * supported on the Windows platform. This allows any preference set to be logged in from a bare universal repo without
+ * crashing the system.
+ *
+ * This configuration runs:
+ * * The local flow manager on port 8081
+ * * The cloud on port 8084
+ *
+ * This mean that:
+ * * The keys, preferences and authentication data is stored locally in a CouchDB instance.
+ * * The following components are running on the local machine:
+ * ** flowManager
+ * ** preferencesServer
+ * ** OntologyHandler
+ * ** solutionsRegistry (reading registry from file)
+ * ** flatMatchMaker
+ * ** matchMakerFramework
+ * ** CouchDB
+ *
+ * Note that this config incorrectly derives from the deviceReporter development config. This is because of a dependency error
+ * in the system design where the cloudBased flowManager still attempts to query the platform deviceReporter rather than
+ * recognising that it is on platform "web" - e.g. within BrowserChannel.js
+ */
+
+{
+    "type": "gpii.config.untrusted.development.manualTesting.mock.windows",
+    "options": {
+        "gradeNames": ["kettle.multiConfig.config"],
+        "configs": {
+            "localConfig": {
+                "configName": "gpii.config.untrusted.development.mock.windows",
+                "configPath": "%gpii-universal/gpii/configs/mocks"
+            },
+            "cloudBasedConfig": {
+                "configName": "gpii.config.cloudBased.development",
+                "configPath": "%gpii-universal/gpii/configs/shared"
+            }
+        },
+        "distributeOptions": {
+            "untrusted.development.port": {
+                "record": 8084,
+                "target": "{that cloudBasedConfig}.options.mainServerPort"
+            },
+            "untrusted.development.prefs": {
+                "record": "http://localhost:8084",
+                "target": "{that cloudBasedConfig flowManager prefsServerDataSource}.options.prefsServerURL",
+                "priority": "after:flowManager.prefsServerDataSource.default"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.base.json5"
+    ]
+}

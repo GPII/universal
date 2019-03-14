@@ -3,13 +3,13 @@
         "_id": "_design/views",
         "views": {
             "findPrefsSafeByGpiiKey": {
-                "map": "function(doc) {if (doc.type === 'gpiiKey') emit(doc._id, {'_id': doc.prefsSafeId, 'gpiiKey': doc})}"
+                "map": "function(doc) {\n  if (doc.type === 'gpiiKey') {\nvar record = { gpiiKey: doc};\nif (doc.prefsSafeId) { record._id = doc.prefsSafeId; };\nemit(doc._id, record);\n}\n}"
             },
             "findClientByOauth2ClientId": {
-                "map": "function(doc) {if (doc.type === 'clientCredential' && doc.revoked === false) emit(doc.oauth2ClientId, {'_id': doc.clientId, 'clientCredential': doc})}"
+                "map": "function(doc) {\n if (doc.type === 'clientCredential' && doc.revoked === false) {\n var record = { clientCredential: doc };\n if (doc.clientId) {\n record._id = doc.clientId;\n }\n emit(doc.oauth2ClientId, record);\n} \n}"
             },
             "findAuthorizationByAccessToken": {
-                "map": "function(doc) {if (doc.type === 'gpiiAppInstallationAuthorization' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'authorization': doc})}}"
+                "map": "function(doc) {\n if (doc.type === 'gpiiAppInstallationAuthorization' && doc.revoked === false) {\n var record = { authorization: doc };\n if (doc.clientId) {\n record._id = doc.clientId;\n } \n emit(doc.accessToken, record);\n }\n }"
             },
             "findRelatedDocsForPrefsSafe": {
                 "map": "function(doc) {if (doc.type === 'gpiiKey' || doc.type === 'gpiiCloudSafeCredential') emit(doc.prefsSafeId, null)}"

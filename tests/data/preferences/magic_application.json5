@@ -1,0 +1,35 @@
+{
+    "flat": {
+        "name": "MAGic application settings.",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.magic": {
+                        "mag.caretbutton": 1,
+                        "mag.colorbutton": 1,
+                        "mag.cursorbutton": 1,
+                        "mag.Focus Enhancement Enabled": 1,
+                        // This may be problematic, as it is associated with a common term.
+                        "mag.size": 2,
+                        "mag.speechbutton": 0,
+                        "mag.splitlocation": 2,
+                        "mag.splitsize": 0,
+                        "mag.splitbordercolor": 9,
+                        "mag.splitframesize": 5,
+                        "mag.splitwindowwidth": 20,
+                        // This may be problematic, as it is associated with a common term.
+                        "mag.startmagnified": 1,
+                        "mag.typeechobutton": 1,
+                        "mag.viewtype": 1,
+                        "Options.SkipILM": 1,
+                        "scheme.Color_Scheme": "Grayscale (Inverted)+Color",
+                        // This may be problematic, as it is associated with a common term (crosshairs).
+                        "scheme.Mouse_Scheme": "Scope When Moving+Mouse"
+                    },
+                    "http://registry.gpii.net/applications/com.freedomscientific.magic/enabled": true
+                }
+            }
+        }
+    }
+}

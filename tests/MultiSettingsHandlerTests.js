@@ -65,4 +65,4 @@ module.exports = gpii.test.bootstrap({
     configName: "gpii.tests.multiSH.config",
     configPath: "%gpii-universal/tests/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
-    module, require, __dirname);
+    module, require, gpii.test.runSnapshotTestDefs);

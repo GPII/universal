@@ -1,0 +1,29 @@
+/**
+ * This configuration is the production version of `gpii.config.untrusted.development.dynamicDR.manualTesting`.
+ * It runs the entire system locally under the untrusted Flow Manager architecture and includes an extra feature
+ * that resets the system on system startup. See documentation/ResetComputer.md.
+ *
+ * It starts these servers:
+ * 1. Untrusted Local Flow Manager on port 8081
+ * 2. Cloud Based Flow Manager and Preferences Server on port 8084
+ * 3. CouchDB on port 25984
+ *
+ * * The following components are running:
+ * ** Auth Server
+ * ** Flat MatchMaker
+ * ** Cloud Based Flow Manager
+ * ** Dynamic Device Reporter
+ * ** Untrusted Local Flow Manager
+ * ** MatchMaker Framework
+ * ** Ontology Handler
+ * ** Preferences Server
+ * ** Solutions Registry (reading registry from file)
+ * ** gpii-couchdb-test-harness
+ */
+{
+    "type": "gpii.config.untrusted.production.dynamicDR.manualTesting",
+    "mergeConfigs": [
+        "%flowManager/configs/gpii.flowManager.config.suppressHttpEndpoints.base.json5",
+        "%gpii-universal/gpii/configs/gpii.config.untrusted.development.dynamicDR.manualTesting.json5"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "type": "gpii.tests.acceptance.untrusted.suppressHttpEndpoints.config",
+    "options": {
+        "distributeOptions": {
+            "acceptance.suppressHttpEndpoints": {
+                "record": true,
+                "target": "{that gpii.flowManager.local}.options.suppressHttpEndpoints"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%gpii-universal/gpii/configs/shared/gpii.config.untrusted.development.local.json5"
+    ]
+}

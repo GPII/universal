@@ -8,7 +8,7 @@
         "gradeNames": "gpii.test.integration.mockHolder.windows"
     },
     "mergeConfigs": [
-        "%gpii-universal/gpii/configs/gpii.config.untrusted.development.json5"
+        "%gpii-universal/gpii/configs/shared/gpii.config.untrusted.development.json5"
     ],
     "require": [
         "%gpii-universal/gpii/node_modules/testing/src/Mocks.js"
