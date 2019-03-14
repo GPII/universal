@@ -1,0 +1,47 @@
+// # Oliver.json5
+//
+// This preference set changes the Windows 10 OSK preferences settings.
+//
+// ## Testing
+//
+// This changes the following settings from the system:
+//     + ClickSound: Disable click sound.
+//     + ShowPositionKeys: Disable OSK position keys.
+//     + ShowNumPad: Shows numeric pad.
+//     + KeyPressMode: Hover over keys.
+//     + HoverPeriod: 1.5 seconds.
+//     + ScanInterval: 1.5 seconds.
+//     + UseDevice: Don't use a gaming device for key scanning.
+//     + UseKB: Don't use keyboard key for key scanning.
+//     + ScanKey: Set "F2" as scan key.
+//     + UseMouse: Use mouse click to scan keys.
+//     + UseTextPrediction: Disable text prediction.
+//     + InsertSpace: Disable space insertion after predicted word.
+//
+{
+    "flat": {
+        "name": "oliver",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.onscreenKeyboard": {
+                        "ClickSound": 0,
+                        "ShowPositionKeys": 0,
+                        "ShowNumPad": 1,
+                        "KeyPressMode": 2,
+                        "HoverPeriod": 1500,
+                        "ScanInterval": 1500,
+                        "UseDevice": 0,
+                        "UseKB": 0,
+                        "ScanKey": 113,
+                        "UseMouse": 1,
+                        "UseTextPrediction": 0,
+                        "InsertSpace": 0,
+                        "Dock": 0
+                    }
+                }
+            }
+        }
+    }
+}

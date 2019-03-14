@@ -1,21 +1,3 @@
-// # Simon.json5
-//
-// This preference set changes the Windows 10 mouse preferences settings.
-//
-// ## Testing
-//
-// This changes the following settings from the system:
-//     + ScrollLines: Now scrolling scrolls a whole page per wheel movement.
-//     + ScrollRouting: Scroll now is passed directly to the app that is under the mouse
-//                      even if that window is not currently focused. This behavior only
-//                      works with Windows Store Apps and with Microsoft applications.
-//     + DoubleClickTime: Increases double click detection to 5 seconds.
-//     + EnableCursorShadow: Enable the cursor shadows.
-//     + ScrollChars: Number of character for horizontal  scroll changed to 10.
-//     + WindowsTrackingEnabled: Windows are now activated when mouse is overing over them.
-//     + AutoWinArrangement: Windows are not arranged when are dragged to the edge with the mouse.
-//     + SwapMouseButtons: Swaps right and left mouse buttons.
-//
 {
     "flat": {
         "name": "mike",
@@ -31,7 +13,14 @@
                         "ScrollChars": 10,
                         "WindowsTrackingEnabled": 1,
                         "AutoWinArrangement": 0,
-                        "SwapMouseButtons": 1
+                        "SwapMouseButtons": 1,
+                        "PointerSpeed": 15,
+                        "EnhancePrecision": true,
+                        "SnapToDefaultButton": 1,
+                        "HidePointer": 0,
+                        "MouseSonar": 1,
+                        "DoubleClickHeight": 32,
+                        "DoubleClickWidth": 32
                     }
                 }
             }
