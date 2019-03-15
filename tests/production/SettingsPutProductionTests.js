@@ -12,7 +12,7 @@ Requirements:
 ---
 
 Copyright 2015 Raising the Floor - International
-Copyright 2018, 2019 OCAD University
+Copyright 2018-2019 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
