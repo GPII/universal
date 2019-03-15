@@ -634,6 +634,18 @@ gpii.tests.windows.builtIn = [
                             "MachinePreferredUILanguages": "REG_SZ"
                         }
                     }
+                }],
+                "com.microsoft.windows.soundSentry": [{
+                    "settings": {
+                        "WindowsEffect": 2
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility\\SoundSentry",
+                        "dataTypes": {
+                            "WindowsEffect": "REG_DWORD"
+                        }
+                    }
                 }]
             },
             "gpii.windows.displaySettingsHandler": {
