@@ -8400,6 +8400,61 @@
             }
         ]
     },
+    "com.microsoft.windows.soundSentry": {
+        "name": "Windows 10 SoundSentry",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "capabilities": [
+        ],
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Accessibility\\SoundSentry",
+                    "dataTypes": {
+                        "WindowsEffect": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "WindowsEffect": {
+                        "schema": {
+                            "title": "SoundSentry",
+                            "description": "Selects the desired visual notification for sounds.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "No visual alert",
+                                "Flash the title of the active window",
+                                "Flash the active window",
+                                "Flash the entire screen"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                },
+                "inverseCapabilitiesTransformations": {
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
     "com.microsoft.windows.onscreenKeyboard": {
         "name": "Windows Built-in Onscreen Keyboard",
         "contexts": {
