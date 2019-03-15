@@ -100,7 +100,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.mainSequence", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.mainSequence", {
-    gradeNames: ["gpii.test.disruption.sequenceGrade"],
+    gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsGet.requests",
     sequenceElements: {
         mainSequence: {
@@ -128,7 +128,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.statusCode", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode", {
-    gradeNames: ["gpii.test.disruption.sequenceGrade"],
+    gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
     recordName: "accessTokenForm",
     expect: 1,
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsGet.requests",
@@ -155,7 +155,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.accessTokenResponse", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.accessTokenResponse", {
-    gradeNames: ["gpii.test.disruption.sequenceGrade"],
+    gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
     recordName: "accessTokenForm",
     expect: 4,
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsGet.requests",
@@ -168,7 +168,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.accessTokenRespon
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruptionsWithMissingGrantArgs", {
-    gradeNames: ["gpii.test.disruption.sequenceGrade"],
+    gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
     disruptions: [
         {
             name: "Attempt to get access token without sending client_id",
@@ -241,7 +241,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.settingsNoAccessTokenSequenc
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.settingsNoAccessTokenSequence", {
-    gradeNames: ["gpii.test.disruption.sequenceGrade"],
+    gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsGet.requests",
     sequenceElements: {
         mainSequence: {
@@ -269,7 +269,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.settingsWrongAccessTokenSequ
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.settingsWrongAccessTokenSequence", {
-    gradeNames: ["gpii.test.disruption.sequenceGrade"],
+    gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsGet.requests",
     sequenceElements: {
         mainSequence: {
@@ -362,7 +362,7 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
     // Successful use cases that request settings for a non-existent GPII key with proper access tokens granted via Resource Owner GPII key grant
     {
         testDef: {
-            name: "A successful workflow for retrieving settings for an existing GPII key",
+            name: "A successful workflow for retrieving settings for a non-existent GPII key",
 
             // The options below are for sending /access_token request
             client_id: "pilot-computer",

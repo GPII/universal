@@ -34,7 +34,7 @@ gpii.loadTestingSupport();
 fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
 require("../shared/DevelopmentTestDefs.js");
-require("./Common.js");
+require("./ProductionTestsUtils.js");
 
 // Flowmanager tests for:
 // /user/%gpiiKey/login and /user/%gpiiKey/logout (as defined in gpii.tests.development.testDefs),

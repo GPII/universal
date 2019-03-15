@@ -1,5 +1,5 @@
 /**
-Tests for deleting  test gpii keys and 'user' prefs safe.
+Tests for deleting test gpii keys and 'user' prefs safe.
 
 Copyright 2019 OCAD University
 
@@ -21,7 +21,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
-require("./Common.js");
+require("./ProductionTestsUtils.js");
 
 fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
     gradeNames: ["fluid.test.sequenceElement"],
@@ -32,37 +32,37 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
             args: [null, { port: "5984" }]
         }, {
             event: "{getSettingsUserKey}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testGetForDeletion"
+            listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion"
         }, {
             func: "{getSettingsUserPrefsSafe}.send",
             args: [null, { port: "5984" }]
         }, {
             event: "{getSettingsUserPrefsSafe}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testGetForDeletion"
+            listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion"
         }, {
             func: "{getGpiiKeyNoPrefsSafe}.send",
             args: [null, { port: "5984" }]
         }, {
             event: "{getGpiiKeyNoPrefsSafe}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testGetForDeletion"
+            listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion"
         }, {
-            funcName: "gpii.tests.productionConfigTesting.sendPrefsSafeId",
+            funcName: "gpii.tests.productionConfigTesting.getPrefsSafeDoc",
             args: ["{getGpiiKeyNoPrefsSafePrefsSafe}", "{getGpiiKeyNoPrefsSafe}"]
         }, {
             event: "{getGpiiKeyNoPrefsSafePrefsSafe}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testGetForDeletion"
+            listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion"
         }, {
             func: "{getNonExistentGpiiKey}.send",
             args: [null, { port: "5984" }]
         }, {
             event: "{getNonExistentGpiiKey}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testGetForDeletion"
+            listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion"
         }, {
-            funcName: "gpii.tests.productionConfigTesting.sendPrefsSafeId",
+            funcName: "gpii.tests.productionConfigTesting.getPrefsSafeDoc",
             args: ["{getNonExistentGpiiKeyPrefsSafe}", "{getNonExistentGpiiKey}"]
         }, {
             event: "{getNonExistentGpiiKeyPrefsSafe}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testGetForDeletion"
+            listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion"
         }, {
             funcName: "gpii.tests.productionConfigTesting.bulkDelete",
             args: [
@@ -140,7 +140,7 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
                 port: "5984",
                 hostname: "couchdb",
 
-                // set at gpii.tests.productionConfigTesting.sendPrefsSafeId()
+                // set at gpii.tests.productionConfigTesting.getPrefsSafeDoc()
                 path: null,
 
                 method: "GET",
@@ -166,7 +166,7 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
                 port: "5984",
                 hostname: "couchdb",
 
-                // set at gpii.tests.productionConfigTesting.sendPrefsSafeId()
+                // set at gpii.tests.productionConfigTesting.getPrefsSafeDoc()
                 path: null,
 
                 method: "GET",
@@ -189,7 +189,7 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
     sequenceGrade: "gpii.tests.productionConfigTesting.deleteRecordsSequence"
 }];
 
-gpii.tests.productionConfigTesting.sendPrefsSafeId = function (prefsSafeRequest, gpiiKeyRequest) {
+gpii.tests.productionConfigTesting.getPrefsSafeDoc = function (prefsSafeRequest, gpiiKeyRequest) {
     var gpiiKeyToRemove = gpiiKeyRequest.options.docToRemove;
     if (gpiiKeyToRemove && gpiiKeyToRemove.prefsSafeId) {
         prefsSafeRequest.options.path = "/gpii/" + gpiiKeyToRemove.prefsSafeId;

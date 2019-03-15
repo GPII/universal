@@ -95,7 +95,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.requests", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.mainSequence", {
-    gradeNames: ["gpii.test.disruption.sequenceGrade"],
+    gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsPut.requests",
     sequenceElements: {
         mainSequence: {
@@ -123,7 +123,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutNoAccessTokenSequ
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNoAccessTokenSequence", {
-    gradeNames: ["gpii.test.disruption.sequenceGrade"],
+    gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsPut.requests",
     sequenceElements: {
         settingsPutNoAccessTokenSequence: {
@@ -151,7 +151,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutWrongAccessTokenS
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutWrongAccessTokenSequence", {
-    gradeNames: ["gpii.test.disruption.sequenceGrade"],
+    gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsPut.requests",
     sequenceElements: {
         settingsPutWrongAccessTokenSequence: {
@@ -397,7 +397,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.updateSnapsetRequests", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.updateSnapsetFailure", {
-    gradeNames: ["gpii.test.disruption.sequenceGrade"],
+    gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsPut.updateSnapsetRequests",
     sequenceElements: {
         updateSnapsetSequence: {

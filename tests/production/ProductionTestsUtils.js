@@ -26,7 +26,7 @@ gpii.tests.productionConfigTesting.config = {
 
 // Grade for "disruptions" that are also proper sequence grades.  Use the
 // standard server sequence
-fluid.defaults("gpii.test.disruption.sequenceGrade", {
+fluid.defaults("gpii.test.disruption.settings.sequenceGrade", {
     gradeNames: ["gpii.test.disruption", "gpii.test.standardServerSequenceGrade"]
 });
 
@@ -98,33 +98,7 @@ gpii.tests.productionConfigTesting.testResponse = function (data, request) {
     );
 };
 
-gpii.tests.productionConfigTesting.testAccessResponse = function (data, request) {
-    var token = JSON.parse(data);
-    var auth = "Bearer " + token.access_token;
-    request.options.stashedAuth = auth;
-
-    gpii.tests.productionConfigTesting.testStatusCode(data, request);
-    jqUnit.assertNotNull("Checking 'access_token'", token.access_token);
-    jqUnit.assertNotNull("Checking 'expiresIn'", token.expiresIn);
-    jqUnit.assertEquals("Checking 'token_type'",  "Bearer", token.token_type);
-};
-
-gpii.tests.productionConfigTesting.testLifecycleResponse = function (data, request) {
-    gpii.tests.productionConfigTesting.testStatusCode(data, request);
-
-    var lifeCycle = JSON.parse(data);
-    jqUnit.assertEquals(
-        "Checking lifeCycle user '" + gpii.tests.productionConfigTesting.carlaKey + "'",
-        gpii.tests.productionConfigTesting.carlaKey,
-        lifeCycle.gpiiKey
-    );
-    // These checks based on
-    // https://github.com/GPII/universal/blob/master/documentation/FlowManager.md#get-lifecycle-instructions-from-cloud-based-flow-manager-get-gpiikeysettingsdevice
-    jqUnit.assertNotNull("Checking 'solutionsRegistryEntries'", lifeCycle.solutionsRegistryEntries);
-    jqUnit.assertNotNull("Checking 'matchMakerOutput'", lifeCycle.matchMakerOutput);
-};
-
-gpii.tests.productionConfigTesting.testGetForDeletion = function (data, request) {
+gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion = function (data, request) {
     var expected = request.options.expectedStatusCodes;
     var actual = request.nativeResponse.statusCode;
     jqUnit.assertNotEquals(

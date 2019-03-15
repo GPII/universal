@@ -21,7 +21,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
-require("./Common.js");
+require("./ProductionTestsUtils.js");
 
 // Tests that add 'user' preferences to the data base
 fluid.defaults("gpii.tests.productionConfigTesting.addUserSettings", {

@@ -40,7 +40,7 @@ fluid.registerNamespace("gpii.test.cloudBased.oauth2");
  * ========================================================================
  */
 
-require("./Common.js");
+require("./ProductionTestsUtils.js");
 require("../shared/FlowManagerSettingsGetTestDefs.js");
 
 gpii.loadTestingSupport();
