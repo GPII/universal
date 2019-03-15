@@ -4835,14 +4835,12 @@
                             "description": "Sets the wallpaper style.",
                             "enum": [
                                 0,
-                                0,
                                 2,
                                 6,
                                 10,
                                 22
                             ],
                             "enumLabels": [
-                                "None",
                                 "None",
                                 "Stretch",
                                 "Fill",
