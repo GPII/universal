@@ -68,7 +68,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.requests", {
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.mainSequence", {
     gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
-        { funcName: "fluid.log", args: ["main sequence hit"]},
+        { funcName: "fluid.log", args: ["Flowmanager get settings main sequence..."]},
         {
             funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
             args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
@@ -114,7 +114,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.mainSequence", {
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.statusCode", {
     gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
-        { funcName: "fluid.log", args: ["status code sequence hit"]},
+        { funcName: "fluid.log", args: ["Flowmanager rejected get settings access token sequence..."]},
         {
             funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
             args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
@@ -143,15 +143,18 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode", {
 // For successful test cases that are accepted by /access_token endpoint
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.accessTokenResponse", {
     gradeNames: ["fluid.test.sequenceElement"],
-    sequence: [{
-        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
-        args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
-    },
-    {
-        event: "{accessTokenRequest}.events.onComplete",
-        listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse",
-        args: ["{arguments}.0", "{accessTokenRequest}"]
-    }]
+    sequence: [
+        { funcName: "fluid.log", args: ["Flowmanager accepted get settings access token sequence..."]},
+        {
+            funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
+            args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
+        },
+        {
+            event: "{accessTokenRequest}.events.onComplete",
+            listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse",
+            args: ["{arguments}.0", "{accessTokenRequest}"]
+        }
+    ]
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.accessTokenResponse", {
@@ -228,7 +231,7 @@ gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs = [{
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.settingsNoAccessTokenSequence", {
     gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
-        { funcName: "fluid.log", args: ["no access token sequence hit"]},
+        { funcName: "fluid.log", args: ["Flowmanager rejected get settings sequence -- no access token..."]},
         {
             func: "{settingsRequest}.send"
         },
@@ -255,7 +258,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.settingsNoAccessT
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.settingsWrongAccessTokenSequence", {
     gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
-        { funcName: "fluid.log", args: ["wrong access token sequence hit"]},
+        { funcName: "fluid.log", args: ["Flowmanager rejected get settings sequence -- wrong access token..."]},
         {
             funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
             args: ["{settingsRequest}", "a_wrong_access_token"]

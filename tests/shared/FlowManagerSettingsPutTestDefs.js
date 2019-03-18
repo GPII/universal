@@ -54,7 +54,7 @@ gpii.tests.cloud.oauth2.settingsPut.verifyUpdateResponse = function (responseTex
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.mainSequence", {
     gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
-        { funcName: "fluid.log", args: ["main sequence hit"]},
+        { funcName: "fluid.log", args: ["Flowmanager put settings main sequence..."]},
         {
             funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
             args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
@@ -110,7 +110,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.mainSequence", {
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutNoAccessTokenSequence", {
     gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
-        { funcName: "fluid.log", args: ["status code sequence hit"]},
+        { funcName: "fluid.log", args: ["Flowmanager rejected put settings sequence -- no access token..."]},
         {
             func: "{settingsPutRequest}.send"
         },
@@ -137,7 +137,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNoAcce
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutWrongAccessTokenSequence", {
     gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
-        { funcName: "fluid.log", args: ["no access token sequence hit"]},
+        { funcName: "fluid.log", args: ["Flowmanager rejected put settings sequence -- wrong access token..."]},
         {
             funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
             args: ["{settingsPutRequest}", "a_wrong_access_token"]
@@ -310,7 +310,7 @@ gpii.tests.cloud.oauth2.settingsPut.updateSnapset.device = {
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.updateSnapsetSequence", {
     gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
-        { funcName: "fluid.log", args: ["update snapset sequence hit"]},
+        { funcName: "fluid.log", args: ["Flowmanager rejection of 'update-snapset' sequence..."]},
         {
             func: "{accessTokenUpdateSnapsetRequest}.send",
             args: [gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaTokenRequestPayload]
