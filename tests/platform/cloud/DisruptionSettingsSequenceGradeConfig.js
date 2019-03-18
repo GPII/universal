@@ -15,7 +15,7 @@ fluid.registerNamespace("gpii.tests.cloud.oauth2.settings");
 
 gpii.tests.cloud.oauth2.settings.config = {
     configName: "gpii.config.cloudBased.development",
-    configPath: "%gpii-universal/gpii/configs"
+    configPath: "%gpii-universal/gpii/configs/shared"
 };
 
 // Grade for "disruptions" that are also proper sequence grades.  Use the grade
