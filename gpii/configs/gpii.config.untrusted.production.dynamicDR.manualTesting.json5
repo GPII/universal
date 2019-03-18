@@ -1,7 +1,6 @@
 /**
  * This configuration is the production version of `gpii.config.untrusted.development.dynamicDR.manualTesting`.
- * It runs the entire system locally under the untrusted Flow Manager architecture and includes an extra feature
- * that resets the system on system startup. See documentation/ResetComputer.md.
+ * It runs the entire system locally under the untrusted Flow Manager architecture.
  *
  * It starts these servers:
  * 1. Untrusted Local Flow Manager on port 8081
