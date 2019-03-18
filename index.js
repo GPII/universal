@@ -21,6 +21,7 @@ var fluid = require("infusion"),
 fluid.module.register("gpii-universal", __dirname, require);
 
 // TODO: proper module loader will eliminate these requires (FLUID-5521)
+require("./gpii/node_modules/solutionsRegistry");
 require("./gpii/node_modules/transformer");
 require("./gpii/node_modules/deviceReporter");
 require("./gpii/node_modules/lifecycleManager");
