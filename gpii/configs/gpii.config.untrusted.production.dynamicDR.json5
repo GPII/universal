@@ -1,6 +1,6 @@
 /**
  * This configuration is the production version of `gpii.config.untrusted.development.dynamicDR`. It runs
- * local Untrusted Flow Manager locally.
+ * the local Untrusted Flow Manager locally and supresses the 'login', 'logout' and 'proximityTriggered' HTTP endpoints.
  *
  * * The following components are running on the local machine:
  * ** Untrusted Local Flow Manager
