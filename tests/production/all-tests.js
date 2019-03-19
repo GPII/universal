@@ -29,6 +29,12 @@ var testIncludes = [
     "./DeleteUserSettingsFromCouchTests.js"
 ];
 
-fluid.each(testIncludes, function (path) {
-    require(path);
-});
+try {
+    fluid.each(testIncludes, function (path) {
+        require(path);
+    });
+}
+catch (err) {
+    // always run database cleanup
+    require("./DeleteUserSettingsFromCouchTests.js");
+}
