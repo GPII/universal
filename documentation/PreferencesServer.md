@@ -393,7 +393,8 @@ returned:
 ```json
 {
     "isError": true,
-    "message": "Cannot lookup prefsSafe"
+    "errorCode": "GPII_ERR_NO_PREFSSAFE",
+    "message": "Missing prefssafe"
 }
 ```
 
@@ -462,7 +463,8 @@ If the safe with the specified `prefsSafeId` does not exist, the following error
 ```json
 {
     "isError": true,
-    "message": "Cannot lookup prefsSafe"
+    "errorCode": "GPII_ERR_NO_PREFSSAFE",
+    "message": "Missing prefssafe"
 }
 ```
 
