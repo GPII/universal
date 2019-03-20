@@ -34,8 +34,8 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
             event: "{getSettingsUserKey}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion"
         }, {
-            func: "{getSettingsUserPrefsSafe}.send",
-            args: [null, { port: "5984" }]
+            func: "gpii.tests.productionConfigTesting.getPrefsSafeDoc",
+            args: ["{getSettingsUserPrefsSafe}", "{getSettingsUserKey}" ]
         }, {
             event: "{getSettingsUserPrefsSafe}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion"
@@ -116,7 +116,10 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
             options: {
                 port: "5984",
                 hostname: "couchdb",
-                path: "/gpii/prefsSafe-os_gnome",
+
+                // set at gpii.tests.productionConfigTesting.getPrefsSafeDoc()
+                path: null,
+
                 method: "GET",
                 gpiiKey: "os_gnome",
                 expectedStatusCodes: [200, 404],
