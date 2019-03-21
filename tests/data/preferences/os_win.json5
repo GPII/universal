@@ -233,7 +233,9 @@
                         "Dock": 0
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.mirrorScreen": {
-                        "ScreenMirror": false
+                        "ScreenMirrorConfig": {
+                            "value": false
+                        }
                     }
                 }
             }

@@ -188,6 +188,18 @@ gpii.tests.journal.initialSettings = {
                     "functionName": "DoubleClickHeight"
                 }
             }
+        ],
+        "com.microsoft.windows.mirrorScreen": [
+            {
+                "settings": {
+                    "ScreenMirrorConfig": {
+                        "value": false
+                    }
+                },
+                "options": {
+                    "functionName": "ScreenMirror"
+                }
+            }
         ]
     }
 };
