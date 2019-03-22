@@ -6523,7 +6523,7 @@
                 // Make sure the colours are applied for custom themes.
                 "type": "gpii.windows.spiSettingsHandler.applyCustomTheme",
                 "themeFile": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}"
-            },
+            }
         ],
         "restore": [
             // Restore the high-contrast theme.
