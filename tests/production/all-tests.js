@@ -22,19 +22,11 @@ kettle.loadTestingSupport();
 fluid.require("%gpii-universal", require);
 
 var testIncludes = [
-    "./AddUserSettingsToCouchTests.js",
     "./CloudStatusProductionTests.js",
     "./SettingsGetProductionTests.js",
-    "./SettingsPutProductionTests.js",
-    "./DeleteUserSettingsFromCouchTests.js"
+    "./SettingsPutProductionTests.js"
 ];
 
-try {
-    fluid.each(testIncludes, function (path) {
-        require(path);
-    });
-}
-catch (err) {
-    // always run database cleanup
-    require("./DeleteUserSettingsFromCouchTests.js");
-}
+fluid.each(testIncludes, function (path) {
+    require(path);
+});

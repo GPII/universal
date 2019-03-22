@@ -1,4 +1,3 @@
-#!/bin/sh -ex
 #
 # This scripts deploys an environment for end-to-end tests based on Docker
 # containers. It was initially developed to support CI.
@@ -45,6 +44,7 @@ BUILD_DATA_DIR="$UNIVERSAL_DIR/build/dbData/snapset"
 DATALOADER_COUCHDB_URL="http://couchdb:${COUCHDB_PORT}/gpii"
 DATASOURCE_HOSTNAME="http://couchdb"
 DATALOADER_CMD="/app/scripts/deleteAndLoadSnapsets.sh"
+PRODTESTS_CMD="npm run test:productionConfig"
 
 GPII_PREFERENCES_CONFIG="gpii.config.preferencesServer.standalone.production"
 GPII_PREFERENCES_PORT=9081
@@ -101,4 +101,4 @@ docker run -d -p $GPII_FLOWMANAGER_PORT:$GPII_FLOWMANAGER_PORT --name flowmanage
 wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 --post-data "username=carla&password=dummy&client_id=pilot-computer&client_secret=pilot-computer-secret&grant_type=password" $ACCESS_TOKEN_URL
 
 # Start the container to run production config tests
-docker run --name productionConfigTests --link flowmanager --link couchdb -e GPII_CLOUD_URL=$GPII_CLOUD_URL $UNIVERSAL_IMAGE node tests/production/all-tests.js
+docker run --name productionConfigTests --link flowmanager --link couchdb -e GPII_CLOUD_URL=$GPII_CLOUD_URL $UNIVERSAL_IMAGE $PRODTESTS_CMD
