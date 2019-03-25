@@ -33,7 +33,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
-require("../shared/DevelopmentTestDefs.js");
+require("../shared/DevelopmentTestDefsNEW.js");
 require("./ProductionTestsUtils.js");
 
 // Flowmanager tests for:
@@ -66,9 +66,15 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                     expectedPayload: {"isReady": true}
                 }
             }
-        }
+        },
+        sequenceGrade: "gpii.tests.productionConfigTesting.cloudStatusSequence"
     });
-    gpii.test.push(testDef.sequence, [
+    return testDef;
+});
+
+fluid.defaults("gpii.tests.productionConfigTesting.cloudStatus", {
+    gradeNames: ["fluid.test.sequenceElement"],
+    sequence: [
         { funcName: "fluid.log", args: ["Cloud status tests:"]},
         {
             func: "{healthRequest}.send"
@@ -82,8 +88,21 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
             listener: "gpii.tests.productionConfigTesting.testResponse"
         },
         { funcName: "fluid.log", args: ["Cloud status tests end"]}
-    ]);
-    return testDef;
+    ]
+});
+
+fluid.defaults("gpii.tests.productionConfigTesting.cloudStatusSequence", {
+    gradeNames: ["gpii.test.standardServerSequenceGrade"],
+    sequenceElements: {
+        loginLogout: {
+            gradeNames: "gpii.tests.development.loginLogout",
+            priority: "after:startServer"
+        },
+        cloudStatus: {
+            gradeNames: "gpii.tests.productionConfigTesting.cloudStatus",
+            priority: "after:loginLogout"
+        }
+    }
 });
 
 gpii.test.runServerTestDefs(gpii.tests.productionConfigTesting.testDefs);
