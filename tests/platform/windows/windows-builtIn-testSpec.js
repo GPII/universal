@@ -544,7 +544,8 @@ gpii.tests.windows.builtIn = [
                             "CaretWidth": "REG_DWORD"
                         }
                     }
-                }, { // Narrator
+                }],
+                "com.microsoft.windows.Narrator": [{ // Narrator
                     "settings": {
                         "SpeechSpeed": 11,
                         "SpeechPitch": 4,
@@ -610,7 +611,8 @@ gpii.tests.windows.builtIn = [
                             "DetailedFeedback": "REG_DWORD"
                         }
                     }
-                }, { // TypingEnhancement
+                }],
+                "com.microsoft.windows.typingEnhancement": [{ // TypingEnhancement
                     "settings": {
                         "EnableAutocorrection": 1,
                         "EnableSpellchecking": 1,
