@@ -16,6 +16,7 @@
     "http://registry\\.gpii\\.net/common/invertImages": "display.screenEnhancement.invertImages",
     "http://registry\\.gpii\\.net/common/invertColours": "display.screenEnhancement.-provisional-invertColours",
     "http://registry\\.gpii\\.net/common/cursorSize": "display.screenEnhancement.cursorSize",
+    "http://registry\\.gpii\\.net/common/cursorThickness": "display.screenEnhancement.cursorThickness",
     "http://registry\\.gpii\\.net/common/highContrast/enabled": "display.screenEnhancement.-provisional-highContrast/enabled",
     "http://registry\\.gpii\\.net/common/highContrastTheme": "display.screenEnhancement.-provisional-highContrastTheme",
     "http://registry\\.gpii\\.net/common/mouseTrailing": "display.screenEnhancement.mouseTrailing",

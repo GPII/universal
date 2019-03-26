@@ -64,6 +64,15 @@
             "maximum": 1,
             "multipleOf": 0.1
         },
+        "http://registry.gpii.net/common/cursorThickness": {
+            "title": "Cursor Size",
+            "description": "Cursor size",
+            "type": "number",
+            "default": 1,
+            "minimum": 1,
+            "maximum": 20,
+            "multipleOf": 1
+        },
         "http://registry.gpii.net/common/cursorSpeed": {
             "title": "Cursor speed",
             "description": "The speed of the mouse cursor", // needs to be defined

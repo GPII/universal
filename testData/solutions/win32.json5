@@ -5156,6 +5156,9 @@
                     "UpArrow": {},
                     "Wait": {}
                 },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/cursorSize"
+                ],
                 "capabilitiesTransformations": {
                     "AppStarting": {
                         "transform": {
@@ -6084,6 +6087,40 @@
                         }
                     ]
                 }
+            },
+            "configureCursorThickness": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Desktop",
+                    "dataTypes": {
+                        "CaretWidth": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "CaretWidth": {
+                        "title": "Text cursor thickness",
+                        "description": "Specifies the thickness of the text cursor.",
+                        "type": "integer",
+                        "default": 1,
+                        "minimum": 1,
+                        "maximum": 20
+                    }
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/cursorThickness"
+                ],
+                "capabilitiesTransformations": {
+                    "CaretWidth": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorThickness"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/cursorThickness": "CaretWidth"
+                }
             }
         },
         "launchHandlers": {
@@ -6115,13 +6152,15 @@
             "launchers.launcher"
         ],
         "configure": [
-            "settings.configure"
+            "settings.configure",
+            "settings.configureCursorThickness"
         ],
         "restore": [
             "settings.configure",
             {
                 "type": "gpii.windows.spiSettingsHandler.updateCursors"
-            }
+            },
+            "settings.configureCursorThickness"
         ],
         "isInstalled": [
             {
@@ -9073,6 +9112,313 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.touchScreen": {
+        "name": "Windows 10 touch screen settings",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configureContactVisualization": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETCONTACTVISUALIZATION",
+                    "setAction": "SPI_SETCONTACTVISUALIZATION",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "VisualScreenTouchesConfig": {
+                        "schema": {
+                            "title": "Show screen touches",
+                            "description": "Shows visual feedback around the point when I touch the screen.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "VisualScreenTouchesConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchScreen.ShowScreenTouches",
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchScreen.ShowBolderScreenTouches",
+                                    "true": 2,
+                                    "false": 1
+                                }
+                            },
+                            "false": 0,
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchScreen.ShowScreenTouches": "VisualScreenTouchesConfig.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchScreen.ShowBolderScreenTouches": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchScreen.ShowScreenTouches",
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.valueMapper",
+                                    "defaultInputPath": "VisualScreenTouchesConfig.value",
+                                    "match": {
+                                        "2": true
+                                    },
+                                    "noMatch": {
+                                        "outputValue": false
+                                    }
+                                }
+                            },
+                            "false": 0,
+                            "outputPath": "value"
+                        }
+                    }
+                }
+            },
+            "configureGestureVisualization": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETGESTUREVISUALIZATION",
+                    "setAction": "SPI_SETGESTUREVISUALIZATION",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "VisualScreenGesturesConfig": {
+                        "schema": {
+                            "title": "Show screen gestures",
+                            "description": "Specifies the different UI feedback gestures to enable.",
+                            "enum": [
+                                0,
+                                31,
+                                1,
+                                2,
+                                4,
+                                8,
+                                16
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "On",
+                                "Tap",
+                                "DoubleTap",
+                                "PressAndTap",
+                                "PressAndHold",
+                                "RigthTap"
+                            ],
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "VisualScreenGesturesConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchScreen.ShowScreenGestures",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                          "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchScreen.ShowScreenGestures": "VisualScreenGesturesConfig.value"
+                }
+            }
+        },
+        "configure": [
+            "settings.configureContactVisualization",
+            "settings.configureGestureVisualization"
+        ],
+        "restore": [
+            "settings.configureContactVisualization",
+            "settings.configureGestureVisualization"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.animations": {
+        "name": "Windows 10 animations",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configureAnimations": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETCLIENTAREAANIMATION",
+                    "setAction": "SPI_SETCLIENTAREAANIMATION",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "AnimationsEnabledConfig": {
+                        "schema": {
+                            "title": "Windows animations",
+                            "description": "Enables or disables showing Windows animations.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "AnimationsEnabledConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.animations.AnimationsEnabled",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                          "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.animations.AnimationsEnabled": "AnimationsEnabledConfig.value"
+                }
+            }
+        },
+        "configure": [
+            "settings.configureAnimations"
+        ],
+        "restore": [
+            "settings.configureAnimations"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.focus": {
+        "name": "Windows 10 focus settings",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configureFocusBorder": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Desktop",
+                    "dataTypes": {
+                        "FocusBorderHeight": "REG_DWORD",
+                        "FocusBorderWidth": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "FocusBorderHeight": {
+                        "title": "Focus Border Height",
+                        "description": "Specifies the focus border height.",
+                        "type": "integer",
+                        "default": 1,
+                        "enum": [
+                            1,
+                            2
+                        ],
+                        "enumLabels": [
+                            "1",
+                            "2"
+                        ]
+                    },
+                    "FocusBorderWidth": {
+                        "title": "Focus Border Width",
+                        "description": "Specifies the focus border width.",
+                        "type": "integer",
+                        "default": 1,
+                        "enum": [
+                            1,
+                            2
+                        ],
+                        "enumLabels": [
+                            "1",
+                            "2"
+                        ]
+                    }
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "FocusBorderHeight": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.focus.FocusBorder"
+                        }
+                    },
+                    "FocusBorderWidth": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.focus.FocusBorder"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.focus.FocusBorder": "FocusBorderHeight.value"
+                }
+            }
+        },
+        "configure": [
+            "settings.configureFocusBorder"
+        ],
+        "restore": [
+            "settings.configureFocusBorder"
         ],
         "isInstalled": [
             {
