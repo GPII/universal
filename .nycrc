@@ -78,7 +78,7 @@
     "!**/gpii/node_modules/ontologyHandler/src/ontologyHandler.js",
     "!**/gpii/node_modules/ontologyHandler/src/ontologyHandlerUtilities.js",
     "!**/gpii/node_modules/preferencesServer/index.js",
-    "!**/gpii/node_modules/preferencesServer/src/cloudSafeCredHandlers.js"
+    "!**/gpii/node_modules/preferencesServer/src/cloudSafeCredHandlers.js",
     "!**/gpii/node_modules/preferencesServer/src/preferencesGetHandler.js",
     "!**/gpii/node_modules/preferencesServer/src/preferencesPostHandler.js",
     "!**/gpii/node_modules/preferencesServer/src/preferencesPutHandler.js",

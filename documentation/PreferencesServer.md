@@ -560,6 +560,7 @@ suitable message will be returned.
 ```json
 {
     "isError": true,
+    "errorCode": "APPROPRIATE_ERROR_CODE",
     "message": "System error described here."
 }
 ```
