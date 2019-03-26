@@ -65,8 +65,8 @@
             "multipleOf": 0.1
         },
         "http://registry.gpii.net/common/cursorThickness": {
-            "title": "Cursor Size",
-            "description": "Cursor size",
+            "title": "Cursor Thickness",
+            "description": "The cursor thickness to be used",
             "type": "number",
             "default": 1,
             "minimum": 1,
