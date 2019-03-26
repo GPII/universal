@@ -33,7 +33,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
-require("../shared/DevelopmentTestDefsNEW.js");
+require("../shared/DevelopmentTestDefs.js");
 require("./ProductionTestsUtils.js");
 
 // Flowmanager tests for:
