@@ -418,6 +418,61 @@ gpii.tests.windows.builtIn = [
                             }
                         }
                     }
+                ],
+                "com.microsoft.windows.touchScreen": [
+                    {
+                        "settings": {
+                            "VisualScreenTouchesConfig": {
+                                "path": "pvParam",
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETCONTACTVISUALIZATION",
+                            "setAction": "SPI_SETCONTACTVISUALIZATION",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            },
+                            "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                        }
+                    },
+                    {
+                        "settings": {
+                            "VisualScreenGesturesConfig": {
+                                "path": "pvParam",
+                                "value": 31
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETGESTUREVISUALIZATION",
+                            "setAction": "SPI_SETGESTUREVISUALIZATION",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            },
+                            "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                        }
+                    }
+                ],
+                "com.microsoft.windows.animations": [
+                    {
+                        "settings": {
+                            "AnimationsEnabledConfig": {
+                                "path": "pvParam",
+                                "value": 0
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETCLIENTAREAANIMATION",
+                            "setAction": "SPI_SETCLIENTAREAANIMATION",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            },
+                            "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                        }
+                    }
                 ]
             },
             "gpii.windows.registrySettingsHandler": {
@@ -476,6 +531,17 @@ gpii.tests.windows.builtIn = [
                             "SizeWE": "REG_SZ",
                             "UpArrow": "REG_SZ",
                             "Wait": "REG_SZ"
+                        }
+                    }
+                }, { // cursor width
+                    "settings": {
+                        "CaretWidth": 7
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Desktop",
+                        "dataTypes": {
+                            "CaretWidth": "REG_DWORD"
                         }
                     }
                 }, { // Narrator
@@ -634,6 +700,20 @@ gpii.tests.windows.builtIn = [
                             "MachinePreferredUILanguages": "REG_SZ"
                         }
                     }
+                }],
+                "com.microsoft.windows.focus": [{
+                    "settings": {
+                        "FocusBorderWidth": 2,
+                        "FocusBorderHeight": 2
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Desktop",
+                        "dataTypes": {
+                            "FocusBorderHeight": "REG_DWORD",
+                            "FocusBorderWidth": "REG_DWORD"
+                        }
+                    }
                 }]
             },
             "gpii.windows.displaySettingsHandler": {
@@ -765,6 +845,54 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "functionName": "SolidColor"
+                    }
+                }]
+            }
+        }
+    }, {
+        name: "Testing os_win_visualTouches using default matchmaker",
+        gpiiKey: "os_win_visualTouches",
+        initialState: {},
+        settingsHandlers: {
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.touchScreen": [{
+                    "settings": {
+                        "VisualScreenTouchesConfig": {
+                            "path": "pvParam",
+                            "value": 1
+                        }
+                    },
+                    "options": {
+                        "getAction": "SPI_GETCONTACTVISUALIZATION",
+                        "setAction": "SPI_SETCONTACTVISUALIZATION",
+                        "uiParam": 0,
+                        "pvParam": {
+                            "type": "UINT"
+                        }
+                    }
+                }]
+            }
+        }
+    }, {
+        name: "Testing os_win_visualBolderTouches using default matchmaker",
+        gpiiKey: "os_win_visualBolderTouches",
+        initialState: {},
+        settingsHandlers: {
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.touchScreen": [{
+                    "settings": {
+                        "VisualScreenTouchesConfig": {
+                            "path": "pvParam",
+                            "value": 2
+                        }
+                    },
+                    "options": {
+                        "getAction": "SPI_GETCONTACTVISUALIZATION",
+                        "setAction": "SPI_SETCONTACTVISUALIZATION",
+                        "uiParam": 0,
+                        "pvParam": {
+                            "type": "UINT"
+                        }
                     }
                 }]
             }

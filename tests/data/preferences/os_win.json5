@@ -56,7 +56,8 @@
                         "UpArrow": "%SystemRoot%\\cursors\\up_l.cur",
                         "SizeNESW": "%SystemRoot%\\cursors\\size1_l.cur",
                         "SizeNWSE": "%SystemRoot%\\cursors\\size2_l.cur",
-                        "AppStarting": "%SystemRoot%\\cursors\\wait_l.cur"
+                        "AppStarting": "%SystemRoot%\\cursors\\wait_l.cur",
+                        "CaretWidth": 7
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.magnifier": {
                         "FollowFocus": 0,
@@ -231,6 +232,25 @@
                         "UseTextPrediction": 0,
                         "InsertSpace": 0,
                         "Dock": 0
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.touchScreen": {
+                        "VisualScreenTouchesConfig": {
+                            "path": "pvParam",
+                            "value": 1
+                        },
+                        "VisualScreenGesturesConfig": {
+                            "path": "pvParam",
+                            "value": 31
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.animations": {
+                        "AnimationsEnabledConfig": {
+                            "path": "pvParam",
+                            "value": 0
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.focus": {
+                        "FocusBorder": 2
                     }
                 }
             }

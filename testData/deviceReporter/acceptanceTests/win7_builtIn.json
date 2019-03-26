@@ -73,5 +73,17 @@
 
     {
         "id": "com.microsoft.windows.desktopBackgroundColor"
+    },
+
+    {
+        "id": "com.microsoft.windows.touchScreen"
+    },
+
+    {
+        "id": "com.microsoft.windows.animations"
+    },
+
+    {
+        "id": "com.microsoft.windows.focus"
     }
 ]
