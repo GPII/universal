@@ -731,7 +731,17 @@ gpii.tests.pspIntegration.testDefs = [
         ]
     }, {
         name: "GPII-3693: \"reset all\" does not corrupt PSPChannel's model",
-        expect: 9,
+        expect: 10,
+        "defaultSettings": {
+            "contexts": {
+                "gpii-default": {
+                    "preferences": {
+                        "http://registry.gpii.net/common/cursorSize": 0.5,
+                        "http://registry.gpii.net/common/volume": 0.75
+                    }
+                }
+            }
+        },
         sequence: [
             {
                 func: "{pspClient}.connect"
@@ -743,7 +753,10 @@ gpii.tests.pspIntegration.testDefs = [
             {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "modelChanged"]
+                args: ["{arguments}.0", "modelChanged", [
+                    "http://registry\\.gpii\\.net/common/cursorSize",
+                    "http://registry\\.gpii\\.net/common/volume"
+                ]]
             },
             {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
@@ -752,7 +765,11 @@ gpii.tests.pspIntegration.testDefs = [
             {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "modelChanged", ["http://registry\\.gpii\\.net/common/magnification"]]
+                args: ["{arguments}.0", "modelChanged", [
+                    "http://registry\\.gpii\\.net/common/cursorSize",
+                    "http://registry\\.gpii\\.net/common/volume",
+                    "http://registry\\.gpii\\.net/common/magnification"
+                ]]
             },
             {
                 func: "{resetRequest}.send"
@@ -766,7 +783,10 @@ gpii.tests.pspIntegration.testDefs = [
                 // When "noUser" keys back in, PSP client receives empty settingControls block.
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "modelChanged", []]
+                args: ["{arguments}.0", "modelChanged", [
+                    "http://registry\\.gpii\\.net/common/cursorSize",
+                    "http://registry\\.gpii\\.net/common/volume"
+                ]]
             },
             {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
@@ -775,7 +795,10 @@ gpii.tests.pspIntegration.testDefs = [
             {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "modelChanged", ["http://registry\\.gpii\\.net/common/cursorSize"]]
+                args: ["{arguments}.0", "modelChanged", [
+                    "http://registry\\.gpii\\.net/common/cursorSize",
+                    "http://registry\\.gpii\\.net/common/volume"
+                ]]
             }
         ]
     }

@@ -28,8 +28,10 @@ gpii.tests.pspIntegration.buildTestDefs = function (testDefs) {
                 "gpii.test.common.lifecycleManagerReceiver"
             ],
             config: {
-                configName: "gpii.tests.acceptance.linux.builtIn.config",
-                configPath: "%gpii-universal/tests/platform/linux/configs"
+                configName: "gpii.tests.acceptance.pspIntegration.config",
+                configPath: "%gpii-universal/tests/configs"
+                // configName: "gpii.tests.acceptance.linux.builtIn.config",
+                // configPath: "%gpii-universal/tests/platform/linux/configs"
             }
         }, testDef);
     });
