@@ -1,5 +1,5 @@
 /*!
-GPII Universal Tests
+GPII Universal Production Tests
 
 Copyright 2019 OCAD University
 
@@ -8,6 +8,9 @@ compliance with this License.
 
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
+
+WARNING:  Do not run these tests directly.  They are called from within the
+"vagrantCloudBasedContainers.sh" after it has initialized the environment.
 */
 
 "use strict";
