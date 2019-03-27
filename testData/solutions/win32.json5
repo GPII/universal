@@ -6149,7 +6149,8 @@
         "stop": [],
         "update": [
             "settings.configure",
-            "start"
+            "start",
+            "settings.configureCursorThickness"
         ],
         "isRunning": [
             "launchers.launcher"
