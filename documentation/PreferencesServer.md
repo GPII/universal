@@ -512,6 +512,7 @@ with the contents of the system error:
 ```json
 {
     "isError": true,
+    "errorCode": "GPII_ERR_APPLICABLE_MESSAGE",
     "message": "System error described here."
 }
 ```
@@ -686,11 +687,12 @@ In the event of any system error, an error payload with a suitable `message` is 
 ```json
 {
     "isError": true,
+    "errorCode": "GPII_ERR_APPLICABLE_MESSAGE",
     "message": "System error described here."
 }
 ```
 
-### PUT /add-cloud-credential/:prefsSafeId
+### PUT /add-cloud-credentials/:prefsSafeId
 
 This endpoint will add a new username and password credential set to the preferences safe whose id is specified
 in the URL parameter `prefsSafeId`. The body is a JSON payload containing the username and password for the new
@@ -698,7 +700,7 @@ credential set.
 
 #### Example PUT
 
-URL: `http://preferences.gpii.net/add-cloud-credential/prefsSafe-1`
+URL: `http://preferences.gpii.net/add-cloud-credentials/prefsSafe-1`
 
 The above indicates that the credentials will be added to preferences safe with `id` `prefsSafe-1`.
 
@@ -708,6 +710,28 @@ putBody:
 {
     "username": "NewLoginUsername",
     "password": "v3ry$ecu4e"
+}
+```
+
+Example successful return payload:
+
+```json
+{
+    "_id": "8f3085a7-b65b-4648-9a78-8ac7de766997"
+    "type": "gpiiCloudSafeCredential",
+    "schemaVersion": "0.1",
+    "prefsSafeId": "prefsSafe-1",
+    "gpiiExpressUserId": "org.couch.db.user:prefs1user",
+}
+```
+
+In the event of any system error, an error payload with a suitable `message` is returned.
+
+```json
+{
+    "isError": true,
+    "errorCode": "GPII_ERR_APPLICABLE_MESSAGE",
+    "message": "System error described here."
 }
 ```
 
@@ -746,6 +770,7 @@ If the username and password do not match a record the following error is return
 ```json
 {
     "isError": true,
+    "errorCode": "GPII_ERR_UNLOCKING_PREFSSAFE_CREDENTIALS",
     "message": "Unable to unlock a Preferences Safe with the supplied credentials."
 }
 ```
