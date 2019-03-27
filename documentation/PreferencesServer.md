@@ -717,11 +717,11 @@ Example successful return payload:
 
 ```json
 {
-    "_id": "8f3085a7-b65b-4648-9a78-8ac7de766997"
+    "_id": "8f3085a7-b65b-4648-9a78-8ac7de766997",
     "type": "gpiiCloudSafeCredential",
     "schemaVersion": "0.1",
     "prefsSafeId": "prefsSafe-1",
-    "gpiiExpressUserId": "org.couch.db.user:prefs1user",
+    "gpiiExpressUserId": "org.couch.db.user:prefs1user"
 }
 ```
 
