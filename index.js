@@ -89,7 +89,7 @@ gpii.start = function (options) {
  * Stops the GPII instance that was started with gpii.start()
  */
 gpii.stop = function () {
-    var configs = gpii.queryConfigs();
+    var configs = gpii.queryConfigs().reverse();
     fluid.each(configs, function (config) {
         config.destroy();
     });
