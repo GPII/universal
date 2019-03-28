@@ -6466,7 +6466,7 @@
                                 "black-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcwhite.theme",
                                 "white-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcblack.theme",
                                 "yellow-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc1.theme",
-                                "black-yellow": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\yellowOnBlack.theme",
+                                "black-yellow": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\blackOnYellow.theme",
                                 "lime-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc2.theme",
                                 "black-brown": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\blackOnBrown.theme",
                                 "grey-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
