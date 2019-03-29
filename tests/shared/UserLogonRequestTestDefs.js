@@ -12,9 +12,9 @@
 
 "use strict";
 
-var fluid  = require("infusion"),
+var fluid = require("infusion"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
-    gpii   = fluid.registerNamespace("gpii");
+    gpii = fluid.registerNamespace("gpii");
 
 fluid.require("%gpii-universal");
 

@@ -69,9 +69,9 @@ fluid.defaults("gpii.tests.productionConfigTesting.settingsPut.testCaseHolder", 
             source: "{that}.options.productionHostConfig",
             target: "{that accessTokenUpdateSnapsetRequest}.options"
         },
-        "lifeCycleRequest.hostConfig": {
+        "lifecycleRequest.hostConfig": {
             source: "{that}.options.productionHostConfig",
-            target: "{that lifeCycleRequest}.options"
+            target: "{that lifecycleRequest}.options"
         },
         "putSettingsRequestFailure.hostConfig": {
             source: "{that}.options.productionHostConfig",

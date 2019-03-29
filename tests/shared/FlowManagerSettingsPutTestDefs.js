@@ -318,7 +318,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.updateSnapsetSequence", {
             event: "{accessTokenUpdateSnapsetRequest}.events.onComplete",
             listener: "gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testAccessResponse"
         }, {
-            func: "{lifeCycleRequest}.send",
+            func: "{lifecycleRequest}.send",
             args: [
                 null,
                 {
@@ -328,7 +328,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.updateSnapsetSequence", {
                 }
             ]
         }, {
-            event: "{lifeCycleRequest}.events.onComplete",
+            event: "{lifecycleRequest}.events.onComplete",
             listener: "gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testLifecycleResponse"
         }, {
             func: "{putSettingsRequestFailure}.send",
@@ -359,7 +359,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.updateSnapsetRequests", {
                 expectedStatusCode: 200
             }
         },
-        lifeCycleRequest: {
+        lifecycleRequest: {
             type: "kettle.test.request.http",
             options: {
                 path: fluid.stringTemplate("/%gpiiKey/settings/%device", {
@@ -452,14 +452,14 @@ gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testAccessResponse = function 
 gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testLifecycleResponse = function (data, request) {
     gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testStatusCode(data, request);
 
-    var lifeCycle = JSON.parse(data);
+    var lifecycle = JSON.parse(data);
     jqUnit.assertEquals(
-        "Checking lifeCycle user '" + gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaKey + "'",
+        "Checking lifecycle user '" + gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaKey + "'",
         gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaKey,
-        lifeCycle.gpiiKey
+        lifecycle.gpiiKey
     );
     // These checks based on
     // https://github.com/GPII/universal/blob/master/documentation/FlowManager.md#get-lifecycle-instructions-from-cloud-based-flow-manager-get-gpiikeysettingsdevice
-    jqUnit.assertNotNull("Checking 'solutionsRegistryEntries'", lifeCycle.solutionsRegistryEntries);
-    jqUnit.assertNotNull("Checking 'matchMakerOutput'", lifeCycle.matchMakerOutput);
+    jqUnit.assertNotNull("Checking 'solutionsRegistryEntries'", lifecycle.solutionsRegistryEntries);
+    jqUnit.assertNotNull("Checking 'matchMakerOutput'", lifecycle.matchMakerOutput);
 };
