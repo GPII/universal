@@ -6466,7 +6466,7 @@
                                 "black-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcwhite.theme",
                                 "white-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcblack.theme",
                                 "yellow-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc1.theme",
-                                "black-yellow": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\yellowOnBlack.theme",
+                                "black-yellow": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\blackOnYellow.theme",
                                 "lime-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc2.theme",
                                 "black-brown": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\blackOnBrown.theme",
                                 "grey-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
@@ -6518,7 +6518,12 @@
                 "saveAs": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\Pre-High Contrast Scheme}"
             },
             // Apply high-contrast.
-            "settings.configure-spi"
+            "settings.configure-spi",
+            {
+                // Make sure the colours are applied for custom themes.
+                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme",
+                "themeFile": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\LastSet}"
+            }
         ],
         "restore": [
             // Restore the high-contrast theme.
