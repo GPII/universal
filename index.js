@@ -90,7 +90,11 @@ gpii.start = function (options) {
  */
 gpii.stop = function () {
     // Destroy the configs in reverse order, so the first loaded one is destroyed last.
+    // There should properly never be more than one - see https://github.com/GPII/universal/pull/766
     var configs = gpii.queryConfigs().reverse();
+    if (configs.length > 1) {
+        fluid.log(fluid.logLevel.WARN, "Error during gpii.stop - found more than one active config: ", configs);
+    }
     fluid.each(configs, function (config) {
         config.destroy();
     });
