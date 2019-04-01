@@ -75,7 +75,6 @@ database and ready to be inserted using an HTTP POST request like this:
 
 var process = require("process"),
     fs = require("fs"),
-    fluid = require("infusion"),
     path = require("path"),
     uuid = uuid || require("node-uuid");
 
@@ -83,8 +82,8 @@ var credentialsName = process.env.GPII_CREDENTIALS_NAME;
 var credentialsSite = process.env.GPII_CREDENTIALS_SITE;
 
 if (!credentialsSite || !credentialsSite) {
-   console.log("Usage: GPII_CREDENTIALS_NAME=<SITE NAME> GPII_CREDENTIALS_SITE=<SITE.NAME.COM> node generateCredentials.js");
-   process.exit(1);
+    console.log("Usage: GPII_CREDENTIALS_NAME=<SITE NAME> GPII_CREDENTIALS_SITE=<SITE.NAME.COM> node generateCredentials.js");
+    process.exit(1);
 }
 
 var generateCredentials = function () {
@@ -96,11 +95,11 @@ var generateCredentials = function () {
     var gpiiAppInstallationClientId = uuid.v4();
 
     var secret = {
-      "site": credentialsSite,
-      "clientCredentials": {
-        "client_id": clientId,
-        "client_secret": clientSecret
-      }
+        "site": credentialsSite,
+        "clientCredentials": {
+            "client_id": clientId,
+            "client_secret": clientSecret
+        }
     };
 
     var clientCredential = {
@@ -114,7 +113,7 @@ var generateCredentials = function () {
         "revokedReason": null,
         "timestampCreated": currentTime,
         "timestampRevoked": null
-    }
+    };
 
     var gpiiAppInstallationClient = {
         "_id": gpiiAppInstallationClientId,
@@ -124,7 +123,7 @@ var generateCredentials = function () {
         "computerType": "public",
         "timestampCreated": currentTime,
         "timestampUpdated": null
-    }
+    };
 
     return {
         secret: secret,
@@ -136,7 +135,10 @@ var generateCredentials = function () {
 
 var outputFolder = credentialsSite + "-credentials";
 fs.mkdir(outputFolder, function (err) {
-    if (err) throw err;
+    if (err) {
+        throw err;
+        process.exit(1);
+    }
     var credentials = generateCredentials();
     fs.writeFileSync(path.join(outputFolder, "secret.txt"), JSON.stringify(credentials.secret, null, 2));
     fs.writeFileSync(path.join(outputFolder, "couchDBData.json"), JSON.stringify(credentials.couchDBData, null, 2));
