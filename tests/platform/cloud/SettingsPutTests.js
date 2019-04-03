@@ -229,7 +229,28 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
         }]
     },
 
-    // Rejected by /settings endpoint
+    {
+        testDef: {
+            name: "Attempt to upload an invalid settings payload.",
+
+            // The options below are for sending /access_token request
+            client_id: "Bakersfield-AJC-client-id",
+            client_secret: "Bakersfield-AJC-client-secret",
+            username: "nonexistent_gpii_key",
+            password: "dummy",
+
+            expectedMsg: "Your request was invalid.  See the errors for details.",
+
+            // The options below are required for sending /settings
+            gpiiKey: "nonexistent_gpii_key",
+            prefsSet: {} // invalid payload
+        },
+        disruptions: [{
+            sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.mainSequence",
+            expectedStatusCode: 400
+        }]
+    },
+
     {
         testDef: {
             name: "Attempt to update preferences without providing an access token",
