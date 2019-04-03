@@ -35,14 +35,30 @@ gpii.tests.cloud.oauth2.settingsPut.prefsSet = {
 
 gpii.tests.cloud.oauth2.settingsPut.verifyUpdateResponse = function (responseText, request, expectedStatusCode, expectedGpiiKey, expectedMsg) {
     var response = JSON.parse(responseText);
-    jqUnit.assertEquals("The returned message in the response is expected", expectedStatusCode, request.nativeResponse.statusCode);
-    jqUnit.assertEquals("The returned message in the response is expected", expectedMsg, response.message);
+    jqUnit.assertEquals("The status code in the response is as expected.", expectedStatusCode, request.nativeResponse.statusCode);
+    jqUnit.assertTrue("The returned message in the response is as expected.", gpii.tests.cloud.oauth2.settingsPut.startsWithOrEqual(expectedMsg, response.message));
     if (expectedGpiiKey) {
         jqUnit.assertEquals("The returned GPII key in the response is expected", expectedGpiiKey, response.gpiiKey);
     } else {
         jqUnit.assertTrue("The returned is an error message", response.isError);
     }
 };
+
+/**
+ *
+ * Confirm that the actual message is either equal to or matches the start of the expected message.  Used to check
+ * request payloads that include stuff like "... while executing HTTP PUT on ..."
+ *
+ * @param {String|undefined} expected - The expected message.
+ * @param {String|undefined} actual - The actual message.
+ * @return {Boolean} - `true` if the actual message is equal to or starts with the expected message, or `false` otherwise.
+ *
+ */
+gpii.tests.cloud.oauth2.settingsPut.startsWithOrEqual = function (expected, actual) {
+    var startsWithOrEqual = expected === actual || (typeof actual === "string" && actual.indexOf(expected) === 0);
+    return startsWithOrEqual;
+};
+
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.requests", {
     gradeNames: ["fluid.component"],
