@@ -104,7 +104,8 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutNoAccessTokenSequ
     gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
         {
-            func: "{settingsPutRequest}.send"
+            func: "{settingsPutRequest}.send",
+            args: ["{testCaseHolder}.options.prefsSet"]
         },
         {
             event: "{settingsPutRequest}.events.onComplete",
@@ -131,7 +132,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutWrongAccessTokenS
     sequence: [
         {
             funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
-            args: ["{settingsPutRequest}", "a_wrong_access_token"]
+            args: ["{settingsPutRequest}", "a_wrong_access_token", "{testCaseHolder}.options.prefsSet"]
         },
         {
             event: "{settingsPutRequest}.events.onComplete",
@@ -232,7 +233,8 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
     {
         testDef: {
             name: "Attempt to update preferences without providing an access token",
-            gpiiKey: "settingsUser"
+            gpiiKey: "settingsUser",
+            prefsSet: gpii.tests.cloud.oauth2.settingsPut.prefsSet
         },
         disruptions: [{
             sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNoAccessTokenSequence",
@@ -243,7 +245,8 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
     {
         testDef: {
             name: "Attempt to update preferences by providing a wrong access token",
-            gpiiKey: "settingsUser"
+            gpiiKey: "settingsUser",
+            prefsSet: gpii.tests.cloud.oauth2.settingsPut.prefsSet
         },
         disruptions: [{
             sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutWrongAccessTokenSequence",
