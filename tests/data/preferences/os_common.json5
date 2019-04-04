@@ -9,6 +9,7 @@
                     "http://registry.gpii.net/common/tracking": [ "mouse", "caret" ],
                     "http://registry.gpii.net/common/invertColours": true,
                     "http://registry.gpii.net/common/cursorSize": 0.9,
+                    "http://registry.gpii.net/common/cursorThickness": 0.45,
                     "http://registry.gpii.net/common/fontSize": 9,
                     "http://registry.gpii.net/common/mouseTrailing": 10,
                     "http://registry.gpii.net/common/mouseEmulation/enabled": true,

@@ -68,10 +68,10 @@
             "title": "Cursor Thickness",
             "description": "The cursor thickness to be used",
             "type": "number",
-            "default": 1,
-            "minimum": 1,
-            "maximum": 20,
-            "multipleOf": 1
+            "default": 0.05,
+            "minimum": 0.05,
+            "maximum": 1,
+            "multipleOf": 0.05
         },
         "http://registry.gpii.net/common/cursorSpeed": {
             "title": "Cursor speed",

@@ -1529,7 +1529,19 @@ gpii.tests.windows.builtIn = [
                             "Wait": "REG_SZ"
                         }
                     }
-                }]
+                },
+                {
+                    "settings": {
+                        "CaretWidth": 9
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Desktop",
+                        "dataTypes": {
+                            "CaretWidth": "REG_DWORD"
+                        }
+                    }
+                }],
             },
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{

@@ -6104,9 +6104,9 @@
                             "title": "Text cursor thickness",
                             "description": "Specifies the thickness of the text cursor.",
                             "type": "integer",
-                            "default": 1,
-                            "minimum": 1,
-                            "maximum": 20
+                            "default": 0.05,
+                            "minimum": 0.05,
+                            "maximum": 1
                         }
                     }
                 },
@@ -6116,13 +6116,20 @@
                 "capabilitiesTransformations": {
                     "CaretWidth": {
                         "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/cursorThickness"
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorThickness",
+                            "factor": 20
                         }
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/cursorThickness": "CaretWidth"
+                    "http://registry\\.gpii\\.net/common/cursorThickness": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "CaretWidth",
+                            "factor": 0.05
+                        }
+                    }
                 }
             }
         },
