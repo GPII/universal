@@ -9158,11 +9158,13 @@
                             "description": "Shows visual feedback around the point when I touch the screen.",
                             "enum": [
                                 0,
-                                1
+                                1,
+                                2
                             ],
                             "enumLabels": [
-                                "off",
-                                "on"
+                                "Off",
+                                "On",
+                                "Bolder"
                             ],
                             "default": 0
                         }
