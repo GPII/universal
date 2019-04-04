@@ -1,0 +1,26 @@
+// # Fray
+//
+// - Changes Windows focus border width in some applications.
+// - Changes cursor thickness to system value: 9.
+//
+// ## Testing
+//
+// After activating:
+//  - Focus border width should be increased in "some" legacy applications
+// like old "Control Panel".
+//  - Cursor thickness is increased. System value should display value 9.
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.focus": {
+                        "FocusBorder": 0
+                    },
+                    "http://registry.gpii.net/common/cursorThickness": 0.35
+                }
+            }
+        }
+    }
+}

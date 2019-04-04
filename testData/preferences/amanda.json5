@@ -1,0 +1,24 @@
+// # Amanda
+//
+// Disable Windows 10 animations.
+//
+// ## Testing
+//
+// After activating Windows 10 animations will be disable, like:
+//  * Windows minimization/maximization.
+//  * Start menu.
+//  * Etc...
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.animations": {
+                        "AnimationsEnabled": 0
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+// # Tyna
+//
+// This preference sets activate visual feedback for touches when working on a touchscreen on Windows 10.
+//
+// ## Testing
+//
+// After login the screen touches should have a visual feeback around the point the user is touching,
+// and the touch point should be larger and darker than usual.
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.touchScreen": {
+                        "ShowScreenTouches": 1,
+                        "ShowBolderScreenTouches": 1
+                    }
+                }
+            }
+        }
+    }
+}
