@@ -1541,7 +1541,7 @@ gpii.tests.windows.builtIn = [
                             "CaretWidth": "REG_DWORD"
                         }
                     }
-                }],
+                }]
             },
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
