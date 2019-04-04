@@ -27,7 +27,7 @@ gpii.tests.cloud.oauth2.settingsPut.prefsSet = {
             "name": "Default preferences",
             "preferences": {
                 "http://registry.gpii.net/common/fontSize": 40,
-                "http://registry.gpii.net/common/backgroundColor": "black"
+                "http://registry.gpii.net/common/announceCapitals": true
             }
         }
     }
