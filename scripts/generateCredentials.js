@@ -81,7 +81,7 @@ var process = require("process"),
 var credentialsName = process.env.GPII_CREDENTIALS_NAME;
 var credentialsSite = process.env.GPII_CREDENTIALS_SITE;
 
-if (!credentialsSite || !credentialsSite) {
+if (!credentialsName || !credentialsSite) {
     console.log("Usage: GPII_CREDENTIALS_NAME=<SITE NAME> GPII_CREDENTIALS_SITE=<SITE.NAME.COM> node generateCredentials.js");
     process.exit(1);
 }
