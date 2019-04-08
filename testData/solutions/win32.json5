@@ -172,8 +172,8 @@
                     //         "title": "Braille Marking",
                     //         "description": "Show Marking may be any combination of the following ored together brlMarkNothing= 0, brlMarkText = 1, brlMarkBold = 2, brlMarkItalic = 4, brlMarkUnderline = 8, brlMarkStrikeout = 16, brlMarkGraphic = 32, brlMarkHighlight = 64, brlMarkColor= 128, // see brlOptColorsToMark string option brlMarkExtended=256, // things like spelling and grammatical errors in MSWord etc, script defined marking brlMarkDoubleStrikeout=512, brlMarkSuperscript=1024, brlMarkSubscript=2048, brlMarkShadow=4096, brlMarkOutline=8192, brlMarkEmboss=16384, brlMarkEngrave=32768, Note when Extended marking is on, JAWS calls the PointNeedsMarking function passing in the coordinates of each cell to determine whether text at that location requires marking. This is useful when the attribute you want to mark is not actually known to JAWS such as the red and green zigzags in MSWord indicating spelling or grammatical errors.",
                     //         "type": "integer",
-                    //         "minValue": 0,
-                    //         "maxValue": 65536,
+                    //         "minimum": 0,
+                    //         "maximum": 65536,
                     //         "default": 64
                     //     }
                     // },
@@ -939,7 +939,7 @@
                             "description": "How fast the caret blinks, in milliseconds.",
                             "type": "integer",
                             "default": 53,
-                            "minValue": 1
+                            "minimum": 1
                         }
                     },
                     "Options.CaretDetect": {
@@ -948,7 +948,7 @@
                             "description": "How many cursor blinks are used to locate the caret.",
                             "type": "integer",
                             "default": 1,
-                            "minValue": 1
+                            "minimum": 1
                         }
                     },
                     "Options.CaretDetectTimeOut": {
@@ -957,7 +957,7 @@
                             "description": "The number of milliseconds before JAWS for Windows will give up looking for the caret.",
                             "type": "integer",
                             "default": 250,
-                            "minValue": 0
+                            "minimum": 0
                         }
                     },
                     "OSM.CaretTimeOut": {
@@ -1592,7 +1592,7 @@
                             "description": "How often to announce progress bar updates, in milliseconds.  Set to 0 to disable update announcements.",
                             "type": "integer",
                             "default": 5000,
-                            "minValue": 0
+                            "minimum": 0
                         }
                     },
                     "Options.QuickKeyNavigationMode": {
@@ -2071,7 +2071,7 @@
                             "description": "How often to reset communication with the synthesizer, in milliseconds.",
                             "type": "integer",
                             "default": 2000,
-                            "minValue": 0
+                            "minimum": 0
                         }
                     },
                     "Options.TetherJawsToPC": {
@@ -2323,7 +2323,7 @@
                             "description": "How often (in milliseconds) should an embedded ActiveX control cause the Virtual HTML area to be updated when receiving rapid ValueChange events from MSAA.  Set to -1 to disable refreshes.",
                             "type": "integer",
                             "default": 0,
-                            "minValue": -1
+                            "minimum": -1
                         }
                     },
                     "Options.VirtualRibbonSupport": {
@@ -6692,8 +6692,8 @@
                             "description": "Set up magnification level",
                             "type": "integer",
                             "default": 200,
-                            "min": 100,
-                            "max": 1600
+                            "minimum": 100,
+                            "maximum": 1600
                         }
                     },
                     "FollowFocus": {
@@ -6886,9 +6886,9 @@
                             "title": "Mouse keys acceleration",
                             "description": "Acceleration of mouse keys",
                             "type": "number",
-                            "min": -1000,
+                            "minimum": -1000,
                             // TODO: Not clear how to describe this setting
-                            "max": 1000
+                            "maximum": 1000
                         }
                     }
                 },
@@ -7577,7 +7577,7 @@
                             "default": 4,
                             "minimum": 1,
                             "maximum": 64,
-                            "divisibleBy": 1
+                            "multipleOf": 1
                         }
                     }
                 },
@@ -7610,7 +7610,7 @@
                             "default": 4,
                             "minimum": 1,
                             "maximum": 64,
-                            "divisibleBy": 1
+                            "multipleOf": 1
                         }
                     }
                 },
@@ -7699,8 +7699,8 @@
                             "title": "Mouse trails",
                             "description": "Amount of mouse trailing",
                             "type": "integer",
-                            "min": 0,
-                            "max": 10
+                            "minimum": 0,
+                            "maximum": 10
                         }
                     }
                 },
@@ -9224,8 +9224,8 @@
                             "title": "Font Size",
                             "description": "The font size in which text is preferred to be presented",
                             "type": "number",
-                            "min": 12,
-                            "max": 96,
+                            "minimum": 12,
+                            "maximum": 96,
                             "default": 48,
                             "multipleOf" : 2
                         }
@@ -9426,8 +9426,8 @@
                             "type": "integer",
                             // TODO: We should present the value in a homogeneus speech rate
                             "default": 10,
-                            "min": 0,
-                            "max": 20
+                            "minimum": 0,
+                            "maximum": 20
                         }
                     },
                     "ReadingModeSyllables": {
@@ -9577,8 +9577,8 @@
                             "type": "integer",
                             // TODO: We should present the value in a homogeneous speech rate
                             "default": 10,
-                            "min": 0,
-                            "max": 20
+                            "minimum": 0,
+                            "maximum": 20
                         }
                     },
                     "ReadingModeSyllables": {

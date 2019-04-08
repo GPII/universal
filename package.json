@@ -15,7 +15,7 @@
         "glob": "7.1.3",
         "@google-cloud/trace-agent": "3.4.0",
         "gpii-couchdb-test-harness": "1.0.0-dev.20190227T100402Z.f266632.GPII-3531",
-        "gpii-json-schema": "2.0.0-dev.20190402T101438Z.cf9ef9e.GPII-3083",
+        "gpii-json-schema": "2.0.0-dev.20190408T072733Z.1dc9549.GPII-3083",
         "infusion": "3.0.0-dev.20190328T144119Z.ec44dbfab",
         "json5": "2.1.0",
         "kettle": "1.10.1",
