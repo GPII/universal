@@ -16,7 +16,7 @@
         "gpii-express-user": "1.0.1",
         "@google-cloud/trace-agent": "3.4.0",
         "gpii-couchdb-test-harness": "1.0.0-dev.20190227T100402Z.f266632.GPII-3531",
-        "infusion": "3.0.0-dev.20181204T213346Z.2ca90f6e6",
+        "infusion": "3.0.0-dev.20190328T144119Z.ec44dbfab",
         "json5": "2.1.0",
         "kettle": "1.10.1",
         "mkdirp": "0.5.1",
