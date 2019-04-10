@@ -506,7 +506,7 @@ The POST payload should be a full preferences safe without an `id`:
 ```
 
 A successful return payload will consist of the same payload with the addition of timestamps and a
-freshly generated `id` field.  In the event of an error a payload similar to the following will be returned
+freshly generated `id` field.  In the event of an error, a payload similar to the following will be returned
 with the contents of the system error:
 
 ```json
