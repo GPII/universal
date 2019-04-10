@@ -648,7 +648,7 @@ An example payload for a particlar safe may be:
 
 This endpoint will add a new `gpiiKey` document to the system. There are no URL parameters, but the JSON body takes
 3 fields, one of them optional. Required are the `prefsSafeId` and `prefsSetId`. These indicate the preferences safe,
-and the respective preferences set that this key and token will operate upon. Optionally you can pass in a unique
+and the respective preferences set that this key will operate upon. Optionally you can pass in a unique
 unused `gpiiKey` to use, otherwise a new one will be generated as part of the process.  The new document is returned
 upon success. In event of a failure, a standard error document is returned with `isError` true, and a message
 detailing the failure.
