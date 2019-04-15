@@ -90,25 +90,78 @@ gpii.accessTokens.initOptions = function (processArgv) {
  */
 gpii.accessTokens.saveToArchive = function (options) {
     var togo = fluid.promise();
+    var appendSequence = [
+        gpii.accessTokens.readCurrentArchive,
+        gpii.accessTokens.concatenateAndWriteArchive
+    ];
     if (options.accessTokens.length === 0) {
         fluid.log("No access tokens found -- nothing to archive");
         togo.resolve(true);
     } else {
-        fs.appendFile(
-            options.archive,
-            JSON.stringify(options.accessTokens, null, 4),
-            function (err) {
-                if (err) {
-                    fluid.log(err);
-                    togo.reject(err);
-                } else {
-                    fluid.log("Wrote access tokens to: '" + options.archive + "'");
-                    togo.resolve(true);
-                }
+        fluid.promise.sequence(appendSequence, options).then(
+            function (result) {
+                togo.resolve(result);
+            },
+            function (error) {
+                togo.reject(error);
             }
         );
     }
     return togo;
+};
+
+/**
+ * Read the current ontents of the access token archive into memory.
+ * @param {Object} options - The archive to read:
+ * @param {String} options.archive - Path (relative or absolute) of archive file.
+ * @param {Array} options.currentArchiveContents - The current contents of the
+ *                                                 archive, set by this function.
+ * @return {Promise} - A promise that resolves or rejects reading the archive
+ *                     into memory.
+ */
+gpii.accessTokens.readCurrentArchive = function (options) {
+    var readPromise = fluid.promise();
+    fs.readFile(options.archive, function (err, data) {
+        if (err) {
+            fluid.log(err);
+            readPromise.reject(err);
+        } else {
+            options.currentArchiveContents = JSON.parse(data);
+            readPromise.resolve(options.currentArchiveContents);
+            fluid.log("Read contents from archive: '" + options.archive + "'");
+        }
+    });
+    return readPromise;
+};
+
+/**
+ * Merge the current archive contents with the newer set of access tokens to
+ * archive, and then write out the entirety to the archive file.
+ * @param {Object} options - The archive to read:
+ * @param {String} options.archive - Path (relative or absolute) of archive file.
+ * @param {Array} options.currentArchiveContents - The current contents of the
+ *                                                 archive to append to.
+ * @param {Array} options.accessTokens - Array of access tokens to add to the
+ *                                       archive.
+ * @return {Promise} - A promise that resolves or rejects saving all the tokens
+ *                     to the archive.
+ */
+gpii.accessTokens.concatenateAndWriteArchive = function (options) {
+    var writePromise = fluid.promise();
+    var allAccessTokens = options.currentArchiveContents.concat(options.accessTokens);
+    fs.writeFile(options.archive,
+        JSON.stringify(allAccessTokens, null, 4),
+        function (err) {
+            if (err) {
+                fluid.log(err);
+                writePromise.reject(err);
+            } else {
+                fluid.log("Wrote access tokens to: '" + options.archive + "'");
+                writePromise.resolve(true);
+            }
+        }
+    );
+    return writePromise;
 };
 
 /**
