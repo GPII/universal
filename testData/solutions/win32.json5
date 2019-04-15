@@ -4788,7 +4788,9 @@
         ],
         "isInstalled": [
             {
-                "type": "gpii.deviceReporter.alwaysInstalled"
+                "type": "gpii.deviceReporter.wmiSettingSupported",
+                "namespace": "root\\WMI",
+                "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
             }
         ]
     },
