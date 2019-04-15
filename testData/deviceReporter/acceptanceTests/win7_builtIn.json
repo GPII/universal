@@ -56,6 +56,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.volumeControl"
+    },
+
+    {
         "id": "com.microsoft.windows.language"
     },
 
