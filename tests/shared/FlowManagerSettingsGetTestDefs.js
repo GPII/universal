@@ -130,7 +130,6 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.statusCode", {
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode", {
     gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
     recordName: "accessTokenForm",
-    expect: 1,
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsGet.requests",
     sequenceElements: {
         mainSequence: {
@@ -160,7 +159,6 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.accessTokenResponse", {
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.accessTokenResponse", {
     gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
     recordName: "accessTokenForm",
-    expect: 4,
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsGet.requests",
     sequenceElements: {
         mainSequence: {

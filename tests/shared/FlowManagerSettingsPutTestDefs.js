@@ -312,11 +312,12 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.updateSnapsetSequence", {
     sequence: [
         { funcName: "fluid.log", args: ["Flowmanager rejection of 'update-snapset' sequence..."]},
         {
-            func: "{accessTokenUpdateSnapsetRequest}.send",
-            args: [gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaTokenRequestPayload]
+            funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
+            args: ["{accessTokenUpdateSnapsetRequest}", gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaTokenRequestPayload]
         }, {
             event: "{accessTokenUpdateSnapsetRequest}.events.onComplete",
-            listener: "gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testAccessResponse"
+            listener: "gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testAndStashAccessResponse",
+            args: ["{arguments}.0", "{accessTokenUpdateSnapsetRequest}"]
         }, {
             func: "{lifecycleRequest}.send",
             args: [
@@ -356,6 +357,9 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.updateSnapsetRequests", {
             options: {
                 path: "/access_token",
                 method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
                 expectedStatusCode: 200
             }
         },
@@ -427,7 +431,6 @@ gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testStatusCode = function (dat
 gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testResponse = function (data, request) {
     gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testStatusCode(data, request);
     var actual = JSON.parse(data);
-
     jqUnit.assertTrue(
         "Checking payload error for " + request.options.path,
         actual.isError
@@ -438,20 +441,14 @@ gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testResponse = function (data,
     );
 };
 
-gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testAccessResponse = function (data, request) {
-    var token = JSON.parse(data);
+gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testAndStashAccessResponse = function (data, request) {
+    var token = gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse(data, request);
     var auth = "Bearer " + token.access_token;
     request.options.stashedAuth = auth;
-
-    gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testStatusCode(data, request);
-    jqUnit.assertNotNull("Checking 'access_token'", token.access_token);
-    jqUnit.assertNotNull("Checking 'expiresIn'", token.expiresIn);
-    jqUnit.assertEquals("Checking 'token_type'",  "Bearer", token.token_type);
 };
 
 gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testLifecycleResponse = function (data, request) {
     gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testStatusCode(data, request);
-
     var lifecycle = JSON.parse(data);
     jqUnit.assertEquals(
         "Checking lifecycle user '" + gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaKey + "'",

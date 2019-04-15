@@ -24,10 +24,74 @@ gpii.tests.productionConfigTesting.config = {
     configPath: "%gpii-universal/tests/configs"
 };
 
+// Access token deletion requests
+fluid.defaults("gpii.tests.cloud.oauth2.accessTokensDeleteRequests", {
+    gradeNames: ["fluid.component"],
+    components: {
+        getAccessTokensRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+                path: "/gpii/_design/views/_view/findAuthorizationByAccessToken",
+                method: "GET",
+                expectedStatusCodes: [200, 404],
+                tokensToRemove: []       // set by successful request.
+            }
+        },
+        bulkDeleteRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+                path: "/gpii/_bulk_docs",
+                method: "POST",
+                expectedStatusCode: 201
+            }
+        }
+    }
+});
+
+// Sequence elements for cleaning up extra access tokens
+fluid.defaults("gpii.tests.productionConfigTesting.deleteAccessTokensSequence", {
+    gradeNames: ["fluid.test.sequenceElement"],
+    sequence: [
+        { funcName: "fluid.log", args: ["Delete extra test access tokens"]},
+        {
+            func: "{getAccessTokensRequest}.send",
+            args: [null, { port: "5984" }]
+        }, {
+            event: "{getAccessTokensRequest}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testGetAccessTokensForDeletion"
+        }, {
+            funcName: "gpii.tests.productionConfigTesting.bulkDelete",
+            args: ["{bulkDeleteRequest}", "{getAccessTokensRequest}.options.tokensToRemove"]
+        }, {
+            event: "{bulkDeleteRequest}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.afterAccessTokensDeletion"
+        }, {
+            funcName: "fluid.log",
+            args: ["Deleted extra test access tokens"]
+        }
+    ]
+});
+
+// Grade for cleaning up access tokens
+fluid.defaults("gpii.tests.productionConfigTesting.flushAccessTokens", {
+    gradeNames: ["gpii.test.standardServerSequenceGrade"],
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.accessTokensDeleteRequests",
+    sequenceElements: {
+        deleteTokens: {
+            gradeNames: "gpii.tests.productionConfigTesting.deleteAccessTokensSequence",
+            priority: "before:stopServer"
+        }
+    }
+});
+
 // Grade for "disruptions" that are also proper sequence grades.  Use the
 // standard server sequence
 fluid.defaults("gpii.test.disruption.settings.sequenceGrade", {
-    gradeNames: ["gpii.test.disruption", "gpii.test.standardServerSequenceGrade"]
+    gradeNames: ["gpii.test.disruption", "gpii.tests.productionConfigTesting.flushAccessTokens"]
 });
 
 gpii.tests.productionConfigTesting.getKeyOrPrefsFromFile = function (filePath, id) {
@@ -101,10 +165,10 @@ gpii.tests.productionConfigTesting.testResponse = function (data, request) {
 gpii.tests.productionConfigTesting.testStatusCodes = function (request) {
     var expected = request.options.expectedStatusCodes;
     var actual = request.nativeResponse.statusCode;
-    jqUnit.assertNotEquals(
-        "Deleting record(s) from database using " + request.options.path +
-        ", status: " + actual,
-        expected.indexOf(actual), -1
+    jqUnit.assertTrue(
+        "Database request " + request.options.path + " expected [" + expected +
+        "]; actual status: " + actual,
+        fluid.contains(expected, actual)
     );
 };
 
@@ -137,4 +201,32 @@ gpii.tests.productionConfigTesting.testGetExtraAccessTokens = function (data, ac
     } else {
         fluid.log("No access tokens to remove");
     }
+};
+
+gpii.tests.productionConfigTesting.testGetAccessTokensForDeletion = function (data, accessTokensRequest) {
+    gpii.tests.productionConfigTesting.testStatusCodes(accessTokensRequest);
+    var tokens = JSON.parse(data);
+    fluid.each(tokens.rows, function (aRow) {
+        var aToken = aRow.value.authorization;
+        if (fluid.contains(gpii.test.cloudBased.oauth2.accessTokenCache, aToken.accessToken)) {
+            aToken._deleted = true;
+            accessTokensRequest.options.tokensToRemove.push(aToken);
+            fluid.log("Will remove ", aToken.type, " for ", aToken.gpiiKey);
+        }
+    });
+};
+
+gpii.tests.productionConfigTesting.bulkDelete = function (bulkDeleteRequest, docsToRemove) {
+    var bulkDocsArray = { "docs": [] };
+    fluid.each(docsToRemove, function (aDocToRemove) {
+        if (aDocToRemove) {
+            bulkDocsArray.docs.push(aDocToRemove);
+        }
+    });
+    bulkDeleteRequest.send(bulkDocsArray, { port: 5984 });
+};
+
+gpii.tests.productionConfigTesting.afterAccessTokensDeletion = function (data, request) {
+    gpii.tests.productionConfigTesting.testStatusCode(data, request);
+    gpii.test.cloudBased.oauth2.clearAccessTokenCache();
 };

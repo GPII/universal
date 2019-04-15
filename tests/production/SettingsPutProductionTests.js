@@ -51,7 +51,10 @@ gpii.loadTestingSupport();
 // PUT /settings tests
 
 fluid.defaults("gpii.tests.productionConfigTesting.settingsPut.testCaseHolder", {
-    gradeNames: ["gpii.test.cloudBased.oauth2.testCaseHolder"],
+    gradeNames: [
+        "gpii.test.cloudBased.oauth2.testCaseHolder",
+        "gpii.tests.cloud.oauth2.accessTokensDeleteRequests"
+    ],
     productionHostConfig: {
         hostname: "flowmanager",
         port: 9082
@@ -80,6 +83,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.settingsPut.testCaseHolder", 
     }
 });
 
+gpii.test.cloudBased.oauth2.clearAccessTokenCache();
 gpii.test.cloudBased.oauth2.runDisruptedTests(
     gpii.tests.cloud.oauth2.settingsPut.disruptedTests,
     gpii.tests.productionConfigTesting.config,
@@ -93,6 +97,7 @@ gpii.test.cloudBased.oauth2.runDisruptedTests(
  * ========================================================================
  */
 
+gpii.test.cloudBased.oauth2.clearAccessTokenCache();
 gpii.test.cloudBased.oauth2.runDisruptedTests(
     gpii.tests.cloud.oauth2.settingsPut.updateSnapsetTest,
     gpii.tests.productionConfigTesting.config,

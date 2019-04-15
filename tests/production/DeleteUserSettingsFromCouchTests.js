@@ -26,14 +26,6 @@ fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
 require("./ProductionTestsUtils.js");
 
-gpii.tests.productionConfigTesting.extraGpiiKeyIds = [
-    "os_gnome",
-    "gpii_key_no_prefs_safe",
-    "carla",
-    "nonexistent_gpii_key",
-    "testUser1"
-];
-
 fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
     gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
@@ -75,12 +67,6 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
             event: "{getNonExistentGpiiKeyPrefsSafe}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion"
         }, {
-            func: "{getExtraAccessTokens}.send",
-            args: [null, { port: "5984" }]
-        }, {
-            event: "{getExtraAccessTokens}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testGetExtraAccessTokens"
-        }, {
             funcName: "gpii.tests.productionConfigTesting.bulkDelete",
             args: [
                 "{deleteInBulk}",
@@ -91,15 +77,14 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
                     "{getGpiiKeyNoPrefsSafePrefsSafe}.options.docToRemove",
                     "{getNonExistentGpiiKey}.options.docToRemove",
                     "{getNonExistentGpiiKeyPrefsSafe}.options.docToRemove"
-                ],
-                "{getExtraAccessTokens}.options.tokensToRemove"
+                ]
             ]
         }, {
             event: "{deleteInBulk}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testStatusCode"
         }, {
             funcName: "fluid.log",
-            args: ["Deleted 'user' test prefs safes and access tokens"]
+            args: ["Deleted 'user' test prefs safes"]
         }
     ]
 });
@@ -116,7 +101,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteRecordsSequence", {
 // Tests for deleting test 'user' preferences from the database
 gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
     name: "Flow manager production tests - delete test GPII keys and PrefsSafe",
-    expect: 8,
+    expect: 7,
     config: gpii.tests.productionConfigTesting.config,
     gradeNames: ["gpii.test.common.testCaseHolder"],
     components: {
@@ -198,18 +183,6 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
                 docToRemove: null       // set by successful request.
             }
         },
-        getExtraAccessTokens: {
-            type: "kettle.test.request.http",
-            options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/_design/views/_view/findAuthorizationByAccessToken",
-                method: "GET",
-                expectedStatusCodes: [200, 404],
-                extraGpiiKeys: gpii.tests.productionConfigTesting.extraGpiiKeyIds,
-                tokensToRemove: []       // set by successful request.
-            }
-        },
         deleteInBulk: {
             type: "kettle.test.request.http",
             options: {
@@ -234,17 +207,6 @@ gpii.tests.productionConfigTesting.getPrefsSafeDoc = function (prefsSafeRequest,
         fluid.log("No Prefs Safe to retrieve for GPII key " + prefsSafeRequest.options.gpiiKey);
     }
     prefsSafeRequest.send(null, { port: 5984 });
-};
-
-gpii.tests.productionConfigTesting.bulkDelete = function (bulkDeleteRequest, docsToRemove, accessTokensToRemove) {
-    var bulkDocsArray = { "docs": [] };
-    var allDocs = docsToRemove.concat(accessTokensToRemove);
-    fluid.each(allDocs, function (aDocToRemove) {
-        if (aDocToRemove) {
-            bulkDocsArray.docs.push(aDocToRemove);
-        }
-    });
-    bulkDeleteRequest.send(bulkDocsArray, { port: 5984 });
 };
 
 gpii.test.runServerTestDefs(gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests);
