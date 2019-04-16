@@ -123,8 +123,13 @@ gpii.accessTokens.readCurrentArchive = function (options) {
     var readPromise = fluid.promise();
     fs.readFile(options.archive, function (err, data) {
         if (err) {
-            fluid.log(err);
-            readPromise.reject(err);
+            if (err.code === "ENOENT") { // archive is new
+                options.currentArchiveContents = [];
+                readPromise.resolve(options.currentArchiveContents);
+            } else {
+                fluid.log(err);
+                readPromise.reject(err);
+            }
         } else {
             options.currentArchiveContents = JSON.parse(data);
             readPromise.resolve(options.currentArchiveContents);
