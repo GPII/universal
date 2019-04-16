@@ -155,6 +155,12 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
                     "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
                     "subPath": ""
                 }]
+            },
+            "gpii.deviceReporter.wmiSettingSupported": {
+                "expectInstalled": [{
+                    "namespace": "root\\WMI",
+                    "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
+                }]
             }
         }
     },
@@ -175,6 +181,12 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
                     "path": "Software\\Texthelp\\Read&Write11",
                     "subPath": "InstallPath"
                 }]
+            },
+            "gpii.deviceReporter.wmiSettingSupported": {
+                "expectInstalled": [{
+                    "namespace": "root\\WMI",
+                    "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
+                }]
             }
         }
     },
@@ -190,7 +202,9 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "Brightness": {}
+                            "Brightness": {
+                                "value": 70
+                            }
                         },
                         "options": {
                             "Brightness": {
@@ -207,7 +221,7 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
                     }
                 ]
             },
-            "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.brightness(true)
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.brightness(false)
         },
         deviceReporters: {
             "gpii.deviceReporter.wmiSettingSupported": {
