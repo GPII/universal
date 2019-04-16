@@ -191,8 +191,8 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
         }
     },
     {
-        name: "Testing screen_brightness using Flat matchmaker",
-        gpiiKey: "screen_brightness",
+        name: "Testing os_win_brightness using Flat matchmaker",
+        gpiiKey: "os_win_brightness",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.brightness(false)
         },
