@@ -13,10 +13,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // 2. Archive them,
 // 3. Delete them from the database,
 // A sample command that runs this script:
-// node archiveAndFlushAccessTokens.js $COUCHDBURL $ARCHIVE_FILE
+// node archiveAndFlushAccessTokens.js $COUCHDBURL $ARCHIVE_FILE [--deleteAll]
 //
-// There is also an optional final [--deleteAll] argument to optionally remove
-// all of the records regardless of their time of expiration.
+// The optional [--deleteAll] argument removes all of the access token records
+// regardless of their time of expiration.
 //
 "use strict";
 
@@ -51,7 +51,7 @@ gpii.accessTokens.initOptions = function (processArgv) {
     options.archive = processArgv[3];
 
     // Ignore time of expiration and delete all access tokens?
-    options.deleteAll = processArgv.indexOf("--deleteAll") !== -1;
+    options.deleteAll = fluid.contains(processArgv, "--deleteAll");
 
     // Set up database specific options
     options.viewsUrl = options.couchDbUrl + "/_design/views";
@@ -81,7 +81,7 @@ gpii.accessTokens.initOptions = function (processArgv) {
 };
 
 /**
- * Append the access tokens retrieved from the database to a diskfile as an
+ * Append the access tokens retrieved from the database to a disk file as an
  * array of JSON objects.
  * @param {Object} options - The tokens to archive and where:
  * @param {Array} options.accessTokens - Array of access tokens to archive
@@ -111,7 +111,7 @@ gpii.accessTokens.saveToArchive = function (options) {
 };
 
 /**
- * Read the current ontents of the access token archive into memory.
+ * Read the current contents of the access token archive into memory.
  * @param {Object} options - The archive to read:
  * @param {String} options.archive - Path (relative or absolute) of archive file.
  * @param {Array} options.currentArchiveContents - The current contents of the
@@ -140,8 +140,8 @@ gpii.accessTokens.readCurrentArchive = function (options) {
 };
 
 /**
- * Merge the current archive contents with the newer set of access tokens to
- * archive, and then write out the entirety to the archive file.
+ * Merge the current archive contents with the set of access tokens from the
+ * database, and then write out the entirety to the archive file.
  * @param {Object} options - The archive to read:
  * @param {String} options.archive - Path (relative or absolute) of archive file.
  * @param {Array} options.currentArchiveContents - The current contents of the
@@ -249,10 +249,13 @@ gpii.accessTokens.configureStep = function (details, options) {
 };
 
 /**
- * Create the step that retrieves the access tokens from the database.  Note
- * that only the expired access tokens are retrieved.
- * @param {Object} options - The access tokens url:
- * @param {Array} options.accessTokensUrl - The .
+ * Create the step that retrieves access tokens from the database:  either
+ * only the expired tokens, or all of them.
+ * @param {Object} options - Access tokens URL and whether to filter:
+ * @param {Array} options.accessTokensUrl - The url for retrieving all of the
+ *                                          access tokens in the database.
+ * @param {Boolean} options.deleteAll - Flag indicating whether to ignore the
+ *                                      expiration date of the access tokens.
  * @return {Promise} - A promise that resolves retrieving the tokens.
  */
 gpii.accessTokens.retrieveExpiredAccessTokens = function (options) {
@@ -271,11 +274,11 @@ gpii.accessTokens.retrieveExpiredAccessTokens = function (options) {
  * options specify otherwise.
  * @param {String} responseString - the response from the request to get all the
  *                                  acess tokens.
- * @param {Object} options - Where to store the expired access tokens and
+ * @param {Object} options - Where to store the to-be-deleted access tokens and
  *                           whether to delete regardless of time of expiration:
- * @param {Array} options.accessTokens - The expired access tokens.
+ * @param {Array} options.accessTokens - The access tokens sought.
  * @param {Boolean} options.deleteAll - Whether to ignore time of deletion.
- * @return {Array} - The expired access tokens.
+ * @return {Array} - The access tokens.
  */
 gpii.accessTokens.filterExpiredAccessTokens = function (responseString, options) {
     if (options.deleteAll) {
@@ -410,9 +413,9 @@ gpii.accessTokens.logDeletion = function (responseString, options) {
 };
 
 /**
- * Configure deletion, in batch, of the expired access tokens.
+ * Configure deletion, in batch, of the access tokens.
  * @param {Object} options - The records to be deleted:
- * @param {Array} options.accessToksn - The access token records to delete.
+ * @param {Array} options.accessTokens - The access token records to delete.
  * @return {Promise} - The promise that resolves the deletion.
  */
 gpii.accessTokens.flush = function (options) {
@@ -425,7 +428,7 @@ gpii.accessTokens.flush = function (options) {
 };
 
 /**
- * Create and execute the steps to update the database.
+ * Create and execute the steps to archive are delete the access tokens.
  */
 gpii.accessTokens.archiveAndFlush = function () {
     var options = gpii.accessTokens.initOptions(process.argv);
