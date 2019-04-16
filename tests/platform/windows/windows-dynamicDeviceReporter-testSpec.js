@@ -97,6 +97,16 @@ gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries = {
                 }
             }]
         };
+    },
+    brightness: function (running) {
+        return {
+            "com.windows.brightness": [{
+                "settings": {
+                    "running": running
+                },
+                "options": {}
+            }]
+        };
     }
 };
 
@@ -164,6 +174,46 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Texthelp\\Read&Write11",
                     "subPath": "InstallPath"
+                }]
+            }
+        }
+    },
+    {
+        name: "Testing screen_brightness using Flat matchmaker",
+        gpiiKey: "screen_brightness",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.brightness(false)
+        },
+        gradeNames: "gpii.test.integration.deviceReporterAware.windows",
+        settingsHandlers: {
+            "gpii.windows.wmiSettingsHandler": {
+                "data": [
+                    {
+                        "settings": {
+                            "Brightness": {}
+                        },
+                        "options": {
+                            "Brightness": {
+                                "namespace": "root\\WMI",
+                                "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
+                                "set": {
+                                    "className": "WmiMonitorBrightnessMethods",
+                                    "method": "WmiSetBrightness",
+                                    "params": [0xFFFFFFFF, "$value"],
+                                    "returnVal": ["uint", 0]
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.brightness(true)
+        },
+        deviceReporters: {
+            "gpii.deviceReporter.wmiSettingSupported": {
+                "expectInstalled": [{
+                    "namespace": "root\\WMI",
+                    "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
                 }]
             }
         }
