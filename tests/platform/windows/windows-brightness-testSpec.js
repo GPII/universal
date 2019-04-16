@@ -43,7 +43,8 @@ gpii.tests.windows.brightness.testDefs = [
                                 "method": "WmiSetBrightness",
                                 "params": [0xFFFFFFFF, "$value"],
                                 "returnVal": ["uint", 0]
-                            }
+                            },
+                            "settingType": "uint"
                         }
                     }
                 }]
