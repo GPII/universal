@@ -21,6 +21,6 @@
     "type": "gpii.config.untrusted.development.dynamicDR.manualTesting",
     "mergeConfigs": [
         "%gpii-universal/gpii/configs/shared/gpii.config.untrusted.development.dynamicDR.local.json5",
-        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.manualTesting.json5"
+        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.startWithoutCleanData.json5"
     ]
 }
