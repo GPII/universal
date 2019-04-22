@@ -12,7 +12,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // 1. Gather all the expired records of type "gpiiAppInstallationAuthorization" from the database,
 // 2. Delete them from the database,
 // A sample command that runs this script:
-// node deleteAccessTokens.js $COUCHDBURL [--deleteAll]
+// node deleteExpiredAccessTokens.js $COUCHDBURL [--deleteAll]
 //
 // The optional [--deleteAll] argument removes all of the access token records
 // regardless of their time of expiration.
@@ -49,7 +49,6 @@ gpii.accessTokens.initOptions = function (processArgv) {
     options.deleteAll = fluid.contains(processArgv, "--deleteAll");
 
     // Set up database specific options
-    options.viewsUrl = options.couchDbUrl + "/_design/views";
     options.accessTokensUrl = options.couchDbUrl + "/_design/views/_view/findAuthorizationByAccessToken";
     options.accessTokens = [];
     options.parsedCouchDbUrl = url.parse(options.couchDbUrl);

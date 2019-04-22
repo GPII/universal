@@ -32,5 +32,5 @@ log "CouchDB docker container: ${GPII_COUCHDB_CONTAINER}"
 log "CouchDB: ${GPII_COUCHDB_URL_SANITIZED}"
 log "Delete all flag: ${DELETE_ALL_FLAG}"
 
-docker run --rm --link $GPII_COUCHDB_CONTAINER $GPII_UNIVERSAL_IMAGE $DELETE_ACCESS_TOKENS_CMD
+docker run --name deleteExpiredAccessTokens --rm --link $GPII_COUCHDB_CONTAINER $GPII_UNIVERSAL_IMAGE $DELETE_ACCESS_TOKENS_CMD
 
