@@ -26,6 +26,12 @@ fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
 require("./ProductionTestsUtils.js");
 
+// Special case list of GPII Keys used by login/logout tests that generate
+// extraneous access tokens that need to be removed after the tests are done.
+gpii.tests.productionConfigTesting.loginGpiiKeys = [
+    "testUser1", "nonexistent_gpii_key"
+];
+
 fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
     gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
@@ -67,7 +73,13 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
             event: "{getNonExistentGpiiKeyPrefsSafe}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion"
         }, {
-            funcName: "gpii.tests.productionConfigTesting.bulkDelete",
+            func: "{getExtraAccessTokens}.send",
+            args: [null, { port: "5984" }]
+        }, {
+            event: "{getExtraAccessTokens}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testGetExtraAccessTokens"
+        }, {
+            funcName: "gpii.tests.productionConfigTesting.deleteAllExtraRecords",
             args: [
                 "{deleteInBulk}",
                 [
@@ -77,14 +89,15 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
                     "{getGpiiKeyNoPrefsSafePrefsSafe}.options.docToRemove",
                     "{getNonExistentGpiiKey}.options.docToRemove",
                     "{getNonExistentGpiiKeyPrefsSafe}.options.docToRemove"
-                ]
+                ],
+                "{getExtraAccessTokens}.options.tokensToRemove"
             ]
         }, {
             event: "{deleteInBulk}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testStatusCode"
         }, {
             funcName: "fluid.log",
-            args: ["Deleted 'user' test prefs safes"]
+            args: ["Deleted 'user' test prefs safes and login tests' access tokens"]
         }
     ]
 });
@@ -101,7 +114,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteRecordsSequence", {
 // Tests for deleting test 'user' preferences from the database
 gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
     name: "Flow manager production tests - delete test GPII keys and PrefsSafe",
-    expect: 7,
+    expect: 8,
     config: gpii.tests.productionConfigTesting.config,
     gradeNames: ["gpii.test.common.testCaseHolder"],
     components: {
@@ -183,6 +196,18 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
                 docToRemove: null       // set by successful request.
             }
         },
+        getExtraAccessTokens: {
+            type: "kettle.test.request.http",
+            options: {
+                port: "5984",
+                hostname: "couchdb",
+                path: "/gpii/_design/views/_view/findAuthorizationByAccessToken",
+                method: "GET",
+                expectedStatusCodes: [200, 404],
+                extraGpiiKeys: gpii.tests.productionConfigTesting.loginGpiiKeys,
+                tokensToRemove: []       // set by successful request.
+            }
+        },
         deleteInBulk: {
             type: "kettle.test.request.http",
             options: {
@@ -207,6 +232,11 @@ gpii.tests.productionConfigTesting.getPrefsSafeDoc = function (prefsSafeRequest,
         fluid.log("No Prefs Safe to retrieve for GPII key " + prefsSafeRequest.options.gpiiKey);
     }
     prefsSafeRequest.send(null, { port: 5984 });
+};
+
+gpii.tests.productionConfigTesting.deleteAllExtraRecords = function (bulkDeleteRequest, docsToRemove, loginTokensToRemove) {
+    var allDocsToRemove = docsToRemove.concat(loginTokensToRemove);
+    gpii.tests.productionConfigTesting.bulkDelete(bulkDeleteRequest, allDocsToRemove);
 };
 
 gpii.test.runServerTestDefs(gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests);
