@@ -199,6 +199,11 @@ From your project's top-level directory (where the `Vagrantfile` and `package.js
 The `test:vagrantProduction` target uses the `vagrantCloudBasedContainers.sh` script to spin up docker container-based
 GPII components inside the VM.
 
+**WARNING:** There is also a `test:productionConfig` npm script but do not run it
+directly.  It is used to execute the production tests *within* the docker container-based GPII components
+created by `vagrantCloudBasedContainers.sh`.  It is executed as the last step of
+`vagrantCloudBasedContainers.sh`.
+
 You can also run `vagrant ssh` to connect to the VM (or open the VirtualBox console and interface with the desktop
 environment) and run the tests manually if you wish.
 
@@ -223,15 +228,10 @@ manager when fetching or updating user settings, so there are extended requireme
 These tests are a supplement to the `all-tests.js` (and hence not part of that test suite) and should be run separately
 when testing the system and having the below requirements available.
 
-Requirements:
+The tests are run in one of two ways, using the following commands:
 
-* an internet connection
-* a cloud based flow manager running at `http://flowmanager.gpii.net` containing at least the following (unmodified)
-  preference set: `testUser1`
-
-The tests are run using the following command:
-
-`GPII_CLOUD_URL="http://flowmanager.gpii.net" node tests/ProductionConfigTests.js`
+1. From a host machine running a guest VM: `npm run test:vagrantProduction`
+2. From within the VM: `./scripts/vagrantCloudBasedContainers.sh`
 
 ### Coverage Reporting
 
