@@ -157,7 +157,7 @@ gpii.accessTokens.flush = function (options) {
 };
 
 /**
- * Create and execute the steps to archive are delete the access tokens.
+ * Create and execute the steps to delete the access tokens.
  */
 gpii.accessTokens.deleteAccessTokens = function () {
     var options = gpii.accessTokens.initOptions(process.argv);
