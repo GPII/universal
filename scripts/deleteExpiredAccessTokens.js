@@ -23,6 +23,8 @@ var http = require("http"),
     url = require("url"),
     fluid = require("infusion");
 
+fluid.require("%gpii-universal/scripts/shared/dbRequestUtils.js");
+
 var gpii = fluid.registerNamespace("gpii");
 fluid.registerNamespace("gpii.accessTokens");
 
@@ -30,7 +32,7 @@ fluid.setLogging(fluid.logLevel.INFO);
 
 // Handle command line
 if (process.argv.length < 3) {
-    fluid.log("Usage: node deleteAccessTokens.js $COUCHDB_URL [--deleteAll]");
+    fluid.log("Usage: node deleteExpiredAccessTokens.js $COUCHDB_URL [--deleteAll]");
     process.exit(1);
 }
 
@@ -74,85 +76,6 @@ gpii.accessTokens.initOptions = function (processArgv) {
 };
 
 /**
- * Response handler function used for the callback argument of an
- * {http.ClientRequest}.
- * @callback ResponseCallback
- * @param {http.IncomingMessage} response - Response object.
- */
-
-/**
- * Function that processes the data passed via the {ResponseCallback}.
- * @callback ResponseDataHandler
- * @param {String} responseString - The raw response data.
- * @param {Object} options - Other information used by this handler; documented
- *                           by specific data handler functions.
- */
-
-/**
- * POST request headers.
- * @typedef {Object} PostRequestHeaders
- * @property {String} Accept - "application/json" (constant).
- * @property {String} Content-Length - Computed and filled in per request (variable).
- * @property {String} Content-Type - "application/json" (constant).
- */
-
-/**
- * The POST request options for bulk updates.
- * @typedef {Object} PostRequestOptions
- * @property {String} hostname - The database host name (constant).
- * @property {String} port - The port associated with the URL (constant).
- * @property {String} path - The bulk documents command: "/gpii/_bulk_docs" (constant).
- * @property {String} auth - Authorization for access (constant).
- * @property {String} method - "POST" (constant).
- * @property {PostRequestHeaders} headers - The POST headers.
- */
-
-/**
- * Utility to configure a step:  Creates a response callback, binds it to an
- * http database request, and configures a promise to resolve/reject when the
- * response callback finishes or fails.
- * @param {Object} details - Specific information for the request and response.
- *                           These details are set appropriately by the caller:
- * @param {String} details.requestErrMsg - Error message to display on a request
- *                                         error.
- * @param {ResponseDataHandler} details.responseDataHandler -
- *                                  Function for processing the data returned in
- *                                  the response.
- * @param {String} details.responseErrMsg - Error message to display on a
- *                                          response error.
- * @param {Array} details.dataToPost - Optional: if present, a POST request is
- *                                     used.
- * @param {String} details.requestUrl - If not a POST request, the URL for a GET
- *                                      request.
- * @param {Object} options - Post request:
- * @param {PostRequestOptions} options.postOptions - If a POST request is used,
- *                                                   contains the specifics of
- *                                                   the request.
- * @return {Promise} - A promise that resolves the configured step.
- */
-gpii.accessTokens.configureStep = function (details, options) {
-    var togo = fluid.promise();
-    var response = gpii.accessTokens.createResponseHandler(
-        details.responseDataHandler,
-        options,
-        togo,
-        details.responseErrMsg
-    );
-    var request;
-    if (details.dataToPost) {
-        request = gpii.accessTokens.createPostRequest(
-            details.dataToPost, response, options
-        );
-    } else {
-        request = gpii.accessTokens.queryDatabase(
-            details.requestUrl, response, details.requestErrMsg
-        );
-    }
-    request.end();
-    return togo;
-};
-
-/**
  * Create the step that retrieves access tokens from the database:  either
  * only the expired tokens, or all of them.
  * @param {Object} options - Access tokens URL and whether to filter:
@@ -169,7 +92,7 @@ gpii.accessTokens.retrieveExpiredAccessTokens = function (options) {
         responseDataHandler: gpii.accessTokens.filterExpiredAccessTokens,
         responseErrMsg: "Error retrieving access tokens from database: "
     };
-    return gpii.accessTokens.configureStep(details, options);
+    return gpii.dbRequest.configureStep(details, options);
 };
 
 /**
@@ -207,104 +130,6 @@ gpii.accessTokens.filterExpiredAccessTokens = function (responseString, options)
 };
 
 /**
- * Given the expired access tokens, mark them for deletion.
- * @param {Array} tokens - Array of access tokens to delete from the database.
- * @return {Array} - the access tokens marked for deletion.
- */
-gpii.accessTokens.markAccessTokensForDeletion = function (tokens) {
-    fluid.each(tokens, function (aToken) {
-        aToken._deleted = true;
-    });
-    return tokens;
-};
-
-/**
- * Create an http request for a bulk docs POST request using the given data.
- * @param {Object} dataToPost - JSON data to POST and process in bulk.
- * @param {ResponseCallback} responseHandler - http response callback for the
- *                                             request.
- * @param {Object} options - Post request options:
- * @param {PostRequestOptions} options.postOptions - the POST request specifics.
- * @return {http.ClientRequest} - An http request object.
- */
-gpii.accessTokens.createPostRequest = function (dataToPost, responseHandler, options) {
-    var batchPostData = JSON.stringify({"docs": dataToPost});
-    options.postOptions.headers["Content-Length"] = Buffer.byteLength(batchPostData);
-    var batchDocsRequest = http.request(options.postOptions, responseHandler);
-    batchDocsRequest.write(batchPostData);
-    return batchDocsRequest;
-};
-
-/**
- * Generate a response handler, setting up the given promise to resolve/reject
- * at the correct time.
- * @param {ResponseDataHandler} handleEnd - Function that processes the response
- *                                          data when the response receives an
- *                                          "end" event.
- * @param {Object} options - Data loader options passed to `handleEnd()`.
- * @param {Promise} promise - Promise to resolve/reject on a response "end" or
- *                           "error" event.
- * @param {String} errorMsg - Optional error message to prepend to the error
- *                            received from a response "error" event.
- * @return {ResponseCallback} - Reponse callback function suitable for an http
- *                              request.
- */
-gpii.accessTokens.createResponseHandler = function (handleEnd, options, promise, errorMsg) {
-    if (!errorMsg) {
-        errorMsg = "";
-    }
-    return function (response) {
-        var responseString = "";
-
-        response.setEncoding("utf8");
-        response.on("data", function (chunk) {
-            responseString += chunk;
-        });
-        response.on("end", function () {
-            if (response.statusCode >= 400) {   // error
-                var fullErrorMsg = errorMsg +
-                                   response.statusCode + " - " +
-                                   response.statusMessage;
-                // Document-not-found or 404 errors include a reason in the
-                // response.
-                // http://docs.couchdb.org/en/stable/api/basics.html#http-status-codes
-                if (response.statusCode === 404) {
-                    fullErrorMsg = fullErrorMsg + ", " +
-                                   JSON.parse(responseString).reason;
-                }
-                promise.reject(fullErrorMsg);
-            }
-            else {
-                var value = handleEnd(responseString, options);
-                promise.resolve(value);
-            }
-        });
-        response.on("error", function (e) {
-            fluid.log(errorMsg + e.message);
-            promise.reject(e);
-        });
-    };
-};
-
-/**
- * General mechanism to create a database request, set up an error handler and
- * return.  It is up to the caller to trigger the request by calling its end()
- * function.
- * @param {String} databaseURL - URL to query the database with.
- * @param {ResponseCallback} handleResponse - callback that processes the
- *                                            response from the request.
- * @param {String} errorMsg - optional error message for request errors.
- * @return {http.ClientRequest} - The http request object.
- */
-gpii.accessTokens.queryDatabase = function (databaseURL, handleResponse, errorMsg) {
-    var aRequest = http.request(databaseURL, handleResponse);
-    aRequest.on("error", function (e) {
-        fluid.log(errorMsg + e.message);
-    });
-    return aRequest;
-};
-
-/**
  * Log how many accesss tokens were deleted.
  * @param {String} responseString - Response from the database (ignored)
  * @param {Object} options - Object containing the set of access tokens:
@@ -323,12 +148,12 @@ gpii.accessTokens.logDeletion = function (responseString, options) {
  * @return {Promise} - The promise that resolves the deletion.
  */
 gpii.accessTokens.flush = function (options) {
-    gpii.accessTokens.markAccessTokensForDeletion(options.accessTokens);
+    gpii.dbRequest.markDocsForDeletion(options.accessTokens);
     var details = {
         dataToPost: options.accessTokens,
         responseDataHandler: gpii.accessTokens.logDeletion
     };
-    return gpii.accessTokens.configureStep(details, options);
+    return gpii.dbRequest.configureStep(details, options);
 };
 
 /**
