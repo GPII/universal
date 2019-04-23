@@ -19,8 +19,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 //
 "use strict";
 
-var http = require("http"),
-    url = require("url"),
+var url = require("url"),
     fluid = require("infusion");
 
 fluid.require("%gpii-universal/scripts/shared/dbRequestUtils.js");
