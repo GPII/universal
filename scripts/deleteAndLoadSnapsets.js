@@ -53,7 +53,7 @@ gpii.dataLoader.initOptions = function (processArgv) {
     dbOptions.staticDataDir = processArgv[3];
     dbOptions.buildDataDir = processArgv[4];
     // for debugging
-    dbOptions.justDelete = processArgv.length > 5 && processArgv[5] === "--justDelete";
+    dbOptions.justDelete = fluid.contains(processArgv, "--justDelete");
 
     // Set up database specific options
     dbOptions.viewsUrl = dbOptions.couchDbUrl + "/_design/views";
