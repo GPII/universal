@@ -13,8 +13,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // 2. Delete them from the database,
 // A sample command that runs this script:
 // node deleteExpiredAccessTokens.js $COUCHDBURL [--deleteAll]
-//
-// The optional [--deleteAll] argument removes all of the access token records
+// where COUCHDBURL is the url to database, e.g. http://localhost:5984/gpii
+// The optional --deleteAll argument removes all of the access token records
 // regardless of their time of expiration.
 //
 "use strict";
@@ -96,8 +96,9 @@ gpii.accessTokens.retrieveExpiredAccessTokens = function (options) {
 
 /**
  * Given all the access tokens from the database, filter out only the ones that
- * have expired and store them in an array.  The filter is not applied if the
- * options specify otherwise.
+ * have expired and store them in an array.  If the "options" argument's
+ * "deleteAll" flag is set, no filtering is done and all of the access tokens are
+ * returned.
  * @param {String} responseString - the response from the request to get all the
  *                                  acess tokens.
  * @param {Object} options - Where to store the to-be-deleted access tokens and
