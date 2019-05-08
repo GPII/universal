@@ -4962,7 +4962,13 @@
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             "type": "string",
-                            "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg"
+                            "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg",
+                            "path": {
+                                "transform": {
+                                    "type": "fluid.transforms.literalValue",
+                                    "input": "pvParam"
+                                }
+                            }
                         }
                     }
                 },
@@ -4972,12 +4978,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Image",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam"
-                            }
                         }
                     }
                 },
@@ -5022,7 +5022,13 @@
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             "type": "string",
-                            "default": ""
+                            "default": "",
+                            "path": {
+                                "transform": {
+                                    "type": "fluid.transforms.literalValue",
+                                    "input": "pvParam"
+                                }
+                            }
                         }
                     }
                 },
@@ -5032,12 +5038,6 @@
                             "type": "fluid.transforms.literalValue",
                             "input": "",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam"
-                            }
                         }
                     }
                 },
@@ -6158,7 +6158,13 @@
                             "title": "Filter keys",
                             "description": "Enable/Disable filter keys",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "path": {
+                                "transform": {
+                                    "type": "fluid.transforms.literalValue",
+                                    "input": "pvParam.dwFlags.FKF_FILTERKEYSON"
+                                }
+                            }
                         }
                     },
                     "SlowKeysInterval": {
@@ -6168,7 +6174,13 @@
                             "type": "number",
                             "default": 0,
                             // 0 means no interval time
-                            "divisibleBy": 1
+                            "divisibleBy": 1,
+                            "path": {
+                                "transform": {
+                                    "type": "fluid.transforms.literalValue",
+                                    "input": "pvParam.iWaitMSec"
+                                }
+                            }
                         }
                     },
                     "BounceKeysInterval": {
@@ -6177,7 +6189,13 @@
                             "description": "Bounce keys interval time in milliseconds",
                             "type": "number",
                             "default": 0,
-                            "divisibleBy": 1
+                            "divisibleBy": 1,
+                            "path": {
+                                "transform": {
+                                    "type": "fluid.transforms.literalValue",
+                                    "input": "pvParam.iBounceMSec"
+                                }
+                            }
                         }
                     }
                 },
@@ -6191,12 +6209,6 @@
                             "right": false,
                             "operator": "||",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.dwFlags.FKF_FILTERKEYSON"
-                            }
                         }
                     },
                     "SlowKeysInterval": {
@@ -6212,12 +6224,6 @@
                             },
                             "false": 0,
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iWaitMSec"
-                            }
                         }
                     },
                     "BounceKeysInterval": {
@@ -6249,12 +6255,6 @@
                             },
                             "false": 0,
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iBounceMSec"
-                            }
                         }
                     }
                 },
@@ -6365,7 +6365,13 @@
                             "title": "High Contrast",
                             "description": "Whether to enable/disable High Contrast",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "path": {
+                                "transform": {
+                                    "type": "fluid.transforms.literalValue",
+                                    "input": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+                                }
+                            }
                         }
                     }
                 },
@@ -6399,12 +6405,6 @@
                                 }
                             },
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
-                            }
                         }
                     }
                 },
@@ -6875,7 +6875,13 @@
                             "title": "Mouse keys",
                             "description": "Enable/Disable mouse keys",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "path": {
+                                "transform": {
+                                    "type": "fluid.transforms.literalValue",
+                                    "input": "pvParam.dwFlags.MKF_MOUSEKEYSON"
+                                }
+                            }
                         }
                     },
                     "MaxSpeed": {
@@ -6883,7 +6889,13 @@
                             "title": "Mouse keys speed",
                             "description": "Speed of mouse keys",
                             "type": "number",
-                            "divisibleBy": 10
+                            "divisibleBy": 10,
+                            "path": {
+                                "transform": {
+                                    "type": "fluid.transforms.literalValue",
+                                    "input": "pvParam.iMaxSpeed"
+                                }
+                            }
                         }
                     },
                     "Acceleration": {
@@ -6893,7 +6905,13 @@
                             "type": "number",
                             "min": -1000,
                             // TODO: Not clear how to describe this setting
-                            "max": 1000
+                            "max": 1000,
+                            "path": {
+                                "transform": {
+                                    "type": "fluid.transforms.literalValue",
+                                    "input": "pvParam.iTimeToMaxSpeed"
+                                }
+                            }
                         }
                     }
                 },
@@ -6903,12 +6921,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulation/enabled",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.dwFlags.MKF_MOUSEKEYSON"
-                            }
                         }
                     },
                     "MaxSpeed": {
@@ -6923,12 +6935,6 @@
                                 }
                             },
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iMaxSpeed"
-                            }
                         }
                     },
                     "Acceleration": {
@@ -6952,12 +6958,6 @@
                                 }
                             },
                             "operator": "+"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iTimeToMaxSpeed"
-                            }
                         }
                     }
                 },
