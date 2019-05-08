@@ -14,7 +14,7 @@
 
 GPII_APP_DIR=${GPII_APP_DIR:-"/app"}
 GPII_COUCHDB_URL=${GPII_COUCHDB_URL:-"http://couchdb:5984/gpii"}
-DELETE_ALL_FLAG=${DELETE_ALL_FLAG:-""}
+DELETE_ALL=${DELETE_ALL:-""}
 
 GPII_COUCHDB_URL_SANITIZED=$(echo "${GPII_COUCHDB_URL}" | sed -e 's,\(://\)[^/]*\(@\),\1<SENSITIVE>\2,g')
 
@@ -24,7 +24,7 @@ log() {
 
 log "Delete expired access tokens: starting..."
 log "CouchDB: ${GPII_COUCHDB_URL_SANITIZED}"
-log "Delete all flag: ${DELETE_ALL_FLAG}"
+log "Delete all flag: ${DELETE_ALL}"
 
-node ${GPII_APP_DIR}/scripts/deleteExpiredAccessTokens.js ${GPII_COUCHDB_URL} ${DELETE_ALL_FLAG}
+node ${GPII_APP_DIR}/scripts/deleteExpiredAccessTokens.js ${GPII_COUCHDB_URL} ${DELETE_ALL}
 
