@@ -32,7 +32,7 @@ log "CouchDB: ${GPII_COUCHDB_URL_SANITIZED}"
 log "Delete all flag: ${DELETE_ALL}"
 
 log "Waiting for couchdb to be ready"
-for ((i=0; i<$COUCHDB_HEALTHCHECK_RETRIES; i++));
+for i in `seq 1 $COUCHDB_HEALTHCHECK_RETRIES`
 do
     RET_CODE=$(curl --write-out '%{http_code}' --silent --output /dev/null "${GPII_COUCHDB_URL_ROOT}/_up")
     if [ "$RET_CODE" = '200' ]; then
@@ -44,6 +44,6 @@ done
 node ${DELETE_ACCESS_TOKENS_JS} ${GPII_COUCHDB_URL} ${DELETE_ALL}
 RET_CODE=$?
 if [ "${RET_CODE}" != '0' ]; then
-  log "${DELETE_ACCESS_TOKENS_JS} failed with exit code ${RET_CODE}, exiting"
+  log "${DELETE_ACCESS_TOKENS_JS} failed with exit code ${RET_CODE}"
 fi
 exit "${RET_CODE}"
