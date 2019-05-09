@@ -88,7 +88,7 @@ gpii.dbRequest.configureStep = function (details, options) {
         );
     } else {
         request = gpii.dbRequest.queryDatabase(
-            details.requestUrl, response, details.requestErrMsg
+            details.requestUrl, response, details.requestErrMsg, togo
         );
     }
     request.end();
@@ -171,12 +171,14 @@ gpii.dbRequest.createResponseHandler = function (handleEnd, options, promise, er
  * @param {ResponseCallback} handleResponse - callback that processes the
  *                                            response from the request.
  * @param {String} errorMsg - optional error message for request errors.
+ * @param {Promise} promise - promise to reject on a request error.
  * @return {http.ClientRequest} - The http request object.
  */
-gpii.dbRequest.queryDatabase = function (databaseURL, handleResponse, errorMsg) {
+gpii.dbRequest.queryDatabase = function (databaseURL, handleResponse, errorMsg, promise) {
     var aRequest = http.request(databaseURL, handleResponse);
     aRequest.on("error", function (e) {
         fluid.log(errorMsg + e.message);
+        promise.reject(e);
     });
     return aRequest;
 };
