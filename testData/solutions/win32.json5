@@ -4963,12 +4963,7 @@
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             "type": "string",
                             "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg",
-                            "path": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "input": "pvParam"
-                                }
-                            }
+                            "path": "pvParam"
                         }
                     }
                 },
@@ -4978,6 +4973,12 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Image",
                             "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
                         }
                     }
                 },
@@ -5023,12 +5024,7 @@
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             "type": "string",
                             "default": "",
-                            "path": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "input": "pvParam"
-                                }
-                            }
+                            "path": "pvParam"
                         }
                     }
                 },
@@ -5038,6 +5034,12 @@
                             "type": "fluid.transforms.literalValue",
                             "input": "",
                             "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
                         }
                     }
                 },
@@ -6159,12 +6161,7 @@
                             "description": "Enable/Disable filter keys",
                             "type": "boolean",
                             "default": false,
-                            "path": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "input": "pvParam.dwFlags.FKF_FILTERKEYSON"
-                                }
-                            }
+                            "path": "pvParam.dwFlags.FKF_FILTERKEYSON"
                         }
                     },
                     "SlowKeysInterval": {
@@ -6175,12 +6172,7 @@
                             "default": 0,
                             // 0 means no interval time
                             "divisibleBy": 1,
-                            "path": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "input": "pvParam.iWaitMSec"
-                                }
-                            }
+                            "path": "http://registry\\.gpii\\.net/common/slowKeysInterval"
                         }
                     },
                     "BounceKeysInterval": {
@@ -6190,12 +6182,7 @@
                             "type": "number",
                             "default": 0,
                             "divisibleBy": 1,
-                            "path": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "input": "pvParam.iBounceMSec"
-                                }
-                            }
+                            "path": "pvParam.iBounceMSec"
                         }
                     }
                 },
@@ -6209,6 +6196,12 @@
                             "right": false,
                             "operator": "||",
                             "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.dwFlags.FKF_FILTERKEYSON"
+                            }
                         }
                     },
                     "SlowKeysInterval": {
@@ -6224,6 +6217,12 @@
                             },
                             "false": 0,
                             "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iWaitMSec"
+                            }
                         }
                     },
                     "BounceKeysInterval": {
@@ -6255,6 +6254,12 @@
                             },
                             "false": 0,
                             "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iBounceMSec"
+                            }
                         }
                     }
                 },
@@ -6366,12 +6371,7 @@
                             "description": "Whether to enable/disable High Contrast",
                             "type": "boolean",
                             "default": false,
-                            "path": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "input": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
-                                }
-                            }
+                            "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
                         }
                     }
                 },
@@ -6405,6 +6405,12 @@
                                 }
                             },
                             "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+                            }
                         }
                     }
                 },
@@ -6876,12 +6882,7 @@
                             "description": "Enable/Disable mouse keys",
                             "type": "boolean",
                             "default": false,
-                            "path": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "input": "pvParam.dwFlags.MKF_MOUSEKEYSON"
-                                }
-                            }
+                            "path": "pvParam.dwFlags.MKF_MOUSEKEYSON"
                         }
                     },
                     "MaxSpeed": {
@@ -6890,12 +6891,7 @@
                             "description": "Speed of mouse keys",
                             "type": "number",
                             "divisibleBy": 10,
-                            "path": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "input": "pvParam.iMaxSpeed"
-                                }
-                            }
+                            "path": "pvParam.iMaxSpeed"
                         }
                     },
                     "Acceleration": {
@@ -6906,12 +6902,7 @@
                             "min": -1000,
                             // TODO: Not clear how to describe this setting
                             "max": 1000,
-                            "path": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "input": "pvParam.iTimeToMaxSpeed"
-                                }
-                            }
+                            "path": "pvParam.iTimeToMaxSpeed"
                         }
                     }
                 },
@@ -6921,6 +6912,12 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulation/enabled",
                             "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.dwFlags.MKF_MOUSEKEYSON"
+                            }
                         }
                     },
                     "MaxSpeed": {
@@ -6935,6 +6932,12 @@
                                 }
                             },
                             "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iMaxSpeed"
+                            }
                         }
                     },
                     "Acceleration": {
@@ -6958,6 +6961,12 @@
                                 }
                             },
                             "operator": "+"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iTimeToMaxSpeed"
+                            }
                         }
                     }
                 },
@@ -7016,7 +7025,11 @@
                                 "off",
                                 "on"
                             ],
-                            "default": 0
+                            "default": 0,
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
                         }
                     }
                 },
@@ -7069,7 +7082,11 @@
                                     "enum": [4294967295],
                                     "enumLabels": ["full-page"]
                                 }
-                            ]
+                            ],
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
                         }
                     }
                 },
@@ -7111,7 +7128,8 @@
                             "description": "Changes the way mouse scrolling is passed to applications.",
                             "type": "string",
                             "enum": [0, 1],
-                            "enumLabels": ["RoutingFocus", "RoutingHybrid"]
+                            "enumLabels": ["RoutingFocus", "RoutingHybrid"],
+                            "path": "pvParam"
                         }
                     }
                 },
@@ -7149,7 +7167,8 @@
                             "title": "Mouse cursor shadow",
                             "description": "Enables or disables mouse cursor shadow.",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "path": "pvParam"
                         }
                     }
                 },
@@ -7190,7 +7209,11 @@
                             "default": 3,
                             "minimum": 1,
                             "maximum": 100,
-                            "divisibleBy": 1
+                            "divisibleBy": 1,
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
                         }
                     }
                 },
@@ -7231,7 +7254,8 @@
                             "title": "Mouse Windows tracking",
                             "description": "Windows are focused when mouse is stopped over them.",
                             "type": "boolean",
-                            "default": 0
+                            "default": 0,
+                            "path": "pvParam"
                         }
                     }
                 },
@@ -7269,7 +7293,8 @@
                             "title": "Windows Tracking",
                             "description": "Windows receive focus when mouse hovers over them.",
                             "type": "boolean",
-                            "default": 0
+                            "default": 0,
+                            "path": "pvParam"
                         }
                     }
                 },
@@ -7307,7 +7332,11 @@
                             "title": "Configures Window arrangement",
                             "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
                             "type": "boolean",
-                            "default": 1
+                            "default": 1,
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
                         }
                     }
                 },
@@ -7382,7 +7411,8 @@
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 20,
-                            "default": 10
+                            "default": 10,
+                            "path": "pvParam"
                         }
                     }
                 },
@@ -7422,7 +7452,8 @@
                             "title": "Enhance pointer precision",
                             "description": "Enable/Disables enhanced pointer precision.",
                             "type": "boolean",
-                            "default": 1
+                            "default": 1,
+                            "path": "pvParam"
                         }
                     }
                 },
@@ -7463,7 +7494,11 @@
                             "title": "Snap To",
                             "description": "Automatically move pointer to the default button in a dialogue.",
                             "type": "boolean",
-                            "default": 0
+                            "default": 0,
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
                         }
                     }
                 },
@@ -7504,7 +7539,8 @@
                             "title": "Hide pointer while typing",
                             "description": "Enable/Disables hiding the pointer while typing.",
                             "type": "boolean",
-                            "default": 1
+                            "default": 1,
+                            "path": "pvParam"
                         }
                     }
                 },
@@ -7542,7 +7578,8 @@
                             "title": "Mouse sonar",
                             "description": "Enable/Disable showing mouse location when pressing the CTRL key.",
                             "type": "boolean",
-                            "default": 0
+                            "default": 0,
+                            "path": "pvParam"
                         }
                     }
                 },
@@ -7702,7 +7739,11 @@
                             "type": "number",
                             "min": 0,
                             "max": 10,
-                            "divisibleBy": 1
+                            "divisibleBy": 1,
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
                         }
                     }
                 },
@@ -8757,7 +8798,11 @@
                     }
                 },
                 "supportedSettings": {
-                    "StickyKeysOn": {}
+                    "StickyKeysOn": {
+                        "schema": {
+                            "path": "pvParam.dwFlags.SKF_STICKYKEYSON"
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "StickyKeysOn": {
