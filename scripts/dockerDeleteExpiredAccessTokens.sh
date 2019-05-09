@@ -31,7 +31,7 @@ log "Delete expired access tokens: starting..."
 log "CouchDB: ${GPII_COUCHDB_URL_SANITIZED}"
 log "Delete all flag: ${DELETE_ALL}"
 
-log "Waiting for couchdb to be ready"
+log "Checking that CouchDB is ready..."
 for i in `seq 1 $COUCHDB_HEALTHCHECK_RETRIES`
 do
     RET_CODE=$(curl --write-out '%{http_code}' --silent --output /dev/null "${GPII_COUCHDB_URL_ROOT}/_up")
@@ -44,6 +44,6 @@ done
 node ${DELETE_ACCESS_TOKENS_JS} ${GPII_COUCHDB_URL} ${DELETE_ALL}
 RET_CODE=$?
 if [ "${RET_CODE}" != '0' ]; then
-  log "${DELETE_ACCESS_TOKENS_JS} failed with exit code ${RET_CODE}"
+    log "${DELETE_ACCESS_TOKENS_JS} failed with exit code ${RET_CODE}"
 fi
 exit "${RET_CODE}"
