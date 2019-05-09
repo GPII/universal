@@ -84,7 +84,7 @@ gpii.dbRequest.configureStep = function (details, options) {
     var request;
     if (details.dataToPost) {
         request = gpii.dbRequest.createPostRequest(
-            details.dataToPost, response, options
+            details.dataToPost, response, options, togo
         );
     } else {
         request = gpii.dbRequest.queryDatabase(
@@ -102,12 +102,17 @@ gpii.dbRequest.configureStep = function (details, options) {
  *                                             request.
  * @param {Object} options - Post request options:
  * @param {PostRequestOptions} options.postOptions - the POST request specifics.
+ * @param {Promise} promise - promise to reject on a request error.
  * @return {http.ClientRequest} - An http request object.
  */
-gpii.dbRequest.createPostRequest = function (dataToPost, responseHandler, options) {
+gpii.dbRequest.createPostRequest = function (dataToPost, responseHandler, options, promise) {
     var batchPostData = JSON.stringify({"docs": dataToPost});
     options.postOptions.headers["Content-Length"] = Buffer.byteLength(batchPostData);
     var batchDocsRequest = http.request(options.postOptions, responseHandler);
+    batchDocsRequest.on("error", function (e) {
+        fluid.log("Error with bulk 'docs' POST request: " + e);
+        promise.reject(e);
+    });
     batchDocsRequest.write(batchPostData);
     return batchDocsRequest;
 };
