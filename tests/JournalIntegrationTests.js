@@ -164,6 +164,16 @@ gpii.tests.journal.initialSettings = {
                 "options": {
                     "functionName": "DoubleClickHeight"
                 }
+            },
+            {
+                "settings": {
+                    "Volume": {
+                        "value": 0.5
+                    }
+                },
+                "options": {
+                    "functionName": "Volume"
+                }
             }
         ]
     }

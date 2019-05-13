@@ -37,20 +37,34 @@ gpii.tests.development.testLogoutResponse = function (response, gpiiKey) {
         gpiiKey + " was successfully logged out.", response);
 };
 
-gpii.tests.development.commonTestSequence = [{
-    func: "{loginRequest}.send"
-}, {
-    event: "{loginRequest}.events.onComplete",
-    listener: "gpii.tests.development.testLoginResponse",
-    args: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey"]
-}, {
-    func: "{logoutRequest}.send"
-}, {
-    event: "{logoutRequest}.events.onComplete",
-    listener: "gpii.tests.development.testLogoutResponse",
-    args: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey"]
-}];
+fluid.defaults ("gpii.tests.development.loginLogout", {
+    gradeNames: ["fluid.test.sequenceElement"],
+    sequence: [
+        {
+            func: "{loginRequest}.send"
+        }, {
+            event: "{loginRequest}.events.onComplete",
+            listener: "gpii.tests.development.testLoginResponse",
+            args: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey"]
+        }, {
+            func: "{logoutRequest}.send"
+        }, {
+            event: "{logoutRequest}.events.onComplete",
+            listener: "gpii.tests.development.testLogoutResponse",
+            args: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey"]
+        }
+    ]
+});
 
+fluid.defaults ("gpii.tests.development.commonTestSequence", {
+    gradeNames: ["gpii.test.couchSequenceGrade"],
+    sequenceElements: {
+        loginLogout: {
+            gradeNames: "gpii.tests.development.loginLogout",
+            priority: "after:startCouch"
+        }
+    }
+});
 
 gpii.tests.development.testDefs = [{
     name: "Flow Manager test: Key in and key out with an existing GPII key",
@@ -60,7 +74,7 @@ gpii.tests.development.testDefs = [{
         configPath: "%gpii-universal/gpii/configs/shared"
     },
     gpiiKey: "testUser1",
-    sequence: gpii.tests.development.commonTestSequence
+    sequenceGrade: "gpii.tests.development.commonTestSequence"
 }, {
     name: "Flow Manager test: Key in and key out with a nonexistent GPII key",
     expect: 2,
@@ -69,5 +83,5 @@ gpii.tests.development.testDefs = [{
         configPath: "%gpii-universal/gpii/configs/shared"
     },
     gpiiKey: "nonexistent_gpii_key",
-    sequence: gpii.tests.development.commonTestSequence
+    sequenceGrade: "gpii.tests.development.commonTestSequence"
 }];

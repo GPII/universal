@@ -98,6 +98,16 @@ gpii.tests.windows.builtIn = [
                         "options": {
                             "functionName": "DoubleClickHeight"
                         }
+                    },
+                    {
+                        "settings": {
+                            "Volume": {
+                                "value": 0.7
+                            }
+                        },
+                        "options": {
+                            "functionName": "Volume"
+                        }
                     }
                 ]
             },

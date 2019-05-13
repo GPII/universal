@@ -226,6 +226,11 @@
                         "UseTextPrediction": 0,
                         "InsertSpace": 0,
                         "Dock": 0
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.volumeControl": {
+                        "Volume": {
+                            "value": 0.7
+                        }
                     }
                 }
             }
