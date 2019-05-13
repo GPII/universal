@@ -1,0 +1,14 @@
+windows-brightness-testSpec.js
+
+Description:
+This tests the Windows 10 built in functionality brightness, this feature is hardware
+dependent and isn't available in VMs, so it is isolated in its own file.
+
+Requirements:
+
+* Being on a windows 10 machine.
+* Having a screen which allows changing its brightness by software.
+* Having compatible graphics hardware.
+
+As long as the system is able to change brightness using the system interface,
+this feature should be available in that system, and tests could be exercised there.
