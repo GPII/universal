@@ -4750,7 +4750,8 @@
                             "method": "WmiSetBrightness",
                             "params": [0xFFFFFFFF, "$value"],
                             "returnVal": ["uint", 0]
-                        }
+                        },
+                        "settingType": "uint"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -4787,7 +4788,9 @@
         ],
         "isInstalled": [
             {
-                "type": "gpii.deviceReporter.alwaysInstalled"
+                "type": "gpii.deviceReporter.wmiSettingSupported",
+                "namespace": "root\\WMI",
+                "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
             }
         ]
     },
@@ -6429,7 +6432,7 @@
                                 "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
                                 "%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
                                 "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
-                                "%SystemRoot%\\resources\\Ease of Access Themes\\yellowOnBlack.theme",
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\blackOnYellow.theme",
                                 "%SystemRoot%\\resources\\Ease of Access Themes\\hc2.theme",
                                 "%SystemRoot%\\resources\\Ease of Access Themes\\blackOnBrown.theme",
                                 "%SystemRoot%\\resources\\Ease of Access Themes\\grayOnDark.theme",
@@ -9098,9 +9101,7 @@
         ]
     },
     "com.microsoft.windows.volumeControl": {
-        // This solution has not yet been implemented but has been mocked in the solutions registry to aid
-        // presentation of the PSP's volume control referenced by one of the standard snapsets
-        "name": "GPII Test solution for volume control of the computer",
+        "name": "Windows 10 system volume",
         "contexts": {
             "OS": [
                 {
@@ -9111,18 +9112,44 @@
         },
         "settingsHandlers": {
             "configure": {
-                "type": "gpii.settingsHandlers.noSettings",
+                "type": "gpii.windows.nativeSettingsHandler",
                 "liveness": "live",
-                "capabilitiesTransformations": {
-                    "volume": "http://registry\\.gpii\\.net/common/volume"
+                "options": {
+                    "functionName": "Volume"
                 },
                 "supportedSettings": {
-                    "volume": {}
+                    "Volume": {
+                        "schema": {
+                            "title": "System volume",
+                            "description": "Changes the current system volume.",
+                            "type": "number",
+                            "default": 0.5,
+                            "minimum": 0,
+                            "maximum": 1,
+                            "multipleOf": 0.01
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "Volume": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/volume": "Volume.value"
                 }
             }
         },
-        "configure": ["settings.configure"],
-        "restore": [],
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
         "start": [],
         "stop": [],
         "isInstalled": [
