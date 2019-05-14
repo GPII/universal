@@ -2062,6 +2062,8 @@
                             "title": "Synthesizer",
                             "description": "The synthesizer to use/ Available synthesizers are listed in JfW.INI",
                             "type": "string",
+                            "enum": ["Synth1"],
+                            "enumLabels": ["Default speech synthesizer"],
                             "default": "Synth1"
                         }
                     },
