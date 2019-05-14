@@ -2859,7 +2859,6 @@
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
                 "supportedSettings": {
-                    "Options.PrimarySynthesizer": {},
                     "ENU-Global.Pitch": {
                         "schema": {
                             "title": "Pitch",
@@ -3120,7 +3119,6 @@
                     }
                 },
                 "capabilitiesTransformations": {
-                    "Options\\.PrimarySynthesizer": "http://registry\\.gpii\\.net/common/speechSynthesizer",
                     "ENU-Global\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "ENU-JAWSCursor\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "ENU-Keyboard\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
@@ -3429,7 +3427,6 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/speechSynthesizer": "Options\\.PrimarySynthesizer",
                     "http://registry\\.gpii\\.net/common/speechRate": "ENU-Global\\.Rate",
                     "http://registry\\.gpii\\.net/common/pitch": {
                         "transform": {
