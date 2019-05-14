@@ -22,7 +22,7 @@
     "options": {
         "components": {
             "harness": {
-                "type": "gpii.test.couchdb.harness.persistent",
+                "type": "gpii.test.couchdb.harness",
                 "options": {
                     "databases": {
                         "gpii": {
