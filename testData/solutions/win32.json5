@@ -9048,8 +9048,8 @@
                         "schema": {
                             "title": "Show Text Suggestions",
                             "description": "Show text suggestions while typing.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"],
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"],
                             "default": true
                         }
                     }
