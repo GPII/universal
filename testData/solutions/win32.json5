@@ -4961,8 +4961,14 @@
                         "schema": {
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
-                            "type": "string",
-                            "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg"
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string"},
+                                "value": {
+                                    "type": "string",
+                                    "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg"
+                                }
+                            }
                         }
                     }
                 },
@@ -5021,8 +5027,15 @@
                         "schema": {
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
-                            "type": "string",
-                            "default": ""
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "type": "string",
+                                    "required": true,
+                                    "default": ""
+                                }
+                            }
                         }
                     }
                 },
@@ -6248,17 +6261,30 @@
                         "schema": {
                             "title": "Filter keys",
                             "description": "Enable/Disable filter keys",
-                            "type": "boolean",
-                            "default": false
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     },
                     "SlowKeysInterval": {
                         "schema": {
                             "title": "Slow keys interval",
                             "description": "Slow keys interval time in milliseconds",
-                            "type": "integer",
-                            "default": 0
-                            // 0 means no interval time
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "default": 0 // 0 means no interval time
+                                }
+                            }
                         }
                     },
                     "BounceKeysInterval": {
@@ -6453,8 +6479,15 @@
                         "schema": {
                             "title": "High Contrast",
                             "description": "Whether to enable/disable High Contrast",
-                            "type": "boolean",
-                            "default": false
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     }
                 },
@@ -6996,8 +7029,15 @@
                         "schema": {
                             "title": "Mouse keys",
                             "description": "Enable/Disable mouse keys",
-                            "type": "boolean",
-                            "default": false
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     },
                     "MaxSpeed": {
@@ -7130,15 +7170,22 @@
                         "schema": {
                             "title": "Swap mouse primary button",
                             "description": "Swap mouse left/right buttons",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [
+                                        0,
+                                        1
+                                    ],
+                                    "enumLabels": [
+                                        "off",
+                                        "on"
+                                    ],
+                                    "default": 0
+                                }
+                            }
                         }
                     }
                 },
@@ -7178,20 +7225,27 @@
                         "schema": {
                             "title": "Mouse scroll wheel mode",
                             "description": "Changes the number of lines to scroll when moving the scrollwheel.",
-                            "default": 3,
-                            "oneOf": [
-                                {
-                                    "title": "Range of accepted regular values",
-                                    "type": "integer",
-                                    "minimum": 1,
-                                    "maximum": 100
-                                },
-                                {
-                                    "title": "Values with special meaning",
-                                    "enum": [4294967295],
-                                    "enumLabels": ["full-page"]
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "default": 3,
+                                    "oneOf": [
+                                        {
+                                            "title": "Range of accepted regular values",
+                                            "type": "integer",
+                                            "minimum": 1,
+                                            "maximum": 100
+                                        },
+                                        {
+                                            "title": "Values with special meaning",
+                                            "enum": [4294967295],
+                                            "enumLabels": ["full-page"]
+                                        }
+                                    ]
                                 }
-                            ]
+                            }
                         }
                     }
                 },
@@ -7231,8 +7285,15 @@
                         "schema": {
                             "title": "Mouse scroll focus routing",
                             "description": "Changes the way mouse scrolling is passed to applications.",
-                            "enum": [0, 1],
-                            "enumLabels": ["RoutingFocus", "RoutingHybrid"]
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["RoutingFocus", "RoutingHybrid"]
+                                }
+                            }
                         }
                     }
                 },
@@ -7269,8 +7330,15 @@
                         "schema": {
                             "title": "Mouse cursor shadow",
                             "description": "Enables or disables mouse cursor shadow.",
-                            "type": "boolean",
-                            "default": false
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     }
                 },
@@ -7307,10 +7375,17 @@
                         "schema": {
                             "title": "Mouse wheel horizontal scroll",
                             "description": "Changes the number of chars that are scrolled horizontally.",
-                            "type": "integer",
-                            "default": 3,
-                            "minimum": 1,
-                            "maximum": 100
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "default": 3,
+                                    "minimum": 1,
+                                    "maximum": 100
+                                }
+                            }
                         }
                     }
                 },
@@ -7350,9 +7425,16 @@
                         "schema": {
                             "title": "Mouse Windows tracking",
                             "description": "Windows are focused when mouse is stopped over them.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"],
-                            "default": 0
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 0
+                                }
+                            }
                         }
                     }
                 },
@@ -7389,9 +7471,16 @@
                         "schema": {
                             "title": "Windows Tracking",
                             "description": "Windows receive focus when mouse hovers over them.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"],
-                            "default": 0
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 0
+                                }
+                            }
                         }
                     }
                 },
@@ -7428,9 +7517,16 @@
                         "schema": {
                             "title": "Configures Window arrangement",
                             "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"],
-                            "default": 1
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 1
+                                }
+                            }
                         }
                     }
                 },
@@ -7501,10 +7597,17 @@
                         "schema": {
                             "title": "Configures pointer speed",
                             "description": "Selects a pointer speed.",
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 20,
-                            "default": 10
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 20,
+                                    "default": 10
+                                }
+                            }
                         }
                     }
                 },
@@ -7543,9 +7646,16 @@
                         "schema": {
                             "title": "Enhance pointer precision",
                             "description": "Enable/Disables enhanced pointer precision.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"],
-                            "default": 1
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 1
+                                }
+                            }
                         }
                     }
                 },
@@ -7585,9 +7695,16 @@
                         "schema": {
                             "title": "Snap To",
                             "description": "Automatically move pointer to the default button in a dialogue.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"],
-                            "default": 0
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 0
+                                }
+                            }
                         }
                     }
                 },
@@ -7627,9 +7744,16 @@
                         "schema": {
                             "title": "Hide pointer while typing",
                             "description": "Enable/Disables hiding the pointer while typing.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"],
-                            "default": 1
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 1
+                                }
+                            }
                         }
                     }
                 },
@@ -7666,9 +7790,16 @@
                         "schema": {
                             "title": "Mouse sonar",
                             "description": "Enable/Disable showing mouse location when pressing the CTRL key.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"],
-                            "default": 0
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 0
+                                }
+                            }
                         }
                     }
                 },
@@ -7825,9 +7956,16 @@
                             // Exactly the same schema as mouseTrailing common term
                             "title": "Mouse trails",
                             "description": "Amount of mouse trailing",
-                            "type": "integer",
-                            "minimum": 0,
-                            "maximum": 10
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 10
+                                }
+                            }
                         }
                     }
                 },
