@@ -4751,7 +4751,8 @@
                             "method": "WmiSetBrightness",
                             "params": [0xFFFFFFFF, "$value"],
                             "returnVal": ["uint", 0]
-                        }
+                        },
+                        "settingType": "uint"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -4788,7 +4789,9 @@
         ],
         "isInstalled": [
             {
-                "type": "gpii.deviceReporter.alwaysInstalled"
+                "type": "gpii.deviceReporter.wmiSettingSupported",
+                "namespace": "root\\WMI",
+                "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
             }
         ]
     },
@@ -9086,9 +9089,7 @@
         ]
     },
     "com.microsoft.windows.volumeControl": {
-        // This solution has not yet been implemented but has been mocked in the solutions registry to aid
-        // presentation of the PSP's volume control referenced by one of the standard snapsets
-        "name": "GPII Test solution for volume control of the computer",
+        "name": "Windows 10 system volume",
         "contexts": {
             "OS": [
                 {
@@ -9099,18 +9100,44 @@
         },
         "settingsHandlers": {
             "configure": {
-                "type": "gpii.settingsHandlers.noSettings",
+                "type": "gpii.windows.nativeSettingsHandler",
                 "liveness": "live",
-                "capabilitiesTransformations": {
-                    "volume": "http://registry\\.gpii\\.net/common/volume"
+                "options": {
+                    "functionName": "Volume"
                 },
                 "supportedSettings": {
-                    "volume": {}
+                    "Volume": {
+                        "schema": {
+                            "title": "System volume",
+                            "description": "Changes the current system volume.",
+                            "type": "number",
+                            "default": 0.5,
+                            "minimum": 0,
+                            "maximum": 1,
+                            "multipleOf": 0.01
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "Volume": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/volume": "Volume.value"
                 }
             }
         },
-        "configure": ["settings.configure"],
-        "restore": [],
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
         "start": [],
         "stop": [],
         "isInstalled": [
