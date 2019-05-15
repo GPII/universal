@@ -260,7 +260,27 @@ gpii.tests.windows.jaws.testDefs = [
                             "Options.SayAllMode": 1,
                             "Options.SayAllIndicateCaps": 0,
                             "Options.SayAllIgnoreShiftKeys": 0,
-                            "Options.TypingEcho": 3
+                            "Options.TypingEcho": 3,
+                            "Braille.AllDotsBrailleCursor": 0,
+                            "Braille.AttributeRotationDelay": 1000,
+                            "Braille.AutoPanMode": 255,
+                            "Braille.BrailleAutoDetectBluetooth": 0,
+                            "Braille.BrailleAutoRouteToCursor": 1,
+                            "Braille.BrailleCursorBlinkRate": 500,
+                            "Braille.BrailleKeyInterruptSpeech": 1,
+                            "Braille.BrailleMessages": 1,
+                            "Braille.BrailleMoveActiveCursor": 0,
+                            "Braille.BrailleSleepMode": 0,
+                            "Braille.ContractedBrailleInput": 0,
+                            "Braille.EightDotBraille": 1,
+                            "Braille.FilterControlCharacters": 1,
+                            "Braille.GeneralizeBullets": 0,
+                            "Braille.Grade2SuppressCapitalSigns": 0,
+                            "Braille.MessagePrefixes": 1,
+                            "Braille.MessageStatusText": "msg",
+                            "Braille.MessageTime": 5000,
+                            "Braille.ReversePanningButtons": 0,
+                            "Braille.StructuredModeReverseOrder": 0
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
