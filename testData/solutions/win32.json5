@@ -5144,78 +5144,104 @@
                 "supportedSettings": {
                     "AppStarting": {
                         schema: {
+                            title: "Application Startup Cursor",
+                            description: "The animated cursor that displays while an application is starting up.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_working.ani"
                         }
                     },
                     "Arrow": {
                         schema: {
+                            title: "Arrow Cursor",
+                            description: "The 'arrow' cursor icon.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_arrow.cur"
                         }
                     },
                     "Hand": {
                         schema: {
+                            title: "Hand Cursor",
+                            description: "The 'hand' cursor icon.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_link.cur"
                         }
                     },
                     "Help": {
                         schema: {
+                            title: "Help Cursor",
+                            description: "The 'help' cursor icon.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_helpsel.cur"
                         }
                     },
                     "No": {
                         schema: {
+                            title: "'No' Cursor",
+                            description: "The cursor icon used to indicate that the resource under the pointer cannot be clicked.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_unavail.cur"
                         }
                     },
                     "NWPen": {
                         schema: {
+                            title: "Pen Cursor",
+                            description: "The 'pen' cursor icon.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_pen.cur"
                         }
                     },
                     "SizeAll": {
                         schema: {
+                            title: "'Resize All' Cursor",
+                            description: "The 'resize all' cursor icon.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_move.cur"
                         }
                     },
                     "SizeNESW": {
                         schema: {
+                            title: "'Resize NESW' Cursor",
+                            description: "The 'resize NESW' cursor icon.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_nesw.cur"
                         }
                     },
                     "SizeNS": {
                         schema: {
+                            title: "'Resize Height' Cursor",
+                            description: "The 'resize height' cursor icon.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_ns.cur"
                         }
                     },
                     "SizeNWSE": {
                         schema: {
+                            title: "'Resize NWSE' Cursor",
+                            description: "The 'resize NWSE' cursor icon.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_nwse.cur"
                         }
                     },
                     "SizeWE": {
                         schema: {
+                            title: "'Resize WE' Cursor",
+                            description: "The 'resize WE' cursor icon.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_ew.cur"
                         }
                     },
                     "UpArrow": {
                         schema: {
+                            title: "'Up Arrow' Cursor",
+                            description: "The 'up arrow' cursor icon.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_up.cur"
                         }
                     },
                     "Wait": {
                         schema: {
+                            title: "'Wait' Cursor",
+                            description: "The cursor icon to display while the system is busy.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_busy.ani"
                         }
@@ -6552,7 +6578,14 @@
                     }
                 },
                 "supportedSettings": {
-                    "Pre-High Contrast Scheme": {}
+                    "Pre-High Contrast Scheme": {
+                        "schema": {
+                            "title": "Previous Scheme",
+                            "description": "The scheme that was used prior to selecting the high contrast theme.",
+                            "type": "string",
+                            "default": "C:\\Windows\\resources\\Themes\\aero.theme"
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/highContrast/enabled",
@@ -6627,15 +6660,21 @@
                     "http://registry\\.gpii\\.net/common/language"
                 ],
                 "capabilitiesTransformations": {
-                    "MachinePreferredUILanguages": {
+                    "MachinePreferredUILanguages": [{
                         "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/language"
                         }
-                    }
+                    }]
                 },
                 "supportedSettings": {
-                    "MachinePreferredUILanguages": {}
+                    "MachinePreferredUILanguages": {
+                        "schema": {
+                            "title": "The Machine Preferred UI Language",
+                            "description": "Machine Preferred UI language.",
+                            "type": "string"
+                        }
+                    }
                 }
             },
             "configure2": {
@@ -6660,7 +6699,13 @@
                     }
                 },
                 "supportedSettings": {
-                    "PreferredUILanguages": {}
+                    "PreferredUILanguages": {
+                        "schema": {
+                            "title": "Preferred UI Language",
+                            "description": "Preffered UI language.",
+                            "type": "string"
+                        }
+                    }
                 }
             },
             "configure3": {
@@ -6677,15 +6722,21 @@
                     "http://registry\\.gpii\\.net/common/language"
                 ],
                 "capabilitiesTransformations": {
-                    "Languages": {
+                    "Languages": [{
                         "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/language"
                         }
-                    }
+                    }]
                 },
                 "supportedSettings": {
-                    "Languages": {}
+                    "Languages": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Language.",
+                            "type": "string"
+                        }
+                    }
                 }
             }
         },
@@ -6802,7 +6853,16 @@
                             ]
                         }
                     },
-                    "ZoomIncrement": {}
+                    "ZoomIncrement": {
+                        "schema": {
+                            "title": "Zoom Increment",
+                            "description": "How much to increase or decrease the zoom level at once.",
+                            "type": "integer",
+                            "enum": [25, 50, 100, 150, 200, 400],
+                            "enumLabels": ["25 %", "50 %", "100 %", "150 %", "200 %", "400 %"],
+                            "default": 100
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "Invert": {
@@ -7902,7 +7962,7 @@
                     "InteractionMouse": {
                         "schema": {
                             "title": "Interaction Mouse",
-                            "description": "",
+                            "description": "Whether to follow mouse interactions.",
                             "enum": [0, 1],
                             "enumLabels": ["Off", "On"]
                         }
@@ -8189,8 +8249,23 @@
                             ]
                         }
                     },
-                    "ShowKeyboardIntroduction": {},
-                    "ShowBrowserSelection": {},
+                    // TODO: Confirm this is still useful, it doesn't seem to appear in the Narrator options.
+                    "ShowKeyboardIntroduction": {
+                        "schema": {
+                            "title": "Show Keyboard Introduction",
+                            "description": "Whether or not to show the keyboard introduction.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
+                    "ShowBrowserSelection": {
+                        "schema": {
+                            "title": "Show Browser Selection",
+                            "description": "Whether or not to show the browser selection.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
                     "ContextVerbosityLevel": {
                         "schema": {
                             "title": "Context Verbosity Level",
@@ -8835,7 +8910,17 @@
                     }
                 },
                 "supportedSettings": {
-                    "StickyKeysOn": {}
+                    "StickyKeysOn": {
+                        // TODO: Make a general pattern for SPI settings.
+                        schema: {
+                            "title": "Sticky Keys On",
+                            "description": "Whether or not sticky keys should be turned on.",
+                            "properties": {
+                                "path": { "type":  "string", "required":  true},
+                                "value": { "type":  "boolean", "required":  true}
+                            }
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "StickyKeysOn": {
@@ -8984,8 +9069,8 @@
                     // TODO: confirm this is still relevant, update details, and add defaults.
                     "EnableCompatibilityKeyboard": {
                         "schema": {
-                            "title": "",
-                            "description": "",
+                            "title": "Enable Compatibility Keyboard",
+                            "description": "Enable compatibility keyboard.",
                             "enum": [true, false],
                             "enumLabels": ["On", "Off"]
                         }
@@ -8993,8 +9078,8 @@
                     // TODO: confirm this is still relevant, update details, and add defaults.
                     "EnableDesktopModeAutoInvoke": {
                         "schema": {
-                            "title": "",
-                            "description": "",
+                            "title": "Enable Desktop Mode Auto-invoke",
+                            "description": "Enable desktop mode auto-invoke.",
                             "enum": [true, false],
                             "enumLabels": ["On", "Off"]
                         }
@@ -9011,8 +9096,8 @@
                     // TODO: confirm this is still relevant, update details, and add defaults.
                     "EnableKeyAudioFeedback": {
                         "schema": {
-                            "title": "",
-                            "description": "",
+                            "title": "Enable Key Audio Feedback",
+                            "description": "Play a sound when a key is pressed.",
                             "enum": [true, false],
                             "enumLabels": ["On", "Off"]
                         }
@@ -9029,8 +9114,8 @@
                     // TODO: confirm this is still relevant, update details, and add defaults.
                     "EnableShiftLock": {
                         "schema": {
-                            "title": "",
-                            "description": "",
+                            "title": "Enable Shift Lock",
+                            "description": "Enable shift lock.",
                             "enum": [true, false],
                             "enumLabels": ["On", "Off"]
                         }
@@ -10256,6 +10341,8 @@
                     },
                     "wordSpace": {
                         "schema": {
+                            "title": "Word Spacing",
+                            "description": "The spacing between words.",
                             "type": "number",
                             "default": 0,
                             "minimum": -0.3,
@@ -12444,9 +12531,8 @@
                     },
                     "speech.espeak.voice": {
                         "schema": {
-
-                            "title": "",
-                            "description": "",
+                            "title": "ESpeak Voice",
+                            "description": "The voice to use when using the 'eSpeak' engine.",
                             "enum": [
                                 "af", "sq", "am", "ar", "an", "hy-arevela", "hyw", "as", "az", "eu", "bn", "bpy", "bs",
                                 "bg", "ca", "zh-yue", "zh-cmn", "hr", "cs", "da", "nl", "en-us", "en-029", "en-gb",
