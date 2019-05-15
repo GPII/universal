@@ -6,7 +6,7 @@
 //
 // This changes the following settings from the AT software:
 //      General:
-//          + Button size: Czech
+//          + Button size: Small
 //          + Button style: Color
 //          + Show text on toolbar: true
 //          + Toolbar color: "#008080" (Need to verify by looking to the panel)
