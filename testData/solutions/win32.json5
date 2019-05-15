@@ -5126,10 +5126,10 @@
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Control Panel\\Cursors",
                     "dataTypes": {
+                        "AppStarting": "REG_SZ",
                         "Arrow": "REG_SZ",
                         "Hand": "REG_SZ",
                         "Help": "REG_SZ",
-                        "AppStarting": "REG_SZ",
                         "No": "REG_SZ",
                         "NWPen": "REG_SZ",
                         "SizeAll": "REG_SZ",
@@ -5142,19 +5142,84 @@
                     }
                 },
                 "supportedSettings": {
-                    "Arrow": {},
-                    "Hand": {},
-                    "Help": {},
-                    "AppStarting": {},
-                    "No": {},
-                    "NWPen": {},
-                    "SizeAll": {},
-                    "SizeNESW": {},
-                    "SizeNS": {},
-                    "SizeNWSE": {},
-                    "SizeWE": {},
-                    "UpArrow": {},
-                    "Wait": {}
+                    "AppStarting": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_working.ani"
+                        }
+                    },
+                    "Arrow": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_arrow.cur"
+                        }
+                    },
+                    "Hand": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_link.cur"
+                        }
+                    },
+                    "Help": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_helpsel.cur"
+                        }
+                    },
+                    "No": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_unavail.cur"
+                        }
+                    },
+                    "NWPen": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_pen.cur"
+                        }
+                    },
+                    "SizeAll": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_move.cur"
+                        }
+                    },
+                    "SizeNESW": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_nesw.cur"
+                        }
+                    },
+                    "SizeNS": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_ns.cur"
+                        }
+                    },
+                    "SizeNWSE": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_nwse.cur"
+                        }
+                    },
+                    "SizeWE": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_ew.cur"
+                        }
+                    },
+                    "UpArrow": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_up.cur"
+                        }
+                    },
+                    "Wait": {
+                        schema: {
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_busy.ani"
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "AppStarting": {
@@ -8885,30 +8950,109 @@
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\TabletTip\\1.7",
                     "dataTypes": {
+                        "EnableAutoShiftEngage": "REG_DWORD",
                         "EnableAutocorrection": "REG_DWORD",
-                        "EnableSpellchecking": "REG_DWORD",
-                        "EnableTextPrediction": "REG_DWORD",
-                        "EnablePredictionSpaceInsertion": "REG_DWORD",
+                        "EnableCompatibilityKeyboard": "REG_DWORD",
+                        "EnableDesktopModeAutoInvoke": "REG_DWORD",
                         "EnableDoubleTapSpace": "REG_DWORD",
                         "EnableKeyAudioFeedback": "REG_DWORD",
-                        "EnableAutoShiftEngage": "REG_DWORD",
+                        "EnablePredictionSpaceInsertion": "REG_DWORD",
                         "EnableShiftLock": "REG_DWORD",
-                        "EnableCompatibilityKeyboard": "REG_DWORD",
-                        "EnableDesktopModeAutoInvoke": "REG_DWORD"
+                        "EnableSpellchecking": "REG_DWORD",
+                        "EnableTextPrediction": "REG_DWORD"
                     }
                 },
-                // TODO: Schema data
                 "supportedSettings": {
-                    "EnableAutocorrection": {},
-                    "EnableSpellchecking": {},
-                    "EnableTextPrediction": {},
-                    "EnablePredictionSpaceInsertion": {},
-                    "EnableDoubleTapSpace": {},
-                    "EnableKeyAudioFeedback": {},
-                    "EnableAutoShiftEngage": {},
-                    "EnableShiftLock": {},
-                    "EnableCompatibilityKeyboard": {},
-                    "EnableDesktopModeAutoInvoke": {}
+                    // TODO: confirm this is still relevant, update details, and add defaults.
+                    "EnableAutoShiftEngage": {
+                        "schema": {
+                            "title": "Auto Shift",
+                            "description": "Automatically engage the shift key when ???.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
+                    "EnableAutocorrection": {
+                        "schema": {
+                            "title": "Autocorrect Misspelled Words",
+                            "description": "Autocorrect misspelled words while typing.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"],
+                            "default": true
+                        }
+                    },
+                    // TODO: confirm this is still relevant, update details, and add defaults.
+                    "EnableCompatibilityKeyboard": {
+                        "schema": {
+                            "title": "",
+                            "description": "",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
+                    // TODO: confirm this is still relevant, update details, and add defaults.
+                    "EnableDesktopModeAutoInvoke": {
+                        "schema": {
+                            "title": "",
+                            "description": "",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
+                    "EnableDoubleTapSpace": {
+                        "schema": {
+                            "title": "Period On Spacebar Double Tap",
+                            "description": "Add a period after the spacebar is double-tapped.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"],
+                            "default": true
+                        }
+                    },
+                    // TODO: confirm this is still relevant, update details, and add defaults.
+                    "EnableKeyAudioFeedback": {
+                        "schema": {
+                            "title": "",
+                            "description": "",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
+                    "EnablePredictionSpaceInsertion": {
+                        "schema": {
+                            "title": "Add Space After Suggestion",
+                            "description": "Add a space after choosing a text suggestion.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"],
+                            "default": true
+                        }
+                    },
+                    // TODO: confirm this is still relevant, update details, and add defaults.
+                    "EnableShiftLock": {
+                        "schema": {
+                            "title": "",
+                            "description": "",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
+                    "EnableSpellchecking": {
+                        "schema": {
+                            "title": "Highlight Misspelled Words",
+                            "description": "Highlight misspelled words while typing.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"],
+                            "default": true
+                        }
+                    },
+                    "EnableTextPrediction": {
+                        "schema": {
+                            "title": "Show Text Suggestions",
+                            "description": "Show text suggestions while typing.",
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": true
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/autocorrectionEnabled",
