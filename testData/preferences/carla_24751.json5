@@ -5,19 +5,6 @@
                 "name": "Default preferences",
                 "preferences": {
                     "applications": {
-                        "com.texthelp.readWriteGold": {
-                            "id": "com.texthelp.readWriteGold",
-                            "priority": 100,
-                            "parameters": {
-                                "ApplicationSettings.AppBar.Width.$t": 788,
-                                "ApplicationSettings.AppBar.ShowText.$t": true,
-                                "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
-                                "ApplicationSettings.AppBar.LargeIcons.$t": true,
-                                "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
-                                "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
-                                "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
-                            }
-                        },
                         "org.gnome.desktop.a11y.magnifier": {
                             "id": "org.gnome.desktop.a11y.magnifier",
                             "priority": 100,

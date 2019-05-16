@@ -9665,7 +9665,7 @@
         }
     },
     "com.texthelp.readWriteGold": {
-        "name": "Read Write Gold",
+        "name": "Read&Write 12",
         "contexts": {
             "OS": [
                 {
@@ -9682,7 +9682,7 @@
                 "type": "gpii.settingsHandlers.XMLHandler",
                 "liveness": "manualRestart",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",
+                    "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\12\\RWSettings.xml",
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                 },
@@ -9690,26 +9690,1640 @@
                     "ApplicationSettings": "ApplicationSettings"
                 },
                 "supportedSettings": {
-                    "ApplicationSettings.AppBar.optToolbarIconSet.$t": {},
-                    "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": {},
-                    "ApplicationSettings.AppBar.DocType.$t": {},
-                    "ApplicationSettings.AppBar.Width.$t": {},
-                    "ApplicationSettings.AppBar.ShowText.$t": {},
-                    "ApplicationSettings.AppBar.optToolbarShowText.$t": {},
-                    "ApplicationSettings.AppBar.LargeIcons.$t": {},
-                    "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": {},
-                    "ApplicationSettings.Speech.optSAPI5Pitch.$t": {},
-                    "ApplicationSettings.Speech.optSAPI5Speed.$t": {},
-                    "ApplicationSettings.Speech.optSAPI5Volume.$t": {},
-                    "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": {},
-                    "ApplicationSettings.Speech.optSAPI5Voice.$t": {},
-                    "ApplicationSettings.Speech.WebHighlighting.$t": {},
-                    "ApplicationSettings.Translation.ToLanguage.$t": {},
-                    "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": {},
-                    "ApplicationSettings.Scanning.ScanDestination.$t": {},
-                    "ApplicationSettings.Scanning.ScanToFile.$t": {},
-                    "ApplicationSettings.Spelling.SpellAsIType.$t": {},
-                    "ApplicationSettings.Speech.optAutoUseScreenReading.$t": {}
+                    // General
+                    "ApplicationSettings.AppBar.IconSize.$t": {
+                        "schema": {
+                            "title": "Button size",
+                            "description": "Changes the application panel buttons size.",
+                            "enum": [
+                                "Medium",
+                                "Small",
+                                "Large"
+                            ],
+                            "enumLabels": [
+                                "Medium",
+                                "Small",
+                                "Large"
+                            ],
+                            "default": "Medium"
+                        }
+                    },
+                    "ApplicationSettings.AppBar.ToolbarIconSet.$t": {
+                        "schema": {
+                            "title": "Button style",
+                            "description": "Changes the application panel buttons style.",
+                            "enum": [
+                                "Clear",
+                                "Color"
+                            ],
+                            "enumLabels": [
+                                "Clear",
+                                "Color"
+                            ],
+                            "default": "Clear"
+                        }
+                    },
+                    "ApplicationSettings.AppBar.ShowText.$t": {
+                        "schema": {
+                            "title": "Show text on toolbar",
+                            "description": "Shows icons text in the application toolbar.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.AppBar.optToolbarBackColour.$t": {
+                        "schema": {
+                            "title": "Toolbar color",
+                            "description": "Changes the ammount of time for considering a click when hovering over a key",
+                            "type": "integer",
+                            "default": 1000,
+                            "minimum": 500,
+                            "maximum": 3000
+                        }
+                    },
+                    "ApplicationSettings.AppBar.RunOnStartUp.$t": {
+                        "schema": {
+                            "title": "Launch on Windows startup",
+                            "description": "Automatically launches the application at windows startup.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Check It
+                    "ApplicationSettings.Spelling.OrderByContext.$t": {
+                        "schema": {
+                            "title": "Order suggestions by context",
+                            "description": "Suggestions are ordered by context.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ApplicationSettings.Spelling.SpeakSpellingOnHover.$t": {
+                        "schema": {
+                            "title": "Speak when mouse pointer hovers over a word",
+                            "description": "When mouse pointer hovers over a word spell the hovered word.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ApplicationSettings.Spelling.ShowCheckIt.$t": {
+                        "schema": {
+                            "title": "Classic Spell Check",
+                            "description": "Uses the old program interface for spell checking.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.Spelling.RightClickMSWord.$t": {
+                        "schema": {
+                            "title": "Microsoft Word right click spell check",
+                            "description": "Allows right click Read&Write spell check in Microsoft Word.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    // Check It - Vocabulary - TODO: We need to comsume an array to build a mask
+                    // "ApplicationSettings.Spelling.optVocabMask.$t": {},
+                    //
+                    // Dictionary
+                    "ApplicationSettings.Dictionary.WebDictionary.$t": {
+                        "schema": {
+                            "title": "Web Dictionary",
+                            "description": "Select the web dictionary to use.",
+                            "enum":  [
+                                "Google Dictionary",
+                                "Bing",
+                                "Dictionary.com"
+                            ],
+                            "enumLabels": [
+                                "Google Dictionary",
+                                "Bing",
+                                "Dictionary.com"
+                            ],
+                            "default": "Google Dictionary"
+                        }
+                    },
+                    "ApplicationSettings.Dictionary.PopupDictionary.$t": {
+                        "schema": {
+                            "title": "Pop-up Dictionary",
+                            "description": "Displays a popup dictionary when hovering selected words.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.Dictionary.ToggleImages.$t": {
+                        "schema": {
+                            "title": "Toggle Images",
+                            "description": "Toggles image section in dictionary popup window.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    // Highlights
+                    "ApplicationSettings.StudySkills.CollectYellowHighlight.$t": {
+                        "schema": {
+                            "title": "Collect Yellow color",
+                            "description": "Collects your highlighted sections that have been marked with Yellow.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ApplicationSettings.StudySkills.CollectBlueHighlight.$t": {
+                        "schema": {
+                            "title": "Collect Blue color",
+                            "description": "Collects your highlighted sections that have been marked with Blue.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ApplicationSettings.StudySkills.CollectGreenHighlight.$t": {
+                        "schema": {
+                            "title": "Collect Green color",
+                            "description": "Collects your highlighted sections that have been marked with Green.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ApplicationSettings.StudySkills.CollectPinkHighlight.$t": {
+                        "schema": {
+                            "title": "Collect Pink color",
+                            "description": "Collects your highlighted sections that have been marked with Pink.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ApplicationSettings.StudySkills.CollectOrder.$t": {
+                        "schema": {
+                            "title": "Highlights order",
+                            "description": "Changes the order in which highlights are displayed.",
+                            "enum":  [
+                                "Color",
+                                "Position",
+                                "Time"
+                            ],
+                            "enumLabels": [
+                                "Color",
+                                "Position",
+                                "Time"
+                            ],
+                            "default": "Color"
+                        }
+                    },
+                    "ApplicationSettings.StudySkills.ColorSeparator.$t": {
+                        "schema": {
+                            "title": "Colors separator",
+                            "description": "Element used for color separation.",
+                            "enum":  [
+                                "Paragraph",
+                                "None",
+                                "Page"
+                            ],
+                            "enumLabels": [
+                                "Paragraph",
+                                "None",
+                                "Page"
+                            ],
+                            "default": "Paragraph"
+                        }
+                    },
+                    "ApplicationSettings.StudySkills.HighlightSeparator.$t": {
+                        "schema": {
+                            "title": "Highlights separator",
+                            "description": "Element used for highlight separation.",
+                            "enum": [
+                                "Line",
+                                "None",
+                                "Space",
+                                "Tab"
+                            ],
+                            "enumLabels": [
+                                "Line",
+                                "None",
+                                "Space",
+                                "Tab"
+                            ],
+                            "default": "Line"
+                        }
+                    },
+                    "ApplicationSettings.StudySkills.MultiDocHighlighting.$t": {
+                        "schema": {
+                            "title": "Collect from multiple documents",
+                            "description": "Makes the application collect your highlights from multiple documents.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Prediction
+                    "ApplicationSettings.Prediction.DisplayAlphabetic.$t": {
+                        "schema": {
+                            "title": "Alphabetic display",
+                            "description": "Display words alphabetically.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.Prediction.FollowCursor.$t": {
+                        "schema": {
+                            "title": "Follow the cursor while typing",
+                            "description": "Instructs the system to have the Prediction window follow where the cursor goes.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.Prediction.AutoHeightAdjust.$t": {
+                        "schema": {
+                            "title": "Auto height adjust",
+                            "description": "Instructs the system to have the Prediction window change size depending on the amount of words appearing.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.Prediction.winPredictOneWordAhead.$t": {
+                        "schema": {
+                            "title": "Predict one word ahead",
+                            "description": "Instructs the system to predict a word ahead.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ApplicationSettings.Prediction.InsertSpaceAfterPred.$t": {
+                        "schema": {
+                            "title": "Insert a space after predictions",
+                            "description": "Instructs the system to automatically insert a space after a word when it is inserted.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ApplicationSettings.Prediction.UseSpellingForPredictions.$t": {
+                        "schema": {
+                            "title": "Use spelling suggestions for the prediction list",
+                            "description": "Allows the system to suggest words even if you start to spell them wrong.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Prediction Speech
+                    "ApplicationSettings.Prediction.SpeakPredictionOnMouseHover.$t": {
+                        "schema": {
+                            "title": "Speak when hovering",
+                            "description": "Speaks when the mouse pointer hovers over a word",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // This two settings are excluyent, need to encode that
+                    // =====================================================
+                    "ApplicationSettings.Prediction.SpeakOnWordClick.$t": {
+                        "schema": {
+                            "title": "Speak the word when clicked",
+                            "description": "Speaks the word clicked in the prediction list.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.Prediction.InsertOnWordClick.$t": {
+                        "schema": {
+                            "title": "Insert the word when clicked",
+                            "description": "Inserts the word clicked in the prediction list.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // =====================================================
+                    // Prediction Learning
+                    "ApplicationSettings.Prediction.SpellCheckBeforeLearn.$t": {
+                        "schema": {
+                            "title": "Spell check each word before learning",
+                            "description": "System always spell check each word before learning it. Turn off for making the system learn custom words.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ApplicationSettings.Prediction.AutoLearnAsType.$t": {
+                        "schema": {
+                            "title": "Automatically learn as I type",
+                            "description": "Prediction will learn anything typed by the user when using prediction.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Scanning
+                    "ApplicationSettings.Scanning.dpi.$t": {
+                        "schema": {
+                            "title": "Resolution",
+                            "description": "DPI resolution in which the scan is going to be performed.",
+                            "enum": [
+                                300,
+                                600
+                            ],
+                            "enumLabels": [
+                                "300 DPI",
+                                "600 DPI"
+                            ],
+                            "default": 300
+                        }
+                    },
+                    "ApplicationSettings.Scanning.colormode.$t": {
+                        "schema": {
+                            "title": "Color mode",
+                            "description": "Specifies the color mode used to scan the image.",
+                            "enum": [
+                                "Color",
+                                "GrayScale",
+                                "BlackAndWhite"
+                            ],
+                            "enumLabels": [
+                                "Full color",
+                                "GrayScale",
+                                "Monochrome"
+                            ],
+                            "default": "Color"
+                        }
+                    },
+                    "ApplicationSettings.Scanning.HideInterface.$t": {
+                        "schema": {
+                            "title": "Hide device settings",
+                            "description": "Make the scanning easier and faster. You can turn this off for getting device info.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Device Setup (Advanced settigns)
+                    "ApplicationSettings.Scanning.Countdown.$t": {
+                        "schema": {
+                            "title": "Use Countdown",
+                            "description": "Automatically scans using a countdown interval.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ApplicationSettings.Scanning.CountdownInterval.$t": {
+                        "schema": {
+                            "title": "Countdown seconds interval",
+                            "description": "Sets the number of seconds of the interval.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 99,
+                            "default": 6
+                        }
+                    },
+                    "ApplicationSettings.Scanning.ADF.$t": {
+                        "schema": {
+                            "title": "Automatic Document Feeder",
+                            "description": "Enable if you are using an Automatic Document Feeder.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.Scanning.Duplex.$t": {
+                        "schema": {
+                            "title": "Duplex",
+                            "description": "Enable you are using an 'double side scanner'.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    // Save Options
+                    "ApplicationSettings.Scanning.AutoSave.$t": {
+                        "schema": {
+                            "title": "Use save location",
+                            "description": "Use the supplied location to save the scanned documents.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.Scanning.DefaultFilePath.$t": {
+                        "schema": {
+                            "title": "File path",
+                            "description": "Default location for storing the scanned documents.",
+                            "type": "string",
+                            // Should be a way to capture the $HOME environmental variable
+                            "default": "%HOME%\\Documents"
+                        }
+                    },
+                    "ApplicationSettings.Scanning.DefaultFileName.$t": {
+                        "schema": {
+                            "title": "File name",
+                            "description": "Default file name for the scanned document.",
+                            "type": "string",
+                            "default": "Scan"
+                        }
+                    },
+                    // PDF Output
+                    "ApplicationSettings.Scanning.PdfTextOnly.$t": {
+                        "schema": {
+                            "title": "Text only PDF output",
+                            "description": "Scan to PDF to text only.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.Scanning.MSWordRetainFormat.$t": {
+                        "schema": {
+                            "title": "Plain text Word output",
+                            "description": "Scan to Word in plain text.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.Scanning.CoverFirstPage.$t": {
+                        "schema": {
+                            "title": "Title in ePub Output",
+                            "description": "Threat heading as book title for ePub output.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Output Types
+                    "ApplicationSettings.Scanning.EnableEpub.$t": {
+                        "schema": {
+                            "title": "Enable ePup",
+                            "description": "Enable ePub as output format.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.Scanning.EnableWeb.$t": {
+                        "schema": {
+                            "title": "Enable Web",
+                            "description": "Enable Web as output format.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    // Screen Masking
+                    "ApplicationSettings.ScreenMasking.ScreenMask.$t": {
+                        "schema": {
+                            "title": "Screen Masking mode",
+                            "description": "Specifies the mode in which 'Screen Masking' tool will operate.",
+                            "enum": [
+                                "TintScreen",
+                                "UnderlineTypingLine",
+                                "TintTypingLine",
+                                "SystemBackground",
+                                "UnderlineCursor"
+                            ],
+                            "enumLabels": [
+                                "TintScreen",
+                                "UnderlineTypingLine",
+                                "TintTypingLine",
+                                "SystemBackground",
+                                "UnderlineCursor"
+                            ],
+                            "default": "TintScreen"
+                        }
+                    },
+                    //  Screen Masking -> Tint whole screen subsettings
+                    "ApplicationSettings.ScreenMasking.TintScreenColour.$t": {
+                        "schema": {
+                            "title": "Whole screen color mask",
+                            "description": "Selects the color for tinting the screen.",
+                            "type": "string",
+                            "default": "#80FFFF"
+                        }
+                    },
+                    "ApplicationSettings.ScreenMasking.TintScreenOpacity.$t": {
+                        "schema": {
+                            "title": "Whole screen mask opacity",
+                            "description": "Selects the opacity for the screen mask.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "default": 0.3
+                        }
+                    },
+                    "ApplicationSettings.ScreenMasking.ReadingLight.$t": {
+                        "schema": {
+                            "title": "Reading ruler",
+                            "description": "Enable/Disable reading ruler.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.ScreenMasking.ReadingLightColour.$t": {
+                        "schema": {
+                            "title": "Reading ruler color",
+                            "description": "Selects the color for the reading ruler.",
+                            "type": "string",
+                            "default": "#00FFFFFF"
+                        }
+                    },
+                    "ApplicationSettings.ScreenMasking.ReadingLightOpacity.$t": {
+                        "schema": {
+                            "title": "Reading ruler opacity",
+                            "description": "Selects the opacity for the reading ruler.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "default": 0.3
+                        }
+                    },
+                    "ApplicationSettings.ScreenMasking.ReadingLightHeight.$t": {
+                        "schema": {
+                            "title": "Reading ruler height",
+                            "description": "Selects the height for the reading ruler.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 300,
+                            "default": 100
+                        }
+                    },
+                    // Screen Masking -> Underline typing line
+                    "ApplicationSettings.ScreenMasking.UnderlineTypingLineColour.$t": {
+                        "schema": {
+                            "title": "Underline typing line color",
+                            "description": "Selects the color for the underline typing line.",
+                            "type": "string",
+                            "default": "#80FFFF"
+                        }
+                    },
+                    "ApplicationSettings.ScreenMasking.UnderlineTypingLineOpacity.$t": {
+                        "schema": {
+                            "title": "Underline typing line opacity",
+                            "description": "Selects the opacity for the underline typing line.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "default": 0.5
+                        }
+                    },
+                    "ApplicationSettings.ScreenMasking.UnderlineTypingLineHeight.$t": {
+                        "schema": {
+                            "title": "Underline typing line height",
+                            "description": "Selects the height for the underline typing line.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 5
+                        }
+                    },
+                    // Screen Masking -> Tint typing line
+                    "ApplicationSettings.ScreenMasking.TintTypingLineColour.$t": {
+                        "schema": {
+                            "title": "Typing line mask color",
+                            "description": "Selects the color for the typing line mask.",
+                            "type": "string",
+                            "default": "#80FFFF"
+                        }
+                    },
+                    "ApplicationSettings.ScreenMasking.TintTypingLineOpacity.$t": {
+                        "schema": {
+                            "title": "Typing line mask opacity",
+                            "description": "Selects the opacity for the typing line mask.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "default": 0.3
+                        }
+                    },
+                    // Screen Masking -> Change page color
+                    "ApplicationSettings.ScreenMasking.SystemBackgroundColour.$t": {
+                        "schema": {
+                            "title": "Change page color",
+                            "description": "Changes the page color of text fields.",
+                            "type": "string",
+                            "default": "#80FFFF"
+                        }
+                    },
+                    // Screen Masking -> Underline cursor
+                    "ApplicationSettings.ScreenMasking.UnderlineCursorColour.$t": {
+                        "schema": {
+                            "title": "Underline cursor color",
+                            "description": "Changes the color for the underline cursor.",
+                            "type": "string",
+                            "default": "#80FFFF"
+                        }
+                    },
+                    "ApplicationSettings.ScreenMasking.UnderlineCursorOpacity.$t": {
+                        "schema": {
+                            "title": "Underline cursor line opacity",
+                            "description": "Selects the opacity for underline cursor line.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "default": 0.5
+                        }
+                    },
+                    "ApplicationSettings.ScreenMasking.UnderlineCursorHeight.$t": {
+                        "schema": {
+                            "title": "Underline cursor line height",
+                            "description": "Selects the height for underline cursor line.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 5
+                        }
+                    },
+                    // Screenshot Reader
+                    "ApplicationSettings.Screenshot.CaptureBy.$t": {
+                        "schema": {
+                            "title": "Capture operation",
+                            "description": "Specifies the type of operation that is needed for making a screenshot.",
+                            "enum": [
+                                "Drawing Rectangle",
+                                "Drawing Freehand",
+                                "Hover"
+                            ],
+                            "enumLabels": [
+                                "Drawing Rectangle",
+                                "Drawing Freehand",
+                                "Hover"
+                            ],
+                            "default": "Drawing Rectangle"
+                        }
+                    },
+                    "ApplicationSettings.Screenshot.ScreenshotTo.$t": {
+                        "schema": {
+                            "title": "Capture operation",
+                            "description": "Specifies the type of operation that is needed for making a screenshot.",
+                            "enum": [
+                                "Drawing Rectangle",
+                                "Drawing Freehand",
+                                "Hover"
+                            ],
+                            "enumLabels": [
+                                "Drawing Rectangle",
+                                "Drawing Freehand",
+                                "Hover"
+                            ],
+                            "default": "Drawing Rectangle"
+                        }
+                    },
+                    "ApplicationSettings.Screenshot.AppendToMsWordDoc.$t": {
+                        "schema": {
+                            "title": "Add to active Microsoft Word document",
+                            "description": "Automatically add the screenshot to the current active Microsoft Word document.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Speech
+                    "ApplicationSettings.Speech.CurrentVoice.$t": {
+                        "schema": {
+                            "title": "Voice",
+                            "description": "Selects the human voice for speaking.",
+                            "enum":[
+                                "Mexican Spanish Paulina - Vocalizer",
+                                "US Ava - Vocalizer",
+                                "US Tom - Vocalizer",
+                                "Microsoft David Desktop - English (United States)",
+                                "Microsoft Zira Desktop - English (United States)"
+                            ],
+                            "enumLabels": [
+                                "Mexican Spanish Paulina - Vocalizer",
+                                "US Ava - Vocalizer",
+                                "US Tom - Vocalizer",
+                                "Microsoft David Desktop - English (United States)",
+                                "Microsoft Zira Desktop - English (United States)"
+                            ],
+                            "default": "US Ava - Vocalizer"
+                        }
+                    },
+                    "ApplicationSettings.Speech.VoiceSpeed.$t": {
+                        "schema": {
+                            "title": "Voice speed",
+                            "description": "Selects the speed of reading.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    "ApplicationSettings.Speech.UseVoiceSpeedHotKey.$t": {
+                        "schema": {
+                            "title": "Use arrow keys to change speed",
+                            "description": "This will allow you to use the Up (\u2b06) and Down (\u2b07) keys on your keyboard to change the voice speed when it is reading.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ApplicationSettings.Speech.WordPause.$t": {
+                        "schema": {
+                            "title": "Word pause",
+                            "description": "Selects the word pause time while reading.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 1000,
+                            "default": 0,
+                            // TODO: Verify if it's the proper check
+                            "divisibleBy": 100
+                        }
+                    },
+                    "ApplicationSettings.Speech.VoicePitch.$t": {
+                        "schema": {
+                            "title": "Voice pitch",
+                            "description": "Selects the pitch of the reading voice.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        }
+                    },
+                    // Speech -> Auto Read
+                    "ApplicationSettings.Speech.SpeakAsIType.$t": {
+                        "schema": {
+                            "title": "Speak as I type",
+                            "description": "Enable speaking while the user is typing.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Speech -> Auto Read -> Speak as I type
+                    "ApplicationSettings.Speech.SpeakOnEachLetter.$t": {
+                        "schema": {
+                            "title": "Speak on each letter",
+                            "description": "System will speak each written letter.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    // Speech -> Auto Read -> Speak as I type
+                    "ApplicationSettings.Speech.SpeakOnEachWord.$t": {
+                        "schema": {
+                            "title": "Speak on each word",
+                            "description": "System will speak each written word.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Speech -> Auto Read -> Speak as I type
+                    "ApplicationSettings.Speech.SpeakOnEachSentence.$t": {
+                        "schema": {
+                            "title": "Speak on each sentence",
+                            "description": "System will speak each written sentence.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Speech -> Screen reading
+                    "ApplicationSettings.Speech.ScreenReadingEnabled.$t": {
+                        "schema": {
+                            "title": "Screen reading",
+                            "description": "Enables screen reading.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Speech -> Screen reading -> Items to read
+                    // TODO: Setting is stored in an array format in XML, we need to check how
+                    // XMLSettingsHandler handles this case.
+                    // "ApplicationSettings.Speech.ScreenReadingItems.$t": {
+                    //     "schema": {
+                    //         "title": "Items to read",
+                    //         "description": "Selects the kind of items that shoud be readed.",
+                    //         "type": "array",
+                    //         "default": [
+                    //             "<ScreenReadItem ReadItem=\"true\">Buttons</ScreenReadItem>",
+                    //             "<ScreenReadItem ReadItem=\"true\">Lists</ScreenReadItem>",
+                    //             "<ScreenReadItem ReadItem=\"true\">Menus</ScreenReadItem>",
+                    //             "<ScreenReadItem ReadItem=\"true\">Text</ScreenReadItem>",
+                    //             "<ScreenReadItem ReadItem=\"true\">Other</ScreenReadItem>"
+                    //         ]
+                    //     }
+                    // },
+                    // Speech -> Read by
+                    "ApplicationSettings.Speech.SelectionType.$t": {
+                        "schema": {
+                            "title": "Read by",
+                            "description": "Selects the reading unit.",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Words",
+                                "Sentences",
+                                "Paragraphs"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    // Speech -> Continuous reading
+                    "ApplicationSettings.Speech.ContinuousReading.$t": {
+                        "schema": {
+                            "title": "Continuous reading",
+                            "description": "It instructs the system to keep reading until the end of the text.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Speech -> Read the web
+                    "ApplicationSettings.Speech.ReadTheWeb.$t": {
+                        "schema": {
+                            "title": "Read the web",
+                            "description": "Encourages the system to read webpages.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Speech -> Speech highlighting
+                    "ApplicationSettings.Speech.HighlightingMethod.$t": {
+                        "schema": {
+                            "title": "Read by",
+                            "description": "Selects the reading unit.",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Speak with highlighting in document",
+                                "Speak with highlighting in text reader",
+                                "Speak using one word display"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    // Speech -> Speech highlighting -> Font
+                    "ApplicationSettings.Speech.TextReaderOneWordFontName.$t": {
+                        "schema": {
+                            "title": "One word display font",
+                            "description": "Selects the reading font for the 'one word display'",
+                            "enum": [
+                                "Adobe Arabic",
+                                "Adobe Fan Heiti Std",
+                                "Adobe Gothic Std",
+                                "Adobe Hebrew",
+                                "Adobe Heiti Std",
+                                "Adobe Ming Std",
+                                "Adobe Myungjo Std",
+                                "Adobe Pi Std",
+                                "Adobe Song Std",
+                                "Adobe Thai",
+                                "Arial",
+                                "Bahnschrift",
+                                "Calibri",
+                                "Cambria",
+                                "Cambria Math",
+                                "Candara",
+                                "Comic Sans MS",
+                                "Consolas",
+                                "Constantia",
+                                "Corbel",
+                                "Courier New",
+                                "Courier Std",
+                                "Ebrima",
+                                "Franklin Gothic",
+                                "Gabriola",
+                                "Gadugi",
+                                "Georgia",
+                                "Global Monospace",
+                                "Global Sans Serif",
+                                "Global Serif",
+                                "Global User Interface",
+                                "HoloLens MDL2 Assets",
+                                "Impact",
+                                "Ink Free",
+                                "Javanese Text",
+                                "Kozuka Gothic Pr6N",
+                                "Kozuka Mincho Pr6N",
+                                "Leelawadee UI",
+                                "Lucida Console",
+                                "Lucida Sans Unicode",
+                                "Malgun Gothic",
+                                "Marlett",
+                                "Microsoft Himalaya",
+                                "Microsoft JhengHei",
+                                "Microsoft JhengHei UI",
+                                "Microsoft New Tai Lue",
+                                "Microsoft PhagsPa",
+                                "Microsoft Sans Serif",
+                                "Microsoft Tai Le",
+                                "Microsoft YaHei",
+                                "Microsoft YaHei UI",
+                                "Microsoft Yi Baiti",
+                                "MingLiUHKSCS-ExtB",
+                                "MingLiU-ExtB",
+                                "Minion Pro",
+                                "Mongolian Baiti",
+                                "MS Gothic",
+                                "MS PGothic",
+                                "MS UI Gothic",
+                                "MV Boli",
+                                "Myanmar Text",
+                                "Myriad Pro",
+                                "Nirmala UI",
+                                "NSimSun",
+                                "Open Sans",
+                                "Palatino Linotype",
+                                "PMingLiu-ExtB",
+                                "Segoe MDL2 Assets",
+                                "Segoe Print",
+                                "Segoe Script",
+                                "Segoe UI",
+                                "Segoe UI Emoji",
+                                "Comic Sans MS",
+                                "Segoe UI Historic",
+                                "Segoe UI Symbol",
+                                "SimSun",
+                                "Simsun-ExtB",
+                                "Sitka Banner",
+                                "Sitka Display",
+                                "Sitka Heading",
+                                "Sitka Small",
+                                "Sitka Subheading",
+                                "Sitka Text",
+                                "Sylfaen",
+                                "Symbol",
+                                "Tahoma",
+                                "Times New Roman",
+                                "Trebuchet MS",
+                                "Verdana",
+                                "Webdings",
+                                "Wingdings",
+                                "Yu Gothic",
+                                "Yu Gothic UI"
+                            ],
+                            "enumLabels": [
+                                "Adobe Arabic",
+                                "Adobe Fan Heiti Std",
+                                "Adobe Gothic Std",
+                                "Adobe Hebrew",
+                                "Adobe Heiti Std",
+                                "Adobe Ming Std",
+                                "Adobe Myungjo Std",
+                                "Adobe Pi Std",
+                                "Adobe Song Std",
+                                "Adobe Thai",
+                                "Arial",
+                                "Bahnschrift",
+                                "Calibri",
+                                "Cambria",
+                                "Cambria Math",
+                                "Candara",
+                                "Comic Sans MS",
+                                "Consolas",
+                                "Constantia",
+                                "Corbel",
+                                "Courier New",
+                                "Courier Std",
+                                "Ebrima",
+                                "Franklin Gothic",
+                                "Gabriola",
+                                "Gadugi",
+                                "Georgia",
+                                "Global Monospace",
+                                "Global Sans Serif",
+                                "Global Serif",
+                                "Global User Interface",
+                                "HoloLens MDL2 Assets",
+                                "Impact",
+                                "Ink Free",
+                                "Javanese Text",
+                                "Kozuka Gothic Pr6N",
+                                "Kozuka Mincho Pr6N",
+                                "Leelawadee UI",
+                                "Lucida Console",
+                                "Lucida Sans Unicode",
+                                "Malgun Gothic",
+                                "Marlett",
+                                "Microsoft Himalaya",
+                                "Microsoft JhengHei",
+                                "Microsoft JhengHei UI",
+                                "Microsoft New Tai Lue",
+                                "Microsoft PhagsPa",
+                                "Microsoft Sans Serif",
+                                "Microsoft Tai Le",
+                                "Microsoft YaHei",
+                                "Microsoft YaHei UI",
+                                "Microsoft Yi Baiti",
+                                "MingLiUHKSCS-ExtB",
+                                "MingLiU-ExtB",
+                                "Minion Pro",
+                                "Mongolian Baiti",
+                                "MS Gothic",
+                                "MS PGothic",
+                                "MS UI Gothic",
+                                "MV Boli",
+                                "Myanmar Text",
+                                "Myriad Pro",
+                                "Nirmala UI",
+                                "NSimSun",
+                                "Open Sans",
+                                "Palatino Linotype",
+                                "PMingLiu-ExtB",
+                                "Segoe MDL2 Assets",
+                                "Segoe Print",
+                                "Segoe Script",
+                                "Segoe UI",
+                                "Segoe UI Emoji",
+                                "Comic Sans MS",
+                                "Segoe UI Historic",
+                                "Segoe UI Symbol",
+                                "SimSun",
+                                "Simsun-ExtB",
+                                "Sitka Banner",
+                                "Sitka Display",
+                                "Sitka Heading",
+                                "Sitka Small",
+                                "Sitka Subheading",
+                                "Sitka Text",
+                                "Sylfaen",
+                                "Symbol",
+                                "Tahoma",
+                                "Times New Roman",
+                                "Trebuchet MS",
+                                "Verdana",
+                                "Webdings",
+                                "Wingdings",
+                                "Yu Gothic",
+                                "Yu Gothic UI"
+                            ],
+                            "default": "Comic Sans MS"
+                        }
+                    },
+                    "ApplicationSettings.Speech.optSpeechHighTRFontName.$t": {
+                        "schema": {
+                            "title": "Text reader display font",
+                            "description": "Selects the font for the 'text reader tool'.",
+                            "enum": [
+                                "Adobe Arabic",
+                                "Adobe Fan Heiti Std",
+                                "Adobe Gothic Std",
+                                "Adobe Hebrew",
+                                "Adobe Heiti Std",
+                                "Adobe Ming Std",
+                                "Adobe Myungjo Std",
+                                "Adobe Pi Std",
+                                "Adobe Song Std",
+                                "Adobe Thai",
+                                "Arial",
+                                "Bahnschrift",
+                                "Calibri",
+                                "Cambria",
+                                "Cambria Math",
+                                "Candara",
+                                "Comic Sans MS",
+                                "Consolas",
+                                "Constantia",
+                                "Corbel",
+                                "Courier New",
+                                "Courier Std",
+                                "Ebrima",
+                                "Franklin Gothic",
+                                "Gabriola",
+                                "Gadugi",
+                                "Georgia",
+                                "Global Monospace",
+                                "Global Sans Serif",
+                                "Global Serif",
+                                "Global User Interface",
+                                "HoloLens MDL2 Assets",
+                                "Impact",
+                                "Ink Free",
+                                "Javanese Text",
+                                "Kozuka Gothic Pr6N",
+                                "Kozuka Mincho Pr6N",
+                                "Leelawadee UI",
+                                "Lucida Console",
+                                "Lucida Sans Unicode",
+                                "Malgun Gothic",
+                                "Marlett",
+                                "Microsoft Himalaya",
+                                "Microsoft JhengHei",
+                                "Microsoft JhengHei UI",
+                                "Microsoft New Tai Lue",
+                                "Microsoft PhagsPa",
+                                "Microsoft Sans Serif",
+                                "Microsoft Tai Le",
+                                "Microsoft YaHei",
+                                "Microsoft YaHei UI",
+                                "Microsoft Yi Baiti",
+                                "MingLiUHKSCS-ExtB",
+                                "MingLiU-ExtB",
+                                "Minion Pro",
+                                "Mongolian Baiti",
+                                "MS Gothic",
+                                "MS PGothic",
+                                "MS UI Gothic",
+                                "MV Boli",
+                                "Myanmar Text",
+                                "Myriad Pro",
+                                "Nirmala UI",
+                                "NSimSun",
+                                "Open Sans",
+                                "Palatino Linotype",
+                                "PMingLiu-ExtB",
+                                "Segoe MDL2 Assets",
+                                "Segoe Print",
+                                "Segoe Script",
+                                "Segoe UI",
+                                "Segoe UI Emoji",
+                                "Comic Sans MS",
+                                "Segoe UI Historic",
+                                "Segoe UI Symbol",
+                                "SimSun",
+                                "Simsun-ExtB",
+                                "Sitka Banner",
+                                "Sitka Display",
+                                "Sitka Heading",
+                                "Sitka Small",
+                                "Sitka Subheading",
+                                "Sitka Text",
+                                "Sylfaen",
+                                "Symbol",
+                                "Tahoma",
+                                "Times New Roman",
+                                "Trebuchet MS",
+                                "Verdana",
+                                "Webdings",
+                                "Wingdings",
+                                "Yu Gothic",
+                                "Yu Gothic UI"
+                            ],
+                            "enumLabels": [
+                                "Adobe Arabic",
+                                "Adobe Fan Heiti Std",
+                                "Adobe Gothic Std",
+                                "Adobe Hebrew",
+                                "Adobe Heiti Std",
+                                "Adobe Ming Std",
+                                "Adobe Myungjo Std",
+                                "Adobe Pi Std",
+                                "Adobe Song Std",
+                                "Adobe Thai",
+                                "Arial",
+                                "Bahnschrift",
+                                "Calibri",
+                                "Cambria",
+                                "Cambria Math",
+                                "Candara",
+                                "Comic Sans MS",
+                                "Consolas",
+                                "Constantia",
+                                "Corbel",
+                                "Courier New",
+                                "Courier Std",
+                                "Ebrima",
+                                "Franklin Gothic",
+                                "Gabriola",
+                                "Gadugi",
+                                "Georgia",
+                                "Global Monospace",
+                                "Global Sans Serif",
+                                "Global Serif",
+                                "Global User Interface",
+                                "HoloLens MDL2 Assets",
+                                "Impact",
+                                "Ink Free",
+                                "Javanese Text",
+                                "Kozuka Gothic Pr6N",
+                                "Kozuka Mincho Pr6N",
+                                "Leelawadee UI",
+                                "Lucida Console",
+                                "Lucida Sans Unicode",
+                                "Malgun Gothic",
+                                "Marlett",
+                                "Microsoft Himalaya",
+                                "Microsoft JhengHei",
+                                "Microsoft JhengHei UI",
+                                "Microsoft New Tai Lue",
+                                "Microsoft PhagsPa",
+                                "Microsoft Sans Serif",
+                                "Microsoft Tai Le",
+                                "Microsoft YaHei",
+                                "Microsoft YaHei UI",
+                                "Microsoft Yi Baiti",
+                                "MingLiUHKSCS-ExtB",
+                                "MingLiU-ExtB",
+                                "Minion Pro",
+                                "Mongolian Baiti",
+                                "MS Gothic",
+                                "MS PGothic",
+                                "MS UI Gothic",
+                                "MV Boli",
+                                "Myanmar Text",
+                                "Myriad Pro",
+                                "Nirmala UI",
+                                "NSimSun",
+                                "Open Sans",
+                                "Palatino Linotype",
+                                "PMingLiu-ExtB",
+                                "Segoe MDL2 Assets",
+                                "Segoe Print",
+                                "Segoe Script",
+                                "Segoe UI",
+                                "Segoe UI Emoji",
+                                "Comic Sans MS",
+                                "Segoe UI Historic",
+                                "Segoe UI Symbol",
+                                "SimSun",
+                                "Simsun-ExtB",
+                                "Sitka Banner",
+                                "Sitka Display",
+                                "Sitka Heading",
+                                "Sitka Small",
+                                "Sitka Subheading",
+                                "Sitka Text",
+                                "Sylfaen",
+                                "Symbol",
+                                "Tahoma",
+                                "Times New Roman",
+                                "Trebuchet MS",
+                                "Verdana",
+                                "Webdings",
+                                "Wingdings",
+                                "Yu Gothic",
+                                "Yu Gothic UI"
+                            ],
+                            "default": "Comic Sans MS"
+                        }
+                    },
+                    // Speech -> Speech highlighting -> Font size
+                    "ApplicationSettings.Speech.TextReaderOneWordFontSize.$t": {
+                        "schema": {
+                            "title": "One word display font size",
+                            "description": "Selects the font size for the 'one word display'.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 50,
+                            "default": 14
+                        }
+                    },
+                    "ApplicationSettings.Speech.optSpeechHighTRFontSize.$t": {
+                        "schema": {
+                            "title": "Text reader font size",
+                            "description": "Selects the font size for the 'text reader tool'.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 50,
+                            "default": 14
+                        }
+                    },
+                    // Speech -> Speech highlighting -> Highlighting colors
+                    "ApplicationSettings.Speech.HighlightingBackColour.$t": {
+                        "schema": {
+                            "title": "Highlighted background color",
+                            "description": "Selects the color used as background for highlighting.",
+                            "enum": [
+                                "Blue",
+                                "Turquoise",
+                                "Chartreuse", // Bright green
+                                "Violet",
+                                "Red",
+                                "Yellow",
+                                "White",
+                                "DarkBlue",
+                                "Teal",
+                                "DarkGreen",
+                                "Purple",
+                                "DarkRed",
+                                "Olive",
+                                "LightGray",
+                                "Gray"
+                            ],
+                            "enumLabels": [
+                                "Blue",
+                                "Turquoise",
+                                "Brigh green",
+                                "Violet",
+                                "Red",
+                                "Yellow",
+                                "White",
+                                "Dark Blue",
+                                "Teal",
+                                "Dark Green",
+                                "Purple",
+                                "Dark Red",
+                                "Olive green",
+                                "Dimmed Text",
+                                "Gray"
+                            ],
+                            "default": "Yellow"
+                        }
+                    },
+                    "ApplicationSettings.Speech.HighlightingForeColour.$t": {
+                        "schema": {
+                            "title": "Highlighted foreground color",
+                            "description": "Selects the color used as foreground for highlighting.",
+                            "enum": [
+                                "Yellow",
+                                "Red",
+                                "Violet",
+                                "Chartreuse",
+                                "Turquoise",
+                                "Blue",
+                                "Black",
+                                "LightYellow",
+                                "Orange",
+                                "LightGreen",
+                                "SkyBlue",
+                                "White",
+                                // This color is only used in case of the following setting value:
+                                // "ApplicationSettings.Speech.HighlightingMethod.$t": "Speak with highlighting in text reader"
+                                "RoyalBlue"
+                            ],
+                            "enumLabels": [
+                                "Yellow",
+                                "Red",
+                                "Violet",
+                                "Bright green",
+                                "Turquoise",
+                                "Blue",
+                                "Black",
+                                "Pale yellow",
+                                "Orange",
+                                "Light Green",
+                                "Sky blue",
+                                "White",
+                                // This color is only used in case of the following setting value:
+                                // "ApplicationSettings.Speech.HighlightingMethod.$t": "Speak with highlighting in text reader"
+                                "Royal blue"
+                            ],
+                            "default": "Yellow"
+                        }
+                    },
+                    // Translation
+                    "ApplicationSettings.Translation.FromLanguage.$t": {
+                        "schema": {
+                            "title": "Translate from",
+                            "description": "Selects the language from which translate text.",
+                            "enum":[
+                                "en",
+                                "af",
+                                "sq",
+                                "ar",
+                                "be",
+                                "bn",
+                                "bg",
+                                "ca",
+                                "zh",
+                                "hr",
+                                "cs",
+                                "da",
+                                "nl",
+                                "et",
+                                "tl",
+                                "fi",
+                                "fr",
+                                "gl",
+                                "de",
+                                "el",
+                                "gu",
+                                "ht",
+                                "he",
+                                "hi",
+                                "hu",
+                                "is",
+                                "id",
+                                "ga",
+                                "it",
+                                "ja",
+                                "kn",
+                                "ko",
+                                "lv",
+                                "lt",
+                                "mk",
+                                "ms",
+                                "mt",
+                                "no",
+                                "fa",
+                                "pl",
+                                "pt",
+                                "ro",
+                                "ru",
+                                "sr",
+                                "sk",
+                                "sl",
+                                "es",
+                                "sw",
+                                "sv",
+                                "ta",
+                                "te",
+                                "th",
+                                "tr",
+                                "uk",
+                                "ur",
+                                "vi",
+                                "cy",
+                                "yi"
+                            ],
+                            "enumLabels": [
+                                "English",
+                                "Afrikaans",
+                                "Albanian",
+                                "Arabic",
+                                "Belarusian",
+                                "Bengali",
+                                "Bulgarian",
+                                "Catalan",
+                                "Chinese",
+                                "Croatian",
+                                "Czech",
+                                "Danish",
+                                "Dutch",
+                                "Estonian",
+                                "Filipino",
+                                "Finnish",
+                                "French",
+                                "Galician",
+                                "German",
+                                "Greek",
+                                "Gujarati",
+                                "Haitian Creole",
+                                "Hebrew",
+                                "Hindi",
+                                "Hungarian",
+                                "Icelandic",
+                                "Indonesian",
+                                "Irish",
+                                "Italian",
+                                "Japanese",
+                                "Kannada",
+                                "Korean",
+                                "Latvian",
+                                "Lithuanian",
+                                "Macedonian",
+                                "Malay",
+                                "Maltese",
+                                "Norwegian",
+                                "Persian",
+                                "Polish",
+                                "Portuguese",
+                                "Romanian",
+                                "Russian",
+                                "Serbian",
+                                "Slovak",
+                                "Slovenian",
+                                "Spanish",
+                                "Swahili",
+                                "Swedish",
+                                "Tamil",
+                                "Telugu",
+                                "Thai",
+                                "Turkish",
+                                "Ukrainian",
+                                "Urdu",
+                                "Vietnamese",
+                                "Welsh",
+                                "Yiddish"
+                            ],
+                            "default": "en"
+                        }
+                    },
+                    "ApplicationSettings.Translation.ToLanguage.$t": {
+                        "schema": {
+                            "title": "Translate to",
+                            "description": "Selects the target language in which text should be translated.",
+                            "enum":[
+                                "en",
+                                "af",
+                                "sq",
+                                "ar",
+                                "be",
+                                "bn",
+                                "bg",
+                                "ca",
+                                "zh",
+                                "hr",
+                                "cs",
+                                "da",
+                                "nl",
+                                "et",
+                                "tl",
+                                "fi",
+                                "fr",
+                                "gl",
+                                "de",
+                                "el",
+                                "gu",
+                                "ht",
+                                "he",
+                                "hi",
+                                "hu",
+                                "is",
+                                "id",
+                                "ga",
+                                "it",
+                                "ja",
+                                "kn",
+                                "ko",
+                                "lv",
+                                "lt",
+                                "mk",
+                                "ms",
+                                "mt",
+                                "no",
+                                "fa",
+                                "pl",
+                                "pt",
+                                "ro",
+                                "ru",
+                                "sr",
+                                "sk",
+                                "sl",
+                                "es",
+                                "sw",
+                                "sv",
+                                "ta",
+                                "te",
+                                "th",
+                                "tr",
+                                "uk",
+                                "ur",
+                                "vi",
+                                "cy",
+                                "yi"
+                            ],
+                            "enumLabels": [
+                                "English",
+                                "Afrikaans",
+                                "Albanian",
+                                "Arabic",
+                                "Belarusian",
+                                "Bengali",
+                                "Bulgarian",
+                                "Catalan",
+                                "Chinese",
+                                "Croatian",
+                                "Czech",
+                                "Danish",
+                                "Dutch",
+                                "Estonian",
+                                "Filipino",
+                                "Finnish",
+                                "French",
+                                "Galician",
+                                "German",
+                                "Greek",
+                                "Gujarati",
+                                "Haitian Creole",
+                                "Hebrew",
+                                "Hindi",
+                                "Hungarian",
+                                "Icelandic",
+                                "Indonesian",
+                                "Irish",
+                                "Italian",
+                                "Japanese",
+                                "Kannada",
+                                "Korean",
+                                "Latvian",
+                                "Lithuanian",
+                                "Macedonian",
+                                "Malay",
+                                "Maltese",
+                                "Norwegian",
+                                "Persian",
+                                "Polish",
+                                "Portuguese",
+                                "Romanian",
+                                "Russian",
+                                "Serbian",
+                                "Slovak",
+                                "Slovenian",
+                                "Spanish",
+                                "Swahili",
+                                "Swedish",
+                                "Tamil",
+                                "Telugu",
+                                "Thai",
+                                "Turkish",
+                                "Ukrainian",
+                                "Urdu",
+                                "Vietnamese",
+                                "Welsh",
+                                "Yiddish"
+                            ],
+                            "default": "es"
+                        }
+                    },
+                    // Vocabulary List
+                    // TODO: Verify with Microsoft word installation
+                    "ApplicationSettings.Vocabulary.VocabListWindow.$t": {
+                        "schema": {
+                            "title": "Show Vocabulary list window",
+                            "description": "Displays the vocabulary list window. This lets you edit the current vocabulary list before creating a doc with it.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ApplicationSettings.Vocabulary.VocabListImages.$t": {
+                        "schema": {
+                            "title": "Include pictures",
+                            "description": "Include pictures of the words present in the vocabulary list.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ApplicationSettings.Vocabulary.VocabListDefinitions.$t": {
+                        "schema": {
+                            "title": "Include definitions",
+                            "description": "Include definitions of the words present the vocabulary list.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // Voice Note
+                    "ApplicationSettings.VoiceNote.InsertInDoc.$t": {
+                        "schema": {
+                            "title": "Insert voice note directly on document",
+                            "description": "Allows you to insert a voice note directly in the current working document if supported.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
                 }
             }
         },
@@ -9720,19 +11334,22 @@
                     "setTrue": [
                         {
                             "type": "gpii.launch.exec",
-                            "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
+                            "command": "\"${{environment}.SystemDrive}\\Program Files (x86)\\Texthelp\\Read And Write 12\\ReadAndWrite.exe\""
                         }
                     ],
                     "setFalse": [
                         {
                             "type": "gpii.windows.closeProcessByName",
-                            "filename": "ReadAndWrite.exe"
+                            "filename": "ReadAndWrite.exe",
+                            "options": {
+                                "message": "WM_CLOSE"
+                            }
                         }
                     ],
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
-                            "command": "ReadAndWrite"
+                            "command": "ReadAndWrite.exe"
                         }
                     ]
                 }
@@ -9742,8 +11359,8 @@
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_CURRENT_USER",
-                "path": "Software\\Texthelp\\Read&Write11",
-                "subPath": "InstallPath",
+                "path": "Software\\Texthelp\\Voices",
+                "subPath": "DefaultTokenId",
                 "dataType": "REG_SZ"
             }
         ]
