@@ -5,15 +5,6 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
-                        "ApplicationSettings.AppBar.Width.$t": 788,
-                        "ApplicationSettings.AppBar.LargeIcons.$t": false,
-                        "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": false,
-                        "ApplicationSettings.AppBar.ShowText.$t": false,
-                        "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
-                        "ApplicationSettings.Speech.optSAPI5Speed.$t": 90,
-                        "ApplicationSettings.Speech.optAutoUseScreenReading.$t": true
-                    },
                     "http://registry.gpii.net/applications/org.gnome.orca": {},
                     "http://registry.gpii.net/applications/nvda.screenReader": {},
                     "http://registry.gpii.net/applications/webinsight.webAnywhere.windows": {},
