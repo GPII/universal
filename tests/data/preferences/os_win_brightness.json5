@@ -4,7 +4,7 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/brightness": 100
+                    "http://registry.gpii.net/common/brightness": 70
                 }
             }
         }
