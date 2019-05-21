@@ -75,8 +75,9 @@
         "test:vagrantBrowser": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; npm run test:browser'",
         "test:vagrantNode": "vagrant ssh -c 'cd /home/vagrant/sync/universal; npm run test:node'",
         "test:vagrantProduction": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; ./scripts/vagrantCloudBasedContainers.sh'",
+        "test:productionConfig": "node tests/production/AddUserSettingsToCouchTests.js && node tests/production/all-tests.js && node tests/production/DeleteUserSettingsFromCouchTests.js",
         "posttest": "node node_modules/nyc/bin/nyc.js report -r text-summary -r html --report-dir reports --temp-directory coverage",
         "start": "node gpii.js",
-        "postinstall": "node scripts/browserifyTestDependency.js && node scripts/convertPrefs.js testData/preferences/ build/dbData/snapset/ snapset && node scripts/convertPrefs.js testData/preferences/ build/dbData/user/ user && node scripts/convertPrefs.js tests/data/preferences/ build/tests/dbData/ user"
+        "postinstall": "node scripts/browserifyTestDependency.js && node scripts/convertPrefs.js testData/preferences/ build/dbData/snapset/ snapset && node scripts/convertPrefs.js tests/data/preferences/ build/tests/dbData/ user"
     }
 }

@@ -1,0 +1,1 @@
+This configuration file is used by the for acceptance test: windows-brigthness-testSpec.js.
