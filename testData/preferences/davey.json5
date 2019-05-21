@@ -1,16 +1,21 @@
-// # davey.json5
+// # Davey.json5
 //
-// ## Demo Personas with User Stories
+// This preference set changes several preferences from Read&Write Gold 12
 //
-// This preference set is part of our set of personas used for the demo install,
-// presentations, and in general conveying an array of compelling user stories for
-// the GPII.
+// ## Testing
 //
-// ## Details
+// This changes the following settings from the AT software:
+//      Translation:
+//          + From Language: Czech
+//          + To Language: Danish
 //
-// Davey  -  ReadWrite Gold with “fun” icons
+//      Vocabulary List:
+//          + Show vocabulary List window: true
+//          + Include pictures: false
+//          + Include definitions: true
 //
-// Davey is 6 and has a learning disability and when he looks at text it is visually scrambled. He needs to have text highlighted and read to him to make it easier for him to learn and read for school (and for any reading).
+//      Voice Note:
+//          + Insert directly in the document: false
 {
     "flat": {
         "name": "Davey",
@@ -19,24 +24,16 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
-                        "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Fun",
-                        "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Writing Features",
-                        "ApplicationSettings.AppBar.DocType.$t": "1",
-                        "ApplicationSettings.AppBar.ShowText.$t": true,
-                        "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
-                        "ApplicationSettings.AppBar.LargeIcons.$t": true,
-                        "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
-                        "ApplicationSettings.Speech.optSAPI5Pitch.$t": 36,
-                        "ApplicationSettings.Speech.optSAPI5Speed.$t": 38,
-                        "ApplicationSettings.Speech.optSAPI5Volume.$t": 72,
-                        "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": 0,
-                        "ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK English Daniel",
-                        "ApplicationSettings.Speech.WebHighlighting.$t": false,
-                        "ApplicationSettings.Translation.ToLanguage.$t": "fr",
-                        "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": 2,
-                        "ApplicationSettings.Scanning.ScanDestination.$t": "PDF",
-                        "ApplicationSettings.Scanning.ScanToFile.$t": false,
-                        "ApplicationSettings.Spelling.SpellAsIType.$t": true
+                        // Translation
+                        "ApplicationSettings.Translation.FromLanguage.$t": "cs",
+                        "ApplicationSettings.Translation.ToLanguage.$t": "da",
+                        // Vocabulary List
+                        // TODO: Verify with Microsoft word installation
+                        "ApplicationSettings.Vocabulary.VocabListWindow.$t": true,
+                        "ApplicationSettings.Vocabulary.VocabListImages.$t": false,
+                        "ApplicationSettings.Vocabulary.VocabListDefinitions.$t": true,
+                        // Voice Note
+                        "ApplicationSettings.VoiceNote.InsertInDoc.$t": true
                     }
                 }
             }
