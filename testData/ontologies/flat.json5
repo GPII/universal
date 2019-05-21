@@ -571,6 +571,13 @@
             "minimum": 0,
             "maximum": 1
         },
+        "http://registry.gpii.net/common/brightness": {
+            "title": "Screen brightness",
+            "description": "Main monitor screen brightness",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+        },
         "http://registry.gpii.net/common/volumeTTS": {
             "title": "TTS Volume",
             "description": "Output volume of TTS",
