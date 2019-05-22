@@ -29,7 +29,6 @@
 
                     "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
                         "HighContrastOn": {
-                            "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
                             "value": true
                         }
                     }
