@@ -15,7 +15,7 @@
  * ** OntologyHandler
  * ** solutionsRegistry (reading registry from file)
  * ** flatMatchMaker
- * ** matchMakerFramework
+ * ** MatchMakerFramework
  * ** CouchDB
  *
  * Note that this config incorrectly derives from the deviceReporter development config. This is because of a dependency error

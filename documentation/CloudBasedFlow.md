@@ -43,6 +43,6 @@ The process of retrieving application lifecycle instructions in the Cloud Based 
     run (in that order).
    * The end result of this process is a description of the configuration to be applied to system, described per
     application. The event `onMatchDone` signals that we have the lifecycle instructions ready. For more details on the
-    match maker frameworks internal workings, see: [Match Maker Framework Documentation](MatchMakerFramework.md)
+    MatchMaker frameworks internal workings, see: [MatchMaker Framework Documentation](MatchMakerFramework.md)
 5. `onMatchDone` is being listened to by the `matchToSettings` function (Cloud Based FlowManager) which takes and puts
    the lifecycle instructions in the response to the requesting application.
