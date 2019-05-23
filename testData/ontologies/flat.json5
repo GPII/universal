@@ -571,7 +571,7 @@
             "minimum": 0,
             "maximum": 1
         },
-        "http://registry.gpii.net/common/brightness": {
+        "http://registry.gpii.net/common/screenBrightness": {
             "title": "Screen brightness",
             "description": "Main monitor screen brightness",
             "type": "number",
