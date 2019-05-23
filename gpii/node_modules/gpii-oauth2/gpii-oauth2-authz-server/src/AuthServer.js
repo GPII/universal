@@ -75,8 +75,10 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
      * @param {Function} done - The oauth2orizeServer endpoint function to grant or reject when a client requests authorization.
      * @return {Object} The result of gpii.oauth2.oauth2orizeServer.promiseToDone() that contains the response to the grant request.
      */
-    oauth2orizeServer.exchange(oauth2orize.exchange.password(function (clientInfo, username, password, scope, done) {
-        var passwordPromise = authorizationService.grantGpiiAppInstallationAuthorization(username, clientInfo.client.id, clientInfo.clientCredentialId);
+    oauth2orizeServer.exchange(oauth2orize.exchange.password(function (clientInfo, username, password, scope, body, authInfo, done) {
+        var ip = authInfo.req.headers['x-forwarded-for'] || authInfo.req.connection.remoteAddress || authInfo.req.socket.remoteAddress;
+        
+        var passwordPromise = authorizationService.grantGpiiAppInstallationAuthorization(username, clientInfo.client.id, clientInfo.clientCredential.id);
 
         var authorizationMapper = function (authorization) {
             return authorization.accessToken;
@@ -225,6 +227,12 @@ gpii.oauth2.urlencodedBodyParser = function () {
 gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServer, passport) {
     that.expressApp.post("/access_token",
         passport.authenticate("oauth2-client-password", { session: false }),
+        // A suggested workaround to get node "request" variable passed into oauth2orize supported exchanges:
+        // https://github.com/jaredhanson/oauth2orize/issues/182#issuecomment-253571341
+        function(req, res, next) {
+            req.authInfo.req = req;
+            next();
+        },
         oauth2orizeServer.token(),
         oauth2orizeServer.errorHandler()
     );
