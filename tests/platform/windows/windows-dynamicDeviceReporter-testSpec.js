@@ -101,6 +101,16 @@ gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries = {
                 }
             }]
         };
+    },
+    brightness: function (running) {
+        return {
+            "com.windows.brightness": [{
+                "settings": {
+                    "running": running
+                },
+                "options": {}
+            }]
+        };
     }
 };
 
@@ -149,6 +159,12 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
                     "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
                     "subPath": ""
                 }]
+            },
+            "gpii.deviceReporter.wmiSettingSupported": {
+                "expectInstalled": [{
+                    "namespace": "root\\WMI",
+                    "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
+                }]
             }
         }
     },
@@ -169,6 +185,54 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
                     "path": "Software\\Texthelp\\Voices",
                     "subPath": "DefaultTokenId",
                     "dataType": "REG_SZ"
+                }]
+            },
+            "gpii.deviceReporter.wmiSettingSupported": {
+                "expectInstalled": [{
+                    "namespace": "root\\WMI",
+                    "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
+                }]
+            }
+        }
+    },
+    {
+        name: "Testing os_win_brightness using Flat matchmaker",
+        gpiiKey: "os_win_brightness",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.brightness(false)
+        },
+        gradeNames: "gpii.test.integration.deviceReporterAware.windows",
+        settingsHandlers: {
+            "gpii.windows.wmiSettingsHandler": {
+                "data": [
+                    {
+                        "settings": {
+                            "Brightness": {
+                                "value": 70
+                            }
+                        },
+                        "options": {
+                            "Brightness": {
+                                "namespace": "root\\WMI",
+                                "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
+                                "set": {
+                                    "className": "WmiMonitorBrightnessMethods",
+                                    "method": "WmiSetBrightness",
+                                    "params": [0xFFFFFFFF, "$value"],
+                                    "returnVal": ["uint", 0]
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.brightness(false)
+        },
+        deviceReporters: {
+            "gpii.deviceReporter.wmiSettingSupported": {
+                "expectInstalled": [{
+                    "namespace": "root\\WMI",
+                    "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
                 }]
             }
         }

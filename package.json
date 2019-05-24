@@ -15,7 +15,7 @@
         "glob": "7.1.3",
         "@google-cloud/trace-agent": "3.4.0",
         "gpii-couchdb-test-harness": "1.0.0-dev.20190227T100402Z.f266632.GPII-3531",
-        "infusion": "3.0.0-dev.20181204T213346Z.2ca90f6e6",
+        "infusion": "3.0.0-dev.20190328T144119Z.ec44dbfab",
         "json5": "2.1.0",
         "kettle": "1.10.1",
         "mkdirp": "0.5.1",
@@ -74,8 +74,9 @@
         "test:vagrantBrowser": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; npm run test:browser'",
         "test:vagrantNode": "vagrant ssh -c 'cd /home/vagrant/sync/universal; npm run test:node'",
         "test:vagrantProduction": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; ./scripts/vagrantCloudBasedContainers.sh'",
+        "test:productionConfig": "node tests/production/AddUserSettingsToCouchTests.js && node tests/production/all-tests.js && node tests/production/DeleteUserSettingsFromCouchTests.js",
         "posttest": "node node_modules/nyc/bin/nyc.js report -r text-summary -r html --report-dir reports --temp-directory coverage",
         "start": "node gpii.js",
-        "postinstall": "node scripts/browserifyTestDependency.js && node scripts/convertPrefs.js testData/preferences/ build/dbData/snapset/ snapset && node scripts/convertPrefs.js testData/preferences/ build/dbData/user/ user && node scripts/convertPrefs.js tests/data/preferences/ build/tests/dbData/ user"
+        "postinstall": "node scripts/browserifyTestDependency.js && node scripts/convertPrefs.js testData/preferences/ build/dbData/snapset/ snapset && node scripts/convertPrefs.js tests/data/preferences/ build/tests/dbData/ user"
     }
 }
