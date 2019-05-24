@@ -4759,7 +4759,7 @@
                     "Brightness": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.brightness.BrightnessVal",
+                            "inputPath": "http://registry\\.gpii\\.net/common/screenBrightness",
                             "outputPath": "value"
                         }
                     }
@@ -4777,7 +4777,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.brightness.BrightnessVal": "Brightness.value"
+                    "http://registry\\.gpii\\.net/common/screenBrightness": "Brightness.value"
                 }
             }
         },
@@ -11342,7 +11342,7 @@
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "ReadAndWrite.exe",
                             "options": {
-                                "message": "WM_CLOSE"
+                                "closeWindow": true
                             }
                         }
                     ],
