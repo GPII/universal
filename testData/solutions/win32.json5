@@ -11342,7 +11342,7 @@
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "ReadAndWrite.exe",
                             "options": {
-                                "message": "WM_CLOSE"
+                                "closeWindow": true
                             }
                         }
                     ],
