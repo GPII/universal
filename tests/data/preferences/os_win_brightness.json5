@@ -4,9 +4,7 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/applications/com.microsoft.windows.brightness": {
-                        "BrightnessVal": 70
-                    }
+                    "http://registry.gpii.net/common/screenBrightness": 70
                 }
             }
         }
