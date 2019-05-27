@@ -30,19 +30,8 @@ fluid.defaults("gpii.tests.deviceReporterErrorTests.testCaseHolder", {
             "record": "%gpii-universal/tests/data/faultyDeviceReport.jsonx",
             "target": "{that deviceReporter installedSolutionsDataSource}.options.path"
         }
-    },
-    components: {
-        deviceRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                path: "/device",
-                port: 8081
-            }
-        }
     }
 });
-
-gpii.tests.deviceReporterErrorTests.gpiiKey = "testUser1";
 
 gpii.tests.deviceReporterErrorTests.testDefCommon = {
     config: {
@@ -56,7 +45,12 @@ gpii.tests.deviceReporterErrorTests.testDefs = [
     {
         name: "Login fails on error in Device Reporter and reports to login",
         expect: 4,
-        gpiiKey: gpii.tests.deviceReporterErrorTests.gpiiKey,
+        gpiiKey: "testUser1",
+        config: {
+            configName: "gpii.config.development.local",
+            configPath: "%gpii-universal/gpii/configs/shared"
+        },
+        gradeNames: "gpii.tests.deviceReporterErrorTests.testCaseHolder",
         sequence: [{
             func: "{loginRequest}.send"
         }, {
@@ -69,26 +63,6 @@ gpii.tests.deviceReporterErrorTests.testDefs = [
                 request: "{loginRequest}"
             }
         }]
-    }, {
-        name: "Device Reporter fails on corrupt JSON file",
-        expect: 4,
-        config: {
-            configName: "gpii.config.development.local",
-            configPath: "%gpii-universal/gpii/configs/shared"
-        },
-        gradeNames: [ "gpii.tests.deviceReporterErrorTests.testCaseHolder" ],
-        sequence: [{
-            func: "{deviceRequest}.send"
-        }, {
-            event: "{deviceRequest}.events.onComplete",
-            listener: "kettle.test.assertErrorResponse",
-            args: {
-                message: "Received 500 error from device reporter direct",
-                errorTexts: ["Failed to read deviceReporter", "Parse error"],
-                string: "{arguments}.0",
-                request: "{deviceRequest}"
-            }
-        }]
     }];
 
 gpii.tests.deviceReporterErrorTests.buildAllTestDefs = function () {
@@ -97,4 +71,4 @@ gpii.tests.deviceReporterErrorTests.buildAllTestDefs = function () {
     });
 };
 
-gpii.test.runCouchTestDefs(gpii.tests.deviceReporterErrorTests.buildAllTestDefs());
+gpii.test.runCouchTestDefs(gpii.tests.deviceReporterErrorTests.testDefs);
