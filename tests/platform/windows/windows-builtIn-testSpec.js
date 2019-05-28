@@ -1752,5 +1752,5 @@ module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.builtIn.testDefs",
     configName: "gpii.tests.acceptance.windows.builtIn.config",
     configPath: "%gpii-universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
+}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.actionHandlersAware.windows"],
     module, require, __dirname);
