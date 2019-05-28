@@ -77,22 +77,28 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
      */
     oauth2orizeServer.exchange(oauth2orize.exchange.password(function (clientInfo, username, password, scope, body, authInfo, done) {
         var ip = authInfo.req.headers['x-forwarded-for'] || authInfo.req.connection.remoteAddress || authInfo.req.socket.remoteAddress;
-        
-        var passwordPromise = authorizationService.grantGpiiAppInstallationAuthorization(username, clientInfo.client.id, clientInfo.clientCredential.id);
+        var isIPAllowed = gpii.oauth2.isIPINRange(ip, clientInfo.clientCredential.allowedIPBlocks);
 
-        var authorizationMapper = function (authorization) {
-            return authorization.accessToken;
-        };
+        if (isIPAllowed) {
+            var passwordPromise = authorizationService.grantGpiiAppInstallationAuthorization(username, clientInfo.client.id, clientInfo.clientCredential.id);
 
-        var paramsMapper = function (params) {
-            // extra parameters to be included in the `oauth2orizeServer` response except `accessToken`
-            return fluid.censorKeys(params, "accessToken");
-        };
+            var authorizationMapper = function (authorization) {
+                return authorization.accessToken;
+            };
 
-        var authorizationPromise = fluid.promise.map(passwordPromise, authorizationMapper);
-        var paramsPromise = fluid.promise.map(passwordPromise, paramsMapper);
+            var paramsMapper = function (params) {
+                // extra parameters to be included in the `oauth2orizeServer` response except `accessToken`
+                return fluid.censorKeys(params, "accessToken");
+            };
 
-        gpii.oauth2.oauth2orizeServer.promiseToDone(authorizationPromise, done, paramsPromise);
+            var authorizationPromise = fluid.promise.map(passwordPromise, authorizationMapper);
+            var paramsPromise = fluid.promise.map(passwordPromise, paramsMapper);
+
+            gpii.oauth2.oauth2orizeServer.promiseToDone(authorizationPromise, done, paramsPromise);
+        } else {
+            fluid.log("authServer, /access_token request handler: IP of the incoming request (" + ip + ") is not within the allowed IP blocks: " + clientInfo.clientCredential.allowedIPBlocks);
+            gpii.oauth2.oauth2orizeServer.promiseToDone(fluid.promise().reject(gpii.dbOperation.errors.unauthorized), done);
+        }
     }));
 
 };
@@ -256,7 +262,7 @@ gpii.oauth2.oauth2orizeServer.promiseToDone = function (promise, done, paramsPro
             done(null, data);
         }
     }, function (error) {
-        var responseError = new oauth2orize.OAuth2Error(error.msg, null, null, error.statusCode);
+        var responseError = new oauth2orize.OAuth2Error(error.message, null, null, error.statusCode);
         done(responseError, false);
     });
 };

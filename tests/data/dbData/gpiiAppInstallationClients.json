@@ -16,5 +16,14 @@
         "computerType": "public",
         "timestampCreated": "2017-11-21T18:11:22.101Z",
         "timestampUpdated": null
+    },
+    {
+        "_id": "gpiiAppInstallationClient-3",
+        "type": "gpiiAppInstallationClient",
+        "schemaVersion": "0.1",
+        "name": "NOVA Computers",
+        "computerType": "public",
+        "timestampCreated": "2019-05-28T18:11:22.101Z",
+        "timestampUpdated": null
     }
 ]

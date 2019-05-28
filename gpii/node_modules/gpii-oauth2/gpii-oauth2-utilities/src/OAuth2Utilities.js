@@ -15,6 +15,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = fluid || require("infusion");
 
 var gpii = fluid.registerNamespace("gpii");
+var ipRangeCheck = require("ip-range-check");
+
 fluid.registerNamespace("gpii.oauth2");
 
 gpii.oauth2.parseBearerAuthorizationHeader = function (req) {
@@ -88,4 +90,14 @@ gpii.oauth2.getExpiresIn = function (timestampStarts, timestampExpires) {
     var startsTimeInMsec = timestampStarts.getTime();
     var expiresTimeInMsec = new Date(timestampExpires).getTime();
     return expiresTimeInMsec > startsTimeInMsec ? Math.round((expiresTimeInMsec - startsTimeInMsec) / 1000) : 0;
+};
+
+/**
+ * Verify if the given IP address is in the allowed IP blocks.
+ * @param {String} ipAddress - An IP to verify.
+ * @param {Array} allowedIPBlocks - An array of allowed IP blocks.
+ * @return {Boolean} Return true if allowedIPBlocks is not provided or the given IP is within the range. Otherwise, return false.
+ */
+gpii.oauth2.isIPINRange = function (ipAddress, allowedIPBlocks) {
+    return allowedIPBlocks ? ipRangeCheck(ipAddress, allowedIPBlocks) : true;
 };
