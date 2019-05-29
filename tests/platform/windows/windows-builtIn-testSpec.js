@@ -721,8 +721,7 @@ gpii.tests.windows.builtIn = [
         gradeNames: "gpii.test.integration.actionHandlersAware.windows",
         actionsHandlers: [
             {
-                "type": "gpii.windows.updateLanguage",
-                "currentLanguage": "HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages"
+                "type": "gpii.windows.updateLanguage"
             }
         ]
     }, {
@@ -1588,24 +1587,13 @@ gpii.tests.windows.builtInHighContrast = [
         },
         actionsHandlers: [
             {
-                "type": "gpii.windows.rm",
-                "path": "environment.APPDATA\\Microsoft\\Windows\\Themes\\CachedFiles",
-                "options": {
-                    "recursive": true,
-                    "silent": true
-                }
+                "type": "gpii.windows.rm"
             },
             {
-                // Make sure the colours are applied for custom themes.
-                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme",
-                "themeFile": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\LastSet"
+                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme"
             },
             {
-                // Save the current theme, and set the new high-contrast one.
-                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
-                "newTheme": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme",
-                "currentTheme": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\CurrentTheme",
-                "saveAs": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\Pre-High Contrast Scheme"
+                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme"
             }
         ]
     }, {
@@ -1637,24 +1625,13 @@ gpii.tests.windows.builtInHighContrast = [
         },
         actionsHandlers: [
             {
-                "type": "gpii.windows.rm",
-                "path": "environment.APPDATA\\Microsoft\\Windows\\Themes\\CachedFiles",
-                "options": {
-                    "recursive": true,
-                    "silent": true
-                }
+                "type": "gpii.windows.rm"
             },
             {
-                // Make sure the colours are applied for custom themes.
-                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme",
-                "themeFile": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\LastSet"
+                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme"
             },
             {
-                // Save the current theme, and set the new high-contrast one.
-                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
-                "newTheme": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme",
-                "currentTheme": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\CurrentTheme",
-                "saveAs": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\Pre-High Contrast Scheme"
+                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme"
             }
         ]
     }, {
@@ -1724,24 +1701,13 @@ gpii.tests.windows.builtInHighContrast = [
         },
         actionsHandlers: [
             {
-                "type": "gpii.windows.rm",
-                "path": "environment.APPDATA\\Microsoft\\Windows\\Themes\\CachedFiles",
-                "options": {
-                    "recursive": true,
-                    "silent": true
-                }
+                "type": "gpii.windows.rm"
             },
             {
-                // Make sure the colours are applied for custom themes.
-                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme",
-                "themeFile": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\LastSet"
+                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme"
             },
             {
-                // Save the current theme, and set the new high-contrast one.
-                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
-                "newTheme": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme",
-                "currentTheme": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\CurrentTheme",
-                "saveAs": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\Pre-High Contrast Scheme"
+                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme"
             }
         ]
     }, {
@@ -1811,24 +1777,13 @@ gpii.tests.windows.builtInHighContrast = [
         },
         actionsHandlers: [
             {
-                "type": "gpii.windows.rm",
-                "path": "environment.APPDATA\\Microsoft\\Windows\\Themes\\CachedFiles",
-                "options": {
-                    "recursive": true,
-                    "silent": true
-                }
+                "type": "gpii.windows.rm"
             },
             {
-                // Make sure the colours are applied for custom themes.
-                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme",
-                "themeFile": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\LastSet"
+                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme"
             },
             {
-                // Save the current theme, and set the new high-contrast one.
-                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
-                "newTheme": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme",
-                "currentTheme": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\CurrentTheme",
-                "saveAs": "registry.HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\Pre-High Contrast Scheme"
+                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme"
             }
         ]
     }
