@@ -4742,6 +4742,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.wmiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "Brightness": {
                         "namespace": "root\\WMI",
