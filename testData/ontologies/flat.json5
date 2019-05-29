@@ -589,6 +589,15 @@
             ]
         }
     },
+    "http://registry.gpii.net/common/screenBrightness": {
+        "schema": {
+            "title": "Screen brightness",
+            "description": "Main monitor screen brightness",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+        }
+    },
     "http://registry.gpii.net/common/screenReaderBrailleOutput": {
         "schema": {
             "title": "Enable braille output",
