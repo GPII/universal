@@ -77,9 +77,12 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
      */
     oauth2orizeServer.exchange(oauth2orize.exchange.password(function (clientInfo, username, password, scope, body, authInfo, done) {
         var ip = authInfo.req.headers['x-forwarded-for'] || authInfo.req.connection.remoteAddress || authInfo.req.socket.remoteAddress;
-        var isIPAllowed = gpii.oauth2.isIPINRange(ip, clientInfo.clientCredential.allowedIPBlocks);
 
-        if (isIPAllowed) {
+        // If the value of "clientInfo.clientCredential.allowedIPBlocks" is null or undefined, skip the ip verification
+        // and go ahead to assign an access token. If this value is provided, the IP of the incoming request must be
+        // within the allowed IP blocks before assigning an access token.
+        if (!clientInfo.clientCredential.allowedIPBlocks ||
+            clientInfo.clientCredential.allowedIPBlocks && gpii.oauth2.isIPINRange(ip, clientInfo.clientCredential.allowedIPBlocks)) {
             var passwordPromise = authorizationService.grantGpiiAppInstallationAuthorization(username, clientInfo.client.id, clientInfo.clientCredential.id);
 
             var authorizationMapper = function (authorization) {

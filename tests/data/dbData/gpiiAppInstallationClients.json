@@ -9,19 +9,19 @@
         "timestampUpdated": null
     },
     {
-        "_id": "gpiiAppInstallationClient-2",
+        "_id": "gpiiAppInstallationClient-NOVA-passIPVerification",
         "type": "gpiiAppInstallationClient",
         "schemaVersion": "0.1",
-        "name": "Bakersfield AJC - PC1",
+        "name": "NOVA - success workflow tests",
         "computerType": "public",
-        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampCreated": "2019-05-28T18:11:22.101Z",
         "timestampUpdated": null
     },
     {
-        "_id": "gpiiAppInstallationClient-3",
+        "_id": "gpiiAppInstallationClient-NOVA-failIPVerification",
         "type": "gpiiAppInstallationClient",
         "schemaVersion": "0.1",
-        "name": "NOVA Computers",
+        "name": "NOVA - erroneous workflow tests",
         "computerType": "public",
         "timestampCreated": "2019-05-28T18:11:22.101Z",
         "timestampUpdated": null
