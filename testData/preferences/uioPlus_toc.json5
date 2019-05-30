@@ -5,12 +5,13 @@
 // Should only enable the Table of Contents. The table of contents will be injected into one of the following locations depending on what is located on the page: an element with the class `flc-toc-tocContainer`, main content, or the `body` element.
 {
     "flat": {
+        "name": "UIO+ Table of Contents",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/common/captions/enabled": false,
-                    "http://registry.gpii.net/common/characterSpace": 0,
+                    "http://registry.gpii.net/common/characterSpace": 1,
                     "http://registry.gpii.net/common/fontSize": 12,
                     "http://registry.gpii.net/common/highContrast/enabled": false,
                     "http://registry.gpii.net/common/highlightColor": "default",

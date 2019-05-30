@@ -83,6 +83,7 @@ var testIncludes = [
     "../gpii/node_modules/settingsHandlers/test/WebSocketsSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/singleInstance/test/SingleInstanceTests.js",
+    "../gpii/node_modules/solutionsRegistry/test/all-tests.js",
     "../gpii/node_modules/userListeners/test/all-tests.js"
 ];
 
