@@ -125,6 +125,14 @@
     },
 
     {
+        "id": "com.microsoft.windows.desktopBackground"
+    },
+
+    {
+        "id": "com.microsoft.windows.desktopBackgroundColor"
+    },
+
+    {
         "id": "fakemag2"
     },
 

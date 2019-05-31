@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Chrome Default",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

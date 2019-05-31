@@ -98,7 +98,6 @@ gpii.tests.windows.jaws.testDefs = [
 
                     {
                         "settings": {
-                            "Options.PrimarySynthesizer" : "eloq",
                             "ENU-Global.Rate": 100,
                             "ENU-JAWSCursor.Rate": 100,
                             "ENU-Keyboard.Rate": 100,
@@ -164,7 +163,6 @@ gpii.tests.windows.jaws.testDefs = [
 
                     {
                         "settings": {
-                            "Options.PrimarySynthesizer" : "eloq",
                             "ENU-Global.Rate": 100,
                             "ENU-JAWSCursor.Rate": 100,
                             "ENU-Keyboard.Rate": 100,
@@ -216,7 +214,6 @@ gpii.tests.windows.jaws.testDefs = [
                 "com.freedomscientific.jaws": [
                     {
                         "settings": {
-                            "Options.PrimarySynthesizer": "eloq",
                             "ENU-Global.Rate": 40,
                             "ENU-Global.Punctuation": 2,
                             "ENU-Global.Pitch": 75,
@@ -282,7 +279,6 @@ gpii.tests.windows.jaws.testDefs = [
                 "com.freedomscientific.jaws": [
                     {
                         "settings": {
-                            "Options.PrimarySynthesizer": "eloq",
                             "ENU-Global.Rate": 40,
                             "ENU-Global.Punctuation": 0,
                             "ENU-Global.Pitch": 11,
@@ -347,7 +343,6 @@ gpii.tests.windows.jaws.testDefs = [
                 "com.freedomscientific.jaws": [
                     {
                         "settings": {
-                            "Options.PrimarySynthesizer": "eloq",
                             "ENU-Global.Rate": 100,
                             "ENU-Global.Punctuation": 2,
                             "ENU-Global.Pitch": 100,

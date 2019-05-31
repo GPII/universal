@@ -6,6 +6,7 @@
 // ** big font and big buttons.
 {
     "flat": {
+        "name": "TVM Vladimir",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
