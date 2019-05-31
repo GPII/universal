@@ -11,7 +11,7 @@
   * [Couch Connector](CouchConnector.md)
   * [Data Loader](DataLoader.md)
 * [MatchMakerFramework](MatchMakerFramework.md)
-  * [Flat Match Maker](FlatMatchMaker.md)
+  * [Flat MatchMaker](FlatMatchMaker.md)
   * [Apptology](Apptology.md)
 * [Context Manager](ContextManager.md)
 * [Lifecycle Manager](LifecycleManager.md)

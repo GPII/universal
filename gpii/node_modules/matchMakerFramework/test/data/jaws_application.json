@@ -6,7 +6,6 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
                         "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                        "Options.PrimarySynthesizer" : "eloq",
                         "Options.SayAllIndicateCaps" : 0,
                         "ENU-Global.Rate" : 100,
                         "ENU-Global.Pitch" : 75,

@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Conditional Test",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

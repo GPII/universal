@@ -1,7 +1,7 @@
 /**
  * This configuration is the production version of `gpii.config.untrusted.development.dynamicDR.manualTesting`.
- * It runs the entire system locally under the untrusted Flow Manager architecture and includes an extra feature
- * that resets the system on system startup. See documentation/ResetComputer.md.
+ * It runs the entire system locally under the untrusted Flow Manager architecture and supresses
+ * the 'login', 'logout' and 'proximityTriggered' HTTP endpoints.
  *
  * It starts these servers:
  * 1. Untrusted Local Flow Manager on port 8081
@@ -23,7 +23,7 @@
 {
     "type": "gpii.config.untrusted.production.dynamicDR.manualTesting",
     "mergeConfigs": [
-        "%flowManager/configs/gpii.flowManager.config.production.base.json5",
+        "%flowManager/configs/gpii.flowManager.config.suppressHttpEndpoints.base.json5",
         "%gpii-universal/gpii/configs/gpii.config.untrusted.development.dynamicDR.manualTesting.json5"
     ]
 }
