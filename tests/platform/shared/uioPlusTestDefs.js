@@ -30,7 +30,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": false,
-                            "characterSpace": 1,
+                            "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
                             "inputsLargerEnabled": false,
@@ -59,7 +59,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": false,
-                            "characterSpace": 1,
+                            "characterSpace": 2,
                             "contrastTheme": "wb",
                             "fontSize": 1,
                             "inputsLargerEnabled": false,
@@ -88,7 +88,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": false,
-                            "characterSpace": 1,
+                            "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 2,
                             "inputsLargerEnabled": false,
@@ -117,7 +117,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": false,
-                            "characterSpace": 1,
+                            "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
                             "inputsLargerEnabled": false,
@@ -146,7 +146,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": false,
-                            "characterSpace": 1,
+                            "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
                             "inputsLargerEnabled": false,
@@ -175,7 +175,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": false,
-                            "characterSpace": 1.2,
+                            "characterSpace": 2.2,
                             "contrastTheme": "default",
                             "fontSize": 1,
                             "inputsLargerEnabled": false,
@@ -204,7 +204,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": false,
-                            "characterSpace": 1,
+                            "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
                             "inputsLargerEnabled": true,
@@ -233,7 +233,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": false,
-                            "characterSpace": 1,
+                            "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
                             "inputsLargerEnabled": false,
@@ -262,7 +262,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": false,
-                            "characterSpace": 1,
+                            "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
                             "inputsLargerEnabled": false,
@@ -291,7 +291,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": false,
-                            "characterSpace": 1,
+                            "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
                             "inputsLargerEnabled": false,
@@ -320,7 +320,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": false,
-                            "characterSpace": 1,
+                            "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
                             "inputsLargerEnabled": false,
@@ -349,7 +349,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": true,
-                            "characterSpace": 1,
+                            "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
                             "inputsLargerEnabled": false,
@@ -378,7 +378,7 @@ gpii.tests.uioPlus.testDefs = [
                     {
                         "settings": {
                             "captionsEnabled": false,
-                            "characterSpace": 1,
+                            "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
                             "inputsLargerEnabled": false,

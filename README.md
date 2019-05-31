@@ -95,7 +95,12 @@ There are currently 3 different sets of tests:
 * Production tests, that run in node.js, but which interact with external services.
 
 The `npm test` command will run the browser and Node based tests.  Please note, the node tests may behave oddly if you
-have set the `NODE_ENV` variable.
+have set the `NODE_ENV` variable. The last two types of tests require you to have either Docker or Vagrant installed
+and available on your path, or else have a local instance of CouchDB listening on port 25984.
+If you are using Vagrant, you'll need to set the `GPII_TEST_COUCH_USE_VAGRANT` environment
+variable to `true`, or if you wish to bind tests against a local CouchDB on port 25984, you can
+set the `GPII_TEST_COUCH_USE_EXTERNAL` environment variable to `true`. See [the documentation for the
+gpii-couchdb-test-harness package](https://github.com/GPII/gpii-couchdb-test-harness) for more details.
 
 ### Convert Preferences Data
 
@@ -112,21 +117,21 @@ The preferences files in `%gpii-universaluniversal/testData/preferences/` are co
 
 The above `snapset` preferences safes and GPII keys are:
 
-1. loaded into the production and the staging CouchDB in cloud environments.
-2. loaded into the PouchDB when GPII runs locally, regardless of which configuration is used.
+1. loaded into production and staging CouchDB instances in cloud environments.
+2. loaded into a local CouchDB instance when GPII runs locally, regardless of which configuration is used.
 
-The above `user` preferences are loaded into the local PouchDB for running GPII integration tests.
+The above `user` preferences are loaded into the local CouchDB for running GPII integration tests.
 
 The preferences in `%gpii-universal/tests/data/preferences/` are converted into `user` preferences:
 
 * `%gpii-universal/build/tests/dbData/user/gpiiKeys.json`
 * `%gpii-universal/build/tests/dbData/user/prefsSafes.json`
 
-These `user` preferences and the above `snapset` preferences are used with a PouchDB when GPII runs in a development configuration.
+These `user` preferences and the above `snapset` preferences are used with CouchDB when GPII runs in a development configuration.
 
 When any preferences file in either one of the two source directories (`%gpii-universaluniversal/testData/preferences/`
 or `%gpii-universal/tests/data/preferences/`) are modified, running `npm run postinstall` will generate
-gpiiKeys.json and prefsSafes.json files, whose contents are structured for loading into PouchDB/CouchDB.
+gpiiKeys.json and prefsSafes.json files, whose contents are structured for loading into CouchDB.
 This step is needed for any preferences modifications that are to be applied to GPII.
 
 ### Running browser tests
@@ -194,6 +199,11 @@ From your project's top-level directory (where the `Vagrantfile` and `package.js
 The `test:vagrantProduction` target uses the `vagrantCloudBasedContainers.sh` script to spin up docker container-based
 GPII components inside the VM.
 
+**WARNING:** There is also a `test:productionConfig` npm script but do not run it
+directly.  It is used to execute the production tests *within* the docker container-based GPII components
+created by `vagrantCloudBasedContainers.sh`.  It is executed as the last step of
+`vagrantCloudBasedContainers.sh`.
+
 You can also run `vagrant ssh` to connect to the VM (or open the VirtualBox console and interface with the desktop
 environment) and run the tests manually if you wish.
 
@@ -218,15 +228,10 @@ manager when fetching or updating user settings, so there are extended requireme
 These tests are a supplement to the `all-tests.js` (and hence not part of that test suite) and should be run separately
 when testing the system and having the below requirements available.
 
-Requirements:
+The tests are run in one of two ways, using the following commands:
 
-* an internet connection
-* a cloud based flow manager running at `http://flowmanager.gpii.net` containing at least the following (unmodified)
-  preference set: `testUser1`
-
-The tests are run using the following command:
-
-`GPII_CLOUD_URL="http://flowmanager.gpii.net" node tests/ProductionConfigTests.js`
+1. From a host machine running a guest VM: `npm run test:vagrantProduction`
+2. From within the VM: `./scripts/vagrantCloudBasedContainers.sh`
 
 ### Coverage Reporting
 
@@ -304,7 +309,7 @@ Running `./scripts/vagrantCloudBasedContainers.sh`:
 2. In the case that you would like to start these 3 servers without rebuilding the universal docker image, run the
    script with `--no-rebuild` option: `./scripts/vagrantCloudBasedContainers.sh --no-rebuild`
 
-#### Method 2: On the host machine that has docker installed
+#### Method 2: On a host machine that has docker installed
 
 To build a Docker image simply run: `docker build -t my-universal .`
 

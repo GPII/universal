@@ -1,0 +1,21 @@
+/**
+ * This configuration runs a GPII cloud including a cloud based flow manager and a preferences server, locally
+ * on port 8081. It also uses a CouchDB Docker test harness for persistence, which is available at port 25984.
+ *
+ * * The following components are running:
+ * ** Auth Server
+ * ** Flat MatchMaker
+ * ** Flow Manager
+ * ** MatchMaker Framework
+ * ** Ontology Handler
+ * ** Preferences Server
+ * ** Solutions Registry (reading registry from file)
+ * ** gpii-couchdb-test-harness
+ */
+{
+    "type": "gpii.config.cloudBased.development.manualTesting",
+    "mergeConfigs": [
+        "%gpii-universal/gpii/configs/shared/gpii.config.cloudBased.development.json5",
+        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.startWithoutCleanData.json5"
+    ]
+}

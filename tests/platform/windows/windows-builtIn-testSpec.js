@@ -26,8 +26,8 @@ fluid.registerNamespace("gpii.tests.windows");
 
 gpii.tests.windows.builtIn = [
     {
-        name: "Testing os_win7 using default matchmaker",
-        gpiiKey: "os_win7",
+        name: "Testing os_win using default matchmaker",
+        gpiiKey: "os_win",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -77,6 +77,36 @@ gpii.tests.windows.builtIn = [
                         },
                         "options": {
                             "functionName": "DoubleClickTime"
+                        }
+                    },
+                    {
+                        "settings": {
+                            "DoubleClickWidthConfig": {
+                                "value": 32
+                            }
+                        },
+                        "options": {
+                            "functionName": "DoubleClickWidth"
+                        }
+                    },
+                    {
+                        "settings": {
+                            "DoubleClickHeightConfig": {
+                                "value": 32
+                            }
+                        },
+                        "options": {
+                            "functionName": "DoubleClickHeight"
+                        }
+                    },
+                    {
+                        "settings": {
+                            "Volume": {
+                                "value": 0.7
+                            }
+                        },
+                        "options": {
+                            "functionName": "Volume"
                         }
                     }
                 ]
@@ -398,25 +428,6 @@ gpii.tests.windows.builtIn = [
                             }
                         }
                     }
-                ],
-                "com.microsoft.windows.highContrast": [
-                    { // high contrast settings
-                        "settings": {
-                            "HighContrastOn": {
-                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
-                                "value": true
-                            }
-                        },
-                        "options": {
-                            "getAction": "SPI_GETHIGHCONTRAST",
-                            "setAction": "SPI_SETHIGHCONTRAST",
-                            "uiParam": "struct_size",
-                            "pvParam": {
-                                "type": "struct",
-                                "name": "HIGHCONTRAST"
-                            }
-                        }
-                    }
                 ]
             },
             "gpii.windows.registrySettingsHandler": {
@@ -717,25 +728,44 @@ gpii.tests.windows.builtIn = [
                         "CheckResult": true
                     }
                 }]
-            },
-            "gpii.windows.wmiSettingsHandler": {
-                "com.microsoft.windows.brightness": [{
+            }
+        }
+    }, {
+        name: "Testing os_win_2 using default matchmaker",
+        gpiiKey: "os_win_2",
+        initialState: {},
+        settingsHandlers: {
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.desktopBackgroundColor": [{
                     "settings": {
-                        "Brightness": {
-                            "value": null
+                        "ImageConfig": {
+                            "path": "pvParam",
+                            "value": ""
                         }
                     },
                     "options": {
-                        "Brightness": {
-                            "namespace": "root\\WMI",
-                            "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
-                            "set": {
-                                "className": "WmiMonitorBrightnessMethods",
-                                "method": "WmiSetBrightness",
-                                "params": [0xFFFFFFFF, "$value"],
-                                "returnVal": ["uint", 0]
+                        "getAction": "SPI_GETDESKWALLPAPER",
+                        "setAction": "SPI_SETDESKWALLPAPER",
+                        "uiParam": 260,
+                        "pvParam": {
+                            "type": "array",
+                            "valueType": "TCHAR",
+                            "length": 260
+                        }
+                    }
+                }]
+            },
+            "gpii.windows.nativeSettingsHandler": {
+                "com.microsoft.windows.desktopBackgroundColor": [{
+                    "settings": {
+                        "SolidColorConfig": {
+                            "value": {
+                                "r": 67, "g": 187, "b": 19
                             }
                         }
+                    },
+                    "options": {
+                        "functionName": "SolidColor"
                     }
                 }]
             }
@@ -861,25 +891,6 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "struct",
                                 "name": "FILTERKEYS"
-                            }
-                        }
-                    }
-                ],
-                "com.microsoft.windows.highContrast": [
-                    { // high contrast settings
-                        "settings": {
-                            "HighContrastOn": {
-                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
-                                "value": true
-                            }
-                        },
-                        "options": {
-                            "getAction": "SPI_GETHIGHCONTRAST",
-                            "setAction": "SPI_SETHIGHCONTRAST",
-                            "uiParam": "struct_size",
-                            "pvParam": {
-                                "type": "struct",
-                                "name": "HIGHCONTRAST"
                             }
                         }
                     }
@@ -1106,25 +1117,6 @@ gpii.tests.windows.builtIn = [
                             }
                         }
                     }
-                ],
-                "com.microsoft.windows.highContrast": [
-                    { // high contrast settings
-                        "settings": {
-                            "HighContrastOn": {
-                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
-                                "value": true
-                            }
-                        },
-                        "options": {
-                            "getAction": "SPI_GETHIGHCONTRAST",
-                            "setAction": "SPI_SETHIGHCONTRAST",
-                            "uiParam": "struct_size",
-                            "pvParam": {
-                                "type": "struct",
-                                "name": "HIGHCONTRAST"
-                            }
-                        }
-                    }
                 ]
             },
             "gpii.windows.registrySettingsHandler": {
@@ -1345,25 +1337,6 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "struct",
                                 "name": "FILTERKEYS"
-                            }
-                        }
-                    }
-                ],
-                "com.microsoft.windows.highContrast": [
-                    { // high contrast settings
-                        "settings": {
-                            "HighContrastOn": {
-                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
-                                "value": true
-                            }
-                        },
-                        "options": {
-                            "getAction": "SPI_GETHIGHCONTRAST",
-                            "setAction": "SPI_SETHIGHCONTRAST",
-                            "uiParam": "struct_size",
-                            "pvParam": {
-                                "type": "struct",
-                                "name": "HIGHCONTRAST"
                             }
                         }
                     }
@@ -1590,8 +1563,194 @@ gpii.tests.windows.builtIn = [
     }
 ];
 
+gpii.tests.windows.builtInHighContrast = [
+    {
+        name: "Testing os_win_highContrast using default matchmaker",
+        gpiiKey: "os_win_highContrast",
+        settingsHandlers: {
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.highContrast": [
+                    { // high contrast settings
+                        "settings": {
+                            "HighContrastOn": {
+                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETHIGHCONTRAST",
+                            "setAction": "SPI_SETHIGHCONTRAST",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "HIGHCONTRAST"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }, {
+        name: "Testing os_common_highContrast using default matchmaker",
+        gpiiKey: "os_common_highContrast",
+        settingsHandlers: {
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.highContrast": [
+                    { // high contrast settings
+                        "settings": {
+                            "HighContrastOn": {
+                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETHIGHCONTRAST",
+                            "setAction": "SPI_SETHIGHCONTRAST",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "HIGHCONTRAST"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }, {
+        name: "Testing os_common_highContrast - magnifier running on startup",
+        gpiiKey: "os_common_highContrast",
+        initialState: {
+            "gpii.windows.enableRegisteredAT": {
+                "com.microsoft.windows.magnifier": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "verifySettings": true,
+                        retryOptions: {
+                            rewriteEvery: 0,
+                            numRetries: 20,
+                            retryInterval: 1000
+                        },
+                        "registryName": "magnifierpane",
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
+                    }
+                }],
+                "com.microsoft.windows.onscreenKeyboard": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "registryName": "osk",
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
+                    }
+                }]
+            }
+        },
+        settingsHandlers: {
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.highContrast": [
+                    { // high contrast settings
+                        "settings": {
+                            "HighContrastOn": {
+                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETHIGHCONTRAST",
+                            "setAction": "SPI_SETHIGHCONTRAST",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "HIGHCONTRAST"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }, {
+        name: "Testing os_common_highContrast - magnifier and keyboard both running on startup",
+        gpiiKey: "os_common_highContrast",
+        initialState: {
+            "gpii.windows.enableRegisteredAT": {
+                "com.microsoft.windows.magnifier": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "verifySettings": true,
+                        retryOptions: {
+                            rewriteEvery: 0,
+                            numRetries: 20,
+                            retryInterval: 1000
+                        },
+                        "registryName": "magnifierpane",
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
+                    }
+                }],
+                "com.microsoft.windows.onscreenKeyboard": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "registryName": "osk",
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
+                    }
+                }]
+            }
+        },
+        settingsHandlers: {
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.highContrast": [
+                    { // high contrast settings
+                        "settings": {
+                            "HighContrastOn": {
+                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETHIGHCONTRAST",
+                            "setAction": "SPI_SETHIGHCONTRAST",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "HIGHCONTRAST"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+];
+
+gpii.tests.windows.builtIn.testDefs = gpii.tests.windows.builtInHighContrast.concat(gpii.tests.windows.builtIn);
+
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.windows.builtIn",
+    testDefs:  "gpii.tests.windows.builtIn.testDefs",
     configName: "gpii.tests.acceptance.windows.builtIn.config",
     configPath: "%gpii-universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],

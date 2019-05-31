@@ -24,14 +24,14 @@ gpii.loadTestingSupport();
 fluid.registerNamespace("gpii.tests.untrusted.userLogonRequest");
 
 // 1. Tests for general user logon request tests
-gpii.test.bootstrapServer(gpii.tests.userLogonRequest.buildTestDefs(gpii.tests.userLogonRequest.testDefs, "untrusted"));
+gpii.test.runCouchTestDefs(gpii.tests.userLogonRequest.buildTestDefs(gpii.tests.userLogonRequest.testDefs, "untrusted"));
 
 // 2. Specific tests for untrusted environment only.
 // Test the user report on NoConnection when the cloud cannot be accessed
 gpii.tests.untrusted.userLogonRequest.buildTestDefs = function (testDefs) {
     var config = {
         configName: "gpii.config.untrusted.development",
-        configPath: "%gpii-universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs/shared"
     };
 
     return fluid.transform(testDefs, function (testDef) {
@@ -47,12 +47,10 @@ gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests = [{
     expect: 2,
     sequence: [{
         // standard login without a cloud
-        func: "gpii.tests.invokePromiseProducer",
-        args: ["{lifecycleManager}.performLogin", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
-    }, {
-        event: "{that}.events.onError",
-        listener: "gpii.tests.userLogonRequest.testUserError",
-        args: ["{arguments}.0",
+        task: "{lifecycleManager}.performLogin",
+        args: [gpii.tests.userLogonRequest.gpiiKey],
+        reject: "gpii.tests.userLogonRequest.testUserError",
+        rejectArgs: ["{arguments}.0",
             {
                 "code": "ECONNREFUSED",
                 "errno": "ECONNREFUSED",
@@ -78,4 +76,4 @@ gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests = [{
     }]
 }];
 
-gpii.test.bootstrapServer(gpii.tests.untrusted.userLogonRequest.buildTestDefs(gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests));
+gpii.test.runCouchTestDefs(gpii.tests.untrusted.userLogonRequest.buildTestDefs(gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests));

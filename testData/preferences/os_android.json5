@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Android OS",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

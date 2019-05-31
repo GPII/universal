@@ -58,7 +58,8 @@ gpii.tests.userLogonEvents.testDefs = [{
         args: ["{arguments}.0", "login", false, gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         // wait for debounce
         func: "setTimeout",
@@ -85,4 +86,4 @@ gpii.tests.userLogonEvents.testDefs = [{
     }]
 }];
 
-gpii.test.bootstrapServer(gpii.tests.userLogonHandlers.buildTestDefs(gpii.tests.userLogonEvents.testDefs));
+gpii.test.runCouchTestDefs(gpii.tests.userLogonHandlers.buildTestDefs(gpii.tests.userLogonEvents.testDefs));
