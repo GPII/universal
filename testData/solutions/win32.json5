@@ -6847,9 +6847,8 @@
                             "description": "Set up magnification level",
                             "type": "number",
                             "default": 200,
-                            "min": 100,
-                            "max": 1600,
-                            "divisibleBy": 1
+                            "minimum": 100,
+                            "maximum": 1600
                         }
                     },
                     "FollowFocus": {
@@ -7046,6 +7045,7 @@
             },
             "configureSystemSettings": {
                 "type": "gpii.windows.systemSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "Async": true,
                     "CheckResult": true
@@ -7056,7 +7056,7 @@
                             "title": "Auto Start Magnifier",
                             "description": "Start Magnifier after sign-in.",
                             "type": "boolean",
-                            "default": 0
+                            "default": false
                         }
                     },
                     "SystemSettings_Accessibility_Magnifier_IsAutoStartOnLogonDesktopEnabled": {
@@ -7064,7 +7064,7 @@
                             "title": "Auto Start Magnifier for everyone",
                             "description": "Start Magnifier before sign-in.",
                             "type": "boolean",
-                            "default": 0
+                            "default": false
                         }
                     }
                 },
