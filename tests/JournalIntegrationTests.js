@@ -117,29 +117,6 @@ gpii.tests.journal.initialSettings = {
             }
         ]
     },
-    "gpii.windows.wmiSettingsHandler": {
-        "com.microsoft.windows.brightness": [
-            {
-                "settings": {
-                    "Brightness": {
-                        "value": null
-                    }
-                },
-                "options": {
-                    "Brightness": {
-                        "namespace": "root\\WMI",
-                        "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
-                        "set": {
-                            "className": "WmiMonitorBrightnessMethods",
-                            "method": "WmiSetBrightness",
-                            "params": [0xFFFFFFFF, "$value"],
-                            "returnVal": ["uint", 0]
-                        }
-                    }
-                }
-            }
-        ]
-    },
     "gpii.windows.enableRegisteredAT": {
         "com.microsoft.windows.magnifier": [{
             "settings": {
@@ -186,6 +163,16 @@ gpii.tests.journal.initialSettings = {
                 },
                 "options": {
                     "functionName": "DoubleClickHeight"
+                }
+            },
+            {
+                "settings": {
+                    "Volume": {
+                        "value": 0.5
+                    }
+                },
+                "options": {
+                    "functionName": "Volume"
                 }
             }
         ],

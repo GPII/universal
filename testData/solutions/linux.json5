@@ -1116,7 +1116,7 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/simplification"
+            "http://registry\\.gpii\\.net/common/simplifiedUi/enabled"
         ],
         "launchHandlers": {
             "launcher": {
@@ -1164,11 +1164,12 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/simplification"
+            "http://registry\\.gpii\\.net/common/simplifiedUi/enabled"
         ],
         "settingsHandlers": {
             "configuration": {
-                "type": "gpii.settingsHandlers.noSettings"
+                "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "live"
             }
         },
         "launchHandlers": {

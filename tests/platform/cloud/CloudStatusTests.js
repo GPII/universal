@@ -1,5 +1,5 @@
 /*!
-Copyright 2018 OCAD university
+Copyright 2018-2019 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -37,7 +37,6 @@ gpii.tests.cloudStatus.configs = {
 };
 
 gpii.tests.cloudStatus.commonTestDefs = {
-    expect: 2,
     testUrl: null,    // provided by each test run
     expectedStatusCode: 200,   // provided by each test run
     expectedPayload: {},       // provided by each test run
@@ -75,21 +74,21 @@ gpii.tests.cloudStatus.testResponse = function (expectedStatus, expectedPayload,
 
 gpii.tests.cloudStatus.testCases = {
     // Test cases for /health
-    testReadyWithAllUp: {
+    testHealthWithAllUp: {
         name:  "Test the readiness of the cloud based flow manager: all local with both the cloud based flow manager and the prefs server up running",
         url: "/health",
         config: gpii.tests.cloudStatus.configs.allLocalWithPrefsServer,
         expectedStatusCode: 200,
         expectedPayload: {"isHealthy": true}
     },
-    testReadyWithoutPrefsServer: {
+    testHealthWithoutPrefsServer: {
         name:  "Test the readiness of the cloud based flow manager: all local with only the cloud based flow manager running",
         url: "/health",
         config: gpii.tests.cloudStatus.configs.allLocalWithoutPrefsServer,
         expectedStatusCode: 200,
         expectedPayload: {"isHealthy": true}
     },
-    testReadyWithSeparateServers: {
+    testHealthWithSeparateServers: {
         name:  "Test the readiness of the cloud based flow manager: the cloud based flow manager and the prefs server run as separate servers",
         url: "/health",
         config: gpii.tests.cloudStatus.configs.separateServersWithPrefsServer,
@@ -98,14 +97,14 @@ gpii.tests.cloudStatus.testCases = {
     },
 
     // Test cases for /ready
-    testHealthWithAllUp: {
+    testReadyWithAllUp: {
         name:  "Test the liveness of the cloud based flow manager: all local with both the cloud based flow manager and the prefs server up running",
         url: "/ready",
         config: gpii.tests.cloudStatus.configs.allLocalWithPrefsServer,
         expectedStatusCode: 200,
         expectedPayload: {"isReady": true}
     },
-    testHealthWithoutPrefsServer: {
+    testReadyWithoutPrefsServer: {
         name:  "Test the liveness of the cloud based flow manager: all local with only the cloud based flow manager running",
         url: "/ready",
         config: gpii.tests.cloudStatus.configs.allLocalWithoutPrefsServer,
@@ -115,7 +114,7 @@ gpii.tests.cloudStatus.testCases = {
             "message": "Error connecting to Preferences Server"
         }
     },
-    testHealthWithSeparateServers: {
+    testReadyWithSeparateServers: {
         name:  "Test the liveness of the cloud based flow manager: the cloud based flow manager and the prefs server run as separate servers",
         url: "/ready",
         config: gpii.tests.cloudStatus.configs.separateServersWithPrefsServer,

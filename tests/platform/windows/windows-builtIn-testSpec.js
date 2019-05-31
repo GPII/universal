@@ -98,6 +98,16 @@ gpii.tests.windows.builtIn = [
                         "options": {
                             "functionName": "DoubleClickHeight"
                         }
+                    },
+                    {
+                        "settings": {
+                            "Volume": {
+                                "value": 0.7
+                            }
+                        },
+                        "options": {
+                            "functionName": "Volume"
+                        }
                     }
                 ],
                 "com.microsoft.windows.mirrorScreen": [
@@ -716,27 +726,6 @@ gpii.tests.windows.builtIn = [
                     "options": {
                         "Async": true,
                         "CheckResult": true
-                    }
-                }]
-            },
-            "gpii.windows.wmiSettingsHandler": {
-                "com.microsoft.windows.brightness": [{
-                    "settings": {
-                        "Brightness": {
-                            "value": null
-                        }
-                    },
-                    "options": {
-                        "Brightness": {
-                            "namespace": "root\\WMI",
-                            "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
-                            "set": {
-                                "className": "WmiMonitorBrightnessMethods",
-                                "method": "WmiSetBrightness",
-                                "params": [0xFFFFFFFF, "$value"],
-                                "returnVal": ["uint", 0]
-                            }
-                        }
                     }
                 }]
             }

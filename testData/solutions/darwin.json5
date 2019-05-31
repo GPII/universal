@@ -14,6 +14,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "filename": "/tmp/fakemag1.settings.json"
                 },
@@ -52,6 +53,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "filename": "/tmp/fakemag2.settings.json"
                 },
@@ -91,6 +93,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "filename": "/tmp/fakescreenreader1.json"
                 },

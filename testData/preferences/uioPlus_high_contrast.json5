@@ -5,12 +5,13 @@
 // Applies the Highlight Contrast theme preference. The contrast of the page will be set to match the specified contrast theme. Unless a site provides it's own themed versions (most likely only pages that already support UIO), images will remain unaffected.
 {
     "flat": {
+        "name": "UIO+ High Contrast",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/common/captions/enabled": false,
-                    "http://registry.gpii.net/common/characterSpace": 0,
+                    "http://registry.gpii.net/common/characterSpace": 1,
                     "http://registry.gpii.net/common/fontSize": 12,
                     "http://registry.gpii.net/common/highContrast/enabled": true,
                     "http://registry.gpii.net/common/highContrastTheme": "white-black",
