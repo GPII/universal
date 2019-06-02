@@ -64,24 +64,24 @@ gpii.tests.oauth2.makeTestMiddleware = function (called, key) {
 };
 
 
-jqUnit.test("parseBearerAuthorizationHeader() returns undefined if no Authorization header", function () {
+jqUnit.test("parseAccessTokenFromRequest() returns undefined if no Authorization header", function () {
     jqUnit.assertUndefined("undefined for empty req",
-        gpii.oauth2.parseBearerAuthorizationHeader({}));
+        gpii.oauth2.parseAccessTokenFromRequest({}));
     jqUnit.assertUndefined("undefined for empty headers",
-        gpii.oauth2.parseBearerAuthorizationHeader({ headers: {} }));
+        gpii.oauth2.parseAccessTokenFromRequest({ headers: {} }));
 });
 
-jqUnit.test("parseBearerAuthorizationHeader() returns undefined for badly formed Authorization header", function () {
+jqUnit.test("parseAccessTokenFromRequest() returns undefined for badly formed Authorization header", function () {
     jqUnit.expect(4);
     gpii.tests.oauth2.testdata.badlyFormedAuthHeaderRequests.forEach(function (req) {
-        jqUnit.assertUndefined("expect undefined", gpii.oauth2.parseBearerAuthorizationHeader(req));
+        jqUnit.assertUndefined("expect undefined", gpii.oauth2.parseAccessTokenFromRequest(req));
     });
 });
 
-jqUnit.test("parseBearerAuthorizationHeader() returns access token from Authorization header", function () {
+jqUnit.test("parseAccessTokenFromRequest() returns access token from Authorization header", function () {
     jqUnit.expect(3);
     gpii.tests.oauth2.testdata.goodAuthHeaderRequests.forEach(function (pair) {
-        jqUnit.assertEquals(pair.expected, pair.expected, gpii.oauth2.parseBearerAuthorizationHeader(pair.req));
+        jqUnit.assertEquals(pair.expected, pair.expected, gpii.oauth2.parseAccessTokenFromRequest(pair.req));
     });
 });
 

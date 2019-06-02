@@ -19,7 +19,7 @@ var ipRangeCheck = require("ip-range-check");
 
 fluid.registerNamespace("gpii.oauth2");
 
-gpii.oauth2.parseBearerAuthorizationHeader = function (req) {
+gpii.oauth2.parseAccessTokenFromRequest = function (req) {
     if (req.headers && req.headers.authorization) {
         var parts = req.headers.authorization.split(/\s+/);
         if (parts.length === 2 && parts[0].toLowerCase() === "bearer") {
@@ -29,9 +29,8 @@ gpii.oauth2.parseBearerAuthorizationHeader = function (req) {
     return undefined;
 };
 
-gpii.oauth2.getAuthorization = function (req, authGrantFinder) {
+gpii.oauth2.getAuthorization = function (accessToken, authGrantFinder) {
     var promiseTogo = fluid.promise();
-    var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
 
     if (!accessToken) {
         promiseTogo.reject(gpii.dbOperation.errors.unauthorized);

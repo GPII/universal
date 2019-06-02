@@ -76,7 +76,7 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
      * @return {Object} The result of gpii.oauth2.oauth2orizeServer.promiseToDone() that contains the response to the grant request.
      */
     oauth2orizeServer.exchange(oauth2orize.exchange.password(function (clientInfo, username, password, scope, body, authInfo, done) {
-        var ip = authInfo.req.headers['x-forwarded-for'] || authInfo.req.connection.remoteAddress || authInfo.req.socket.remoteAddress;
+        var ip = authInfo.req.headers["x-forwarded-for"] || authInfo.req.connection.remoteAddress || authInfo.req.socket.remoteAddress;
 
         // If the value of "clientInfo.clientCredential.allowedIPBlocks" is null or undefined, skip the ip verification
         // and go ahead to assign an access token. If this value is provided, the IP of the incoming request must be
@@ -236,9 +236,9 @@ gpii.oauth2.urlencodedBodyParser = function () {
 gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServer, passport) {
     that.expressApp.post("/access_token",
         passport.authenticate("oauth2-client-password", { session: false }),
-        // A suggested workaround to get node "request" variable passed into oauth2orize supported exchanges:
+        // A workaround to get node "request" variable passed into oauth2orize supported exchanges:
         // https://github.com/jaredhanson/oauth2orize/issues/182#issuecomment-253571341
-        function(req, res, next) {
+        function (req, res, next) {
             req.authInfo.req = req;
             next();
         },

@@ -9,6 +9,15 @@
         "timestampUpdated": null
     },
     {
+        "_id": "gpiiAppInstallationClient-schemaV0.1",
+        "type": "gpiiAppInstallationClient",
+        "schemaVersion": "0.1",
+        "name": "To match the client credential data structure that is in the old schema version 0.1",
+        "computerType": "public",
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    {
         "_id": "gpiiAppInstallationClient-NOVA-passIPVerification",
         "type": "gpiiAppInstallationClient",
         "schemaVersion": "0.1",
