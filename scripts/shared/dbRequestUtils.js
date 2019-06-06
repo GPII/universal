@@ -132,9 +132,7 @@ gpii.dbRequest.createPostRequest = function (dataToPost, responseHandler, option
  *                              request.
  */
 gpii.dbRequest.createResponseHandler = function (handleEnd, options, promise, errorMsg) {
-    if (!errorMsg) {
-        errorMsg = "";
-    }
+    errorMsg = (errorMsg || "");
     return function (response) {
         var responseString = "";
 

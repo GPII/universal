@@ -14,7 +14,7 @@
 
 GPII_APP_DIR=${GPII_APP_DIR:-"/app"}
 GPII_COUCHDB_URL=${GPII_COUCHDB_URL:-"http://couchdb:5984/gpii"}
-DELETE_ALL=${DELETE_ALL:-""}
+DELETE_ALL=${DELETE_ALL:-"false"}
 
 GPII_COUCHDB_URL_SANITIZED=$(echo "${GPII_COUCHDB_URL}" | sed -e 's,\(://\)[^/]*\(@\),\1<SENSITIVE>\2,g')
 GPII_COUCHDB_URL_ROOT=$(echo "${GPII_COUCHDB_URL}" | sed 's/[^\/]*$//g')
@@ -40,6 +40,11 @@ do
     fi
     sleep $COUCHDB_HEALTHCHECK_DELAY
 done
+
+if [[ ${DELETE_ALL} = "false" ]]
+then
+    DELETE_ALL=""
+fi
 
 node ${DELETE_ACCESS_TOKENS_JS} ${GPII_COUCHDB_URL} ${DELETE_ALL}
 RET_CODE=$?

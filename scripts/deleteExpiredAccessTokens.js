@@ -120,6 +120,7 @@ gpii.accessTokens.filterExpiredAccessTokens = function (responseString, options)
         fluid.each(tokens.rows, function (aRow) {
             var aToken = aRow.value.authorization;
             if (options.deleteAll || Date.now() > Date.parse(aToken.timestampExpires)) {
+                aToken._deleted = true;
                 expiredTokens.push(aToken);
             }
             options.totalTokens++;
@@ -148,7 +149,6 @@ gpii.accessTokens.logDeletion = function (responseString, options) {
  * @return {Promise} - The promise that resolves the deletion.
  */
 gpii.accessTokens.flush = function (options) {
-    gpii.dbRequest.markDocsForDeletion(options.accessTokens);
     var details = {
         dataToPost: options.accessTokens,
         responseDataHandler: gpii.accessTokens.logDeletion
