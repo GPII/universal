@@ -185,15 +185,3 @@ gpii.dbRequest.queryDatabase = function (databaseURL, handleResponse, errorMsg, 
     });
     return aRequest;
 };
-
-/**
- * Given a set of database documents, mark each of them for deletion.
- * @param {Array} docs - Array of records to delete from the database.
- * @return {Array} - the records marked for deletion.
- */
-gpii.dbRequest.markDocsForDeletion = function (docs) {
-    fluid.each(docs, function (aDoc) {
-        aDoc._deleted = true;
-    });
-    return docs;
-};
