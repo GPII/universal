@@ -39,10 +39,20 @@ log "Working directory: $(pwd)"
 
 # Check we can connect to CouchDB
 GPII_COUCHDB_URL_ROOT=$(echo "${GPII_COUCHDB_URL}" | sed 's/[^\/]*$//g')
-RET_CODE=$(curl --write-out '%{http_code}' --silent --output /dev/null "${GPII_COUCHDB_URL_ROOT}/_up")
+COUCHDB_HEALTHCHECK_RETRIES=30
+COUCHDB_HEALTHCHECK_DELAY=2
+log "Checking that CouchDB is ready..."
+for i in `seq 1 $COUCHDB_HEALTHCHECK_RETRIES`
+do
+    RET_CODE=$(curl --write-out '%{http_code}' --silent --output /dev/null "${GPII_COUCHDB_URL_ROOT}/_up")
+    if [ "$RET_CODE" = '200' ]; then
+        break
+    fi
+    sleep $COUCHDB_HEALTHCHECK_DELAY
+done
 if [ "$RET_CODE" != '200' ]; then
-  log "[ERROR] Failed to connect to CouchDB: ${GPII_COUCHDB_URL_SANITIZED}"
-  exit 1
+    log "[ERROR] Failed to connect to CouchDB: ${GPII_COUCHDB_URL_SANITIZED}"
+    exit 1
 fi
 
 # Create build dir if it does not exist
@@ -78,7 +88,7 @@ fi
 node "${DATALOADER_JS}" "${GPII_COUCHDB_URL}" "${GPII_STATIC_DATA_DIR}" "${GPII_SNAPSET_DATA_DIR}"
 err=$?
 if [ "${err}" != '0' ]; then
-  log "${DATALOADER_JS} failed with ${err}, exiting"
+  log "${DATALOADER_JS} failed with exit status ${err}"
   exit "${err}"
 fi
 
