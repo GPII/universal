@@ -5,6 +5,7 @@
 // ** French user interface.
 {
     "flat": {
+        "name": "TVM Jasmin",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

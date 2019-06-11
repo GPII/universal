@@ -5,12 +5,13 @@
 // Applies the Word Space preference. The space between words should increase.
 {
     "flat": {
+        "name": "UIO+ Word Spacing",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/common/captions/enabled": false,
-                    "http://registry.gpii.net/common/characterSpace": 0,
+                    "http://registry.gpii.net/common/characterSpace": 1,
                     "http://registry.gpii.net/common/fontSize": 12,
                     "http://registry.gpii.net/common/highContrast/enabled": false,
                     "http://registry.gpii.net/common/highlightColor": "default",

@@ -21,10 +21,10 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.windows.screenResolution": {
-                        "screen-resolution": {
+                        "screen-resolution": [{
                             "width": 1280,
                             "height": 720
-                        }
+                        }]
                     }
                 }
             }
