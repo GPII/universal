@@ -1,7 +1,7 @@
 /*
  * GPII Flow Manager Get/Put shared est Definitions
  *
- * Copyright 2018, 2019 OCAD University
+ * Copyright 2018-2019 OCAD University
  *
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
@@ -219,7 +219,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruptionsWithMissingGrantA
     ]
 });
 
-gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs = [{
+gpii.tests.cloud.oauth2.settingsGet.reject = [{
     sequenceGrade: "gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode",
     expectedStatusCode: 401
 }];
@@ -286,7 +286,7 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
     // The client credential used in this test doesn't require the IP verification step (allowedIPBlocks === null).
     {
         testDef: {
-            name: "A successful workflow for retrieving settings for an existing GPII key",
+            name: "A successful workflow that retrieves settings for an existing GPII key using a client not requiring an ip range check",
 
             // The options below are for sending /access_token request
             client_id: "pilot-computer",
@@ -362,10 +362,10 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
     },
 
     // Successful use cases that request settings for an existing GPII key.
-    // The client credential used in this test uses the old schema version 0.1 that doesn't have allowedIPBlocks field.
+    // The client credential used in this test uses the hema version 0.1 that doesn't have allowedIPBlocks field.
     {
         testDef: {
-            name: "A successful workflow for retrieving settings for an existing GPII key",
+            name: "A successful workflow that retrieves settings for an existing GPII key using a client in the old schema version 0.1",
 
             // The options below are for sending /access_token request
             client_id: "pilot-computer-schemaV0.1",
@@ -445,11 +445,11 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
     // that the "localhost" IP is within).
     {
         testDef: {
-            name: "A successful workflow for retrieving settings for an existing GPII key",
+            name: "A successful workflow that retrieves settings for an existing GPII key using a client with an ip range accepting the ip of the incoming request",
 
             // The options below are for sending /access_token request
-            client_id: "nova-computer-passIPVerification",
-            client_secret: "nova-computer-secret-passIPVerification",
+            client_id: "nova-computer",
+            client_secret: "nova-computer-secret",
             username: "os_gnome",
             password: "dummy",
 
@@ -523,11 +523,11 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
     // Successful use cases that request settings for a non-existent GPII key with proper access tokens granted via Resource Owner GPII key grant
     {
         testDef: {
-            name: "A successful workflow for retrieving settings for a non-existent GPII key",
+            name: "A successful workflow that retrieves settings for a non-existent GPII key using a client with the privilege to create GPII keys and prefs safes",
 
             // The options below are for sending /access_token request
-            client_id: "pilot-computer",
-            client_secret: "pilot-computer-secret",
+            client_id: "nova-computer",
+            client_secret: "nova-computer-secret",
             username: "nonexistent_gpii_key",
             password: "dummy",
 
@@ -545,18 +545,26 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
         }]
     },
 
-    // Accepted by /access_token endpoint
+    // Rejected by /access_token endpoint
     {
         testDef: {
-            name: "Attempt to get access token by sending a wrong GPII key",
+            name: "Attempt to get access token by requesting an access token for a nonexistent GPII key using a client without the privilege to create GPII keys and prefs safes",
             client_id: "pilot-computer",
             client_secret: "pilot-computer-secret",
             username: "nonexistent_gpii_key",
             password: "dummy"
         },
-        disruptions: [{
-            sequenceGrade: "gpii.tests.cloud.oauth2.settingsGet.disruption.accessTokenResponse"
-        }]
+        disruptions: gpii.tests.cloud.oauth2.settingsGet.reject
+    },
+    {
+        testDef: {
+            name: "Attempt to get access token by requesting an access token for a nonexistent GPII key using a client in old schema version 0.1",
+            client_id: "pilot-computer-schemaV0.1",
+            client_secret: "pilot-computer-secret-schemaV0.1",
+            username: "nonexistent_gpii_key",
+            password: "dummy"
+        },
+        disruptions: gpii.tests.cloud.oauth2.settingsGet.reject
     },
 
     // Rejected by /access_token endpoint
@@ -578,7 +586,7 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
             username: "gpii_key_no_prefs_safe",
             password: "dummy"
         },
-        disruptions: gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs
+        disruptions: gpii.tests.cloud.oauth2.settingsGet.reject
     },
     {
         testDef: {
@@ -588,7 +596,7 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
             username: "gpii_key_no_prefs_safe",
             password: "dummy"
         },
-        disruptions: gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs
+        disruptions: gpii.tests.cloud.oauth2.settingsGet.reject
     },
     {
         testDef: {
@@ -598,7 +606,7 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
             username: "gpii_key_no_prefs_safe",
             password: "dummy"
         },
-        disruptions: gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs
+        disruptions: gpii.tests.cloud.oauth2.settingsGet.reject
     },
 
     // Rejected by /settings endpoint

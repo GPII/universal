@@ -33,7 +33,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.accessTokensDeleteRequests", {
             options: {
                 port: "5984",
                 hostname: "couchdb",
-                path: "/gpii/_design/views/_view/findAuthorizationByAccessToken",
+                path: "/gpii/_design/views/_view/findInfoByAccessToken",
                 method: "GET",
                 expectedStatusCodes: [200, 404],
                 tokensToRemove: []       // set by successful request.

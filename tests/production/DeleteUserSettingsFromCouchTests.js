@@ -201,7 +201,7 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
             options: {
                 port: "5984",
                 hostname: "couchdb",
-                path: "/gpii/_design/views/_view/findAuthorizationByAccessToken",
+                path: "/gpii/_design/views/_view/findInfoByAccessToken",
                 method: "GET",
                 expectedStatusCodes: [200, 404],
                 extraGpiiKeys: gpii.tests.productionConfigTesting.loginGpiiKeys,

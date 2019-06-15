@@ -1,5 +1,5 @@
 /*!
-Copyright 2014-2017 OCAD university
+Copyright 2014-2019 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -47,12 +47,12 @@ fluid.defaults("gpii.oauth2.oauth2orizeServer", {
     listeners: {
         "onCreate.listenOauth2orize": {
             listener: "gpii.oauth2.oauth2orizeServer.listenOauth2orize",
-            args: ["{that}.oauth2orizeServer", "{clientService}", "{authorizationService}"]
+            args: ["{that}.oauth2orizeServer", "{clientService}", "{authorizationService}", "{dataStore}"]
         }
     }
 });
 
-gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, clientService, authorizationService) {
+gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, clientService, authorizationService, dataStore) {
     oauth2orizeServer.serializeClient(function (client, done) {
         return done(null, client.id);
     });
@@ -64,46 +64,77 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
 
     /**
      * Processes OAuth2 resource owner GPII key grant requests.
-     * @param {Object} clientInfo - The structure is {
-     *     client: {Object},  // all fields from "client" document for this client
-     *     clientCredentialId: {String}  // The internal "id" value from "clientCredential" document that associates with
-     *                                   // the client credential used in this authorization request.
+     * @param {Object} clientInfo - The client and its privilege info.
+     * The structure is {
+     *     "client": {Object},  // all fields from "client" document for this client
+     *     "clientCredential": {
+     *         "id": {String}, // The internal clientCredentialId
+     *         "allowedIPBlocks": {Array|null},
+     *         "isCreateGpiiKeyAllowed": false,
+     *         "isCreatePrefsSafeAllowed": false
+     *     }
      * }
      * @param {String} username - The username value in the grant request.
      * @param {String} password - The password value in the grant request.
      * @param {String} scope - The scope value in the grant request.
+     * @param {Object} body - The request body in the grant request.
+     * @param {Object} authInfo - The additional information passed in via the previous middleware for passing
+     * the grant request for extra client privilege checks.
      * @param {Function} done - The oauth2orizeServer endpoint function to grant or reject when a client requests authorization.
      * @return {Object} The result of gpii.oauth2.oauth2orizeServer.promiseToDone() that contains the response to the grant request.
      */
     oauth2orizeServer.exchange(oauth2orize.exchange.password(function (clientInfo, username, password, scope, body, authInfo, done) {
         var ip = authInfo.req.headers["x-forwarded-for"] || authInfo.req.connection.remoteAddress || authInfo.req.socket.remoteAddress;
 
-        // If the value of "clientInfo.clientCredential.allowedIPBlocks" is null or undefined, skip the ip verification
-        // and go ahead to assign an access token. If this value is provided, the IP of the incoming request must be
-        // within the allowed IP blocks before assigning an access token.
-        if (!clientInfo.clientCredential.allowedIPBlocks ||
-            clientInfo.clientCredential.allowedIPBlocks && gpii.oauth2.isIPINRange(ip, clientInfo.clientCredential.allowedIPBlocks)) {
-            var passwordPromise = authorizationService.grantGpiiAppInstallationAuthorization(username, clientInfo.client.id, clientInfo.clientCredential.id);
-
-            var authorizationMapper = function (authorization) {
-                return authorization.accessToken;
-            };
-
-            var paramsMapper = function (params) {
-                // extra parameters to be included in the `oauth2orizeServer` response except `accessToken`
-                return fluid.censorKeys(params, "accessToken");
-            };
-
-            var authorizationPromise = fluid.promise.map(passwordPromise, authorizationMapper);
-            var paramsPromise = fluid.promise.map(passwordPromise, paramsMapper);
-
-            gpii.oauth2.oauth2orizeServer.promiseToDone(authorizationPromise, done, paramsPromise);
-        } else {
-            fluid.log("authServer, /access_token request handler: IP of the incoming request (" + ip + ") is not within the allowed IP blocks: " + clientInfo.clientCredential.allowedIPBlocks);
+        // GPII-3717: Client privilege checks:
+        // 1. If the value of "clientInfo.clientCredential.allowedIPBlocks" is null or undefined, skip the ip
+        // verification and go ahead to assign an access token. If this value is provided, the IP of the incoming
+        // request must be within the allowed IP blocks before assigning an access token;
+        // 2. If the client does not have privilege to create new GPII keys and prefs safes but requesting an access
+        // token for a nonexistent GPII key, the request will be rejected.
+        if (clientInfo.clientCredential.allowedIPBlocks && !gpii.oauth2.isIPINRange(ip, clientInfo.clientCredential.allowedIPBlocks)) {
+            // 1. Reject if the ip address is not within the allowed range.
+            fluid.log("authServer: unauthorized /access_token request because the IP of the incoming request (" + ip + ") is not within the allowed IP blocks: " + clientInfo.clientCredential.allowedIPBlocks);
             gpii.oauth2.oauth2orizeServer.promiseToDone(fluid.promise().reject(gpii.dbOperation.errors.unauthorized), done);
+        } else if (!clientInfo.clientCredential.isCreateGpiiKeyAllowed || !clientInfo.clientCredential.isCreatePrefsSafeAllowed) {
+            // 2. For clients who don't have privilege to read/write nonexistent GPII keys:
+            // 2.1 If the request is for an existing GPII key, grant an access token;
+            // 2.2 If the request is for an nonexistent GPII key, reject;
+            var gpiiKeyPromise = dataStore.findGpiiKey(username);
+            gpiiKeyPromise.then(function (data) {
+                if (data) {
+                    // The GPII key exists. Proceed to grant an access token
+                    gpii.oauth2.oauth2orizeServer.grantAccessToken(authorizationService, username, clientInfo.client.id, clientInfo.clientCredential.id, done);
+                } else {
+                    // Reject the request because the request GPII key does not exists and the client does not have
+                    // privilege to .
+                    fluid.log("authServer: unauthorized /access_token request the client (with the clientCredentialId ", clientInfo.clientCredential.clientCredentialId, ") does not have privilege to access user settings for the nonexistent GPII key (", username, ").");
+                    gpii.oauth2.oauth2orizeServer.promiseToDone(fluid.promise().reject(gpii.dbOperation.errors.unauthorized), done);
+                }
+            });
+        } else {
+            // For clients who have privilege to read/write nonexistent GPII keys, grant an access token.
+            gpii.oauth2.oauth2orizeServer.grantAccessToken(authorizationService, username, clientInfo.client.id, clientInfo.clientCredential.id, done);
         }
     }));
+};
 
+gpii.oauth2.oauth2orizeServer.grantAccessToken = function (authorizationService, gpiiKey, clientId, clientCredentialId, done) {
+    var passwordPromise = authorizationService.grantGpiiAppInstallationAuthorization(gpiiKey, clientId, clientCredentialId);
+
+    var authorizationMapper = function (authorization) {
+        return authorization.accessToken;
+    };
+
+    var paramsMapper = function (params) {
+        // extra parameters to be included in the `oauth2orizeServer` response except `accessToken`
+        return fluid.censorKeys(params, "accessToken");
+    };
+
+    var authorizationPromise = fluid.promise.map(passwordPromise, authorizationMapper);
+    var paramsPromise = fluid.promise.map(passwordPromise, paramsMapper);
+
+    gpii.oauth2.oauth2orizeServer.promiseToDone(authorizationPromise, done, paramsPromise);
 };
 
 // gpii.oauth2.passport

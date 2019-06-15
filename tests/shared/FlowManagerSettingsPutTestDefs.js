@@ -1,7 +1,7 @@
 /*
  * GPII Flow Manager Get/Put shared est Definitions
  *
- * Copyright 2018, 2019 OCAD University
+ * Copyright 2018-2019 OCAD University
  *
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
@@ -218,8 +218,8 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
             name: "A successful workflow that creates a given nonexistent GPII key and its preferences",
 
             // The options below are for sending /access_token request
-            client_id: "pilot-computer",
-            client_secret: "pilot-computer-secret",
+            client_id: "nova-computer",
+            client_secret: "nova-computer-secret",
             username: "nonexistent_gpii_key",
             password: "dummy",
 

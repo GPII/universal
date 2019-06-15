@@ -18,7 +18,7 @@
         "timestampUpdated": null
     },
     {
-        "_id": "gpiiAppInstallationClient-NOVA-passIPVerification",
+        "_id": "gpiiAppInstallationClient-nova",
         "type": "gpiiAppInstallationClient",
         "schemaVersion": "0.1",
         "name": "NOVA - success workflow tests",

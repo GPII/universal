@@ -1,5 +1,5 @@
 /*!
-Copyright 2016-2017 OCAD university
+Copyright 2016-2019 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -42,7 +42,7 @@ var fluid = fluid || require("infusion");
     // This function looks up access tokens granted for GPII app installations to find the match.
     gpii.oauth2.authGrantFinder.getGrantForAccessToken = function (authorizationService, accessToken) {
         var promiseTogo = fluid.promise();
-        var authorizationPromise = authorizationService.getAuthorizationByAccessToken(accessToken);
+        var authorizationPromise = authorizationService.getInfoByAccessToken(accessToken);
         var grant;
 
         authorizationPromise.then(function (authRecord) {
@@ -53,7 +53,8 @@ var fluid = fluid || require("infusion");
                         accessToken: accessToken,
                         gpiiKey: authRecord.authorization.gpiiKey,
                         allowSettingsGet: true,
-                        allowSettingsPut: true
+                        allowSettingsPut: true,
+                        allowedPrefsToWrite: authRecord.clientCredential.allowedPrefsToWrite || null
                     };
                 }
             }

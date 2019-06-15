@@ -8,11 +8,8 @@
             "findClientByOauth2ClientId": {
                 "map": "function(doc) {\n if (doc.type === 'clientCredential' && doc.revoked === false) {\n var record = { clientCredential: doc };\n if (doc.clientId) {\n record._id = doc.clientId;\n }\n emit(doc.oauth2ClientId, record);\n} \n}"
             },
-            "findClientCredentialByClientId": {
-                "map": "function(doc) {\n if (doc.type === 'clientCredential' && doc.revoked === false) {\n emit(doc.clientId, doc); \n}}"
-            },
-            "findAuthorizationByAccessToken": {
-                "map": "function(doc) {\n if (doc.type === 'gpiiAppInstallationAuthorization' && doc.revoked === false) {\n emit(doc.accessToken, { authorization: doc });\n }\n }"
+            "findInfoByAccessToken": {
+                "map": "function(doc) {\n if (doc.type === 'gpiiAppInstallationAuthorization' && doc.revoked === false) {\n var record = { authorization: doc };\n if (doc.clientCredentialId) {\n record._id = doc.clientCredentialId;\n } \n emit(doc.accessToken, record);\n }\n }"
             },
             "findSnapsetPrefsSafes": {
                 "map": "function(doc) {if (doc.type === 'prefsSafe' && doc.prefsSafeType === 'snapset') { emit(doc._id, doc); }}"
