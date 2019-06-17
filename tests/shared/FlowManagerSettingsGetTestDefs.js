@@ -581,8 +581,8 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
     {
         testDef: {
             name: "Attempt to get access token by sending a client whose allowedIPBlocks value doesn't match the IP that the request is sent from",
-            client_id: "nova-computer-failIPVerification",
-            client_secret: "nova-computer-secret-failIPVerification",
+            client_id: "nova-computer-failInIpVerification",
+            client_secret: "nova-computer-secret-failInIpVerification",
             username: "gpii_key_no_prefs_safe",
             password: "dummy"
         },

@@ -27,10 +27,19 @@
         "timestampUpdated": null
     },
     {
-        "_id": "gpiiAppInstallationClient-NOVA-failIPVerification",
+        "_id": "gpiiAppInstallationClient-nova-failInIpVerification",
         "type": "gpiiAppInstallationClient",
         "schemaVersion": "0.1",
-        "name": "NOVA - erroneous workflow tests",
+        "name": "NOVA - erroneous workflow test for the ip verification",
+        "computerType": "public",
+        "timestampCreated": "2019-05-28T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "gpiiAppInstallationClient-nova-failInAllowedPrefsToWrite",
+        "type": "gpiiAppInstallationClient",
+        "schemaVersion": "0.1",
+        "name": "NOVA - erroneous workflow test for the allowed preferences to write",
         "computerType": "public",
         "timestampCreated": "2019-05-28T18:11:22.101Z",
         "timestampUpdated": null
