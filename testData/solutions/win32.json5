@@ -6522,7 +6522,6 @@
                 "type": "gpii.windows.rm",
                 "path": "${{environment}.APPDATA}\\Microsoft\\Windows\\Themes\\TranscodedWallpaper",
                 "options": {
-                    "recursive": false,
                     "silent": true
                 }
             },
