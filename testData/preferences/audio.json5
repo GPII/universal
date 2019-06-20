@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Android Audio",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

@@ -15,6 +15,7 @@
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "setTrue": {
                         "type": "gpii.androidActivityManager.startFreespeech"
@@ -446,6 +447,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "live",
                 "supportedSettings": {
                     "access_commonprefs_speechrate": {},
                     "access_commonprefs_speechpitch": {},

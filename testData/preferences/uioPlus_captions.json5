@@ -5,12 +5,13 @@
 // Applies the Captions preference. The captions for a supported media player should be enabled.
 {
     "flat": {
+        "name": "UIO+ Captions",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/common/captions/enabled": true,
-                    "http://registry.gpii.net/common/characterSpace": 0,
+                    "http://registry.gpii.net/common/characterSpace": 1,
                     "http://registry.gpii.net/common/fontSize": 12,
                     "http://registry.gpii.net/common/highContrast/enabled": false,
                     "http://registry.gpii.net/common/highlightColor": "default",

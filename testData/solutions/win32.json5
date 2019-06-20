@@ -172,8 +172,8 @@
                     //         "title": "Braille Marking",
                     //         "description": "Show Marking may be any combination of the following ored together brlMarkNothing= 0, brlMarkText = 1, brlMarkBold = 2, brlMarkItalic = 4, brlMarkUnderline = 8, brlMarkStrikeout = 16, brlMarkGraphic = 32, brlMarkHighlight = 64, brlMarkColor= 128, // see brlOptColorsToMark string option brlMarkExtended=256, // things like spelling and grammatical errors in MSWord etc, script defined marking brlMarkDoubleStrikeout=512, brlMarkSuperscript=1024, brlMarkSubscript=2048, brlMarkShadow=4096, brlMarkOutline=8192, brlMarkEmboss=16384, brlMarkEngrave=32768, Note when Extended marking is on, JAWS calls the PointNeedsMarking function passing in the coordinates of each cell to determine whether text at that location requires marking. This is useful when the attribute you want to mark is not actually known to JAWS such as the red and green zigzags in MSWord indicating spelling or grammatical errors.",
                     //         "type": "integer",
-                    //         "minValue": 0,
-                    //         "maxValue": 65536,
+                    //         "minimum": 0,
+                    //         "maximum": 65536,
                     //         "default": 64
                     //     }
                     // },
@@ -562,9 +562,9 @@
                         "schema": {
                             "title": "Graphical Link Last Resort",
                             "description": "What to announce when a graphical link contains no title or alt text for its enclosing image and the enclosing anchor has no title.",
-                            "enum": "0,1",
-                            "enumLabels": "Read the image's src, Read the image's enclosing anchor's href.",
-                            "default": "0"
+                            "enum": [ 0, 1],
+                            "enumLabels": ["Read the image's src", "Read the image's enclosing anchor's href."],
+                            "default": 0
                         }
                     },
                     "HTML.IdentifyLinkType": {
@@ -754,9 +754,9 @@
                         "schema": {
                             "title": "Table Detection",
                             "description": "Whether to announce all tables, or only data tables.",
-                            "enum": "0,1",
-                            "enumLabels": "Indicate all tables, Only indicate data tables",
-                            "default": "1"
+                            "enum": [0, 1],
+                            "enumLabels": ["Indicate all tables", "Only indicate data tables"],
+                            "default": 1
                         }
                     },
                     "HTML.TblMaxCellTextLength": {
@@ -939,7 +939,7 @@
                             "description": "How fast the caret blinks, in milliseconds.",
                             "type": "integer",
                             "default": 53,
-                            "minValue": 1
+                            "minimum": 1
                         }
                     },
                     "Options.CaretDetect": {
@@ -948,7 +948,7 @@
                             "description": "How many cursor blinks are used to locate the caret.",
                             "type": "integer",
                             "default": 1,
-                            "minValue": 1
+                            "minimum": 1
                         }
                     },
                     "Options.CaretDetectTimeOut": {
@@ -957,7 +957,7 @@
                             "description": "The number of milliseconds before JAWS for Windows will give up looking for the caret.",
                             "type": "integer",
                             "default": 250,
-                            "minValue": 0
+                            "minimum": 0
                         }
                     },
                     "OSM.CaretTimeOut": {
@@ -1592,7 +1592,7 @@
                             "description": "How often to announce progress bar updates, in milliseconds.  Set to 0 to disable update announcements.",
                             "type": "integer",
                             "default": 5000,
-                            "minValue": 0
+                            "minimum": 0
                         }
                     },
                     "Options.QuickKeyNavigationMode": {
@@ -2062,6 +2062,8 @@
                             "title": "Synthesizer",
                             "description": "The synthesizer to use/ Available synthesizers are listed in JfW.INI",
                             "type": "string",
+                            "enum": ["Synth1"],
+                            "enumLabels": ["Default speech synthesizer"],
                             "default": "Synth1"
                         }
                     },
@@ -2071,7 +2073,7 @@
                             "description": "How often to reset communication with the synthesizer, in milliseconds.",
                             "type": "integer",
                             "default": 2000,
-                            "minValue": 0
+                            "minimum": 0
                         }
                     },
                     "Options.TetherJawsToPC": {
@@ -2323,7 +2325,7 @@
                             "description": "How often (in milliseconds) should an embedded ActiveX control cause the Virtual HTML area to be updated when receiving rapid ValueChange events from MSAA.  Set to -1 to disable refreshes.",
                             "type": "integer",
                             "default": 0,
-                            "minValue": -1
+                            "minimum": -1
                         }
                     },
                     "Options.VirtualRibbonSupport": {
@@ -2463,9 +2465,9 @@
                         "schema": {
                             "title": "Include Graphics",
                             "description": "Which graphics to announce.",
-                            "enum": "0,1,2",
-                            "enumLabels": "Ignore all graphics, Announce labeled graphics only, Announce all graphics",
-                            "default": "1"
+                            "enum": [ 0, 1, 2 ],
+                            "enumLabels": ["Ignore all graphics", "Announce labeled graphics only", "Announce all graphics"],
+                            "default": 1
                         }
                     },
                     "OSM.IncludeLines": {
@@ -2859,7 +2861,6 @@
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
                 "supportedSettings": {
-                    "Options.PrimarySynthesizer": {},
                     "ENU-Global.Pitch": {
                         "schema": {
                             "title": "Pitch",
@@ -3120,7 +3121,6 @@
                     }
                 },
                 "capabilitiesTransformations": {
-                    "Options\\.PrimarySynthesizer": "http://registry\\.gpii\\.net/common/speechSynthesizer",
                     "ENU-Global\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "ENU-JAWSCursor\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "ENU-Keyboard\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
@@ -3429,7 +3429,6 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/speechSynthesizer": "Options\\.PrimarySynthesizer",
                     "http://registry\\.gpii\\.net/common/speechRate": "ENU-Global\\.Rate",
                     "http://registry\\.gpii\\.net/common/pitch": {
                         "transform": {
@@ -3641,9 +3640,9 @@
                         }
                     },
                     "mag.enablebilingual": {
-                        title: "Enable Bilingual Mode",
-                        description: "Whether or not to enable 'bilingual mode' in MAGic.  If this setting is enabled, MAGic will change its language when a voice profile is selected that uses a different language.",
                         schema: {
+                            title: "Enable Bilingual Mode",
+                            description: "Whether or not to enable 'bilingual mode' in MAGic.  If this setting is enabled, MAGic will change its language when a voice profile is selected that uses a different language.",
                             enum: [0,1],
                             enumLabels: ["Off", "On"],
                             default: 0
@@ -3781,9 +3780,9 @@
                                 "Blue",
                                 "Dark Magenta",
                                 "Magenta"
-                            ]
-                        },
-                        default: 5
+                            ],
+                            default: 5
+                        }
                     },
                     "mag.overlayborderwidth": {
                         schema: {
@@ -4230,7 +4229,6 @@
                         "schema": {
                             "title": "Magnifier position",
                             "description": "Position of the magnified area",
-                            "type": "number",
                             "default": 2,
                             "enum": [
                                 1,
@@ -4286,7 +4284,7 @@
                                 "Invert Colors",
                                 "Yellow on Black"
                             ],
-                            default: "Invert Brightness"
+                            default: "Invert Brightness+Color"
                         }
                     },
                     "scheme.CursorSchemeModified": {
@@ -4323,7 +4321,7 @@
                         schema: {
                             title: "Mouse Scheme Modified",
                             description: "Whether or not the chosen mouse scheme has been modified from its defaults.",
-                            enum: [0,1],
+                            enum: [ 0, 1 ],
                             enumLabels: ["Off", "On"],
                             default: 0
                         }
@@ -4350,7 +4348,7 @@
                                 "MAGic Key Mouse Finder",
                                 "Scope When Moving"
                             ],
-                            default: "3D Blue with Oval"
+                            default: "3D Blue with Oval+Mouse"
                         }
                     }
                 },
@@ -4742,6 +4740,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.wmiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "Brightness": {
                         "namespace": "root\\WMI",
@@ -4759,7 +4758,7 @@
                     "Brightness": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.brightness.BrightnessVal",
+                            "inputPath": "http://registry\\.gpii\\.net/common/screenBrightness",
                             "outputPath": "value"
                         }
                     }
@@ -4777,7 +4776,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.brightness.BrightnessVal": "Brightness.value"
+                    "http://registry\\.gpii\\.net/common/screenBrightness": "Brightness.value"
                 }
             }
         },
@@ -4838,14 +4837,12 @@
                             "description": "Sets the wallpaper style.",
                             "enum": [
                                 0,
-                                0,
                                 2,
                                 6,
                                 10,
                                 22
                             ],
                             "enumLabels": [
-                                "None",
                                 "None",
                                 "Stretch",
                                 "Fill",
@@ -4964,8 +4961,14 @@
                         "schema": {
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
-                            "type": "string",
-                            "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg"
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string"},
+                                "value": {
+                                    "type": "string",
+                                    "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg"
+                                }
+                            }
                         }
                     }
                 },
@@ -5024,8 +5027,15 @@
                         "schema": {
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
-                            "type": "string",
-                            "default": ""
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "type": "string",
+                                    "required": true,
+                                    "default": ""
+                                }
+                            }
                         }
                     }
                 },
@@ -5129,10 +5139,10 @@
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Control Panel\\Cursors",
                     "dataTypes": {
+                        "AppStarting": "REG_SZ",
                         "Arrow": "REG_SZ",
                         "Hand": "REG_SZ",
                         "Help": "REG_SZ",
-                        "AppStarting": "REG_SZ",
                         "No": "REG_SZ",
                         "NWPen": "REG_SZ",
                         "SizeAll": "REG_SZ",
@@ -5145,19 +5155,110 @@
                     }
                 },
                 "supportedSettings": {
-                    "Arrow": {},
-                    "Hand": {},
-                    "Help": {},
-                    "AppStarting": {},
-                    "No": {},
-                    "NWPen": {},
-                    "SizeAll": {},
-                    "SizeNESW": {},
-                    "SizeNS": {},
-                    "SizeNWSE": {},
-                    "SizeWE": {},
-                    "UpArrow": {},
-                    "Wait": {}
+                    "AppStarting": {
+                        schema: {
+                            title: "Application Startup Cursor",
+                            description: "The animated cursor that displays while an application is starting up.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_working.ani"
+                        }
+                    },
+                    "Arrow": {
+                        schema: {
+                            title: "Arrow Cursor",
+                            description: "The 'arrow' cursor icon.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_arrow.cur"
+                        }
+                    },
+                    "Hand": {
+                        schema: {
+                            title: "Hand Cursor",
+                            description: "The 'hand' cursor icon.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_link.cur"
+                        }
+                    },
+                    "Help": {
+                        schema: {
+                            title: "Help Cursor",
+                            description: "The 'help' cursor icon.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_helpsel.cur"
+                        }
+                    },
+                    "No": {
+                        schema: {
+                            title: "'No' Cursor",
+                            description: "The cursor icon used to indicate that the resource under the pointer cannot be clicked.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_unavail.cur"
+                        }
+                    },
+                    "NWPen": {
+                        schema: {
+                            title: "Pen Cursor",
+                            description: "The 'pen' cursor icon.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_pen.cur"
+                        }
+                    },
+                    "SizeAll": {
+                        schema: {
+                            title: "'Resize All' Cursor",
+                            description: "The 'resize all' cursor icon.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_move.cur"
+                        }
+                    },
+                    "SizeNESW": {
+                        schema: {
+                            title: "'Resize NESW' Cursor",
+                            description: "The 'resize NESW' cursor icon.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_nesw.cur"
+                        }
+                    },
+                    "SizeNS": {
+                        schema: {
+                            title: "'Resize Height' Cursor",
+                            description: "The 'resize height' cursor icon.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_ns.cur"
+                        }
+                    },
+                    "SizeNWSE": {
+                        schema: {
+                            title: "'Resize NWSE' Cursor",
+                            description: "The 'resize NWSE' cursor icon.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_nwse.cur"
+                        }
+                    },
+                    "SizeWE": {
+                        schema: {
+                            title: "'Resize WE' Cursor",
+                            description: "The 'resize WE' cursor icon.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_ew.cur"
+                        }
+                    },
+                    "UpArrow": {
+                        schema: {
+                            title: "'Up Arrow' Cursor",
+                            description: "The 'up arrow' cursor icon.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_up.cur"
+                        }
+                    },
+                    "Wait": {
+                        schema: {
+                            title: "'Wait' Cursor",
+                            description: "The cursor icon to display while the system is busy.",
+                            type: "string",
+                            default: "%SystemRoot%\\cursors\\aero_busy.ani"
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "AppStarting": {
@@ -6160,27 +6261,38 @@
                         "schema": {
                             "title": "Filter keys",
                             "description": "Enable/Disable filter keys",
-                            "type": "boolean",
-                            "default": false
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     },
                     "SlowKeysInterval": {
                         "schema": {
                             "title": "Slow keys interval",
                             "description": "Slow keys interval time in milliseconds",
-                            "type": "number",
-                            "default": 0,
-                            // 0 means no interval time
-                            "divisibleBy": 1
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "default": 0 // 0 means no interval time
+                                }
+                            }
                         }
                     },
                     "BounceKeysInterval": {
                         "schema": {
                             "title": "Bounce keys interval",
                             "description": "Bounce keys interval time in milliseconds",
-                            "type": "number",
-                            "default": 0,
-                            "divisibleBy": 1
+                            "type": "integer",
+                            "default": 0
                         }
                     }
                 },
@@ -6367,8 +6479,15 @@
                         "schema": {
                             "title": "High Contrast",
                             "description": "Whether to enable/disable High Contrast",
-                            "type": "boolean",
-                            "default": false
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     }
                 },
@@ -6492,7 +6611,14 @@
                     }
                 },
                 "supportedSettings": {
-                    "Pre-High Contrast Scheme": {}
+                    "Pre-High Contrast Scheme": {
+                        "schema": {
+                            "title": "Previous Scheme",
+                            "description": "The scheme that was used prior to selecting the high contrast theme.",
+                            "type": "string",
+                            "default": "C:\\Windows\\resources\\Themes\\aero.theme"
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/highContrast/enabled",
@@ -6567,15 +6693,21 @@
                     "http://registry\\.gpii\\.net/common/language"
                 ],
                 "capabilitiesTransformations": {
-                    "MachinePreferredUILanguages": {
+                    "MachinePreferredUILanguages": [{
                         "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/language"
                         }
-                    }
+                    }]
                 },
                 "supportedSettings": {
-                    "MachinePreferredUILanguages": {}
+                    "MachinePreferredUILanguages": {
+                        "schema": {
+                            "title": "The Machine Preferred UI Language",
+                            "description": "Machine Preferred UI language.",
+                            "type": "string"
+                        }
+                    }
                 }
             },
             "configure2": {
@@ -6600,7 +6732,13 @@
                     }
                 },
                 "supportedSettings": {
-                    "PreferredUILanguages": {}
+                    "PreferredUILanguages": {
+                        "schema": {
+                            "title": "Preferred UI Language",
+                            "description": "Preffered UI language.",
+                            "type": "string"
+                        }
+                    }
                 }
             },
             "configure3": {
@@ -6617,15 +6755,21 @@
                     "http://registry\\.gpii\\.net/common/language"
                 ],
                 "capabilitiesTransformations": {
-                    "Languages": {
+                    "Languages": [{
                         "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/language"
                         }
-                    }
+                    }]
                 },
                 "supportedSettings": {
-                    "Languages": {}
+                    "Languages": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Language.",
+                            "type": "string"
+                        }
+                    }
                 }
             }
         },
@@ -6689,61 +6833,69 @@
                         "schema": {
                             "title": "Invert Colours",
                             "description": "Enable colour inversion for Magnifier",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "Magnification": {
                         "schema": {
                             "title": "Magnification",
                             "description": "Set up magnification level",
-                            "type": "number",
+                            "type": "integer",
                             "default": 200,
-                            "min": 100,
-                            "max": 1600,
-                            "divisibleBy": 1
+                            "minimum": 100,
+                            "maximum": 1600
                         }
                     },
                     "FollowFocus": {
                         "schema": {
                             "title": "Magnifier follows focus",
                             "description": "Magnifier follows the keyboard focus",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "FollowCaret": {
                         "schema": {
                             "title": "Magnifier follows caret",
                             "description": "Magnifier follows the text insertion point",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "FollowMouse": {
                         "schema": {
                             "title": "Magnifier follows mouse",
                             "description": "Magnifier follows the mouse pointer",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "MagnificationMode": {
                         "schema": {
                             "title": "Magnifier position",
                             "description": "Position of the magnified area",
-                            "type": "number",
                             "default": 2,
                             "enum": [
                                 1,
                                 2,
                                 3
+                            ],
+                            "enumLabels": [
+                                "TopHalf", "FullScreen", "Lens"
                             ]
-                            // TODO: We must present these values in a human readable form
-                            // 1: "TopHalf", 2: "FullScreen", 3: "Lens"
                         }
                     },
-                    "ZoomIncrement": {}
+                    "ZoomIncrement": {
+                        "schema": {
+                            "title": "Zoom Increment",
+                            "description": "How much to increase or decrease the zoom level at once.",
+                            "type": "integer",
+                            "enum": [25, 50, 100, 150, 200, 400],
+                            "enumLabels": ["25 %", "50 %", "100 %", "150 %", "200 %", "400 %"],
+                            "default": 100
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "Invert": {
@@ -6877,8 +7029,15 @@
                         "schema": {
                             "title": "Mouse keys",
                             "description": "Enable/Disable mouse keys",
-                            "type": "boolean",
-                            "default": false
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     },
                     "MaxSpeed": {
@@ -6886,7 +7045,7 @@
                             "title": "Mouse keys speed",
                             "description": "Speed of mouse keys",
                             "type": "number",
-                            "divisibleBy": 10
+                            "multipleOf": 10
                         }
                     },
                     "Acceleration": {
@@ -6894,9 +7053,9 @@
                             "title": "Mouse keys acceleration",
                             "description": "Acceleration of mouse keys",
                             "type": "number",
-                            "min": -1000,
+                            "minimum": -1000,
                             // TODO: Not clear how to describe this setting
-                            "max": 1000
+                            "maximum": 1000
                         }
                     }
                 },
@@ -7011,15 +7170,22 @@
                         "schema": {
                             "title": "Swap mouse primary button",
                             "description": "Swap mouse left/right buttons",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [
+                                        0,
+                                        1
+                                    ],
+                                    "enumLabels": [
+                                        "off",
+                                        "on"
+                                    ],
+                                    "default": 0
+                                }
+                            }
                         }
                     }
                 },
@@ -7059,20 +7225,27 @@
                         "schema": {
                             "title": "Mouse scroll wheel mode",
                             "description": "Changes the number of lines to scroll when moving the scrollwheel.",
-                            "default": 3,
-                            "oneOf": [
-                                {
-                                    "title": "Range of accepted regular values",
-                                    "type": "integer",
-                                    "minimum": 1,
-                                    "maximum": 100
-                                },
-                                {
-                                    "title": "Values with special meaning",
-                                    "enum": [4294967295],
-                                    "enumLabels": ["full-page"]
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "default": 3,
+                                    "oneOf": [
+                                        {
+                                            "title": "Range of accepted regular values",
+                                            "type": "integer",
+                                            "minimum": 1,
+                                            "maximum": 100
+                                        },
+                                        {
+                                            "title": "Values with special meaning",
+                                            "enum": [4294967295],
+                                            "enumLabels": ["full-page"]
+                                        }
+                                    ]
                                 }
-                            ]
+                            }
                         }
                     }
                 },
@@ -7112,9 +7285,15 @@
                         "schema": {
                             "title": "Mouse scroll focus routing",
                             "description": "Changes the way mouse scrolling is passed to applications.",
-                            "type": "string",
-                            "enum": [0, 1],
-                            "enumLabels": ["RoutingFocus", "RoutingHybrid"]
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["RoutingFocus", "RoutingHybrid"]
+                                }
+                            }
                         }
                     }
                 },
@@ -7151,8 +7330,15 @@
                         "schema": {
                             "title": "Mouse cursor shadow",
                             "description": "Enables or disables mouse cursor shadow.",
-                            "type": "boolean",
-                            "default": false
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     }
                 },
@@ -7189,11 +7375,17 @@
                         "schema": {
                             "title": "Mouse wheel horizontal scroll",
                             "description": "Changes the number of chars that are scrolled horizontally.",
-                            "type": "number",
-                            "default": 3,
-                            "minimum": 1,
-                            "maximum": 100,
-                            "divisibleBy": 1
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "default": 3,
+                                    "minimum": 1,
+                                    "maximum": 100
+                                }
+                            }
                         }
                     }
                 },
@@ -7233,8 +7425,16 @@
                         "schema": {
                             "title": "Mouse Windows tracking",
                             "description": "Windows are focused when mouse is stopped over them.",
-                            "type": "boolean",
-                            "default": 0
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 0
+                                }
+                            }
                         }
                     }
                 },
@@ -7271,8 +7471,16 @@
                         "schema": {
                             "title": "Windows Tracking",
                             "description": "Windows receive focus when mouse hovers over them.",
-                            "type": "boolean",
-                            "default": 0
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 0
+                                }
+                            }
                         }
                     }
                 },
@@ -7309,8 +7517,16 @@
                         "schema": {
                             "title": "Configures Window arrangement",
                             "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
-                            "type": "boolean",
-                            "default": 1
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 1
+                                }
+                            }
                         }
                     }
                 },
@@ -7347,8 +7563,7 @@
                             "type": "integer",
                             "default": 500,
                             "minimum": 500,
-                            "maximum": 5000,
-                            "divisibleBy": 1
+                            "maximum": 5000
                         }
                     }
                 },
@@ -7382,10 +7597,17 @@
                         "schema": {
                             "title": "Configures pointer speed",
                             "description": "Selects a pointer speed.",
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 20,
-                            "default": 10
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 20,
+                                    "default": 10
+                                }
+                            }
                         }
                     }
                 },
@@ -7424,8 +7646,16 @@
                         "schema": {
                             "title": "Enhance pointer precision",
                             "description": "Enable/Disables enhanced pointer precision.",
-                            "type": "boolean",
-                            "default": 1
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 1
+                                }
+                            }
                         }
                     }
                 },
@@ -7465,8 +7695,16 @@
                         "schema": {
                             "title": "Snap To",
                             "description": "Automatically move pointer to the default button in a dialogue.",
-                            "type": "boolean",
-                            "default": 0
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 0
+                                }
+                            }
                         }
                     }
                 },
@@ -7506,8 +7744,16 @@
                         "schema": {
                             "title": "Hide pointer while typing",
                             "description": "Enable/Disables hiding the pointer while typing.",
-                            "type": "boolean",
-                            "default": 1
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 1
+                                }
+                            }
                         }
                     }
                 },
@@ -7544,8 +7790,16 @@
                         "schema": {
                             "title": "Mouse sonar",
                             "description": "Enable/Disable showing mouse location when pressing the CTRL key.",
-                            "type": "boolean",
-                            "default": 0
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 0
+                                }
+                            }
                         }
                     }
                 },
@@ -7581,7 +7835,7 @@
                             "default": 4,
                             "minimum": 1,
                             "maximum": 64,
-                            "divisibleBy": 1
+                            "multipleOf": 1
                         }
                     }
                 },
@@ -7614,7 +7868,7 @@
                             "default": 4,
                             "minimum": 1,
                             "maximum": 64,
-                            "divisibleBy": 1
+                            "multipleOf": 1
                         }
                     }
                 },
@@ -7702,10 +7956,16 @@
                             // Exactly the same schema as mouseTrailing common term
                             "title": "Mouse trails",
                             "description": "Amount of mouse trailing",
-                            "type": "number",
-                            "min": 0,
-                            "max": 10,
-                            "divisibleBy": 1
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type":  "string", "required": true},
+                                "value": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 10
+                                }
+                            }
                         }
                     }
                 },
@@ -7784,7 +8044,7 @@
                             "title": "Couple Narrator Cursor Keyboard",
                             "description": "Whether to couple the narrator cursor to the keyboard",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "CoupleNarratorCursorMouse": {
@@ -7792,7 +8052,7 @@
                             "title": "Narrator cursor follow the mouse",
                             "description": "Have the narrator cursor follow the mouse.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "EchoChars": {
@@ -7800,7 +8060,7 @@
                             "title": "Echo Characters",
                             "description": "Whether to echo characters typed.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "EchoWords": {
@@ -7808,7 +8068,7 @@
                             "title": "Echo Words",
                             "description": "Whether to echo words typed.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "ErrorNotificationType": {
@@ -7816,7 +8076,7 @@
                             "title": "Speak narrator errors",
                             "description": "Narrator announces errors such as 'no next landmark' or 'no next item.'",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "FastKeyEntryEnabled": {
@@ -7824,7 +8084,7 @@
                             "title": "Touch keyboard keys activated on finger lift",
                             "description": "Make key insertion work on finger lift on touch keyboards",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     // CoupleNarratorCursorKeyboard, FollowInsertion, and InteractionMouse are mapped to one common term, maybe we should have individual schemas, maybe not.
@@ -7833,16 +8093,16 @@
                             "title": "Couple Narrator Cursor Keyboard",
                             "description": "Whether to couple the narrator cursor to the keyboard.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     // CoupleNarratorCursorKeyboard, FollowInsertion, and InteractionMouse are mapped to one common term, maybe we should have individual schemas, maybe not.
                     "InteractionMouse": {
                         "schema": {
                             "title": "Interaction Mouse",
-                            "description": "",
+                            "description": "Whether to follow mouse interactions.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "IntonationPause": {
@@ -7850,7 +8110,7 @@
                             "title": "Narrator intonation pauses",
                             "description": "Enable intonation pauses for Narrator",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "LockNarratorKeys": {
@@ -7858,7 +8118,7 @@
                             "title": "Lock Narrator keys",
                             "description": "Lock the Narrator key so you don't have to press it with each command.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "NarratorCursorHighlight": {
@@ -7866,7 +8126,7 @@
                             "title": "Cursor Highlight",
                             "description": "Enable cursor highlighting with a blue focus box",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "PlayAudioCues": {
@@ -7874,7 +8134,7 @@
                             "title": "Read audio cues",
                             "description": "Enable sound playing when you do things like perform a Narrator command or when suggestions are available",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "ReadingWithIntent": {
@@ -7882,7 +8142,7 @@
                             "title": "Emphasize formatted text",
                             "description": "Narrator’s voice will put more emphasis on formatted text.",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "ReadHints": {
@@ -7890,7 +8150,7 @@
                             "title": "Read hints for controls and buttons",
                             "description": "Enable narrator announcing how to interact with items",
                             "enum": [0, 1],
-                            "enumLabels": ["on", "off"]
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "SpeechSpeed": {
@@ -8079,6 +8339,7 @@
             },
             "configureNoRoam": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "live",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Narrator\\NoRoam",
@@ -8101,14 +8362,14 @@
                             "title": "Speech volume",
                             "description": "Changes the Narrator voice volume",
                             "type": "number",
-                            "range": "0.01..1"
+                            "minimum": 0.01,
+                            "maximum": 1
                         }
                     },
                     "SpeechVoice": {
                         "schema": {
                             "title": "Speech voice",
                             "description": "Select which voice is going to be used for Narrator",
-                            "type": "enum",
                             "default": "Microsoft David - English (United States)",
                             "enum": [
                                 "Microsoft David - English (United States)",
@@ -8126,22 +8387,36 @@
                             ]
                         }
                     },
-                    "ShowKeyboardIntroduction": {},
-                    "ShowBrowserSelection": {},
+                    // TODO: Confirm this is still useful, it doesn't seem to appear in the Narrator options.
+                    "ShowKeyboardIntroduction": {
+                        "schema": {
+                            "title": "Show Keyboard Introduction",
+                            "description": "Whether or not to show the keyboard introduction.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
+                    "ShowBrowserSelection": {
+                        "schema": {
+                            "title": "Show Browser Selection",
+                            "description": "Whether or not to show the browser selection.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
                     "ContextVerbosityLevel": {
                         "schema": {
                             "title": "Context Verbosity Level",
                             "description": "Changes the amount of contextual reading for controls and buttons",
-                            "type": "enum",
                             "default": 2,
                             "enum": [0, 1, 2, 3, 4, 5],
                             "enumLabels": [
-                                "0 - No context reading",
-                                "1 - Sounds only",
-                                "2 - Immediate context",
-                                "3 - Immediate context name and type",
-                                "4 - Full context of new control",
-                                "5 - Full context of both the old control and new control"
+                                "No context reading",
+                                "Sounds only",
+                                "Immediate context",
+                                "Immediate context name and type",
+                                "Full context of new control",
+                                "Full context of both the old control and new control"
                             ]
                         }
                     },
@@ -8149,7 +8424,6 @@
                         "schema": {
                             "title": "Contextual reading order",
                             "description": "Choose whether you want to hear context before or after the current item",
-                            "type": "enum",
                             "default": 1,
                             "enum": [0, 1],
                             "enumLabels": ["Before", "After"]
@@ -8175,7 +8449,6 @@
                         "schema": {
                             "title": "Text verbosity level",
                             "description": "Changes the level of detail Narrator provides about text.",
-                            "type": "enum",
                             "default": 1,
                             "enum": [
                                 0,
@@ -8199,8 +8472,9 @@
                         "schema": {
                             "title": "Additional feedback",
                             "description": "Use caps lock + E to send additional feedback",
-                            "type": "boolean",
-                            "default": true
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 1
                         }
                     }
                 },
@@ -8268,6 +8542,7 @@
             },
             "configureSystemSettings": {
                 "type": "gpii.windows.systemSettingsHandler",
+                "liveness": "live",
                 "capabilities": [],
                 "options": {
                     "Async": true,
@@ -8278,7 +8553,8 @@
                         "schema": {
                             "title": "Auto Start Narrator",
                             "description": "Start Narrator after sign-in.",
-                            "type": "boolean",
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
                             "default": 0
                         }
                     },
@@ -8286,7 +8562,8 @@
                         "schema": {
                             "title": "Auto Start Narrator for everyone",
                             "description": "Start Narrator before sign-in.",
-                            "type": "boolean",
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
                             "default": 0
                         }
                     }
@@ -8361,6 +8638,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.systemSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "Async": true,
                     "CheckResult": true
@@ -8383,7 +8661,8 @@
                         "schema": {
                             "title": "Night Screen",
                             "description": "Reduce the blue emitted from the screen.",
-                            "type": "boolean",
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
                             "default": 0
                         }
                     }
@@ -8451,32 +8730,35 @@
                         "schema": {
                             "title": "On-Screen Keyboard",
                             "description": "Enable/Disable On-Screen Keyboard",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "ClickSound": {
                         "schema": {
                             "title": "Use click sound",
                             "description": "Makes click sound when pressing OSK keys",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "ShowClearKeyboard": {
                         "schema": {
                             "title": "Show position keys",
                             "description": "Show keys to make it easier to move around the screen",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "ShowNumPad": {
                         "schema": {
                             "title": "Numeric key pad",
                             "description": "Turn on numeric key pad",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "Mode": {
@@ -8520,16 +8802,18 @@
                         "schema": {
                             "title": "Scan using gaming device",
                             "description": "Use joystick, game pad or other gaming device",
-                            "type": "boolean",
-                            "default": true
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 1
                         }
                     },
                     "UseKB": {
                         "schema": {
                             "title": "Scan using keyboard key",
                             "description": "Use specific keyboard key for scanning",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "ScanKey": {
@@ -8569,32 +8853,36 @@
                         "schema": {
                             "title": "Scan using mouse click",
                             "description": "Use mouse clicks to for scanning",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "UseTextPrediction": {
                         "schema": {
                             "title": "Text prediction",
                             "description": "Use OSK text prediction to show suggestions while typing",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "InsertSpace": {
                         "schema": {
                             "title": "Auto insert space",
                             "description": "Insert space after predicted word",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     },
                     "Dock": {
                         "schema": {
                             "title": "Dock",
                             "description": "Dock the OSK at the bottom of the screen",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     }
                 },
@@ -8718,13 +9006,13 @@
                         "schema": {
                             "title": "Screen resolution",
                             "description": "Screen resolution of the default display.",
-                            "type": "array",
+                            "type": "array"
                             // TODO: Discuss and fix this.
                             // TODO: Not sure about this type
-                            "items": {
-                                "enum": []
-                                // TODO: This must be filled in on the fly with available screen resolutions
-                            }
+                            // TODO: This must be filled in on the fly with available screen resolutions
+                            //"items": {
+                            //    "enum": []
+                            //}
                         }
                     }
                 }
@@ -8760,7 +9048,17 @@
                     }
                 },
                 "supportedSettings": {
-                    "StickyKeysOn": {}
+                    "StickyKeysOn": {
+                        // TODO: Make a general pattern for SPI settings.
+                        schema: {
+                            "title": "Sticky Keys On",
+                            "description": "Whether or not sticky keys should be turned on.",
+                            "properties": {
+                                "path": { "type":  "string", "required":  true},
+                                "value": { "type":  "boolean", "required":  true}
+                            }
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "StickyKeysOn": {
@@ -8801,6 +9099,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.systemSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "Async": true,
                     "CheckResult": true
@@ -8869,34 +9168,114 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "live",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\TabletTip\\1.7",
                     "dataTypes": {
+                        "EnableAutoShiftEngage": "REG_DWORD",
                         "EnableAutocorrection": "REG_DWORD",
-                        "EnableSpellchecking": "REG_DWORD",
-                        "EnableTextPrediction": "REG_DWORD",
-                        "EnablePredictionSpaceInsertion": "REG_DWORD",
+                        "EnableCompatibilityKeyboard": "REG_DWORD",
+                        "EnableDesktopModeAutoInvoke": "REG_DWORD",
                         "EnableDoubleTapSpace": "REG_DWORD",
                         "EnableKeyAudioFeedback": "REG_DWORD",
-                        "EnableAutoShiftEngage": "REG_DWORD",
+                        "EnablePredictionSpaceInsertion": "REG_DWORD",
                         "EnableShiftLock": "REG_DWORD",
-                        "EnableCompatibilityKeyboard": "REG_DWORD",
-                        "EnableDesktopModeAutoInvoke": "REG_DWORD"
+                        "EnableSpellchecking": "REG_DWORD",
+                        "EnableTextPrediction": "REG_DWORD"
                     }
                 },
-                // TODO: Schema data
                 "supportedSettings": {
-                    "EnableAutocorrection": {},
-                    "EnableSpellchecking": {},
-                    "EnableTextPrediction": {},
-                    "EnablePredictionSpaceInsertion": {},
-                    "EnableDoubleTapSpace": {},
-                    "EnableKeyAudioFeedback": {},
-                    "EnableAutoShiftEngage": {},
-                    "EnableShiftLock": {},
-                    "EnableCompatibilityKeyboard": {},
-                    "EnableDesktopModeAutoInvoke": {}
+                    // TODO: confirm this is still relevant, update details, and add defaults.
+                    "EnableAutoShiftEngage": {
+                        "schema": {
+                            "title": "Auto Shift",
+                            "description": "Automatically engage the shift key when ???.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
+                    "EnableAutocorrection": {
+                        "schema": {
+                            "title": "Autocorrect Misspelled Words",
+                            "description": "Autocorrect misspelled words while typing.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"],
+                            "default": true
+                        }
+                    },
+                    // TODO: confirm this is still relevant, update details, and add defaults.
+                    "EnableCompatibilityKeyboard": {
+                        "schema": {
+                            "title": "Enable Compatibility Keyboard",
+                            "description": "Enable compatibility keyboard.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
+                    // TODO: confirm this is still relevant, update details, and add defaults.
+                    "EnableDesktopModeAutoInvoke": {
+                        "schema": {
+                            "title": "Enable Desktop Mode Auto-invoke",
+                            "description": "Enable desktop mode auto-invoke.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
+                    "EnableDoubleTapSpace": {
+                        "schema": {
+                            "title": "Period On Spacebar Double Tap",
+                            "description": "Add a period after the spacebar is double-tapped.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"],
+                            "default": true
+                        }
+                    },
+                    // TODO: confirm this is still relevant, update details, and add defaults.
+                    "EnableKeyAudioFeedback": {
+                        "schema": {
+                            "title": "Enable Key Audio Feedback",
+                            "description": "Play a sound when a key is pressed.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
+                    "EnablePredictionSpaceInsertion": {
+                        "schema": {
+                            "title": "Add Space After Suggestion",
+                            "description": "Add a space after choosing a text suggestion.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"],
+                            "default": true
+                        }
+                    },
+                    // TODO: confirm this is still relevant, update details, and add defaults.
+                    "EnableShiftLock": {
+                        "schema": {
+                            "title": "Enable Shift Lock",
+                            "description": "Enable shift lock.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"]
+                        }
+                    },
+                    "EnableSpellchecking": {
+                        "schema": {
+                            "title": "Highlight Misspelled Words",
+                            "description": "Highlight misspelled words while typing.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"],
+                            "default": true
+                        }
+                    },
+                    "EnableTextPrediction": {
+                        "schema": {
+                            "title": "Show Text Suggestions",
+                            "description": "Show text suggestions while typing.",
+                            "enum": [true, false],
+                            "enumLabels": ["On", "Off"],
+                            "default": true
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/autocorrectionEnabled",
@@ -9209,6 +9588,7 @@
                             "description": "The font in which text is preferred to be presented",
                             "type": "string",
                             "enum": [ "Calibri", "Sitka Small" ],
+                            "enumLabels": [ "Calibri", "Sitka Small" ],
                             "default": "Calibri"
                         }
                     },
@@ -9237,10 +9617,10 @@
                             "title": "Font Size",
                             "description": "The font size in which text is preferred to be presented",
                             "type": "number",
-                            "min": 12,
-                            "max": 96,
+                            "minimum": 12,
+                            "maximum": 96,
                             "default": 48,
-                            "divisibleBy" : 2
+                            "multipleOf" : 2
                         }
                     },
                     "SynthRate": {
@@ -9436,12 +9816,11 @@
                         "schema": {
                             "title": "Font Size",
                             "description": "The font size in which text is preferred to be presented",
-                            "type": "number",
+                            "type": "integer",
                             // TODO: We should present the value in a homogeneus speech rate
                             "default": 10,
-                            "min": 0,
-                            "max": 20,
-                            "divisibleBy": 1
+                            "minimum": 0,
+                            "maximum": 20
                         }
                     },
                     "ReadingModeSyllables": {
@@ -9581,19 +9960,18 @@
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_ES-ES_HELENA_11.0"
                             ],
                             "enumLabels": ["David", "Zira", "Helena"],
-                            "default": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_DavidM"
+                            "default": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_DAVID_11.0"
                         }
                     },
                     "ReadAloudVoiceRate": {
                         "schema": {
                             "title": "Font Size",
                             "description": "The font size in which text is preferred to be presented",
-                            "type": "number",
+                            "type": "integer",
                             // TODO: We should present the value in a homogeneous speech rate
                             "default": 10,
-                            "min": 0,
-                            "max": 20,
-                            "divisibleBy": 1
+                            "minimum": 0,
+                            "maximum": 20
                         }
                     },
                     "ReadingModeSyllables": {
@@ -9674,9 +10052,7 @@
                 }
             ]
         },
-        "capabilities": [
-            "http://registry\\.gpii\\.net/common/languageAssistance"
-        ],
+        "capabilities": [],
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
@@ -10186,7 +10562,7 @@
                         "schema": {
                             "title": "Whole screen mask opacity",
                             "description": "Selects the opacity for the screen mask.",
-                            "type": "integer",
+                            "type": "number",
                             "minimum": 0,
                             "maximum": 1,
                             "default": 0.3
@@ -10212,7 +10588,7 @@
                         "schema": {
                             "title": "Reading ruler opacity",
                             "description": "Selects the opacity for the reading ruler.",
-                            "type": "integer",
+                            "type": "number",
                             "minimum": 0,
                             "maximum": 1,
                             "default": 0.3
@@ -10241,7 +10617,7 @@
                         "schema": {
                             "title": "Underline typing line opacity",
                             "description": "Selects the opacity for the underline typing line.",
-                            "type": "integer",
+                            "type": "number",
                             "minimum": 0,
                             "maximum": 1,
                             "default": 0.5
@@ -10270,7 +10646,7 @@
                         "schema": {
                             "title": "Typing line mask opacity",
                             "description": "Selects the opacity for the typing line mask.",
-                            "type": "integer",
+                            "type": "number",
                             "minimum": 0,
                             "maximum": 1,
                             "default": 0.3
@@ -10298,7 +10674,7 @@
                         "schema": {
                             "title": "Underline cursor line opacity",
                             "description": "Selects the opacity for underline cursor line.",
-                            "type": "integer",
+                            "type": "number",
                             "minimum": 0,
                             "maximum": 1,
                             "default": 0.5
@@ -10406,7 +10782,7 @@
                             "maximum": 1000,
                             "default": 0,
                             // TODO: Verify if it's the proper check
-                            "divisibleBy": 100
+                            "multipleOf": 100
                         }
                     },
                     "ApplicationSettings.Speech.VoicePitch.$t": {
@@ -10613,7 +10989,6 @@
                                 "Segoe Script",
                                 "Segoe UI",
                                 "Segoe UI Emoji",
-                                "Comic Sans MS",
                                 "Segoe UI Historic",
                                 "Segoe UI Symbol",
                                 "SimSun",
@@ -10708,7 +11083,6 @@
                                 "Segoe Script",
                                 "Segoe UI",
                                 "Segoe UI Emoji",
-                                "Comic Sans MS",
                                 "Segoe UI Historic",
                                 "Segoe UI Symbol",
                                 "SimSun",
@@ -10810,7 +11184,6 @@
                                 "Segoe Script",
                                 "Segoe UI",
                                 "Segoe UI Emoji",
-                                "Comic Sans MS",
                                 "Segoe UI Historic",
                                 "Segoe UI Symbol",
                                 "SimSun",
@@ -10905,7 +11278,6 @@
                                 "Segoe Script",
                                 "Segoe UI",
                                 "Segoe UI Emoji",
-                                "Comic Sans MS",
                                 "Segoe UI Historic",
                                 "Segoe UI Symbol",
                                 "SimSun",
@@ -11342,7 +11714,7 @@
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "ReadAndWrite.exe",
                             "options": {
-                                "message": "WM_CLOSE"
+                                "closeWindow": true
                             }
                         }
                     ],
@@ -11364,96 +11736,6 @@
                 "dataType": "REG_SZ"
             }
         ]
-    },
-    "eu.singularlogic.pixelsense.sociable": {
-        "name": "Sociable",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "win32",
-                    "version": ">=5.0"
-                }
-            ]
-        },
-        "settingsHandlers": {
-            "configuration": {
-                "type": "gpii.settingsHandlers.XMLHandler",
-                "liveness": "manualRestart",
-                "options": {
-                    "filename": "C:\\Sociable\\Configuration.xml",
-                    "encoding": "utf-8",
-                    "xml-tag": "<?xml version=\"1.0\"?>"
-                },
-                "supportedSettings": {
-                    "user.$t": {},
-                    "expert.$t": {},
-                    "careCenter.$t": {},
-                    "screenReaderTTSEnabled": {},
-                    "highContrastEnabled": {},
-                    "fontSize": {}
-                },
-                "capabilitiesTransformations": {
-                    "user.$t": {
-                        "literalValue": 1
-                    },
-                    "expert.$t": {
-                        "literalValue": 1
-                    },
-                    "careCenter.$t": {
-                        "literalValue": 1
-                    },
-                    "screenReaderTTSEnabled": {
-                        "value": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
-                    },
-                    "highContrastEnabled": {
-                        "value": "http://registry\\.gpii\\.net/common/highContrast/enabled"
-                    },
-                    "fontSize": {
-                        "value": {
-                            "transform": {
-                                "type": "fluid.transforms.quantize",
-                                "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
-                                "ranges": [
-                                    {
-                                        "upperBound": 14,
-                                        "output": "normal"
-                                    },
-                                    {
-                                        "output": "large"
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                "inverseCapabilitiesTransformations": {}
-            }
-        },
-        "launchHandlers": {
-            "launcher": {
-                "type": "gpii.launchHandlers.flexibleHandler",
-                "options": {
-                    "setTrue": [
-                        {
-                            "type": "gpii.launch.exec",
-                            "command": "C:\\Sociable\\Cloud4All.exe"
-                        }
-                    ],
-                    "setFalse": [
-                        {
-                            "type": "gpii.launch.exec",
-                            "command": "C:\\Sociable\\Cloud4All.exe -stop"
-                        }
-                    ],
-                    "getState": [
-                        {
-                            "type": "gpii.processReporter.find",
-                            "command": "Cloud4Allcd "
-                        }
-                    ]
-                }
-            }
-        }
     },
     "net.gpii.test.speechControl": {
         // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
@@ -11513,13 +11795,18 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.settingsHandlers.exploding",
+                "liveness": "live",
                 "supportedSettings": {
                     "explodeMethod": {
                         "schema": {
                             "title": "Explode Method",
                             "description": "The strategy to be used when exploding",
-                            "type": "string",
                             "enum": [
+                                "reject",
+                                "fail",
+                                "throw"
+                            ],
+                            "enumLabels": [
                                 "reject",
                                 "fail",
                                 "throw"
@@ -11530,10 +11817,17 @@
                         "schema": {
                             "title": "Explode On",
                             "description": "Whether to explode during the get or set settingsHandler method",
-                            "type": "string",
                             "enum": [
                                 "get",
-                                "set"
+                                "set",
+                                "launch",
+                                "stop"
+                            ],
+                            "enumLabels": [
+                                "get",
+                                "set",
+                                "launch",
+                                "stop"
                             ]
                         }
                     }
@@ -11579,7 +11873,6 @@
                 "options": {
                     "path": "net.gpii.uioPlus"
                 },
-                // TODO: Schema data
                 "supportedSettings": {
                     "captionsEnabled": {
                         "schema": {
@@ -11631,11 +11924,10 @@
                         "schema": {
                             "title": "Font Size",
                             "description": "Adjust text size.",
-                            "type": "number",
+                            "type": "integer",
                             "default": 12,
                             "minimum": 3,
-                            "maximum": 60,
-                            "multipleOf": 1
+                            "maximum": 60
                         }
                     },
                     "inputsLargerEnabled": {
@@ -11710,6 +12002,8 @@
                     },
                     "wordSpace": {
                         "schema": {
+                            "title": "Word Spacing",
+                            "description": "The spacing between words.",
                             "type": "number",
                             "default": 0,
                             "minimum": -0.3,
@@ -11825,111 +12119,6 @@
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
-    },
-    "net.opendirective.maavis": {
-        "name": "maavis",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "win32",
-                    "version": ">=5.0"
-                }
-            ]
-        },
-        "settingsHandlers": {
-            "configuration": {
-                "type": "gpii.settingsHandlers.JSONSettingsHandler",
-                "liveness": "manualRestart",
-                "options": {
-                    "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
-                },
-                "supportedSettings": {
-                    "speakOnActivate": {},
-                    "speakTitles": {},
-                    "speakLabels": {},
-                    "theme": {}
-                },
-                "capabilitiesTransformations": {
-                    "transform": [
-                        {
-                            "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
-                            "outputPath": "speakOnActivate",
-                            "true": "yes",
-                            "false": "no"
-                        },
-                        {
-                            "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
-                            "outputPath": "speakTitles",
-                            "true": "yes",
-                            "false": "no"
-                        },
-                        {
-                            "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
-                            "outputPath": "speakLabels",
-                            "true": "yes",
-                            "false": "no"
-                        },
-                        {
-                            "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
-                            "condition": false,
-                            "outputPath": "theme",
-                            "false": "colour",
-                            "true": {
-                                "transform": {
-                                    "type": "fluid.transforms.valueMapper",
-                                    "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                                    "match": {
-                                        "black-white": "bw",
-                                        "white-black": "bw",
-                                        "black-yellow": "hc",
-                                        "yellow-black": "hc"
-                                    },
-                                    "noMatch": {
-                                        "outputValue": "bw"
-                                    }
-                                }
-                            }
-                        }
-                    ]
-                },
-                "inverseCapabilitiesTransformations": {}
-            }
-        },
-        "launchHandlers": {
-            "launcher": {
-                "type": "gpii.launchHandlers.flexibleHandler",
-                "options": {
-                    "verifySettings": true,
-                    retryOptions: {
-                        rewriteEvery: 0,
-                        numRetries: 20
-                    },
-                    "setTrue": [
-                        {
-                            "type": "gpii.launch.exec",
-                            "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
-                        }
-                    ],
-                    "setFalse": [
-                        {
-                            "type": "gpii.windows.closeProcessByName",
-                            "filename": "firefox.exe"
-                        }
-                    ],
-                    "getState": [
-                        {
-                            "type": "gpii.processReporter.find",
-                            "command": "MaavisPortable"
-                        }
-                    ]
-                }
-            }
-        },
-        "isInstalled": [] // Disabled due to GPII-3401
     },
     "org.nvda-project": {
         "name": "NVDA Screen Reader",
@@ -12312,14 +12501,10 @@
                                 "Ukrainian",
                                 "Unicode braille",
                                 "Vietnamese grade 1",
-                                "\"Chinese (China",
-                                "Mandarin) grade 1\"",
-                                "\"Chinese (China",
-                                "Mandarin) grade 2\"",
-                                "\"Chinese (Hong Kong",
-                                "Cantonese)\"",
-                                "\"Chinese (Taiwan",
-                                "Mandarin)\""
+                                "Chinese (China Mandarin) grade 1",
+                                "Chinese (China Mandarin) grade 2",
+                                "Chinese (Hong Kong Cantonese)",
+                                "Chinese (Taiwan Mandarin)"
                             ],
                             "default": "en-ueb-g1.ctb"
                         }
@@ -12605,14 +12790,10 @@
                                 "Ukrainian",
                                 "Unicode braille",
                                 "Vietnamese grade 1",
-                                "\"Chinese (China",
-                                "Mandarin) grade 1\"",
-                                "\"Chinese (China",
-                                "Mandarin) grade 2\"",
-                                "\"Chinese (Hong Kong",
-                                "Cantonese)\"",
-                                "\"Chinese (Taiwan",
-                                "Mandarin)\""
+                                "Chinese (China Mandarin) grade 1",
+                                "Chinese (China Mandarin) grade 2",
+                                "Chinese (Hong Kong Cantonese)",
+                                "Chinese (Taiwan Mandarin)"
                             ],
                             "default": "en-ueb-g1.ctb"
                         }
@@ -13101,6 +13282,8 @@
                         "schema": {
                             "title": "Language",
                             "description": "The language that NVDA's user interface and messages should be shown in. There are many languages however the default option is \"User Default Windows\". This option tells NVDA to use the language that Windows is currently set to.",
+
+                            // TODO: These cannot both be correctly alphabetised.
                             "enum": [
                                 "af_ZA",
                                 "am",
@@ -13120,7 +13303,6 @@
                                 "fa",
                                 "fi",
                                 "fr",
-                                "ga",
                                 "ga",
                                 "he",
                                 "hi",
@@ -13222,12 +13404,9 @@
                                 "Ukranian",
                                 "Urdu",
                                 "Vietnamese",
-                                "\"Chinese (simplified",
-                                "China)\"",
-                                "\"Chinese (Traditional",
-                                "Hong Kong SAR)\"",
-                                "\"Chinese (Traditional",
-                                "Taiwan)\"",
+                                "Chinese (simplified China)",
+                                "Chinese (Traditional Hong Kong SAR)",
+                                "Chinese (Traditional Taiwan)",
                                 "User default"
                             ],
                             "default": "Windows"
@@ -13548,7 +13727,7 @@
                             "default": "True"
                         }
                     },
-                    "mouse.audioCoordinates_detectm.": {
+                    "mouse.audioCoordinates_detectBrightness": {
                         "schema": {
                             "title": "Brightness controls audio coordinates volume",
                             "description": "Whether the volume of the audio coordinates beeps is controled by how bright the screen is under the mouse. This setting is turned off by default.",
@@ -14012,40 +14191,42 @@
                         }
                     },
                     "speech.espeak.voice": {
-                        "title": "",
-                        "description": "",
-                        "enum": [
-                            "af", "sq", "am", "ar", "an", "hy-arevela", "hyw", "as", "az", "eu", "bn", "bpy", "bs",
-                            "bg", "ca", "zh-yue", "zh-cmn", "hr", "cs", "da", "nl", "en-us", "en-029", "en-gb",
-                            "en-gb-x-gbclan", "en-gb-x-rp", "en-gb-scotland", "en-gb-x-gbcwmd", "eo", "et", "fi",
-                            "fr-be", "fr-fr", "fr-ch", "ga", "gd", "ka", "de", "grc", "el", "kl", "gn", "gu", "ht",
-                            "hak", "hi", "hu", "is", "id", "ia", "it", "ja", "quc", "kn", "kk", "kok", "ko", "ku", "ky",
-                            "la", "lv", "lfn", "lt", "jbo", "mk", "ms", "ml", "mt", "mr", "my", "mi", "nci", "ne", "no",
-                            "or", "om", "pap", "fa-Latn", "fa", "pl", "pt-br", "pt-pt", "pa", "ro", "ru-LV", "ru", "sr",
-                            "tn", "shn", "sd", "si", "sk", "sl", "es-419", "es", "sw", "sv", "ta", "tt", "te", "tr",
-                            "ur", "vi-vn-x-central", "vi", "vi-vn-x-south", "cy"
-                        ],
-                        "enumLabels": [
-                            "Afrikaans", "Albanian", "Amharic", "Arabic", "Aragonese", "Armenian (East Armenia)",
-                            "Armenian (West Armenia)", "Assamese", "Azerbaijani", "Basque", "Bengali",
-                            "Bishnupriya Manipuri", "Bosnian", "Bulgarian", "Catalan", "Chinese (Cantonese)",
-                            "Chinese (Mandarin)", "Croatian", "Czech", "Danish", "Dutch", "English (America)",
-                            "English (Caribbean)", "English (Great Britain)", "English (Lancaster)",
-                            "English (Received Pronunciation)", "English (Scotland)", "English (West Midlands)",
-                            "Esperanto", "Estonian", "Finnish", "French (Belgium)", "French (France)",
-                            "French (Switzerland)", "Gaelic (Irish)", "Gaelic (Scottish)", "Georgian", "German",
-                            "Greek (Ancient)", "Greek", "Greenlandic", "Guarani", "Gujarati", "Haitian Creole",
-                            "Hakka Chinese", "Hindi", "Hungarian", "Icelandic", "Indonesian", "Interlingua",
-                            "Italian", "Japanese", "K'iche'", "Kannada", "Kazakh", "Konkani", "Korean", "Kurdish",
-                            "Kyrgyz", "Latin", "Latvian", "Lingua Franca Nova", "Lithuanian", "Lojban", "Macedonian",
-                            "Malay", "Malayalam", "Maltese", "Marathi", "Myanmar (Burmese)", "Māori",
-                            "Nahuatl (Classical)", "Nepali", "Norwegian Bokmål", "Oriya", "Oromo", "Papiamento",
-                            "Persian (Pinglish)", "Persian", "Polish", "Portuguese (Brazil)", "Portuguese (Portugal)",
-                            "Punjabi", "Romanian", "Russian (Latvia)", "Russian", "Serbian", "Setswana",
-                            "Shan (Tai Yai)", "Sindhi", "Sinhala", "Slovak", "Slovenian", "Spanish (Latin America)",
-                            "Spanish (Spain)", "Swahili", "Swedish", "Tamil", "Tatar", "Telugu", "Turkish", "Urdu",
-                            "Vietnamese (Central)", "Vietnamese (Northern)", "Vietnamese (Southern)", "Welsh"
-                        ]
+                        "schema": {
+                            "title": "ESpeak Voice",
+                            "description": "The voice to use when using the 'eSpeak' engine.",
+                            "enum": [
+                                "af", "sq", "am", "ar", "an", "hy-arevela", "hyw", "as", "az", "eu", "bn", "bpy", "bs",
+                                "bg", "ca", "zh-yue", "zh-cmn", "hr", "cs", "da", "nl", "en-us", "en-029", "en-gb",
+                                "en-gb-x-gbclan", "en-gb-x-rp", "en-gb-scotland", "en-gb-x-gbcwmd", "eo", "et", "fi",
+                                "fr-be", "fr-fr", "fr-ch", "ga", "gd", "ka", "de", "grc", "el", "kl", "gn", "gu", "ht",
+                                "hak", "hi", "hu", "is", "id", "ia", "it", "ja", "quc", "kn", "kk", "kok", "ko", "ku", "ky",
+                                "la", "lv", "lfn", "lt", "jbo", "mk", "ms", "ml", "mt", "mr", "my", "mi", "nci", "ne", "no",
+                                "or", "om", "pap", "fa-Latn", "fa", "pl", "pt-br", "pt-pt", "pa", "ro", "ru-LV", "ru", "sr",
+                                "tn", "shn", "sd", "si", "sk", "sl", "es-419", "es", "sw", "sv", "ta", "tt", "te", "tr",
+                                "ur", "vi-vn-x-central", "vi", "vi-vn-x-south", "cy"
+                            ],
+                            "enumLabels": [
+                                "Afrikaans", "Albanian", "Amharic", "Arabic", "Aragonese", "Armenian (East Armenia)",
+                                "Armenian (West Armenia)", "Assamese", "Azerbaijani", "Basque", "Bengali",
+                                "Bishnupriya Manipuri", "Bosnian", "Bulgarian", "Catalan", "Chinese (Cantonese)",
+                                "Chinese (Mandarin)", "Croatian", "Czech", "Danish", "Dutch", "English (America)",
+                                "English (Caribbean)", "English (Great Britain)", "English (Lancaster)",
+                                "English (Received Pronunciation)", "English (Scotland)", "English (West Midlands)",
+                                "Esperanto", "Estonian", "Finnish", "French (Belgium)", "French (France)",
+                                "French (Switzerland)", "Gaelic (Irish)", "Gaelic (Scottish)", "Georgian", "German",
+                                "Greek (Ancient)", "Greek", "Greenlandic", "Guarani", "Gujarati", "Haitian Creole",
+                                "Hakka Chinese", "Hindi", "Hungarian", "Icelandic", "Indonesian", "Interlingua",
+                                "Italian", "Japanese", "K'iche'", "Kannada", "Kazakh", "Konkani", "Korean", "Kurdish",
+                                "Kyrgyz", "Latin", "Latvian", "Lingua Franca Nova", "Lithuanian", "Lojban", "Macedonian",
+                                "Malay", "Malayalam", "Maltese", "Marathi", "Myanmar (Burmese)", "Māori",
+                                "Nahuatl (Classical)", "Nepali", "Norwegian Bokmål", "Oriya", "Oromo", "Papiamento",
+                                "Persian (Pinglish)", "Persian", "Polish", "Portuguese (Brazil)", "Portuguese (Portugal)",
+                                "Punjabi", "Romanian", "Russian (Latvia)", "Russian", "Serbian", "Setswana",
+                                "Shan (Tai Yai)", "Sindhi", "Sinhala", "Slovak", "Slovenian", "Spanish (Latin America)",
+                                "Spanish (Spain)", "Swahili", "Swedish", "Tamil", "Tatar", "Telugu", "Turkish", "Urdu",
+                                "Vietnamese (Central)", "Vietnamese (Northern)", "Vietnamese (Southern)", "Welsh"
+                            ]
+                        }
                     },
                     "speech.espeak.volume": {
                         "schema": {
@@ -15213,7 +15394,7 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/simplification"
+            "http://registry\\.gpii\\.net/common/simplifiedUi/enabled"
         ],
         "launchHandlers": {
             "launcher": {
@@ -15251,9 +15432,7 @@
                 }
             ]
         },
-        "capabilities": [
-            "http://registry\\.gpii\\.net/common/pictorialSimplification"
-        ],
+        "capabilities": [],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",

@@ -5,7 +5,6 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/common/auditoryOutLanguage": "fr",
-                    "http://registry.gpii.net/common/speechSynthesizer": "eloq",
                     "http://registry.gpii.net/common/speechRate": 40,
                     "http://registry.gpii.net/common/pitch": 0.75,
                     "http://registry.gpii.net/common/volumeTTS": 0.5,

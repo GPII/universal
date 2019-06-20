@@ -16,6 +16,7 @@
         "gpii-express-user": "1.0.1",
         "@google-cloud/trace-agent": "3.4.0",
         "gpii-couchdb-test-harness": "1.0.0-dev.20190227T100402Z.f266632.GPII-3531",
+        "gpii-json-schema": "2.0.1",
         "infusion": "3.0.0-dev.20190328T144119Z.ec44dbfab",
         "json5": "2.1.0",
         "kettle": "1.10.1",
@@ -47,6 +48,7 @@
         "https-browserify": "1.0.0",
         "nyc": "13.1.0",
         "recursive-copy": "2.0.9",
+        "supports-color": "5.5.0",
         "testem": "2.10.0",
         "url": "0.11.0"
     },
@@ -71,13 +73,18 @@
         "test": "npm run test:node && npm run test:browser",
         "test:browser": "node node_modules/testem/testem.js ci --file tests/testem.js",
         "test:node": "node node_modules/nyc/bin/nyc.js node tests/all-tests.js",
-        "test:vagrant": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; npm test'",
         "test:vagrantBrowser": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; npm run test:browser'",
         "test:vagrantNode": "vagrant ssh -c 'cd /home/vagrant/sync/universal; npm run test:node'",
         "test:vagrantProduction": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; ./scripts/vagrantCloudBasedContainers.sh'",
         "test:productionConfig": "node tests/production/AddUserSettingsToCouchTests.js && node tests/production/all-tests.js && node tests/production/DeleteUserSettingsFromCouchTests.js",
+        "test:vagrant": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; npm test'",
         "posttest": "node node_modules/nyc/bin/nyc.js report -r text-summary -r html --report-dir reports --temp-directory coverage",
         "start": "node gpii.js",
-        "postinstall": "node scripts/browserifyTestDependency.js && node scripts/convertPrefs.js testData/preferences/ build/dbData/snapset/ snapset && node scripts/convertPrefs.js tests/data/preferences/ build/tests/dbData/ user"
+        "postinstall": "npm run postinstall:browserify && npm run postinstall:testDataPrefsToSnapsets &&  npm run postinstall:testDataPrefsToDbData && npm run postinstall:testPrefsToSnapsets && npm run postinstall:generateSchemas",
+        "postinstall:browserify": "node scripts/browserifyTestDependency.js",
+        "postinstall:testDataPrefsToSnapsets": "node scripts/convertPrefs.js testData/preferences/ build/dbData/snapset/ snapset",
+        "postinstall:testDataPrefsToDbData": "node scripts/convertPrefs.js testData/preferences/ build/dbData/user/ user",
+        "postinstall:testPrefsToSnapsets": "node scripts/convertPrefs.js tests/data/preferences/ build/tests/dbData/ user",
+        "postinstall:generateSchemas": "node gpii/node_modules/solutionsRegistry/src/js/generate-schemas.js"
     }
 }
