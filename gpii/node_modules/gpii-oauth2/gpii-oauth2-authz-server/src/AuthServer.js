@@ -84,7 +84,7 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
      * @return {Object} The result of gpii.oauth2.oauth2orizeServer.promiseToDone() that contains the response to the grant request.
      */
     oauth2orizeServer.exchange(oauth2orize.exchange.password(function (clientInfo, username, password, scope, body, authInfo, done) {
-        var ip = authInfo.req.headers["x-forwarded-for"] || authInfo.req.connection.remoteAddress || authInfo.req.socket.remoteAddress;
+        var ip = authInfo.req.headers["x-forwarded-for"] || authInfo.req.socket.remoteAddress;
 
         // GPII-3717: Client privilege checks:
         // 1. If the value of "clientInfo.clientCredential.allowedIPBlocks" is null or undefined, skip the ip
