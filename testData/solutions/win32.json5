@@ -15539,7 +15539,22 @@
                     }
                 },
                 "supportedSettings": {
-                    "OverrideTabletMode": {},
+                    "OverrideTabletMode": {
+                        "schema": {
+                            "title": "Enable Tablet Mode",
+                            "description": "Display larger ribbon buttons that are easier to touch",
+                            "type": "number",
+                            "enum": [
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
                     "OverridePointerMode": {
                         "schema": {
                             "title": "Enable Tablet Mode",
