@@ -15560,16 +15560,24 @@
             },
             "configure.ribbons": {
                 "type": "gpii.settingsHandlers.remoteFileSettingsHandler",
-                "liveness": "manualRestart",
+                "liveness": "live",
                 "options": {
                     "settings": {
                         "word-ribbon": {
                             "path": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Word.officeUI",
                             "url": "https://raw.githubusercontent.com/GPII/gpii-assets/master/dataBlocks/officeRibbon/Word%20%value.xml",
+                            "invokeAfter": {
+                                type: "gpii.windows.office.reloadRibbon",
+                                application: "Word"
+                            }
                         },
                         "excel-ribbon": {
                             "path": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Excel.officeUI",
                             "url": "https://raw.githubusercontent.com/GPII/gpii-assets/master/dataBlocks/officeRibbon/Excel%20%value.xml",
+                            "invokeAfter": {
+                                type: "gpii.windows.office.reloadRibbon",
+                                application: "Excel"
+                            }
                         }
                     }
                 },
@@ -15594,15 +15602,26 @@
                                 "Essentials and Standard Set",
                                 "Basic, Essentials, and Standard Set"
                             ],
-                            "default": null
+                            "default": "StandardSet"
                         }
                     },
                     "excel-ribbon": {
                         "schema": {
                             "title": "Excel Ribbon Layout",
-                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
-                            "type": "data",
-                            "default": null
+                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for Excel",
+                            "enum": [
+                                "StandardSet",
+                                "Basics+StandardSet",
+                                "Essentials+StandardSet",
+                                "Basics+Essentials+StandardSet"
+                            ],
+                            "enumLabels": [
+                                "Standard Set",
+                                "Basics and Standard Set",
+                                "Essentials and Standard Set",
+                                "Basic, Essentials, and Standard Set"
+                            ],
+                            "default": "StandardSet"
                         }
                     }
                 }

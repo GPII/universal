@@ -8,32 +8,7 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.office": {
                         "word-ribbon": "Basics+StandardSet",
-
-//                        "tabletMode":  false,
-//                        "word-status": {
-//                            "FormattedPage": false,
-//                            "Section": false,
-//                            "PageNumber": true,
-//                            "VerticalPos": false,
-//                            "Line": false,
-//                            "Column": false,
-//                            "WordCount": true,
-//                            "SpellCheck": false,
-//                            "Language": false,
-//                            "DigitalSignatures": false,
-//                            "InformationManagementPolicy": false,
-//                            "PermissionPolicy": false,
-//                            "TrackChanges": false,
-//                            "CapsLock": false,
-//                            "Overtype": false,
-//                            "ExtendSelection": false,
-//                            "MacroRecord": false,
-//                            "UploadStatus": false,
-//                            "UpdatesAvailable": false,
-//                            "ViewShortcuts": false,
-//                            "ZoomSlider": true,
-//                            "Zoom": true
-//                        }
+                        "tabletMode":  false
                     }
                 }
             }
