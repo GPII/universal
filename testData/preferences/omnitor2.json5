@@ -11,6 +11,7 @@
 // * When logging out, the user will be taken to the home screen (even if eCmobile/eCtouch is still running in the background)
 {
     "flat": {
+        "name": "Omnitor 2",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

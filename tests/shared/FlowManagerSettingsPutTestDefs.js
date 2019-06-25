@@ -112,7 +112,8 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutNoAccessTokenSequ
     sequence: [
         { funcName: "fluid.log", args: ["Flowmanager rejected put settings sequence -- no access token..."]},
         {
-            func: "{settingsPutRequest}.send"
+            func: "{settingsPutRequest}.send",
+            args: ["{testCaseHolder}.options.updatedPrefsSet"]
         },
         {
             event: "{settingsPutRequest}.events.onComplete",
@@ -140,7 +141,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutWrongAccessTokenS
         { funcName: "fluid.log", args: ["Flowmanager rejected put settings sequence -- wrong access token..."]},
         {
             funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
-            args: ["{settingsPutRequest}", "a_wrong_access_token"]
+            args: ["{settingsPutRequest}", "a_wrong_access_token", "{testCaseHolder}.options.updatedPrefsSet"]
         },
         {
             event: "{settingsPutRequest}.events.onComplete",
@@ -224,7 +225,7 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
 
             // The options below are required for sending /settings
             gpiiKey: "nonexistent_gpii_key",
-            prefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet,
+            updatedPrefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet,
 
             // Expected info
             expectedGpiiKey: "nonexistent_gpii_key",
@@ -240,7 +241,8 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
     {
         testDef: {
             name: "Attempt to update preferences without providing an access token",
-            gpiiKey: "os_gnome"
+            gpiiKey: "os_gnome",
+            updatedPrefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet
         },
         disruptions: [{
             sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNoAccessTokenSequence",
@@ -251,7 +253,8 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
     {
         testDef: {
             name: "Attempt to update preferences by providing a wrong access token",
-            gpiiKey: "os_gnome"
+            gpiiKey: "os_gnome",
+            updatedPrefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet
         },
         disruptions: [{
             sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutWrongAccessTokenSequence",
@@ -271,7 +274,7 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
 
             // The options below are required for sending /settings
             gpiiKey: "a_different_gpii_key",
-            prefsSet: gpii.tests.cloud.oauth2.settingsPut.prefsSet,
+            updatedPrefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet,
 
             // Expected info
             expectedGpiiKey: undefined,
