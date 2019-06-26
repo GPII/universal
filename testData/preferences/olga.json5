@@ -27,9 +27,7 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.windows.onscreenKeyboard": {
                         "ClickSound": 0,
-                        "ShowPositionKeys": 1,
                         "ShowNumPad": 1,
-                        "KeyPressMode": 3,
                         "HoverPeriod": 1500,
                         "ScanInterval": 500,
                         "UseDevice": 0,

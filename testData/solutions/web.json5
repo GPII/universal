@@ -11,6 +11,7 @@
         "settingsHandlers": {
             "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "live",
                 "supportedSettings": {
                     "screenReaderTTS/enabled": {},
                     "fontSize": {},
@@ -81,6 +82,7 @@
         "settingsHandlers": {
             "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "live",
                 "supportedSettings": {
                     "fontSize": {},
                     "fontFaceFontName": {},
@@ -188,6 +190,7 @@
         "settingsHandlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "live",
                 "supportedSettings": {
                     "transform": {},
                     "volume": {},
@@ -278,6 +281,7 @@
         "settingsHandlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "live",
                 "supportedSettings": {
                     "fontSize": {},
                     "language": {},
@@ -346,6 +350,7 @@
         "settingsHandlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "live",
                 "supportedSettings": {
                     "access_commonprefs_speechrate": {},
                     "access_commonprefs_speechpitch": {},
@@ -413,6 +418,7 @@
         "settingsHandlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "live",
                 "supportedSettings": {
                     "language": {},
                     "contrastTheme": {},
@@ -485,6 +491,7 @@
         "settingsHandlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "live",
                 "supportedSettings": {
                     "language": {},
                     "textSize": {},

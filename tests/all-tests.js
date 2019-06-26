@@ -59,6 +59,7 @@ var testIncludes = [
     "./UserLogonRequestTests.js",
     "../gpii/node_modules/accessRequester/test/AccessRequesterTests.js",
     "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
+    "../gpii/node_modules/deviceReporter/test/StaticDeviceReporterTests.js",
     "../gpii/node_modules/eventLog/test/all-tests.js",
     "../gpii/node_modules/flatMatchMaker/test/FlatMatchMakerTests.js",
     "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
@@ -82,6 +83,7 @@ var testIncludes = [
     "../gpii/node_modules/settingsHandlers/test/WebSocketsSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/singleInstance/test/SingleInstanceTests.js",
+    "../gpii/node_modules/solutionsRegistry/test/all-tests.js",
     "../gpii/node_modules/userListeners/test/all-tests.js"
 ];
 
