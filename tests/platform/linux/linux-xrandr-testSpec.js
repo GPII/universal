@@ -53,4 +53,3 @@ module.exports = gpii.test.bootstrap({
     configPath: "%gpii-universal/tests/platform/linux/configs"
 }, ["gpii.test.integration.testCaseHolder.linux"],
     module, require, __dirname);
-

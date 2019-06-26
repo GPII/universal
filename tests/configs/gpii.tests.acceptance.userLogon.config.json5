@@ -1,0 +1,7 @@
+{
+    "type": "gpii.tests.acceptance.userLogon.config",
+    "mergeConfigs": [
+        "%gpii-universal/gpii/configs/shared/gpii.config.development.local.json5",
+        "./shared/gpii.tests.userLogon.config.json5"
+    ]
+}

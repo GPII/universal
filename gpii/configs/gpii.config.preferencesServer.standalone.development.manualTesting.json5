@@ -1,0 +1,20 @@
+/**
+ * This configuration runs a standalone preferences server locally on port 8081. It also starts and loads test data
+ * into a CouchDB instance listening on port 25984 for data persistence.
+ *
+ * * The following components are running:
+ * ** Preferences Server
+ * ** gpii-couchdb-test-harness
+ *
+ * Note: this config is created for testing PPT locally. Currently it's not used by any other configs and tests.
+ */
+{
+    "type": "gpii.config.preferencesServer.standalone.development.manualTesting",
+    "options": {
+        "dbServerPort": 25984
+    },
+    "mergeConfigs": [
+        "%preferencesServer/configs/gpii.preferencesServer.config.base.json5",
+        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.startWithoutCleanData.json5"
+    ]
+}

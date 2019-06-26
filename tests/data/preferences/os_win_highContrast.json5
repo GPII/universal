@@ -1,0 +1,21 @@
+// A temporary preferences file created to work around a window acceptance test failure (GPII-3757)
+// before the proper fix described in GPII-3759(https://issues.gpii.net/browse/GPII-3759) is implemented.
+// The high contrast test is performed using this file to ensure it doesn't mess up the cursors test:
+// high contrast applied after cursors will override cursors settings.
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
+                        "HighContrastOn": {
+                            "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
+                            "value": true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

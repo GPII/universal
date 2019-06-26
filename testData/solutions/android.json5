@@ -2,10 +2,12 @@
     "com.android.freespeech": {
         "name": "FreeSpeech",
         "contexts": {
-            "OS": [{
+            "OS": [
+                {
                     "id": "android",
                     "version": ">=0.1"
-                }]
+                }
+            ]
         },
         "capabilities": [
             "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
@@ -13,13 +15,16 @@
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "setTrue": {
                         "type": "gpii.androidActivityManager.startFreespeech"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -30,14 +35,15 @@
             "launchers.launcher"
         ]
     },
-
     "com.android.talkback": {
         "name": "TalkBack Screen Reader",
         "contexts": {
-            "OS": [{
+            "OS": [
+                {
                     "id": "android",
                     "version": ">=0.1"
-                }]
+                }
+            ]
         },
         "capabilities": [
             "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
@@ -52,14 +58,15 @@
                     "setFalse": {
                         "type": "gpii.androidActivityManager.stopTalkback"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         }
     },
-
     "com.android.persistentConfiguration": {
         "name": "Android Configuration",
         "contexts": {
@@ -157,7 +164,6 @@
             }
         }
     },
-
     "com.android.audioManager": {
         "name": "Android Audio Manager",
         "contexts": {
@@ -206,7 +212,6 @@
             }
         }
     },
-
     "com.android.settings.system": {
         "name": "Android UI Settings.System",
         "contexts": {
@@ -269,7 +274,6 @@
             }
         }
     },
-
     "com.android.settings.secure": {
         "name": "Android UI Settings Secure",
         "contexts": {
@@ -350,14 +354,15 @@
             }
         }
     },
-
     "se.omnitor.ecmobile": {
         "name": "Omnitor eCtouch/eCmobile",
         "contexts": {
-        "OS": [{
-                "id": "android",
-                "version": ">=0.1"
-              }]
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
         },
         "settingsHandlers": {
             "configuration": {
@@ -420,14 +425,15 @@
                             "type": "gpii.androidActivityManager.goToHomeScreen"
                         }
                     ],
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         }
     },
-
     "es.codefactory.android.app.ma": {
         "name": "Mobile Accessibility",
         "contexts": {
@@ -441,6 +447,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "live",
                 "supportedSettings": {
                     "access_commonprefs_speechrate": {},
                     "access_commonprefs_speechpitch": {},

@@ -31,5 +31,5 @@ gpii.tests.contextIntegration.baseTestDef = {
     }
 };
 
-gpii.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
-        gpii.tests.contextIntegration.fixtures, gpii.tests.contextIntegration.baseTestDef));
+var segmentedTestDefs = gpii.test.buildSegmentedFixtures(gpii.tests.contextIntegration.fixtures, gpii.tests.contextIntegration.baseTestDef);
+gpii.test.runCouchTestDefs(segmentedTestDefs);

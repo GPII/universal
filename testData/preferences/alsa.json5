@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Alsa",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

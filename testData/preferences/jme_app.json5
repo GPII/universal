@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "JME App",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

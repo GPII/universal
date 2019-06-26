@@ -36,7 +36,7 @@ gpii.tests.conflictingApps.jawsHandlerEntry = function (running) {
                 "getState": [
                     {
                         "type": "gpii.processReporter.find",
-                        "command": "jfw"
+                        "command": "jfw.exe"
                     }
                 ],
                 "setTrue": [
@@ -109,39 +109,15 @@ gpii.tests.conflictingApps.testDefs = [
         },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "org.nvda-project": [
-                    {
-                        "settings": {
-                            "speech.espeak.rate": 17,
-                            "speech.espeak.volume": 75,
-                            "speech.espeak.pitch": 15,
-                            "speech.espeak.rateBoost": true,
-                            "speech.symbolLevel": 300,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "reviewCursor.followFocus": false,
-                            "reviewCursor.followCaret": true,
-                            "reviewCursor.followMouse": true,
-                            "keyboard.speakTypedWords": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false,
-                            "speech.espeak.sayCapForCapitals": true
-                        },
-                        "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                            "allowNumberSignComments": true,
-                            "allowSubSections": true
-                        }
-                    }
-                ],
                 "com.freedomscientific.jaws": [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
-                            "options.SayAllIndicateCaps": true,
-                            "options.TypingEcho": 2
+                            "Options.SayAllIndicateCaps": 1,
+                            "Options.TypingEcho": 2
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
@@ -167,14 +143,14 @@ gpii.tests.conflictingApps.testDefs = [
                             "ENU-MenuAndDialog.Pitch": 16
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
             },
             "gpii.launchHandlers.flexibleHandler": fluid.extend({},
-                gpii.tests.conflictingApps.jawsHandlerEntry(false),
-                gpii.tests.conflictingApps.NVDAHandlerEntry(true))
+                gpii.tests.conflictingApps.jawsHandlerEntry(true),
+                gpii.tests.conflictingApps.NVDAHandlerEntry(false))
         }
     }, {
         name: "Conflicting screenreader (jaws) is closed is Only one screenreader is launched",
@@ -187,39 +163,15 @@ gpii.tests.conflictingApps.testDefs = [
         settingsHandlers: {
 
             "gpii.settingsHandlers.INISettingsHandler": {
-                "org.nvda-project": [
-                    {
-                        "settings": {
-                            "speech.espeak.rate": 17,
-                            "speech.espeak.volume": 75,
-                            "speech.espeak.pitch": 15,
-                            "speech.espeak.rateBoost": true,
-                            "speech.symbolLevel": 300,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "reviewCursor.followFocus": false,
-                            "reviewCursor.followCaret": true,
-                            "reviewCursor.followMouse": true,
-                            "keyboard.speakTypedWords": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false,
-                            "speech.espeak.sayCapForCapitals": true
-                        },
-                        "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                            "allowNumberSignComments": true,
-                            "allowSubSections": true
-                        }
-                    }
-                ],
                 "com.freedomscientific.jaws": [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
-                            "options.SayAllIndicateCaps": true,
-                            "options.TypingEcho": 2
+                            "Options.SayAllIndicateCaps": 1,
+                            "Options.TypingEcho": 2
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
@@ -245,14 +197,14 @@ gpii.tests.conflictingApps.testDefs = [
                             "ENU-MenuAndDialog.Pitch": 16
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
             },
             "gpii.launchHandlers.flexibleHandler": fluid.extend({},
-                gpii.tests.conflictingApps.jawsHandlerEntry(false),
-                gpii.tests.conflictingApps.NVDAHandlerEntry(true))
+                gpii.tests.conflictingApps.jawsHandlerEntry(true),
+                gpii.tests.conflictingApps.NVDAHandlerEntry(false))
         }
     }
 ];
@@ -261,5 +213,4 @@ module.exports = gpii.test.runTests({
     testDefs:  "gpii.tests.conflictingApps.testDefs",
     configName: "gpii.tests.multiScreenreader.config",
     configPath: "%gpii-universal/tests/configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
-    module, require, __dirname);
+}, ["gpii.test.integration.testCaseHolder.windows"]);

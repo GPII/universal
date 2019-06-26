@@ -40,11 +40,38 @@
     },
 
     {
+        "id": "com.microsoft.windows.mouseSettings"
+    },
+
+    {
         "id": "com.microsoft.windows.narrator"
     },
 
     {
-        "id": "com.microsoft.windows.typingEnhancement"
-    }
+        "id": "com.microsoft.windows.nightScreen"
+    },
 
+    {
+        "id": "com.microsoft.windows.typingEnhancement"
+    },
+
+    {
+        "id": "com.microsoft.windows.volumeControl"
+    },
+
+    {
+        "id": "com.microsoft.windows.language"
+    },
+
+    {
+        "id": "com.microsoft.windows.touchPadSettings"
+    },
+
+    {
+        "id": "com.microsoft.windows.desktopBackground"
+    },
+
+    {
+        "id": "com.microsoft.windows.desktopBackgroundColor"
+    }
 ]

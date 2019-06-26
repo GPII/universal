@@ -12,4 +12,3 @@ Page with all documents related to the second pilot phase:
 
 Setup and installation instructions:
 * http://wiki.gpii.net/w/Cloud4all_Pilot_2_-_Set_up_and_installation
-

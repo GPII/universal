@@ -5,16 +5,6 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
-                        "ApplicationSettings.AppBar.Width.$t": 788,
-                        "ApplicationSettings.AppBar.ShowText.$t": false,
-                        "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
-                        "ApplicationSettings.AppBar.LargeIcons.$t": true,
-                        "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
-                        "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
-                        "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
-                        "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
-                    },
                     "http://registry.gpii.net/applications/org.gnome.desktop.a11y.applications.onscreen-keyboard": {},
                     "http://registry.gpii.net/applications/com.microsoft.windows.onscreenKeyboard": {},
                     "http://registry.gpii.net/applications/org.gnome.desktop.a11y.keyboard": {
