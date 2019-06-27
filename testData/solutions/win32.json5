@@ -15469,6 +15469,7 @@
                         "word-ribbon": {
                             "path": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Word.officeUI",
                             "url": "https://raw.githubusercontent.com/GPII/gpii-assets/master/dataBlocks/officeRibbon/Word%20%value.xml",
+                            "cache": true,
                             "invokeAfter": {
                                 type: "gpii.windows.office.reloadRibbon",
                                 application: "Word"
