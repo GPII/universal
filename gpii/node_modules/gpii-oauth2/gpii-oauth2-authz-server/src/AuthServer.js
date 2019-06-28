@@ -65,15 +65,14 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     /**
      * Processes OAuth2 resource owner GPII key grant requests.
      * @param {Object} clientInfo - The client and its privilege info.
-     * The structure is {
-     *     "client": {Object},  // all fields from "client" document for this client
-     *     "clientCredential": {
-     *         "id": {String}, // The internal clientCredentialId
-     *         "allowedIPBlocks": {Array|null},
-     *         "isCreateGpiiKeyAllowed": false,
-     *         "isCreatePrefsSafeAllowed": false
-     *     }
-     * }
+     * @typedef {Object} clientInfo
+     * @property {Object} client - All fields from "client" document for this client.
+     * @property {Object} clientCredential - Includes listed client credential fields.
+     * @property {String} clientCredential.id - The internal client credential ID.
+     * @property {Array} clientCredential.allowedIPBlocks - Allowed IP ranges that requests are sent from.
+     * @property {Boolean} clientCredential.isCreateGpiiKeyAllowed - Whether the client has privilege to create new GPII keys.
+     * @property {Boolean} clientCredential.isCreatePrefsSafeAllowed - Whether the client has privilege to create new prefs safes.
+     *
      * @param {String} username - The username value in the grant request.
      * @param {String} password - The password value in the grant request.
      * @param {String} scope - The scope value in the grant request.

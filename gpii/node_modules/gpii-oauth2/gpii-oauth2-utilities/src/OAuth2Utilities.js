@@ -15,7 +15,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = fluid || require("infusion");
 
 var gpii = fluid.registerNamespace("gpii");
-var ipRangeCheck = require("ip-range-check");
+var ipaddr = require("ipaddr.js");
 
 fluid.registerNamespace("gpii.oauth2");
 
@@ -98,5 +98,28 @@ gpii.oauth2.getExpiresIn = function (timestampStarts, timestampExpires) {
  * @return {Boolean} Return true if the IP is within the range. Otherwise, return false.
  */
 gpii.oauth2.isIPINRange = function (ipAddress, allowedIPBlocks) {
-    return ipRangeCheck(ipAddress, allowedIPBlocks);
+    allowedIPBlocks = fluid.makeArray(allowedIPBlocks);
+    var addr = ipaddr.process(ipAddress);
+
+    for (var i in allowedIPBlocks) {
+        var oneIPBlock = allowedIPBlocks[i];
+        if (oneIPBlock.indexOf("/") > 0) {
+            // The IP block specifies a range of IP addresses such as "192.168.1.0/24"(IPV4) or "::1/128"(IPV6)
+            try {
+                if (addr.match(ipaddr.parseCIDR(oneIPBlock))) {
+                    return true;
+                }
+            } catch (e) {
+                // Catch the error when kinds of ipAddress and oneIPBlock don't match: one is in IPV4 format while
+                // the other is in IPV6 format. Ignore this error and continue with verifying other IP blocks.
+            }
+        } else {
+            // The IP block specifies a single IP address such as "192.168.1.0"(IPV4) or "::1"(IPV6)
+            var range = ipaddr.parse(oneIPBlock);
+            if (addr.toString() === range.toString()) {
+                return true;
+            }
+        }
+    };
+    return false;
 };

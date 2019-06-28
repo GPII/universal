@@ -188,7 +188,7 @@ jqUnit.test("Test gpii.oauth2.getExpiresIn()", function () {
 });
 
 jqUnit.test("Test gpii.oauth2.isIPINRange()", function () {
-    jqUnit.expect(5);
+    jqUnit.expect(6);
 
     var testCases = [{
         ipAddress: "192.168.1.1",
@@ -202,6 +202,10 @@ jqUnit.test("Test gpii.oauth2.isIPINRange()", function () {
         ipAddress: "192.168.1.1",
         allowedIPBlocks: "102.1.5.2/24",
         expected: false
+    }, {
+        ipAddress: "::ffff:127.0.0.1",
+        allowedIPBlocks: ["127.0.0.1/8", "172.0.0.0/8", "::1"],
+        expected: true
     }, {
         // Checks array of CIDR's and string
         ipAddress: "192.168.1.1",
