@@ -2,6 +2,7 @@
  * GPII Flow Manager Development Test Definitions
  *
  * Copyright 2013 OCAD University
+ * Copyright 2019 OCAD University
  *
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
@@ -69,19 +70,6 @@ fluid.defaults ("gpii.tests.development.commonTestSequence", {
 gpii.tests.development.testDefs = [{
     name: "Flow Manager test: Key in and key out with an existing GPII key",
     expect: 2,
-    config: {
-        configName: "gpii.config.development.local",
-        configPath: "%gpii-universal/gpii/configs/shared"
-    },
     gpiiKey: "testUser1",
-    sequenceGrade: "gpii.tests.development.commonTestSequence"
-}, {
-    name: "Flow Manager test: Key in and key out with a nonexistent GPII key",
-    expect: 2,
-    config: {
-        configName: "gpii.config.development.local",
-        configPath: "%gpii-universal/gpii/configs/shared"
-    },
-    gpiiKey: "nonexistent_gpii_key",
     sequenceGrade: "gpii.tests.development.commonTestSequence"
 }];
