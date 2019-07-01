@@ -15469,19 +15469,12 @@
                         "word-ribbon": {
                             "path": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Word.officeUI",
                             "url": "https://raw.githubusercontent.com/GPII/gpii-assets/master/dataBlocks/officeRibbon/Word%20%value.xml",
-                            "cache": true,
-                            "invokeAfter": {
-                                type: "gpii.windows.office.reloadRibbon",
-                                application: "Word"
-                            }
+                            "cache": true
                         },
                         "excel-ribbon": {
                             "path": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Excel.officeUI",
                             "url": "https://raw.githubusercontent.com/GPII/gpii-assets/master/dataBlocks/officeRibbon/Excel%20%value.xml",
-                            "invokeAfter": {
-                                type: "gpii.windows.office.reloadRibbon",
-                                application: "Excel"
-                            }
+                            "cache": true
                         }
                     }
                 },
@@ -15531,6 +15524,22 @@
                 }
             }
         },
+        "configure": [
+            "settings.configure.ribbons",
+            "settings.configure.common-tabletmode",
+            {
+                type: "gpii.windows.office.reloadRibbon",
+                application: "Word"
+            }
+        ],
+        "restore": [
+            "settings.configure.ribbons",
+            "settings.configure.common-tabletmode",
+            {
+                type: "gpii.windows.office.reloadRibbon",
+                application: "Word"
+            }
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
