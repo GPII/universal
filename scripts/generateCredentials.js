@@ -30,7 +30,7 @@ These credentials consist in:
 {
     "_id": "UUID-clientCredentials",
     "type": "clientCredential",
-    "schemaVersion": "0.1",
+    "schemaVersion": "0.2",
     "clientId": "UUID-gpiiAppInstallationClient",
     "oauth2ClientId": "UUID-pilot-computer",
     "oauth2ClientSecret": "UUID-pilot-computer-secret",
@@ -45,7 +45,7 @@ These credentials consist in:
 {
     "_id": "UUID-gpiiAppInstallationClient",
     "type": "gpiiAppInstallationClient",
-    "schemaVersion": "0.1",
+    "schemaVersion": "0.2",
     "name": "Pilot Computers",
     "computerType": "public",
     "timestampCreated": "2017-11-21T18:11:22.101Z",
@@ -105,7 +105,7 @@ var generateCredentials = function () {
     var clientCredential = {
         "_id": clientCredentialsId,
         "type": "clientCredential",
-        "schemaVersion": "0.1",
+        "schemaVersion": "0.2",
         "clientId": gpiiAppInstallationClientId,
         "oauth2ClientId": clientId,
         "oauth2ClientSecret": clientSecret,
@@ -118,7 +118,7 @@ var generateCredentials = function () {
     var gpiiAppInstallationClient = {
         "_id": gpiiAppInstallationClientId,
         "type": "gpiiAppInstallationClient",
-        "schemaVersion": "0.1",
+        "schemaVersion": "0.2",
         "name": credentialsName,
         "computerType": "public",
         "timestampCreated": currentTime,
