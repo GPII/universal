@@ -1,0 +1,19 @@
+{
+    "type": "gpii.tests.acceptance.linux.builtIn.UntrustedPSPIntegration.config",
+    "options": {
+        "distributeOptions": {
+            "acceptance.cloudBasedConfig.preferencesServer": {
+                "record": "gpii.tests.untrusted.pspIntegration.preferencesServer",
+                "target": "{that cloudBasedConfig preferencesServer}.type"
+            },
+            "acceptance.flowManagerOptions": {
+                "source": "{that}.options.flowManagerOptions",
+                "target": "{that gpii.flowManager.local}.options"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%gpii-universal/tests/platform/linux/configs/gpii.tests.acceptance.linux.builtIn.untrusted.config.json",
+        "./shared/gpii.tests.resetDefaultSettings.config.json5"
+    ]
+}
