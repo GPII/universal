@@ -26,42 +26,70 @@ fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
 require("./ProductionTestsUtils.js");
 
-// Tests that add 'user' preferences to the data base
-fluid.defaults("gpii.tests.productionConfigTesting.addUserSettings", {
+gpii.tests.productionConfigTesting.getDataFromFileById = function (locations) {
+    var resultDocs = [];
+    fluid.each(locations, function (oneFile) {
+        var dataArray = fluid.require(oneFile.filePath);
+        var ids = fluid.makeArray(oneFile.ids);
+        fluid.each(dataArray, function (anEntry) {
+            if (ids.includes(anEntry._id)) {
+                resultDocs.push(anEntry);
+            }
+        });
+    });
+    return {
+        "docs": resultDocs
+    };
+};
+
+gpii.tests.productionConfigTesting.extraTestData = gpii.tests.productionConfigTesting.getDataFromFileById([
+    {
+        filePath: "%gpii-universal/tests/data/dbData/gpiiKeys.json",
+        ids: "gpii_key_no_prefs_safe"
+    }, {
+        filePath: "%gpii-universal/build/tests/dbData/gpiiKeys.json",
+        ids: "os_gnome"
+    }, {
+        filePath: "%gpii-universal/build/tests/dbData/prefsSafes.json",
+        ids: "prefsSafe-os_gnome"
+    }, {
+        filePath: "%gpii-universal/tests/data/dbData/gpiiAppInstallationClients.json",
+        ids: [
+            "gpiiAppInstallationClient-schemaV0.1",
+            "gpiiAppInstallationClient-nova",
+            "gpiiAppInstallationClient-nova-failInIpVerification",
+            "gpiiAppInstallationClient-nova-failInAllowedPrefsToWrite"
+        ]
+    }, {
+        filePath: "%gpii-universal/tests/data/dbData/clientCredentials.json",
+        ids: [
+            "clientCredential-schemaV0.1",
+            "clientCredential-nova",
+            "clientCredential-failInIpVerification",
+            "clientCredential-failInAllowedPrefsToWrite"
+        ]
+    }
+]);
+
+fluid.log(gpii.tests.productionConfigTesting.extraTestData);
+
+// Tests that add extra documents for tests to the database
+fluid.defaults("gpii.tests.productionConfigTesting.addExtraDocs", {
     gradeNames: ["fluid.test.sequenceElement"],
     sequence: [
-        { funcName: "fluid.log", args: ["Add 'user' test prefs safes tests:"]},
+        { funcName: "fluid.log", args: ["Adding extra test data..."]},
         {
-            func: "{addSettingsUserKey}.send",
+            func: "{addInBulk}.send",
             args: [
-                gpii.tests.productionConfigTesting.settingsUserKey,
+                gpii.tests.productionConfigTesting.extraTestData,
                 { port: "5984" }
             ]
         }, {
-            event: "{addSettingsUserKey}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testAddedToDatabase"
-        }, {
-            func: "{addSettingsUserPrefsSafe}.send",
-            args: [
-                gpii.tests.productionConfigTesting.settingsUserPrefsSafe,
-                { port: "5984" }
-            ]
-        }, {
-            event: "{addSettingsUserPrefsSafe}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testAddedToDatabase"
+            event: "{addInBulk}.events.onComplete",
+            listener: "jqUnit.assertEquals",
+            args: ["Add extra test documents to database", "{addInBulk}.options.expectedStatusCode", "{addInBulk}.nativeResponse.statusCode"]
         },
-        {
-            func: "{addGpiiKeyNoPrefsSafe}.send",
-            args: [
-                gpii.tests.productionConfigTesting.gpiiKeyNoPrefsSafe,
-                { port: "5984" }
-            ]
-        },
-        {
-            event: "{addGpiiKeyNoPrefsSafe}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testAddedToDatabase"
-        },
-        { funcName: "fluid.log", args: ["Added 'user' test prefs safe"]}
+        { funcName: "fluid.log", args: ["Added extra test data."]}
     ]
 });
 
@@ -69,53 +97,24 @@ fluid.defaults("gpii.tests.productionConfigTesting.addRecordsSequence", {
     gradeNames: ["fluid.test.sequence"],
     sequenceElements: {
         addRecords: {
-            gradeNames: "gpii.tests.productionConfigTesting.addUserSettings"
+            gradeNames: "gpii.tests.productionConfigTesting.addExtraDocs"
         }
     }
 });
 
 gpii.tests.productionConfigTesting.addTestRecordsToDatabaseTests = [{
     name: "Flow manager production tests - add test GPII keys and PrefsSafe",
-    expect: 3,
+    expect: 1,
     config: gpii.tests.productionConfigTesting.config,
     components: {
-        addSettingsUserKey: {
+        addInBulk: {
             type: "kettle.test.request.http",
             options: {
                 port: "5984",
                 hostname: "couchdb",
-                path: "/gpii",
+                path: "/gpii/_bulk_docs",
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                expectedStatusCodes: [201, 409]  // created or already exists
-            }
-        },
-        addSettingsUserPrefsSafe: {
-            type: "kettle.test.request.http",
-            options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii",
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                expectedStatusCodes: [201, 409]  // created or already exists
-            }
-        },
-        addGpiiKeyNoPrefsSafe: {
-            type: "kettle.test.request.http",
-            options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii",
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                expectedStatusCodes: [201, 409]  // created or already exists
+                expectedStatusCode: 201
             }
         }
     },

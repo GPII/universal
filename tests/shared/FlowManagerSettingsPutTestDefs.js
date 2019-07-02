@@ -1,7 +1,7 @@
 /*
  * GPII Flow Manager Get/Put shared est Definitions
  *
- * Copyright 2018, 2019 OCAD University
+ * Copyright 2018-2019 OCAD University
  *
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
@@ -18,7 +18,7 @@
 
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
-    jqUnit = fluid.registerNamespace("jqUnit");
+    jqUnit = fluid.require("node-jqunit", require, "jqUnit");
 
 // These are test definitions for use with the cloud based flow manager in both
 // development and production configurations. The definitions are for updating
@@ -26,13 +26,70 @@ var fluid = require("infusion"),
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.settingsPut");
 
+// Unit tests
+gpii.tests.cloud.oauth2.settingsPut.prefsAllowedTests = [{
+    name: "All preferences are in the allowed list",
+    preferences: {
+        "http://registry.gpii.net/common/language": "en",
+        "http://registry.gpii.net/common/highContrast/enabled": true
+    },
+    allowedPrefs: [
+        "http://registry.gpii.net/common/language",
+        "http://registry.gpii.net/common/DPIScale",
+        "http://registry.gpii.net/common/highContrast/enabled",
+        "http://registry.gpii.net/common/selfVoicing/enabled"
+    ],
+    expected: true
+}, {
+    name: "One or more preferences are not in the allowed list",
+    preferences: {
+        "http://registry.gpii.net/common/language": "en",
+        "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": true,
+        "http://registry.gpii.net/common/highContrast/enabled": true
+    },
+    allowedPrefs: [
+        "http://registry.gpii.net/common/language",
+        "http://registry.gpii.net/common/DPIScale",
+        "http://registry.gpii.net/common/highContrast/enabled",
+        "http://registry.gpii.net/common/selfVoicing/enabled"
+    ],
+    expected: false
+}, {
+    name: "One or more preferences are not in the allowed list",
+    preferences: {
+        "http://registry.gpii.net/common/language": "en",
+        "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": true,
+        "http://registry.gpii.net/common/highContrast/enabled": true
+    },
+    allowedPrefs: [],
+    expected: false
+}, {
+    name: "When the given preferences is an empty object, return true as all allowed",
+    preferences: {},
+    allowedPrefs: [
+        "http://registry.gpii.net/common/language",
+        "http://registry.gpii.net/common/DPIScale",
+        "http://registry.gpii.net/common/highContrast/enabled",
+        "http://registry.gpii.net/common/selfVoicing/enabled"
+    ],
+    expected: true
+}];
+
+jqUnit.test("gpii.flowManager.cloudBased.settings.isPrefsAllowedToWrite() tests", function () {
+    fluid.each(gpii.tests.cloud.oauth2.settingsPut.prefsAllowedTests, function (oneTest) {
+        var result = gpii.flowManager.cloudBased.settings.isPrefsAllowedToWrite(oneTest.preferences, oneTest.allowedPrefs);
+        jqUnit[oneTest.expected ? "assertTrue" : "assertFalse"]("gpii.flowManager.cloudBased.settings.isPrefsAllowedToWrite() test - " + oneTest.name, result);
+    });
+});
+
+// Integration tests
 gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet = {
     "contexts": {
         "gpii-default": {
             "name": "Default preferences",
             "preferences": {
-                "http://registry.gpii.net/common/fontSize": 40,
-                "http://registry.gpii.net/common/backgroundColor": "black"
+                "http://registry.gpii.net/common/language": "en",
+                "http://registry.gpii.net/common/highContrast/enabled": true
             }
         }
     }
@@ -112,7 +169,8 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutNoAccessTokenSequ
     sequence: [
         { funcName: "fluid.log", args: ["Flowmanager rejected put settings sequence -- no access token..."]},
         {
-            func: "{settingsPutRequest}.send"
+            func: "{settingsPutRequest}.send",
+            args: ["{testCaseHolder}.options.updatedPrefsSet"]
         },
         {
             event: "{settingsPutRequest}.events.onComplete",
@@ -140,7 +198,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutWrongAccessTokenS
         { funcName: "fluid.log", args: ["Flowmanager rejected put settings sequence -- wrong access token..."]},
         {
             funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
-            args: ["{settingsPutRequest}", "a_wrong_access_token"]
+            args: ["{settingsPutRequest}", "a_wrong_access_token", "{testCaseHolder}.options.updatedPrefsSet"]
         },
         {
             event: "{settingsPutRequest}.events.onComplete",
@@ -217,14 +275,14 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
             name: "A successful workflow that creates a given nonexistent GPII key and its preferences",
 
             // The options below are for sending /access_token request
-            client_id: "pilot-computer",
-            client_secret: "pilot-computer-secret",
+            client_id: "nova-computer",
+            client_secret: "nova-computer-secret",
             username: "nonexistent_gpii_key",
             password: "dummy",
 
             // The options below are required for sending /settings
             gpiiKey: "nonexistent_gpii_key",
-            prefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet,
+            updatedPrefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet,
 
             // Expected info
             expectedGpiiKey: "nonexistent_gpii_key",
@@ -240,7 +298,8 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
     {
         testDef: {
             name: "Attempt to update preferences without providing an access token",
-            gpiiKey: "os_gnome"
+            gpiiKey: "os_gnome",
+            updatedPrefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet
         },
         disruptions: [{
             sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNoAccessTokenSequence",
@@ -251,7 +310,8 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
     {
         testDef: {
             name: "Attempt to update preferences by providing a wrong access token",
-            gpiiKey: "os_gnome"
+            gpiiKey: "os_gnome",
+            updatedPrefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet
         },
         disruptions: [{
             sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutWrongAccessTokenSequence",
@@ -271,7 +331,31 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
 
             // The options below are required for sending /settings
             gpiiKey: "a_different_gpii_key",
-            prefsSet: gpii.tests.cloud.oauth2.settingsPut.prefsSet,
+            updatedPrefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet,
+
+            // Expected info
+            expectedGpiiKey: undefined,
+            expectedMsg: "Unauthorized"
+        },
+        disruptions: [{
+            sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.mainSequence",
+            expectedStatusCode: 401
+        }]
+    },
+
+    {
+        testDef: {
+            name: "Attempt to update preferences whose one or more keys are not in the allowed preferences list",
+
+            // The options below are for sending /access_token request
+            client_id: "nova-computer-failInAllowedPrefsToWrite",
+            client_secret: "nova-computer-secret-failInAllowedPrefsToWrite",
+            username: "os_gnome",
+            password: "dummy",
+
+            // The options below are required for sending /settings
+            gpiiKey: "os_gnome",
+            updatedPrefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet,
 
             // Expected info
             expectedGpiiKey: undefined,
