@@ -16,6 +16,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
+                    // TODO: Create a base grade for JAWS and version-specific variations.  Make JAWS 2019 the default.  Restart version-detection discussions and "capability" discussions.
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                 },
                 "supportedSettings": {
@@ -2858,6 +2859,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
+                    // TODO: Create a base grade for JAWS and version-specific variations.  Make JAWS 2019 the default.  Restart version-detection discussions and "capability" discussions.
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
                 "supportedSettings": {
@@ -3319,6 +3321,7 @@
                             }
                         }
                     },
+                    // TODO: This should be shared between all variations within this solution
                     "ENU-Global\\.SynthLangString": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -3337,6 +3340,7 @@
                             }
                         }
                     },
+                    // TODO: This should be shared between all variations within this solution
                     "ENU-JAWSCursor\\.SynthLangString": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -3355,6 +3359,7 @@
                             }
                         }
                     },
+                    // TODO: This should be shared between all variations within this solution
                     "ENU-Keyboard\\.SynthLangString": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -3373,6 +3378,7 @@
                             }
                         }
                     },
+                    // TODO: This should be shared between all variations within this solution
                     "ENU-MenuAndDialog\\.SynthLangString": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -3391,6 +3397,7 @@
                             }
                         }
                     },
+                    // TODO: This should be shared between all variations within this solution
                     "ENU-Message\\.SynthLangString": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -3409,6 +3416,7 @@
                             }
                         }
                     },
+                    // TODO: This should be shared between all variations within this solution
                     "ENU-PCCursor\\.SynthLangString": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -3469,6 +3477,7 @@
                             ]
                         }
                     },
+                    // TODO: Review the "common" language settings WRT various solution language settings.
                     "http://registry\\.gpii\\.net/common/auditoryOutLanguage": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -4780,12 +4789,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.wmiSettingSupported",
@@ -5111,10 +5114,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configureImage",
-            "settings.configureSolidColor"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -6207,19 +6206,10 @@
                 }
             }
         },
-        "start": [
-            "launchers.launcher"
-        ],
         "stop": [],
         "update": [
             "settings.configure",
             "start"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
-        "configure": [
-            "settings.configure"
         ],
         "restore": [
             "settings.configure",
@@ -6653,14 +6643,6 @@
                 "type": "gpii.windows.spiSettingsHandler.applyCustomTheme",
                 "themeFile": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\LastSet}"
             }
-        ],
-        "restore": [
-            // Restore the high-contrast theme.
-            "settings.configure-registry",
-            // Disable high-contrast.
-            "settings.configure-spi",
-            // Restore the current theme.
-            "settings.configure-theme"
         ],
         "isInstalled": [
             {
@@ -7886,42 +7868,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configureScrollWheelMode",
-            "settings.configureScrollInactiveWindow",
-            "settings.configureMouseCursorShadow",
-            "settings.configureHorizontalScrollChars",
-            "settings.configureActiveWindowTracking",
-            "settings.configureActiveWindowZOrder",
-            "settings.configureWindowsArrangement",
-            "settings.configureMouseDoubleClickTime",
-            "settings.configureMousePrimaryButton",
-            "settings.configurePointerSpeed",
-            "settings.configurePointerPrecision",
-            "settings.configureSnapToDefButton",
-            "settings.configureHidePointer",
-            "settings.configureMouseSonar",
-            "settings.configureDoubleClickWidth",
-            "settings.configureDoubleClickHeight"
-        ],
-        "restore": [
-            "settings.configureScrollWheelMode",
-            "settings.configureScrollInactiveWindow",
-            "settings.configureMouseCursorShadow",
-            "settings.configureHorizontalScrollChars",
-            "settings.configureActiveWindowTracking",
-            "settings.configureActiveWindowZOrder",
-            "settings.configureWindowsArrangement",
-            "settings.configureMouseDoubleClickTime",
-            "settings.configureMousePrimaryButton",
-            "settings.configurePointerSpeed",
-            "settings.configurePointerPrecision",
-            "settings.configureSnapToDefButton",
-            "settings.configureHidePointer",
-            "settings.configureMouseSonar",
-            "settings.configureDoubleClickWidth",
-            "settings.configureDoubleClickHeight"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -8590,21 +8536,6 @@
                 }
             }
         },
-        "update": [
-            "settings.configure",
-            "settings.configureNoRoam",
-            "settings.configureSystemSettings"
-        ],
-        "configure": [
-            "settings.configure",
-            "settings.configureNoRoam",
-            "settings.configureSystemSettings"
-        ],
-        "restore": [
-            "settings.configure",
-            "settings.configureNoRoam",
-            "settings.configureSystemSettings"
-        ],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.windows.enableRegisteredAT",
@@ -8672,15 +8603,6 @@
                 }
             }
         },
-        "update": [
-            "settings.configure"
-        ],
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -9140,15 +9062,6 @@
                 }
             }
         },
-        "update": [
-            "settings.configure"
-        ],
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -9455,12 +9368,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -9511,12 +9418,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "start": [],
         "stop": [],
         "isInstalled": [
@@ -9695,12 +9596,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
@@ -9850,12 +9745,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
@@ -10001,12 +9890,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
@@ -12296,6 +12179,7 @@
                         "schema": {
                             "title": "Input Table",
                             "description": "Complementary to the output table option. The chosen table will be used to translate braille entered on your braille display's Perkins-style keyboard into text. NVDA currently only supports computer braille input so only 8 dot computer braille tables will be shown. You can move from braille table to braille table in the list by using the arrow keys. Note that this option is only useful if your braille display has a Perkins-style keyboard and this feature is supported by the braille display driver. If input is not supported on a display which does have a braille keyboard this will be noted in the Supported Braille Displays section.",
+                            // TODO: If we need to support braille devices, we'll have to reconcile this with our larger support for languages.
                             "enum": [
                                 "ar-ar-g1.utb",
                                 "as-in-g1.utb",
@@ -12581,6 +12465,7 @@
                             "default": "focus"
                         }
                     },
+                    // TODO: If we want to support braille devices, we'll have to reconcile this with our larger support for languages.
                     "braille.translationTable": {
                         "schema": {
                             "title": "Output Table",
@@ -14194,6 +14079,7 @@
                         "schema": {
                             "title": "ESpeak Voice",
                             "description": "The voice to use when using the 'eSpeak' engine.",
+                            // TODO: Figure out a way to more cleanly reuse material between language-supporting features.  Common term?
                             "enum": [
                                 "af", "sq", "am", "ar", "an", "hy-arevela", "hyw", "as", "az", "eu", "bn", "bpy", "bs",
                                 "bg", "ca", "zh-yue", "zh-cmn", "hr", "cs", "da", "nl", "en-us", "en-029", "en-gb",
@@ -14913,6 +14799,7 @@
                         }
                     },
                     "speech\\.espeak\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
+                    // TODO: Figure out a way to reuse this material between language-supporting features.  Common term?
                     "speech\\.espeak\\.voice": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -15277,6 +15164,7 @@
                                 }
                             }
                         },
+                        // TODO: Figure out a way to reuse this material between language-supporting features.  Common term?
                         {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "speech\\.espeak\\.voice",
@@ -15492,6 +15380,166 @@
                 }
             }
         },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.office": {
+        "name": "Microsoft Office",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure.common-tabletmode":  {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Office\\16.0\\Common",
+                    "dataTypes": {
+                        "OverrideTabletMode": "REG_DWORD",
+                        "OverridePointerMode": "REG_DWORD"
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "OverrideTabletMode": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.tabletMode",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
+                    "OverridePointerMode": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.tabletMode",
+                            "true": 2,
+                            "false": 1
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "OverrideTabletMode": {
+                        "schema": {
+                            "title": "Enable Tablet Mode",
+                            "description": "Display larger ribbon buttons that are easier to touch",
+                            "type": "number",
+                            "enum": [
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "OverridePointerMode": {
+                        "schema": {
+                            "title": "Enable Tablet Mode",
+                            "description": "Display larger ribbon buttons that are easier to touch",
+                            "type": "number",
+                            "enum": [
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    }
+                }
+            },
+            "configure.ribbons": {
+                "type": "gpii.settingsHandlers.remoteFileSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "settings": {
+                        "word-ribbon": {
+                            "path": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Word.officeUI",
+                            "url": "https://raw.githubusercontent.com/GPII/gpii-assets/master/dataBlocks/officeRibbon/Word%20%value.xml",
+                            "cache": true
+                        },
+                        "excel-ribbon": {
+                            "path": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Excel.officeUI",
+                            "url": "https://raw.githubusercontent.com/GPII/gpii-assets/master/dataBlocks/officeRibbon/Excel%20%value.xml",
+                            "cache": true
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "word-ribbon": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon",
+                    "excel-ribbon": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-ribbon"
+                },
+                "supportedSettings": {
+                    "word-ribbon": {
+                        "schema": {
+                            "title": "Word Ribbon Layout",
+                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                            "enum": [
+                                "StandardSet",
+                                "Basics+StandardSet",
+                                "Essentials+StandardSet",
+                                "Basics+Essentials+StandardSet"
+                            ],
+                            "enumLabels": [
+                                "Standard Set",
+                                "Basics and Standard Set",
+                                "Essentials and Standard Set",
+                                "Basic, Essentials, and Standard Set"
+                            ],
+                            "default": "StandardSet"
+                        }
+                    },
+                    "excel-ribbon": {
+                        "schema": {
+                            "title": "Excel Ribbon Layout",
+                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for Excel",
+                            "enum": [
+                                "StandardSet",
+                                "Basics+StandardSet",
+                                "Essentials+StandardSet",
+                                "Basics+Essentials+StandardSet"
+                            ],
+                            "enumLabels": [
+                                "Standard Set",
+                                "Basics and Standard Set",
+                                "Essentials and Standard Set",
+                                "Basic, Essentials, and Standard Set"
+                            ],
+                            "default": "StandardSet"
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure.ribbons",
+            "settings.configure.common-tabletmode",
+            {
+                type: "gpii.windows.office.reloadRibbon",
+                application: "Word"
+            }
+        ],
+        "restore": [
+            "settings.configure.ribbons",
+            "settings.configure.common-tabletmode",
+            {
+                type: "gpii.windows.office.reloadRibbon",
+                application: "Word"
+            }
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"

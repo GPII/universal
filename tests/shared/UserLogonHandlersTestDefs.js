@@ -1,7 +1,7 @@
 /*
  * User Logon State Change Test Definitions
  *
- * Copyright 2013-2018 OCAD University
+ * Copyright 2013-2019 OCAD University
  *
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
@@ -374,24 +374,6 @@ gpii.tests.userLogonHandlers.testDefs = [{
             string: "{arguments}.0",
             request: "{logoutRequest}"
         }
-    }]
-}, {
-    name: "Testing login and logout with a nonexistent GPII key",
-    expect: 2,
-    sequence: [{
-        // login with a non-existing GPII key
-        func: "{loginNonexistentRequest}.send"
-    }, {
-        event: "{loginNonexistentRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLoginResponse",
-        args: ["{arguments}.0", "nonexistent-gpii-key"]
-    }, {
-        // logout with a non-existing GPII key
-        func: "{logoutNonexistentRequest}.send"
-    }, {
-        event: "{logoutNonexistentRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
-        args: ["{arguments}.0", "nonexistent-gpii-key"]
     }]
 }, {
     name: "noUser logs back in after an explicit request to logout noUser",

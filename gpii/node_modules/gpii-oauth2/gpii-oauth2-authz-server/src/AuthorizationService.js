@@ -1,5 +1,5 @@
 /*!
-Copyright 2014-2017 OCAD university
+Copyright 2014-2019 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -45,8 +45,8 @@ var fluid = fluid || require("infusion");
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
                                                          // gpiiKey, clientId, clientCredentialId
             },
-            getAuthorizationByAccessToken: {
-                func: "{dataStore}.findAuthorizationByAccessToken"
+            getInfoByAccessToken: {
+                func: "{dataStore}.findInfoByAccessToken"
                     // accessToken
             },
             getCurrentDate: {

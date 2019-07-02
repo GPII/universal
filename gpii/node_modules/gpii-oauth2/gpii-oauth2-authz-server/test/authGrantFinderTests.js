@@ -2,6 +2,7 @@
 
     Copyright 2016-2017 OCAD university
     Copyright 2019 Raising the Floor International
+    Copyright 2019 OCAD University
 
     Licensed under the New BSD license. You may not use this file except in
     compliance with this License.
@@ -92,65 +93,53 @@ fluid.defaults("gpii.tests.oauth2.authGrantFinder.testEnvironment", {
     }
 });
 
-// Tests with an empty data store
-fluid.defaults("gpii.tests.oauth2.authGrantFinder.emptyDataStore", {
-    gradeNames: ["gpii.tests.oauth2.authGrantFinder.testEnvironment"],
-    components: {
-        caseHolder: {
-            options: {
-                modules: [{
-                    name: "Test getGrantForAccessToken()",
-                    tests: [{
-                        name: "getGrantForAccessToken() should return undefined with an empty dataStore",
-                        sequenceGrade: "gpii.tests.oauth2.sequenceGrade",
-                        sequence: [{
-                            task: "{authGrantFinder}.getGrantForAccessToken",
-                            args: ["any-accessToken"],
-                            resolve: "jqUnit.assertUndefined",
-                            resolveArgs: ["undefined should be received", "{arguments}.0"]
-                        }]
-                    }]
-                }]
-            }
-        }
-    }
-});
-
 // All expected results
 gpii.tests.oauth2.authGrantFinder.expected = {
-    accessToken: "Bakersfield_AJC_access_token",
-    gpiiKey: "carol_gpii_key",
-    allowSettingsGet: true,
-    allowSettingsPut: true
+    regular: {
+        accessToken: "Bakersfield_AJC_access_token",
+        gpiiKey: "carol_gpii_key",
+        allowSettingsGet: true,
+        allowSettingsPut: true,
+        allowedPrefsToWrite: []
+    },
+    backwardsCompatibility: {
+        accessToken: "schemaV0.1_access_token",
+        gpiiKey: "carol_gpii_key",
+        allowSettingsGet: true,
+        allowSettingsPut: true,
+        allowedPrefsToWrite: null
+    }
 };
 
-fluid.defaults("gpii.tests.oauth2.authGrantFinder.withData", {
+fluid.defaults("gpii.tests.oauth2.authGrantFinder.cases", {
     gradeNames: ["gpii.tests.oauth2.authGrantFinder.testEnvironment"],
     components: {
         caseHolder: {
             options: {
                 modules: [
                     {
-                        name: "Test getGrantForAccessToken()",
-                        tests: [{
-                            name: "getGrantForAccessToken() returns undefined for an unknown access token",
-                            sequence: [{
-                                task: "{authGrantFinder}.getGrantForAccessToken",
-                                args: ["unknown"],
-                                resolve: "jqUnit.assertUndefined",
-                                resolveArgs: ["undefined should be received for an unknown access token", "{arguments}.0"]
-                            }]
-                        }]
-                    },
-                    {
                         name: "Test getGrantForAccessToken() with an access token for resource owner GPII key grant type",
                         tests: [{
                             name: "getGrantForAccessToken() returns the authorization info in the format for the resource owner GPII key grant type",
+                            sequenceGrade: "gpii.tests.oauth2.sequenceGrade",
                             sequence: [{
                                 task: "{authGrantFinder}.getGrantForAccessToken",
                                 args: ["Bakersfield_AJC_access_token"],
                                 resolve: "jqUnit.assertDeepEq",
-                                resolveArgs: ["The expected authorization info is returned", gpii.tests.oauth2.authGrantFinder.expected, "{arguments}.0"]
+                                resolveArgs: ["The expected authorization info is returned", gpii.tests.oauth2.authGrantFinder.expected.regular, "{arguments}.0"]
+                            }]
+                        }]
+                    },
+                    {
+                        name: "Test getGrantForAccessToken() accommodates the backwards compatibility for the data model in the schema version 0.1",
+                        tests: [{
+                            name: "getGrantForAccessToken() returns the authorization info in the format for the resource owner GPII key grant type",
+                            sequenceGrade: "gpii.tests.oauth2.sequenceGrade",
+                            sequence: [{
+                                task: "{authGrantFinder}.getGrantForAccessToken",
+                                args: ["schemaV0.1_access_token"],
+                                resolve: "jqUnit.assertDeepEq",
+                                resolveArgs: ["The expected authorization info is returned", gpii.tests.oauth2.authGrantFinder.expected.backwardsCompatibility, "{arguments}.0"]
                             }]
                         }]
                     },
@@ -158,11 +147,25 @@ fluid.defaults("gpii.tests.oauth2.authGrantFinder.withData", {
                         name: "Test getGrantForAccessToken() returns undefined for an expired access token",
                         tests: [{
                             name: "getGrantForAccessToken() returns undefined for an expired access token",
+                            sequenceGrade: "gpii.tests.oauth2.sequenceGrade",
                             sequence: [{
                                 task: "{authGrantFinder}.getGrantForAccessToken",
                                 args: ["Bakersfield_AJC_access_token_expired"],
                                 resolve: "jqUnit.assertUndefined",
                                 resolveArgs: ["The expected authorization info is returned", "{arguments}.0"]
+                            }]
+                        }]
+                    },
+                    {
+                        name: "Test getGrantForAccessToken()",
+                        tests: [{
+                            name: "getGrantForAccessToken() returns undefined for an unknown access token",
+                            sequenceGrade: "gpii.tests.oauth2.sequenceGrade",
+                            sequence: [{
+                                task: "{authGrantFinder}.getGrantForAccessToken",
+                                args: ["unknown"],
+                                resolve: "jqUnit.assertUndefined",
+                                resolveArgs: ["undefined should be received for an unknown access token", "{arguments}.0"]
                             }]
                         }]
                     }
@@ -173,6 +176,5 @@ fluid.defaults("gpii.tests.oauth2.authGrantFinder.withData", {
 });
 
 fluid.test.runTests([
-    "gpii.tests.oauth2.authGrantFinder.emptyDataStore",
-    "gpii.tests.oauth2.authGrantFinder.withData"
+    "gpii.tests.oauth2.authGrantFinder.cases"
 ]);
