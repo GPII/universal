@@ -723,5 +723,46 @@ gpii.tests.userLogonRequest.testDefs = [
                 args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.logoutNoUser"] // trackedLogonChange, expectedModelChanges)
             }
         ]
+    },
+    {
+        name: "GPII-3988: Replay environmental login to support \"My Saved Settings\"",
+        expect: 4,
+        sequence: [
+            {
+                // The windows auto key-in sets the value of "{lifecycleManager}.model.lastEnvironmentalLoginGpiiKey"
+                func: "{lifecycleManager}.applier.change",
+                args: ["lastEnvironmentalLoginGpiiKey", gpii.tests.userLogonRequest.anotherGpiiKey]
+            },
+            {
+                // standard login
+                task: "{lifecycleManager}.performLogin",
+                args: [gpii.tests.userLogonRequest.gpiiKey],
+                resolve: "gpii.tests.userLogonRequest.testLoginResponse",
+                resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
+            },
+            {
+                // The replay is rejected when there is a non-noUser active GPII key is keyed in the system
+                task: "{lifecycleManager}.replayEnvironmentalLogin",
+                reject: "jqUnit.assertDeepEq",
+                rejectArgs: ["Proximity trigger ignored due to bounce rules", {
+                    "isError": true,
+                    "message": "Replay environmental login ignored because the current active GPII key is not \"noUser\""
+                }, "{arguments}.0"]
+            },
+            {
+                // logout of the current user
+                task: "{lifecycleManager}.performLogout",
+                args: [gpii.tests.userLogonRequest.gpiiKey],
+                resolve: "gpii.tests.userLogonRequest.testLogoutResponse",
+                resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
+            },
+            {
+                // Trigger the replay of the last environmental login. It uses the GPII key saved in the
+                // "{lifecycleManager}.model.lastEnvironmentalLoginGpiiKey"
+                task: "{lifecycleManager}.replayEnvironmentalLogin",
+                resolve: "gpii.tests.userLogonRequest.testLoginResponse",
+                resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.anotherGpiiKey]
+            }
+        ]
     }
 ];
