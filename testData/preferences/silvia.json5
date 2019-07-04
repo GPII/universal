@@ -1,0 +1,23 @@
+// # Silvia.json5
+//
+// This preference set change serveral settings from Windows built in
+// speech recognition feature.
+{
+    "flat": {
+        "name": "Silvia",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.speechRecognition": {
+                        "409": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Recognizers\\Tokens\\MS-1033-80-DESK",
+                        "ModeForOff": 1,
+                        "SingleTerminalSpace": 2,
+                        "EnableDocumentHarvesting": 0,
+                        "RunAtStartup": "On"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,24 @@
+// # Sven.json5
+//
+// This preference set change serveral settings from Windows built in
+// speech recognition feature.
+{
+    "flat": {
+        "name": "Sven",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/language": "es-Es",
+                    "http://registry.gpii.net/applications/com.microsoft.windows.speechRecognition": {
+                        "c0a": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Recognizers\\Tokens\\MS-3082-80-DESK",
+                        "ModeForOff": 2,
+                        "SingleTerminalSpace": 1,
+                        "EnableDocumentHarvesting": 1,
+                        "RunAtStartup": "On"
+                    }
+                }
+            }
+        }
+    }
+}
