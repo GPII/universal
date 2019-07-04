@@ -9443,6 +9443,392 @@
         ],
         "isRunning": []
     },
+    "com.microsoft.windows.speechRecognition": {
+        "name": "Windows built-in Speech Recognition settings",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "capabilities": [],
+        "settingsHandlers": {
+            "configureLanguageEn": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Speech\\Recognizers\\LanguageDefaults",
+                    "dataTypes": {
+                        "409": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "409": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "enum": [
+                                1025,
+                                1026,
+                                3076,
+                                2052,
+                                1028,
+                                1050,
+                                1029,
+                                1030,
+                                1043,
+                                1033,
+                                2057,
+                                1061,
+                                1035,
+                                3084,
+                                1036,
+                                1031,
+                                1032,
+                                1037,
+                                1038,
+                                1040,
+                                1041,
+                                1042,
+                                1062,
+                                1063,
+                                1044,
+                                1045,
+                                1046,
+                                2070,
+                                1048,
+                                1049,
+                                2074,
+                                9242,
+                                1051,
+                                1060,
+                                2058,
+                                3082,
+                                1053,
+                                1054,
+                                1055,
+                                1058
+                            ],
+                            "enumLabels": [
+                                "Arabic (Saudi Arabia)",
+                                "Bulgarian (Bulgaria)",
+                                "Chinese (Hong Kong SAR)",
+                                "Chinese (PRC)",
+                                "Chinese (Taiwan)",
+                                "Croatian (Croatia)",
+                                "Czech (Czech Republic)",
+                                "Danish (Denmark)",
+                                "Dutch (Netherlands)",
+                                "English (United States)",
+                                "English (United Kingdom)",
+                                "Estonian (Estonia)",
+                                "Finnish (Finland)",
+                                "French (Canada)",
+                                "French (France)",
+                                "German (Germany)",
+                                "Greek (Greece)",
+                                "Hebrew (Israel)",
+                                "Hungarian (Hungary)",
+                                "Italian (Italy)",
+                                "Japanese (Japan)",
+                                "Korean (Korea)",
+                                "Latvian (Latvia)",
+                                "Lithuanian (Lithuania)",
+                                "Norwegian, Bokmål (Norway)",
+                                "Polish (Poland)",
+                                "Portuguese (Brazil)",
+                                "Portuguese (Portugal)",
+                                "Romanian (Romania)",
+                                "Russian (Russia)",
+                                "Serbian (Latin, Serbia)",
+                                "Serbian (Latin, Serbia)",
+                                "Slovak (Slovakia)",
+                                "Slovenian (Slovenia)",
+                                "Spanish (Mexico)",
+                                "Spanish (Spain)",
+                                "Swedish (Sweden)",
+                                "Thai (Thailand)",
+                                "Turkish (Turkey)",
+                                "Ukrainian (Ukraine)"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                },
+                "inverseCapabilitiesTransformations": {
+                }
+            },
+
+            "configureLanguageEs": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Speech\\Recognizers\\LanguageDefaults",
+                    "dataTypes": {
+                        "c0a": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "c0a": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "enum": [
+                                1025,
+                                1026,
+                                3076,
+                                2052,
+                                1028,
+                                1050,
+                                1029,
+                                1030,
+                                1043,
+                                1033,
+                                2057,
+                                1061,
+                                1035,
+                                3084,
+                                1036,
+                                1031,
+                                1032,
+                                1037,
+                                1038,
+                                1040,
+                                1041,
+                                1042,
+                                1062,
+                                1063,
+                                1044,
+                                1045,
+                                1046,
+                                2070,
+                                1048,
+                                1049,
+                                2074,
+                                9242,
+                                1051,
+                                1060,
+                                2058,
+                                3082,
+                                1053,
+                                1054,
+                                1055,
+                                1058
+                            ],
+                            "enumLabels": [
+                                "Arabic (Saudi Arabia)",
+                                "Bulgarian (Bulgaria)",
+                                "Chinese (Hong Kong SAR)",
+                                "Chinese (PRC)",
+                                "Chinese (Taiwan)",
+                                "Croatian (Croatia)",
+                                "Czech (Czech Republic)",
+                                "Danish (Denmark)",
+                                "Dutch (Netherlands)",
+                                "English (United States)",
+                                "English (United Kingdom)",
+                                "Estonian (Estonia)",
+                                "Finnish (Finland)",
+                                "French (Canada)",
+                                "French (France)",
+                                "German (Germany)",
+                                "Greek (Greece)",
+                                "Hebrew (Israel)",
+                                "Hungarian (Hungary)",
+                                "Italian (Italy)",
+                                "Japanese (Japan)",
+                                "Korean (Korea)",
+                                "Latvian (Latvia)",
+                                "Lithuanian (Lithuania)",
+                                "Norwegian, Bokmål (Norway)",
+                                "Polish (Poland)",
+                                "Portuguese (Brazil)",
+                                "Portuguese (Portugal)",
+                                "Romanian (Romania)",
+                                "Russian (Russia)",
+                                "Serbian (Latin, Serbia)",
+                                "Serbian (Latin, Serbia)",
+                                "Slovak (Slovakia)",
+                                "Slovenian (Slovenia)",
+                                "Spanish (Mexico)",
+                                "Spanish (Spain)",
+                                "Swedish (Sweden)",
+                                "Thai (Thailand)",
+                                "Turkish (Turkey)",
+                                "Ukrainian (Ukraine)"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                },
+                "inverseCapabilitiesTransformations": {
+                }
+            },
+            "configureStartup": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+                    "dataTypes": {
+                        "Speech Recognition": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "Speech Recognition": {
+                        "schema": {
+                            "title": "RunAtStartup",
+                            "description": "Indicates if speech recognition should be started at system start",
+                            "enum": [
+                                "On",
+                                "Off"
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Off"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "Speech Recognition": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.speechRecognition.RunAtStartup",
+                            "match": {
+                                "On": "\"C:\\WINDOWS\\Speech\\Common\\sapisvr.exe\" -SpeechUX -Startup"
+                            },
+                            "noMatch": null
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.speechRecognition.RunAtStartup": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.speechRecognition.RunAtStartup",
+                            "match": {
+                                "\"C:\\WINDOWS\\Speech\\Common\\sapisvr.exe\" -SpeechUX -Startup": "On",
+                                "undefined": "Off"
+                            }
+                        }
+                    }
+                }
+            },
+            "configureOptions": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Speech\\Preferences",
+                    "dataTypes": {
+                        "ModeForOff": "REG_DWORD",
+                        "SingleTerminalSpace": "REG_DWORD",
+                        "EnableDocumentHarvesting": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "ModeForOff": {
+                        "schema": {
+                            "title": "Voice activation",
+                            "description": "Select the language used for the speech recognition",
+                            "enum": [
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "On"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "SingleTerminalSpace": {
+                        "schema": {
+                            "title": "Number spaces",
+                            "description": "Number of spaces to insert after spacebar",
+                            "enum": [
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "1",
+                                "2"
+                            ],
+                            "default": 2
+                        }
+                    },
+                    "EnableDocumentHarvesting": {
+                        "schema": {
+                            "title": "Document harvesting",
+                            "description": "Review documents and mail to improve accuracy",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "On"
+                            ],
+                            "default": 1
+                        }
+                    }
+                }
+            }
+        },
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"C:\\WINDOWS\\Speech\\Common\\sapisvr.exe\" -SpeechUX -Startup"
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "sapisvr.exe",
+                            "options": {
+                                "closeWindow": true,
+                                "timeout": 3000
+                            }
+                        }
+                    ],
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "sapisvr.exe"
+                        }
+                    ]
+                }
+            }
+        },
+        "configure": [
+            "settings.configureLanguageEn",
+            "settings.configureLanguageEs",
+            "settings.configureOptions",
+            "settings.configureStartup"
+        ],
+        "restore": [
+            "settings.configureLanguageEn",
+            "settings.configureLanguageEs",
+            "settings.configureOptions",
+            "settings.configureStartup"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
     "com.office.windowsOneNoteLearningTools": {
         "name": "LearningTools for OneNote 2016",
         "contexts": {
