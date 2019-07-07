@@ -163,7 +163,7 @@ gpii.migration.GPII3711.updateDB = function (options) {
 };
 
 /**
- * Create and execute the steps to delete the access tokens.
+ * Create and execute the steps to migrate documents.
  */
 gpii.migration.GPII3711.migrate = function () {
     var options = gpii.migration.GPII3711.initOptions(process.argv);
