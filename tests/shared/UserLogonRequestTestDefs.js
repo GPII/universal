@@ -725,7 +725,7 @@ gpii.tests.userLogonRequest.testDefs = [
         ]
     },
     {
-        name: "GPII-3988: Replay environmental login to support \"My Saved Settings\"",
+        name: "GPII-3988: Replay environmental login to support \"My Saved Settings\" using performLogin()",
         expect: 10,
         sequence: [
             {
@@ -790,7 +790,55 @@ gpii.tests.userLogonRequest.testDefs = [
                 // the GPII key saved for the last environmental login.
                 task: "{lifecycleManager}.replayEnvironmentalLogin",
                 reject: "jqUnit.assertDeepEq",
-                rejectArgs: ["Proximity trigger ignored due to bounce rules", {
+                rejectArgs: ["Replay environmental login ignored", {
+                    "isError": true,
+                    "message": "Replay environmental login ignored because the current active GPII key is not \"noUser\" or the last GPII key used for the environmental login"
+                }, "{arguments}.0"]
+            }
+        ]
+    },
+    {
+        name: "GPII-3988: Replay environmental login to support \"My Saved Settings\" using performProximityTriggered()",
+        expect: 6,
+        sequence: [
+            {
+                // standard login
+                task: "{lifecycleManager}.performProximityTriggered",
+                args: [gpii.tests.userLogonRequest.gpiiKey, {
+                    isEnvironmentalLogin: true
+                }],
+                resolve: "gpii.tests.userLogonRequest.testLoginResponse",
+                resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
+            },
+            {
+                funcName: "jqUnit.assertEquals",
+                args: ["The GPII key of the environmental login has been saved into the model", gpii.tests.userLogonRequest.gpiiKey, "{lifecycleManager}.model.lastEnvironmentalLoginGpiiKey"]
+            },
+            {
+                // The replay of the last environmental login is accepted when the active GPII key is the same key
+                // stored for the replay
+                task: "{lifecycleManager}.replayEnvironmentalLogin",
+                resolve: "gpii.tests.userLogonRequest.testLoginResponse",
+                resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
+            },
+            {
+                // Login a different GPII key as a non-environmental login
+                task: "{lifecycleManager}.performProximityTriggered",
+                args: [gpii.tests.userLogonRequest.anotherGpiiKey],
+                resolve: "gpii.tests.userLogonRequest.testLoginResponse",
+                resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.anotherGpiiKey]
+            },
+            {
+                // Ensure the model value that saves the GPII key of the last environmental login stays unchanged
+                funcName: "jqUnit.assertEquals",
+                args: ["The GPII key of the last environmental login stays unchanged in the model", gpii.tests.userLogonRequest.gpiiKey, "{lifecycleManager}.model.lastEnvironmentalLoginGpiiKey"]
+            },
+            {
+                // The replay of the last environmental login is rejected when the active GPII key is different from
+                // the GPII key saved for the last environmental login.
+                task: "{lifecycleManager}.replayEnvironmentalLogin",
+                reject: "jqUnit.assertDeepEq",
+                rejectArgs: ["Replay environmental login ignored", {
                     "isError": true,
                     "message": "Replay environmental login ignored because the current active GPII key is not \"noUser\" or the last GPII key used for the environmental login"
                 }, "{arguments}.0"]
