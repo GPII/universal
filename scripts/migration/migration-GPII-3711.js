@@ -42,7 +42,9 @@ var newValuesForNovaClientCredential = {
         "http://registry.gpii.net/common/language",
         "http://registry.gpii.net/common/DPIScale",
         "http://registry.gpii.net/common/highContrast/enabled",
-        "http://registry.gpii.net/common/selfVoicing/enabled"
+        "http://registry.gpii.net/common/highContrastTheme",
+        "http://registry.gpii.net/common/selfVoicing/enabled",
+        "http://registry.gpii.net/applications/com.microsoft.office.word-ribbon"
     ],
     isCreateGpiiKeyAllowed: true,
     isCreatePrefsSafeAllowed: true
