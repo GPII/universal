@@ -90,7 +90,7 @@ gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet = {
             "preferences": {
                 "http://registry.gpii.net/common/language": "en",
                 "http://registry.gpii.net/common/highContrast/enabled": true,
-                "http://registry.gpii.net/common/highContrast": "bw",
+                "http://registry.gpii.net/common/highContrastTheme": "bw",
                 "http://registry.gpii.net/applications/com.microsoft.office": {
                     "word-ribbon": "StandardSet"
                 }
