@@ -42,7 +42,9 @@ var newValuesForNovaClientCredential = {
         "http://registry.gpii.net/common/language",
         "http://registry.gpii.net/common/DPIScale",
         "http://registry.gpii.net/common/highContrast/enabled",
-        "http://registry.gpii.net/common/selfVoicing/enabled"
+        "http://registry.gpii.net/common/highContrastTheme",
+        "http://registry.gpii.net/common/selfVoicing/enabled",
+        "http://registry.gpii.net/applications/com.microsoft.office"
     ],
     isCreateGpiiKeyAllowed: true,
     isCreatePrefsSafeAllowed: true
@@ -163,7 +165,7 @@ gpii.migration.GPII3711.updateDB = function (options) {
 };
 
 /**
- * Create and execute the steps to delete the access tokens.
+ * Create and execute the steps to migrate documents.
  */
 gpii.migration.GPII3711.migrate = function () {
     var options = gpii.migration.GPII3711.initOptions(process.argv);
