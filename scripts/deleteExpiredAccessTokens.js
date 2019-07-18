@@ -50,7 +50,7 @@ gpii.accessTokens.initOptions = function (processArgv) {
     options.deleteAll = fluid.contains(processArgv, "--deleteAll");
 
     // Set up database specific options
-    options.accessTokensUrl = options.couchDbUrl + "/_design/views/_view/findAuthorizationByAccessToken";
+    options.accessTokensUrl = options.couchDbUrl + "/_design/views/_view/findInfoByAccessToken";
     options.accessTokens = [];
     options.parsedCouchDbUrl = url.parse(options.couchDbUrl);
     options.postOptions = {
