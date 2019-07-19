@@ -72,7 +72,7 @@ else
 fi
 
 # Initialize (possibly clear) data base
-if [ "${GPII_CLEAR_INDEX}" == 'true' ]; then
+if [ "${GPII_CLEAR_INDEX}" = 'true' ]; then
   log "Deleting database at ${GPII_COUCHDB_URL_SANITIZED}"
   if ! curl -fsS -X DELETE "${GPII_COUCHDB_URL}"; then
     log "Error deleting database"
