@@ -15428,7 +15428,7 @@
                     "OverrideTabletMode": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.tabletMode",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.OverrideTabletMode",
                             "true": 1,
                             "false": 0
                         }
@@ -15436,7 +15436,7 @@
                     "OverridePointerMode": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.tabletMode",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.OverrideTabletMode",
                             "true": 2,
                             "false": 1
                         }
