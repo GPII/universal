@@ -178,5 +178,9 @@
 
     {
         "id": "org.nvda-project"
+    },
+
+    {
+        "id": "com.microsoft.office"
     }
 ]
