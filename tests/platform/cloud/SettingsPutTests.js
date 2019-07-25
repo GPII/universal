@@ -8,7 +8,7 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 */
-
+// TODO: Discuss with Cindy and others, these seem to be preferences rather than settings payloads.
 "use strict";
 
 var fluid = require("infusion"),
