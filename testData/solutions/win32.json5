@@ -5043,11 +5043,15 @@
                         }
                     }
                 },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor"
+                ],
                 "capabilitiesTransformations": {
                     "ImageConfig": {
                         "transform": {
                             "type": "fluid.transforms.literalValue",
-                            "input": ""
+                            "input": "",
+                            "outputPath": "value"
                         },
                         "path": {
                             "transform": {
