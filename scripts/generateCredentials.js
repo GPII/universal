@@ -34,6 +34,10 @@ These credentials consist in:
     "clientId": "UUID-gpiiAppInstallationClient",
     "oauth2ClientId": "UUID-pilot-computer",
     "oauth2ClientSecret": "UUID-pilot-computer-secret",
+    "allowedIPBlocks": null,
+    "allowedPrefsToWrite": null,
+    "isCreateGpiiKeyAllowed": false,
+    "isCreatePrefsSafeAllowed": false,
     "revoked": false,
     "revokedReason": null,
     "timestampCreated": "2017-11-21T18:11:22.101Z",
@@ -65,10 +69,19 @@ After running the script, you can find the files in the folder "testers.gpii.net
 The script generates two files containing:
 1. secret.txt: The file to be provided when building the "Secret Blower" installer
 2. couchDBData.json: The JSON-format documents that go into the production
-database and ready to be inserted using an HTTP POST request like this:
+database and ready to be inserted into couchDB
+
+Note that, depending on the deployment, you might want to manually adjust the following fields in the client
+credentials block inside the couchDBData.json file:
+
+* allowedIPBlocks: An array of allowed IP addresses, e.g.: ["125.19.23.0/24", "2001:cdba::3257:9652", "62.230.58.1"]
+* allowedPrefsToWrite: An array of allowed prefs to write, e.g.: ["http://registry.gpii.net/common/language", "http://registry.gpii.net/common/DPIScale"]
+* isCreateGpiiKeyAllowed: true|false
+* isCreatePrefsSafeAllowed: true|false
+
+After you're done, you can use the following command to load the data using an HTTP POST request like this:
 
 * curl -d @couchDBData.json -H "Content-type: application/json" -X POST http://localhost:25984/gpii/_bulk_docs
-
 
 */
 "use strict";
@@ -109,6 +122,10 @@ var generateCredentials = function () {
         "clientId": gpiiAppInstallationClientId,
         "oauth2ClientId": clientId,
         "oauth2ClientSecret": clientSecret,
+        "allowedIPBlocks": null,
+        "allowedPrefsToWrite": null,
+        "isCreateGpiiKeyAllowed": false,
+        "isCreatePrefsSafeAllowed": false,
         "revoked": false,
         "revokedReason": null,
         "timestampCreated": currentTime,
