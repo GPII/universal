@@ -718,12 +718,7 @@ gpii.tests.windows.builtIn = [
                 }]
             }
         },
-        gradeNames: "gpii.test.integration.actionHandlersAware.windows",
-        actionsHandlers: [
-            {
-                "type": "gpii.windows.updateLanguage"
-            }
-        ]
+        gradeNames: "gpii.test.integration.actionHandlersAware.windows"
     }, {
         name: "Testing os_win_2 using default matchmaker",
         gpiiKey: "os_win_2",
@@ -1584,18 +1579,7 @@ gpii.tests.windows.builtInHighContrast = [
                     }
                 ]
             }
-        },
-        actionsHandlers: [
-            {
-                "type": "gpii.windows.rm"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme"
-            }
-        ]
+        }
     }, {
         name: "Testing os_common_highContrast using default matchmaker",
         gpiiKey: "os_common_highContrast",
@@ -1622,18 +1606,7 @@ gpii.tests.windows.builtInHighContrast = [
                     }
                 ]
             }
-        },
-        actionsHandlers: [
-            {
-                "type": "gpii.windows.rm"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme"
-            }
-        ]
+        }
     }, {
         name: "Testing os_common_highContrast - magnifier running on startup",
         gpiiKey: "os_common_highContrast",
@@ -1698,18 +1671,7 @@ gpii.tests.windows.builtInHighContrast = [
                     }
                 ]
             }
-        },
-        actionsHandlers: [
-            {
-                "type": "gpii.windows.rm"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme"
-            }
-        ]
+        }
     }, {
         name: "Testing os_common_highContrast - magnifier and keyboard both running on startup",
         gpiiKey: "os_common_highContrast",
@@ -1774,18 +1736,7 @@ gpii.tests.windows.builtInHighContrast = [
                     }
                 ]
             }
-        },
-        actionsHandlers: [
-            {
-                "type": "gpii.windows.rm"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme"
-            }
-        ]
+        }
     }
 ];
 
@@ -1795,5 +1746,5 @@ module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.builtIn.testDefs",
     configName: "gpii.tests.acceptance.windows.builtIn.config",
     configPath: "%gpii-universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.actionHandlersAware.windows"],
-    module, require, __dirname);
+}, ["gpii.test.integration.testCaseHolder.windows"],
+    module, require);
