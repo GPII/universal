@@ -5045,13 +5045,9 @@
                 },
                 "capabilitiesTransformations": {
                     "ImageConfig": {
-                        // This transform is necessary due to issue GPII-3784.
                         "transform": {
-                            "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor.r",
-                            "true": "",
-                            "false": "",
-                            "outputPath": "value"
+                            "type": "fluid.transforms.literalValue",
+                            "input": ""
                         },
                         "path": {
                             "transform": {
