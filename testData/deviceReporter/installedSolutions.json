@@ -117,10 +117,6 @@
     },
 
     {
-        "id": "com.microsoft.windows.brightness"
-    },
-
-    {
         "id": "fakemag2"
     },
 
@@ -174,5 +170,9 @@
 
     {
         "id": "org.nvda-project"
+    },
+
+    {
+        "id": "com.microsoft.office"
     }
 ]

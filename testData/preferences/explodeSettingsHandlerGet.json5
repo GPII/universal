@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Exploding Settings Handler Get",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

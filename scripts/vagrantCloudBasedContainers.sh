@@ -1,4 +1,3 @@
-#!/bin/sh -ex
 #
 # This scripts deploys an environment for end-to-end tests based on Docker
 # containers. It was initially developed to support CI.
@@ -45,6 +44,7 @@ BUILD_DATA_DIR="$UNIVERSAL_DIR/build/dbData/snapset"
 DATALOADER_COUCHDB_URL="http://couchdb:${COUCHDB_PORT}/gpii"
 DATASOURCE_HOSTNAME="http://couchdb"
 DATALOADER_CMD="/app/scripts/deleteAndLoadSnapsets.sh"
+PRODTESTS_CMD="npm run test:productionConfig"
 
 GPII_PREFERENCES_CONFIG="gpii.config.preferencesServer.standalone.production"
 GPII_PREFERENCES_PORT=9081
@@ -59,7 +59,7 @@ GPII_CLOUD_URL="http://flowmanager:9082"
 # The URLs to test the readiness of each docker container
 COUCHDB_VIEW_URL="http://localhost:$COUCHDB_PORT/gpii/_design/views/_view/findPrefsSafeByGpiiKey?key=%22carla%22&include_docs=true"
 CARLA_PREFERENCES_URL="http://localhost:$GPII_PREFERENCES_PORT/preferences/carla"
-ACCESS_TOKEN_URL="http://localhost:$GPII_FLOWMANAGER_PORT/access_token"
+GPII_FLOWMANAGER_READY_URL="http://localhost:$GPII_FLOWMANAGER_PORT/ready"
 
 # Remove old containers (exit code is ignored)
 docker rm -f couchdb 2>/dev/null || true
@@ -98,7 +98,7 @@ wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout
 docker run -d -p $GPII_FLOWMANAGER_PORT:$GPII_FLOWMANAGER_PORT --name flowmanager --link couchdb --link preferences -e NODE_ENV=$GPII_FLOWMANAGER_CONFIG -e GPII_FLOWMANAGER_LISTEN_PORT=$GPII_FLOWMANAGER_PORT -e GPII_DATASOURCE_HOSTNAME=$DATASOURCE_HOSTNAME -e GPII_DATASOURCE_PORT=$COUCHDB_PORT -e GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL=$GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL $UNIVERSAL_IMAGE
 
 # Wait for the flow manager container to be ready
-wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 --post-data "username=carla&password=dummy&client_id=pilot-computer&client_secret=pilot-computer-secret&grant_type=password" $ACCESS_TOKEN_URL
+wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 $GPII_FLOWMANAGER_READY_URL
 
 # Start the container to run production config tests
-docker run --name productionConfigTests --link flowmanager -e GPII_CLOUD_URL=$GPII_CLOUD_URL $UNIVERSAL_IMAGE node tests/ProductionConfigTests.js
+docker run --name productionConfigTests --link flowmanager --link couchdb -e GPII_CLOUD_URL=$GPII_CLOUD_URL $UNIVERSAL_IMAGE $PRODTESTS_CMD
