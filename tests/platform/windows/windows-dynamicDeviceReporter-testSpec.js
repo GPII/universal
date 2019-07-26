@@ -122,7 +122,6 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.nvda(false)
         },
-        gradeNames: "gpii.test.integration.deviceReporterAware.windows",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "data": [
@@ -171,7 +170,6 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
     {
         name: "Testing readwritegold_application1 using Flat matchmaker",
         gpiiKey: "readwritegold_general",
-        gradeNames: "gpii.test.integration.deviceReporterAware.windows",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.readwrite(false)
         },
@@ -201,7 +199,6 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.brightness(false)
         },
-        gradeNames: "gpii.test.integration.deviceReporterAware.windows",
         settingsHandlers: {
             "gpii.windows.wmiSettingsHandler": {
                 "data": [
@@ -243,5 +240,5 @@ module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.deviceReporterAware.windows.testDefs",
     configName: "windows-dynamicDeviceReporter-config",
     configPath: "%gpii-universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
-    module, require, __dirname);
+}, ["gpii.test.integration.testCaseHolder.windows"],
+    module, require);
