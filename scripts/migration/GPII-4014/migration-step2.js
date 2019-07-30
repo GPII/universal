@@ -14,10 +14,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // 2. if the document has "timestampUpdated" field, set it to the time that the migration runs.
 
 // Usage: node scripts/migration/GPII-4014/migration-step2.js CouchDB-url
-// @param {String} CouchDB-url - The url to the CouchDB "gpii" database where docoments should be migrated.
+// @param {String} CouchDB-url - The url to the CouchDB where docoments should be migrated.
 
 // A sample command that runs this script in the universal root directory:
-// node scripts/migration/GPII-4014/migration-step2.js http://localhost:25984/gpii
+// node scripts/migration/GPII-4014/migration-step2.js http://localhost:25984
 
 "use strict";
 
@@ -39,7 +39,7 @@ require("../../../gpii/node_modules/gpii-db-operation/src/DbUtils.js");
  */
 gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
-    options.couchDbUrl = processArgv[2];
+    options.couchDbUrl = processArgv[2] + "/gpii";
 
     // Set up database specific options
     options.allDocsUrl = options.couchDbUrl + "/_all_docs?include_docs=true";

@@ -14,12 +14,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // These 4 values are different for public client credentials and NOVA privileged client credentials.
 
 // Usage: node scripts/migration/GPII-4014/migration-step1.js CouchDB-url clientCredentialId-for-NOVA ...
-// @param {String} CouchDB-url - The url to the CouchDB "gpii" database where docoments should be migrated.
+// @param {String} CouchDB-url - The url to the CouchDB where docoments should be migrated.
 // @param {Strings} clientCredentialIds-for-NOVA - The "_id" value of the NOVA client credential. There could be any
 // number of client credential parameters from here onwards.
 
 // A sample command that runs this script in the universal root directory:
-// node scripts/migration/GPII-4014/migration-step1.js http://localhost:25984/gpii "clientCredential-nova1" "clientCredential-nova2"
+// node scripts/migration/GPII-4014/migration-step1.js http://localhost:25984 "clientCredential-nova1" "clientCredential-nova2"
 
 "use strict";
 
@@ -41,11 +41,11 @@ require("../../../gpii/node_modules/gpii-db-operation/src/DbUtils.js");
  */
 gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
-    options.couchDbUrl = processArgv[2];
+    options.couchDbUrl = processArgv[2] + "/gpii";
     options.novaClientCredentials = process.argv.splice(3);
 
     // Set up database specific options
-    options.fetchClientCredentialsUrl = options.couchDbUrl + "/_design/views/_view/findDocsByType?key=%22clientCredential%22";
+    options.allDocsUrl = options.couchDbUrl + "/_all_docs?include_docs=true";
     options.clientCredentials = [];
     options.parsedCouchDbUrl = url.parse(options.couchDbUrl);
     options.postOptions = {
@@ -72,12 +72,12 @@ gpii.migration.GPII4014.initOptions = function (processArgv) {
 /**
  * Create the step that retrieves all documents from the database
  * @param {Object} options - All docs URL and whether to filter:
- * @param {Array} options.fetchClientCredentialsUrl - The url for retrieving all documents in the database.
+ * @param {Array} options.allDocsUrl - The url for retrieving all documents in the database.
  * @return {Promise} - A promise that resolves retrieved documents.
  */
 gpii.migration.GPII4014.retrieveClientCredentials = function (options) {
     var details = {
-        requestUrl: options.fetchClientCredentialsUrl,
+        requestUrl: options.allDocsUrl,
         requestErrMsg: "Error retrieving client credentials from the database: ",
         responseDataHandler: gpii.migration.GPII4014.updateDocsData,
         responseErrMsg: "Error retrieving client credentials from database: "
@@ -95,21 +95,23 @@ gpii.migration.GPII4014.retrieveClientCredentials = function (options) {
  * @return {Array} - The updated documents in the new data structure with the new schema version.
  */
 gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
-    var clientCredentials = JSON.parse(responseString);
+    var allDocs = JSON.parse(responseString);
     var updatedDocs = [];
-    options.totalNumOfDocs = clientCredentials.total_rows;
-    if (clientCredentials.rows) {
-        fluid.each(clientCredentials.rows, function (aRow) {
-            var aDoc = aRow.value;
-            console.log("=== aDoc: ", aDoc);
-            aDoc.schemaVersion = gpii.migration.GPII4014.newSchemaVersion;
-            aDoc = fluid.extend(
-                {},
-                aDoc,
-                options.novaClientCredentials.includes(aDoc._id) ? gpii.migration.GPII4014.newValuesForNovaClientCredential : gpii.migration.GPII4014.newValuesForPublicClientCredential
-            );
-            console.log("Updating the client credential ID: ", aDoc._id);
-            updatedDocs.push(aDoc);
+    options.totalNumOfDocs = allDocs.total_rows;
+    if (allDocs.rows) {
+        fluid.each(allDocs.rows, function (aRow) {
+            var aDoc = aRow.doc;
+            // To filter out the "_design/views" doc that doesn't have the "schemaVersion" field
+            if (aDoc.type === "clientCredential") {
+                aDoc.schemaVersion = gpii.migration.GPII4014.newSchemaVersion;
+                aDoc = fluid.extend(
+                    {},
+                    aDoc,
+                    options.novaClientCredentials.includes(aDoc._id) ? gpii.migration.GPII4014.newValuesForNovaClientCredential : gpii.migration.GPII4014.newValuesForPublicClientCredential
+                );
+                console.log("Updating the client credential ID: ", aDoc._id);
+                updatedDocs.push(aDoc);
+            }
         });
         options.updatedDocs = updatedDocs;
     }

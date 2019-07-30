@@ -14,12 +14,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // 3. All "timestampUpdated" have been set.
 
 // Usage: node scripts/migration/GPII-4014/verify.js CouchDB-url clientCredentialId-for-NOVA ...
-// @param {String} CouchDB-url - The url to the CouchDB "gpii" database where docoments should be verified.
+// @param {String} CouchDB-url - The url to the CouchDB where docoments should be verified.
 // @param {Strings} clientCredentialIds-for-NOVA - The "_id" value of the NOVA client credential. There could be any
 // number of client credential parameters from here onwards.
 
 // A sample command that runs this script in the universal root directory:
-// node scripts/migration/GPII-4014/verify.js http://localhost:25984/gpii "clientCredential-nova1" "clientCredential-nova2"
+// node scripts/migration/GPII-4014/verify.js http://localhost:25984 "clientCredential-nova1" "clientCredential-nova2"
 
 "use strict";
 
@@ -41,7 +41,7 @@ require("../../../gpii/node_modules/gpii-db-operation/src/DbUtils.js");
  */
 gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
-    options.couchDbUrl = processArgv[2];
+    options.couchDbUrl = processArgv[2] + "/gpii";
     options.novaClientCredentials = process.argv.splice(3);
 
     // Set up database specific options
@@ -133,7 +133,7 @@ gpii.migration.GPII4014.verifyDocsData = function (responseString, options) {
             }
         });
     }
-    console.log("The database has " + options.totalNumOfDocs + " documents. " + numOfVerified + " documents are qualified for the verification.");
+    console.log("The database has " + options.totalNumOfDocs + " documents. " + numOfVerified + " documents are qualified for verifications.");
     if (numOfErrorDocs > 0) {
         console.log("Fail: " + numOfErrorDocs + " documents have errors.");
     } else {
