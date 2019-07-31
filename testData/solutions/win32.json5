@@ -7817,6 +7817,52 @@
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseSonar": "MouseSonarConfig.value"
                 }
             },
+            "configureMouseLock": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMOUSECLICKLOCK",
+                    "setAction": "SPI_SETMOUSECLICKLOCK",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "MouseLockConfig": {
+                        "schema": {
+                            "title": "LockConfig",
+                            "description": "Enable/Disable showing mouse location when pressing the CTRL key.",
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type": "string", "required": true },
+                                "value": {
+                                    "required": true,
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "MouseLockConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseLock",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseLock": "MouseLockConfig.value"
+                }
+            },
             "configureDoubleClickWidth": {
                 "type": "gpii.windows.nativeSettingsHandler",
                 "liveness": "live",

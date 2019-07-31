@@ -204,6 +204,25 @@ gpii.tests.windows.builtIn = [
                     },
                     {
                         "settings": {
+                            "MouseLockConfig": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSECLICKLOCK",
+                            "setAction": "SPI_SETMOUSECLICKLOCK",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
                             "WindowsTrackingConfig": {
                                 "path": "pvParam",
                                 "value": 1

@@ -200,6 +200,9 @@
                         },
                         "DoubleClickHeightConfig": {
                             "value": 32
+                        },
+                        "MouseLockConfig": {
+                            "value": 1
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.language": {
