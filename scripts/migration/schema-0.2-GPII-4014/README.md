@@ -9,19 +9,19 @@ Assuming the document IDs for NOVA client credentials are "clientCredential-nova
 
  Run this script **before** deploying the new universal docker image from the universal root directory. It migrates all client credential documents. An example:
 ```
-node scripts/migration/GPII-4014/migration-step1.js http://localhost:25984/gpii "clientCredential-nova1" "clientCredential-nova2"
+node scripts/migration/schema-0.2-GPII-4014/migration-step1.js http://localhost:25984 "clientCredential-nova1" "clientCredential-nova2"
 ```
 
 2. migration-step2.js
 
  Run this script **after** deploying the new universal docker image from the universal root directory. It updates all "schemaVersion" and "timestampUpdated" values. An example:
 ```
-node scripts/migration/GPII-4014/migration-step2.js http://localhost:25984/gpii
+node scripts/migration/schema-0.2-GPII-4014/migration-step2.js http://localhost:25984
 ```
 
 3. verify.js
 
  Run this script **after** the data migration completes. It checks if all documents have been migrated. An example:
 ```
-node scripts/migration/GPII-4014/verify.js http://localhost:25984/gpii "clientCredential-nova1" "clientCredential-nova2"
+node scripts/migration/schema-0.2-GPII-4014/verify.js http://localhost:25984 "clientCredential-nova1" "clientCredential-nova2"
 ```

@@ -80,7 +80,7 @@ gpii.migration.GPII4014.verifyAllDocs = function (options) {
         requestUrl: options.allDocsUrl,
         requestErrMsg: "Error retrieving documents from the database: ",
         responseDataHandler: gpii.migration.GPII4014.verifyDocsData,
-        responseErrMsg: "Error retrieving documents from database: "
+        responseErrMsg: "Error verifying documents from database: "
     };
     return gpii.dbRequest.configureStep(details, options);
 };
@@ -89,56 +89,58 @@ gpii.migration.GPII4014.verifyAllDocs = function (options) {
  * Given all the documents from the database, update their data according to the new data model.
  * @param {String} responseString - the response from the request to get all documents.
  * @param {Object} options - Where to store the to-be-updated documents:
- * @param {Array} options.allDocs - Accumulated documents.
+ * @param {Array} options.novaClientCredentials - An array of NOVA client credential IDs.
+ * @return {Promise} - A promise whose resolved value is the verification result.
  */
 gpii.migration.GPII4014.verifyDocsData = function (responseString, options) {
     var allDocs = JSON.parse(responseString);
-    options.totalNumOfDocs = allDocs.total_rows;
+    var totalNumOfDocs = allDocs.total_rows;
     var numOfVerified = 0;
     var numOfErrorDocs = 0;
-    if (allDocs.rows) {
-        fluid.each(allDocs.rows, function (aRow) {
-            var hasError = false;
-            var aDoc = aRow.doc;
-            // To filter out the "_design/views" doc that doesn't have the "schemaVersion" field
-            if (aDoc.schemaVersion) {
-                numOfVerified++;
-                if (aDoc.schemaVersion !== gpii.migration.GPII4014.newSchemaVersion) {
-                    console.log("Error with the document _id \"" + aDoc._id + "\": schema version is ", aDoc.schemaVersion, ", not ", gpii.migration.GPII4014.newSchemaVersion);
+    var togo = fluid.promise();
+
+    fluid.each(allDocs.rows, function (aRow) {
+        var hasError = false;
+        var aDoc = aRow.doc;
+        // To filter out the "_design/views" doc that doesn't have the "schemaVersion" field
+        if (aDoc.schemaVersion) {
+            numOfVerified++;
+            if (aDoc.schemaVersion !== gpii.migration.GPII4014.newSchemaVersion) {
+                console.log("Error with the document _id \"" + aDoc._id + "\": schema version is ", aDoc.schemaVersion, ", not ", gpii.migration.GPII4014.newSchemaVersion);
+                hasError = true;
+            }
+            if (aDoc.timestampUpdated === null) {
+                console.log("Error with the document _id \"" + aDoc._id + "\": the value of timestampUpdated is empty");
+                hasError = true;
+            }
+            if (aDoc.type === "clientCredential") {
+                var docFields = {
+                    allowedIPBlocks: aDoc.allowedIPBlocks,
+                    allowedPrefsToWrite: aDoc.allowedPrefsToWrite,
+                    isCreateGpiiKeyAllowed: aDoc.isCreateGpiiKeyAllowed,
+                    isCreatePrefsSafeAllowed: aDoc.isCreatePrefsSafeAllowed
+                };
+                var diffResult = fluid.model.diff(
+                    docFields,
+                    options.novaClientCredentials.includes(aDoc._id) ? gpii.migration.GPII4014.newValuesForNovaClientCredential : gpii.migration.GPII4014.newValuesForPublicClientCredential
+                );
+                if (!diffResult) {
+                    console.log("Error with the document _id \"" + aDoc._id + "\": new field values for client credential are incorrect - ", docFields);
                     hasError = true;
                 }
-                if (aDoc.timestampUpdated === null) {
-                    console.log("Error with the document _id \"" + aDoc._id + "\": the value of timestampUpdated is empty");
-                    hasError = true;
-                }
-                if (aDoc.type === "clientCredential") {
-                    var docFields = {
-                        allowedIPBlocks: aDoc.allowedIPBlocks,
-                        allowedPrefsToWrite: aDoc.allowedPrefsToWrite,
-                        isCreateGpiiKeyAllowed: aDoc.isCreateGpiiKeyAllowed,
-                        isCreatePrefsSafeAllowed: aDoc.isCreatePrefsSafeAllowed
-                    };
-                    var diffResult = fluid.model.diff(
-                        docFields,
-                        options.novaClientCredentials.includes(aDoc._id) ? gpii.migration.GPII4014.newValuesForNovaClientCredential : gpii.migration.GPII4014.newValuesForPublicClientCredential
-                    );
-                    if (!diffResult) {
-                        console.log("Error with the document _id \"" + aDoc._id + "\": new field values for client credential are incorrect - ", docFields);
-                        hasError = true;
-                    }
-                }
             }
-            if (hasError) {
-                numOfErrorDocs++;
-            }
-        });
-    }
-    console.log("The database has " + options.totalNumOfDocs + " documents. " + numOfVerified + " documents are qualified for verifications.");
+        }
+        if (hasError) {
+            numOfErrorDocs++;
+        }
+    });
+    console.log("The database has " + totalNumOfDocs + " documents. " + numOfVerified + " documents are qualified for verifications.");
     if (numOfErrorDocs > 0) {
-        console.log("Fail: " + numOfErrorDocs + " documents have errors.");
+        togo.reject("Fail: " + numOfErrorDocs + " documents have errors.");
     } else {
-        console.log("All passed.");
+        togo.resolve("All passed.");
     }
+    return togo;
 };
 
 /**
@@ -149,8 +151,8 @@ gpii.migration.GPII4014.verify = function () {
     var verifyPromise = gpii.migration.GPII4014.verifyAllDocs(options);
 
     verifyPromise.then(
-        function (/*result*/) {
-            console.log("Done.");
+        function (result) {
+            console.log("Done - " + result);
             process.exit(0);
         },
         function (error) {

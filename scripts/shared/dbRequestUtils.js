@@ -155,8 +155,12 @@ gpii.dbRequest.createResponseHandler = function (handleEnd, options, promise, er
                 promise.reject(fullErrorMsg);
             }
             else {
-                var value = handleEnd(responseString, options);
-                promise.resolve(value);
+                var handlingResult = handleEnd(responseString, options);
+                if (fluid.isPromise(handlingResult)) {
+                    fluid.promise.follow(handlingResult, promise);
+                } else {
+                    promise.resolve(handlingResult);
+                }
             }
         });
         response.on("error", function (e) {
