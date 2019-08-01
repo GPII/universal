@@ -101,4 +101,4 @@ docker run -d -p $GPII_FLOWMANAGER_PORT:$GPII_FLOWMANAGER_PORT --name flowmanage
 wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 $GPII_FLOWMANAGER_READY_URL
 
 # Start the container to run production config tests
-docker run --name productionConfigTests --link flowmanager --link couchdb -e GPII_CLOUD_URL=$GPII_CLOUD_URL -e GPII_FLOWMANAGER_LISTEN_PORT=$GPII_FLOWMANAGER_PORT $UNIVERSAL_IMAGE $PRODTESTS_CMD
+docker run --name productionConfigTests --link flowmanager --link couchdb -e GPII_CLOUD_URL=$GPII_CLOUD_URL -e GPII_FLOWMANAGER_LISTEN_PORT=$GPII_FLOWMANAGER_PORT -e GPII_COUCHDB_URL=$DATALOADER_COUCHDB_URL $UNIVERSAL_IMAGE $PRODTESTS_CMD

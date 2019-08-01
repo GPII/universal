@@ -47,12 +47,14 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
     var testDef = fluid.extend(true, {}, testDefIn, {
         name: "Flow Manager production tests",
         config: gpii.tests.productionConfigTesting.config,
-        expect: 6,
+        expect: 4,
+/*        expect: 6, */ // Left login/lougout tests our for now.
         components: {
             healthRequest: {
                 type: "kettle.test.request.http",
                 options: {
-                    hostname: "flowmanager",
+                    host: gpii.tests.productionConfigTesting.cloudUrl.hostname,
+                    hostname: gpii.tests.productionConfigTesting.cloudUrl.hostname,
                     path: "/health",
                     method: "GET",
                     expectedStatusCode: 200,
@@ -62,7 +64,8 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
             readyRequest: {
                 type: "kettle.test.request.http",
                 options: {
-                    hostname: "flowmanager",
+                    host: gpii.tests.productionConfigTesting.cloudUrl.hostname,
+                    hostname: gpii.tests.productionConfigTesting.cloudUrl.hostname,
                     path: "/ready",
                     method: "GET",
                     expectedStatusCode: 200,
@@ -74,6 +77,8 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
     });
     return testDef;
 });
+
+fluid.log("gpii.tests.productionConfigTesting.testDefs[0].components = '" + JSON.stringify(gpii.tests.productionConfigTesting.testDefs[0].components, null, "\t") + "'");
 
 fluid.defaults("gpii.tests.productionConfigTesting.cloudStatus", {
     gradeNames: ["fluid.test.sequenceElement"],
@@ -97,10 +102,12 @@ fluid.defaults("gpii.tests.productionConfigTesting.cloudStatus", {
 fluid.defaults("gpii.tests.productionConfigTesting.cloudStatusSequence", {
     gradeNames: ["gpii.test.standardServerSequenceGrade"],
     sequenceElements: {
+/*
         loginLogout: {
             gradeNames: "gpii.tests.development.loginLogout",
             priority: "after:startServer"
         },
+*/
         cloudStatus: {
             gradeNames: "gpii.tests.productionConfigTesting.cloudStatus",
             priority: "after:loginLogout"

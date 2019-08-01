@@ -13,6 +13,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
+    url = fluid.require("url", require, "url"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
@@ -24,6 +25,16 @@ gpii.tests.productionConfigTesting.config = {
     configPath: "%gpii-universal/tests/configs"
 };
 
+gpii.tests.productionConfigTesting.cloudUrl = url.parse(
+    process.env.GPII_CLOUD_URL
+);
+fluid.log("gpii.tests.productionConfigTesting.cloudUrl = '" + JSON.stringify(gpii.tests.productionConfigTesting.cloudUrl, null, "\t") + "'");
+
+gpii.tests.productionConfigTesting.couchdbUrl = url.parse(
+    process.env.GPII_COUCHDB_URL
+);
+fluid.log("gpii.tests.productionConfigTesting.couchdbUrl = '" + JSON.stringify(gpii.tests.productionConfigTesting.couchdbUrl, null, "\t") + "'");
+
 // Access token deletion requests
 fluid.defaults("gpii.tests.cloud.oauth2.accessTokensDeleteRequests", {
     gradeNames: ["fluid.component"],
@@ -31,8 +42,9 @@ fluid.defaults("gpii.tests.cloud.oauth2.accessTokensDeleteRequests", {
         getAccessTokensRequest: {
             type: "kettle.test.request.http",
             options: {
-                port: "5984",
-                hostname: "couchdb",
+                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
+                host: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
+                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
                 path: "/gpii/_design/views/_view/findInfoByAccessToken",
                 method: "GET",
                 expectedStatusCodes: [200, 404],
@@ -42,8 +54,9 @@ fluid.defaults("gpii.tests.cloud.oauth2.accessTokensDeleteRequests", {
         bulkDeleteRequest: {
             type: "kettle.test.request.http",
             options: {
-                port: "5984",
-                hostname: "couchdb",
+                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
+                hostpero: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
+                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
                 path: "/gpii/_bulk_docs",
                 method: "POST",
                 expectedStatusCode: 201
@@ -59,7 +72,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteAccessTokensSequence", 
         { funcName: "fluid.log", args: ["Delete extra test access tokens"]},
         {
             func: "{getAccessTokensRequest}.send",
-            args: [null, { port: "5984" }]
+            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
         }, {
             event: "{getAccessTokensRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetAccessTokensForDeletion"
@@ -139,7 +152,10 @@ gpii.tests.productionConfigTesting.bulkDelete = function (bulkDeleteRequest, doc
             bulkDocsArray.docs.push(aDocToRemove);
         }
     });
-    bulkDeleteRequest.send(bulkDocsArray, { port: 5984 });
+    bulkDeleteRequest.send(
+        bulkDocsArray,
+        { port: gpii.tests.productionConfigTesting.couchdbUrl.port }
+    );
 };
 
 gpii.tests.productionConfigTesting.afterAccessTokensDeletion = function (data, request) {
