@@ -205,10 +205,7 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "MouseLockConfig": {
-                                "path": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                },
+                                "path": "pvParam",
                                 "value": 1
                             }
                         },
