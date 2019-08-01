@@ -29,6 +29,9 @@ fluid.registerNamespace("gpii.dbRequest");
  * @param {String} responseString - The raw response data.
  * @param {Object} options - Other information used by this handler; documented
  *                           by specific data handler functions.
+ * @return {String|Promise} - Returns a string describing the handling result, or
+ *                            a promise whose resolved value is a string that describes
+ *                            the handling result.
  */
 
 /**
