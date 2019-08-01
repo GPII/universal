@@ -73,7 +73,7 @@ gpii.migration.GPII4014.initOptions = function (processArgv) {
  * Create the step that retrieves all documents from the database
  * @param {Object} options - All docs URL and whether to filter:
  * @param {Array} options.allDocsUrl - The url for retrieving all documents in the database.
- * @return {Promise} - A promise that resolves retrieved documents.
+ * @return {Promise} - A promise whose resolved value is the verification result.
  */
 gpii.migration.GPII4014.verifyAllDocs = function (options) {
     var details = {

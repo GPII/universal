@@ -122,7 +122,10 @@ gpii.dbRequest.createPostRequest = function (dataToPost, responseHandler, option
  * at the correct time.
  * @param {ResponseDataHandler} handleEnd - Function that processes the response
  *                                          data when the response receives an
- *                                          "end" event.
+ *                                          "end" event. This function can return
+ *                                          either a string describing the handling
+ *                                          result or a promise whose resolved
+ *                                          value describing the handling result.
  * @param {Object} options - Data loader options passed to `handleEnd()`.
  * @param {Promise} promise - Promise to resolve/reject on a response "end" or
  *                           "error" event.
