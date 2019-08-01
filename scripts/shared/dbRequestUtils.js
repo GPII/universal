@@ -29,6 +29,9 @@ fluid.registerNamespace("gpii.dbRequest");
  * @param {String} responseString - The raw response data.
  * @param {Object} options - Other information used by this handler; documented
  *                           by specific data handler functions.
+ * @return {String|Promise} - Returns a string describing the handling result, or
+ *                            a promise whose resolved value is a string that describes
+ *                            the handling result.
  */
 
 /**
@@ -122,10 +125,7 @@ gpii.dbRequest.createPostRequest = function (dataToPost, responseHandler, option
  * at the correct time.
  * @param {ResponseDataHandler} handleEnd - Function that processes the response
  *                                          data when the response receives an
- *                                          "end" event. This function can return
- *                                          either a string describing the handling
- *                                          result or a promise whose resolved
- *                                          value describing the handling result.
+ *                                          "end" event.
  * @param {Object} options - Data loader options passed to `handleEnd()`.
  * @param {Promise} promise - Promise to resolve/reject on a response "end" or
  *                           "error" event.
