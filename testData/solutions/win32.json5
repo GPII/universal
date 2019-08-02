@@ -7832,8 +7832,8 @@
                 "supportedSettings": {
                     "MouseLockConfig": {
                         "schema": {
-                            "title": "LockConfig",
-                            "description": "Enable/Disable showing mouse location when pressing the CTRL key.",
+                            "title": "Mouse Lock",
+                            "description": "Temporarly locks down the primary button when that button is clicked.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
                                 "path": { "type": "string", "required": true },
@@ -7861,6 +7861,53 @@
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseLock": "MouseLockConfig.value"
+                }
+            },
+            "configureMouseLockTime": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMOUSECLICKLOCKTIME",
+                    "setAction": "SPI_SETMOUSECLICKLOCKTIME",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "MouseLockTimeConfig": {
+                        "schema": {
+                            "title": "Mouse Lock Time",
+                            "description": "Adjusts the time delay before the primary mouse button is locked.",
+                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "properties": {
+                                "path": { "type": "string", "required": true },
+                                "value": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 10000,
+                                    "default": 1200
+                                }
+                            }
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "MouseLockTimeConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseLockTime",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseLockTime": "MouseLockTimeConfig.value"
                 }
             },
             "configureDoubleClickWidth": {

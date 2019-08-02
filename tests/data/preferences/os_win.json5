@@ -204,6 +204,10 @@
                         "MouseLockConfig": {
                             "path": "pvParam",
                             "value": 1
+                        },
+                        "MouseLockTimeConfig": {
+                            "path": "pvParam",
+                            "value": 1500
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.language": {

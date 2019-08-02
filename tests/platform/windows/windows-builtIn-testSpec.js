@@ -220,6 +220,22 @@ gpii.tests.windows.builtIn = [
                     },
                     {
                         "settings": {
+                            "MouseLockTimeConfig": {
+                                "path": "pvParam",
+                                "value": 1500
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSECLICKLOCKTIME",
+                            "setAction": "SPI_SETMOUSECLICKLOCKTIME",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
                             "WindowsTrackingConfig": {
                                 "path": "pvParam",
                                 "value": 1
