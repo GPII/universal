@@ -1,0 +1,48 @@
+// # Michael
+//
+// This preference set changes multiple settings from Windows 10 mouse settings:
+//    - Swap mouse primary button: true
+//    - Mouse scroll wheel mode: 10 lines
+//    - Mouse scroll focus routing: RoutingHybrid
+//    - Mouse cursor shadow: false
+//    - Mouse wheel horizontal scroll: 8 chars
+//    - Mouse Windows tracking: true
+//    - Windows Tracking: true
+//    - Configures Window arrangement: 0
+//    - Double click time: 1000
+//    - Configures pointer speed: 8
+//    - Enhance pointer precision: true
+//    - Snap To: On
+//    - Hide pointer while typing: true
+//    - Mouse sonar: On
+//    - Mouse Lock: On
+//    - Mouse Lock Time: 1500
+{
+    "flat": {
+        "name": "Michael",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": {
+                        "SwapMouseButtons": 1,
+                        "ScrollLines": 10,
+                        "ScrollRouting": 1,
+                        "EnableCursorShadow": 0,
+                        "ScrollChars": 8,
+                        "WindowsTrackingEnabled": 1,
+                        "AutoWinArrangement": 0,
+                        "DoubleClickTime": 1000,
+                        "PointerSpeed": 8,
+                        "EnhancePrecision": 1,
+                        "SnapToDefaultButton": 1,
+                        "HidePointer": 0,
+                        "MouseSonar": 1,
+                        "MouseLock": 1,
+                        "MouseLockTime": 1500
+                    }
+                }
+            }
+        }
+    }
+}
