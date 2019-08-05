@@ -8,17 +8,16 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-// This script performs data migration for GPII-3711 work. It includes:
-// 1. Add 4 new fields to all "clientCredential" documents: allowedIPBlocks, allowedPrefsToWrite, isCreateGpiiKeyAllowed, isCreatePrefsSafeAllowed;
-// 2. Bump schemaVersion value from 0.1 to 0.2 for all documents that have schemaVersion field. Note that views doc doesn't have this field.
-// 3. if the document has "timestampUpdated" field, set it to the time that the migration runs.
+// This script performs the second step of the data migration for GPII-4014 deployment. It includes:
+// 1. Bump schemaVersion value from 0.1 to 0.2 for all documents that have schemaVersion field.
+// Note that "_design/views" doc doesn't have this field.
+// 2. if the document has "timestampUpdated" field, set it to the time that the migration runs.
 
-// Usage: node scripts/migration/migration-GPII-3711.js CouchDB-url clientCredentialId-for-NOVA
-// @param {String} CouchDB-url - The url to the CouchDB "gpii" database where docoments should be migrated.
-// @param {String} clientCredentialId-for-NOVA - The "_id" value of the NOVA client credential.
+// Usage: node scripts/migration/GPII-4014/migration-step2.js CouchDB-url
+// @param {String} CouchDB-url - The url to the CouchDB where docoments should be migrated.
 
 // A sample command that runs this script in the universal root directory:
-// node scripts/convertPrefs.js http://localhost:25984/gpii "clientCredential-nova"
+// node scripts/migration/GPII-4014/migration-step2.js http://localhost:25984
 
 "use strict";
 
@@ -26,36 +25,11 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     url = require("url");
 
-fluid.registerNamespace("gpii.migration.GPII3711");
+fluid.registerNamespace("gpii.migration.GPII4014");
 
-require("../shared/dbRequestUtils.js");
-require("../../gpii/node_modules/gpii-db-operation/src/DbUtils.js");
-
-var clientCredentialNova = process.argv[3];
-
-// Constants of migrated values
-var newSchemaVersion = "0.2";
-
-var newValuesForNovaClientCredential = {
-    allowedIPBlocks: null,
-    allowedPrefsToWrite: [
-        "http://registry.gpii.net/common/language",
-        "http://registry.gpii.net/common/DPIScale",
-        "http://registry.gpii.net/common/highContrast/enabled",
-        "http://registry.gpii.net/common/highContrastTheme",
-        "http://registry.gpii.net/common/selfVoicing/enabled",
-        "http://registry.gpii.net/applications/com.microsoft.office"
-    ],
-    isCreateGpiiKeyAllowed: true,
-    isCreatePrefsSafeAllowed: true
-};
-
-var newValuesForPublicClientCredential = {
-    allowedIPBlocks: null,
-    allowedPrefsToWrite: null,
-    isCreateGpiiKeyAllowed: false,
-    isCreatePrefsSafeAllowed: false
-};
+require("./shared/migratedValues.js");
+require("../../shared/dbRequestUtils.js");
+require("../../../gpii/node_modules/gpii-db-operation/src/DbUtils.js");
 
 /**
  * Create a set of options for this script.
@@ -63,9 +37,9 @@ var newValuesForPublicClientCredential = {
  * @param {Array} processArgv - The command line arguments.
  * @return {Object} - The options.
  */
-gpii.migration.GPII3711.initOptions = function (processArgv) {
+gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
-    options.couchDbUrl = processArgv[2];
+    options.couchDbUrl = processArgv[2] + "/gpii";
 
     // Set up database specific options
     options.allDocsUrl = options.couchDbUrl + "/_all_docs?include_docs=true";
@@ -98,11 +72,11 @@ gpii.migration.GPII3711.initOptions = function (processArgv) {
  * @param {Array} options.allDocsUrl - The url for retrieving all documents in the database.
  * @return {Promise} - A promise that resolves retrieved documents.
  */
-gpii.migration.GPII3711.retrieveAllDocs = function (options) {
+gpii.migration.GPII4014.retrieveAllDocs = function (options) {
     var details = {
         requestUrl: options.allDocsUrl,
         requestErrMsg: "Error retrieving documents from the database: ",
-        responseDataHandler: gpii.migration.GPII3711.updateDocsData,
+        responseDataHandler: gpii.migration.GPII4014.updateDocsData,
         responseErrMsg: "Error retrieving documents from database: "
     };
     return gpii.dbRequest.configureStep(details, options);
@@ -115,20 +89,18 @@ gpii.migration.GPII3711.retrieveAllDocs = function (options) {
  * @param {Array} options.allDocs - Accumulated documents.
  * @return {Array} - The updated documents in the new data structure with the new schema version.
  */
-gpii.migration.GPII3711.updateDocsData = function (responseString, options) {
+gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
     var allDocs = JSON.parse(responseString);
     var updatedDocs = [];
-    options.totalDocs = allDocs.total_rows;
+    options.totalNumOfDocs = allDocs.total_rows;
     if (allDocs.rows) {
         fluid.each(allDocs.rows, function (aRow) {
             var aDoc = aRow.doc;
+            // To filter out the "_design/views" doc that doesn't have the "schemaVersion" field
             if (aDoc.schemaVersion) {
-                aDoc.schemaVersion = newSchemaVersion;
-                if (aDoc.timestampUpdated || aDoc.timestampUpdated === null) {
+                aDoc.schemaVersion = gpii.migration.GPII4014.newSchemaVersion;
+                if (aDoc.timestampUpdated === null) {
                     aDoc.timestampUpdated = gpii.dbOperation.getCurrentTimestamp();
-                }
-                if (aDoc.type === "clientCredential") {
-                    aDoc = fluid.extend({}, aDoc, aDoc._id === clientCredentialNova ? newValuesForNovaClientCredential : newValuesForPublicClientCredential);
                 }
                 updatedDocs.push(aDoc);
             }
@@ -145,8 +117,8 @@ gpii.migration.GPII3711.updateDocsData = function (responseString, options) {
  * @param {Array} options.updatedDocs - The documents to update.
  * @return {Number} - the number of documents updated.
  */
-gpii.migration.GPII3711.logUpdateDB = function (responseString, options) {
-    console.log("Updated ", options.updatedDocs.length, " of ", options.totalDocs, " GPII documents.");
+gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
+    console.log("Updated ", options.updatedDocs.length, " of ", options.totalNumOfDocs, " GPII documents.");
     return options.updatedDocs.length;
 };
 
@@ -156,10 +128,10 @@ gpii.migration.GPII3711.logUpdateDB = function (responseString, options) {
  * @param {Array} options.updatedDocs - The documents to update.
  * @return {Promise} - The promise that resolves the update.
  */
-gpii.migration.GPII3711.updateDB = function (options) {
+gpii.migration.GPII4014.updateDB = function (options) {
     var details = {
         dataToPost: options.updatedDocs,
-        responseDataHandler: gpii.migration.GPII3711.logUpdateDB
+        responseDataHandler: gpii.migration.GPII4014.logUpdateDB
     };
     return gpii.dbRequest.configureStep(details, options);
 };
@@ -167,11 +139,11 @@ gpii.migration.GPII3711.updateDB = function (options) {
 /**
  * Create and execute the steps to migrate documents.
  */
-gpii.migration.GPII3711.migrate = function () {
-    var options = gpii.migration.GPII3711.initOptions(process.argv);
+gpii.migration.GPII4014.migrateStep2 = function () {
+    var options = gpii.migration.GPII4014.initOptions(process.argv);
     var sequence = [
-        gpii.migration.GPII3711.retrieveAllDocs,
-        gpii.migration.GPII3711.updateDB
+        gpii.migration.GPII4014.retrieveAllDocs,
+        gpii.migration.GPII4014.updateDB
     ];
     fluid.promise.sequence(sequence, options).then(
         function (/*result*/) {
@@ -185,4 +157,4 @@ gpii.migration.GPII3711.migrate = function () {
     );
 };
 
-gpii.migration.GPII3711.migrate();
+gpii.migration.GPII4014.migrateStep2();
