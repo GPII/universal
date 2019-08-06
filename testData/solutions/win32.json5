@@ -5103,23 +5103,9 @@
                 },
                 "capabilitiesTransformations": {
                     "SolidColorConfig": {
-                        // This transform is necessary due to issue GPII-3784.
                         "transform": {
-                            "type": "fluid.transforms.condition",
-                            "conditionPath": "SolidColor",
-                            "condition": true,
-                            "true": {
-                                "transform": {
-                                    "type": "fluid.transforms.value",
-                                    "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor"
-                                }
-                            },
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.value",
-                                    "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor"
-                                }
-                            },
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor",
                             "outputPath": "value"
                         }
                     }
