@@ -155,6 +155,9 @@ gpii.migration.GPII4014.updateDB = function (options) {
 
 /**
  * Migrate documents recursively.
+ * @param {Object} options - All docs URL and whether to filter:
+ * @param {Array} options.allDocsUrl - The url for retrieving all documents in the database.
+ * @param {Array} options.postOptions - The url for posting the bulk update.
  */
 gpii.migration.GPII4014.migrateRecursive = function (options) {
     var sequence = [
