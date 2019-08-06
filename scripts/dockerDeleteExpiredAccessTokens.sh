@@ -14,7 +14,7 @@
 
 GPII_APP_DIR=${GPII_APP_DIR:-"/app"}
 GPII_COUCHDB_URL=${GPII_COUCHDB_URL:-"http://couchdb:5984/gpii"}
-DELETE_ALL=${DELETE_ALL:-"false"}
+MAX_DOCS_IN_BATCH_PER_REQUEST=${MAX_DOCS_IN_BATCH_PER_REQUEST:-100}
 
 GPII_COUCHDB_URL_SANITIZED=$(echo "${GPII_COUCHDB_URL}" | sed -e 's,\(://\)[^/]*\(@\),\1<SENSITIVE>\2,g')
 GPII_COUCHDB_URL_ROOT=$(echo "${GPII_COUCHDB_URL}" | sed 's/[^\/]*$//g')
@@ -29,7 +29,6 @@ log() {
 
 log "Delete expired access tokens: starting..."
 log "CouchDB: ${GPII_COUCHDB_URL_SANITIZED}"
-log "Delete all flag: ${DELETE_ALL}"
 
 log "Checking that CouchDB is ready..."
 for i in `seq 1 $COUCHDB_HEALTHCHECK_RETRIES`
@@ -41,12 +40,7 @@ do
     sleep $COUCHDB_HEALTHCHECK_DELAY
 done
 
-if [[ ${DELETE_ALL} = "false" ]]
-then
-    DELETE_ALL=""
-fi
-
-node ${DELETE_ACCESS_TOKENS_JS} ${GPII_COUCHDB_URL} ${DELETE_ALL}
+node ${DELETE_ACCESS_TOKENS_JS} ${GPII_COUCHDB_URL} ${MAX_DOCS_IN_BATCH_PER_REQUEST}
 RET_CODE=$?
 if [ "${RET_CODE}" != '0' ]; then
     log "${DELETE_ACCESS_TOKENS_JS} failed with exit code ${RET_CODE}"
