@@ -140,7 +140,7 @@ gpii.accessTokens.findExpiredAccessTokens = function (responseString, options) {
  * @return {Number} - the number of access tokens deleted.
  */
 gpii.accessTokens.logDeletion = function (responseString, options) {
-    fluid.log("Deleted ", options.accessTokens.length, " of ", options.totalTokens, " access tokens.");
+    fluid.log("Deleted ", options.accessTokens.length, " of ", options.totalTokens, " expired access tokens.");
     return options.accessTokens.length;
 };
 
