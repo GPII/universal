@@ -116,7 +116,7 @@ gpii.accessTokens.findExpiredAccessTokens = function (responseString, options) {
         if (tokens.rows.length === 0) {
             togo.reject({
                 errorCode: "GPII-NO-MORE-DOCS",
-                message: "No more CouchDB documents to be deleted."
+                message: "No more expired access tokens to delete."
             });
         } else {
             fluid.each(tokens.rows, function (aRow) {
