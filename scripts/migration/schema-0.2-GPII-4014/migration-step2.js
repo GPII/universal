@@ -106,7 +106,7 @@ gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
         if (allDocs.rows.length === 0) {
             togo.reject({
                 errorCode: "GPII-NO-MORE-DOCS",
-                message: "No more CouchDB documents to be updated."
+                message: "No more CouchDB documents to migrate."
             });
         } else {
             fluid.each(allDocs.rows, function (aRow) {
@@ -171,7 +171,7 @@ gpii.migration.GPII4014.migrateRecursive = function (options) {
         },
         function (error) {
             if (error.errorCode === "GPII-NO-MORE-DOCS") {
-                console.log("Done.");
+                console.log("Done: " + error.message);
                 process.exit(0);
             } else {
                 console.log(error);

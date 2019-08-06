@@ -35,7 +35,7 @@ fluid.setLogging(fluid.logLevel.INFO);
 
 // Handle command line
 if (process.argv.length < 3) {
-    fluid.log("Usage: node deleteExpiredAccessTokens.js $COUCHDB_URL [maxDocsInBatchPerRequest]");
+    console.log("Usage: node deleteExpiredAccessTokens.js $COUCHDB_URL [maxDocsInBatchPerRequest]");
     process.exit(1);
 }
 
@@ -176,7 +176,7 @@ gpii.accessTokens.migrateRecursive = function (options) {
         },
         function (error) {
             if (error.errorCode === "GPII-NO-MORE-DOCS") {
-                console.log("Exiting: " + error.message);
+                console.log("Done: " + error.message);
                 process.exit(0);
             } else {
                 console.log(error);
