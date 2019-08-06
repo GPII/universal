@@ -14,7 +14,7 @@
 
 GPII_APP_DIR=${GPII_APP_DIR:-"/app"}
 GPII_COUCHDB_URL=${GPII_COUCHDB_URL:-"http://couchdb:5984/gpii"}
-GPII_MAX_DOC_IN_BATCH=${GPII_COUCHDB_URL:-"100"}
+MAX_DOC_IN_BATCH=${MAX_DOC_IN_BATCH:-"100"}
 
 GPII_COUCHDB_URL_SANITIZED=$(echo "${GPII_COUCHDB_URL}" | sed -e 's,\(://\)[^/]*\(@\),\1<SENSITIVE>\2,g')
 GPII_COUCHDB_URL_ROOT=$(echo "${GPII_COUCHDB_URL}" | sed 's/[^\/]*$//g')
@@ -40,7 +40,7 @@ do
     sleep $COUCHDB_HEALTHCHECK_DELAY
 done
 
-node ${DELETE_ACCESS_TOKENS_JS} ${GPII_COUCHDB_URL} ${GPII_MAX_DOC_IN_BATCH}
+node ${DELETE_ACCESS_TOKENS_JS} ${GPII_COUCHDB_URL} ${MAX_DOC_IN_BATCH}
 RET_CODE=$?
 if [ "${RET_CODE}" != '0' ]; then
     log "${DELETE_ACCESS_TOKENS_JS} failed with exit code ${RET_CODE}"
