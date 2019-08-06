@@ -159,7 +159,11 @@ gpii.accessTokens.flush = function (options) {
 };
 
 /**
- * Create and execute the steps to delete the access tokens.
+ * Create and execute the steps to delete the access tokens recursively.
+ * @param {Object} options - All docs URL and whether to filter:
+ * @param {Array} options.accessTokensUrl - The url for retrieving all of the
+ *                                          access tokens in the database.
+ * @param {Array} options.postOptions - The url for posting the bulk deletion.
  */
 gpii.accessTokens.migrateRecursive = function (options) {
     var sequence = [
