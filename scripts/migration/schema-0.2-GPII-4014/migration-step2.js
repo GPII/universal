@@ -12,13 +12,16 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // 1. Bump schemaVersion value from 0.1 to 0.2 for all documents that have schemaVersion field.
 // Note that "_design/views" doc doesn't have this field.
 // 2. if the document has "timestampUpdated" field, set it to the time that the migration runs.
+// Note that this script migrates documents in batches. Each batch will migrate a limited number of documents
+// to avoid hitting the out-of-memory issue when migrating a large number of documents.
 
-// Usage: node scripts/migration/schema-0.2-GPII-4014/migration-step2.js CouchDB-url limit
+// Usage: node scripts/migration/schema-0.2-GPII-4014/migration-step2.js CouchDB-url [maxDocsInBatchPerRequest]
 // @param {String} CouchDB-url - The url to the CouchDB where docoments should be migrated.
-// @param {Number} limit - [optional] Limit the number of documents to update. Default to 100 if not provided.
+// @param {Number} maxDocsInBatchPerRequest - [optional] Limit the number of documents to be migrated in a batch.
+// Default to 100 if not provided.
 
 // A sample command that runs this script in the universal root directory:
-// node scripts/migration/schema-0.2-GPII-4014/migration-step2.js http://localhost:25984
+// node scripts/migration/schema-0.2-GPII-4014/migration-step2.js http://localhost:25984 10
 
 "use strict";
 
@@ -32,7 +35,7 @@ require("./shared/migratedValues.js");
 require("../../shared/dbRequestUtils.js");
 require("../../../gpii/node_modules/gpii-db-operation/src/DbUtils.js");
 
-gpii.migration.GPII4014.defaultLimit = 100;
+gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest = 100;
 
 /**
  * Create a set of options for this script.
@@ -43,10 +46,10 @@ gpii.migration.GPII4014.defaultLimit = 100;
 gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
     options.couchDbUrl = processArgv[2] + "/gpii";
-    options.limit = processArgv[3] || gpii.migration.GPII4014.defaultLimit;
+    options.maxDocsInBatchPerRequest = processArgv[3] || gpii.migration.GPII4014.defaultmaxDocsInBatchPerRequest;
 
     // Set up database specific options
-    options.allDocsUrl = options.couchDbUrl + "/_design/views/_view/findDocsBySchemaVersion?key=%22" + gpii.migration.GPII4014.oldSchemaVersion + "%22&limit=" + options.limit;
+    options.allDocsUrl = options.couchDbUrl + "/_design/views/_view/findDocsBySchemaVersion?key=%22" + gpii.migration.GPII4014.oldSchemaVersion + "%22&limit=" + options.maxDocsInBatchPerRequest;
     options.allDocs = [];
     options.parsedCouchDbUrl = url.parse(options.couchDbUrl);
     options.postOptions = {

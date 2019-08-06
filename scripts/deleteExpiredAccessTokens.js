@@ -9,14 +9,18 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 // This script modifies the preferences database:
-// 1. Gather all the expired records of type "gpiiAppInstallationAuthorization" from the database,
-// 2. Delete them from the database,
-// A sample command that runs this script:
-// node deleteExpiredAccessTokens.js $COUCHDBURL [--deleteAll]
-// where COUCHDBURL is the url to database, e.g. http://localhost:5984/gpii
-// The optional --deleteAll argument removes all of the access token records
-// regardless of their time of expiration.
-//
+// 1. Gather the given number of the expired documents of type "gpiiAppInstallationAuthorization" from the database;
+// 2. Delete them from the database;
+// 3. Repeat step 1 & 2 untial all expired authorization documents are removed from the database.
+
+// Usage: node scripts/deleteExpiredAccessTokens.js CouchDB-url [maxDocsInBatchPerRequest]
+// @param {String} CouchDB-url - The url to the CouchDB where docoments should be migrated.
+// @param {Number} maxDocsInBatchPerRequest - [optional] Limit the number of documents to be deleted in a batch.
+// Default to 100 if not provided.
+
+// A sample command that runs this script in the universal root directory:
+// node scripts/deleteExpiredAccessTokens.js http://localhost:25984/gpii 10
+
 "use strict";
 
 var url = require("url"),
@@ -31,9 +35,11 @@ fluid.setLogging(fluid.logLevel.INFO);
 
 // Handle command line
 if (process.argv.length < 3) {
-    fluid.log("Usage: node deleteExpiredAccessTokens.js $COUCHDB_URL [--deleteAll]");
+    fluid.log("Usage: node deleteExpiredAccessTokens.js $COUCHDB_URL [maxDocsInBatchPerRequest]");
     process.exit(1);
 }
+
+gpii.accessTokens.defaultMaxDocsInBatchPerRequest = 100;
 
 /**
  * Create a set of options for this script.
@@ -45,12 +51,10 @@ if (process.argv.length < 3) {
 gpii.accessTokens.initOptions = function (processArgv) {
     var options = {};
     options.couchDbUrl = processArgv[2];
-
-    // Ignore time of expiration and delete all access tokens?
-    options.deleteAll = fluid.contains(processArgv, "--deleteAll");
+    options.maxDocsInBatchPerRequest = processArgv[3] || gpii.accessTokens.defaultMaxDocsInBatchPerRequest;
 
     // Set up database specific options
-    options.accessTokensUrl = options.couchDbUrl + "/_design/views/_view/findInfoByAccessToken";
+    options.accessTokensUrl = options.couchDbUrl + "/_design/views/_view/findExpiredAccessTokens?limit=" + options.maxDocsInBatchPerRequest;
     options.accessTokens = [];
     options.parsedCouchDbUrl = url.parse(options.couchDbUrl);
     options.postOptions = {
@@ -80,15 +84,13 @@ gpii.accessTokens.initOptions = function (processArgv) {
  * @param {Object} options - Access tokens URL and whether to filter:
  * @param {Array} options.accessTokensUrl - The url for retrieving all of the
  *                                          access tokens in the database.
- * @param {Boolean} options.deleteAll - Flag indicating whether to ignore the
- *                                      expiration date of the access tokens.
  * @return {Promise} - A promise that resolves retrieving the tokens.
  */
 gpii.accessTokens.retrieveExpiredAccessTokens = function (options) {
     var details = {
         requestUrl: options.accessTokensUrl,
         requestErrMsg: "Error retrieving access tokens from the database: ",
-        responseDataHandler: gpii.accessTokens.filterExpiredAccessTokens,
+        responseDataHandler: gpii.accessTokens.findExpiredAccessTokens,
         responseErrMsg: "Error retrieving access tokens from database: "
     };
     return gpii.dbRequest.configureStep(details, options);
@@ -96,38 +98,38 @@ gpii.accessTokens.retrieveExpiredAccessTokens = function (options) {
 
 /**
  * Given all the access tokens from the database, filter out only the ones that
- * have expired and store them in an array.  If the "options" argument's
- * "deleteAll" flag is set, no filtering is done and all of the access tokens are
- * returned.
+ * have expired and store them in an array.
  * @param {String} responseString - the response from the request to get all the
  *                                  acess tokens.
  * @param {Object} options - Where to store the to-be-deleted access tokens and
  *                           whether to delete regardless of time of expiration:
  * @param {Array} options.accessTokens - The access tokens sought.
- * @param {Boolean} options.deleteAll - Whether to ignore time of deletion.
  * @return {Array} - The access tokens.
  */
-gpii.accessTokens.filterExpiredAccessTokens = function (responseString, options) {
-    if (options.deleteAll) {
-        fluid.log("Deleting all access tokens...");
-    } else {
-        fluid.log("Filtering for expired access tokens...");
-    }
+gpii.accessTokens.findExpiredAccessTokens = function (responseString, options) {
+    var togo = fluid.promise();
     var tokens = JSON.parse(responseString);
     var expiredTokens = [];
     options.totalTokens = 0;
+
     if (tokens.rows) {
-        fluid.each(tokens.rows, function (aRow) {
-            var aToken = aRow.value.authorization;
-            if (options.deleteAll || Date.now() > Date.parse(aToken.timestampExpires)) {
+        if (tokens.rows.length === 0) {
+            togo.reject({
+                errorCode: "GPII-NO-MORE-DOCS",
+                message: "No more CouchDB documents to be deleted."
+            });
+        } else {
+            fluid.each(tokens.rows, function (aRow) {
+                var aToken = aRow.value;
                 aToken._deleted = true;
                 expiredTokens.push(aToken);
-            }
-            options.totalTokens++;
-        });
-        options.accessTokens = expiredTokens;
+                options.totalTokens++;
+            });
+            options.accessTokens = expiredTokens;
+            togo.resolve(expiredTokens);
+        }
     }
-    return expiredTokens;
+    return togo;
 };
 
 /**
@@ -159,21 +161,33 @@ gpii.accessTokens.flush = function (options) {
 /**
  * Create and execute the steps to delete the access tokens.
  */
-gpii.accessTokens.deleteAccessTokens = function () {
-    var options = gpii.accessTokens.initOptions(process.argv);
+gpii.accessTokens.migrateRecursive = function (options) {
     var sequence = [
         gpii.accessTokens.retrieveExpiredAccessTokens,
         gpii.accessTokens.flush
     ];
     fluid.promise.sequence(sequence, options).then(
         function (/*result*/) {
-            fluid.log("Done.");
-            process.exit(0);
+            gpii.accessTokens.migrateRecursive(options);
         },
         function (error) {
-            fluid.log(error);
-            process.exit(1);
+            if (error.errorCode === "GPII-NO-MORE-DOCS") {
+                console.log("Done.");
+                process.exit(0);
+            } else {
+                console.log(error);
+                process.exit(1);
+            }
         }
     );
 };
+
+/**
+ * Create and execute the steps to delete the access tokens.
+ */
+gpii.accessTokens.deleteAccessTokens = function () {
+    var options = gpii.accessTokens.initOptions(process.argv);
+    gpii.accessTokens.migrateRecursive(options);
+};
+
 gpii.accessTokens.deleteAccessTokens();
