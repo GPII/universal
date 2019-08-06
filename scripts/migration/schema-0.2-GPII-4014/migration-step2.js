@@ -13,11 +13,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // Note that "_design/views" doc doesn't have this field.
 // 2. if the document has "timestampUpdated" field, set it to the time that the migration runs.
 
-// Usage: node scripts/migration/GPII-4014/migration-step2.js CouchDB-url
+// Usage: node scripts/migration/schema-0.2-GPII-4014/migration-step2.js CouchDB-url limit
 // @param {String} CouchDB-url - The url to the CouchDB where docoments should be migrated.
+// @param {Number} limit - [optional] Limit the number of documents to update. Default to 100 if not provided.
 
 // A sample command that runs this script in the universal root directory:
-// node scripts/migration/GPII-4014/migration-step2.js http://localhost:25984
+// node scripts/migration/schema-0.2-GPII-4014/migration-step2.js http://localhost:25984
 
 "use strict";
 
@@ -31,6 +32,8 @@ require("./shared/migratedValues.js");
 require("../../shared/dbRequestUtils.js");
 require("../../../gpii/node_modules/gpii-db-operation/src/DbUtils.js");
 
+gpii.migration.GPII4014.defaultLimit = 100;
+
 /**
  * Create a set of options for this script.
  * The options are based on the command line parameters and a set of database constants.
@@ -40,9 +43,10 @@ require("../../../gpii/node_modules/gpii-db-operation/src/DbUtils.js");
 gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
     options.couchDbUrl = processArgv[2] + "/gpii";
+    options.limit = processArgv[3] || gpii.migration.GPII4014.defaultLimit;
 
     // Set up database specific options
-    options.allDocsUrl = options.couchDbUrl + "/_all_docs?include_docs=true";
+    options.allDocsUrl = options.couchDbUrl + "/_design/views/_view/findDocsBySchemaVersion?key=%22" + gpii.migration.GPII4014.oldSchemaVersion + "%22&limit=" + options.limit;
     options.allDocs = [];
     options.parsedCouchDbUrl = url.parse(options.couchDbUrl);
     options.postOptions = {
@@ -92,22 +96,32 @@ gpii.migration.GPII4014.retrieveAllDocs = function (options) {
 gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
     var allDocs = JSON.parse(responseString);
     var updatedDocs = [];
+    var togo = fluid.promise();
+
     options.totalNumOfDocs = allDocs.total_rows;
     if (allDocs.rows) {
-        fluid.each(allDocs.rows, function (aRow) {
-            var aDoc = aRow.doc;
-            // To filter out the "_design/views" doc that doesn't have the "schemaVersion" field
-            if (aDoc.schemaVersion) {
-                aDoc.schemaVersion = gpii.migration.GPII4014.newSchemaVersion;
-                if (aDoc.timestampUpdated === null) {
-                    aDoc.timestampUpdated = gpii.dbOperation.getCurrentTimestamp();
+        if (allDocs.rows.length === 0) {
+            togo.reject({
+                errorCode: "GPII-NO-MORE-DOCS",
+                message: "No more CouchDB documents to be updated."
+            });
+        } else {
+            fluid.each(allDocs.rows, function (aRow) {
+                var aDoc = aRow.value;
+                // To filter out the "_design/views" doc that doesn't have the "schemaVersion" field
+                if (aDoc.schemaVersion) {
+                    aDoc.schemaVersion = gpii.migration.GPII4014.newSchemaVersion;
+                    if (aDoc.timestampUpdated === null) {
+                        aDoc.timestampUpdated = gpii.dbOperation.getCurrentTimestamp();
+                    }
+                    updatedDocs.push(aDoc);
                 }
-                updatedDocs.push(aDoc);
-            }
-        });
-        options.updatedDocs = updatedDocs;
+            });
+            options.updatedDocs = updatedDocs;
+            togo.resolve(updatedDocs);
+        }
     }
-    return updatedDocs;
+    return togo;
 };
 
 /**
@@ -137,24 +151,36 @@ gpii.migration.GPII4014.updateDB = function (options) {
 };
 
 /**
- * Create and execute the steps to migrate documents.
+ * Migrate documents recursively.
  */
-gpii.migration.GPII4014.migrateStep2 = function () {
-    var options = gpii.migration.GPII4014.initOptions(process.argv);
+gpii.migration.GPII4014.migrateRecursive = function (options) {
     var sequence = [
         gpii.migration.GPII4014.retrieveAllDocs,
         gpii.migration.GPII4014.updateDB
     ];
+
     fluid.promise.sequence(sequence, options).then(
         function (/*result*/) {
-            console.log("Done.");
-            process.exit(0);
+            gpii.migration.GPII4014.migrateRecursive(options);
         },
         function (error) {
-            console.log(error);
-            process.exit(1);
+            if (error.errorCode === "GPII-NO-MORE-DOCS") {
+                console.log("Done.");
+                process.exit(0);
+            } else {
+                console.log(error);
+                process.exit(1);
+            }
         }
     );
+};
+
+/**
+ * Create and execute the steps to migrate documents.
+ */
+gpii.migration.GPII4014.migrateStep2 = function () {
+    var options = gpii.migration.GPII4014.initOptions(process.argv);
+    gpii.migration.GPII4014.migrateRecursive(options);
 };
 
 gpii.migration.GPII4014.migrateStep2();

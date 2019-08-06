@@ -1,6 +1,6 @@
 # Data Migration and Verification for GPII-4014 Deployment
 
-The scripts in this directory are used during GPII-4014 deployment to perform the data migration and the data verification afterwards. See [GPII-4014](https://issues.gpii.net/browse/GPII-4014) for deploy details.
+The scripts in this directory are used during GPII-4014 deployment to perform the data migration and the data verification afterwards. See [GPII-4014](https://issues.gpii.net/browse/schema-0.2-GPII-4014) for deploy details.
 
 ## How to use these scripts
 Assuming the document IDs for NOVA client credentials are "clientCredential-nova1" and "clientCredential-nova2":

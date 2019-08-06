@@ -19,6 +19,9 @@
             },
             "findDocsByType": {
                 "map": "function(doc) {emit(doc.type, doc); }"
+            },
+            "findDocsBySchemaVersion": {
+                "map": "function(doc) {emit(doc.schemaVersion, doc); }"
             }
         }
     }
