@@ -52,7 +52,7 @@ gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
     options.couchDbUrl = processArgv[2] + "/gpii";
     options.numOfKeysToCreate = processArgv[3];
-    options.maxDocsInBatchPerRequest = processArgv[4] || gpii.migration.GPII4014.defaultmaxDocsInBatchPerRequest;
+    options.maxDocsInBatchPerRequest = processArgv[4] || gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest;
 
     // Set up database specific options
     options.newDocs = [];

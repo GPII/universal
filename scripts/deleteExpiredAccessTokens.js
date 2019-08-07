@@ -54,7 +54,13 @@ gpii.accessTokens.initOptions = function (processArgv) {
     options.maxDocsInBatchPerRequest = processArgv[3] || gpii.accessTokens.defaultMaxDocsInBatchPerRequest;
 
     // Set up database specific options
-    options.accessTokensUrl = options.couchDbUrl + "/_design/views/_view/findExpiredAccessTokens?limit=" + options.maxDocsInBatchPerRequest;
+
+    // Note that the comparison of timestamp needs to use startkey and endkey rather than performing it in
+    // the CouchDB view because calling Date.now() in the view will set the "now" to a static timestamp when
+    // the view index is created. See:
+    // https://stackoverflow.com/questions/29854776/couchdb-filter-timestamps-in-a-reduce-function-some-sort-of-date-now
+    var currentTime = Date.now();
+    options.accessTokensUrl = options.couchDbUrl + "/_design/views/_view/findExpiredAccessTokens?ascending=true&startkey=0&endkey=" + currentTime + "&limit=" + options.maxDocsInBatchPerRequest;
     options.accessTokens = [];
     options.totalDeleted = 0;
     options.parsedCouchDbUrl = url.parse(options.couchDbUrl);
@@ -171,14 +177,14 @@ gpii.accessTokens.flush = function (options) {
  * @param {Array} options.postOptions - The url for posting the bulk deletion.
  * @param {Number} options.totalDeleted - The total number of deleted access tokens.
  */
-gpii.accessTokens.migrateRecursive = function (options) {
+gpii.accessTokens.deleteRecursive = function (options) {
     var sequence = [
         gpii.accessTokens.retrieveExpiredAccessTokens,
         gpii.accessTokens.flush
     ];
     fluid.promise.sequence(sequence, options).then(
         function (/*result*/) {
-            gpii.accessTokens.migrateRecursive(options);
+            gpii.accessTokens.deleteRecursive(options);
         },
         function (error) {
             if (error.errorCode === "GPII-NO-MORE-DOCS") {
@@ -197,7 +203,7 @@ gpii.accessTokens.migrateRecursive = function (options) {
  */
 gpii.accessTokens.deleteAccessTokens = function () {
     var options = gpii.accessTokens.initOptions(process.argv);
-    gpii.accessTokens.migrateRecursive(options);
+    gpii.accessTokens.deleteRecursive(options);
 };
 
 gpii.accessTokens.deleteAccessTokens();

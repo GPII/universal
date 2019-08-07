@@ -46,7 +46,7 @@ gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest = 100;
 gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
     options.couchDbUrl = processArgv[2] + "/gpii";
-    options.maxDocsInBatchPerRequest = processArgv[3] || gpii.migration.GPII4014.defaultmaxDocsInBatchPerRequest;
+    options.maxDocsInBatchPerRequest = processArgv[3] || gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest;
 
     // Set up database specific options
     options.allDocsUrl = options.couchDbUrl + "/_design/views/_view/findDocsBySchemaVersion?key=%22" + gpii.migration.GPII4014.oldSchemaVersion + "%22&limit=" + options.maxDocsInBatchPerRequest;
