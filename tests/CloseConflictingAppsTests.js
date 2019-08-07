@@ -125,22 +125,22 @@ gpii.tests.conflictingApps.testDefs = [
                         "settings": {
                             "ENU-Global.Rate": 400,
                             "ENU-Global.Punctuation": 3,
-                            "ENU-Global.Pitch": 16,
+                            "ENU-Global.Pitch": 11,
                             "ENU-Message.Rate": 400,
                             "ENU-Message.Punctuation": 3,
-                            "ENU-Message.Pitch": 16,
+                            "ENU-Message.Pitch": 11,
                             "ENU-Keyboard.Rate": 400,
                             "ENU-Keyboard.Punctuation": 3,
-                            "ENU-Keyboard.Pitch": 16,
+                            "ENU-Keyboard.Pitch": 11,
                             "ENU-PCCursor.Rate": 400,
                             "ENU-PCCursor.Punctuation": 3,
-                            "ENU-PCCursor.Pitch": 16,
+                            "ENU-PCCursor.Pitch": 11,
                             "ENU-JAWSCursor.Rate": 400,
                             "ENU-JAWSCursor.Punctuation": 3,
-                            "ENU-JAWSCursor.Pitch": 16,
+                            "ENU-JAWSCursor.Pitch": 11,
                             "ENU-MenuAndDialog.Rate": 400,
                             "ENU-MenuAndDialog.Punctuation": 3,
-                            "ENU-MenuAndDialog.Pitch": 16
+                            "ENU-MenuAndDialog.Pitch": 11
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
@@ -179,22 +179,22 @@ gpii.tests.conflictingApps.testDefs = [
                         "settings": {
                             "ENU-Global.Rate": 400,
                             "ENU-Global.Punctuation": 3,
-                            "ENU-Global.Pitch": 16,
+                            "ENU-Global.Pitch": 11,
                             "ENU-Message.Rate": 400,
                             "ENU-Message.Punctuation": 3,
-                            "ENU-Message.Pitch": 16,
+                            "ENU-Message.Pitch": 11,
                             "ENU-Keyboard.Rate": 400,
                             "ENU-Keyboard.Punctuation": 3,
-                            "ENU-Keyboard.Pitch": 16,
+                            "ENU-Keyboard.Pitch": 11,
                             "ENU-PCCursor.Rate": 400,
                             "ENU-PCCursor.Punctuation": 3,
-                            "ENU-PCCursor.Pitch": 16,
+                            "ENU-PCCursor.Pitch": 11,
                             "ENU-JAWSCursor.Rate": 400,
                             "ENU-JAWSCursor.Punctuation": 3,
-                            "ENU-JAWSCursor.Pitch": 16,
+                            "ENU-JAWSCursor.Pitch": 11,
                             "ENU-MenuAndDialog.Rate": 400,
                             "ENU-MenuAndDialog.Punctuation": 3,
-                            "ENU-MenuAndDialog.Pitch": 16
+                            "ENU-MenuAndDialog.Pitch": 11
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
