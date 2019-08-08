@@ -47,6 +47,7 @@ gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
     options.couchDbUrl = processArgv[2] + "/gpii";
     options.maxDocsInBatchPerRequest = processArgv[3] || gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest;
+    options.numOfUpdated = 0;
 
     // Set up database specific options
     options.allDocsUrl = options.couchDbUrl + "/_design/views/_view/findDocsBySchemaVersion?key=%22" + gpii.migration.GPII4014.oldSchemaVersion + "%22&limit=" + options.maxDocsInBatchPerRequest;
@@ -132,10 +133,12 @@ gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
  * @param {String} responseString - Response from the database (ignored)
  * @param {Object} options - Object containing the set of documents:
  * @param {Array} options.updatedDocs - The documents to update.
+ * @param {Array} options.numOfUpdated - The total number of migrated documents.
  * @return {Number} - the number of documents updated.
  */
 gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
-    console.log("Updated ", options.updatedDocs.length, " of ", options.totalNumOfDocs, " GPII documents.");
+    options.numOfUpdated = Number(options.numOfUpdated) + Number(options.updatedDocs.length);
+    console.log("Updated ", options.numOfUpdated, " of ", options.totalNumOfDocs, " GPII documents.");
     return options.updatedDocs.length;
 };
 
@@ -158,6 +161,7 @@ gpii.migration.GPII4014.updateDB = function (options) {
  * @param {Object} options - All docs URL and whether to filter:
  * @param {Array} options.allDocsUrl - The url for retrieving all documents in the database.
  * @param {Array} options.postOptions - The url for posting the bulk update.
+ * @param {Array} options.numOfUpdated - The total number of migrated documents.
  */
 gpii.migration.GPII4014.migrateRecursive = function (options) {
     var sequence = [
@@ -171,7 +175,7 @@ gpii.migration.GPII4014.migrateRecursive = function (options) {
         },
         function (error) {
             if (error.errorCode === "GPII-NO-MORE-DOCS") {
-                console.log("Done: " + error.message);
+                console.log("Done: " + error.message + " Migrated " + options.numOfUpdated + " documents in total.");
                 process.exit(0);
             } else {
                 console.log(error);
