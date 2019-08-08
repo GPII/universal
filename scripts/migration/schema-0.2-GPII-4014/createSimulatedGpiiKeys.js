@@ -180,23 +180,18 @@ gpii.migration.GPII4014.createOneBatch = function (options) {
 /**
  * Create GPII keys recursively.
  * @param {Object} options - Object containing the set of information for GPII key creation.
+ * @param {Promise} togo - The return promise provided by the caller. It will be modified by this function.
  */
-gpii.migration.GPII4014.createRecursive = function (options) {
+gpii.migration.GPII4014.createRecursive = function (options, togo) {
     var createPromise = gpii.migration.GPII4014.createOneBatch(options);
 
     createPromise.then(
         function (numOfCreatedKeys) {
             console.log("Created " + numOfCreatedKeys + " of requested " + options.numOfKeysToCreate + " GPII keys.");
-            gpii.migration.GPII4014.createRecursive(options);
+            gpii.migration.GPII4014.createRecursive(options, togo);
         },
         function (error) {
-            if (error.errorCode === "GPII-CREATED-ENOUGH") {
-                console.log("Done: " + error.numOfCreatedKeys + " have been created.");
-                process.exit(0);
-            } else {
-                console.log(error);
-                process.exit(1);
-            }
+            togo.reject(error);
         }
     );
 };
@@ -206,7 +201,20 @@ gpii.migration.GPII4014.createRecursive = function (options) {
   */
 gpii.migration.GPII4014.createKeys = function () {
     var options = gpii.migration.GPII4014.initOptions(process.argv);
-    gpii.migration.GPII4014.createRecursive(options);
+    var finalPromise = fluid.promise();
+    gpii.migration.GPII4014.createRecursive(options, finalPromise);
+
+    finalPromise.then(function () {
+        // ignore
+    }, function (error) {
+        if (error.errorCode === "GPII-CREATED-ENOUGH") {
+            console.log("Done: " + error.numOfCreatedKeys + " have been created.");
+            process.exit(0);
+        } else {
+            console.log(error);
+            process.exit(1);
+        }
+    });
 };
 
 gpii.migration.GPII4014.createKeys();

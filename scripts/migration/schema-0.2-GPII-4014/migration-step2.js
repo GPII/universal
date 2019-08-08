@@ -162,8 +162,9 @@ gpii.migration.GPII4014.updateDB = function (options) {
  * @param {Array} options.allDocsUrl - The url for retrieving all documents in the database.
  * @param {Array} options.postOptions - The url for posting the bulk update.
  * @param {Array} options.numOfUpdated - The total number of migrated documents.
+ * @param {Promise} togo - The return promise provided by the caller. It will be modified by this function.
  */
-gpii.migration.GPII4014.migrateRecursive = function (options) {
+gpii.migration.GPII4014.migrateRecursive = function (options, togo) {
     var sequence = [
         gpii.migration.GPII4014.retrieveAllDocs,
         gpii.migration.GPII4014.updateDB
@@ -171,16 +172,10 @@ gpii.migration.GPII4014.migrateRecursive = function (options) {
 
     fluid.promise.sequence(sequence, options).then(
         function (/*result*/) {
-            gpii.migration.GPII4014.migrateRecursive(options);
+            gpii.migration.GPII4014.migrateRecursive(options, togo);
         },
         function (error) {
-            if (error.errorCode === "GPII-NO-MORE-DOCS") {
-                console.log("Done: " + error.message + " Migrated " + options.numOfUpdated + " documents in total.");
-                process.exit(0);
-            } else {
-                console.log(error);
-                process.exit(1);
-            }
+            togo.reject(error);
         }
     );
 };
@@ -190,7 +185,20 @@ gpii.migration.GPII4014.migrateRecursive = function (options) {
  */
 gpii.migration.GPII4014.migrateStep2 = function () {
     var options = gpii.migration.GPII4014.initOptions(process.argv);
-    gpii.migration.GPII4014.migrateRecursive(options);
+    var finalPromise = fluid.promise();
+    gpii.migration.GPII4014.migrateRecursive(options, finalPromise);
+
+    finalPromise.then(function () {
+        // ignore
+    }, function (error) {
+        if (error.errorCode === "GPII-NO-MORE-DOCS") {
+            console.log("Done: " + error.message + " Migrated " + options.numOfUpdated + " documents in total.");
+            process.exit(0);
+        } else {
+            console.log(error);
+            process.exit(1);
+        }
+    });
 };
 
 gpii.migration.GPII4014.migrateStep2();
