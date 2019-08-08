@@ -60,7 +60,7 @@ gpii.accessTokens.initOptions = function (processArgv) {
     // the view index is created. See:
     // https://stackoverflow.com/questions/29854776/couchdb-filter-timestamps-in-a-reduce-function-some-sort-of-date-now
     var currentTime = Date.now();
-    options.accessTokensUrl = options.couchDbUrl + "/_design/views/_view/findExpiredAccessTokens?ascending=true&startkey=0&endkey=" + currentTime + "&limit=" + options.maxDocsInBatchPerRequest;
+    options.accessTokensUrl = options.couchDbUrl + "/_design/views/_view/findAccessTokenByExpires?descending=true&startkey=" + currentTime + "&endkey=0&limit=" + options.maxDocsInBatchPerRequest;
     options.accessTokens = [];
     options.totalDeleted = 0;
     options.parsedCouchDbUrl = url.parse(options.couchDbUrl);
@@ -151,7 +151,7 @@ gpii.accessTokens.findExpiredAccessTokens = function (responseString, options) {
  */
 gpii.accessTokens.logDeletion = function (responseString, options) {
     options.totalDeleted = Number(options.totalDeleted) + Number(options.accessTokens.length);
-    fluid.log("Deleted ", options.accessTokens.length, " of ", options.totalExpiredInThisBatch, " expired access tokens.");
+    fluid.log("Deleted ", options.accessTokens.length, " of ", options.totalExpiredInThisBatch, " access tokens.");
     return options.accessTokens.length;
 };
 

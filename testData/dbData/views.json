@@ -17,7 +17,7 @@
             "findAllGpiiKeys": {
                 "map": "function(doc) {if (doc.type === 'gpiiKey') { emit(doc._id, doc); }}"
             },
-            "findExpiredAccessTokens": {
+            "findAccessTokenByExpires": {
                 "map": "function(doc) {if (doc.type === 'gpiiAppInstallationAuthorization') emit(Date.parse(doc.timestampExpires), doc); }"
             },
             "findDocsBySchemaVersion": {
