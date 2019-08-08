@@ -12,14 +12,14 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // It creates new documents in batches of a given number. Note that creating number n of GPII keys will end up
 // with creating n * 2 documents in the database since each key has a corresponding prefs safe document created.
 
-// Usage: node scripts/migration/schema-0.2-GPII-4014/createGpiiKeys.js CouchDB-url numOfKeysToCreate maxDocsInBatchPerRequest
+// Usage: node scripts/migration/schema-0.2-GPII-4014/createSimulatedGpiiKeys.js CouchDB-url numOfKeysToCreate maxDocsInBatchPerRequest
 // @param {String} CouchDB-url - The url to the CouchDB where docoments should be created.
 // @param {Number} numOfKeysToCreate - The number of GPII keys to be created.
 // @param {Number} maxDocsInBatchPerRequest - [optional] Limit the number of documents to be created in a batch.
 // Default to 100 if not provided.
 
 // A sample command that runs this script in the universal root directory:
-// node scripts/migration/schema-0.2-GPII-4014/createGpiiKeys.js http://localhost:25984 100000 300
+// node scripts/migration/schema-0.2-GPII-4014/createSimulatedGpiiKeys.js http://localhost:25984 100000 300
 
 "use strict";
 
@@ -36,7 +36,7 @@ require("../../../gpii/node_modules/gpii-db-operation/src/DbUtils.js");
 
 // Handle command line
 if (process.argv.length < 4) {
-    console.log("Usage: node createGpiiKeys.js COUCHDB_URL numOfKeysToCreate [maxDocsInBatchPerRequest]");
+    console.log("Usage: node createSimulatedGpiiKeys.js COUCHDB_URL numOfKeysToCreate [maxDocsInBatchPerRequest]");
     process.exit(1);
 }
 
@@ -51,8 +51,8 @@ gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest = 100;
 gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
     options.couchDbUrl = processArgv[2] + "/gpii";
-    options.numOfKeysToCreate = processArgv[3];
-    options.maxDocsInBatchPerRequest = processArgv[4] || gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest;
+    options.numOfKeysToCreate = Number(processArgv[3]);
+    options.maxDocsInBatchPerRequest = Number(processArgv[4]) || gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest;
 
     // Set up database specific options
     options.newDocs = [];
@@ -139,17 +139,17 @@ gpii.migration.GPII4014.generateKeyData = function (numOfKeys) {
  * @param {Object} options - Object containing the set of documents:
  * @param {Array} options.numOfKeysToCreate - Total number of GPII keys to create.
  * @param {Array} options.numOfCreatedKeys - Total number of GPII keys that have been created.
- * @return {Number} - the number of documents created.
+ * @return {Promise} - The resolved value is options.numOfCreatedKeys.
  */
 gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
     var togo = fluid.promise();
-    options.numOfCreatedKeys = Number(options.numOfCreatedKeys) + Number(options.numToCreateInThisBatch);
-    if (Number(options.numOfCreatedKeys) < Number(options.numOfKeysToCreate)) {
-        togo.resolve("Created " + options.numOfCreatedKeys + " of requested " + options.numOfKeysToCreate + " GPII keys.");
+    options.numOfCreatedKeys = options.numOfCreatedKeys + options.numToCreateInThisBatch;
+    if (options.numOfCreatedKeys < options.numOfKeysToCreate) {
+        togo.resolve(options.numOfCreatedKeys);
     } else {
         togo.reject({
             errorCode: "GPII-CREATED-ENOUGH",
-            message: options.numOfCreatedKeys + " have been created."
+            numOfCreatedKeys: options.numOfCreatedKeys
         });
     }
     return togo;
@@ -160,7 +160,8 @@ gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
  * @param {Object} options - Object containing the set of documents:
  * @param {Array} options.newDocs - The documents to create.
  * @param {Array} options.numOfKeysToCreate - Total number of GPII keys to create.
- * @param {Array} options.numOfCreatedKeys - Total number of GPII keys that have been created.
+ * @param {Number} options.numOfCreatedKeys - Total number of GPII keys that have been created. This option will be
+ * written by a call to this function.
  * @return {Promise} - The promise that resolves the creation of this batch.
  */
 gpii.migration.GPII4014.createOneBatch = function (options) {
@@ -184,13 +185,13 @@ gpii.migration.GPII4014.createRecursive = function (options) {
     var createPromise = gpii.migration.GPII4014.createOneBatch(options);
 
     createPromise.then(
-        function (message) {
-            console.log(message);
+        function (numOfCreatedKeys) {
+            console.log("Created " + numOfCreatedKeys + " of requested " + options.numOfKeysToCreate + " GPII keys.");
             gpii.migration.GPII4014.createRecursive(options);
         },
         function (error) {
             if (error.errorCode === "GPII-CREATED-ENOUGH") {
-                console.log("Done: " + error.message);
+                console.log("Done: " + error.numOfCreatedKeys + " have been created.");
                 process.exit(0);
             } else {
                 console.log(error);
@@ -200,9 +201,9 @@ gpii.migration.GPII4014.createRecursive = function (options) {
     );
 };
 
-/**
- * Create and execute the steps to create GPII keys.
- */
+ /**
+  * Create and execute the steps to create GPII keys.
+  */
 gpii.migration.GPII4014.createKeys = function () {
     var options = gpii.migration.GPII4014.initOptions(process.argv);
     gpii.migration.GPII4014.createRecursive(options);

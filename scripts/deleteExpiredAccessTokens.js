@@ -51,7 +51,7 @@ gpii.accessTokens.defaultMaxDocsInBatchPerRequest = 100;
 gpii.accessTokens.initOptions = function (processArgv) {
     var options = {};
     options.couchDbUrl = processArgv[2];
-    options.maxDocsInBatchPerRequest = processArgv[3] || gpii.accessTokens.defaultMaxDocsInBatchPerRequest;
+    options.maxDocsInBatchPerRequest = Number(processArgv[3]) || gpii.accessTokens.defaultMaxDocsInBatchPerRequest;
 
     // Set up database specific options
 
@@ -150,7 +150,7 @@ gpii.accessTokens.findExpiredAccessTokens = function (responseString, options) {
  * @return {Number} - the number of access tokens deleted.
  */
 gpii.accessTokens.logDeletion = function (responseString, options) {
-    options.totalDeleted = Number(options.totalDeleted) + Number(options.accessTokens.length);
+    options.totalDeleted = options.totalDeleted + options.accessTokens.length;
     fluid.log("Deleted ", options.accessTokens.length, " of ", options.totalExpiredInThisBatch, " access tokens.");
     return options.accessTokens.length;
 };

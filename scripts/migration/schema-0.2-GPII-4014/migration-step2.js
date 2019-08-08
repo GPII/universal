@@ -46,7 +46,7 @@ gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest = 100;
 gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
     options.couchDbUrl = processArgv[2] + "/gpii";
-    options.maxDocsInBatchPerRequest = processArgv[3] || gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest;
+    options.maxDocsInBatchPerRequest = Number(processArgv[3]) || gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest;
     options.numOfUpdated = 0;
 
     // Set up database specific options
@@ -137,7 +137,7 @@ gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
  * @return {Number} - the number of documents updated.
  */
 gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
-    options.numOfUpdated = Number(options.numOfUpdated) + Number(options.updatedDocs.length);
+    options.numOfUpdated = options.numOfUpdated + options.updatedDocs.length;
     console.log("Updated ", options.numOfUpdated, " of ", options.totalNumOfDocs, " GPII documents.");
     return options.updatedDocs.length;
 };

@@ -13,7 +13,7 @@ The scripts in this directory are used during GPII-4014 deployment to perform th
  script will generate 100 new GPII keys and their corresponding prefs safes each time to send to CouchDB /_bulk_docs
  to create. This is to avoid the potential memory overflow at creating a large number of GPII keys in one shot. An example to create 50K GPII keys in batches of 50:
  ```
- node scripts/migration/schema-0.2-GPII-4014/createGpiiKeys.js http://localhost:25984 50000 50
+ node scripts/migration/schema-0.2-GPII-4014/createSimulatedGpiiKeys.js http://localhost:25984 50000 50
  ```
 
 ### Scripts for deployment
@@ -29,14 +29,15 @@ node scripts/migration/schema-0.2-GPII-4014/migration-step1.js http://localhost:
 
 2. migration-step2.js
 
- Run this script **after** deploying the new universal docker image from the universal root directory. It updates all "schemaVersion" and "timestampUpdated" values. An example:
+ Run this script **after** deploying the new universal docker image from the universal root directory. It updates all "schemaVersion" and "timestampUpdated" values in batches. An example of migrating in batches of 5000 documents in one batch:
 ```
-node scripts/migration/schema-0.2-GPII-4014/migration-step2.js http://localhost:25984
+node scripts/migration/schema-0.2-GPII-4014/migration-step2.js http://localhost:25984 5000
 ```
 
 3. verify.js
 
- Run this script **after** the data migration completes. It checks if all documents have been migrated. An example:
+ Run this script **after** the data migration completes. It checks if all documents have been migrated. An example of verifying
+ in batches of 5000 documents in one batch:
 ```
-node scripts/migration/schema-0.2-GPII-4014/verify.js http://localhost:25984 "clientCredential-nova1" "clientCredential-nova2"
+node scripts/migration/schema-0.2-GPII-4014/verify.js http://localhost:25984 5000 "clientCredential-nova1" "clientCredential-nova2"
 ```

@@ -20,7 +20,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // number of client credential parameters from here onwards.
 
 // A sample command that runs this script in the universal root directory:
-// node scripts/migration/schema-0.2-GPII-4014/verify.js http://localhost:25984 100 "clientCredential-nova1" "clientCredential-nova2"
+// node scripts/migration/schema-0.2-GPII-4014/verify.js 500 http://localhost:25984 100 "clientCredential-nova1" "clientCredential-nova2"
 
 "use strict";
 
@@ -43,7 +43,7 @@ require("../../../gpii/node_modules/gpii-db-operation/src/DbUtils.js");
 gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
     options.couchDbUrl = processArgv[2] + "/gpii";
-    options.maxDocsInBatchPerRequest = processArgv[3];
+    options.maxDocsInBatchPerRequest = Number(processArgv[3]);
     options.novaClientCredentials = process.argv.splice(4);
     options.numOfVerified = 0;
     options.numOfErrorDocs = 0;
@@ -142,7 +142,7 @@ gpii.migration.GPII4014.verifyDocsData = function (responseString, options) {
                 options.numOfErrorDocs++;
             }
         });
-        options.numOfVerified = Number(options.numOfVerified) + Number(allDocs.rows.length);
+        options.numOfVerified = options.numOfVerified + allDocs.rows.length;
         console.log("Verified " + options.numOfVerified + " of " + options.totalNumOfDocs + " documents.");
         togo.resolve();
     }
