@@ -33,8 +33,7 @@
                         "ApplicationSettings.ScreenMasking.UnderlineTypingLineHeight.$t": 15,
                         // Screenshot Reader
                         "ApplicationSettings.Screenshot.CaptureBy.$t": "Drawing Freehand",
-                        // TODO: Enable once this is fixed: https://issues.gpii.net/browse/GPII-4035
-                        // "ApplicationSettings.Screenshot.ScreenshotTo.$t": "Window",
+                        "ApplicationSettings.Screenshot.ScreenshotTo.$t": "Window",
                         "ApplicationSettings.Screenshot.AppendToMsWordDoc.$t": false
                     }
                 }

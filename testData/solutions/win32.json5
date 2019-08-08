@@ -3440,16 +3440,10 @@
                     "http://registry\\.gpii\\.net/common/speechRate": "ENU-Global\\.Rate",
                     "http://registry\\.gpii\\.net/common/pitch": {
                         "transform": {
-                            "type": "fluid.transforms.round",
-                            "scale": 1,
-                            "input": {
-                                "transform": {
-                                    "type": "fluid.transforms.linearScale",
-                                    "inputPath": "ENU-Global\\.Pitch",
-                                    "factor": 0.010101,
-                                    "offset": -0.010101
-                                }
-                            }
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "ENU-Global\\.Pitch",
+                            "factor": 0.010101,
+                            "offset": -0.010101
                         }
                     },
                     "http://registry\\.gpii\\.net/common/volumeTTS": {
@@ -15434,7 +15428,7 @@
                     "OverrideTabletMode": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.OverrideTabletMode",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.tabletMode",
                             "true": 1,
                             "false": 0
                         }
@@ -15442,7 +15436,7 @@
                     "OverridePointerMode": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.OverrideTabletMode",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.tabletMode",
                             "true": 2,
                             "false": 1
                         }

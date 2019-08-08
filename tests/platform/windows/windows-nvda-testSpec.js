@@ -151,7 +151,7 @@ gpii.tests.windows.nvda.testDef = [
                         "settings": {
                             "speech.espeak.rate": 17,
                             "speech.espeak.volume": 75,
-                            "speech.espeak.pitch": 10,
+                            "speech.espeak.pitch": 15,
                             "speech.espeak.rateBoost": true,
                             "speech.symbolLevel": 300,
                             "speech.espeak.voice": "en\\en-wi",

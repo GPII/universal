@@ -58,7 +58,7 @@ gpii.tests.linux.orca.testDefs = [
                                 "name": "en-westindies"
                             },
                             "verbalizePunctuationStyle": 0,
-                            "voices.default.average-pitch": 1.0
+                            "voices.default.average-pitch": 1.5
                         },
                         "options": {
                             "user": "screenreader_common"
@@ -111,7 +111,7 @@ gpii.tests.linux.orca.testDefs = [
                                 "name": "en-westindies"
                             },
                             "verbalizePunctuationStyle": 0,
-                            "voices.default.average-pitch": 1.0
+                            "voices.default.average-pitch": 1.5
                         },
                         "options": {
                             "user": "screenreader_common"
@@ -164,7 +164,7 @@ gpii.tests.linux.orca.testDefs = [
                                 "name": "en-westindies"
                             },
                             "verbalizePunctuationStyle": 0,
-                            "voices.default.average-pitch": 1.0
+                            "voices.default.average-pitch": 1.5
                         },
                         "options": {
                             "user": "screenreader_orca"

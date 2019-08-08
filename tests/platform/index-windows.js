@@ -26,8 +26,7 @@ module.exports = [
     "windows/windows-builtIn-testSpec.js",
     "windows/windows-jaws-testSpec.js",
     "windows/windows-nvda-testSpec.js",
-     //TODO: Restore this once it's not a copy/paste of JAWS.
-    //"windows/windows-magic-testSpec.js",
+    "windows/windows-magic-testSpec.js",
     "windows/windows-uioPlus-testSpec.js",
     "windows/windows-readWrite12-testSpec.js",
     "windows/windows-dynamicDeviceReporter-testSpec.js",
