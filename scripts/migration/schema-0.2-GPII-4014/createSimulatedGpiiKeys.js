@@ -156,7 +156,7 @@ gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
  * @param {Number} options.numOfKeysToCreate - Total number of GPII keys to create.
  * @param {Number} options.numOfCreatedKeys - Total number of GPII keys that have been created. This option will be
  * written by a call to this function.
- * @return {Promise} - The promise that resolves the creation status.
+ * @return {Promise} - A promise whose resolved value is the number of created documents, or 0 when all has been created.
  */
 gpii.migration.GPII4014.createOneBatch = function (options) {
     var numOfNeeded = options.numOfKeysToCreate - options.numOfCreatedKeys;

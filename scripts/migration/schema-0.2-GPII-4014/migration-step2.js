@@ -77,7 +77,7 @@ gpii.migration.GPII4014.initOptions = function (processArgv) {
 /**
  * Create the step that retrieves all documents from the database
  * @param {Object} options - All docs URL and whether to filter:
- * @param {Array} options.allDocsUrl - The url for retrieving all documents in the database.
+ * @param {String} options.allDocsUrl - The url for retrieving all documents in the database.
  * @return {Promise} - A promise that resolves retrieved documents.
  */
 gpii.migration.GPII4014.retrieveAllDocs = function (options) {
@@ -96,7 +96,7 @@ gpii.migration.GPII4014.retrieveAllDocs = function (options) {
  * @param {Object} options - Where to store the to-be-updated documents:
  * @param {Array} options.allDocs - Accumulated documents.
  * @return {Promise} - The resolved value contains an array of documents to be migrated, or 0
- * when no more document to be migrated.
+ * when no more document to migrate.
  */
 gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
     var allDocs = JSON.parse(responseString);
@@ -131,7 +131,7 @@ gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
  * @param {String} responseString - Response from the database (ignored)
  * @param {Object} options - Object containing the set of documents:
  * @param {Array} options.updatedDocs - The documents to update.
- * @param {Array} options.numOfUpdated - The total number of migrated documents.
+ * @param {Number} options.numOfUpdated - The total number of migrated documents.
  * @return {Number} - the number of documents updated.
  */
 gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
@@ -144,7 +144,8 @@ gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
  * Configure update, in batch, of the documents.
  * @param {Object} options - The documents to be updated:
  * @param {Array} options.updatedDocs - The documents to update.
- * @return {Promise} - The promise that resolves the update.
+ * @return {Promise} - A promise whose resolved value is the number of migrated documents,
+ * or 0 when all has been migrated.
  */
 gpii.migration.GPII4014.updateDB = function (options) {
     var togo = fluid.promise();

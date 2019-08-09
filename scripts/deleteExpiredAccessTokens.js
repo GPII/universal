@@ -89,7 +89,7 @@ gpii.accessTokens.initOptions = function (processArgv) {
  * Create the step that retrieves access tokens from the database:  either
  * only the expired tokens, or all of them.
  * @param {Object} options - Access tokens URL and whether to filter:
- * @param {Array} options.accessTokensUrl - The url for retrieving all of the
+ * @param {String} options.accessTokensUrl - The url for retrieving all of the
  *                                          access tokens in the database.
  * @return {Promise} - A promise that resolves retrieving the tokens.
  */
@@ -111,7 +111,7 @@ gpii.accessTokens.retrieveExpiredAccessTokens = function (options) {
  * @param {Object} options - Where to store the to-be-deleted access tokens and
  *                           whether to delete regardless of time of expiration:
  * @param {Array} options.accessTokens - The access tokens sought.
- * @param {Array} options.totalExpiredInThisBatch - The total number of expired access tokens in this batch.
+ * @param {Number} options.totalExpiredInThisBatch - The total number of expired access tokens in this batch.
  * @return {Promise} - The resolved value contains an array of expired access tokens to be deleted in this batch,
  * or 0 when no more tokens to delete.
  */
@@ -143,7 +143,7 @@ gpii.accessTokens.findExpiredAccessTokens = function (responseString, options) {
  * @param {String} responseString - Response from the database (ignored)
  * @param {Object} options - Object containing the set of access tokens:
  * @param {Array} options.accessTokens - The tokens to delete.
- * @param {Array} options.totalExpiredInThisBatch - The total number of expired access tokens in this batch.
+ * @param {Number} options.totalExpiredInThisBatch - The total number of expired access tokens in this batch.
  * @return {Number} - the number of access tokens deleted.
  */
 gpii.accessTokens.logDeletion = function (responseString, options) {
@@ -156,7 +156,8 @@ gpii.accessTokens.logDeletion = function (responseString, options) {
  * Configure deletion, in batch, of the access tokens.
  * @param {Object} options - The records to be deleted:
  * @param {Array} options.accessTokens - The access token records to delete.
- * @return {Promise} - The promise that resolves the deletion.
+ * @return {Promise} - A promise whose resolved value is the number of deleted access tokens,
+ * or 0 when all has been deleted.
  */
 gpii.accessTokens.flush = function (options) {
     var togo = fluid.promise();

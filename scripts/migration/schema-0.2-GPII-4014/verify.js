@@ -76,7 +76,7 @@ gpii.migration.GPII4014.initOptions = function (processArgv) {
 /**
  * Create the step that retrieves all documents from the database
  * @param {Object} options - All docs URL and whether to filter:
- * @param {Array} options.allDocsUrl - The url for retrieving all documents in the database.
+ * @param {String} options.allDocsUrl - The url for retrieving all documents in the database.
  * @return {Promise} - A promise whose resolved value is the verification result.
  */
 gpii.migration.GPII4014.verifyDocsInBatch = function (options) {
@@ -94,9 +94,9 @@ gpii.migration.GPII4014.verifyDocsInBatch = function (options) {
  * @param {String} responseString - the response from the request to get all documents.
  * @param {Object} options - Where to store the to-be-updated documents:
  * @param {Array} options.novaClientCredentials - An array of NOVA client credential IDs.
- * @param {Array} options.numOfVerified - The number of verified documents.
- * @param {Array} options.numOfErrorDocs - The number of verified documents that have verification errors.
- * @return {Promise} - A promise whose resolved value is the verification result, or 0 when all has been verified.
+ * @param {Number} options.numOfVerified - The number of verified documents.
+ * @param {Number} options.numOfErrorDocs - The number of verified documents that have verification errors.
+ * @return {Promise} - A promise whose resolved value is the number of verified documents, or 0 when all has been verified.
  */
 gpii.migration.GPII4014.verifyDocsData = function (responseString, options) {
     var allDocs = JSON.parse(responseString);
