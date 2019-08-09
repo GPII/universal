@@ -112,8 +112,8 @@ gpii.accessTokens.retrieveExpiredAccessTokens = function (options) {
  *                           whether to delete regardless of time of expiration:
  * @param {Array} options.accessTokens - The access tokens sought.
  * @param {Array} options.totalExpiredInThisBatch - The total number of expired access tokens in this batch.
- * @return {Promise} - The resolved value is an array of expired access tokens to be deleted in this batch.
- * When there's no more tokens to delete, reject with an error code and a message.
+ * @return {Promise} - The resolved value contains an array of expired access tokens to be deleted in this batch,
+ * or 0 when no more tokens to delete.
  */
 gpii.accessTokens.findExpiredAccessTokens = function (responseString, options) {
     var togo = fluid.promise();
@@ -121,23 +121,20 @@ gpii.accessTokens.findExpiredAccessTokens = function (responseString, options) {
     var expiredTokens = [];
     options.totalExpiredInThisBatch = tokens.total_rows;
 
-    if (tokens.rows) {
-        if (tokens.rows.length === 0) {
-            togo.reject({
-                errorCode: "GPII-NO-MORE-DOCS",
-                message: "No more expired access tokens to delete."
-            });
-        } else {
-            fluid.each(tokens.rows, function (aRow) {
-                var aToken = aRow.value;
-                aToken._deleted = true;
-                expiredTokens.push(aToken);
-                options.totalTokens++;
-            });
-            options.accessTokens = expiredTokens;
-            togo.resolve(expiredTokens);
-        }
+    if (tokens.rows.length === 0) {
+        // No more expired access tokens
+        options.accessTokens = 0;
+    } else {
+        fluid.each(tokens.rows, function (aRow) {
+            var aToken = aRow.value;
+            aToken._deleted = true;
+            expiredTokens.push(aToken);
+            options.totalTokens++;
+        });
+        options.accessTokens = expiredTokens;
     }
+    togo.resolve(options.accessTokens);
+
     return togo;
 };
 
@@ -162,54 +159,38 @@ gpii.accessTokens.logDeletion = function (responseString, options) {
  * @return {Promise} - The promise that resolves the deletion.
  */
 gpii.accessTokens.flush = function (options) {
-    var details = {
-        dataToPost: options.accessTokens,
-        responseDataHandler: gpii.accessTokens.logDeletion
-    };
-    return gpii.dbRequest.configureStep(details, options);
-};
-
-/**
- * Create and execute the steps to delete the access tokens recursively.
- * @param {Object} options - All docs URL and whether to filter:
- * @param {Array} options.accessTokensUrl - The url for retrieving all of the
- *                                          access tokens in the database.
- * @param {Array} options.postOptions - The url for posting the bulk deletion.
- * @param {Number} options.totalDeleted - The total number of deleted access tokens.
- * @param {Promise} togo - The return promise provided by the caller. It will be modified by this function.
- */
-gpii.accessTokens.deleteRecursive = function (options, togo) {
-    var sequence = [
-        gpii.accessTokens.retrieveExpiredAccessTokens,
-        gpii.accessTokens.flush
-    ];
-    fluid.promise.sequence(sequence, options).then(
-        function (/*result*/) {
-            gpii.accessTokens.deleteRecursive(options, togo);
-        },
-        function (error) {
-            togo.reject(error);
-        }
-    );
+    var togo = fluid.promise();
+    if (options.accessTokens === 0) {
+        togo.resolve(0);
+    } else {
+        var details = {
+            dataToPost: options.accessTokens,
+            responseDataHandler: gpii.accessTokens.logDeletion
+        };
+        togo = gpii.dbRequest.configureStep(details, options);
+    }
+    return togo;
 };
 
 /**
  * Create and execute the steps to delete the access tokens.
  */
 gpii.accessTokens.deleteAccessTokens = function () {
-    var finalPromise = fluid.promise();
     var options = gpii.accessTokens.initOptions(process.argv);
-    gpii.accessTokens.deleteRecursive(options, finalPromise);
+    var actionFunc = function (options) {
+        return fluid.promise.sequence([
+            gpii.accessTokens.retrieveExpiredAccessTokens,
+            gpii.accessTokens.flush
+        ], options);
+    };
+
+    var finalPromise = gpii.dbRequest.processRecursive(options, actionFunc);
     finalPromise.then(function () {
-        // ignore
+        console.log("Done: Deleted " + options.totalDeleted + " expired access tokens in total.");
+        process.exit(0);
     }, function (error) {
-        if (error.errorCode === "GPII-NO-MORE-DOCS") {
-            console.log("Done: " + error.message + " Deleted " + options.totalDeleted + " expired access tokens in total.");
-            process.exit(0);
-        } else {
-            console.log(error);
-            process.exit(1);
-        }
+        console.log(error);
+        process.exit(1);
     });
 };
 

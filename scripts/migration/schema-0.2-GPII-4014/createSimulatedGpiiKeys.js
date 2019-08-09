@@ -139,19 +139,13 @@ gpii.migration.GPII4014.generateKeyData = function (numOfKeys) {
  * @param {Object} options - Object containing the set of documents:
  * @param {Array} options.numOfKeysToCreate - Total number of GPII keys to create.
  * @param {Array} options.numOfCreatedKeys - Total number of GPII keys that have been created.
- * @return {Promise} - The resolved value is options.numOfCreatedKeys.
+ * @return {Promise} - The resolved value is options.numOfCreatedKeys, or 0 when all has been created.
  */
 gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
     var togo = fluid.promise();
     options.numOfCreatedKeys = options.numOfCreatedKeys + options.numToCreateInThisBatch;
-    if (options.numOfCreatedKeys < options.numOfKeysToCreate) {
-        togo.resolve(options.numOfCreatedKeys);
-    } else {
-        togo.reject({
-            errorCode: "GPII-CREATED-ENOUGH",
-            numOfCreatedKeys: options.numOfCreatedKeys
-        });
-    }
+    console.log("Created " + options.numOfCreatedKeys + " of requested " + options.numOfKeysToCreate + " GPII keys.");
+    togo.resolve(options.numOfCreatedKeys < options.numOfKeysToCreate ? options.numOfCreatedKeys : 0);
     return togo;
 };
 
@@ -162,7 +156,7 @@ gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
  * @param {Array} options.numOfKeysToCreate - Total number of GPII keys to create.
  * @param {Number} options.numOfCreatedKeys - Total number of GPII keys that have been created. This option will be
  * written by a call to this function.
- * @return {Promise} - The promise that resolves the creation of this batch.
+ * @return {Promise} - The promise that resolves the creation status.
  */
 gpii.migration.GPII4014.createOneBatch = function (options) {
     var numOfNeeded = options.numOfKeysToCreate - options.numOfCreatedKeys;
@@ -178,43 +172,15 @@ gpii.migration.GPII4014.createOneBatch = function (options) {
 };
 
 /**
- * Create GPII keys recursively.
- * @param {Object} options - Object containing the set of information for GPII key creation.
- * @param {Promise} togo - The return promise provided by the caller. It will be modified by this function.
+ * Create and execute the steps to create GPII keys.
  */
-gpii.migration.GPII4014.createRecursive = function (options, togo) {
-    var createPromise = gpii.migration.GPII4014.createOneBatch(options);
-
-    createPromise.then(
-        function (numOfCreatedKeys) {
-            console.log("Created " + numOfCreatedKeys + " of requested " + options.numOfKeysToCreate + " GPII keys.");
-            gpii.migration.GPII4014.createRecursive(options, togo);
-        },
-        function (error) {
-            togo.reject(error);
-        }
-    );
-};
-
- /**
-  * Create and execute the steps to create GPII keys.
-  */
 gpii.migration.GPII4014.createKeys = function () {
     var options = gpii.migration.GPII4014.initOptions(process.argv);
-    var finalPromise = fluid.promise();
-    gpii.migration.GPII4014.createRecursive(options, finalPromise);
+    var finalPromise = gpii.dbRequest.processRecursive(options, gpii.migration.GPII4014.createOneBatch);
 
     finalPromise.then(function () {
-        // ignore
-    }, function (error) {
-        if (error.errorCode === "GPII-CREATED-ENOUGH") {
-            console.log("Done: " + error.numOfCreatedKeys + " have been created.");
-            process.exit(0);
-        } else {
-            console.log(error);
-            process.exit(1);
-        }
-    });
+        console.log("Done: " + options.numOfCreatedKeys + " GPII keys have been created.");
+    }, console.log);
 };
 
 gpii.migration.GPII4014.createKeys();

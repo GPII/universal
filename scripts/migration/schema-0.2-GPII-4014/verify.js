@@ -49,6 +49,7 @@ gpii.migration.GPII4014.initOptions = function (processArgv) {
     options.numOfErrorDocs = 0;
 
     // Set up database specific options
+    options.allDocsUrl = options.couchDbUrl + "/_all_docs?include_docs=true&descending=true&limit=" + options.maxDocsInBatchPerRequest;
     options.allDocs = [];
     options.parsedCouchDbUrl = url.parse(options.couchDbUrl);
     options.postOptions = {
@@ -95,7 +96,7 @@ gpii.migration.GPII4014.verifyDocsInBatch = function (options) {
  * @param {Array} options.novaClientCredentials - An array of NOVA client credential IDs.
  * @param {Array} options.numOfVerified - The number of verified documents.
  * @param {Array} options.numOfErrorDocs - The number of verified documents that have verification errors.
- * @return {Promise} - A promise whose resolved value is the verification result.
+ * @return {Promise} - A promise whose resolved value is the verification result, or 0 when all has been verified.
  */
 gpii.migration.GPII4014.verifyDocsData = function (responseString, options) {
     var allDocs = JSON.parse(responseString);
@@ -103,10 +104,7 @@ gpii.migration.GPII4014.verifyDocsData = function (responseString, options) {
     var togo = fluid.promise();
 
     if (allDocs.rows.length === 0) {
-        togo.reject({
-            errorCode: "GPII-NO-MORE-DOCS",
-            message: "No more documents to verify."
-        });
+        togo.resolve(0);
     } else {
         fluid.each(allDocs.rows, function (aRow) {
             var hasError = false;
@@ -144,42 +142,10 @@ gpii.migration.GPII4014.verifyDocsData = function (responseString, options) {
         });
         options.numOfVerified = options.numOfVerified + allDocs.rows.length;
         console.log("Verified " + options.numOfVerified + " of " + options.totalNumOfDocs + " documents.");
-        togo.resolve();
+        options.allDocsUrl = options.couchDbUrl + "/_all_docs?include_docs=true&descending=true&skip=" + options.numOfVerified + "&limit=" + options.maxDocsInBatchPerRequest;
+        togo.resolve(allDocs.rows.length);
     }
     return togo;
-};
-
-/**
- * Verify recursively in small batches.
- * @param {Object} options - Where to store information for verification as well as its progress:
- * @param {Array} options.allDocsUrl - The url to query the database in small batches.
- * @param {Array} options.novaClientCredentials - An array of NOVA client credential IDs.
- * @param {Array} options.numOfVerified - The number of verified documents.
- * @param {Array} options.numOfErrorDocs - The number of verified documents that have verification errors.
- */
-gpii.migration.GPII4014.verifyRecursive = function (options) {
-    options.allDocsUrl = options.couchDbUrl + "/_all_docs?include_docs=true&descending=true&skip=" + options.numOfVerified + "&limit=" + options.maxDocsInBatchPerRequest;
-    var verifyPromise = gpii.migration.GPII4014.verifyDocsInBatch(options);
-
-    verifyPromise.then(
-        function () {
-            gpii.migration.GPII4014.verifyRecursive(options);
-        },
-        function (error) {
-            if (error.errorCode === "GPII-NO-MORE-DOCS") {
-                if (options.numOfErrorDocs > 0) {
-                    console.log("Fail: " + options.numOfErrorDocs + " documents have errors.");
-                } else {
-                    console.log("All passed.");
-                }
-                console.log("Done: " + error.message + " Verified " + options.totalNumOfDocs + " documents in total.");
-                process.exit(0);
-            } else {
-                console.log(error);
-                process.exit(1);
-            }
-        }
-    );
 };
 
 /**
@@ -187,7 +153,16 @@ gpii.migration.GPII4014.verifyRecursive = function (options) {
  */
 gpii.migration.GPII4014.verify = function () {
     var options = gpii.migration.GPII4014.initOptions(process.argv);
-    gpii.migration.GPII4014.verifyRecursive(options);
+    var finalPromise = gpii.dbRequest.processRecursive(options, gpii.migration.GPII4014.verifyDocsInBatch);
+
+    finalPromise.then(function () {
+        if (options.numOfErrorDocs > 0) {
+            console.log("Fail: " + options.numOfErrorDocs + " documents have errors.");
+        } else {
+            console.log("All passed.");
+        }
+        console.log("Done: Verified " + options.totalNumOfDocs + " documents in total.");
+    }, console.log);
 };
 
 gpii.migration.GPII4014.verify();

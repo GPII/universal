@@ -95,7 +95,8 @@ gpii.migration.GPII4014.retrieveAllDocs = function (options) {
  * @param {String} responseString - the response from the request to get all documents.
  * @param {Object} options - Where to store the to-be-updated documents:
  * @param {Array} options.allDocs - Accumulated documents.
- * @return {Array} - The updated documents in the new data structure with the new schema version.
+ * @return {Promise} - The resolved value contains an array of documents to be migrated, or 0
+ * when no more document to be migrated.
  */
 gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
     var allDocs = JSON.parse(responseString);
@@ -103,28 +104,25 @@ gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
     var togo = fluid.promise();
 
     options.totalNumOfDocs = allDocs.total_rows;
-    if (allDocs.rows) {
-        if (allDocs.rows.length === 0) {
-            togo.reject({
-                errorCode: "GPII-NO-MORE-DOCS",
-                message: "No more CouchDB documents to migrate."
-            });
-        } else {
-            fluid.each(allDocs.rows, function (aRow) {
-                var aDoc = aRow.value;
-                // To filter out the "_design/views" doc that doesn't have the "schemaVersion" field
-                if (aDoc.schemaVersion) {
-                    aDoc.schemaVersion = gpii.migration.GPII4014.newSchemaVersion;
-                    if (aDoc.timestampUpdated === null) {
-                        aDoc.timestampUpdated = gpii.dbOperation.getCurrentTimestamp();
-                    }
-                    updatedDocs.push(aDoc);
+
+    if (allDocs.rows.length === 0) {
+        options.updatedDocs = 0;
+    } else {
+        fluid.each(allDocs.rows, function (aRow) {
+            var aDoc = aRow.value;
+            // To filter out the "_design/views" doc that doesn't have the "schemaVersion" field
+            if (aDoc.schemaVersion) {
+                aDoc.schemaVersion = gpii.migration.GPII4014.newSchemaVersion;
+                if (aDoc.timestampUpdated === null) {
+                    aDoc.timestampUpdated = gpii.dbOperation.getCurrentTimestamp();
                 }
-            });
-            options.updatedDocs = updatedDocs;
-            togo.resolve(updatedDocs);
-        }
+                updatedDocs.push(aDoc);
+            }
+        });
+        options.updatedDocs = updatedDocs;
     }
+    togo.resolve(options.updatedDocs);
+
     return togo;
 };
 
@@ -149,35 +147,17 @@ gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
  * @return {Promise} - The promise that resolves the update.
  */
 gpii.migration.GPII4014.updateDB = function (options) {
-    var details = {
-        dataToPost: options.updatedDocs,
-        responseDataHandler: gpii.migration.GPII4014.logUpdateDB
-    };
-    return gpii.dbRequest.configureStep(details, options);
-};
-
-/**
- * Migrate documents recursively.
- * @param {Object} options - All docs URL and whether to filter:
- * @param {Array} options.allDocsUrl - The url for retrieving all documents in the database.
- * @param {Array} options.postOptions - The url for posting the bulk update.
- * @param {Array} options.numOfUpdated - The total number of migrated documents.
- * @param {Promise} togo - The return promise provided by the caller. It will be modified by this function.
- */
-gpii.migration.GPII4014.migrateRecursive = function (options, togo) {
-    var sequence = [
-        gpii.migration.GPII4014.retrieveAllDocs,
-        gpii.migration.GPII4014.updateDB
-    ];
-
-    fluid.promise.sequence(sequence, options).then(
-        function (/*result*/) {
-            gpii.migration.GPII4014.migrateRecursive(options, togo);
-        },
-        function (error) {
-            togo.reject(error);
-        }
-    );
+    var togo = fluid.promise();
+    if (options.updatedDocs === 0) {
+        togo.resolve(0);
+    } else {
+        var details = {
+            dataToPost: options.updatedDocs,
+            responseDataHandler: gpii.migration.GPII4014.logUpdateDB
+        };
+        togo = gpii.dbRequest.configureStep(details, options);
+    }
+    return togo;
 };
 
 /**
@@ -185,20 +165,18 @@ gpii.migration.GPII4014.migrateRecursive = function (options, togo) {
  */
 gpii.migration.GPII4014.migrateStep2 = function () {
     var options = gpii.migration.GPII4014.initOptions(process.argv);
-    var finalPromise = fluid.promise();
-    gpii.migration.GPII4014.migrateRecursive(options, finalPromise);
+    var actionFunc = function (options) {
+        return fluid.promise.sequence([
+            gpii.migration.GPII4014.retrieveAllDocs,
+            gpii.migration.GPII4014.updateDB
+        ], options);
+    };
+
+    var finalPromise = gpii.dbRequest.processRecursive(options, actionFunc);
 
     finalPromise.then(function () {
-        // ignore
-    }, function (error) {
-        if (error.errorCode === "GPII-NO-MORE-DOCS") {
-            console.log("Done: " + error.message + " Migrated " + options.numOfUpdated + " documents in total.");
-            process.exit(0);
-        } else {
-            console.log(error);
-            process.exit(1);
-        }
-    });
+        console.log("Done: Migrated " + options.numOfUpdated + " documents in total.");
+    }, console.log);
 };
 
 gpii.migration.GPII4014.migrateStep2();
