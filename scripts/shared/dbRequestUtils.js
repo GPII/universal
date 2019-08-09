@@ -192,3 +192,28 @@ gpii.dbRequest.queryDatabase = function (databaseURL, handleResponse, errorMsg, 
     });
     return aRequest;
 };
+
+/**
+ * Process recursively.
+ * @param {Object} options - Object of elements required for processing. It also tracks information that need to be passed
+ * along during the processing.
+ * @param {Function} actionFunc - The action function that returns a promise whose resolved value is a number of
+ * documents to process. If the number is 0, the recursion stops. If more than 0, the recursion continues.
+ * @return {Promise} - Hold the processing result.
+ */
+gpii.dbRequest.processRecursive = function (options, actionFunc) {
+    var togo = fluid.promise();
+    var actionPromise = actionFunc(options);
+
+    actionPromise.then(function (docCount) {
+        if (docCount === 0 || docCount[0] === 0) {
+            // No more documents to process
+            togo.resolve();
+        } else {
+            // Continue to process
+            var subsequentProcess = gpii.dbRequest.processRecursive(options, actionFunc);
+            fluid.promise.follow(subsequentProcess, togo);
+        }
+    }, togo.reject);
+    return togo;
+};
