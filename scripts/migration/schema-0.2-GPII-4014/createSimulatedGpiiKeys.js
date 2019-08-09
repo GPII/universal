@@ -137,8 +137,8 @@ gpii.migration.GPII4014.generateKeyData = function (numOfKeys) {
  * Log how many GPII documents were updated.
  * @param {String} responseString - Response from the database (ignored)
  * @param {Object} options - Object containing the set of documents:
- * @param {Array} options.numOfKeysToCreate - Total number of GPII keys to create.
- * @param {Array} options.numOfCreatedKeys - Total number of GPII keys that have been created.
+ * @param {Number} options.numOfKeysToCreate - Total number of GPII keys to create.
+ * @param {Number} options.numOfCreatedKeys - Total number of GPII keys that have been created.
  * @return {Promise} - The resolved value is options.numOfCreatedKeys, or 0 when all has been created.
  */
 gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
@@ -153,7 +153,7 @@ gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
  * Configure one batch of creation.
  * @param {Object} options - Object containing the set of documents:
  * @param {Array} options.newDocs - The documents to create.
- * @param {Array} options.numOfKeysToCreate - Total number of GPII keys to create.
+ * @param {Number} options.numOfKeysToCreate - Total number of GPII keys to create.
  * @param {Number} options.numOfCreatedKeys - Total number of GPII keys that have been created. This option will be
  * written by a call to this function.
  * @return {Promise} - The promise that resolves the creation status.
