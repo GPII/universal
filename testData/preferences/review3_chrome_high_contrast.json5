@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Review 3 Chrome High Contrast",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

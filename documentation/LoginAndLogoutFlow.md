@@ -79,6 +79,6 @@ The user login process is as follows:
       be run (in that order).
    2. The end result of this process is a description of the configuration to be applied to system, described per
       application. The even `onMatchDone` signals that we have the lifecycle instructions ready. For more details on the
-      match maker frameworks internal workings, see: [Match Maker Framework Documentation](MatchMakerFramework.md)
+      MatchMaker frameworks internal workings, see: [MatchMaker Framework Documentation](MatchMakerFramework.md)
 6. `onMatchDone` is being listened to by the `startLifecycle` (UserLogonStateChange), which applies the settings to the
    system via the functionality in the LifecycleManager.

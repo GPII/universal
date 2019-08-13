@@ -5,11 +5,12 @@
  *
  * * The following components are running:
  * ** Cloud Bsed Flow Manager
- * ** Canopy MatchMaker
+ * ** Flat MatchMaker
  */
 {
     "type": "gpii.config.cloudBased.flowManager.production",
     "options": {
+        "gradeNames": "gpii.withCloudLogging", // Apply cloud logging for GPII-3310
         "mainServerPort": 8082,
         "dbServerPort": 5984,
         "dataSourceConfigProductionEnv": {
@@ -26,6 +27,6 @@
     },
     "mergeConfigs": [
         "%flowManager/configs/gpii.flowManager.config.cloud.base.json5",
-        "%canopyMatchMaker/configs/gpii.canopyMatchMaker.config.base.json5"
+        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.base.json5"
     ]
 }

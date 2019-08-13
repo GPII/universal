@@ -74,27 +74,41 @@ gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries = {
                     retryOptions: {
                         rewriteEvery: 0,
                         numRetries: 40,
-                        retryInterval: 1000
+                        retryInterval: 20000
                     },
                     "setTrue": [
                         {
                             "type": "gpii.launch.exec",
-                            "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
+                            "command": "\"${{environment}.SystemDrive}\\Program Files (x86)\\Texthelp\\Read And Write 12\\ReadAndWrite.exe\""
                         }
                     ],
                     "setFalse": [
                         {
                             "type": "gpii.windows.closeProcessByName",
-                            "filename": "ReadAndWrite.exe"
+                            "filename": "ReadAndWrite.exe",
+                            "options": {
+                                "message": "WM_CLOSE"
+                            }
                         }
                     ],
                     "getState": [
                         {
-                            "type": "gpii.processReporter.find",
-                            "command": "ReadAndWrite"
+                            "type": "gpii.tests.windows.readwrite.findProcess",
+                            "command": "ReadAndWrite.exe",
+                            "time": 10
                         }
                     ]
                 }
+            }]
+        };
+    },
+    brightness: function (running) {
+        return {
+            "com.windows.brightness": [{
+                "settings": {
+                    "running": running
+                },
+                "options": {}
             }]
         };
     }
@@ -108,7 +122,6 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.nvda(false)
         },
-        gradeNames: "gpii.test.integration.deviceReporterAware.windows",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "data": [
@@ -145,13 +158,18 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
                     "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
                     "subPath": ""
                 }]
+            },
+            "gpii.deviceReporter.wmiSettingSupported": {
+                "expectInstalled": [{
+                    "namespace": "root\\WMI",
+                    "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
+                }]
             }
         }
     },
     {
         name: "Testing readwritegold_application1 using Flat matchmaker",
-        gpiiKey: "readwritegold_application1",
-        gradeNames: "gpii.test.integration.deviceReporterAware.windows",
+        gpiiKey: "readwritegold_general",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.readwrite(false)
         },
@@ -162,8 +180,56 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
             "gpii.deviceReporter.registryKeyExists": {
                 "expectInstalled": [{
                     "hKey": "HKEY_CURRENT_USER",
-                    "path": "Software\\Texthelp\\Read&Write11",
-                    "subPath": "InstallPath"
+                    "path": "Software\\Texthelp\\Voices",
+                    "subPath": "DefaultTokenId",
+                    "dataType": "REG_SZ"
+                }]
+            },
+            "gpii.deviceReporter.wmiSettingSupported": {
+                "expectInstalled": [{
+                    "namespace": "root\\WMI",
+                    "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
+                }]
+            }
+        }
+    },
+    {
+        name: "Testing os_win_brightness using Flat matchmaker",
+        gpiiKey: "os_win_brightness",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.brightness(false)
+        },
+        settingsHandlers: {
+            "gpii.windows.wmiSettingsHandler": {
+                "data": [
+                    {
+                        "settings": {
+                            "Brightness": {
+                                "value": 70
+                            }
+                        },
+                        "options": {
+                            "Brightness": {
+                                "namespace": "root\\WMI",
+                                "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
+                                "set": {
+                                    "className": "WmiMonitorBrightnessMethods",
+                                    "method": "WmiSetBrightness",
+                                    "params": [0xFFFFFFFF, "$value"],
+                                    "returnVal": ["uint", 0]
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.brightness(false)
+        },
+        deviceReporters: {
+            "gpii.deviceReporter.wmiSettingSupported": {
+                "expectInstalled": [{
+                    "namespace": "root\\WMI",
+                    "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
                 }]
             }
         }
@@ -174,5 +240,5 @@ module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.deviceReporterAware.windows.testDefs",
     configName: "windows-dynamicDeviceReporter-config",
     configPath: "%gpii-universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
-    module, require, __dirname);
+}, ["gpii.test.integration.testCaseHolder.windows"],
+    module, require);

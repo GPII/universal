@@ -35,9 +35,9 @@ gpii.tests.payloadSize.testDefs = [{
     expect: 2,
     config: {
         configName: "gpii.config.development.local",
-        configPath: "%gpii-universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs/shared"
     },
-    gradeNames: ["gpii.test.common.testCaseHolder"],
+    gradeNames: ["gpii.test.testCaseHolder"],
     gpiiKey: "giant",
 
     sequence: [{
@@ -53,4 +53,4 @@ gpii.tests.payloadSize.testDefs = [{
     }]
 }];
 
-gpii.test.bootstrapServer(gpii.tests.payloadSize.testDefs);
+gpii.test.runCouchTestDefs(gpii.tests.payloadSize.testDefs);

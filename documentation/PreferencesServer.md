@@ -22,12 +22,26 @@ The main types of filtering provided by the Preferences Server are the following
   Preferences Server draws on the ontologyHandler component to take care of the bulk of this filtering, merging, etc.,
   of the prefs and metadata sections.
 
-## API
+## APIs
 
-### GET /preferences/:token[?view=:view]
+### GET /ready
 
-Retrieves the preference sets for the token (`:token`). The optional `view` parameter is to retrieve the preferences in
-a different view (ontology). If no `view` is specified the 'flat' ontology will be defaulted to.
+Check whether Preferences Server is ready to handle requests. The readiness endpoint checks the database connection.
+
+It returns http status code 200 when Preferences Server is ready to handle requests. Otherwise, returns http status code
+404.
+
+### GET /health
+
+Check whether Preferences Server itself is running. A running Preferences Server may or may not be ready to handle requests
+because the liveness endpoint does not check the connection between Preferences Server and the database.
+
+It returns http status code 200 when Preferences Server itself is running. Otherwise, returns http status code 500.
+
+### GET /preferences/:gpiiKey[?view=:view]
+
+Retrieves the preference sets for the GPII key (`:gpiiKey`). The optional `view` parameter is to retrieve the
+preferences in a different view (ontology). If no `view` is specified the 'flat' ontology will be defaulted to.
 
 #### Example of GET request with no view provided
 
@@ -64,7 +78,7 @@ Return payload:
 
 An example of a GET request (given that the Preferences Server is located on preferences.gpii.net):
 
-`http://preferences.gpii.net/preferences/mytoken?view=ISO24751`
+`http://preferences.gpii.net/preferences/myGpiiKey?view=ISO24751`
 
 Return payload:
 
@@ -99,8 +113,8 @@ Return payload:
 
 ### POST /preferences/[?view=:view]
 
-This is used to post new preferences to the Preferences Server. A new token will automatically be generated and returned
-in the payload along with the saved preferences.
+This is used to post new preferences to the Preferences Server. A new GPII key will automatically be generated and
+returned in the payload along with the saved preferences.
 
 As with GET, this takes an optional `view` parameter denoting the ontology of the provided settings. If no `view` is
 provided, the preferences will be stored and interpreted as being in the `flat` format.
@@ -139,11 +153,11 @@ Example POST body:
 }
 ```
 
-The return payload will contain the stored preferences (keyed by `preferences`) and the newly generated token (keyed by
-`token`) under which the preference set is stored.
+The return payload will contain the stored preferences (keyed by `preferences`) and the newly generated GPII key
+(keyed by `gpiiKey`) under which the preference set is stored.
 
-Given that the above payload was stored with the token `123e4567-e89b-12d3-a456-426655440000` the return payload would
-be:
+Given that the above preferences was stored with the GPII key `123e4567-e89b-12d3-a456-426655440000`, the return
+payload would be:
 
 ```json
 {
@@ -170,23 +184,24 @@ be:
 }
 ```
 
-### PUT /preferences/:token[?merge=:mergeview=:view]
+### PUT /preferences/:gpiiKey[?merge=:mergeview=:view]
 
-This is used to update an existing preference set to the Preferences Server. In case no preference set exists associated
-with that token, a new one will be created.
+This is used to create a new GPII key with its preferences, or update preferences for an existing GPII key to the
+Preferences Server. At the update, if no preferences safe is associated with the provided GPII key, a new safe will
+be automatically created.
 
 As with GET and PUT, this takes an optional `view` parameter denoting the ontology of the settings provided in the
 payload of the request body. If no `view` is provided, the preferences will be stored and interpreted as being in the
 `flat` format.
 
-As with PUT, this takes an optional boolean `merge` parameter denoting whether the incoming preferences should be merged
-with the existing preferences. If `merge` is `true`, the incoming preferences will be merged with the existing ones.
-Otherwise, the incoming preferences will override the existing ones. If no `merge` is provided, the default value will
-be `false`.
+As for the update, this takes an optional boolean `merge` parameter denoting whether the incoming preferences should be
+merged with the existing preferences. If `merge` is `true`, the incoming preferences will be merged with the existing
+ones. Otherwise, the incoming preferences will override the existing ones. If no `merge` is provided, the default value
+will be `false`.
 
-When settings are PUT to the preferences server, all the settings in that view will be overwritten. In other words, if I
-have some settings A, B and C already existing in my preference set (in a given view), and a put request is made
-containing only settings B and D, the resulting preference set will contain only settings B and D.
+When preferences are PUT to the preferences server, all the preferences in that view will be overwritten. In other
+words, if I have preferences A, B and C already existing in my preference set (in a given view), and a put request is
+made containing only settings B and D, the resulting preference set will contain only settings B and D.
 
 The preferences are allowed to be stored in different ontologies. A (transformable) user preference will only be stored
 once in the preference set. This also means that if a put request is make containing a preference A1, which already
@@ -199,9 +214,9 @@ be given below to help make this clearer.
 Below is an example of a put query to the following url (given that a Preferences Server is available at
 preferences.gpii.net):
 
-`http://preferences.gpii.net/preferences/mytoken?merge=true&view=flat`
+`http://preferences.gpii.net/preferences/myGpiiKey?merge=true&view=flat`
 
-Note that here, we store preferences to the token 'mytoken'. The body of the PUT should contain the preferences to be
+Note that here, we store preferences to the GPII key 'myKey'. The body of the PUT should contain the preferences to be
 stored. They should be in the format specified by `view` or in the flat format if no `view` is provided.
 
 putBody:

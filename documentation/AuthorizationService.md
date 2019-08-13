@@ -4,11 +4,11 @@ The authorization service provides API that allows to add and retrieve authoriza
 GPII App Installations are authorized using [Resource Owner GPII key
 Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Key_Grant).
 
-* [getAuthorizationByAccessToken(accessToken)](#getauthorizationbyaccesstokenaccesstoken)
+* [getInfoByAccessToken(accessToken)](#getinfobyaccesstokenaccesstoken)
 * [grantGpiiAppInstallationAuthorization(gpiiKey, clientId,
   clientCredentialId)](#grantgpiiappinstallationauthorizationgpiikey-clientid-clientcredentialid)
 
-## getAuthorizationByAccessToken(accessToken)
+## getInfoByAccessToken(accessToken)
 
 * **description**: Get the authorization information that is associated with the access token.
 * **parameters:**
@@ -19,18 +19,25 @@ Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Key_Grant)
     ```json
     {
         "accessToken": "gpii-app-installation-accessToken-1",
-        "client": {
-            "type": "gpiiAppInstallationClient",
-            "schemaVersion": "0.1",
-            "name": "AJC-Bakersfield",
-            "computerType": "public",
+        "clientCredential": {
+            "type": "clientCredential",
+            "schemaVersion": "0.2",
+            "clientId": "gpiiAppInstallationClient-1",
+            "oauth2ClientId": "net.gpii.ajc.bakersfield",
+            "oauth2ClientSecret": "client_secret_ajc_bakersfield",
+            "allowedIPBlocks": null,
+            "allowedPrefsToWrite": null,
+            "isCreateGpiiKeyAllowed": false,
+            "isCreatePrefsSafeAllowed": false,
+            "revoked": false,
+            "revokedReason": null,
             "timestampCreated": "2017-11-21T18:11:22.101Z",
-            "timestampUpdated": null,
-            "id": "gpiiAppInstallationClient-1"
+            "timestampRevoked": null,
+            "id": "clientCredential-1"
         },
         "authorization": {
             "type": "gpiiAppInstallationAuthorization",
-            "schemaVersion": "0.1",
+            "schemaVersion": "0.2",
             "clientId": "gpiiAppInstallationClient-1",
             "gpiiKey": "chrome_high_contrast",
             "accessToken": "gpii-app-installation-accessToken-1",
@@ -67,7 +74,7 @@ Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Key_Grant)
 }
 ```
 
-Return an object that contains the error message and http status code if,
+Return an object that contains the error message and HTTP status code if,
 
 * The GPII key is not found, or,
 * The client is not a GPII App Installation Client.

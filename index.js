@@ -21,6 +21,7 @@ var fluid = require("infusion"),
 fluid.module.register("gpii-universal", __dirname, require);
 
 // TODO: proper module loader will eliminate these requires (FLUID-5521)
+require("./gpii/node_modules/solutionsRegistry");
 require("./gpii/node_modules/transformer");
 require("./gpii/node_modules/deviceReporter");
 require("./gpii/node_modules/lifecycleManager");
@@ -31,10 +32,8 @@ require("./gpii/node_modules/preferencesServer");
 require("./gpii/node_modules/ontologyHandler");
 require("./gpii/node_modules/matchMakerFramework");
 require("./gpii/node_modules/flatMatchMaker");
-require("./gpii/node_modules/canopyMatchMaker");
 require("./gpii/node_modules/contextManager");
 require("./gpii/node_modules/journal");
-require("./gpii/node_modules/pouchManager");
 require("./gpii/node_modules/eventLog");
 require("./gpii/node_modules/processReporter");
 require("./gpii/node_modules/gpii-db-operation");
@@ -80,7 +79,7 @@ gpii.queryConfigs = function () {
  */
 gpii.start = function (options) {
     options = options || {};
-    var configName = options.configName || "gpii.config.development.all.local";
+    var configName = options.configName || "gpii.config.development.manualTesting";
     var configPath = options.configPath || __dirname + "/gpii/configs";
     kettle.config.loadConfig({
         configName: kettle.config.getConfigName(configName),
@@ -92,7 +91,12 @@ gpii.start = function (options) {
  * Stops the GPII instance that was started with gpii.start()
  */
 gpii.stop = function () {
-    var configs = gpii.queryConfigs();
+    // Destroy the configs in reverse order, so the first loaded one is destroyed last.
+    // There should properly never be more than one - see https://github.com/GPII/universal/pull/766
+    var configs = gpii.queryConfigs().reverse();
+    if (configs.length > 1) {
+        fluid.log(fluid.logLevel.WARN, "Error during gpii.stop - found more than one active config: ", configs);
+    }
     fluid.each(configs, function (config) {
         config.destroy();
     });

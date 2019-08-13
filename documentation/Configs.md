@@ -36,7 +36,7 @@ If you have installed GPII in the folder <GPII-install>:
 Then run the command: `node gpii.js`
 
 By default this will start up the system with everything running locally, using the
-`gpii.config.development.all.local.json5` configuration file of universal repository (see the `universal/gpii/configs`
+`gpii.config.development.manualTesting.json5` configuration file of universal repository (see the `universal/gpii/configs`
 folder). If you would like to run the system using a different configuration, say `dev.remote.prefs` run the following:
 
 * in Microsoft Windows: `SET NODE_ENV=dev.remote.prefs`
@@ -52,8 +52,8 @@ folder <GPII-install>, go to: `<GPII-install>/node_modules/universal`.
 
 Change the NODE_ENV environment variable to the cloudbased config file:
 
-* in Microsoft Windows: `SET NODE_ENV=gpii.config.cloudBased.development.all.local`
-* in GNU/Linux and other Unix-like systems: `export NODE_ENV=gpii.config.cloudBased.development.all.local`
+* in Microsoft Windows: `SET NODE_ENV=gpii.config.cloudBased.development.manualTesting`
+* in GNU/Linux and other Unix-like systems: `export NODE_ENV=gpii.config.cloudBased.development.manualTesting`
 
 Then start up the server by running the following command from the universal folder:
 
