@@ -1,4 +1,4 @@
-// # Bryan.json5
+// # Brenda.json5
 //
 // This preference sets changes the desktop wallpaper with another default Windows 10 one.
 //
@@ -8,13 +8,13 @@
 //
 {
     "flat": {
-        "name": "Bryan",
+        "name": "Brenda",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.windows.desktopBackground": {
-                        "Image": "C:\\Windows\\Web\\Wallpaper\\Theme1\\img3.jpg"
+                        "Image": "C:\\Windows\\Web\\Wallpaper\\Theme1\\img2.jpg"
                     }
                 }
             }
