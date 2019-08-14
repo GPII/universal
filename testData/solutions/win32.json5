@@ -10609,19 +10609,19 @@
                     },
                     "ApplicationSettings.Screenshot.ScreenshotTo.$t": {
                         "schema": {
-                            "title": "Capture operation",
-                            "description": "Specifies the type of operation that is needed for making a screenshot.",
+                            "title": "Capture target",
+                            "description": "Specifies the capture target of the screenshot operation.",
                             "enum": [
-                                "Drawing Rectangle",
-                                "Drawing Freehand",
-                                "Hover"
+                                "Window",
+                                "Microsoft Word",
+                                "Text Reader"
                             ],
                             "enumLabels": [
-                                "Drawing Rectangle",
-                                "Drawing Freehand",
-                                "Hover"
+                                "Window",
+                                "Microsoft Word",
+                                "Text Reader"
                             ],
-                            "default": "Drawing Rectangle"
+                            "default": "Window"
                         }
                     },
                     "ApplicationSettings.Screenshot.AppendToMsWordDoc.$t": {
