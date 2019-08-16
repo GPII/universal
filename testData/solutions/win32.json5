@@ -6676,6 +6676,7 @@
                 }
             ]
         },
+        "settingsApplicationPriority": "last",
         "settingsHandlers": {
             "configure1": {
                 "type": "gpii.windows.registrySettingsHandler",
