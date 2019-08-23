@@ -19,8 +19,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // If this requirement expands, this code will be moved into its own module, otherwise it will be removed
 
 if (process.env.GPII_ENABLE_STACKDRIVER_TRACE === "true") {
-    console.log("Enabling @google-cloud/trace-agent");
-    require("@google-cloud/trace-agent").start();
+    // GPII-4069: This is a proof of concept for New Relic Agent. If this
+    // requirement expands, the environment variable that controls this block
+    // should be renamed, or a new block should be added if we want to support
+    // both Stackdriver Trace and New Relic Agent.
+    console.log("Enabling newrelic trace agent");
+    require("newrelic");
 }
 
 // A simple bootstrap file which allows a configuration of the GPII to be
