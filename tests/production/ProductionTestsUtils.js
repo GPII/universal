@@ -55,7 +55,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.accessTokensDeleteRequests", {
             type: "kettle.test.request.http",
             options: {
                 port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostpero: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
+                host: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
                 hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
                 path: "/gpii/_bulk_docs",
                 method: "POST",
