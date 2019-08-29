@@ -47,8 +47,8 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
     var testDef = fluid.extend(true, {}, testDefIn, {
         name: "Flow Manager production tests",
         config: gpii.tests.productionConfigTesting.config,
-        expect: 4,
-/*        expect: 6, */ // Left login/lougout tests our for now.
+/*        expect: 4,*/
+        expect: 6,
         components: {
             healthRequest: {
                 type: "kettle.test.request.http",
@@ -102,15 +102,13 @@ fluid.defaults("gpii.tests.productionConfigTesting.cloudStatus", {
 fluid.defaults("gpii.tests.productionConfigTesting.cloudStatusSequence", {
     gradeNames: ["gpii.test.standardServerSequenceGrade"],
     sequenceElements: {
-/*
-        loginLogout: {
-            gradeNames: "gpii.tests.development.loginLogout",
-            priority: "after:startServer"
-        },
-*/
         cloudStatus: {
             gradeNames: "gpii.tests.productionConfigTesting.cloudStatus",
-            priority: "after:loginLogout"
+            priority: "after:startServer"
+        },
+        loginLogout: {
+            gradeNames: "gpii.tests.development.loginLogout",
+            priority: "after:cloudStatus"
         }
     }
 });
