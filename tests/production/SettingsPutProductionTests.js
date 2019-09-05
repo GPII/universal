@@ -93,7 +93,7 @@ gpii.test.cloudBased.oauth2.runDisruptedTests(
 
 /*
  * ========================================================================
- * Testing inability to updaet a snapset
+ * Testing inability to update a snapset
  * ========================================================================
  */
 

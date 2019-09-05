@@ -39,6 +39,13 @@ fluid.registerNamespace("gpii.tests.productionConfigTesting");
 require("../shared/DevelopmentTestDefs.js");
 require("./ProductionTestsUtils.js");
 
+fluid.defaults("gpii.tests.productionConfigTesting.cloudStatusRequest", {
+    gradeNames: ["kettle.test.request.http"],
+    host: gpii.tests.productionConfigTesting.cloudUrl.hostname,
+    hostname: gpii.tests.productionConfigTesting.cloudUrl.hostname,
+    expectedStatusCode: 200,
+});
+
 // Flowmanager tests for:
 // /user/%gpiiKey/login and /user/%gpiiKey/logout (as defined in gpii.tests.development.testDefs),
 // /health,
@@ -47,28 +54,19 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
     var testDef = fluid.extend(true, {}, testDefIn, {
         name: "Flow Manager production tests",
         config: gpii.tests.productionConfigTesting.config,
-/*        expect: 4,*/
         expect: 6,
         components: {
             healthRequest: {
-                type: "kettle.test.request.http",
+                type: "gpii.tests.productionConfigTesting.cloudStatusRequest",
                 options: {
-                    host: gpii.tests.productionConfigTesting.cloudUrl.hostname,
-                    hostname: gpii.tests.productionConfigTesting.cloudUrl.hostname,
                     path: "/health",
-                    method: "GET",
-                    expectedStatusCode: 200,
                     expectedPayload: {"isHealthy": true}
                 }
             },
             readyRequest: {
-                type: "kettle.test.request.http",
+                type: "gpii.tests.productionConfigTesting.cloudStatusRequest",
                 options: {
-                    host: gpii.tests.productionConfigTesting.cloudUrl.hostname,
-                    hostname: gpii.tests.productionConfigTesting.cloudUrl.hostname,
                     path: "/ready",
-                    method: "GET",
-                    expectedStatusCode: 200,
                     expectedPayload: {"isReady": true}
                 }
             }
@@ -77,8 +75,6 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
     });
     return testDef;
 });
-
-fluid.log("gpii.tests.productionConfigTesting.testDefs[0].components = '" + JSON.stringify(gpii.tests.productionConfigTesting.testDefs[0].components, null, "\t") + "'");
 
 fluid.defaults("gpii.tests.productionConfigTesting.cloudStatus", {
     gradeNames: ["fluid.test.sequenceElement"],

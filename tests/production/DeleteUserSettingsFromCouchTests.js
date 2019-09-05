@@ -235,189 +235,105 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
     gradeNames: ["gpii.test.common.testCaseHolder"],
     components: {
         getOsGnomeKey: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
                 path: "/gpii/os_gnome",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
             }
         },
         getOsGnomeKeyPrefsSafe: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-
                 // set at gpii.tests.productionConfigTesting.getPrefsSafeDoc()
                 path: null,
-
-                method: "GET",
-                gpiiKey: "os_gnome",
-                expectedStatusCodes: [200, 404]
+                gpiiKey: "os_gnome"
             }
         },
         getGpiiKeyNoPrefsSafe: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
                 path: "/gpii/gpii_key_no_prefs_safe",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
             }
         },
         getGpiiKeyNoPrefsSafePrefsSafe: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-
                 // set at gpii.tests.productionConfigTesting.getPrefsSafeDoc()
                 path: null,
-
-                method: "GET",
-                gpiiKey: "gpii_key_no_prefs_safe",
-                expectedStatusCodes: [200, 404]
+                gpiiKey: "gpii_key_no_prefs_safe"
             }
         },
         getNonExistentGpiiKey: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-                path: "/gpii/nonexistent_gpii_key",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/nonexistent_gpii_key"
             }
         },
         getNonExistentGpiiKeyPrefsSafe: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-
                 // set at gpii.tests.productionConfigTesting.getPrefsSafeDoc()
                 path: null,
-
-                method: "GET",
-                gpiiKey: "nonexistent_gpii_key",
-                expectedStatusCodes: [200, 404]
+                gpiiKey: "nonexistent_gpii_key"
             }
         },
         "getClientCredentialSchemaV01": {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-                path: "/gpii/clientCredential-schemaV0.1",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/clientCredential-schemaV0.1"
             }
         },
         getClientCredentialNova: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-                path: "/gpii/clientCredential-nova",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/clientCredential-nova"
             }
         },
         getClientCredentialFailInIpVerification: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-                path: "/gpii/clientCredential-failInIpVerification",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/clientCredential-failInIpVerification"
             }
         },
         getClientCredentialFailInAllowedPrefsToWrite: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-                path: "/gpii/clientCredential-failInAllowedPrefsToWrite",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/clientCredential-failInAllowedPrefsToWrite"
             }
         },
         getClientOldSchema: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-                path: "/gpii/gpiiAppInstallationClient-schemaV0.1",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/gpiiAppInstallationClient-schemaV0.1"
             }
         },
         getClientNova: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-                path: "/gpii/gpiiAppInstallationClient-nova",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/gpiiAppInstallationClient-nova"
             }
         },
         getClientFailInIpVerification: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-                path: "/gpii/gpiiAppInstallationClient-nova-failInIpVerification",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/gpiiAppInstallationClient-nova-failInIpVerification"
             }
         },
         getClientFailInAllowedPrefsToWrite: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-                path: "/gpii/gpiiAppInstallationClient-nova-failInAllowedPrefsToWrite",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/gpiiAppInstallationClient-nova-failInAllowedPrefsToWrite"
             }
         },
         getExtraAccessTokens: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
                 path: "/gpii/_design/views/_view/findInfoByAccessToken",
-                method: "GET",
-                expectedStatusCodes: [200, 404],
                 extraGpiiKeys: gpii.tests.productionConfigTesting.loginGpiiKeys
             }
         },
         deleteInBulk: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
                 path: "/gpii/_bulk_docs",
                 method: "POST",
                 expectedStatusCode: 201

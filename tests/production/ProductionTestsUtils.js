@@ -35,28 +35,30 @@ gpii.tests.productionConfigTesting.couchdbUrl = url.parse(
 );
 fluid.log("gpii.tests.productionConfigTesting.couchdbUrl = '" + JSON.stringify(gpii.tests.productionConfigTesting.couchdbUrl, null, "\t") + "'");
 
+// Base grade for database requests
+fluid.defaults("gpii.tests.productionConfigTesting.dataBaseRequest", {
+    gradeNames: ["kettle.test.request.http"],
+    port: gpii.tests.productionConfigTesting.couchdbUrl.port,
+    host: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
+    hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
+    auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
+    expectedStatusCodes: [200, 404]
+});
+
 // Access token deletion requests
 fluid.defaults("gpii.tests.cloud.oauth2.accessTokensDeleteRequests", {
     gradeNames: ["fluid.component"],
     components: {
         getAccessTokensRequest: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                host: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
                 path: "/gpii/_design/views/_view/findInfoByAccessToken",
-                method: "GET",
-                expectedStatusCodes: [200, 404],
                 tokensToRemove: []       // set by successful request.
             }
         },
         bulkDeleteRequest: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                host: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
                 path: "/gpii/_bulk_docs",
                 method: "POST",
                 expectedStatusCode: 201

@@ -108,12 +108,8 @@ gpii.tests.productionConfigTesting.addTestRecordsToDatabaseTests = [{
     config: gpii.tests.productionConfigTesting.config,
     components: {
         addInBulk: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: gpii.tests.productionConfigTesting.couchdbUrl.port,
-                host: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
-                auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
                 path: "/gpii/_bulk_docs",
                 method: "POST",
                 expectedStatusCode: 201
