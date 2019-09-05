@@ -28,12 +28,10 @@ gpii.tests.productionConfigTesting.config = {
 gpii.tests.productionConfigTesting.cloudUrl = url.parse(
     process.env.GPII_CLOUD_URL
 );
-fluid.log("gpii.tests.productionConfigTesting.cloudUrl = '" + JSON.stringify(gpii.tests.productionConfigTesting.cloudUrl, null, "\t") + "'");
 
 gpii.tests.productionConfigTesting.couchdbUrl = url.parse(
     process.env.GPII_COUCHDB_URL
 );
-fluid.log("gpii.tests.productionConfigTesting.couchdbUrl = '" + JSON.stringify(gpii.tests.productionConfigTesting.couchdbUrl, null, "\t") + "'");
 
 // Base grade for database requests
 fluid.defaults("gpii.tests.productionConfigTesting.dataBaseRequest", {
