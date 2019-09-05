@@ -43,7 +43,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.cloudStatusRequest", {
     gradeNames: ["kettle.test.request.http"],
     host: gpii.tests.productionConfigTesting.cloudUrl.hostname,
     hostname: gpii.tests.productionConfigTesting.cloudUrl.hostname,
-    expectedStatusCode: 200,
+    expectedStatusCode: 200
 });
 
 // Flowmanager tests for:

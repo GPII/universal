@@ -237,7 +237,7 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
         getOsGnomeKey: {
             type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                path: "/gpii/os_gnome",
+                path: "/gpii/os_gnome"
             }
         },
         getOsGnomeKeyPrefsSafe: {
@@ -251,7 +251,7 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
         getGpiiKeyNoPrefsSafe: {
             type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                path: "/gpii/gpii_key_no_prefs_safe",
+                path: "/gpii/gpii_key_no_prefs_safe"
             }
         },
         getGpiiKeyNoPrefsSafePrefsSafe: {
