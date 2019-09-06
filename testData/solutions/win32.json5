@@ -12,24 +12,14 @@
         "settingsHandlers": {
             "install": {
                 "type": "gpii.iod.settingsHandler",
-                "capabilities": [],
+                "capabilities": [
+                    "http://registry\.gpii\.net/applications/net\.gpii\.test\.iod"
+                ],
                 "options": {
-                    "package1": {
-                        "isInstalled": {
-                            "type": "gpii.deviceReporter.alwaysInstalled"
-                        },
-                        "packageName": "demo-package"
-                    }
                 },
-                "capabilitiesTransformations": {
-                    "package1": {
-                        "transform": {
-                            "type": "fluid.transforms.literalValue",
-                            "input": "hello",
-                            "outputPath": "a"
-                        }
-                    }
-                }
+//                "capabilitiesTransformations": {
+//                    "package1": "http://registry\\.gpii\\.net/applications/net\\.gpii\\.test\\.iod"
+//                }
             }
         },
         "isInstalled": [
