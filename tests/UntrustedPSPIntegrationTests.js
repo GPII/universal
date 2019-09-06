@@ -249,7 +249,7 @@ gpii.tests.pspIntegration.saveTestDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/pitch"], 0.85]
+                args: [ "{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/common/pitch", "value"], 0.85]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
