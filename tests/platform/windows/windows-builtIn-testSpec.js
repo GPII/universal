@@ -797,7 +797,8 @@ gpii.tests.windows.builtIn = [
                     }
                 }]
             }
-        }
+        },
+        gradeNames: "gpii.test.integration.actionHandlersAware.windows"
     }, {
         name: "Testing os_win_2 using default matchmaker",
         gpiiKey: "os_win_2",
@@ -1635,6 +1636,7 @@ gpii.tests.windows.builtInHighContrast = [
     {
         name: "Testing os_win_highContrast using default matchmaker",
         gpiiKey: "os_win_highContrast",
+        gradeNames: "gpii.test.integration.actionHandlersAware.windows",
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
                 "com.microsoft.windows.highContrast": [
@@ -1661,6 +1663,7 @@ gpii.tests.windows.builtInHighContrast = [
     }, {
         name: "Testing os_common_highContrast using default matchmaker",
         gpiiKey: "os_common_highContrast",
+        gradeNames: "gpii.test.integration.actionHandlersAware.windows",
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
                 "com.microsoft.windows.highContrast": [
@@ -1687,6 +1690,7 @@ gpii.tests.windows.builtInHighContrast = [
     }, {
         name: "Testing os_common_highContrast - magnifier running on startup",
         gpiiKey: "os_common_highContrast",
+        gradeNames: "gpii.test.integration.actionHandlersAware.windows",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -1751,6 +1755,7 @@ gpii.tests.windows.builtInHighContrast = [
     }, {
         name: "Testing os_common_highContrast - magnifier and keyboard both running on startup",
         gpiiKey: "os_common_highContrast",
+        gradeNames: "gpii.test.integration.actionHandlersAware.windows",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -1822,4 +1827,4 @@ module.exports = gpii.test.bootstrap({
     configName: "gpii.tests.acceptance.windows.builtIn.config",
     configPath: "%gpii-universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
-    module, require, __dirname);
+    module, require);

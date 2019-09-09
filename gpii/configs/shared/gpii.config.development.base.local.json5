@@ -19,7 +19,7 @@
     "options": {
         "distributeOptions": {
             "development.all.ontologyHandler": {
-                "record": "{flowManager}.ontologyHandler",
+                "record": "{ontologyHandler}",
                 "target": "{that preferencesServer}.options.components.ontologyHandler"
             }
         }
