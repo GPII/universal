@@ -21,6 +21,7 @@
 // * wordSpace: increased (1)
 {
     "flat": {
+        "name": "UIO+ Multiple Settings",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

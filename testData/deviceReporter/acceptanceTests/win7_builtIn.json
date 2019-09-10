@@ -32,6 +32,22 @@
     },
 
     {
+        "id": "com.microsoft.windows.toggleKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.underlineMenuShortcuts"
+    },
+
+    {
+        "id": "com.microsoft.windows.shortcutWarningMessage"
+    },
+
+    {
+        "id": "com.microsoft.windows.shortcutWarningSound"
+    },
+
+    {
         "id": "com.microsoft.windows.filterKeys"
     },
 
@@ -56,11 +72,11 @@
     },
 
     {
-        "id": "com.microsoft.windows.language"
+        "id": "com.microsoft.windows.volumeControl"
     },
 
     {
-        "id": "com.microsoft.windows.brightness"
+        "id": "com.microsoft.windows.language"
     },
 
     {

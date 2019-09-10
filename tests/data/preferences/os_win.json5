@@ -33,6 +33,31 @@
                             "value": true
                         }
                     },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.toggleKeys": {
+                        "ToggleKeysOn": {
+                            "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON",
+                            "value": true
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.underlineMenuShortcuts": {
+                        "UnderlineMenuShortcutsOn": {
+                            "value": 1,
+                            "path": "pvParam"
+                        },
+                        "KeyboardPreferenceOn": {
+                            "value": 1,
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
+                        "Warning Sounds": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningSound": {
+                        "Sound on Activation": 1
+                    },
                     "http://registry.gpii.net/applications/com.microsoft.windows.filterKeys": {
                         "FilterKeysEnable": {
                             "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
@@ -206,11 +231,6 @@
                         "MachinePreferredUILanguages": "en-US",
                         "PreferredUILanguages": "en-US"
                     },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.brightness": {
-                        "Brightness": {
-                            "value": null
-                        }
-                    },
                     "http://registry.gpii.net/applications/com.microsoft.windows.touchPadSettings": {
                         "SystemSettings_Input_Touch_SetActivationTimeout": {
                             "value": "Low sensitivity"
@@ -234,6 +254,11 @@
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.soundSentry": {
                         "WindowsEffect": 2
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.volumeControl": {
+                        "Volume": {
+                            "value": 0.7
+                        }
                     }
                 }
             }

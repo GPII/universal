@@ -4,6 +4,7 @@
  * the preferences server and matchmaker all locally. It doesn't start any backend database for data persistence.
  *
  * * The following components are running:
+ * ** Auth Server
  * ** Flat MatchMaker
  * ** Cloud Based Flow Manager
  * ** Lifecycle Manager

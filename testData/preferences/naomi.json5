@@ -44,16 +44,9 @@
                         "ErrorNotificationType": 1,
                         "CoupleNarratorCursorMouse": 1,
                         "LockNarratorKeys": 1,
-                        "SpeechVolume": 80,
+                        "SpeechVolume": .8,
                         "SpeechVoice": "Microsoft Zira - English (United States)",
-                        "ControlContextVerbosity": 4,
-                        "ReadContextBeforeControls": 1,
-                        "LowerAppsVolume": 1,
-                        "StartWithShortcut": 1,
-                        "TextVerbosityLevel": 3,
-                        "DetailedFeedback": 1,
-                        "EnableAutoStart": true,
-                        "EnableSystemAutoStart": true
+                        "DetailedFeedback": 1
                     }
                 }
             }
