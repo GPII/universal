@@ -104,33 +104,6 @@ gpii.tests.oauth2.authorizationService.expected = {
     }
 };
 
-// Tests with an empty data store
-fluid.defaults("gpii.tests.oauth2.authorizationService.emptyDataStore", {
-    gradeNames: ["gpii.tests.oauth2.authorizationService.testEnvironment"],
-    components: {
-        caseHolder: {
-            options: {
-                modules: [{
-                    name: "Test grantGpiiAppInstallationAuthorization()",
-                    tests: [{
-                        name: "grantGpiiAppInstallationAuthorization() returns an error with an empty dataStore",
-                        sequence: [{
-                            task: "{authorizationService}.grantGpiiAppInstallationAuthorization",
-                            args: ["alice_gpii_key", "client-1", "clientCredential-1"],
-                            reject: "jqUnit.assertDeepEq",
-                            rejectArgs: [
-                                "Unauthorized error should be received with an empty data store",
-                                gpii.tests.oauth2.authorizationService.expected.unauthorized,
-                                "{arguments}.0"
-                            ]
-                        }]
-                    }]
-                }]
-            }
-        }
-    }
-});
-
 fluid.defaults("gpii.tests.oauth2.authorizationService.withData.grantGpiiAppInstallationAuthorization", {
     gradeNames: ["gpii.tests.oauth2.authorizationService.testEnvironment"],
     components: {
@@ -287,6 +260,5 @@ fluid.defaults("gpii.tests.oauth2.authorizationService.withData.grantGpiiAppInst
 
 });
 fluid.test.runTests([
-    "gpii.tests.oauth2.authorizationService.emptyDataStore",
     "gpii.tests.oauth2.authorizationService.withData.grantGpiiAppInstallationAuthorization"
 ]);
