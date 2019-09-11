@@ -81,6 +81,22 @@
     },
 
     {
+        "id": "com.microsoft.windows.toggleKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.underlineMenuShortcuts"
+    },
+
+    {
+        "id": "com.microsoft.windows.shortcutWarningMessage"
+    },
+
+    {
+        "id": "com.microsoft.windows.shortcutWarningSound"
+    },
+
+    {
         "id": "com.microsoft.windows.narrator"
     },
 
@@ -178,5 +194,9 @@
 
     {
         "id": "org.nvda-project"
+    },
+
+    {
+        "id": "com.microsoft.office"
     }
 ]

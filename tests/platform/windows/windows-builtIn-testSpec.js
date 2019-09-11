@@ -428,6 +428,62 @@ gpii.tests.windows.builtIn = [
                             }
                         }
                     }
+                ],
+                "com.microsoft.windows.toggleKeys": [
+                    {
+                        "settings": {
+                            "ToggleKeysOn": {
+                                "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETTOGGLEKEYS",
+                            "setAction": "SPI_SETTOGGLEKEYS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "TOGGLEKEYS"
+                            }
+                        }
+                    }
+                ],
+                "com.microsoft.windows.underlineMenuShortcuts": [
+                    {
+                        "settings": {
+                            "UnderlineMenuShortcutsOn": {
+                                "path": "pvParam",
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETKEYBOARDCUES",
+                            "setAction": "SPI_SETKEYBOARDCUES",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "KeyboardPreferenceOn": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETKEYBOARDPREF",
+                            "setAction": "SPI_SETKEYBOARDPREF",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    }
                 ]
             },
             "gpii.windows.registrySettingsHandler": {
@@ -644,6 +700,30 @@ gpii.tests.windows.builtIn = [
                             "MachinePreferredUILanguages": "REG_SZ"
                         }
                     }
+                }],
+                "com.microsoft.windows.shortcutWarningMessage": [{
+                    "settings": {
+                        "Warning Sounds": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility",
+                        "dataTypes": {
+                            "Warning Sounds": "REG_DWORD"
+                        }
+                    }
+                }],
+                "com.microsoft.windows.shortcutWarningSound": [{
+                    "settings": {
+                        "Sound on Activation": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility",
+                        "dataTypes": {
+                            "Sound on Activation": "REG_DWORD"
+                        }
+                    }
                 }]
             },
             "gpii.windows.displaySettingsHandler": {
@@ -717,7 +797,8 @@ gpii.tests.windows.builtIn = [
                     }
                 }]
             }
-        }
+        },
+        gradeNames: "gpii.test.integration.actionHandlersAware.windows"
     }, {
         name: "Testing os_win_2 using default matchmaker",
         gpiiKey: "os_win_2",
@@ -1555,6 +1636,7 @@ gpii.tests.windows.builtInHighContrast = [
     {
         name: "Testing os_win_highContrast using default matchmaker",
         gpiiKey: "os_win_highContrast",
+        gradeNames: "gpii.test.integration.actionHandlersAware.windows",
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
                 "com.microsoft.windows.highContrast": [
@@ -1581,6 +1663,7 @@ gpii.tests.windows.builtInHighContrast = [
     }, {
         name: "Testing os_common_highContrast using default matchmaker",
         gpiiKey: "os_common_highContrast",
+        gradeNames: "gpii.test.integration.actionHandlersAware.windows",
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
                 "com.microsoft.windows.highContrast": [
@@ -1607,6 +1690,7 @@ gpii.tests.windows.builtInHighContrast = [
     }, {
         name: "Testing os_common_highContrast - magnifier running on startup",
         gpiiKey: "os_common_highContrast",
+        gradeNames: "gpii.test.integration.actionHandlersAware.windows",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -1671,6 +1755,7 @@ gpii.tests.windows.builtInHighContrast = [
     }, {
         name: "Testing os_common_highContrast - magnifier and keyboard both running on startup",
         gpiiKey: "os_common_highContrast",
+        gradeNames: "gpii.test.integration.actionHandlersAware.windows",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -1742,4 +1827,4 @@ module.exports = gpii.test.bootstrap({
     configName: "gpii.tests.acceptance.windows.builtIn.config",
     configPath: "%gpii-universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
-    module, require, __dirname);
+    module, require);
