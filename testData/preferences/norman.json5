@@ -1,0 +1,22 @@
+// # Norman.json5
+//
+// This preference sets changes the amount of time a notification is showed up by the system.
+//
+// ## Testing
+//
+// Trigger a system notification and observe that the time that is displayed is 7 seconds.
+//
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.notificationDuration": {
+                        "NotificationDuration": 7
+                    }
+                }
+            }
+        }
+    }
+}
