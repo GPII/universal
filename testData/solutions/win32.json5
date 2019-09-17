@@ -6666,6 +6666,146 @@
             }
         ]
     },
+    "com.microsoft.windows.audioDescription": {
+        "name": "Windows video audio description feature",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETAUDIODESCRIPTION",
+                    "setAction": "SPI_SETAUDIODESCRIPTION",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "AUDIODESCRIPTION"
+                    }
+                },
+                "supportedSettings": {
+                    "AudioDescriptionOn": {
+                        "schema": {
+                            "title": "Video audio description",
+                            "description": "Hear descriptions of what's happening in videos",
+                            "default": 0,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "AudioDescriptionOn": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.audioDescription.AudioDescriptionEnabled",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.Enabled"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.audioDescription.AudioDescriptionEnabled": "AudioDescriptionOn.value"
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.notificationDuration": {
+        "name": "Windows notification duration",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMESSAGEDURATION",
+                    "setAction": "SPI_SETMESSAGEDURATION",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    }
+                },
+                "supportedSettings": {
+                    "Duration": {
+                        "schema": {
+                            "title": "Notification duration",
+                            "description": "Changes the time system notifications are displayed",
+                            "type": "number",
+                            "default": 5,
+                            "enum": [
+                                5,
+                                7,
+                                15,
+                                30,
+                                60,
+                                300
+                            ],
+                            "enumLabels": [
+                                "5s",
+                                "7s",
+                                "15s",
+                                "30s",
+                                "60s",
+                                "300s"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "Duration": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.notificationDuration.NotificationDuration",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.notificationDuration.NotificationDuration": "Duration.value"
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
     "com.microsoft.windows.language": {
         "name": "Windows Display Language",
         "contexts": {
