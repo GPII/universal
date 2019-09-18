@@ -52,7 +52,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.cloudStatusRequest", {
 // /ready,
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
-        name: "Flow Manager production tests",
+        name: "Flow Manager production tests -- status, login, and logout",
         config: gpii.tests.productionConfigTesting.config,
         expect: 6,
         components: {
