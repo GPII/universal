@@ -79,11 +79,8 @@ fluid.defaults("gpii.tests.productionConfigTesting.addExtraDocs", {
     sequence: [
         { funcName: "fluid.log", args: ["Adding extra test data..."]},
         {
-            func: "{addInBulk}.send",
-            args: [
-                gpii.tests.productionConfigTesting.extraTestData,
-                { port: gpii.tests.productionConfigTesting.couchdbUrl.port }
-            ]
+            func: "{addInBulk}.sendToDatabase",
+            args: [gpii.tests.productionConfigTesting.extraTestData]
         }, {
             event: "{addInBulk}.events.onComplete",
             listener: "jqUnit.assertEquals",

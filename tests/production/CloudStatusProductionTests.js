@@ -39,13 +39,6 @@ fluid.registerNamespace("gpii.tests.productionConfigTesting");
 require("../shared/DevelopmentTestDefs.js");
 require("./ProductionTestsUtils.js");
 
-fluid.defaults("gpii.tests.productionConfigTesting.cloudStatusRequest", {
-    gradeNames: ["kettle.test.request.http"],
-    host: gpii.tests.productionConfigTesting.cloudUrl.hostname,
-    hostname: gpii.tests.productionConfigTesting.cloudUrl.hostname,
-    expectedStatusCode: 200
-});
-
 // Flowmanager tests for:
 // /user/%gpiiKey/login and /user/%gpiiKey/logout (as defined in gpii.tests.development.testDefs),
 // /health,
@@ -81,12 +74,12 @@ fluid.defaults("gpii.tests.productionConfigTesting.cloudStatus", {
     sequence: [
         { funcName: "fluid.log", args: ["Cloud status tests:"]},
         {
-            func: "{healthRequest}.send"
+            func: "{healthRequest}.sendToCBFM"
         }, {
             event: "{healthRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testResponse"
         }, {
-            func: "{readyRequest}.send"
+            func: "{readyRequest}.sendToCBFM"
         }, {
             event: "{readyRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testResponse"

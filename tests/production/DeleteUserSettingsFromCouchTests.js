@@ -64,7 +64,7 @@ gpii.tests.productionConfigTesting.getPrefsSafeDoc = function (prefsSafeRequest,
         prefsSafeRequest.options.path = "/gpii/prefsSafe-" + prefsSafeRequest.options.gpiiKey;
         fluid.log("No Prefs Safe to retrieve for GPII key " + prefsSafeRequest.options.gpiiKey);
     }
-    prefsSafeRequest.send(null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port });
+    prefsSafeRequest.sendToDatabase();
 };
 
 gpii.tests.productionConfigTesting.testGetExtraAccessTokens = function (data, accessTokensRequest, docsToRemove) {
@@ -95,8 +95,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
         { funcName: "fluid.log", args: ["Deleting extra loaded data and access tokens generated during test runs:"]},
         {
             // remove the loaded GPII key "os_gnome" and its prefs safe
-            func: "{getOsGnomeKey}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getOsGnomeKey}.sendToDatabase"
         }, {
             event: "{getOsGnomeKey}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
@@ -110,8 +109,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
             // remove the GPII key "gpii_key_no_prefs_safe" and its generated prefs safe
-            func: "{getGpiiKeyNoPrefsSafe}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getGpiiKeyNoPrefsSafe}.sendToDatabase"
         }, {
             event: "{getGpiiKeyNoPrefsSafe}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
@@ -125,66 +123,57 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
             // remove loaded client credential data
-            func: "{getClientCredentialSchemaV01}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getClientCredentialSchemaV01}.sendToDatabase"
         }, {
             event: "{getClientCredentialSchemaV01}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
-            func: "{getClientCredentialNova}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getClientCredentialNova}.sendToDatabase"
         }, {
             event: "{getClientCredentialNova}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
-            func: "{getClientCredentialFailInIpVerification}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getClientCredentialFailInIpVerification}.sendToDatabase"
         }, {
             event: "{getClientCredentialFailInIpVerification}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
-            func: "{getClientCredentialFailInAllowedPrefsToWrite}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getClientCredentialFailInAllowedPrefsToWrite}.sendToDatabase"
         }, {
             event: "{getClientCredentialFailInAllowedPrefsToWrite}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
             // remove loaded client data
-            func: "{getClientOldSchema}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getClientOldSchema}.sendToDatabase"
         }, {
             event: "{getClientOldSchema}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
-            func: "{getClientNova}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getClientNova}.sendToDatabase"
         }, {
             event: "{getClientNova}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
-            func: "{getClientFailInIpVerification}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getClientFailInIpVerification}.sendToDatabase"
         }, {
             event: "{getClientFailInIpVerification}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
-            func: "{getClientFailInAllowedPrefsToWrite}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getClientFailInAllowedPrefsToWrite}.sendToDatabase"
         }, {
             event: "{getClientFailInAllowedPrefsToWrite}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
             // remove the GPII key "nonexistent_gpii_key" and its prefs safe
-            func: "{getNonExistentGpiiKey}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getNonExistentGpiiKey}.sendToDatabase"
         }, {
             event: "{getNonExistentGpiiKey}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
@@ -198,8 +187,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
             // remove access tokens generated during all test runs
-            func: "{getExtraAccessTokens}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getExtraAccessTokens}.sendToDatabase"
         }, {
             event: "{getExtraAccessTokens}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetExtraAccessTokens",

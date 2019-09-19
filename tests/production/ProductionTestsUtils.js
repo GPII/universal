@@ -36,11 +36,34 @@ gpii.tests.productionConfigTesting.couchdbUrl = url.parse(
 // Base grade for database requests
 fluid.defaults("gpii.tests.productionConfigTesting.dataBaseRequest", {
     gradeNames: ["kettle.test.request.http"],
-    port: gpii.tests.productionConfigTesting.couchdbUrl.port,
     host: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
     hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
     auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
-    expectedStatusCodes: [200, 404]
+    expectedStatusCodes: [200, 404],
+    invokers: {
+        sendToDatabase: {
+            funcName: "gpii.tests.productionConfigTesting.sendToRemoteHost",
+            args: [
+                "{that}",
+                gpii.tests.productionConfigTesting.couchdbUrl.port,
+                "{arguments}.0" // payload (optional)
+            ]
+        }
+    }
+});
+
+// Cloud based flowmanager status requests
+fluid.defaults("gpii.tests.productionConfigTesting.cloudStatusRequest", {
+    gradeNames: ["kettle.test.request.http"],
+    host: gpii.tests.productionConfigTesting.cloudUrl.hostname,
+    hostname: gpii.tests.productionConfigTesting.cloudUrl.hostname,
+    expectedStatusCode: 200,
+    invokers: {
+        sendToCBFM: {
+            funcName: "gpii.tests.productionConfigTesting.sendToRemoteHost",
+            args: ["{that}", gpii.tests.productionConfigTesting.cloudUrl.port]
+        }
+    }
 });
 
 // Access token deletion requests
@@ -71,8 +94,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteAccessTokensSequence", 
     sequence: [
         { funcName: "fluid.log", args: ["Delete extra test access tokens"]},
         {
-            func: "{getAccessTokensRequest}.send",
-            args: [null, { port: gpii.tests.productionConfigTesting.couchdbUrl.port }]
+            func: "{getAccessTokensRequest}.sendToDatabase"
         }, {
             event: "{getAccessTokensRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetAccessTokensForDeletion"
@@ -161,4 +183,8 @@ gpii.tests.productionConfigTesting.bulkDelete = function (bulkDeleteRequest, doc
 gpii.tests.productionConfigTesting.afterAccessTokensDeletion = function (data, request) {
     gpii.tests.productionConfigTesting.testStatusCode(data, request);
     gpii.test.cloudBased.oauth2.clearAccessTokenCache();
+};
+
+gpii.tests.productionConfigTesting.sendToRemoteHost = function (request, remotePort, payload) {
+    request.send(payload, { port: remotePort });
 };
