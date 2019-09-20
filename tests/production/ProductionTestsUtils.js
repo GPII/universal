@@ -174,10 +174,7 @@ gpii.tests.productionConfigTesting.bulkDelete = function (bulkDeleteRequest, doc
             bulkDocsArray.docs.push(aDocToRemove);
         }
     });
-    bulkDeleteRequest.send(
-        bulkDocsArray,
-        { port: gpii.tests.productionConfigTesting.couchdbUrl.port }
-    );
+    bulkDeleteRequest.sendToDatabase(bulkDocsArray);
 };
 
 gpii.tests.productionConfigTesting.afterAccessTokensDeletion = function (data, request) {
