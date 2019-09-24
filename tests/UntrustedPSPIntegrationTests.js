@@ -138,6 +138,23 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
     },
     // 4
     {
+        "flat": {
+            "contexts": {
+                "gpii-default": {
+                    "name": "Default preferences",
+                    "preferences": {
+                        "http://registry.gpii.net/common/magnification": 1.5,
+                        "http://registry.gpii.net/common/volume": 0.5,
+                        "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                            "http://registry.gpii.net/common/magnification": 3
+                        }
+                    }
+                }
+            }
+        }
+    },
+    // 4
+    {
     },
     // 5
     {
