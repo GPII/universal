@@ -153,10 +153,10 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
             }
         }
     },
-    // 4
+    // 5
     {
     },
-    // 5
+    // 6
     {
         "flat": {
             "contexts": {
@@ -169,7 +169,7 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
             }
         }
     },
-    // 6
+    // 7
     {
         "flat": {
             "contexts": {
