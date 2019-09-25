@@ -173,6 +173,21 @@ gpii.tests.pspIntegration.data = {
             }
         }
     },
+    afterChangeShowCrosshairs: {
+        "settingsHandlers": {
+            "gpii.gsettings": {
+                "data": [{
+                    "settings": {
+                        "mag-factor": 3,
+                        "show-cross-hairs": 1
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.magnifier"
+                    }
+                }]
+            }
+        }
+    },
     bright: {
         "settingsHandlers": {
             "gpii.gsettings": {
@@ -444,6 +459,86 @@ gpii.tests.pspIntegration.testDefs = [
             }, {
                 func: "gpii.test.checkConfiguration",
                 args: ["{tests}.options.data.afterChangeVolume.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+            }, {
+                event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                listener: "fluid.identity"
+            }, {
+                func: "{logoutRequest}.send"
+            }, {
+                event: "{logoutRequest}.events.onComplete",
+                listener: "gpii.test.logoutRequestListen"
+            }, {
+                func: "gpii.test.checkRestoredConfiguration",
+                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+            }, {
+                event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
+                listener: "fluid.identity"
+            }
+        ]
+    }, {
+        name: "GPII-4136: Sequential setting changes with the same scoped term on different settings",
+        expect: 12,
+        sequence: [
+            {
+                func: "gpii.test.expandSettings",
+                args: [ "{tests}", [ "contexts" ]]
+            }, {
+                func: "gpii.test.snapshotSettings",
+                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+            }, {
+                event: "{testCaseHolder}.events.onSnapshotComplete",
+                listener: "fluid.identity"
+            }, {
+                func: "{loginRequest}.send"
+            }, {
+                event: "{loginRequest}.events.onComplete",
+                listener: "gpii.test.loginRequestListen"
+            }, {
+                func: "gpii.test.checkConfiguration",
+                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+            }, {
+                event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                listener: "fluid.identity"
+            }, {
+                func: "{pspClient}.connect"
+            }, {
+                event: "{pspClient}.events.onConnect",
+                listener: "gpii.tests.pspIntegration.connectionSucceeded"
+            }, {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged"]
+            }, {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification"], 3]
+            }, {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged"]
+            }, {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferencesApplied"]
+            }, {
+                func: "gpii.test.checkConfiguration",
+                args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+            }, {
+                event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                listener: "fluid.identity"
+            }, {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/showCrosshairs"], 1]
+            }, {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged"]
+            }, {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferencesApplied"]
+            }, {
+                func: "gpii.test.checkConfiguration",
+                args: ["{tests}.options.data.afterChangeShowCrosshairs.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
