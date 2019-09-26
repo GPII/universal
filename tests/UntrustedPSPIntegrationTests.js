@@ -266,7 +266,13 @@ gpii.tests.pspIntegration.saveTestDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/common/pitch", "value"], 0.85]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/pitch": {
+                            value: 0.85
+                        }
+                    }
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -289,7 +295,9 @@ gpii.tests.pspIntegration.saveTestDefs = [
                 args: ["{that}", "{arguments}.0"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", [ "saveButtonClickCount" ], 1]
+                args: [ "{pspClient}", "modelChanged", {
+                    saveButtonClickCount: 1
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",

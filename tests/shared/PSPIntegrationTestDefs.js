@@ -39,16 +39,17 @@ fluid.defaults("gpii.tests.pspIntegration.resetRequestType", {
     path: "/user/reset/login"
 });
 
-gpii.tests.pspIntegration.sendMsg = function (client, path, value) {
+gpii.tests.pspIntegration.sendMsg = function (client, type, value) {
     client.send({
-        path: path,
-        value: value,
-        type: "ADD"
+        type: type,
+        value: value
     });
 };
 
 gpii.tests.pspIntegration.sendContextChange = function (client, newContext) {
-    gpii.tests.pspIntegration.sendMsg(client, ["activeContextName"], newContext);
+    gpii.tests.pspIntegration.sendMsg(client, "modelChanged", {
+        activeContextName: newContext
+    });
 };
 
 gpii.tests.pspIntegration.checkPayload = function (data, expectedType, expectedSettingControls) {
@@ -240,7 +241,13 @@ gpii.tests.pspIntegration.testDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", [ "settingControls", "http://registry\\.gpii\\.net/common/magnification", "value"], 3]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            value: 3
+                        }
+                    }
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -299,7 +306,13 @@ gpii.tests.pspIntegration.testDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/common/cursorSize", "value"], 0.9]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/cursorSize": {
+                            value: 0.9
+                        }
+                    }
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -316,7 +329,13 @@ gpii.tests.pspIntegration.testDefs = [
                 listener: "fluid.identity"
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/common/cursorSize", "value"], 0.5]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/cursorSize": {
+                            value: 0.5
+                        }
+                    }
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -375,7 +394,13 @@ gpii.tests.pspIntegration.testDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification", "value"], 3]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification": {
+                            value: 3
+                        }
+                    }
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -438,7 +463,13 @@ gpii.tests.pspIntegration.testDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: ["{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/common/magnification", "value"], 3]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            value: 3
+                        }
+                    }
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -451,7 +482,13 @@ gpii.tests.pspIntegration.testDefs = [
                 listener: "fluid.identity"
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: ["{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/common/volume", "value"], 0.75]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/volume": {
+                            value: 0.75
+                        }
+                    }
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -510,7 +547,13 @@ gpii.tests.pspIntegration.testDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification"], 3]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification": {
+                            value: 3
+                        }
+                    }
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -527,7 +570,13 @@ gpii.tests.pspIntegration.testDefs = [
                 listener: "fluid.identity"
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/showCrosshairs"], 1]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/showCrosshairs": {
+                            value: 1
+                        }
+                    }
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -649,7 +698,13 @@ gpii.tests.pspIntegration.testDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: ["{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/common/magnification", "value"], 3]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            value: 3
+                        }
+                    }
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -723,7 +778,13 @@ gpii.tests.pspIntegration.testDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: ["{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/common/magnification", "value"], 3]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            value: 3
+                        }
+                    }
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -807,7 +868,13 @@ gpii.tests.pspIntegration.testDefs = [
             }, {
                 // Issue a setting change that will be applied using the async mock settings handler
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/applications/org\\.gnome\\.orca.http://registry\\.gpii\\.net/common/screenReaderTTS/enabled", "value"], true]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.orca.http://registry\\.gpii\\.net/common/screenReaderTTS/enabled": {
+                            value: true
+                        }
+                    }
+                }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -874,7 +941,13 @@ gpii.tests.pspIntegration.testDefs = [
             },
             {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/common/magnification", "value"], 3]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            value: 3
+                        }
+                    }
+                }]
             },
             {
                 event: "{pspClient}.events.onReceiveMessage",
@@ -897,7 +970,13 @@ gpii.tests.pspIntegration.testDefs = [
             },
             {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/common/cursorSize", "value"], 0.9]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/cursorSize": {
+                            value: 0.9
+                        }
+                    }
+                }]
             },
             {
                 event: "{pspClient}.events.onReceiveMessage",
@@ -1023,7 +1102,13 @@ gpii.tests.pspIntegration.testDefs = [
             },
             {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/common/magnification", "value"], 3]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            "value": 3
+                        }
+                    }
+                }]
             },
             {
                 event: "{pspClient}.events.onReceiveMessage",
@@ -1048,7 +1133,13 @@ gpii.tests.pspIntegration.testDefs = [
                 // change a setting that is in default settings from the reset to standard file.
                 // settingControls.settingKey.schema.default should be set to the value from the default setting.
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", ["settingControls", "http://registry\\.gpii\\.net/common/cursorSize", "value"], 0.9]
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/cursorSize": {
+                            "value": 0.9
+                        }
+                    }
+                }]
             },
             {
                 event: "{pspClient}.events.onReceiveMessage",
