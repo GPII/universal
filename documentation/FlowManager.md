@@ -45,6 +45,15 @@ See [Reset Computer Documentation](ResetComputer.md) for more details about the 
 Note that a separate logout of "reset" is not necessary. The final condition of using the "reset" key is to have the
 "noUser" key log back in the system.
 
+### restore
+
+The reserved GPII key "restore" is to be used with the journal API to restore a specific journal. The API is:
+
+GET /journal/restore/:journalId
+
+Note that a separate logout of "restore" is not necessary. The final condition of using the "reset" key is to have the
+"noUser" key log back in the system.
+
 ## APIs on Local Flow Manager
 
 ### User Logon state change (GET /user/:gpiiKey/proximityTriggered)

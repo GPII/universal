@@ -37,16 +37,32 @@ socket.on("message", function (data) {
         return;
     };
 
+    // Uncomment lines below to try an example that a pspChannel client sends a "modelChanged" request to apply a preference.
+    // socket.send(JSON.stringify(
+    //     {
+    //         "type": "modelChanged",
+    //         value: {
+    //             settingControls: {
+    //                 "http://registry\\.gpii\\.net/common/DPIScale": {
+    //                     value: 1.75
+    //                 }
+    //             }
+    //         }
+    //     })
+    // );
+
+    // Uncomment lines below to try an example that a pspChannel client sends a "pullModel" request to read the setting value of a preference.
     socket.send(JSON.stringify(
         {
             "type": "modelChanged",
             value: {
                 settingControls: {
-                    "http://registry\\.gpii\\.net/common/DPIScale": {
-                        value: 1.75
+                    "http://registry\\.gpii\\.net/common/magnification": {
+                        value: true
                     }
                 }
             }
-        }));
+        })
+    );
 
 });
