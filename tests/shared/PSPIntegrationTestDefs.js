@@ -1188,7 +1188,7 @@ gpii.tests.pspIntegration.readPrefsTestDefs = [
                 args: [ "{pspClient}", "pullModel", {
                     settingControls: {
                         "http://registry\\.gpii\\.net/common/magnification": {
-                            "value": true
+                            "value": 1
                         }
                     }
                 }]

@@ -58,7 +58,7 @@ socket.on("message", function (data) {
             value: {
                 settingControls: {
                     "http://registry\\.gpii\\.net/common/magnification": {
-                        value: true
+                        value: 1
                     }
                 }
             }
