@@ -54,7 +54,7 @@ socket.on("message", function (data) {
     // Uncomment lines below to try an example that a pspChannel client sends a "pullModel" request to read the setting value of a preference.
     socket.send(JSON.stringify(
         {
-            "type": "modelChanged",
+            "type": "pullModel",
             value: {
                 settingControls: {
                     "http://registry\\.gpii\\.net/common/magnification": {
