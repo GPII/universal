@@ -348,7 +348,7 @@ gpii.tests.untrusted.pspIntegration.addConfig = function (testDefIn) {
     });
 };
 
-gpii.tests.untrusted.pspIntegration.testDefs = fluid.transform(gpii.tests.pspIntegration.testDefs, function (testDefIn, i) {
+gpii.tests.untrusted.pspIntegration.testDefs = fluid.transform(gpii.tests.pspIntegration.applyPrefsTestDefs, function (testDefIn, i) {
     var testDef = gpii.tests.untrusted.pspIntegration.addConfig(testDefIn);
 
     testDef.expect = testDef.expect + 2;

@@ -205,7 +205,7 @@ gpii.tests.pspIntegration.data = {
     }
 };
 
-gpii.tests.pspIntegration.testDefs = [
+gpii.tests.pspIntegration.applyPrefsTestDefs = [
     {
         name: "Simple settings change by PSP - change an existing user setting",
         expect: 8,
@@ -1145,6 +1145,58 @@ gpii.tests.pspIntegration.testDefs = [
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
                 args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.afterChangeCursorSize"]
+            }
+        ]
+    }
+];
+
+gpii.tests.pspIntegration.readPrefsTestDefs = [
+    {
+        name: "Read a setting",
+        // expect: 8,
+        expectedSettingControls: {
+            afterReadMagnification: {
+                "http://registry\\.gpii\\.net/common/magnification": {
+                    "value": 3,
+                    "schema": {
+                        "title": "Magnification",
+                        "description": "Level of magnification",
+                        "type": "number",
+                        "default": 1,
+                        "minimum": 1,
+                        "multipleOf": 0.1
+                    },
+                    "liveness": "live"
+                }
+            }
+        },
+        sequence: [
+            {
+                func: "{pspClient}.connect"
+            },
+            {
+                event: "{pspClient}.events.onConnect",
+                listener: "gpii.tests.pspIntegration.connectionSucceeded"
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", {}]
+            },
+            {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", "pullModel", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            "value": true
+                        }
+                    }
+                }]
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.afterReadMagnification"]
             }
         ]
     }
