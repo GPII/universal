@@ -37,7 +37,7 @@ socket.on("message", function (data) {
         return;
     };
 
-    // Uncomment lines below to try an example that a pspChannel client sends a "modelChanged" request to apply a preference.
+    // Uncomment lines below to try an example that a pspChannel client sends a "modelChanged" request to apply a preference change.
     // socket.send(JSON.stringify(
     //     {
     //         "type": "modelChanged",
