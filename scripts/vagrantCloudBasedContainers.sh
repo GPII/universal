@@ -50,7 +50,8 @@ GPII_PREFERENCES_CONFIG="gpii.config.preferencesServer.standalone.production"
 GPII_PREFERENCES_PORT=9081
 
 GPII_FLOWMANAGER_CONFIG="gpii.config.cloudBased.flowManager.production"
-GPII_FLOWMANAGER_PORT=9082
+GPII_CLOUD_FLOWMANAGER_PORT=9082
+GPII_LOCAL_FLOWMANAGER_PORT=8080
 GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL="http://preferences:${GPII_PREFERENCES_PORT}"
 
 # The URL to point to the flow manager docker container, only used by running the production config tests
@@ -59,7 +60,7 @@ GPII_CLOUD_URL="http://flowmanager:9082"
 # The URLs to test the readiness of each docker container
 COUCHDB_VIEW_URL="http://localhost:$COUCHDB_PORT/gpii/_design/views/_view/findPrefsSafeByGpiiKey?key=%22carla%22&include_docs=true"
 CARLA_PREFERENCES_URL="http://localhost:$GPII_PREFERENCES_PORT/preferences/carla"
-GPII_FLOWMANAGER_READY_URL="http://localhost:$GPII_FLOWMANAGER_PORT/ready"
+GPII_FLOWMANAGER_READY_URL="http://localhost:$GPII_CLOUD_FLOWMANAGER_PORT/ready"
 
 # Remove old containers (exit code is ignored)
 docker rm -f couchdb 2>/dev/null || true
@@ -94,11 +95,11 @@ docker run -d -p $GPII_PREFERENCES_PORT:$GPII_PREFERENCES_PORT --name preference
 # Wait for the preferences server container to be ready
 wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 $CARLA_PREFERENCES_URL
 
-# Start the flow manager container
-docker run -d -p $GPII_FLOWMANAGER_PORT:$GPII_FLOWMANAGER_PORT --name flowmanager --link couchdb --link preferences -e NODE_ENV=$GPII_FLOWMANAGER_CONFIG -e GPII_FLOWMANAGER_LISTEN_PORT=$GPII_FLOWMANAGER_PORT -e GPII_DATASOURCE_HOSTNAME=$DATASOURCE_HOSTNAME -e GPII_DATASOURCE_PORT=$COUCHDB_PORT -e GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL=$GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL $UNIVERSAL_IMAGE
+# Start the flow manager container (the CBFM)
+docker run -d -p $GPII_CLOUD_FLOWMANAGER_PORT:$GPII_CLOUD_FLOWMANAGER_PORT --name flowmanager --link couchdb --link preferences -e NODE_ENV=$GPII_FLOWMANAGER_CONFIG -e GPII_FLOWMANAGER_LISTEN_PORT=$GPII_CLOUD_FLOWMANAGER_PORT -e GPII_DATASOURCE_HOSTNAME=$DATASOURCE_HOSTNAME -e GPII_DATASOURCE_PORT=$COUCHDB_PORT -e GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL=$GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL $UNIVERSAL_IMAGE
 
 # Wait for the flow manager container to be ready
 wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 $GPII_FLOWMANAGER_READY_URL
 
 # Start the container to run production config tests
-docker run --name productionConfigTests --link flowmanager --link couchdb -e GPII_CLOUD_URL=$GPII_CLOUD_URL $UNIVERSAL_IMAGE $PRODTESTS_CMD
+docker run --name productionConfigTests --link flowmanager --link couchdb -e GPII_CLOUD_URL=$GPII_CLOUD_URL -e GPII_FLOWMANAGER_LISTEN_PORT=$GPII_LOCAL_FLOWMANAGER_PORT -e GPII_COUCHDB_URL=$DATALOADER_COUCHDB_URL $UNIVERSAL_IMAGE $PRODTESTS_CMD
