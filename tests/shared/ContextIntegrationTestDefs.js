@@ -24,57 +24,77 @@ fluid.registerNamespace("gpii.tests.contextIntegration");
 fluid.require("%gpii-universal");
 gpii.loadTestingSupport();
 
-
-fluid.defaults("gpii.tests.contextIntegration.environmentChangedRequestType", {
-    gradeNames: "kettle.test.request.http",
-    path: "/environmentChanged",
-    method: "PUT"
-});
-
 // NOTE: This inherits from from "gpii.test.testCaseHolder" via "gpii.test.integration.testCaseHolder.linux"
 // from which it gets loginRequest, logoutRequest and other standard events
 fluid.defaults("gpii.tests.contextIntegration.testCaseHolder", {
-    events: {
-        refreshEnvironmentChangedRequest: null
-    },
-    components: {
-        environmentChangedRequest: {
-            createOnEvent: "refreshEnvironmentChangedRequest",
-            type: "gpii.tests.contextIntegration.environmentChangedRequestType"
-        },
-        environmentChangedRequest2: {
-            type: "gpii.tests.contextIntegration.environmentChangedRequestType"
-        }
+    members: {
+        contextChangedPromise: null  // set during tests
     }
 });
 
 gpii.tests.contextIntegration.checkCurrentContext = function (lifecycleManager, gpiiKey, expected) {
     var session = lifecycleManager.getSession(gpiiKey);
+    fluid.log(expected, " -- ", session.model.activeContextName);
+    debugger;
     jqUnit.assertEquals("Checking that the activeContextName matches: ", expected, session.model.activeContextName);
 };
 
-
 // TODO: Remove the abominable duplication between these definitions and those in Testing.js by means of a FLUID-5903 scheme
-gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName) {
+// JS TODO: check that the above comment still applies
+gpii.tests.contextIntegration.changeContextAndCheck = function (contextName) {
     return [
         {
-            func: "{testCaseHolder}.events.refreshEnvironmentChangedRequest.fire"
+            // Make the context change
+            funcName: "gpii.tests.contextIntegration.changeContext",
+            args: [contextName, "{testCaseHolder}"]
         }, {
-            func: "{environmentChangedRequest}.send",
-            args: gpii.tests.contextIntegration.data.contexts[contextName].environment
+            // Check for configuration change, firing an "onCheckConfigurationComplete" event when done checking (test could fail)
+            funcName: "gpii.tests.contextIntegration.checkConfiguration",
+            args: ["{tests}.contexts." + contextName + ".settingsHandlers", "{nameResolver}",  "{testCaseHolder}.events.onCheckConfigurationComplete.fire", "{testCaseHolder}.contextChangedPromise" ]
         }, {
-            event: "{environmentChangedRequest}.events.onComplete"
-        }, {
-            func: "gpii.test.checkConfiguration",
-            args: ["{tests}.contexts." + contextName + ".settingsHandlers", "{nameResolver}",  "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
-        }, {
+            // Handle the completion of the above "check configuration" step
             event: "{testCaseHolder}.events.onCheckConfigurationComplete",
-            listener: "fluid.identity"
+            listener: "gpii.tests.contextIntegration.completeCheckConfigEvent"
+//           listener: "fluid.identity"
         }, {
+            // Check the current context -- should be contextName -- using the gpiiKey 'context1'.
             func: "gpii.tests.contextIntegration.checkCurrentContext",
             args: ["{lifecycleManager}", "context1", contextName]
         }
     ];
+};
+
+gpii.tests.contextIntegration.changeContext = function (contextName, testCaseHolder, testCaseNameForDebugging) {
+    debugger;
+    var idx = gpii.flowManager.local.flowManagers.length - 1;
+    var fm = gpii.flowManager.local.flowManagers[idx];
+    var cm = fm.contextManager;
+    // Note: if there is no change in context, 'undefined' is returned
+    testCaseHolder.contextChangedPromise = cm.contextChanged(contextName);
+    debugger;
+};
+
+gpii.tests.contextIntegration.changeEnvironment = function (newEnvironment) {
+    debugger;
+    var idx = gpii.flowManager.local.flowManagers.length - 1;
+    var fm = gpii.flowManager.local.flowManagers[idx];
+    var cm = fm.contextManager;
+    cm.environmentChanged(newEnvironment);
+};
+
+gpii.tests.contextIntegration.checkConfiguration = function (settingsHandlers, nameResolver, onComplete, contextChangedPromise) {
+    if (contextChangedPromise) {
+        contextChangedPromise.then(gpii.test.checkConfiguration(settingsHandlers, nameResolver, onComplete));
+    } else {
+        gpii.test.checkConfiguration(settingsHandlers, nameResolver, onComplete);
+    }
+};
+
+gpii.tests.contextIntegration.completeCheckConfigEvent = function () {
+    fluid.log("onCheckConfigurationComplete event");
+    fluid.log(arguments);
+    debugger;
+    fluid.identity();
 };
 
 gpii.tests.contextIntegration.data = {
@@ -235,7 +255,7 @@ gpii.tests.contextIntegration.fixtures = [
                     args: ["{lifecycleManager}", "context1", "gpii-default"]
                 }
             ],
-            gpii.tests.contextIntegration.changeEnvironmentAndCheck("bright"),
+            gpii.tests.contextIntegration.changeContextAndCheck("bright"),
             [
                 {
                     func: "{logoutRequest}.send"
@@ -265,14 +285,10 @@ gpii.tests.contextIntegration.fixtures = [
                     args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}",  "{testCaseHolder}.events.onSnapshotComplete.fire"]
                 }, {
                     event: "{testCaseHolder}.events.onSnapshotComplete",
-                    listener: "fluid.identity"
+                    listener: "gpii.tests.contextIntegration.snapShotComplete" //fluid.identity"
                 }, {
-                    func: "{environmentChangedRequest2}.send",
-                    args: {
-                        "http://registry.gpii.net/common/environment/illuminance": 500
-                    }
-                }, {
-                    event: "{environmentChangedRequest2}.events.onComplete"
+                    funcName: "gpii.tests.contextIntegration.changeEnvironment", //"gpii.tests.contextIntegration.changeContext",
+                    args: { "http://registry.gpii.net/common/environment/illuminance": 500 }
                 }, {
                     func: "{loginRequest}.send"
                 }, {
@@ -331,10 +347,10 @@ gpii.tests.contextIntegration.fixtures = [
                     args: ["{lifecycleManager}", "context1", "gpii-default"]
                 }
             ],
-            gpii.tests.contextIntegration.changeEnvironmentAndCheck("bright"),
-            gpii.tests.contextIntegration.changeEnvironmentAndCheck("gpii-default"),
-            gpii.tests.contextIntegration.changeEnvironmentAndCheck("noise"),
-            gpii.tests.contextIntegration.changeEnvironmentAndCheck("brightandnoise"),
+            gpii.tests.contextIntegration.changeContextAndCheck("bright"),
+            gpii.tests.contextIntegration.changeContextAndCheck("gpii-default"),
+            gpii.tests.contextIntegration.changeContextAndCheck("noise"),
+            gpii.tests.contextIntegration.changeContextAndCheck("brightandnoise"),
             [
                 {
                     func: "{logoutRequest}.send"
@@ -352,6 +368,10 @@ gpii.tests.contextIntegration.fixtures = [
         ]
     }
 ];
+gpii.tests.contextIntegration.snapShotComplete = function (event) {
+    debugger;
+    fluid.identity(event);
+};
 
 fluid.defaults("gpii.tests.contextIntegration.testCaseHolder.common.linux", {
     gradeNames: [
