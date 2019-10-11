@@ -7,11 +7,12 @@
 // This changes the following settings from the system:
 //     + FollowFocus: Narrator doesn't follow focus.
 //     + FollowCaret: Narrator now follows text insertion point.
-//     + Invert: Narrator invert the colours.
-//     + Magnification: Magnification is set to 150%.
-//     + MagnificationMode: Magnification mode is set to "Lens mode".
+//     + FollowMouse: Narrator now follows mouse.
+//     + Invert: Narrator doesn't invert the colours.
+//     + Magnification: Magnification is set to 250%.
+//     + MagnificationMode: Magnification mode is set to "Docked mode".
 //     + FollowNarrator: Magnifier follows Narrator cursor.
-//     + FadeToMagIcon: Magnifier collapses into a magnifying glass icon.
+//     + FadeToMagIcon: Magnifier doesn't collapse into a magnifying glass icon.
 //     + ZoomIncrement: Zoom increment is set to 50.
 //     + UseBitmapSmoothing: Smooth edges of image and text.
 //     + LensHeight: Now the lens height in magnifier lens mode is 50.
