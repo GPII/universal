@@ -7249,7 +7249,6 @@
                 },
                 "supportedSettings": {
                     "Invert": {
-                        // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
                         "schema": {
                             "title": "Invert Colours",
                             "description": "Enable colour inversion for Magnifier",
