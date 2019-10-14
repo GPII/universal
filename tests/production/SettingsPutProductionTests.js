@@ -56,8 +56,8 @@ fluid.defaults("gpii.tests.productionConfigTesting.settingsPut.testCaseHolder", 
         "gpii.tests.cloud.oauth2.accessTokensDeleteRequests"
     ],
     productionHostConfig: {
-        hostname: "flowmanager",
-        port: 9082
+        hostname: gpii.tests.productionConfigTesting.cloudUrl.hostname,
+        port: gpii.tests.productionConfigTesting.cloudUrl.port
     },
     distributeOptions: {
         "accessTokenRequest.hostConfig": {
@@ -93,7 +93,7 @@ gpii.test.cloudBased.oauth2.runDisruptedTests(
 
 /*
  * ========================================================================
- * Testing inability to updaet a snapset
+ * Testing inability to update a snapset
  * ========================================================================
  */
 

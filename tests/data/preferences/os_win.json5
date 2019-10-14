@@ -89,7 +89,13 @@
                         "FollowMouse": 1,
                         "Invert": 1,
                         "Magnification": 150,
-                        "MagnificationMode": 3
+                        "MagnificationMode": 3,
+                        "FollowNarrator": 0,
+                        "FadeToMagIcon": 1,
+                        "ZoomIncrement": 50,
+                        "UseBitmapSmoothing": 1,
+                        "LensHeight": 50,
+                        "LensWidth": 50
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.screenResolution": {
                         "screen-resolution": {
