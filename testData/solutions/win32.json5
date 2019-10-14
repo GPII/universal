@@ -10501,7 +10501,17 @@
                     "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                 },
                 "capabilitiesTransformations": {
-                    "ApplicationSettings": "ApplicationSettings"
+                    "ApplicationSettings": "ApplicationSettings",
+                    "ApplicationSettings.Speech.ScreenReadingItems.$t": {
+                        "transform": {
+                            "type": "fluid.transforms.jsonArrayToTaggedArray",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold\\.ApplicationSettings\\.Speech.ScreenReadingItems",
+                            "outputPath": "value",
+                            "tags": {
+                                "ReadItem": true
+                            }
+                        }
+                    }
                 },
                 "supportedSettings": {
                     // General
@@ -11288,20 +11298,20 @@
                     // Speech -> Screen reading -> Items to read
                     // TODO: Setting is stored in an array format in XML, we need to check how
                     // XMLSettingsHandler handles this case.
-                    // "ApplicationSettings.Speech.ScreenReadingItems.$t": {
-                    //     "schema": {
-                    //         "title": "Items to read",
-                    //         "description": "Selects the kind of items that shoud be readed.",
-                    //         "type": "array",
-                    //         "default": [
-                    //             "<ScreenReadItem ReadItem=\"true\">Buttons</ScreenReadItem>",
-                    //             "<ScreenReadItem ReadItem=\"true\">Lists</ScreenReadItem>",
-                    //             "<ScreenReadItem ReadItem=\"true\">Menus</ScreenReadItem>",
-                    //             "<ScreenReadItem ReadItem=\"true\">Text</ScreenReadItem>",
-                    //             "<ScreenReadItem ReadItem=\"true\">Other</ScreenReadItem>"
-                    //         ]
-                    //     }
-                    // },
+                    "ApplicationSettings.Speech.ScreenReadingItems.$t": {
+                        "schema": {
+                            "title": "Items to read",
+                            "description": "Selects the kind of items that shoud be readed.",
+                            "type": "array",
+                            "default": [
+                                // "<ScreenReadItem ReadItem=\"true\">Buttons</ScreenReadItem>",
+                                // "<ScreenReadItem ReadItem=\"true\">Lists</ScreenReadItem>",
+                                // "<ScreenReadItem ReadItem=\"true\">Menus</ScreenReadItem>",
+                                // "<ScreenReadItem ReadItem=\"true\">Text</ScreenReadItem>",
+                                // "<ScreenReadItem ReadItem=\"true\">Other</ScreenReadItem>"
+                            ]
+                        }
+                    },
                     // Speech -> Read by
                     "ApplicationSettings.Speech.SelectionType.$t": {
                         "schema": {
