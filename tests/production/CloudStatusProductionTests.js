@@ -45,27 +45,21 @@ require("./ProductionTestsUtils.js");
 // /ready,
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
-        name: "Flow Manager production tests",
+        name: "Flow Manager production tests -- status, login, and logout",
         config: gpii.tests.productionConfigTesting.config,
         expect: 6,
         components: {
             healthRequest: {
-                type: "kettle.test.request.http",
+                type: "gpii.tests.productionConfigTesting.cloudStatusRequest",
                 options: {
-                    hostname: "flowmanager",
                     path: "/health",
-                    method: "GET",
-                    expectedStatusCode: 200,
                     expectedPayload: {"isHealthy": true}
                 }
             },
             readyRequest: {
-                type: "kettle.test.request.http",
+                type: "gpii.tests.productionConfigTesting.cloudStatusRequest",
                 options: {
-                    hostname: "flowmanager",
                     path: "/ready",
-                    method: "GET",
-                    expectedStatusCode: 200,
                     expectedPayload: {"isReady": true}
                 }
             }
@@ -80,12 +74,12 @@ fluid.defaults("gpii.tests.productionConfigTesting.cloudStatus", {
     sequence: [
         { funcName: "fluid.log", args: ["Cloud status tests:"]},
         {
-            func: "{healthRequest}.send"
+            func: "{healthRequest}.sendToCBFM"
         }, {
             event: "{healthRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testResponse"
         }, {
-            func: "{readyRequest}.send"
+            func: "{readyRequest}.sendToCBFM"
         }, {
             event: "{readyRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testResponse"
@@ -97,13 +91,13 @@ fluid.defaults("gpii.tests.productionConfigTesting.cloudStatus", {
 fluid.defaults("gpii.tests.productionConfigTesting.cloudStatusSequence", {
     gradeNames: ["gpii.test.standardServerSequenceGrade"],
     sequenceElements: {
-        loginLogout: {
-            gradeNames: "gpii.tests.development.loginLogout",
-            priority: "after:startServer"
-        },
         cloudStatus: {
             gradeNames: "gpii.tests.productionConfigTesting.cloudStatus",
-            priority: "after:loginLogout"
+            priority: "after:startServer"
+        },
+        loginLogout: {
+            gradeNames: "gpii.tests.development.loginLogout",
+            priority: "after:cloudStatus"
         }
     }
 });
