@@ -141,6 +141,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.mirrorScreen"
+    },
+
+    {
         "id": "com.microsoft.windows.brightness"
     },
 
