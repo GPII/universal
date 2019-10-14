@@ -1,0 +1,101 @@
+// # Randal.json5
+//
+// This preference set changes several preferences from Read&Write Gold 12
+//
+// ## Testing
+//
+// This changes the following settings from the AT software:
+//      Prediction Window Behavior:
+//          + Display words alpahbetically: true
+//          + Follow the cursor while typing: true
+//          + Auto height adjust: true
+//          + Predict one word ahead: true
+//          + Insert space after predictions: false
+//          + Use spelling suggestions for the prediction list: false
+//
+//      Prediction Speech:
+//          + Speak when mouse pointer hovers over a word: false
+//          + Speak the word when clicked: true
+//          + Insert the word when clicked: false
+//
+//      Prediction Learning:
+//          + Spell check each word before learning: false
+//          + Automatically learn as I type: false
+//
+//      Scanning:
+//          + Resolution: 600 DPI
+//          + Color: GrayScale
+//          + Hide device settings: false
+//
+//      Device Setup:
+//          + Using Countdown: true
+//          + Countdown interval: 10
+//          + Using ADF: true
+//          + Using ADF with Duplex: true
+//
+//      Save Options:
+//          + Always use save location below: true
+//          + File path: "C:\\Users\\vagrant\\Download"
+//          + File name: ScannedDoc
+//          + Text only PDF Output: true
+//          + Plain text Word Output: true
+//          + Treat heading as book title: false
+//
+//      Output Types:
+//          + Enable ePup: true
+//          + Enable Web: true
+{
+    "flat": {
+        "name": "Randal",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
+                        // Prediction
+                        "ApplicationSettings.Prediction.DisplayAlphabetic.$t": true,
+                        "ApplicationSettings.Prediction.FollowCursor.$t": true,
+                        "ApplicationSettings.Prediction.AutoHeightAdjust.$t": true,
+                        "ApplicationSettings.Prediction.winPredictOneWordAhead.$t": true,
+                        "ApplicationSettings.Prediction.InsertSpaceAfterPred.$t": false,
+                        "ApplicationSettings.Prediction.UseSpellingForPredictions.$t": false,
+                        // Prediction Speech
+                        "ApplicationSettings.Prediction.SpeakPredictionOnMouseHover.$t": false,
+                        // This two settings are excluyent, need to encode that
+                        "ApplicationSettings.Prediction.SpeakOnWordClick.$t": true,
+                        "ApplicationSettings.Prediction.InsertOnWordClick.$t": false,
+                        // Prediction Learning
+                        "ApplicationSettings.Prediction.SpellCheckBeforeLearn.$t": false,
+                        "ApplicationSettings.Prediction.AutoLearnAsType.$t": false,
+                        // Scanning
+                        "ApplicationSettings.Scanning.dpi.$t": 600,
+                        "ApplicationSettings.Scanning.colormode.$t": "GrayScale",
+                        "ApplicationSettings.Scanning.HideInterface.$t": false,
+                        // Device Setup (Advanced settigns)
+                        "ApplicationSettings.Scanning.Countdown.$t": true,
+                        "ApplicationSettings.Scanning.CountdownInterval.$t": 10,
+                        "ApplicationSettings.Scanning.ADF.$t": true,
+                        "ApplicationSettings.Scanning.Duplex.$t": true,
+                        // Save Options
+                        "ApplicationSettings.Scanning.AutoSave.$t": true,
+                        "ApplicationSettings.Scanning.DefaultFilePath.$t": "C:\\Users\\vagrant\\Download",
+                        "ApplicationSettings.Scanning.DefaultFileName.$t": "ScannedDoc",
+                        // PDF Output
+                        "ApplicationSettings.Scanning.PdfTextOnly.$t": true,
+                        "ApplicationSettings.Scanning.MSWordRetainFormat.$t": true,
+                        "ApplicationSettings.Scanning.CoverFirstPage.$t": false,
+                        // Output Types
+                        "ApplicationSettings.Scanning.EnableEpub.$t": true,
+                        "ApplicationSettings.Scanning.EnableWeb.$t": true,
+
+                        "ApplicationSettings.Speech.ScreenReadingItems": [
+                            "Buttons",
+                            "Lists",
+                            "Menus"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
