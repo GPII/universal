@@ -13,6 +13,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
+    url = fluid.require("url", require, "url"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
@@ -24,26 +25,61 @@ gpii.tests.productionConfigTesting.config = {
     configPath: "%gpii-universal/tests/configs"
 };
 
+gpii.tests.productionConfigTesting.cloudUrl = url.parse(
+    process.env.GPII_CLOUD_URL
+);
+
+gpii.tests.productionConfigTesting.couchdbUrl = url.parse(
+    process.env.GPII_COUCHDB_URL
+);
+
+// Base grade for database requests
+fluid.defaults("gpii.tests.productionConfigTesting.dataBaseRequest", {
+    gradeNames: ["kettle.test.request.http"],
+    host: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
+    hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
+    auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
+    expectedStatusCodes: [200, 404],
+    invokers: {
+        sendToDatabase: {
+            funcName: "gpii.tests.productionConfigTesting.sendToRemoteHost",
+            args: [
+                "{that}",
+                gpii.tests.productionConfigTesting.couchdbUrl.port,
+                "{arguments}.0" // payload (optional)
+            ]
+        }
+    }
+});
+
+// Cloud based flowmanager status requests
+fluid.defaults("gpii.tests.productionConfigTesting.cloudStatusRequest", {
+    gradeNames: ["kettle.test.request.http"],
+    host: gpii.tests.productionConfigTesting.cloudUrl.hostname,
+    hostname: gpii.tests.productionConfigTesting.cloudUrl.hostname,
+    expectedStatusCode: 200,
+    invokers: {
+        sendToCBFM: {
+            funcName: "gpii.tests.productionConfigTesting.sendToRemoteHost",
+            args: ["{that}", gpii.tests.productionConfigTesting.cloudUrl.port]
+        }
+    }
+});
+
 // Access token deletion requests
 fluid.defaults("gpii.tests.cloud.oauth2.accessTokensDeleteRequests", {
     gradeNames: ["fluid.component"],
     components: {
         getAccessTokensRequest: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
                 path: "/gpii/_design/views/_view/findInfoByAccessToken",
-                method: "GET",
-                expectedStatusCodes: [200, 404],
                 tokensToRemove: []       // set by successful request.
             }
         },
         bulkDeleteRequest: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
                 path: "/gpii/_bulk_docs",
                 method: "POST",
                 expectedStatusCode: 201
@@ -58,8 +94,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteAccessTokensSequence", 
     sequence: [
         { funcName: "fluid.log", args: ["Delete extra test access tokens"]},
         {
-            func: "{getAccessTokensRequest}.send",
-            args: [null, { port: "5984" }]
+            func: "{getAccessTokensRequest}.sendToDatabase"
         }, {
             event: "{getAccessTokensRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetAccessTokensForDeletion"
@@ -139,10 +174,14 @@ gpii.tests.productionConfigTesting.bulkDelete = function (bulkDeleteRequest, doc
             bulkDocsArray.docs.push(aDocToRemove);
         }
     });
-    bulkDeleteRequest.send(bulkDocsArray, { port: 5984 });
+    bulkDeleteRequest.sendToDatabase(bulkDocsArray);
 };
 
 gpii.tests.productionConfigTesting.afterAccessTokensDeletion = function (data, request) {
     gpii.tests.productionConfigTesting.testStatusCode(data, request);
     gpii.test.cloudBased.oauth2.clearAccessTokenCache();
+};
+
+gpii.tests.productionConfigTesting.sendToRemoteHost = function (request, remotePort, payload) {
+    request.send(payload, { port: remotePort });
 };

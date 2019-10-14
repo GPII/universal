@@ -79,11 +79,8 @@ fluid.defaults("gpii.tests.productionConfigTesting.addExtraDocs", {
     sequence: [
         { funcName: "fluid.log", args: ["Adding extra test data..."]},
         {
-            func: "{addInBulk}.send",
-            args: [
-                gpii.tests.productionConfigTesting.extraTestData,
-                { port: "5984" }
-            ]
+            func: "{addInBulk}.sendToDatabase",
+            args: [gpii.tests.productionConfigTesting.extraTestData]
         }, {
             event: "{addInBulk}.events.onComplete",
             listener: "jqUnit.assertEquals",
@@ -108,10 +105,8 @@ gpii.tests.productionConfigTesting.addTestRecordsToDatabaseTests = [{
     config: gpii.tests.productionConfigTesting.config,
     components: {
         addInBulk: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
                 path: "/gpii/_bulk_docs",
                 method: "POST",
                 expectedStatusCode: 201
