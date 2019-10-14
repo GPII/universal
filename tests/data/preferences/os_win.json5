@@ -258,15 +258,13 @@
                         "InsertSpace": 0,
                         "Dock": 0
                     },
-<<<<<<< HEAD
                     "http://registry.gpii.net/applications/com.microsoft.windows.mirrorScreen": {
                         "ScreenMirrorConfig": {
                             "value": false
                         }
-=======
+                    },
                     "http://registry.gpii.net/applications/com.microsoft.windows.soundSentry": {
                         "WindowsEffect": 2
->>>>>>> master
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.volumeControl": {
                         "Volume": {
