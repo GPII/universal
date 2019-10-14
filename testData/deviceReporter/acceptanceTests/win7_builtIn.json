@@ -89,5 +89,9 @@
 
     {
         "id": "com.microsoft.windows.desktopBackgroundColor"
+    },
+
+    {
+        "id": "com.microsoft.windows.soundSentry"
     }
 ]

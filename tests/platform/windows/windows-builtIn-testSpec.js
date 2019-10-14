@@ -713,6 +713,18 @@ gpii.tests.windows.builtIn = [
                         }
                     }
                 }],
+                "com.microsoft.windows.soundSentry": [{
+                    "settings": {
+                        "WindowsEffect": 2
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility\\SoundSentry",
+                        "dataTypes": {
+                            "WindowsEffect": "REG_DWORD"
+                        }
+                    }
+                }],
                 "com.microsoft.windows.shortcutWarningMessage": [{
                     "settings": {
                         "Warning Sounds": 1
