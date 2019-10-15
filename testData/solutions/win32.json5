@@ -5119,6 +5119,56 @@
             }
         ]
     },
+    "com.microsoft.windows.mirrorScreen": {
+        "name": "Windows Screen Mirroring",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.nativeSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "functionName": "ScreenMirror"
+                },
+                "supportedSettings": {
+                    "ScreenMirrorConfig": {
+                        "schema": {
+                            "title": "Screen mirroring",
+                            "description": "Mirrors the primary screen into a secondary screen.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ScreenMirrorConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mirrorScreen.ScreenMirror",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mirrorScreen.ScreenMirror": "ScreenMirrorConfig.value"
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
     "com.microsoft.windows.cursors": {
         "name": "Windows Cursors",
         "contexts": {
@@ -7249,7 +7299,6 @@
                 },
                 "supportedSettings": {
                     "Invert": {
-                        // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
                         "schema": {
                             "title": "Invert Colours",
                             "description": "Enable colour inversion for Magnifier",
@@ -7306,10 +7355,12 @@
                             "type": "number",
                             "default": 2,
                             "enum": [
+                                1,
                                 2,
                                 3
                             ],
                             "enumLabels": [
+                               "Docked",
                                "FullScreen",
                                "Lens"
                             ]
@@ -9155,6 +9206,61 @@
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/nightScreen": "SystemSettings_Display_BlueLight_ManualToggleQuickAction.value"
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.soundSentry": {
+        "name": "Windows 10 SoundSentry",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "capabilities": [
+        ],
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Accessibility\\SoundSentry",
+                    "dataTypes": {
+                        "WindowsEffect": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "WindowsEffect": {
+                        "schema": {
+                            "title": "SoundSentry",
+                            "description": "Selects the desired visual notification for sounds.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "No visual alert",
+                                "Flash the title of the active window",
+                                "Flash the active window",
+                                "Flash the entire screen"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                },
+                "inverseCapabilitiesTransformations": {
                 }
             }
         },

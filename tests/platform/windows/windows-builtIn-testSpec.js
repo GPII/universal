@@ -109,6 +109,18 @@ gpii.tests.windows.builtIn = [
                             "functionName": "Volume"
                         }
                     }
+                ],
+                "com.microsoft.windows.mirrorScreen": [
+                    {
+                        "settings": {
+                            "ScreenMirrorConfig": {
+                                "value": false
+                            }
+                        },
+                        "options": {
+                            "functionName": "ScreenMirror"
+                        }
+                    }
                 ]
             },
             "gpii.windows.spiSettingsHandler": {
@@ -710,6 +722,18 @@ gpii.tests.windows.builtIn = [
                         "path": "Control Panel\\Desktop\\MuiCached",
                         "dataTypes": {
                             "MachinePreferredUILanguages": "REG_SZ"
+                        }
+                    }
+                }],
+                "com.microsoft.windows.soundSentry": [{
+                    "settings": {
+                        "WindowsEffect": 2
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility\\SoundSentry",
+                        "dataTypes": {
+                            "WindowsEffect": "REG_DWORD"
                         }
                     }
                 }],
