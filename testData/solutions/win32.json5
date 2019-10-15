@@ -10490,7 +10490,9 @@
                 }
             ]
         },
-        "capabilities": [],
+        "capabilities": [
+            "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold\\.ApplicationSettings\\.Speech.ScreenReadingItems"
+        ],
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
@@ -10502,14 +10504,22 @@
                 },
                 "capabilitiesTransformations": {
                     "ApplicationSettings": "ApplicationSettings",
-                    "ApplicationSettings.Speech.ScreenReadingItems.$t": {
+                    "ApplicationSettings\\.Speech\\.ScreenReadingItems\\.$t": {
                         "transform": {
-                            "type": "fluid.transforms.jsonArrayToTaggedArray",
+                            "type": "gpii.transformer.jsonArrayToTaggedArray",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold\\.ApplicationSettings\\.Speech.ScreenReadingItems",
                             "outputPath": "value",
                             "tags": {
-                                "ReadItem": true
+                                "ReadItem": false
                             }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold\\.ApplicationSettings\\.Speech.ScreenReadingItems": {
+                        "transform" : {
+                            "type": "gpii.transformer.jsonArrayToTaggedArray.invert",
+                            "inputPath": "ApplicationSettings\\.Speech\\.ScreenReadingItems\\.$t.value",
                         }
                     }
                 },
