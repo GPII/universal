@@ -10490,9 +10490,6 @@
                 }
             ]
         },
-        "capabilities": [
-            "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold\\.ApplicationSettings\\.Speech.ScreenReadingItems"
-        ],
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
@@ -10502,24 +10499,35 @@
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                 },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold.ApplicationSettings\\.Speech\\.ScreenReadingItems"
+                ],
                 "capabilitiesTransformations": {
                     "ApplicationSettings": "ApplicationSettings",
-                    "ApplicationSettings\\.Speech\\.ScreenReadingItems\\.$t": {
+                    "ApplicationSettings\\.Speech\\.ScreenReadingItems\\.ScreenReadItem": {
                         "transform": {
                             "type": "gpii.transformer.jsonArrayToTaggedArray",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold\\.ApplicationSettings\\.Speech.ScreenReadingItems",
-                            "outputPath": "value",
-                            "tags": {
-                                "ReadItem": false
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold.ApplicationSettings\\.Speech\\.ScreenReadingItems",
+                            "tag": "ReadItem",
+                            "elems": [
+                                "Buttons",
+                                "Lists",
+                                "Menus",
+                                "Text",
+                                "Other"
+                            ],
+                            "hasElemVal": {
+                                "isTrue": "true",
+                                "isFalse": "false"
                             }
                         }
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold\\.ApplicationSettings\\.Speech.ScreenReadingItems": {
+                    "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold.ApplicationSettings\\.Speech\\.ScreenReadingItems": {
                         "transform" : {
                             "type": "gpii.transformer.jsonArrayToTaggedArray.invert",
-                            "inputPath": "ApplicationSettings\\.Speech\\.ScreenReadingItems\\.$t.value",
+                            "inputPath": "ApplicationSettings\\.Speech\\.ScreenReadingItems\\.ScreenReadItem.value",
                         }
                     }
                 },
