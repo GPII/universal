@@ -913,7 +913,10 @@ gpii.tests.pspIntegration.testDefs = [
                 "gpii-default": {
                     "preferences": {
                         "http://registry.gpii.net/common/cursorSize": 0.8,
-                        "http://registry.gpii.net/common/volume": 1
+                        "http://registry.gpii.net/common/volume": 1,
+                        "http://registry.gpii.net/applications/com.microsoft.office": {
+                            "word-ribbon": "Basics+StandardSet"
+                        }
                     }
                 }
             }
@@ -942,6 +945,26 @@ gpii.tests.pspIntegration.testDefs = [
                         "default": 1
                     },
                     "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon": {
+                    "schema": {
+                        "title": "Word Ribbon Layout",
+                        "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                        "enum": [
+                            "StandardSet",
+                            "Basics+StandardSet",
+                            "Essentials+StandardSet",
+                            "Basics+Essentials+StandardSet"
+                        ],
+                        "enumLabels": [
+                            "Standard Set",
+                            "Basics and Standard Set",
+                            "Essentials and Standard Set",
+                            "Basic, Essentials, and Standard Set"
+                        ],
+                        "default": "Basics+StandardSet"
+                    },
+                    "liveness": "live"
                 }
             },
             afterChangeMagnification: {
@@ -965,6 +988,26 @@ gpii.tests.pspIntegration.testDefs = [
                         "minimum": 0,
                         "maximum": 1,
                         "default": 1
+                    },
+                    "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon": {
+                    "schema": {
+                        "title": "Word Ribbon Layout",
+                        "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                        "enum": [
+                            "StandardSet",
+                            "Basics+StandardSet",
+                            "Essentials+StandardSet",
+                            "Basics+Essentials+StandardSet"
+                        ],
+                        "enumLabels": [
+                            "Standard Set",
+                            "Basics and Standard Set",
+                            "Essentials and Standard Set",
+                            "Basic, Essentials, and Standard Set"
+                        ],
+                        "default": "Basics+StandardSet"
                     },
                     "liveness": "live"
                 },
@@ -1003,6 +1046,26 @@ gpii.tests.pspIntegration.testDefs = [
                         "minimum": 0,
                         "maximum": 1,
                         "default": 1
+                    },
+                    "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon": {
+                    "schema": {
+                        "title": "Word Ribbon Layout",
+                        "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                        "enum": [
+                            "StandardSet",
+                            "Basics+StandardSet",
+                            "Essentials+StandardSet",
+                            "Basics+Essentials+StandardSet"
+                        ],
+                        "enumLabels": [
+                            "Standard Set",
+                            "Basics and Standard Set",
+                            "Essentials and Standard Set",
+                            "Basic, Essentials, and Standard Set"
+                        ],
+                        "default": "Basics+StandardSet"
                     },
                     "liveness": "live"
                 }
