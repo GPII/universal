@@ -44,6 +44,12 @@
 //      Output Types:
 //          + Enable ePup: true
 //          + Enable Web: true
+//
+//      Speech:
+//          + Screen reader reads the following screen elements:
+//              - Buttons.
+//              - Lists.
+//              - Menus.
 {
     "flat": {
         "name": "Randal",
@@ -87,7 +93,7 @@
                         // Output Types
                         "ApplicationSettings.Scanning.EnableEpub.$t": true,
                         "ApplicationSettings.Scanning.EnableWeb.$t": true,
-
+                        // Speech
                         "ApplicationSettings.Speech.ScreenReadingItems": [
                             "Buttons",
                             "Lists",
