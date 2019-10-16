@@ -10527,7 +10527,7 @@
                     "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold.ApplicationSettings\\.Speech\\.ScreenReadingItems": {
                         "transform" : {
                             "type": "gpii.transformer.jsonArrayToTaggedArray.invert",
-                            "inputPath": "ApplicationSettings\\.Speech\\.ScreenReadingItems\\.ScreenReadItem.value",
+                            "inputPath": "ApplicationSettings\\.Speech\\.ScreenReadingItems\\.ScreenReadItem.value"
                         }
                     }
                 },
