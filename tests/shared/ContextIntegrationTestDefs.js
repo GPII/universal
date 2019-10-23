@@ -29,6 +29,15 @@ gpii.loadTestingSupport();
 fluid.defaults("gpii.tests.contextIntegration.testCaseHolder", {
     members: {
         contextChangedPromise: null  // set during tests
+    },
+    // Surface the contextManager to a location where it can be used by the test
+    // fixtures.
+    distributeOptions: {
+        record: {
+            funcName: "gpii.test.common.receiveComponent",
+            args: ["{testCaseHolder}", "{arguments}.0", "contextManager"]
+        },
+        target: "{that contextManager}.options.listeners.onCreate"
     }
 });
 
@@ -46,7 +55,7 @@ gpii.tests.contextIntegration.changeContextAndCheck = function (contextName) {
         {
             // Make the context change
             funcName: "gpii.tests.contextIntegration.changeContext",
-            args: [contextName, "{testCaseHolder}"]
+            args: [contextName, "{contextManager}", "{testCaseHolder}"]
         }, {
             // Check for configuration change, firing an "onCheckConfigurationComplete" event when done checking (test could fail)
             funcName: "gpii.tests.contextIntegration.checkConfiguration",
@@ -64,22 +73,15 @@ gpii.tests.contextIntegration.changeContextAndCheck = function (contextName) {
     ];
 };
 
-gpii.tests.contextIntegration.changeContext = function (contextName, testCaseHolder, testCaseNameForDebugging) {
-    debugger;
-    var idx = gpii.flowManager.local.flowManagers.length - 1;
-    var fm = gpii.flowManager.local.flowManagers[idx];
-    var cm = fm.contextManager;
-    // Note: if there is no change in context, 'undefined' is returned
-    testCaseHolder.contextChangedPromise = cm.contextChanged(contextName);
-    debugger;
+gpii.tests.contextIntegration.changeContext = function (contextName, contextManager, testCaseHolder, testCaseNameForDebugging) {
+    // If there is no change in context, the promise returned by
+    // contextChanged() is 'undefined'
+    testCaseHolder.contextChangedPromise = contextManager.contextChanged(contextName);
 };
 
-gpii.tests.contextIntegration.changeEnvironment = function (newEnvironment) {
+gpii.tests.contextIntegration.changeEnvironment = function (contextManager, newEnvironment) {
     debugger;
-    var idx = gpii.flowManager.local.flowManagers.length - 1;
-    var fm = gpii.flowManager.local.flowManagers[idx];
-    var cm = fm.contextManager;
-    cm.environmentChanged(newEnvironment);
+    contextManager.environmentChanged(newEnvironment);
 };
 
 gpii.tests.contextIntegration.checkConfiguration = function (settingsHandlers, nameResolver, onComplete, contextChangedPromise) {
@@ -288,7 +290,7 @@ gpii.tests.contextIntegration.fixtures = [
                     listener: "gpii.tests.contextIntegration.snapShotComplete" //fluid.identity"
                 }, {
                     funcName: "gpii.tests.contextIntegration.changeEnvironment", //"gpii.tests.contextIntegration.changeContext",
-                    args: { "http://registry.gpii.net/common/environment/illuminance": 500 }
+                    args: [ "{contextManager}", { "http://registry.gpii.net/common/environment/illuminance": 500 }]
                 }, {
                     func: "{loginRequest}.send"
                 }, {
