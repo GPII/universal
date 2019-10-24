@@ -8,7 +8,7 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.office": {
                         "word-ribbon": "Basics+StandardSet",
-                        "OverrideTabletMode":  2
+                        "tabletMode":  false
                     }
                 }
             }

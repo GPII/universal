@@ -126,7 +126,7 @@ gpii.tests.android.talkback = [
                     {
                         "settings": {
                             "tts_default_rate": 681,
-                            "tts_default_pitch": 50
+                            "tts_default_pitch": 75
                         },
                         "options": {
                             "settingType": "Secure"

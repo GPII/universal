@@ -138,8 +138,25 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
     },
     // 4
     {
+        "flat": {
+            "contexts": {
+                "gpii-default": {
+                    "name": "Default preferences",
+                    "preferences": {
+                        "http://registry.gpii.net/common/magnification": 1.5,
+                        "http://registry.gpii.net/common/volume": 0.5,
+                        "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                            "http://registry.gpii.net/common/magnification": 3
+                        }
+                    }
+                }
+            }
+        }
     },
     // 5
+    {
+    },
+    // 6
     {
         "flat": {
             "contexts": {
@@ -152,7 +169,7 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
             }
         }
     },
-    // 6
+    // 7
     {
         "flat": {
             "contexts": {
@@ -249,7 +266,7 @@ gpii.tests.pspIntegration.saveTestDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/pitch"], 0.8]
+                args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/pitch"], 0.85]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -288,7 +305,7 @@ gpii.tests.pspIntegration.saveTestDefs = [
                             "gpii-default": {
                                 "name": "Default preferences",
                                 "preferences": {
-                                    "http://registry.gpii.net/common/pitch": 0.8
+                                    "http://registry.gpii.net/common/pitch": 0.85
                                 }
                             }
                         }

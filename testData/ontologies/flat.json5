@@ -707,6 +707,14 @@
             "default": false
         }
     },
+    "http://registry.gpii.net/common/toggleKeys": {
+        "schema": {
+            "title": "Toggle Keys",
+            "description": "Whether to enable/disable toggle keys",
+            "type": "boolean",
+            "default": false
+        }
+    },
     "http://registry.gpii.net/common/subtitles/enabled": {
         "schema": {
             "title": "Subtitles",

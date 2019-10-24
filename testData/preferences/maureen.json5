@@ -1,0 +1,24 @@
+// # Maureen.json5
+//
+// This preference sets the Windows 10 screen mirroring feature on.
+//
+// ## Testing
+//
+// For testing this feature it's necessary to have a PC with two screens connected.
+// When logging in, the main display should be cloned into the secondary display.
+//
+{
+    "flat": {
+        "name": "maureen",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.mirrorScreen": {
+                        "ScreenMirror": true
+                    }
+                }
+            }
+        }
+    }
+}
