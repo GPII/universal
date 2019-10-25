@@ -44,7 +44,6 @@ fluid.defaults("gpii.tests.contextIntegration.testCaseHolder", {
 gpii.tests.contextIntegration.checkCurrentContext = function (lifecycleManager, gpiiKey, expected) {
     var session = lifecycleManager.getSession(gpiiKey);
     fluid.log(expected, " -- ", session.model.activeContextName);
-    debugger;
     jqUnit.assertEquals("Checking that the activeContextName matches: ", expected, session.model.activeContextName);
 };
 
@@ -63,8 +62,7 @@ gpii.tests.contextIntegration.changeContextAndCheck = function (contextName) {
         }, {
             // Handle the completion of the above "check configuration" step
             event: "{testCaseHolder}.events.onCheckConfigurationComplete",
-            listener: "gpii.tests.contextIntegration.completeCheckConfigEvent"
-//           listener: "fluid.identity"
+            listener: "fluid.identity"
         }, {
             // Check the current context -- should be contextName -- using the gpiiKey 'context1'.
             func: "gpii.tests.contextIntegration.checkCurrentContext",
@@ -73,25 +71,17 @@ gpii.tests.contextIntegration.changeContextAndCheck = function (contextName) {
     ];
 };
 
-gpii.tests.contextIntegration.changeContext = function (contextName, contextManager, testCaseHolder, testCaseNameForDebugging) {
-    // DEBUGGING
-    if (testCaseNameForDebugging) {
-        fluid.log("Context change made for '" + testCaseNameForDebugging + "'");
-    }
-    // If there is no context change, the promise returned by contextChanged()
-    // is 'undefined'
+gpii.tests.contextIntegration.changeContext = function (contextName, contextManager, testCaseHolder) {
+    // If no actual context change, the promise returned by contextChanged() is
+    // 'undefined'
     testCaseHolder.contextChangedPromise = contextManager.contextChanged(contextName);
 };
 
-//gpii.tests.contextIntegration.changeEnvironment = function (contextManager, newEnvironment) {
 gpii.tests.contextIntegration.updateContext = function (contextManager, newContext) {
-    debugger;
     contextManager.updateCurrentContext(newContext);
 };
 
 gpii.tests.contextIntegration.checkConfiguration = function (settingsHandlers, nameResolver, onComplete, contextChangedPromise) {
-    fluid.log(settingsHandlers, nameResolver, onComplete, contextChangedPromise);
-    debugger;  // !!! HERE
     if (contextChangedPromise) {
         contextChangedPromise.then(function () {
             gpii.test.checkConfiguration(settingsHandlers, nameResolver, onComplete);
@@ -99,13 +89,6 @@ gpii.tests.contextIntegration.checkConfiguration = function (settingsHandlers, n
     } else {
         gpii.test.checkConfiguration(settingsHandlers, nameResolver, onComplete);
     }
-};
-
-gpii.tests.contextIntegration.completeCheckConfigEvent = function () {
-    fluid.log("onCheckConfigurationComplete event");
-    fluid.log(arguments);
-    debugger;
-    fluid.identity();
 };
 
 gpii.tests.contextIntegration.data = {
@@ -280,15 +263,12 @@ gpii.tests.contextIntegration.fixtures = [
                     args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}",  "{testCaseHolder}.events.onSnapshotComplete.fire"]
                 }, {
                     event: "{testCaseHolder}.events.onSnapshotComplete",
-                    listener: "gpii.tests.contextIntegration.snapShotComplete" //fluid.identity"
+                    listener: "fluid.identity"
                 }, {
+                    // TODO:  is this test really necessary,
+                    // i.e., is contextManager.updateContext() a thing?
                     funcName: "gpii.tests.contextIntegration.updateContext",
                     args: [ "{contextManager}", "bright" ]
-                    // Returns 'undefined' promise since no user is logged in
-//2                    funcName: "gpii.tests.contextIntegration.changeContext",
-//2                    args: [ "bright", "{contextManager}", "{testCaseHolder}", "Context changed before login"]
-//1                    funcName: "gpii.tests.contextIntegration.changeEnvironment", //"gpii.tests.contextIntegration.changeContext",
-//1                    args: [ "{contextManager}", { "http://registry.gpii.net/common/environment/illuminance": 500 }]
                 }, {
                     func: "{loginRequest}.send"
                 }, {
@@ -368,10 +348,6 @@ gpii.tests.contextIntegration.fixtures = [
         ]
     }
 ];
-gpii.tests.contextIntegration.snapShotComplete = function (event) {
-    debugger;
-    fluid.identity(event);
-};
 
 fluid.defaults("gpii.tests.contextIntegration.testCaseHolder.common.linux", {
     gradeNames: [
