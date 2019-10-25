@@ -74,19 +74,28 @@ gpii.tests.contextIntegration.changeContextAndCheck = function (contextName) {
 };
 
 gpii.tests.contextIntegration.changeContext = function (contextName, contextManager, testCaseHolder, testCaseNameForDebugging) {
-    // If there is no change in context, the promise returned by
-    // contextChanged() is 'undefined'
+    // DEBUGGING
+    if (testCaseNameForDebugging) {
+        fluid.log("Context change made for '" + testCaseNameForDebugging + "'");
+    }
+    // If there is no context change, the promise returned by contextChanged()
+    // is 'undefined'
     testCaseHolder.contextChangedPromise = contextManager.contextChanged(contextName);
 };
 
-gpii.tests.contextIntegration.changeEnvironment = function (contextManager, newEnvironment) {
+//gpii.tests.contextIntegration.changeEnvironment = function (contextManager, newEnvironment) {
+gpii.tests.contextIntegration.updateContext = function (contextManager, newContext) {
     debugger;
-    contextManager.environmentChanged(newEnvironment);
+    contextManager.updateCurrentContext(newContext);
 };
 
 gpii.tests.contextIntegration.checkConfiguration = function (settingsHandlers, nameResolver, onComplete, contextChangedPromise) {
+    fluid.log(settingsHandlers, nameResolver, onComplete, contextChangedPromise);
+    debugger;  // !!! HERE
     if (contextChangedPromise) {
-        contextChangedPromise.then(gpii.test.checkConfiguration(settingsHandlers, nameResolver, onComplete));
+        contextChangedPromise.then(function () {
+            gpii.test.checkConfiguration(settingsHandlers, nameResolver, onComplete);
+        });
     } else {
         gpii.test.checkConfiguration(settingsHandlers, nameResolver, onComplete);
     }
@@ -110,10 +119,6 @@ gpii.tests.contextIntegration.data = {
     ],
     contexts: {
         "gpii-default": {
-            "environment": {
-                "http://registry.gpii.net/common/environment/illuminance": 200,
-                "http://registry.gpii.net/common/environment/auditory.noise": 10000
-            },
             "settingsHandlers": {
                 "gpii.gsettings": {
                     "data": [{
@@ -135,10 +140,6 @@ gpii.tests.contextIntegration.data = {
             }
         },
         "bright": {
-            "environment": {
-                "http://registry.gpii.net/common/environment/illuminance": 500,
-                "http://registry.gpii.net/common/environment/auditory.noise": 10000
-            },
             "settingsHandlers": {
                 "gpii.gsettings": {
                     "data": [{
@@ -174,10 +175,6 @@ gpii.tests.contextIntegration.data = {
             }
         },
         "noise": {
-            "environment": {
-                "http://registry.gpii.net/common/environment/illuminance": 200,
-                "http://registry.gpii.net/common/environment/auditory.noise": 30000
-            },
             "settingsHandlers": {
                 "gpii.gsettings": {
                     "data": [{
@@ -199,10 +196,6 @@ gpii.tests.contextIntegration.data = {
             }
         },
         "brightandnoise": {
-            "environment": {
-                "http://registry.gpii.net/common/environment/illuminance": 500,
-                "http://registry.gpii.net/common/environment/auditory.noise": 30000
-            },
             "settingsHandlers": {
                 "gpii.gsettings": {
                     "data": [{
@@ -248,7 +241,7 @@ gpii.tests.contextIntegration.fixtures = [
                     listener: "gpii.test.loginRequestListen"
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire", "Checking context/settings after login"]
                 }, {
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
@@ -289,8 +282,13 @@ gpii.tests.contextIntegration.fixtures = [
                     event: "{testCaseHolder}.events.onSnapshotComplete",
                     listener: "gpii.tests.contextIntegration.snapShotComplete" //fluid.identity"
                 }, {
-                    funcName: "gpii.tests.contextIntegration.changeEnvironment", //"gpii.tests.contextIntegration.changeContext",
-                    args: [ "{contextManager}", { "http://registry.gpii.net/common/environment/illuminance": 500 }]
+                    funcName: "gpii.tests.contextIntegration.updateContext",
+                    args: [ "{contextManager}", "bright" ]
+                    // Returns 'undefined' promise since no user is logged in
+//2                    funcName: "gpii.tests.contextIntegration.changeContext",
+//2                    args: [ "bright", "{contextManager}", "{testCaseHolder}", "Context changed before login"]
+//1                    funcName: "gpii.tests.contextIntegration.changeEnvironment", //"gpii.tests.contextIntegration.changeContext",
+//1                    args: [ "{contextManager}", { "http://registry.gpii.net/common/environment/illuminance": 500 }]
                 }, {
                     func: "{loginRequest}.send"
                 }, {
@@ -298,7 +296,7 @@ gpii.tests.contextIntegration.fixtures = [
                     listener: "gpii.test.loginRequestListen"
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.contexts.onlyBright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                    args: ["{tests}.contexts.onlyBright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire", "Checking context/settings switch before login"]
                 }, {
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
