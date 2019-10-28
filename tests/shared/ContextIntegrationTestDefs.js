@@ -262,7 +262,7 @@ gpii.tests.contextIntegration.fixtures = [
                     listener: "fluid.identity"
                 }, {
                     // TODO:  is this test valid?  It is a way to make the test
-                    // run, but is there be any real-world use for
+                    // run, but is there any real-world use for
                     // contextManager.updateCurrentContext()?  Note that this
                     // used to be handled via the /environmentChanged endpoint,
                     // which no longer exists.
