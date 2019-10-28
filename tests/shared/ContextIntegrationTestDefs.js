@@ -77,10 +77,6 @@ gpii.tests.contextIntegration.changeContext = function (contextName, contextMana
     testCaseHolder.contextChangedPromise = contextManager.contextChanged(contextName);
 };
 
-gpii.tests.contextIntegration.updateContext = function (contextManager, newContext) {
-    contextManager.updateCurrentContext(newContext);
-};
-
 gpii.tests.contextIntegration.checkConfiguration = function (settingsHandlers, nameResolver, onComplete, contextChangedPromise) {
     if (contextChangedPromise) {
         contextChangedPromise.then(function () {
@@ -265,10 +261,13 @@ gpii.tests.contextIntegration.fixtures = [
                     event: "{testCaseHolder}.events.onSnapshotComplete",
                     listener: "fluid.identity"
                 }, {
-                    // TODO:  is this test really necessary,
-                    // i.e., is contextManager.updateContext() a thing?
-                    funcName: "gpii.tests.contextIntegration.updateContext",
-                    args: [ "{contextManager}", "bright" ]
+                    // TODO:  is this test valid?  It is a way to make the test
+                    // run, but is there be any real-world use for
+                    // contextManager.updateCurrentContext()?  Note that this
+                    // used to be handled via the /environmentChanged endpoint,
+                    // which no longer exists.
+                    func: "{contextManager}.updateCurrentContext",
+                    args: ["bright"]
                 }, {
                     func: "{loginRequest}.send"
                 }, {

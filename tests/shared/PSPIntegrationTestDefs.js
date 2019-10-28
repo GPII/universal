@@ -22,12 +22,6 @@ fluid.registerNamespace("gpii.tests.pspIntegration");
 fluid.require("%gpii-universal");
 gpii.loadTestingSupport();
 
-fluid.defaults("gpii.tests.pspIntegration.environmentChangedRequestType", {
-    gradeNames: "kettle.test.request.http",
-    path: "/environmentChanged",
-    method: "PUT"
-});
-
 fluid.defaults("gpii.tests.pspIntegration.client", {
     gradeNames: "kettle.test.request.ws",
     path: "/pspChannel",
@@ -594,7 +588,7 @@ gpii.tests.pspIntegration.testDefs = [
     }, {
         // This test checks that the manually changed context from the user is not overridden
         // by a context change triggered by changes in the environment
-        name: "Manual context change via the PSP followed by a change in environment",
+        name: "Manual context change via the PSP followed by a change in environment",  // ??
         expect: 11,
         sequence: [
             {
@@ -653,10 +647,8 @@ gpii.tests.pspIntegration.testDefs = [
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
             }, {
-                func: "{environmentChangedRequest}.send", // change the environment to match "noise context"
-                args: { "http://registry.gpii.net/common/environment/auditory.noise": 30000 }
-            }, {
-                event: "{environmentChangedRequest}.events.onComplete"
+                func: "{contextManager}.updateCurrentContext",
+                args: ["noise"]
             }, {
                 func: "gpii.test.checkConfiguration", // should still be bright since manual overrides automatic context
                 args: ["{tests}.options.data.bright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
@@ -972,13 +964,19 @@ fluid.defaults("gpii.tests.pspIntegration.testCaseHolder.common.linux", {
         pspClient: {
             type: "gpii.tests.pspIntegration.client"
         },
-        environmentChangedRequest: {
-            type: "gpii.tests.pspIntegration.environmentChangedRequestType"
-        },
         resetRequest: {
             type: "gpii.tests.pspIntegration.resetRequestType"
         }
     },
     gpiiKey: "context1",
-    data: gpii.tests.pspIntegration.data
+    data: gpii.tests.pspIntegration.data,
+    // Surface the contextManager to a location where it can be used by the test
+    // fixtures.
+    distributeOptions: {
+        record: {
+            funcName: "gpii.test.common.receiveComponent",
+            args: ["{testCaseHolder}", "{arguments}.0", "contextManager"]
+        },
+        target: "{that contextManager}.options.listeners.onCreate"
+    }
 });
