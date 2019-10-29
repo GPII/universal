@@ -43,6 +43,7 @@
     "http://registry\\.gpii\\.net/common/cursorAcceleration": "control.mouseEmulation.cursorAcceleration",
     "http://registry\\.gpii\\.net/common/mouseEmulation/enabled": "control.mouseEmulation.-provisional-mouseEmulation/enabled",
     "http://registry\\.gpii\\.net/common/stickyKeys": "control.keyboardEnhancement.stickyKeys",
+    "http://registry\\.gpii\\.net/common/toggleKeys": "control.keyboardEnhancement.toggleKeys",
     "http://registry\\.gpii\\.net/common/slowKeysInterval": "control.keyboardEnhancement.slowKeys.slowKeysInterval",
     "http://registry\\.gpii\\.net/common/slowKeys/enabled": "control.keyboardEnhancement.slowKeys.-provisional-slowKeys/enabled",
     "http://registry\\.gpii\\.net/common/debounce/enabled": "control.keyboardEnhancement.debounceKeys.-provisional-debounce/enabled",

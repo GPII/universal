@@ -71,6 +71,7 @@ var testIncludes = [
     "../gpii/node_modules/gpii-ini-file/test/iniFileTests.js",
     "../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/authGrantFinderTests.js",
     "../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/authorizationServiceTests.js",
+    "../gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/test/OAuth2UtilitiesTests.js",
     "../gpii/node_modules/matchMakerFramework/test/MatchMakerFrameworkTests.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
     "../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
@@ -87,6 +88,7 @@ var testIncludes = [
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/singleInstance/test/SingleInstanceTests.js",
     "../gpii/node_modules/solutionsRegistry/test/all-tests.js",
+    "../gpii/node_modules/transformer/test/TransformerTests.js",
     "../gpii/node_modules/userListeners/test/all-tests.js"
 ];
 

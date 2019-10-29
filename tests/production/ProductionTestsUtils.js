@@ -13,6 +13,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
+    url = fluid.require("url", require, "url"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
@@ -24,26 +25,61 @@ gpii.tests.productionConfigTesting.config = {
     configPath: "%gpii-universal/tests/configs"
 };
 
+gpii.tests.productionConfigTesting.cloudUrl = url.parse(
+    process.env.GPII_CLOUD_URL
+);
+
+gpii.tests.productionConfigTesting.couchdbUrl = url.parse(
+    process.env.GPII_COUCHDB_URL
+);
+
+// Base grade for database requests
+fluid.defaults("gpii.tests.productionConfigTesting.dataBaseRequest", {
+    gradeNames: ["kettle.test.request.http"],
+    host: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
+    hostname: gpii.tests.productionConfigTesting.couchdbUrl.hostname,
+    auth: gpii.tests.productionConfigTesting.couchdbUrl.auth,
+    expectedStatusCodes: [200, 404],
+    invokers: {
+        sendToDatabase: {
+            funcName: "gpii.tests.productionConfigTesting.sendToRemoteHost",
+            args: [
+                "{that}",
+                gpii.tests.productionConfigTesting.couchdbUrl.port,
+                "{arguments}.0" // payload (optional)
+            ]
+        }
+    }
+});
+
+// Cloud based flowmanager status requests
+fluid.defaults("gpii.tests.productionConfigTesting.cloudStatusRequest", {
+    gradeNames: ["kettle.test.request.http"],
+    host: gpii.tests.productionConfigTesting.cloudUrl.hostname,
+    hostname: gpii.tests.productionConfigTesting.cloudUrl.hostname,
+    expectedStatusCode: 200,
+    invokers: {
+        sendToCBFM: {
+            funcName: "gpii.tests.productionConfigTesting.sendToRemoteHost",
+            args: ["{that}", gpii.tests.productionConfigTesting.cloudUrl.port]
+        }
+    }
+});
+
 // Access token deletion requests
 fluid.defaults("gpii.tests.cloud.oauth2.accessTokensDeleteRequests", {
     gradeNames: ["fluid.component"],
     components: {
         getAccessTokensRequest: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/_design/views/_view/findAuthorizationByAccessToken",
-                method: "GET",
-                expectedStatusCodes: [200, 404],
+                path: "/gpii/_design/views/_view/findInfoByAccessToken",
                 tokensToRemove: []       // set by successful request.
             }
         },
         bulkDeleteRequest: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
                 path: "/gpii/_bulk_docs",
                 method: "POST",
                 expectedStatusCode: 201
@@ -58,8 +94,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteAccessTokensSequence", 
     sequence: [
         { funcName: "fluid.log", args: ["Delete extra test access tokens"]},
         {
-            func: "{getAccessTokensRequest}.send",
-            args: [null, { port: "5984" }]
+            func: "{getAccessTokensRequest}.sendToDatabase"
         }, {
             event: "{getAccessTokensRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetAccessTokensForDeletion"
@@ -94,64 +129,11 @@ fluid.defaults("gpii.test.disruption.settings.sequenceGrade", {
     gradeNames: ["gpii.test.disruption", "gpii.tests.productionConfigTesting.flushAccessTokens"]
 });
 
-gpii.tests.productionConfigTesting.getKeyOrPrefsFromFile = function (filePath, id) {
-    var dataArray = fluid.require(filePath);
-    return fluid.find(dataArray, function (anEntry) {
-        if (anEntry._id === id) {
-            return anEntry;
-        }
-    }, null);
-};
-
-gpii.tests.productionConfigTesting.gpiiKeyNoPrefsSafe =
-    gpii.tests.productionConfigTesting.getKeyOrPrefsFromFile(
-        "%gpii-universal/tests/data/dbData/gpiiKeys.json",
-        "gpii_key_no_prefs_safe"
-    );
-
-gpii.tests.productionConfigTesting.settingsUserKey =
-    gpii.tests.productionConfigTesting.getKeyOrPrefsFromFile(
-        "%gpii-universal/build/tests/dbData/gpiiKeys.json",
-        "os_gnome"
-    );
-
-gpii.tests.productionConfigTesting.settingsUserPrefsSafe =
-    gpii.tests.productionConfigTesting.getKeyOrPrefsFromFile(
-        "%gpii-universal/build/tests/dbData/prefsSafes.json",
-        "prefsSafe-os_gnome"
-    );
-
-gpii.tests.productionConfigTesting.prefsUpdate = {
-    "contexts": {
-        "gpii-default": {
-            "name": "Default preferences",
-            "preferences": {
-                "http://registry.gpii.net/common/setting1": 12
-            }
-        }
-    }
-};
-
 gpii.tests.productionConfigTesting.testStatusCode = function (data, request) {
     jqUnit.assertEquals(
         "Checking status of " + request.options.path,
         request.options.expectedStatusCode, request.nativeResponse.statusCode
     );
-};
-
-gpii.tests.productionConfigTesting.testAddedToDatabase = function (data, request) {
-    var expected = request.options.expectedStatusCodes;
-    var actual = request.nativeResponse.statusCode;
-    jqUnit.assertNotEquals(
-        "Adding record to database using " + request.options.path +
-        ", status: " + actual,
-        expected.indexOf(actual), -1
-    );
-    // Store the added record's id and rev
-    if (actual === 201 || actual === 200) {
-        request.options.result = JSON.parse(data);
-        fluid.log(request.options.result);
-    }
 };
 
 gpii.tests.productionConfigTesting.testResponse = function (data, request) {
@@ -170,37 +152,6 @@ gpii.tests.productionConfigTesting.testStatusCodes = function (request) {
         "]; actual status: " + actual,
         fluid.contains(expected, actual)
     );
-};
-
-gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion = function (data, request) {
-    gpii.tests.productionConfigTesting.testStatusCodes(request);
-    // Mark and store the to-be-deleted record
-    if (request.nativeResponse.statusCode === 201 || request.nativeResponse.statusCode === 200) {
-        request.options.docToRemove = JSON.parse(data);
-        request.options.docToRemove._deleted = true;
-        fluid.log("Will remove ", request.options.docToRemove.type, " ", request.options.docToRemove._id);
-    } else {
-        fluid.log("Nothing to remove at ", request.options.path);
-    }
-};
-
-gpii.tests.productionConfigTesting.testGetExtraAccessTokens = function (data, accessTokensRequest) {
-    gpii.tests.productionConfigTesting.testStatusCodes(accessTokensRequest);
-    var tokens = JSON.parse(data);
-    if (tokens.rows) {
-        fluid.each(tokens.rows, function (aRow) {
-            fluid.each(accessTokensRequest.options.extraGpiiKeys, function (extraGpiiKey) {
-                var aToken = aRow.value.authorization;
-                if (aToken.gpiiKey === extraGpiiKey && aToken.clientCredentialId === "clientCredential-1") {
-                    aToken._deleted = true;
-                    accessTokensRequest.options.tokensToRemove.push(aToken);
-                    fluid.log("Will remove ", aToken.type, " for ", aToken.gpiiKey);
-                }
-            });
-        });
-    } else {
-        fluid.log("No access tokens to remove");
-    }
 };
 
 gpii.tests.productionConfigTesting.testGetAccessTokensForDeletion = function (data, accessTokensRequest) {
@@ -223,10 +174,14 @@ gpii.tests.productionConfigTesting.bulkDelete = function (bulkDeleteRequest, doc
             bulkDocsArray.docs.push(aDocToRemove);
         }
     });
-    bulkDeleteRequest.send(bulkDocsArray, { port: 5984 });
+    bulkDeleteRequest.sendToDatabase(bulkDocsArray);
 };
 
 gpii.tests.productionConfigTesting.afterAccessTokensDeletion = function (data, request) {
     gpii.tests.productionConfigTesting.testStatusCode(data, request);
     gpii.test.cloudBased.oauth2.clearAccessTokenCache();
+};
+
+gpii.tests.productionConfigTesting.sendToRemoteHost = function (request, remotePort, payload) {
+    request.send(payload, { port: remotePort });
 };

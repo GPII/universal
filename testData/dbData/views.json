@@ -8,8 +8,8 @@
             "findClientByOauth2ClientId": {
                 "map": "function(doc) {\n if (doc.type === 'clientCredential' && doc.revoked === false) {\n var record = { clientCredential: doc };\n if (doc.clientId) {\n record._id = doc.clientId;\n }\n emit(doc.oauth2ClientId, record);\n} \n}"
             },
-            "findAuthorizationByAccessToken": {
-                "map": "function(doc) {\n if (doc.type === 'gpiiAppInstallationAuthorization' && doc.revoked === false) {\n var record = { authorization: doc };\n if (doc.clientId) {\n record._id = doc.clientId;\n } \n emit(doc.accessToken, record);\n }\n }"
+            "findInfoByAccessToken": {
+                "map": "function(doc) {\n if (doc.type === 'gpiiAppInstallationAuthorization' && doc.revoked === false) {\n var record = { authorization: doc };\n if (doc.clientCredentialId) {\n record._id = doc.clientCredentialId;\n } \n emit(doc.accessToken, record);\n }\n }"
             },
             "findRelatedDocsForPrefsSafe": {
                 "map": "function(doc) {if (doc.type === 'gpiiKey' || doc.type === 'gpiiCloudSafeCredential') emit(doc.prefsSafeId, null)}"
@@ -21,10 +21,16 @@
                 "map": "function(doc) {if (doc.type === 'gpiiCloudSafeCredential') {emit(doc.gpiiExpressUserId, null);}}"
             },
             "findSnapsetPrefsSafes": {
-                "map": "function(doc) {if (doc.type === 'prefsSafe' && doc.prefsSafeType === 'snapset') {emit(doc._id, doc)}}"
+                "map": "function(doc) {if (doc.type === 'prefsSafe' && doc.prefsSafeType === 'snapset') { emit(doc._id, doc); }}"
             },
             "findAllGpiiKeys": {
-                "map": "function(doc) {if (doc.type === 'gpiiKey') {emit(doc._id, doc)}}"
+                "map": "function(doc) {if (doc.type === 'gpiiKey') { emit(doc._id, doc); }}"
+            },
+            "findAccessTokenByExpires": {
+                "map": "function(doc) {if (doc.type === 'gpiiAppInstallationAuthorization') emit(Date.parse(doc.timestampExpires), doc); }"
+            },
+            "findDocsBySchemaVersion": {
+                "map": "function(doc) {emit(doc.schemaVersion, doc); }"
             }
         }
     }

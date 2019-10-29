@@ -4240,7 +4240,6 @@
                             "description": "Position of the magnified area",
                             "default": 2,
                             "enum": [
-                                1,
                                 2,
                                 3
                             ],
@@ -5114,6 +5113,56 @@
                 }
             }
         },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.mirrorScreen": {
+        "name": "Windows Screen Mirroring",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.nativeSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "functionName": "ScreenMirror"
+                },
+                "supportedSettings": {
+                    "ScreenMirrorConfig": {
+                        "schema": {
+                            "title": "Screen mirroring",
+                            "description": "Mirrors the primary screen into a secondary screen.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ScreenMirrorConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mirrorScreen.ScreenMirror",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mirrorScreen.ScreenMirror": "ScreenMirrorConfig.value"
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -6625,6 +6674,22 @@
             }
         },
         "configure": [
+            // Remove current system wallpaper files.
+            {
+                "type": "gpii.windows.rm",
+                "path": "${{environment}.APPDATA}\\Microsoft\\Windows\\Themes\\CachedFiles",
+                "options": {
+                    "recursive": true,
+                    "silent": true
+                }
+            },
+            {
+                "type": "gpii.windows.rm",
+                "path": "${{environment}.APPDATA}\\Microsoft\\Windows\\Themes\\TranscodedWallpaper",
+                "options": {
+                    "silent": true
+                }
+            },
             // Set the "restore" theme.
             "settings.configure-theme",
             // Set the high-contrast theme.
@@ -6644,6 +6709,146 @@
                 "themeFile": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\LastSet}"
             }
         ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.audioDescription": {
+        "name": "Windows video audio description feature",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETAUDIODESCRIPTION",
+                    "setAction": "SPI_SETAUDIODESCRIPTION",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "AUDIODESCRIPTION"
+                    }
+                },
+                "supportedSettings": {
+                    "AudioDescriptionOn": {
+                        "schema": {
+                            "title": "Video audio description",
+                            "description": "Hear descriptions of what's happening in videos",
+                            "default": 0,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "AudioDescriptionOn": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.audioDescription.AudioDescriptionEnabled",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.Enabled"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.audioDescription.AudioDescriptionEnabled": "AudioDescriptionOn.value"
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.notificationDuration": {
+        "name": "Windows notification duration",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMESSAGEDURATION",
+                    "setAction": "SPI_SETMESSAGEDURATION",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    }
+                },
+                "supportedSettings": {
+                    "Duration": {
+                        "schema": {
+                            "title": "Notification duration",
+                            "description": "Changes the time system notifications are displayed",
+                            "type": "number",
+                            "default": 5,
+                            "enum": [
+                                5,
+                                7,
+                                15,
+                                30,
+                                60,
+                                300
+                            ],
+                            "enumLabels": [
+                                "5s",
+                                "7s",
+                                "15s",
+                                "30s",
+                                "60s",
+                                "300s"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "Duration": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.notificationDuration.NotificationDuration",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.notificationDuration.NotificationDuration": "Duration.value"
+                }
+            }
+        },
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -6779,6 +6984,284 @@
             }
         ]
     },
+    "com.microsoft.windows.toggleKeys": {
+        "name": "Windows Toggle keys feature",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETTOGGLEKEYS",
+                    "setAction": "SPI_SETTOGGLEKEYS",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "TOGGLEKEYS"
+                    }
+                },
+                "supportedSettings": {
+                    "ToggleKeysOn": {
+                        "schema": {
+                            "title": "ToggleKeys accesibility feature",
+                            "description": "Enable/Disable ToggleKeys feature",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ToggleKeysOn": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/toggleKeys",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.dwFlags.TKF_TOGGLEKEYSON"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/toggleKeys": "ToggleKeysOn.value"
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.underlineMenuShortcuts": {
+        "name": "Underline menu shortcuts",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configureShortcuts": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETKEYBOARDCUES",
+                    "setAction": "SPI_SETKEYBOARDCUES",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    }
+                },
+                "supportedSettings": {
+                    "UnderlineMenuShortcutsOn": {
+                        "schema": {
+                            "title": "Enable/Disable underlaying menu shortcuts",
+                            "description": "Displays a underline showing which is the shortcut to active a menu item",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "UnderlineMenuShortcutsOn": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled": "UnderlineMenuShortcutsOn.value"
+                }
+            },
+            "keyboardPreferred": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETKEYBOARDPREF",
+                    "setAction": "SPI_SETKEYBOARDPREF",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    }
+                },
+                "supportedSettings": {
+                    "KeyboardPreferenceOn": {
+                        "schema": {
+                            "title": "Keyboard as preferred input method",
+                            "description": "Set the keyboard as the preferred input method",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "KeyboardPreferenceOn": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.KeyboardPrefEnabled",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.KeyboardPrefEnabled": "KeyboardPreferenceOn.value"
+                }
+            }
+        },
+        "configure": [
+            "settings.configureShortcuts",
+            "settings.keyboardPreferred"
+        ],
+        "restore": [
+            "settings.keyboardPreferred",
+            "settings.configureShortcuts"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.shortcutWarningMessage": {
+        "name": "Warning messages for shortcuts",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Accessibility",
+                    "dataTypes": {
+                        "Warning Sounds": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "Warning Sounds": {
+                        "schema": {
+                            "title": "Shortcut warning messages",
+                            "description": "Enable/Disable warning messages when changing a setting with a shortcut",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "Warning Sounds": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled": "Warning Sounds.value"
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.shortcutWarningSound": {
+        "name": "Warning sounds for shortcuts",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Accessibility",
+                    "dataTypes": {
+                        "Sound on Activation": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "Sound on Activation": {
+                        "schema": {
+                            "title": "Shortcut warning sounds",
+                            "description": "Enable/Disable warning sounds when changing a setting with a shortcut",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "Sound on Activation": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningSound.Enabled",
+                            "false": 0,
+                            "true": 1
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningSound.Enabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "Sound on Activation",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    }
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
     "com.microsoft.windows.magnifier": {
         "name": "Windows Built-in Screen Magnifier",
         "contexts": {
@@ -6805,13 +7288,17 @@
                         "FollowFocus": "REG_DWORD",
                         "FollowCaret": "REG_DWORD",
                         "FollowMouse": "REG_DWORD",
+                        "FollowNarrator": "REG_DWORD",
                         "MagnificationMode": "REG_DWORD",
-                        "ZoomIncrement": "REG_DWORD"
+                        "FadeToMagIcon": "REG_DWORD",
+                        "ZoomIncrement": "REG_DWORD",
+                        "UseBitmapSmoothing": "REG_DWORD",
+                        "LensHeight": "REG_DWORD",
+                        "LensWidth": "REG_DWORD"
                     }
                 },
                 "supportedSettings": {
                     "Invert": {
-                        // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
                         "schema": {
                             "title": "Invert Colours",
                             "description": "Enable colour inversion for Magnifier",
@@ -6823,7 +7310,7 @@
                         "schema": {
                             "title": "Magnification",
                             "description": "Set up magnification level",
-                            "type": "integer",
+                            "type": "number",
                             "default": 200,
                             "minimum": 100,
                             "maximum": 1600
@@ -6853,10 +7340,19 @@
                             "enumLabels": ["Off", "On"]
                         }
                     },
+                    "FollowNarrator": {
+                        "schema": {
+                            "title": "Magnifier follows Narrator",
+                            "description": "Magnifier follows the Narrator cursor",
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
+                        }
+                    },
                     "MagnificationMode": {
                         "schema": {
                             "title": "Magnifier position",
                             "description": "Position of the magnified area",
+                            "type": "number",
                             "default": 2,
                             "enum": [
                                 1,
@@ -6864,18 +7360,70 @@
                                 3
                             ],
                             "enumLabels": [
-                                "TopHalf", "FullScreen", "Lens"
+                               "Docked",
+                               "FullScreen",
+                               "Lens"
                             ]
+                        }
+                    },
+                    "FadeToMagIcon": {
+                        "schema": {
+                            "title": "Collapse into magnifiying glass",
+                            "description": "Collapse Magnifier window into a floating transparent magnifying glass.",
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "ZoomIncrement": {
                         "schema": {
                             "title": "Zoom Increment",
-                            "description": "How much to increase or decrease the zoom level at once.",
+                            "description": "Change zoom increments.",
+                            "type": "number",
+                            "default": 100,
+                            "enum": [
+                                25,
+                                50,
+                                100,
+                                150,
+                                200,
+                                400
+                            ],
+                            "enumLabels": [
+                               "25%",
+                               "50%",
+                               "100% (default)",
+                               "150%",
+                               "200%",
+                               "400%"
+                            ]
+                        }
+                    },
+                    "UseBitmapSmoothing": {
+                        "schema": {
+                            "title": "Smooth edges of images and text",
+                            "description": "Enables/Disables smoothing for edges",
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
+                        }
+                    },
+                    "LensHeight": {
+                        "schema": {
+                            "title": "Lens Height",
+                            "description": "Modifies the height of the magnifier lens.",
                             "type": "integer",
-                            "enum": [25, 50, 100, 150, 200, 400],
-                            "enumLabels": ["25 %", "50 %", "100 %", "150 %", "200 %", "400 %"],
-                            "default": 100
+                            "minimum": 10,
+                            "maximum": 100,
+                            "default": 30
+                        }
+                    },
+                    "LensWidth": {
+                        "schema": {
+                            "title": "Lens Width",
+                            "description": "Modifies the width of the magnifier lens.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 100,
+                            "default": 30
                         }
                     }
                 },
@@ -6961,8 +7509,66 @@
                         }
                     ]
                 }
+            },
+            "configureSystemSettings": {
+                "type": "gpii.windows.systemSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "Async": true,
+                    "CheckResult": true
+                },
+                "supportedSettings": {
+                    "SystemSettings_Accessibility_Magnifier_IsAutoStartEnabled": {
+                        "schema": {
+                            "title": "Auto Start Magnifier",
+                            "description": "Start Magnifier after sign-in.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "SystemSettings_Accessibility_Magnifier_IsAutoStartOnLogonDesktopEnabled": {
+                        "schema": {
+                            "title": "Auto Start Magnifier for everyone",
+                            "description": "Start Magnifier before sign-in.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "SystemSettings_Accessibility_Magnifier_IsAutoStartEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableAutoStart",
+                            "outputPath": "value"
+                        }
+                    },
+                    "SystemSettings_Accessibility_Magnifier_IsAutoStartOnLogonDesktopEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableSystemAutoStart",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableAutoStart": "SystemSettings_Accessibility_Magnifier_IsAutoStartEnabled.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableSystemAutoStart": "SystemSettings_Accessibility_Magnifier_IsAutoStartOnLogonDesktopEnabled.value"
+                }
             }
         },
+        "update": [
+            "settings.configure",
+            "settings.configureSystemSettings"
+        ],
+        "configure": [
+            "settings.configure",
+            "settings.configureSystemSettings"
+        ],
+        "restore": [
+            "settings.configure",
+            "settings.configureSystemSettings"
+        ],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.windows.enableRegisteredAT",
@@ -8600,6 +9206,61 @@
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/nightScreen": "SystemSettings_Display_BlueLight_ManualToggleQuickAction.value"
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.soundSentry": {
+        "name": "Windows 10 SoundSentry",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "capabilities": [
+        ],
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Accessibility\\SoundSentry",
+                    "dataTypes": {
+                        "WindowsEffect": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "WindowsEffect": {
+                        "schema": {
+                            "title": "SoundSentry",
+                            "description": "Selects the desired visual notification for sounds.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "No visual alert",
+                                "Flash the title of the active window",
+                                "Flash the active window",
+                                "Flash the entire screen"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                },
+                "inverseCapabilitiesTransformations": {
                 }
             }
         },
@@ -10593,19 +11254,19 @@
                     },
                     "ApplicationSettings.Screenshot.ScreenshotTo.$t": {
                         "schema": {
-                            "title": "Capture operation",
-                            "description": "Specifies the type of operation that is needed for making a screenshot.",
+                            "title": "Capture target",
+                            "description": "Specifies the capture target of the screenshot operation.",
                             "enum": [
-                                "Drawing Rectangle",
-                                "Drawing Freehand",
-                                "Hover"
+                                "Window",
+                                "Microsoft Word",
+                                "Text Reader"
                             ],
                             "enumLabels": [
-                                "Drawing Rectangle",
-                                "Drawing Freehand",
-                                "Hover"
+                                "Window",
+                                "Microsoft Word",
+                                "Text Reader"
                             ],
-                            "default": "Drawing Rectangle"
+                            "default": "Window"
                         }
                     },
                     "ApplicationSettings.Screenshot.AppendToMsWordDoc.$t": {
@@ -15380,6 +16041,166 @@
                 }
             }
         },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.office": {
+        "name": "Microsoft Office",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure.common-tabletmode":  {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Office\\16.0\\Common",
+                    "dataTypes": {
+                        "OverrideTabletMode": "REG_DWORD",
+                        "OverridePointerMode": "REG_DWORD"
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "OverrideTabletMode": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.tabletMode",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
+                    "OverridePointerMode": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.tabletMode",
+                            "true": 2,
+                            "false": 1
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "OverrideTabletMode": {
+                        "schema": {
+                            "title": "Enable Tablet Mode",
+                            "description": "Display larger ribbon buttons that are easier to touch",
+                            "type": "number",
+                            "enum": [
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "OverridePointerMode": {
+                        "schema": {
+                            "title": "Enable Tablet Mode",
+                            "description": "Display larger ribbon buttons that are easier to touch",
+                            "type": "number",
+                            "enum": [
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    }
+                }
+            },
+            "configure.ribbons": {
+                "type": "gpii.settingsHandlers.remoteFileSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "settings": {
+                        "word-ribbon": {
+                            "path": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Word.officeUI",
+                            "url": "https://raw.githubusercontent.com/GPII/gpii-assets/master/dataBlocks/officeRibbon/Word%20%value.xml",
+                            "cache": true
+                        },
+                        "excel-ribbon": {
+                            "path": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Excel.officeUI",
+                            "url": "https://raw.githubusercontent.com/GPII/gpii-assets/master/dataBlocks/officeRibbon/Excel%20%value.xml",
+                            "cache": true
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "word-ribbon": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon",
+                    "excel-ribbon": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-ribbon"
+                },
+                "supportedSettings": {
+                    "word-ribbon": {
+                        "schema": {
+                            "title": "Word Ribbon Layout",
+                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                            "enum": [
+                                "StandardSet",
+                                "Basics+StandardSet",
+                                "Essentials+StandardSet",
+                                "Basics+Essentials+StandardSet"
+                            ],
+                            "enumLabels": [
+                                "Standard Set",
+                                "Basics and Standard Set",
+                                "Essentials and Standard Set",
+                                "Basic, Essentials, and Standard Set"
+                            ],
+                            "default": "StandardSet"
+                        }
+                    },
+                    "excel-ribbon": {
+                        "schema": {
+                            "title": "Excel Ribbon Layout",
+                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for Excel",
+                            "enum": [
+                                "StandardSet",
+                                "Basics+StandardSet",
+                                "Essentials+StandardSet",
+                                "Basics+Essentials+StandardSet"
+                            ],
+                            "enumLabels": [
+                                "Standard Set",
+                                "Basics and Standard Set",
+                                "Essentials and Standard Set",
+                                "Basic, Essentials, and Standard Set"
+                            ],
+                            "default": "StandardSet"
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure.ribbons",
+            "settings.configure.common-tabletmode",
+            {
+                type: "gpii.windows.office.reloadRibbon",
+                application: "Word"
+            }
+        ],
+        "restore": [
+            "settings.configure.ribbons",
+            "settings.configure.common-tabletmode",
+            {
+                type: "gpii.windows.office.reloadRibbon",
+                application: "Word"
+            }
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"

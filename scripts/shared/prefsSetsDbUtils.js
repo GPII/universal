@@ -55,7 +55,7 @@ gpii.prefsSetsDbUtils.generateKeyData = function (gpiiKeyId, preferences, prefsS
     var newGpiiKey = {
         "_id": gpiiKeyId,
         "type": "gpiiKey",
-        "schemaVersion": "0.1",
+        "schemaVersion": "0.2",
         "prefsSafeId": prefsSafeId,
         "prefsSetId": "gpii-default",
         "revoked": false,
@@ -67,7 +67,7 @@ gpii.prefsSetsDbUtils.generateKeyData = function (gpiiKeyId, preferences, prefsS
     var newPrefsSafe = {
         "_id": prefsSafeId,
         "type": "prefsSafe",
-        "schemaVersion": "0.1",
+        "schemaVersion": "0.2",
         "prefsSafeType": prefsSafeType || "user",
         "name": gpiiKeyId,
         "email": null,

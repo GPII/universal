@@ -70,6 +70,12 @@ fluid.defaults("gpii.tests.untrusted.pspIntegration.testCaseHolder", {
     gradeNames: [
         "gpii.tests.pspIntegration.testCaseHolder.common.linux"
     ],
+    distributeOptions: {
+        "acceptance.defaultSettings": {
+            record: "{that}.options.defaultSettings",
+            target: "{that gpii.flowManager.local}.options.defaultSettings"
+        }
+    },
     components: {
         rawPrefsAtStart: {
             type: "gpii.test.untrusted.pspIntegration.rawPrefsRequest"
@@ -132,8 +138,25 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
     },
     // 4
     {
+        "flat": {
+            "contexts": {
+                "gpii-default": {
+                    "name": "Default preferences",
+                    "preferences": {
+                        "http://registry.gpii.net/common/magnification": 1.5,
+                        "http://registry.gpii.net/common/volume": 0.5,
+                        "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                            "http://registry.gpii.net/common/magnification": 3
+                        }
+                    }
+                }
+            }
+        }
     },
     // 5
+    {
+    },
+    // 6
     {
         "flat": {
             "contexts": {
@@ -146,7 +169,7 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
             }
         }
     },
-    // 6
+    // 7
     {
         "flat": {
             "contexts": {
@@ -307,8 +330,8 @@ gpii.tests.pspIntegration.saveTestDefs = [
 gpii.tests.untrusted.pspIntegration.addConfig = function (testDefIn) {
     return fluid.extend(true, {}, testDefIn, {
         config: {
-            configName: "gpii.tests.acceptance.linux.builtIn.untrustedPSPIntegration.config",
-            configPath: "%gpii-universal/tests/platform/linux/configs"
+            configName: "gpii.tests.acceptance.untrusted.pspIntegration.config.json",
+            configPath: "%gpii-universal/tests/configs"
         },
         gradeNames: [
             "gpii.tests.untrusted.pspIntegration.testCaseHolder",

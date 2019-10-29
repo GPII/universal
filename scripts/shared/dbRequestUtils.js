@@ -29,6 +29,9 @@ fluid.registerNamespace("gpii.dbRequest");
  * @param {String} responseString - The raw response data.
  * @param {Object} options - Other information used by this handler; documented
  *                           by specific data handler functions.
+ * @return {String|Promise} - Returns a string describing the handling result, or
+ *                            a promise whose resolved value is a string that describes
+ *                            the handling result.
  */
 
 /**
@@ -155,8 +158,12 @@ gpii.dbRequest.createResponseHandler = function (handleEnd, options, promise, er
                 promise.reject(fullErrorMsg);
             }
             else {
-                var value = handleEnd(responseString, options);
-                promise.resolve(value);
+                var handlingResult = handleEnd(responseString, options);
+                if (fluid.isPromise(handlingResult)) {
+                    fluid.promise.follow(handlingResult, promise);
+                } else {
+                    promise.resolve(handlingResult);
+                }
             }
         });
         response.on("error", function (e) {
@@ -184,4 +191,29 @@ gpii.dbRequest.queryDatabase = function (databaseURL, handleResponse, errorMsg, 
         promise.reject(e);
     });
     return aRequest;
+};
+
+/**
+ * Process recursively.
+ * @param {Object} options - Object of elements required for processing. It also tracks information that need to be passed
+ * along during the processing.
+ * @param {Function} actionFunc - The action function that returns a promise whose resolved value is a number of
+ * documents to process. If the number is 0, the recursion stops. If more than 0, the recursion continues.
+ * @return {Promise} - Hold the processing result.
+ */
+gpii.dbRequest.processRecursive = function (options, actionFunc) {
+    var togo = fluid.promise();
+    var actionPromise = actionFunc(options);
+
+    actionPromise.then(function (docCount) {
+        if (docCount === 0 || docCount[0] === 0) {
+            // No more documents to process
+            togo.resolve();
+        } else {
+            // Continue to process
+            var subsequentProcess = gpii.dbRequest.processRecursive(options, actionFunc);
+            fluid.promise.follow(subsequentProcess, togo);
+        }
+    }, togo.reject);
+    return togo;
 };
