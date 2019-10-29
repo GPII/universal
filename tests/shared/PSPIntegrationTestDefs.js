@@ -586,89 +586,6 @@ gpii.tests.pspIntegration.testDefs = [
             }
         ]
     }, {
-        // This test checks that the manually changed context from the user is not overridden
-        // by a context change triggered by changes in the environment
-        name: "Manual context change via the PSP followed by a change in environment",  // ??
-        expect: 11,
-        sequence: [
-            {
-                func: "gpii.test.expandSettings",
-                args: [ "{tests}", [ "contexts" ]]
-            }, {
-                func: "gpii.test.snapshotSettings",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
-            }, {
-                event: "{testCaseHolder}.events.onSnapshotComplete",
-                listener: "fluid.identity"
-            }, {
-                func: "{loginRequest}.send"
-            }, {
-                event: "{loginRequest}.events.onComplete",
-                listener: "gpii.test.loginRequestListen"
-            }, {
-                func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
-            }, {
-                event: "{testCaseHolder}.events.onCheckConfigurationComplete",
-                listener: "fluid.identity"
-            }, {
-                func: "{pspClient}.connect"
-            }, {
-                event: "{pspClient}.events.onConnect",
-                listener: "gpii.tests.pspIntegration.connectionSucceeded"
-            }, {
-                event: "{pspClient}.events.onReceiveMessage",
-                listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "modelChanged"]
-            }, {
-                funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
-            }, {
-                event: "{pspClient}.events.onReceiveMessage",
-                listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "preferencesApplied"]
-            }, {
-                func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
-            }, {
-                event: "{testCaseHolder}.events.onCheckConfigurationComplete",
-                listener: "fluid.identity"
-            }, {
-                funcName: "gpii.tests.pspIntegration.sendContextChange",
-                args: ["{pspClient}", "bright"]
-            }, {
-                event: "{pspClient}.events.onReceiveMessage",
-                listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "modelChanged"]
-            }, {
-                func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.bright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
-            }, {
-                event: "{testCaseHolder}.events.onCheckConfigurationComplete",
-                listener: "fluid.identity"
-            }, {
-                func: "{contextManager}.updateCurrentContext",
-                args: ["noise"]
-            }, {
-                func: "gpii.test.checkConfiguration", // should still be bright since manual overrides automatic context
-                args: ["{tests}.options.data.bright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
-            }, {
-                event: "{testCaseHolder}.events.onCheckConfigurationComplete",
-                listener: "fluid.identity"
-            }, {
-                func: "{logoutRequest}.send"
-            }, {
-                event: "{logoutRequest}.events.onComplete",
-                listener: "gpii.test.logoutRequestListen"
-            }, {
-                func: "gpii.test.checkRestoredConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
-            }, {
-                event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
-                listener: "fluid.identity"
-            }
-        ]
-    }, {
         name: "GPII-3437: reset does not throw errors after a long asynchronous reset process",
         expect: 7,
         sequence: [
@@ -969,14 +886,5 @@ fluid.defaults("gpii.tests.pspIntegration.testCaseHolder.common.linux", {
         }
     },
     gpiiKey: "context1",
-    data: gpii.tests.pspIntegration.data,
-    // Surface the contextManager to a location where it can be used by the test
-    // fixtures.
-    distributeOptions: {
-        record: {
-            funcName: "gpii.test.common.receiveComponent",
-            args: ["{testCaseHolder}", "{arguments}.0", "contextManager"]
-        },
-        target: "{that contextManager}.options.listeners.onCreate"
-    }
+    data: gpii.tests.pspIntegration.data
 });
