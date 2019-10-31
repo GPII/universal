@@ -39,7 +39,7 @@ The process of retrieving application lifecycle instructions in the Cloud Based 
    `flowManager.processMatch.priorities`. As with everything else in this flow, the sequence and ordering of the steps
    in the matchmaking process can be modified by the config/setup being used, and this document wont dive into the
    details of this flow except for some general observatiosn:
-   * Generally some prioritized steps: `preProcess`, `matchMakerDispatcher`, `runContextManager` and `transform` will be
+   * Generally some prioritized steps: `preProcess`, `matchMakerDispatcher`, `updsteActivePrefsSetName` and `transform` will be
     run (in that order).
    * The end result of this process is a description of the configuration to be applied to system, described per
     application. The event `onMatchDone` signals that we have the lifecycle instructions ready. For more details on the
