@@ -41,8 +41,8 @@ gpii.tests.pspIntegration.sendMsg = function (client, path, value) {
     });
 };
 
-gpii.tests.pspIntegration.sendContextChange = function (client, newContext) {
-    gpii.tests.pspIntegration.sendMsg(client, ["activeContextName"], newContext);
+gpii.tests.pspIntegration.sendPrefsSetNameChange = function (client, newContext) {
+    gpii.tests.pspIntegration.sendMsg(client, ["activePrefsSetName"], newContext);
 };
 
 gpii.tests.pspIntegration.checkPayload = function (data, expectedType, expectedSettingControls) {
@@ -488,7 +488,7 @@ gpii.tests.pspIntegration.testDefs = [
                 listener: "gpii.tests.pspIntegration.checkPayload",
                 args: ["{arguments}.0", "modelChanged"]
             }, {
-                funcName: "gpii.tests.pspIntegration.sendContextChange",
+                funcName: "gpii.tests.pspIntegration.sendPrefsSetNameChange",
                 args: ["{pspClient}", "bright"]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
@@ -560,7 +560,7 @@ gpii.tests.pspIntegration.testDefs = [
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
             }, {
-                funcName: "gpii.tests.pspIntegration.sendContextChange",
+                funcName: "gpii.tests.pspIntegration.sendPrefsSetNameChange",
                 args: ["{pspClient}", "bright"]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
