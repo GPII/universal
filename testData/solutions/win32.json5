@@ -917,6 +917,15 @@
                             "default": 0
                         }
                     },
+                    "Options.AutomaticNotificationOfUpdates": {
+                        "schema": {
+                            "title": "Automatic Notification of Updates",
+                            "description": "Whether to show automatic notifications for updates.",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 0
+                        }
+                    },
                     // This does not seem safe to update, as we have no idea which displays are available on a given machine.
                     // "Options.BrailleDisplay": {
                     //     "schema": {
@@ -926,6 +935,15 @@
                     //         "default": "Braille1"
                     //     }
                     // },
+                    "Options.bVirtViewer": {
+                        "schema": {
+                            "title": "Show Virtual Viewer on screen",
+                            "description": "Whether to show the virtual viewer on screen.",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 0
+                        }
+                    },
                     "Options.CapIndicator": {
                         "schema": {
                             "title": "Cap Indicator",
@@ -1283,14 +1301,24 @@
                         }
                     },
                     // No documentation, disabled for now.
-                    // "Options.KeyboardType": {
-                    //     "schema": {
-                    //         "title": "Keyboard Type",
-                    //         "description": "Can be one of the types defined in the default.jkm settings file.",
-                    //         "type": "string",
-                    //         "default": "Laptop"
-                    //     }
-                    // },
+                    "Options.KeyboardType": {
+                        "schema": {
+                            "title": "Keyboard Type",
+                            "description": "Can be one of the types defined in the default.jkm settings file.",
+                            "type": "string",
+                            "default": "Desktop",
+                            "enum": [
+                                "Desktop",
+                                "Laptop",
+                                "Kinesis"
+                            ],
+                            "enumLabels": [
+                                "Desktop",
+                                "Laptop",
+                                "Kinesis"
+                            ]
+                        }
+                    },
                     "Options.KeyRepeat": {
                         "schema": {
                             "title": "Key Repeat",
@@ -2311,6 +2339,21 @@
                             ]
                         }
                     },
+                    "Options.ViewMode": {
+                        "schema": {
+                            "title": "Run JAWS from System Tray",
+                            "description": "Whether to run JAWS from the System Tray",
+                            "default": 0,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ]
+                        }
+                    },
                     "Options.VirtualDocumentLinkActivationMethod": {
                         "schema": {
                             "title": "Virtual Document Link Activation Method",
@@ -2615,6 +2658,44 @@
                             "description": "How far away in pixels can an underline be before being considered an actual underline.",
                             "type": "integer",
                             "default": 0
+                        }
+                    },
+                    "OutputModes.ACCESS_KEY": {
+                        "schema": {
+                            "title": "Access Key",
+                            "description": "Which items to speak with the access key???",
+                            "type": "string",
+                            "default": "1|1|1|Access Key",
+                            "enum": [
+                                "0|0|0|Access Key",
+                                "1|1|1|Access Key",
+                                "2|2|2|Access Key",
+                                "3|3|3|Access Key"
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "Speak all",
+                                "Speak menus only",
+                                "Speak dialogs only"
+                            ]
+                        }
+                    },
+                    "OutputModes.TUTOR": {
+                        "schema": {
+                            "title": "Tutor Messages",
+                            "description": "Which items to speak with the access key???",
+                            "type": "string",
+                            "default": "1|1|1|Tutor",
+                            "enum": [
+                                "0|0|0|Tutor",
+                                "1|1|1|Tutor",
+                                "2|2|2|Tutor"
+                            ],
+                            "enumLabels": [
+                                "Turn off menu and control help",
+                                "Announce menu and control help",
+                                "Announce custom messages only"
+                            ]
                         }
                     },
                     // TODO: Document default.
