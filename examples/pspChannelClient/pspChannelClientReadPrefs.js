@@ -31,27 +31,12 @@ socket.on("message", function (data) {
     var message = JSON.parse(data);
     console.log("## Received the following message: " + JSON.stringify(message, null, 4));
 
-    if (message.type === "preferencesApplied") {
-        console.log("Preferences have been applied");
+    if (message.type === "modelChanged") {
+        console.log("Preferences have been read");
         socket.close();
         return;
     };
 
-    // Uncomment lines below to try an example that a pspChannel client sends a "modelChanged" request to apply a preference change.
-    // socket.send(JSON.stringify(
-    //     {
-    //         "type": "modelChanged",
-    //         value: {
-    //             settingControls: {
-    //                 "http://registry\\.gpii\\.net/common/DPIScale": {
-    //                     value: 1.75
-    //                 }
-    //             }
-    //         }
-    //     })
-    // );
-
-    // Uncomment lines below to try an example that a pspChannel client sends a "pullModel" request to read the setting value of a preference.
     socket.send(JSON.stringify(
         {
             "type": "pullModel",
@@ -64,5 +49,4 @@ socket.on("message", function (data) {
             }
         })
     );
-
 });

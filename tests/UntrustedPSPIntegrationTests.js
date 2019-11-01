@@ -371,3 +371,7 @@ gpii.test.runCouchTestDefs(gpii.tests.untrusted.pspIntegration.testDefs);
 gpii.test.runCouchTestDefs(fluid.transform(gpii.tests.pspIntegration.saveTestDefs, function (testDefIn) {
     return gpii.tests.untrusted.pspIntegration.addConfig(testDefIn);
 }));
+
+gpii.test.runCouchTestDefs(fluid.transform(gpii.tests.pspIntegration.readPrefsTestDefs, function (testDefIn) {
+    return gpii.tests.untrusted.pspIntegration.addConfig(testDefIn);
+}));

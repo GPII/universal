@@ -1153,9 +1153,9 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
 gpii.tests.pspIntegration.readPrefsTestDefs = [
     {
         name: "Read a setting",
-        // expect: 8,
+        expect: 7,
         expectedSettingControls: {
-            afterReadMagnification: {
+            changeMagnification: {
                 "http://registry\\.gpii\\.net/common/magnification": {
                     "value": 3,
                     "schema": {
@@ -1183,6 +1183,23 @@ gpii.tests.pspIntegration.readPrefsTestDefs = [
                 listener: "gpii.tests.pspIntegration.checkPayload",
                 args: ["{arguments}.0", "modelChanged", {}]
             },
+            // set the magnification value in the mock settingsStore for it to be read afterwards
+            {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            "value": 3
+                        }
+                    }
+                }]
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.changeMagnification"]
+            },
+            // read a setting
             {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
                 args: [ "{pspClient}", "pullModel", {
@@ -1196,7 +1213,7 @@ gpii.tests.pspIntegration.readPrefsTestDefs = [
             {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.afterReadMagnification"]
+                args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.changeMagnification"]
             }
         ]
     }
