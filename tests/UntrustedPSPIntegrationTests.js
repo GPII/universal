@@ -197,6 +197,7 @@ gpii.test.untrusted.pspIntegration.verifyRawPrefsAtStart = function (that, prefe
 };
 
 gpii.test.untrusted.pspIntegration.verifyRawPrefsAtEnd = function (that, preferences, sequenceNum, expectedChange) {
+    fluid.log (that.options.name, ", number ", sequenceNum, " in the sequence");
     var expectedPrefsChange = expectedChange ? expectedChange : gpii.test.untrusted.pspIntegration.expectedPrefsChange[sequenceNum];
 
     var expected = fluid.extend(true, {}, that.options.initialPrefs, expectedPrefsChange);

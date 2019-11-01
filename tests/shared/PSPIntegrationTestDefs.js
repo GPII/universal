@@ -45,6 +45,10 @@ gpii.tests.pspIntegration.sendPrefsSetNameChange = function (client, newContext)
     gpii.tests.pspIntegration.sendMsg(client, ["activePrefsSetName"], newContext);
 };
 
+gpii.tests.pspIntegration.sendPrefsSetChange = function (client, newPrefsSetName) {
+    gpii.tests.pspIntegration.sendMsg(client, ["activePrefsSetName"], newPrefsSetName);
+};
+
 gpii.tests.pspIntegration.checkPayload = function (data, expectedType, expectedSettingControls) {
     jqUnit.assertEquals("Checking message from PSP: ", expectedType, data.type);
     if (expectedSettingControls) {
@@ -455,7 +459,7 @@ gpii.tests.pspIntegration.testDefs = [
             }
         ]
     }, {
-        name: "Context change via the PSP",
+        name: "Preferences set change via the PSP",
         expect: 8,
         sequence: [
             {
@@ -514,7 +518,7 @@ gpii.tests.pspIntegration.testDefs = [
             }
         ]
     }, {
-        name: "Settings change from PSP followed by context change via the PSP (new context should be applied)",
+        name: "Settings change from PSP followed by a preferences set change via the PSP",
         expect: 10,
         sequence: [
             {
@@ -561,6 +565,79 @@ gpii.tests.pspIntegration.testDefs = [
                 listener: "fluid.identity"
             }, {
                 funcName: "gpii.tests.pspIntegration.sendPrefsSetNameChange",
+                args: ["{pspClient}", "bright"]
+            }, {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged"]
+            }, {
+                func: "gpii.test.checkConfiguration",
+                args: ["{tests}.options.data.bright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+            }, {
+                event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                listener: "fluid.identity"
+            }, {
+                func: "{logoutRequest}.send"
+            }, {
+                event: "{logoutRequest}.events.onComplete",
+                listener: "gpii.test.logoutRequestListen"
+            }, {
+                func: "gpii.test.checkRestoredConfiguration",
+                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+            }, {
+                event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
+                listener: "fluid.identity"
+            }
+        ]
+    }, {
+        // Test of the user manually changing the preferences set, and then logging out
+        name: "Manual context change via the PSP",
+        expect: 10,
+        sequence: [
+            {
+                func: "gpii.test.expandSettings",
+                args: [ "{tests}", [ "contexts" ]]
+            }, {
+                func: "gpii.test.snapshotSettings",
+                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+            }, {
+                event: "{testCaseHolder}.events.onSnapshotComplete",
+                listener: "fluid.identity"
+            }, {
+                func: "{loginRequest}.send"
+            }, {
+                event: "{loginRequest}.events.onComplete",
+                listener: "gpii.test.loginRequestListen"
+            }, {
+                func: "gpii.test.checkConfiguration",
+                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+            }, {
+                event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                listener: "fluid.identity"
+            }, {
+                func: "{pspClient}.connect"
+            }, {
+                event: "{pspClient}.events.onConnect",
+                listener: "gpii.tests.pspIntegration.connectionSucceeded"
+            }, {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged"]
+            }, {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
+            }, {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferencesApplied"]
+            }, {
+                func: "gpii.test.checkConfiguration",
+                args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+            }, {
+                event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                listener: "fluid.identity"
+            }, {
+                funcName: "gpii.tests.pspIntegration.sendPrefsSetChange",
                 args: ["{pspClient}", "bright"]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
