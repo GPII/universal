@@ -5045,6 +5045,7 @@
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            // GPII-4207 Test with the new find `default` value function
                             "properties": {
                                 "path": { "type":  "string"},
                                 "value": {
@@ -6377,6 +6378,7 @@
                     }
                 },
                 "supportedSettings": {
+                    // GPII-4207 Add the check for defaults in `properties.value.default`
                     "FilterKeysEnable": {
                         "schema": {
                             "title": "Filter keys",
@@ -6392,6 +6394,7 @@
                             }
                         }
                     },
+                    // GPII-4207 it looks like the default in the control panel for this may be 1000...
                     "SlowKeysInterval": {
                         "schema": {
                             "title": "Slow keys interval",
@@ -6400,13 +6403,26 @@
                             "properties": {
                                 "path": { "type":  "string", "required": true},
                                 "value": {
+                                    // GPII-4207 In the current Windows 10 UI this goes from 0.0 seconds
+                                    // to 20.0 seconds in somewhat random steps in a combo box:
+                                    // 0.0, 0.3, 0.5, 0.7, 1.0, 1.4, 2.0, 5.0, 10.0, 20.0
+                                    // TODO try manually setting a differnet value under the covers,
+                                    // not sure if this should really be an enum...
                                     "required": true,
                                     "type": "integer",
-                                    "default": 0 // 0 means no interval time
+                                    "minimum": 0,
+                                    "maximum": 20000,
+                                    "default": 1000 // 0 means no interval time
                                 }
                             }
                         }
                     },
+                    // GPII-4207 This default looks correct... it probably isn't getting casted to
+                    // a number during the default check...
+                    //
+                    // Currently in the control panel it goes from 0.3 to 20 seconds in a drop down
+                    //
+                    // Having issues capturing changes to this... am I looking at the correct setting
                     "BounceKeysInterval": {
                         "schema": {
                             "title": "Bounce keys interval",
@@ -6824,6 +6840,7 @@
                         "schema": {
                             "title": "Video audio description",
                             "description": "Hear descriptions of what's happening in videos",
+                            // GPII-4207 Test to see if this `default` is getting cast correctly
                             "default": 0,
                             "enum": [
                                 0,
@@ -7094,6 +7111,7 @@
                             "title": "ToggleKeys accesibility feature",
                             "description": "Enable/Disable ToggleKeys feature",
                             "type": "boolean",
+                            // GPII-4207 check `default` cast
                             "default": false
                         }
                     }
@@ -7152,6 +7170,7 @@
                             "title": "Enable/Disable underlaying menu shortcuts",
                             "description": "Displays a underline showing which is the shortcut to active a menu item",
                             "type": "boolean",
+                            // GPII-4207 This is coming out of the capture as 0 rather than false... TODO
                             "default": false
                         }
                     }
@@ -7192,6 +7211,7 @@
                             "title": "Keyboard as preferred input method",
                             "description": "Set the keyboard as the preferred input method",
                             "type": "boolean",
+                            // GPII-4207 This is coming out of the capture as 0 rather than false... TODO
                             "default": false
                         }
                     }
@@ -7693,6 +7713,15 @@
                         "name": "MOUSEKEYS"
                     }
                 },
+                /*
+                 * Some interesting notes from testing on GPII-4207
+                 * the `MouseKeysOn` isn't getting defaulted because we still need to add
+                 * support for checkingin the `properties` block.
+                 *
+                 * The MaxSpeed and Acceleration both have slightly different values
+                 *
+                 * Defaults are from observing 2 different peoples windows captures (Gregg and sgithens)
+                 */
                 "supportedSettings": {
                     "MouseKeysOn": {
                         "schema": {
@@ -7709,22 +7738,40 @@
                             }
                         }
                     },
+                    // GPII-4207 sgithens speed
+                    // Having tested this in conjuction with the control panel it seems the
+                    // max and min values are: (what is shown when you hover over the slider)
+                    //
+                    //           Control Panel UI        GPII Capture
+                    // low:      10                      10
+                    // high:     358                     358
+                    // default:  80                      80
                     "MaxSpeed": {
                         "schema": {
                             "title": "Mouse keys speed",
                             "description": "Speed of mouse keys",
                             "type": "number",
-                            "multipleOf": 10
+                            "multipleOf": 10,
+                            "default": 80
                         }
                     },
+                    // GPII-4207 sgithens acceleration
+                    // Having tested this in conjuction with the control panel it seems the
+                    // max and min values are: (what is shown when you hover over the slider)
+                    //
+                    //           Control Panel UI        GPII Capture
+                    // low:      100                     5000
+                    // high:     500                     1000  (yes it's inverse)
+                    // default:  300                     3000
                     "Acceleration": {
                         "schema": {
                             "title": "Mouse keys acceleration",
                             "description": "Acceleration of mouse keys",
                             "type": "number",
-                            "minimum": -1000,
+                            "minimum": 1000,
                             // TODO: Not clear how to describe this setting
-                            "maximum": 1000
+                            "maximum": 5000,
+                            "default": 3000
                         }
                     }
                 },
@@ -8596,7 +8643,8 @@
                                     "required": true,
                                     "type": "integer",
                                     "minimum": 0,
-                                    "maximum": 10
+                                    "maximum": 10,
+                                    "default": 0
                                 }
                             }
                         }
@@ -9719,7 +9767,11 @@
                             "description": "Whether or not sticky keys should be turned on.",
                             "properties": {
                                 "path": { "type":  "string", "required":  true},
-                                "value": { "type":  "boolean", "required":  true}
+                                "value": {
+                                    "type":  "boolean",
+                                    "required":  true,
+                                    "default": false
+                                }
                             }
                         }
                     }
@@ -14824,7 +14876,7 @@
                             // TODO: Figure out a way to more cleanly reuse material between language-supporting features.  Common term?
                             "enum": [
                                 "af", "sq", "am", "ar", "an", "hy-arevela", "hyw", "as", "az", "eu", "bn", "bpy", "bs",
-                                "bg", "ca", "zh-yue", "zh-cmn", "hr", "cs", "da", "nl", "en-us", "en-029", "en-gb",
+                                "bg", "ca", "zh-yue", "zh-cmn", "hr", "cs", "da", "nl", "en", "en-us", "en-029", "en-gb",
                                 "en-gb-x-gbclan", "en-gb-x-rp", "en-gb-scotland", "en-gb-x-gbcwmd", "eo", "et", "fi",
                                 "fr-be", "fr-fr", "fr-ch", "ga", "gd", "ka", "de", "grc", "el", "kl", "gn", "gu", "ht",
                                 "hak", "hi", "hu", "is", "id", "ia", "it", "ja", "quc", "kn", "kk", "kok", "ko", "ku", "ky",
@@ -14837,7 +14889,7 @@
                                 "Afrikaans", "Albanian", "Amharic", "Arabic", "Aragonese", "Armenian (East Armenia)",
                                 "Armenian (West Armenia)", "Assamese", "Azerbaijani", "Basque", "Bengali",
                                 "Bishnupriya Manipuri", "Bosnian", "Bulgarian", "Catalan", "Chinese (Cantonese)",
-                                "Chinese (Mandarin)", "Croatian", "Czech", "Danish", "Dutch", "English (America)",
+                                "Chinese (Mandarin)", "Croatian", "Czech", "Danish", "Dutch", "English", "English (America)",
                                 "English (Caribbean)", "English (Great Britain)", "English (Lancaster)",
                                 "English (Received Pronunciation)", "English (Scotland)", "English (West Midlands)",
                                 "Esperanto", "Estonian", "Finnish", "French (Belgium)", "French (France)",
@@ -14853,7 +14905,8 @@
                                 "Shan (Tai Yai)", "Sindhi", "Sinhala", "Slovak", "Slovenian", "Spanish (Latin America)",
                                 "Spanish (Spain)", "Swahili", "Swedish", "Tamil", "Tatar", "Telugu", "Turkish", "Urdu",
                                 "Vietnamese (Central)", "Vietnamese (Northern)", "Vietnamese (Southern)", "Welsh"
-                            ]
+                            ],
+                            "default": "en"
                         }
                     },
                     "speech.espeak.volume": {
@@ -16171,6 +16224,8 @@
                 "supportedSettings": {
                     "OverrideTabletMode": {
                         "schema": {
+                            // GPII-4207 OverrideTabletMode and Enable Tablet Mode before look to have cut and paste issues
+                            // with their title and description... TODO
                             "title": "Enable Tablet Mode",
                             "description": "Display larger ribbon buttons that are easier to touch",
                             "type": "number",
