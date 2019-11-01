@@ -1152,8 +1152,8 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
 
 gpii.tests.pspIntegration.readPrefsTestDefs = [
     {
-        name: "Read a setting",
-        expect: 7,
+        name: "Read a setting with success",
+        expect: 8,
         expectedSettingControls: {
             changeMagnification: {
                 "http://registry\\.gpii\\.net/common/magnification": {
@@ -1214,6 +1214,45 @@ gpii.tests.pspIntegration.readPrefsTestDefs = [
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
                 args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.changeMagnification"]
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferenceReadSuccess"]
+            }
+        ]
+    },
+    {
+        name: "Read a setting with failure",
+        expect: 4,
+        sequence: [
+            {
+                func: "{pspClient}.connect"
+            },
+            {
+                event: "{pspClient}.events.onConnect",
+                listener: "gpii.tests.pspIntegration.connectionSucceeded"
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", {}]
+            },
+            // read an undefined setting
+            {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", "pullModel", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            "value": 1
+                        }
+                    }
+                }]
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferenceReadFail"]
             }
         ]
     }
