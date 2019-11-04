@@ -109,6 +109,18 @@ gpii.tests.windows.builtIn = [
                             "functionName": "Volume"
                         }
                     }
+                ],
+                "com.microsoft.windows.mirrorScreen": [
+                    {
+                        "settings": {
+                            "ScreenMirrorConfig": {
+                                "value": false
+                            }
+                        },
+                        "options": {
+                            "functionName": "ScreenMirror"
+                        }
+                    }
                 ]
             },
             "gpii.windows.spiSettingsHandler": {
@@ -494,7 +506,13 @@ gpii.tests.windows.builtIn = [
                         "MagnificationMode": 3,
                         "FollowFocus": 0,
                         "FollowCaret": 1,
-                        "FollowMouse": 1
+                        "FollowMouse": 1,
+                        "FollowNarrator": 0,
+                        "FadeToMagIcon": 1,
+                        "ZoomIncrement": 50,
+                        "UseBitmapSmoothing": 1,
+                        "LensHeight": 50,
+                        "LensWidth": 50
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -505,7 +523,13 @@ gpii.tests.windows.builtIn = [
                             "FollowFocus": "REG_DWORD",
                             "FollowCaret": "REG_DWORD",
                             "FollowMouse": "REG_DWORD",
-                            "MagnificationMode": "REG_DWORD"
+                            "FollowNarrator": "REG_DWORD",
+                            "MagnificationMode": "REG_DWORD",
+                            "FadeToMagIcon": "REG_DWORD",
+                            "ZoomIncrement": "REG_DWORD",
+                            "UseBitmapSmoothing": "REG_DWORD",
+                            "LensHeight": "REG_DWORD",
+                            "LensWidth": "REG_DWORD"
                         }
                     }
                 }],
@@ -698,6 +722,18 @@ gpii.tests.windows.builtIn = [
                         "path": "Control Panel\\Desktop\\MuiCached",
                         "dataTypes": {
                             "MachinePreferredUILanguages": "REG_SZ"
+                        }
+                    }
+                }],
+                "com.microsoft.windows.soundSentry": [{
+                    "settings": {
+                        "WindowsEffect": 2
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility\\SoundSentry",
+                        "dataTypes": {
+                            "WindowsEffect": "REG_DWORD"
                         }
                     }
                 }],
