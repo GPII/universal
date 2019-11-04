@@ -7767,7 +7767,7 @@
                         "schema": {
                             "title": "Mouse keys acceleration",
                             "description": "Acceleration of mouse keys",
-                            "type": "number",
+                            "type": "integer",
                             "minimum": 1000,
                             // TODO: Not clear how to describe this setting
                             "maximum": 5000,
