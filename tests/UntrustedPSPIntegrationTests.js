@@ -168,19 +168,6 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
                 }
             }
         }
-    },
-    // 7
-    {
-        "flat": {
-            "contexts": {
-                "gpii-default": {
-                    "name": "Default preferences",
-                    "preferences": {
-                        "http://registry.gpii.net/common/magnification": 3
-                    }
-                }
-            }
-        }
     }
 ];
 
