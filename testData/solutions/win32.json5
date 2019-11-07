@@ -4815,7 +4815,8 @@
                     "path": "Control Panel\\Desktop",
                     "dataTypes": {
                         "TileWallpaper": "REG_SZ",
-                        "WallpaperStyle": "REG_SZ"
+                        "WallpaperStyle": "REG_SZ",
+                        "Scaling": "REG_SZ"
                     }
                 },
                 "supportedSettings": {
@@ -4899,15 +4900,15 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Scaling",
                             "match": {
-                                "Fill": "6",
-                                "Fit": "10",
+                                "Fill": "10",
+                                "Fit": "6",
                                 "Stretch": "2",
                                 "Tile": "0",
                                 "Center": "0",
                                 "Span": "22"
                             },
                             "noMatch": {
-                                "outputValue": "6"
+                                "outputValue": "10"
                             }
                         }
                     }
@@ -4918,8 +4919,8 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "WallpaperStyle",
                             "match": {
-                                "6": "Fill",
-                                "10": "Fit",
+                                "10": "Fill",
+                                "6": "Fit",
                                 "2": "Stretch",
                                 "0": {
                                     "outputValue": {
@@ -5041,6 +5042,9 @@
                         }
                     }
                 },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor"
+                ],
                 "capabilitiesTransformations": {
                     "ImageConfig": {
                         "transform": {
@@ -5055,9 +5059,6 @@
                             }
                         }
                     }
-                },
-                "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.Image": "ImageConfig.value"
                 }
             },
             "configureSolidColor": {
@@ -5113,6 +5114,14 @@
                 }
             }
         },
+        "configure": [
+            "settings.configureImage",
+            "settings.configureSolidColor"
+        ],
+        "restore": [
+            "settings.configureImage",
+            "settings.configureSolidColor"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"

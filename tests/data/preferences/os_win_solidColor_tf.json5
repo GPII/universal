@@ -1,14 +1,5 @@
-// # Daniel.json5
-//
-// This preference sets the desktop background to a solid color.
-//
-// ## Testing
-//
-// Windows desktop background should be replace by a green image.
-//
 {
     "flat": {
-        "name": "Daniel",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
