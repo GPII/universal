@@ -4878,7 +4878,7 @@
         ]
     },
     "com.microsoft.windows.desktopBackground": {
-        "name": "Windows desktop background personalization",
+        "name": "Windows desktop background wallpaper",
         "contexts": {
             "OS": [
                 {
@@ -5083,7 +5083,7 @@
         ]
     },
     "com.microsoft.windows.desktopBackgroundColor": {
-        "name": "Windows desktop background personalization",
+        "name": "Windows desktop background color",
         "contexts": {
             "OS": [
                 {
