@@ -40,8 +40,8 @@ gpii.tests.pspIntegration.buildTestDefs = function (testDefs) {
         }, testDef);
     });
 };
-var builtApplySettingsTestDefs = gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.applyPrefsTestDefs);
-gpii.test.runCouchTestDefs(builtApplySettingsTestDefs);
+// var builtApplySettingsTestDefs = gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.applyPrefsTestDefs);
+// gpii.test.runCouchTestDefs(builtApplySettingsTestDefs);
 
 var builtReadSettingsTestDefs = gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.readPrefsTestDefs);
 gpii.test.runCouchTestDefs(builtReadSettingsTestDefs);

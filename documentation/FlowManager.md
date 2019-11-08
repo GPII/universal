@@ -36,9 +36,8 @@ key is keyed into the system.
 
 ### reset
 
-The reserved GPII key "reset" is to be used with the flow manager login API to reset the computer. The API is:
-
-GET /user/reset/login
+The reserved GPII key "reset" is used by [the flow manager login API](ResetComputer.md#reset-via-http-request) to
+reset the computer.
 
 See [Reset Computer Documentation](ResetComputer.md) for more details about the reset workflow.
 
@@ -47,12 +46,19 @@ Note that a separate logout of "reset" is not necessary. The final condition of 
 
 ### restore
 
-The reserved GPII key "restore" is to be used with the journal API to restore a specific journal. The API is:
+The reserved GPII key "restore" is used by the journal API to restore a specific journal. The API is:
 
 GET /journal/restore/:journalId
 
 Note that a separate logout of "restore" is not necessary. The final condition of using the "reset" key is to have the
 "noUser" key log back in the system.
+
+### readSetting
+
+The reserved GPII key "readSetting" is used by the PSPChannel read API to read a preference value.
+
+Note that "readSetting" GPII key does not log into the system at any time. It's only used to construct an initial
+payload structure to start a matchMaking process.
 
 ## APIs on Local Flow Manager
 

@@ -1153,11 +1153,23 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
 gpii.tests.pspIntegration.readPrefsTestDefs = [
     {
         name: "Read a setting with success",
-        expect: 8,
+        // expect: 8,
+        initialSettings: {
+            "gpii.gsettings": {
+                "org.gnome.desktop.a11y.magnifier": [{
+                    "settings": {
+                        "mag-factor": 1.5
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.magnifier"
+                    }
+                }]
+            }
+        },
         expectedSettingControls: {
             changeMagnification: {
                 "http://registry\\.gpii\\.net/common/magnification": {
-                    "value": 3,
+                    "value": 1.5,
                     "schema": {
                         "title": "Magnification",
                         "description": "Level of magnification",
@@ -1165,12 +1177,19 @@ gpii.tests.pspIntegration.readPrefsTestDefs = [
                         "default": 1,
                         "minimum": 1,
                         "multipleOf": 0.1
-                    },
-                    "liveness": "live"
+                    }
                 }
             }
         },
         sequence: [
+            {
+                func: "gpii.test.setSettings",
+                args: ["{that}.options.initialSettings", "{nameResolver}", "{testCaseHolder}.events.onInitialSettingsComplete.fire"]
+            },
+            {
+                event: "{tests}.events.onInitialSettingsComplete",
+                listener: "fluid.identity"
+            },
             {
                 func: "{pspClient}.connect"
             },
@@ -1183,23 +1202,7 @@ gpii.tests.pspIntegration.readPrefsTestDefs = [
                 listener: "gpii.tests.pspIntegration.checkPayload",
                 args: ["{arguments}.0", "modelChanged", {}]
             },
-            // set the magnification value in the mock settingsStore for it to be read afterwards
-            {
-                funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", "modelChanged", {
-                    settingControls: {
-                        "http://registry\\.gpii\\.net/common/magnification": {
-                            "value": 3
-                        }
-                    }
-                }]
-            },
-            {
-                event: "{pspClient}.events.onReceiveMessage",
-                listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.changeMagnification"]
-            },
-            // read a setting
+            // read the initial preference value
             {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
                 args: [ "{pspClient}", "pullModel", {
@@ -1221,40 +1224,92 @@ gpii.tests.pspIntegration.readPrefsTestDefs = [
                 args: ["{arguments}.0", "preferenceReadSuccess"]
             }
         ]
-    },
-    {
-        name: "Read a setting with failure",
-        expect: 4,
-        sequence: [
-            {
-                func: "{pspClient}.connect"
-            },
-            {
-                event: "{pspClient}.events.onConnect",
-                listener: "gpii.tests.pspIntegration.connectionSucceeded"
-            },
-            {
-                event: "{pspClient}.events.onReceiveMessage",
-                listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "modelChanged", {}]
-            },
-            // read an undefined setting
-            {
-                funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", "pullModel", {
-                    settingControls: {
-                        "http://registry\\.gpii\\.net/common/magnification": {
-                            "value": 1
-                        }
-                    }
-                }]
-            },
-            {
-                event: "{pspClient}.events.onReceiveMessage",
-                listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "preferenceReadFail"]
-            }
-        ]
+    // },
+    // {
+    //     name: "Read a setting with success - does NOT return settingControls block when settings stay unchanged",
+    //     expect: 5,
+    //     sequence: [
+    //         {
+    //             func: "{pspClient}.connect"
+    //         },
+    //         {
+    //             event: "{pspClient}.events.onConnect",
+    //             listener: "gpii.tests.pspIntegration.connectionSucceeded"
+    //         },
+    //         {
+    //             event: "{pspClient}.events.onReceiveMessage",
+    //             listener: "gpii.tests.pspIntegration.checkPayload",
+    //             args: ["{arguments}.0", "modelChanged", {}]
+    //         },
+    //         // set the initial magnification value to trigger the first "modelChanged" response
+    //         {
+    //             funcName: "gpii.tests.pspIntegration.sendMsg",
+    //             args: [ "{pspClient}", "modelChanged", {
+    //                 settingControls: {
+    //                     "http://registry\\.gpii\\.net/common/magnification": {
+    //                         "value": 3
+    //                     }
+    //                 }
+    //             }]
+    //         },
+    //         {
+    //             event: "{pspClient}.events.onReceiveMessage",
+    //             listener: "gpii.tests.pspIntegration.checkPayload",
+    //             args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.changeMagnification"]
+    //         },
+    //         // read a setting
+    //         {
+    //             funcName: "gpii.tests.pspIntegration.sendMsg",
+    //             args: [ "{pspClient}", "pullModel", {
+    //                 settingControls: {
+    //                     "http://registry\\.gpii\\.net/common/magnification": {
+    //                         "value": 1
+    //                     }
+    //                 }
+    //             }]
+    //         },
+    //         // Only return "preferenceReadSuccess" message. "modelChanged" message is not returned as all settings
+    //         // including magnification value stays unchanged.
+    //         {
+    //             event: "{pspClient}.events.onReceiveMessage",
+    //             listener: "gpii.tests.pspIntegration.checkPayload",
+    //             args: ["{arguments}.0", "preferenceReadSuccess"]
+    //         }
+    //     ]
+    // },
+    // {
+    //     name: "Read a setting with failure",
+    //     expect: 4,
+    //     sequence: [
+    //         {
+    //             func: "{pspClient}.connect"
+    //         },
+    //         {
+    //             event: "{pspClient}.events.onConnect",
+    //             listener: "gpii.tests.pspIntegration.connectionSucceeded"
+    //         },
+    //         {
+    //             event: "{pspClient}.events.onReceiveMessage",
+    //             listener: "gpii.tests.pspIntegration.checkPayload",
+    //             args: ["{arguments}.0", "modelChanged", {}]
+    //         },
+    //         // read an undefined setting
+    //         {
+    //             funcName: "gpii.tests.pspIntegration.sendMsg",
+    //             args: [ "{pspClient}", "pullModel", {
+    //                 settingControls: {
+    //                     "http://registry\\.gpii\\.net/common/magnification": {
+    //                         "value": 1
+    //                     }
+    //                 }
+    //             }]
+    //         },
+    //         {
+    //             event: "{pspClient}.events.onReceiveMessage",
+    //             listener: "gpii.tests.pspIntegration.checkPayload",
+    //             args: ["{arguments}.0", "preferenceReadFail"]
+    //         }
+    //     ]
     }
 ];
 
@@ -1274,5 +1329,8 @@ fluid.defaults("gpii.tests.pspIntegration.testCaseHolder.common.linux", {
         }
     },
     gpiiKey: "context1",
-    data: gpii.tests.pspIntegration.data
+    data: gpii.tests.pspIntegration.data,
+    events: {
+        onInitialSettingsComplete: null
+    }
 });
