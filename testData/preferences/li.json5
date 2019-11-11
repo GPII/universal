@@ -15,8 +15,6 @@
 //  * SuperNova is prioritised on Windows,
 //  * Mobile Accessibility for Android is prioritised over other Android accessibility features,
 //  * Rule-Based Matchmaker.
-// * lower ambient light conditions:
-//  * the same as the above, but with a magnification of 200% and high contrast.
 {
     "flat": {
         "name": "Li",

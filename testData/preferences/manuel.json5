@@ -14,8 +14,6 @@
 //  * use Windows' built-in magnifier (instead of third-party solutions),
 //  * Cloud4Chrome does NOT invert colours,
 //  * Rule-Based Matchmaker.
-// * lower ambient light conditions (luminance lower than 200):
-//  * the same as the above, but Cloud4Chrome must now invert the colours.
 {
 
     "flat": {

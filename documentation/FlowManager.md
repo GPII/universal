@@ -209,14 +209,7 @@ Note that a separate logout of "reset" is not necessary. The final condition of 
                 "applications": {}
             },
             "turn-down-light": {
-                "applications": {},
-                "conditions": [
-                    {
-                        "type": "http://registry.gpii.net/conditions/inRange",
-                        "min": 400,
-                        "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
-                    }
-                ]
+                "applications": {}
             }
         }
     }
