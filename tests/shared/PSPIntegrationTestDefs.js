@@ -15,195 +15,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    jqUnit = fluid.registerNamespace("jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.registerNamespace("gpii.tests.pspIntegration");
 fluid.require("%gpii-universal");
 gpii.loadTestingSupport();
 
-fluid.defaults("gpii.tests.pspIntegration.environmentChangedRequestType", {
-    gradeNames: "kettle.test.request.http",
-    path: "/environmentChanged",
-    method: "PUT"
-});
-
-fluid.defaults("gpii.tests.pspIntegration.client", {
-    gradeNames: "kettle.test.request.ws",
-    path: "/pspChannel",
-    port: 8081
-});
-
-fluid.defaults("gpii.tests.pspIntegration.resetRequestType", {
-    gradeNames: "kettle.test.request.http",
-    path: "/user/reset/login"
-});
-
-gpii.tests.pspIntegration.sendMsg = function (client, type, value) {
-    client.send({
-        type: type,
-        value: value
-    });
-};
-
-gpii.tests.pspIntegration.sendContextChange = function (client, newContext) {
-    gpii.tests.pspIntegration.sendMsg(client, "modelChanged", {
-        activeContextName: newContext
-    });
-};
-
-gpii.tests.pspIntegration.checkPayload = function (data, expectedType, expectedSettingControls) {
-    jqUnit.assertEquals("Checking message from PSP: ", expectedType, data.type);
-    if (expectedSettingControls) {
-        var actualSettingControls = data.payload.value.settingControls;
-        jqUnit.assertDeepEq("Checking received settingControls from PSP: ", expectedSettingControls, actualSettingControls);
-    }
-};
-
-gpii.tests.pspIntegration.connectionSucceeded = function (data) {
-    jqUnit.assertValue("Connection between client and server can be established", data);
-};
-
-gpii.tests.pspIntegration.checkResetResponse = function (data) {
-    jqUnit.assertEquals("The reset request completes successfully", "Reset successfully.", data);
-};
-
-gpii.tests.pspIntegration.data = {
-    initial: {
-        "settingsHandlers": {
-            "gpii.gsettings": {
-                "data": [{
-                    "settings": {
-                        "mag-factor": 1.5
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.magnifier"
-                    }
-                }]
-            },
-            "gpii.alsa": {
-                "data": [{
-                    "settings": {
-                        "masterVolume": 50
-                    }
-                }]
-            }
-        }
-    },
-    afterChangeMagnification: {
-        "settingsHandlers": {
-            "gpii.gsettings": {
-                "data": [{
-                    "settings": {
-                        "mag-factor": 3
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.magnifier"
-                    }
-                }]
-            },
-            "gpii.alsa": {
-                "data": [{
-                    "settings": {
-                        "masterVolume": 50
-                    }
-                }]
-            }
-        }
-    },
-    afterChangeCursorSize: {
-        "settingsHandlers": {
-            "gpii.gsettings": {
-                "data": [{
-                    "settings": {
-                        "cursor-size": 41
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.interface"
-                    }
-                }]
-            },
-            "gpii.alsa": {
-                "data": [{
-                    "settings": {
-                        "masterVolume": 50
-                    }
-                }]
-            }
-        }
-    },
-    afterDecreaseCursorSize: {
-        "settingsHandlers": {
-            "gpii.gsettings": {
-                "data": [{
-                    "settings": {
-                        "cursor-size": 29
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.interface"
-                    }
-                }]
-            },
-            "gpii.alsa": {
-                "data": [{
-                    "settings": {
-                        "masterVolume": 50
-                    }
-                }]
-            }
-        }
-    },
-    afterChangeVolume: {
-        "settingsHandlers": {
-            "gpii.gsettings": {
-                "data": [{
-                    "settings": {
-                        "mag-factor": 3
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.magnifier"
-                    }
-                }]
-            },
-            "gpii.alsa": {
-                "data": [{
-                    "settings": {
-                        "masterVolume": 75
-                    }
-                }]
-            }
-        }
-    },
-    afterChangeShowCrosshairs: {
-        "settingsHandlers": {
-            "gpii.gsettings": {
-                "data": [{
-                    "settings": {
-                        "mag-factor": 3,
-                        "show-cross-hairs": 1
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.magnifier"
-                    }
-                }]
-            }
-        }
-    },
-    bright: {
-        "settingsHandlers": {
-            "gpii.gsettings": {
-                "data": [{
-                    "settings": {
-                        "mag-factor": 2
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.magnifier"
-                    }
-                }]
-            }
-        }
-    }
-};
+require("./pspIntegrationTestUtils.js");
 
 gpii.tests.pspIntegration.applyPrefsTestDefs = [
     {
@@ -215,7 +33,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: [ "{tests}", [ "contexts" ]]
             }, {
                 func: "gpii.test.snapshotSettings",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onSnapshotComplete",
                 listener: "fluid.identity"
@@ -226,7 +44,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.loginRequestListen"
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -254,7 +72,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "preferencesApplied"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.afterChangeMagnification, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -265,7 +83,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.logoutRequestListen"
             }, {
                 func: "gpii.test.checkRestoredConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
                 listener: "fluid.identity"
@@ -280,7 +98,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: [ "{tests}", [ "contexts" ]]
             }, {
                 func: "gpii.test.snapshotSettings",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onSnapshotComplete",
                 listener: "fluid.identity"
@@ -291,7 +109,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.loginRequestListen"
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -323,7 +141,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "preferencesApplied"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.afterChangeCursorSize.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.afterChangeCursorSize, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -342,7 +160,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "preferencesApplied"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.afterDecreaseCursorSize.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.afterDecreaseCursorSize, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -353,7 +171,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.logoutRequestListen"
             }, {
                 func: "gpii.test.checkRestoredConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
                 listener: "fluid.identity"
@@ -368,7 +186,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: [ "{tests}", [ "contexts" ]]
             }, {
                 func: "gpii.test.snapshotSettings",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onSnapshotComplete",
                 listener: "fluid.identity"
@@ -379,7 +197,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.loginRequestListen"
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -411,7 +229,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "preferencesApplied"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.afterChangeMagnification, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -422,7 +240,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.logoutRequestListen"
             }, {
                 func: "gpii.test.checkRestoredConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
                 listener: "fluid.identity"
@@ -437,7 +255,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: [ "{tests}", [ "contexts" ]]
             }, {
                 func: "gpii.test.snapshotSettings",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onSnapshotComplete",
                 listener: "fluid.identity"
@@ -448,7 +266,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.loginRequestListen"
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -476,7 +294,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "preferencesApplied"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.afterChangeMagnification, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -495,7 +313,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "preferencesApplied"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.afterChangeVolume.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.afterChangeVolume, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -506,7 +324,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.logoutRequestListen"
             }, {
                 func: "gpii.test.checkRestoredConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
                 listener: "fluid.identity"
@@ -521,7 +339,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: [ "{tests}", [ "contexts" ]]
             }, {
                 func: "gpii.test.snapshotSettings",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onSnapshotComplete",
                 listener: "fluid.identity"
@@ -532,7 +350,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.loginRequestListen"
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -564,7 +382,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "preferencesApplied"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.afterChangeMagnification, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -587,7 +405,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "preferencesApplied"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.afterChangeShowCrosshairs.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.afterChangeShowCrosshairs, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -598,7 +416,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.logoutRequestListen"
             }, {
                 func: "gpii.test.checkRestoredConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
                 listener: "fluid.identity"
@@ -613,7 +431,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: [ "{tests}", [ "contexts" ]]
             }, {
                 func: "gpii.test.snapshotSettings",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onSnapshotComplete",
                 listener: "fluid.identity"
@@ -624,7 +442,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.loginRequestListen"
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -646,7 +464,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.bright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.bright, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -657,7 +475,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.logoutRequestListen"
             }, {
                 func: "gpii.test.checkRestoredConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
                 listener: "fluid.identity"
@@ -672,7 +490,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: [ "{tests}", [ "contexts" ]]
             }, {
                 func: "gpii.test.snapshotSettings",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onSnapshotComplete",
                 listener: "fluid.identity"
@@ -683,7 +501,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.loginRequestListen"
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -711,7 +529,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "preferencesApplied"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.afterChangeMagnification, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -724,7 +542,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.bright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.bright, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -735,7 +553,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.logoutRequestListen"
             }, {
                 func: "gpii.test.checkRestoredConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
                 listener: "fluid.identity"
@@ -752,7 +570,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: [ "{tests}", [ "contexts" ]]
             }, {
                 func: "gpii.test.snapshotSettings",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onSnapshotComplete",
                 listener: "fluid.identity"
@@ -763,7 +581,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.loginRequestListen"
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -791,7 +609,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "preferencesApplied"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.afterChangeMagnification, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -804,7 +622,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.bright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.bright, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -815,7 +633,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 event: "{environmentChangedRequest}.events.onComplete"
             }, {
                 func: "gpii.test.checkConfiguration", // should still be bright since manual overrides automatic context
-                args: ["{tests}.options.data.bright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.bright, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -826,7 +644,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.logoutRequestListen"
             }, {
                 func: "gpii.test.checkRestoredConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
                 listener: "fluid.identity"
@@ -841,7 +659,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 args: [ "{tests}", [ "contexts" ]]
             }, {
                 func: "gpii.test.snapshotSettings",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onSnapshotComplete",
                 listener: "fluid.identity"
@@ -852,7 +670,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 listener: "gpii.test.loginRequestListen"
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -1152,39 +970,13 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
 
 gpii.tests.pspIntegration.readPrefsTestDefs = [
     {
-        name: "Read a setting with success",
-        // expect: 8,
-        initialSettings: {
-            "gpii.gsettings": {
-                "org.gnome.desktop.a11y.magnifier": [{
-                    "settings": {
-                        "mag-factor": 1.5
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.magnifier"
-                    }
-                }]
-            }
-        },
-        expectedSettingControls: {
-            changeMagnification: {
-                "http://registry\\.gpii\\.net/common/magnification": {
-                    "value": 1.5,
-                    "schema": {
-                        "title": "Magnification",
-                        "description": "Level of magnification",
-                        "type": "number",
-                        "default": 1,
-                        "minimum": 1,
-                        "multipleOf": 0.1
-                    }
-                }
-            }
-        },
+        name: "Read the same setting sequentially",
+        expect: 9,
         sequence: [
+            // Set the initial underlying magnification value
             {
                 func: "gpii.test.setSettings",
-                args: ["{that}.options.initialSettings", "{nameResolver}", "{testCaseHolder}.events.onInitialSettingsComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onInitialSettingsComplete.fire"]
             },
             {
                 event: "{tests}.events.onInitialSettingsComplete",
@@ -1202,7 +994,7 @@ gpii.tests.pspIntegration.readPrefsTestDefs = [
                 listener: "gpii.tests.pspIntegration.checkPayload",
                 args: ["{arguments}.0", "modelChanged", {}]
             },
-            // read the initial preference value
+            // read the initial magnification value
             {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
                 args: [ "{pspClient}", "pullModel", {
@@ -1216,7 +1008,38 @@ gpii.tests.pspIntegration.readPrefsTestDefs = [
             {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.changeMagnification"]
+                args: ["{arguments}.0", "modelChanged", gpii.tests.pspIntegration.settingsHandlers.expectedSettingControls.readPrefsInitial]
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferenceReadSuccess"]
+            },
+            // Change the underlying magnification value
+            {
+                func: "gpii.test.setSettings",
+                args: [gpii.tests.pspIntegration.settingsHandlers.bright, "{nameResolver}", "{testCaseHolder}.events.onInitialSettingsComplete.fire"]
+            },
+            {
+                event: "{tests}.events.onInitialSettingsComplete",
+                listener: "fluid.identity"
+            },
+            // Re-read the magnification preference
+            {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", "pullModel", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            "value": 1
+                        }
+                    }
+                }]
+            },
+            // The changed magnification value is returned
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", gpii.tests.pspIntegration.settingsHandlers.expectedSettingControls.readPrefsBright]
             },
             {
                 event: "{pspClient}.events.onReceiveMessage",
@@ -1224,113 +1047,162 @@ gpii.tests.pspIntegration.readPrefsTestDefs = [
                 args: ["{arguments}.0", "preferenceReadSuccess"]
             }
         ]
-    // },
-    // {
-    //     name: "Read a setting with success - does NOT return settingControls block when settings stay unchanged",
-    //     expect: 5,
-    //     sequence: [
-    //         {
-    //             func: "{pspClient}.connect"
-    //         },
-    //         {
-    //             event: "{pspClient}.events.onConnect",
-    //             listener: "gpii.tests.pspIntegration.connectionSucceeded"
-    //         },
-    //         {
-    //             event: "{pspClient}.events.onReceiveMessage",
-    //             listener: "gpii.tests.pspIntegration.checkPayload",
-    //             args: ["{arguments}.0", "modelChanged", {}]
-    //         },
-    //         // set the initial magnification value to trigger the first "modelChanged" response
-    //         {
-    //             funcName: "gpii.tests.pspIntegration.sendMsg",
-    //             args: [ "{pspClient}", "modelChanged", {
-    //                 settingControls: {
-    //                     "http://registry\\.gpii\\.net/common/magnification": {
-    //                         "value": 3
-    //                     }
-    //                 }
-    //             }]
-    //         },
-    //         {
-    //             event: "{pspClient}.events.onReceiveMessage",
-    //             listener: "gpii.tests.pspIntegration.checkPayload",
-    //             args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.changeMagnification"]
-    //         },
-    //         // read a setting
-    //         {
-    //             funcName: "gpii.tests.pspIntegration.sendMsg",
-    //             args: [ "{pspClient}", "pullModel", {
-    //                 settingControls: {
-    //                     "http://registry\\.gpii\\.net/common/magnification": {
-    //                         "value": 1
-    //                     }
-    //                 }
-    //             }]
-    //         },
-    //         // Only return "preferenceReadSuccess" message. "modelChanged" message is not returned as all settings
-    //         // including magnification value stays unchanged.
-    //         {
-    //             event: "{pspClient}.events.onReceiveMessage",
-    //             listener: "gpii.tests.pspIntegration.checkPayload",
-    //             args: ["{arguments}.0", "preferenceReadSuccess"]
-    //         }
-    //     ]
-    // },
-    // {
-    //     name: "Read a setting with failure",
-    //     expect: 4,
-    //     sequence: [
-    //         {
-    //             func: "{pspClient}.connect"
-    //         },
-    //         {
-    //             event: "{pspClient}.events.onConnect",
-    //             listener: "gpii.tests.pspIntegration.connectionSucceeded"
-    //         },
-    //         {
-    //             event: "{pspClient}.events.onReceiveMessage",
-    //             listener: "gpii.tests.pspIntegration.checkPayload",
-    //             args: ["{arguments}.0", "modelChanged", {}]
-    //         },
-    //         // read an undefined setting
-    //         {
-    //             funcName: "gpii.tests.pspIntegration.sendMsg",
-    //             args: [ "{pspClient}", "pullModel", {
-    //                 settingControls: {
-    //                     "http://registry\\.gpii\\.net/common/magnification": {
-    //                         "value": 1
-    //                     }
-    //                 }
-    //             }]
-    //         },
-    //         {
-    //             event: "{pspClient}.events.onReceiveMessage",
-    //             listener: "gpii.tests.pspIntegration.checkPayload",
-    //             args: ["{arguments}.0", "preferenceReadFail"]
-    //         }
-    //     ]
+    },
+    {
+        name: "Read different settings",
+        expect: 9,
+        sequence: [
+            // Set the initial underlying preference values for magnification and volume
+            {
+                func: "gpii.test.setSettings",
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onInitialSettingsComplete.fire"]
+            },
+            {
+                event: "{tests}.events.onInitialSettingsComplete",
+                listener: "fluid.identity"
+            },
+            {
+                func: "{pspClient}.connect"
+            },
+            {
+                event: "{pspClient}.events.onConnect",
+                listener: "gpii.tests.pspIntegration.connectionSucceeded"
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", {}]
+            },
+            // read the magnification
+            {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", "pullModel", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            "value": 1
+                        }
+                    }
+                }]
+            },
+            // Only the magnification value is returned
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", gpii.tests.pspIntegration.settingsHandlers.expectedSettingControls.readPrefsInitial]
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferenceReadSuccess"]
+            },
+            // Read a different preference - volume
+            {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", "pullModel", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/volume": {
+                            "value": 0.1
+                        }
+                    }
+                }]
+            },
+            // Both magnification and volume values are returned
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", gpii.tests.pspIntegration.settingsHandlers.expectedSettingControls.readPrefsMulitple]
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferenceReadSuccess"]
+            }
+        ]
+    },
+    {
+        name: "Read a setting with success - does NOT return settingControls block when settings stay unchanged",
+        expect: 5,
+        sequence: [
+            {
+                func: "{pspClient}.connect"
+            },
+            {
+                event: "{pspClient}.events.onConnect",
+                listener: "gpii.tests.pspIntegration.connectionSucceeded"
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", {}]
+            },
+            // set the initial magnification value to trigger the first "modelChanged" response
+            {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", "modelChanged", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            "value": 3
+                        }
+                    }
+                }]
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.changeMagnification"]
+            },
+            // read a setting
+            {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", "pullModel", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            "value": 1
+                        }
+                    }
+                }]
+            },
+            // Only return "preferenceReadSuccess" message. "modelChanged" message is not returned as all settings
+            // including magnification value stays unchanged.
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferenceReadSuccess"]
+            }
+        ]
+    },
+    {
+        name: "Read a setting with failure",
+        expect: 4,
+        sequence: [
+            {
+                func: "{pspClient}.connect"
+            },
+            {
+                event: "{pspClient}.events.onConnect",
+                listener: "gpii.tests.pspIntegration.connectionSucceeded"
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", {}]
+            },
+            // read an undefined setting
+            {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", "pullModel", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            "value": 1
+                        }
+                    }
+                }]
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferenceReadFail"]
+            }
+        ]
     }
 ];
-
-fluid.defaults("gpii.tests.pspIntegration.testCaseHolder.common.linux", {
-    gradeNames: [
-        "gpii.test.integration.testCaseHolder.linux"
-    ],
-    components: {
-        pspClient: {
-            type: "gpii.tests.pspIntegration.client"
-        },
-        environmentChangedRequest: {
-            type: "gpii.tests.pspIntegration.environmentChangedRequestType"
-        },
-        resetRequest: {
-            type: "gpii.tests.pspIntegration.resetRequestType"
-        }
-    },
-    gpiiKey: "context1",
-    data: gpii.tests.pspIntegration.data,
-    events: {
-        onInitialSettingsComplete: null
-    }
-});

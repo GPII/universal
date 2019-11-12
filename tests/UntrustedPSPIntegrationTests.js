@@ -240,7 +240,7 @@ gpii.tests.pspIntegration.saveTestDefs = [
                 args: [ "{tests}", [ "contexts" ]]
             }, {
                 func: "gpii.test.snapshotSettings",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{tests}.events.onSnapshotComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{tests}.events.onSnapshotComplete.fire"]
             }, {
                 event: "{tests}.events.onSnapshotComplete",
                 listener: "fluid.identity"
@@ -251,7 +251,7 @@ gpii.tests.pspIntegration.saveTestDefs = [
                 listener: "gpii.test.loginRequestListen"
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -283,7 +283,7 @@ gpii.tests.pspIntegration.saveTestDefs = [
                 args: ["{arguments}.0", "preferencesApplied"]
             }, {
                 func: "gpii.test.checkConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                 listener: "fluid.identity"
@@ -326,7 +326,7 @@ gpii.tests.pspIntegration.saveTestDefs = [
                 listener: "gpii.test.logoutRequestListen"
             }, {
                 func: "gpii.test.checkRestoredConfiguration",
-                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{tests}.events.onCheckRestoredConfigurationComplete.fire"]
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{tests}.settingsStore", "{nameResolver}", "{tests}.events.onCheckRestoredConfigurationComplete.fire"]
             }, {
                 event: "{tests}.events.onCheckRestoredConfigurationComplete",
                 listener: "fluid.identity"
