@@ -21,7 +21,7 @@ fluid.registerNamespace("gpii.tests.pspIntegration");
 fluid.require("%gpii-universal");
 gpii.loadTestingSupport();
 
-require("./pspIntegrationTestUtils.js");
+require("./PSPIntegrationTestUtils.js");
 
 gpii.tests.pspIntegration.applyPrefsTestDefs = [
     {
