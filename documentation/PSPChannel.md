@@ -11,7 +11,7 @@ from PSPChannel server can be found at
 
 ### Open up a PSPChannel WebSocket Connection
 
-Assume GPII is running on port `localhost:8081` port:
+Assume GPII is running on the port `localhost:8081`:
 
 ```js
 var WS = require("ws");
@@ -171,7 +171,7 @@ When preferences are applied, the server will send back a `modelChanged` message
 
 The value at the path `value.settingControls.{preference}.value` can be any valid value constrained by this setting's
 schema defined in its solution registry entry. This value is required for sending the requested preference through the
-matchmaking process but it doesn't have any effect to the system.
+matchmaking process but it doesn't have any effect on the system.
 
 * The server response:
 
