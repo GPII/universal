@@ -6272,6 +6272,111 @@
             }
         ]
     },
+    "com.microsoft.windows.colorFilters": {
+        "name": "Windows Built-in Screen Magnifier",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "capabilities": [
+        ],
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.systemSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "CheckResult": true
+                },
+                "supportedSettings": {
+                    "SystemSettings_Accessibility_ColorFiltering_IsEnabled": {
+                        "schema": {
+                            "title": "Enable color filtering",
+                            "description": "Enable or disables Windows color filters.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "SystemSettings_Accessibility_ColorFiltering_FilterType": {
+                        "schema": {
+                            "title": "Color filter type",
+                            "description": "Selects the Windows color filter to be used.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "enumLabels": [
+                                "Grayscale",
+                                "Inverted",
+                                "Grayscale inverted",
+                                "Red-green (green weak, deuteranopia)",
+                                "Red-green (red weak, protanopia)",
+                                "Blue-yellow (tritanopia)"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "SystemSettings_Accessibility_ColorFiltering_IsShortcutKeyEnabled": {
+                        "schema": {
+                            "title": "Shortcut key for color filters",
+                            "description": "Allow the shurtcut key (Windows + Ctrl + C) to toggle color filter on or off.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "SystemSettings_Accessibility_ColorFiltering_IsEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.colorFilters.Enable",
+                            "outputPath": "value"
+                        }
+                    },
+                    "SystemSettings_Accessibility_ColorFiltering_FilterType": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.colorFilters.FilterType",
+                            "outputPath": "value"
+                        }
+                    },
+                    "SystemSettings_Accessibility_ColorFiltering_IsShortcutKeyEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.colorFilters.ShortcutKeyEnable",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.colorFilters.Enable": "SystemSettings_Accessibility_ColorFiltering_IsEnabled.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.colorFilters.FilterType": "SystemSettings_Accessibility_ColorFiltering_FilterType.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.colorFilters.ShortcutKeyEnable": "SystemSettings_Accessibility_ColorFiltering_IsShortcutKeyEnabled.value"
+                }
+            }
+        },
+        "update": [
+            "settings.configure"
+        ],
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
     "com.microsoft.windows.filterKeys": {
         "name": "Windows FilterKeys",
         "contexts": {
