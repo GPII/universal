@@ -7,15 +7,13 @@
 // Color should cahnge when the user is logged in, green color should be weaker than before.
 {
     "flat": {
-        "name": "Catalina",
+        "name": "Caroline",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.windows.colorFilters": {
-                        "Enable": true,
-                        "FilterType": 3,
-                        "ShortcutKeyEnable": true
+                        "FilterType": 3
                     }
                 }
             }
