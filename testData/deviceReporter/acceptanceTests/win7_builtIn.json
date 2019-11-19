@@ -32,6 +32,22 @@
     },
 
     {
+        "id": "com.microsoft.windows.toggleKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.underlineMenuShortcuts"
+    },
+
+    {
+        "id": "com.microsoft.windows.shortcutWarningMessage"
+    },
+
+    {
+        "id": "com.microsoft.windows.shortcutWarningSound"
+    },
+
+    {
         "id": "com.microsoft.windows.filterKeys"
     },
 
@@ -60,15 +76,30 @@
     },
 
     {
+        "id": "com.microsoft.windows.volumeControl"
+    },
+
+    {
         "id": "com.microsoft.windows.language"
     },
 
     {
-        "id": "com.microsoft.windows.brightness"
+        "id": "com.microsoft.windows.touchPadSettings"
     },
 
     {
-        "id": "com.microsoft.windows.touchPadSettings"
-    }
+        "id": "com.microsoft.windows.desktopBackground"
+    },
 
+    {
+        "id": "com.microsoft.windows.desktopBackgroundColor"
+    },
+
+    {
+        "id": "com.microsoft.windows.mirrorScreen"
+    },
+
+    {
+        "id": "com.microsoft.windows.soundSentry"
+    }
 ]

@@ -1,0 +1,15 @@
+windows-readWrite12-testSpec.js
+
+Descriptions:
+This will run the acceptance tests for Read&Write Gold. It uses 4 preference sets:
+    - readwritegold_general.
+    - readwritegold_check_dict_high.
+    - readwritegold_pred_scan_out.
+    - readwritegold_screen_mask_shot.
+    - readwritegold_voice.
+    - readwritegold_trans_voca_voice.
+
+Requirements:
+* Read&Write 12 Gold installed
+
+Has been tested with Read&Write Gold 12 on Windows 10.

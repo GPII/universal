@@ -1,8 +1,8 @@
 [
     {
-        "_id": "alice_gpii_key",
+        "_id": "gpii_key_no_prefs_safe",
         "type": "gpiiKey",
-        "schemaVersion": "0.1",
+        "schemaVersion": "0.2",
         "prefsSafeId": null,
         "prefsSetId": null,
         "revoked": false,
