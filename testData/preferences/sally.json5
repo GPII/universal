@@ -1,0 +1,27 @@
+// # Sally.json5
+//
+// This preference set changes the SoundSentry feature from Windows 10. Changing the visual
+// notification for sounds.
+//
+// ## Testing
+//
+// The setting this preference set changes is located in:
+//      + Ease Of Access -> Audio -> Show audio alerts visually.
+// and it's changed to a value of:
+//      + "Flash the active window".
+//
+{
+    "flat": {
+        "name": "sally",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.soundSentry": {
+                        "WindowsEffect": 2
+                    }
+                }
+            }
+        }
+    }
+}

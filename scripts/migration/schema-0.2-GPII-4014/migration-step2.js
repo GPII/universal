@@ -12,12 +12,16 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // 1. Bump schemaVersion value from 0.1 to 0.2 for all documents that have schemaVersion field.
 // Note that "_design/views" doc doesn't have this field.
 // 2. if the document has "timestampUpdated" field, set it to the time that the migration runs.
+// Note that this script migrates documents in batches. Each batch will migrate a limited number of documents
+// to avoid hitting the out-of-memory issue when migrating a large number of documents.
 
-// Usage: node scripts/migration/GPII-4014/migration-step2.js CouchDB-url
+// Usage: node scripts/migration/schema-0.2-GPII-4014/migration-step2.js CouchDB-url [maxDocsInBatchPerRequest]
 // @param {String} CouchDB-url - The url to the CouchDB where docoments should be migrated.
+// @param {Number} maxDocsInBatchPerRequest - [optional] Limit the number of documents to be migrated in a batch.
+// Default to 100 if not provided.
 
 // A sample command that runs this script in the universal root directory:
-// node scripts/migration/GPII-4014/migration-step2.js http://localhost:25984
+// node scripts/migration/schema-0.2-GPII-4014/migration-step2.js http://localhost:25984 10
 
 "use strict";
 
@@ -31,6 +35,8 @@ require("./shared/migratedValues.js");
 require("../../shared/dbRequestUtils.js");
 require("../../../gpii/node_modules/gpii-db-operation/src/DbUtils.js");
 
+gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest = 100;
+
 /**
  * Create a set of options for this script.
  * The options are based on the command line parameters and a set of database constants.
@@ -40,9 +46,11 @@ require("../../../gpii/node_modules/gpii-db-operation/src/DbUtils.js");
 gpii.migration.GPII4014.initOptions = function (processArgv) {
     var options = {};
     options.couchDbUrl = processArgv[2] + "/gpii";
+    options.maxDocsInBatchPerRequest = Number(processArgv[3]) || gpii.migration.GPII4014.defaultMaxDocsInBatchPerRequest;
+    options.numOfUpdated = 0;
 
     // Set up database specific options
-    options.allDocsUrl = options.couchDbUrl + "/_all_docs?include_docs=true";
+    options.allDocsUrl = options.couchDbUrl + "/_design/views/_view/findDocsBySchemaVersion?key=%22" + gpii.migration.GPII4014.oldSchemaVersion + "%22&limit=" + options.maxDocsInBatchPerRequest;
     options.allDocs = [];
     options.parsedCouchDbUrl = url.parse(options.couchDbUrl);
     options.postOptions = {
@@ -69,7 +77,7 @@ gpii.migration.GPII4014.initOptions = function (processArgv) {
 /**
  * Create the step that retrieves all documents from the database
  * @param {Object} options - All docs URL and whether to filter:
- * @param {Array} options.allDocsUrl - The url for retrieving all documents in the database.
+ * @param {String} options.allDocsUrl - The url for retrieving all documents in the database.
  * @return {Promise} - A promise that resolves retrieved documents.
  */
 gpii.migration.GPII4014.retrieveAllDocs = function (options) {
@@ -87,15 +95,21 @@ gpii.migration.GPII4014.retrieveAllDocs = function (options) {
  * @param {String} responseString - the response from the request to get all documents.
  * @param {Object} options - Where to store the to-be-updated documents:
  * @param {Array} options.allDocs - Accumulated documents.
- * @return {Array} - The updated documents in the new data structure with the new schema version.
+ * @return {Promise} - The resolved value contains an array of documents to be migrated, or 0
+ * when no more document to migrate.
  */
 gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
     var allDocs = JSON.parse(responseString);
     var updatedDocs = [];
+    var togo = fluid.promise();
+
     options.totalNumOfDocs = allDocs.total_rows;
-    if (allDocs.rows) {
+
+    if (allDocs.rows.length === 0) {
+        options.updatedDocs = 0;
+    } else {
         fluid.each(allDocs.rows, function (aRow) {
-            var aDoc = aRow.doc;
+            var aDoc = aRow.value;
             // To filter out the "_design/views" doc that doesn't have the "schemaVersion" field
             if (aDoc.schemaVersion) {
                 aDoc.schemaVersion = gpii.migration.GPII4014.newSchemaVersion;
@@ -107,7 +121,9 @@ gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
         });
         options.updatedDocs = updatedDocs;
     }
-    return updatedDocs;
+    togo.resolve(options.updatedDocs);
+
+    return togo;
 };
 
 /**
@@ -115,10 +131,12 @@ gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
  * @param {String} responseString - Response from the database (ignored)
  * @param {Object} options - Object containing the set of documents:
  * @param {Array} options.updatedDocs - The documents to update.
+ * @param {Number} options.numOfUpdated - The total number of migrated documents.
  * @return {Number} - the number of documents updated.
  */
 gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
-    console.log("Updated ", options.updatedDocs.length, " of ", options.totalNumOfDocs, " GPII documents.");
+    options.numOfUpdated = options.numOfUpdated + options.updatedDocs.length;
+    console.log("Updated ", options.numOfUpdated, " of ", options.totalNumOfDocs, " GPII documents.");
     return options.updatedDocs.length;
 };
 
@@ -126,14 +144,21 @@ gpii.migration.GPII4014.logUpdateDB = function (responseString, options) {
  * Configure update, in batch, of the documents.
  * @param {Object} options - The documents to be updated:
  * @param {Array} options.updatedDocs - The documents to update.
- * @return {Promise} - The promise that resolves the update.
+ * @return {Promise} - A promise whose resolved value is the number of migrated documents,
+ * or 0 when all has been migrated.
  */
 gpii.migration.GPII4014.updateDB = function (options) {
-    var details = {
-        dataToPost: options.updatedDocs,
-        responseDataHandler: gpii.migration.GPII4014.logUpdateDB
-    };
-    return gpii.dbRequest.configureStep(details, options);
+    var togo = fluid.promise();
+    if (options.updatedDocs === 0) {
+        togo.resolve(0);
+    } else {
+        var details = {
+            dataToPost: options.updatedDocs,
+            responseDataHandler: gpii.migration.GPII4014.logUpdateDB
+        };
+        togo = gpii.dbRequest.configureStep(details, options);
+    }
+    return togo;
 };
 
 /**
@@ -141,20 +166,18 @@ gpii.migration.GPII4014.updateDB = function (options) {
  */
 gpii.migration.GPII4014.migrateStep2 = function () {
     var options = gpii.migration.GPII4014.initOptions(process.argv);
-    var sequence = [
-        gpii.migration.GPII4014.retrieveAllDocs,
-        gpii.migration.GPII4014.updateDB
-    ];
-    fluid.promise.sequence(sequence, options).then(
-        function (/*result*/) {
-            console.log("Done.");
-            process.exit(0);
-        },
-        function (error) {
-            console.log(error);
-            process.exit(1);
-        }
-    );
+    var actionFunc = function (options) {
+        return fluid.promise.sequence([
+            gpii.migration.GPII4014.retrieveAllDocs,
+            gpii.migration.GPII4014.updateDB
+        ], options);
+    };
+
+    var finalPromise = gpii.dbRequest.processRecursive(options, actionFunc);
+
+    finalPromise.then(function () {
+        console.log("Done: Migrated " + options.numOfUpdated + " documents in total.");
+    }, console.log);
 };
 
 gpii.migration.GPII4014.migrateStep2();

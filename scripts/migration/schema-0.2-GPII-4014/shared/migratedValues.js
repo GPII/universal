@@ -18,6 +18,7 @@ var fluid = require("infusion"),
 fluid.registerNamespace("gpii.migration.GPII4014");
 
 // Migrated values
+gpii.migration.GPII4014.oldSchemaVersion = "0.1";
 gpii.migration.GPII4014.newSchemaVersion = "0.2";
 
 gpii.migration.GPII4014.newValuesForNovaClientCredential = {

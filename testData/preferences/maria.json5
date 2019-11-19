@@ -1,0 +1,48 @@
+// # Maria.json5
+//
+// This preference set changes the Windows 10 magnifier preferences settings.
+//
+// ## Testing
+//
+// This changes the following settings from the system:
+//     + FollowFocus: Narrator doesn't follow focus.
+//     + FollowCaret: Narrator now follows text insertion point.
+//     + FollowMouse: Narrator now follows mouse.
+//     + Invert: Narrator doesn't invert the colours.
+//     + Magnification: Magnification is set to 250%.
+//     + MagnificationMode: Magnification mode is set to "Docked mode".
+//     + FollowNarrator: Magnifier follows Narrator cursor.
+//     + FadeToMagIcon: Magnifier doesn't collapse into a magnifying glass icon.
+//     + ZoomIncrement: Zoom increment is set to 50.
+//     + UseBitmapSmoothing: Smooth edges of image and text.
+//     + LensHeight: Now the lens height in magnifier lens mode is 50.
+//     + LensWidth: Now the lens width in magnifier lens mode is 50.
+//
+{
+    "flat": {
+        "name": "maria",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.magnifier": {
+                        "FollowFocus": 0,
+                        "FollowCaret": 1,
+                        "FollowMouse": 1,
+                        "Invert": 0,
+                        "Magnification": 250,
+                        "MagnificationMode": 1,
+                        "FollowNarrator": 1,
+                        "FadeToMagIcon": 0,
+                        "ZoomIncrement": 50,
+                        "UseBitmapSmoothing": 1,
+                        "LensHeight": 50,
+                        "LensWidth": 50,
+                        "EnableAutoStart": true,
+                        "EnableSystemAutoStart": true
+                    }
+                }
+            }
+        }
+    }
+}

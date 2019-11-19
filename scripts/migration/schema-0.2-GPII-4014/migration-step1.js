@@ -13,13 +13,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // allowedIPBlocks, allowedPrefsToWrite, isCreateGpiiKeyAllowed, isCreatePrefsSafeAllowed.
 // These 4 values are different for public client credentials and NOVA privileged client credentials.
 
-// Usage: node scripts/migration/GPII-4014/migration-step1.js CouchDB-url clientCredentialId-for-NOVA ...
+// Usage: node scripts/migration/schema-0.2-GPII-4014/migration-step1.js CouchDB-url clientCredentialId-for-NOVA ...
 // @param {String} CouchDB-url - The url to the CouchDB where docoments should be migrated.
 // @param {Strings} clientCredentialIds-for-NOVA - The "_id" value of the NOVA client credential. There could be any
 // number of client credential parameters from here onwards.
 
 // A sample command that runs this script in the universal root directory:
-// node scripts/migration/GPII-4014/migration-step1.js http://localhost:25984 "clientCredential-nova1" "clientCredential-nova2"
+// node scripts/migration/schema-0.2-GPII-4014/migration-step1.js http://localhost:25984 "clientCredential-nova1" "clientCredential-nova2"
 
 "use strict";
 
