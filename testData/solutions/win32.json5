@@ -10630,9 +10630,9 @@
                             "title": "Vocabulary",
                             "description": "Select the different vocabularies that should be used during the check.",
                             "type": "number",
-                            "label": "bitmask",
                             "default": 130
-                        }
+                        },
+                        "label": "bitmask"
                     },
                     // Dictionary
                     "ApplicationSettings.Dictionary.WebDictionary.$t": {
