@@ -5045,7 +5045,6 @@
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
-                            // GPII-4207 Test with the new find `default` value function
                             "properties": {
                                 "path": { "type":  "string"},
                                 "value": {
@@ -6378,7 +6377,6 @@
                     }
                 },
                 "supportedSettings": {
-                    // GPII-4207 Add the check for defaults in `properties.value.default`
                     "FilterKeysEnable": {
                         "schema": {
                             "title": "Filter keys",
@@ -6394,7 +6392,6 @@
                             }
                         }
                     },
-                    // GPII-4207 it looks like the default in the control panel for this may be 1000...
                     "SlowKeysInterval": {
                         "schema": {
                             "title": "Slow keys interval",
@@ -6403,7 +6400,7 @@
                             "properties": {
                                 "path": { "type":  "string", "required": true},
                                 "value": {
-                                    // GPII-4207 In the current Windows 10 UI this goes from 0.0 seconds
+                                    // In the current Windows 10 UI this goes from 0.0 seconds
                                     // to 20.0 seconds in somewhat random steps in a combo box:
                                     // 0.0, 0.3, 0.5, 0.7, 1.0, 1.4, 2.0, 5.0, 10.0, 20.0
                                     // TODO try manually setting a differnet value under the covers,
@@ -6840,7 +6837,6 @@
                         "schema": {
                             "title": "Video audio description",
                             "description": "Hear descriptions of what's happening in videos",
-                            // GPII-4207 Test to see if this `default` is getting cast correctly
                             "default": 0,
                             "enum": [
                                 0,
@@ -7111,7 +7107,6 @@
                             "title": "ToggleKeys accesibility feature",
                             "description": "Enable/Disable ToggleKeys feature",
                             "type": "boolean",
-                            // GPII-4207 check `default` cast
                             "default": false
                         }
                     }
