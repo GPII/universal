@@ -1,6 +1,6 @@
 # PSP Channel
 
-PSPChannel is used to establish persistent WebSockets connection between PSPChannel server and clients. Once the
+PSPChannel is used to establish persistent WebSocket connection between PSPChannel server and clients. Once the
 connection is established, the PSPChannel client can request various actions by transmitting the specified data to the
 pspChannel server. These actions include: apply preferences, switch to a different preference set, save changed
 preferences and read a preference value. Examples of how to construct PSPChannel connections and send/receive data
@@ -62,8 +62,7 @@ socket.close();
 
 ### Send Data to PSPChannel Server
 
-the PSPChannle client can request various actions by
-transmitting the specified data to the server.
+The PSPChannel client can request various actions by transmitting the specified data to the server.
 
 ```js
 socket.send(data);

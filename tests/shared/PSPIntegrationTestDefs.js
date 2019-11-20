@@ -1049,7 +1049,7 @@ gpii.tests.pspIntegration.readPrefsTestDefs = [
         ]
     },
     {
-        name: "Read different settings",
+        name: "Read different settings one by one sequentially",
         expect: 9,
         sequence: [
             // Set the initial underlying preference values for magnification and volume
@@ -1100,6 +1100,58 @@ gpii.tests.pspIntegration.readPrefsTestDefs = [
                 funcName: "gpii.tests.pspIntegration.sendMsg",
                 args: [ "{pspClient}", "pullModel", {
                     settingControls: {
+                        "http://registry\\.gpii\\.net/common/volume": {
+                            "value": 0.1
+                        }
+                    }
+                }]
+            },
+            // Both magnification and volume values are returned
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", gpii.tests.pspIntegration.settingsHandlers.expectedSettingControls.readPrefsMulitple]
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferenceReadSuccess"]
+            }
+        ]
+    },
+    {
+        name: "Read multiple settings in one request",
+        expect: 6,
+        sequence: [
+            // Set the initial underlying preference values for magnification and volume
+            {
+                func: "gpii.test.setSettings",
+                args: [gpii.tests.pspIntegration.settingsHandlers.initial, "{nameResolver}", "{testCaseHolder}.events.onInitialSettingsComplete.fire"]
+            },
+            {
+                event: "{tests}.events.onInitialSettingsComplete",
+                listener: "fluid.identity"
+            },
+            {
+                func: "{pspClient}.connect"
+            },
+            {
+                event: "{pspClient}.events.onConnect",
+                listener: "gpii.tests.pspIntegration.connectionSucceeded"
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", {}]
+            },
+            // read the magnification
+            {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", "pullModel", {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            "value": 1
+                        },
                         "http://registry\\.gpii\\.net/common/volume": {
                             "value": 0.1
                         }
