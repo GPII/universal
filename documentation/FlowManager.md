@@ -1,10 +1,9 @@
 # Flow Manager
 
 The flow manager is the central point of coordination in the system for managing flow between different architecture
-components. For example, it coordinates the steps involved during logging in which require retrieving preferences,
+components. For example, it coordinates the steps involved during logging in, which require retrieving preferences,
 solutions, device data, etc. and passing these to the [MatchMaker Framework](MatchMakerFramework.md). Following those
-steps, the payload is sent via the [Context Manager](ContextManager.md) and then to the [Lifecycle
-Manager](LifecycleManager.md).
+steps, the payload is sent  to the [LifecycleManager](LifecycleManager.md).
 
 ## Important flows
 
@@ -210,14 +209,7 @@ Note that a separate logout of "reset" is not necessary. The final condition of 
                 "applications": {}
             },
             "turn-down-light": {
-                "applications": {},
-                "conditions": [
-                    {
-                        "type": "http://registry.gpii.net/conditions/inRange",
-                        "min": 400,
-                        "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
-                    }
-                ]
+                "applications": {}
             }
         }
     }

@@ -13,7 +13,6 @@
 * [MatchMakerFramework](MatchMakerFramework.md)
   * [Flat MatchMaker](FlatMatchMaker.md)
   * [Apptology](Apptology.md)
-* [Context Manager](ContextManager.md)
 * [Lifecycle Manager](LifecycleManager.md)
 * [Transformer](Transformer.md)
 * [BrowserChannel and WebSockets settings handler](BrowserChannel.md)

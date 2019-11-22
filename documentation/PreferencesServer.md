@@ -9,7 +9,7 @@ The preferences server currently preferences APIs. The URLS are as follows:
 
 The Preferences Server is a server meant to be the public-facing, REST-based interface for consumers of preferences. Its
 main purpose is to be able to present a filtered view of the user preferences based on the requirements of the consumer,
-i.e. the preferences shown in a specific ontology, filtered according to a specific set of contexts.
+i.e. the preferences shown in a specific ontology, filtered according to a specified set of preferences.
 
 The bulk of work of the Preferences Server is done in other components of the GPII system, leaving the Preferences
 Server with the task of acting on the parameters supplied to the REST calls, calling the relevant functions in other

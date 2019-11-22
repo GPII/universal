@@ -168,19 +168,6 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
                 }
             }
         }
-    },
-    // 7
-    {
-        "flat": {
-            "contexts": {
-                "gpii-default": {
-                    "name": "Default preferences",
-                    "preferences": {
-                        "http://registry.gpii.net/common/magnification": 3
-                    }
-                }
-            }
-        }
     }
 ];
 
@@ -214,6 +201,7 @@ gpii.test.untrusted.pspIntegration.verifyRawPrefsAtStart = function (that, prefe
 };
 
 gpii.test.untrusted.pspIntegration.verifyRawPrefsAtEnd = function (that, preferences, sequenceNum, expectedChange) {
+    fluid.log (that.options.name, ", number ", sequenceNum, " in the sequence");
     var expectedPrefsChange = expectedChange ? expectedChange : gpii.test.untrusted.pspIntegration.expectedPrefsChange[sequenceNum];
 
     var expected = fluid.extend(true, {}, that.options.initialPrefs, expectedPrefsChange);
