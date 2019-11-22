@@ -247,7 +247,7 @@ Note that a separate logout of "reset" is not necessary. The final condition of 
             "name": "Default preferences",
             "preferences": {
                 "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
-                "http://registry.gpii.net/common/initDelay": 0.120,
+                "http://registry.gpii.net/common/initDelay": 120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850
             }
         }
