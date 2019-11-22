@@ -254,7 +254,7 @@ gpii.tests.pspIntegration.saveTestDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/pitch"], 0.85]
+                args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/pitch"], 0.8]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -293,7 +293,7 @@ gpii.tests.pspIntegration.saveTestDefs = [
                             "gpii-default": {
                                 "name": "Default preferences",
                                 "preferences": {
-                                    "http://registry.gpii.net/common/pitch": 0.85
+                                    "http://registry.gpii.net/common/pitch": 0.8
                                 }
                             }
                         }
