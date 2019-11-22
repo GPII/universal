@@ -3440,10 +3440,16 @@
                     "http://registry\\.gpii\\.net/common/speechRate": "ENU-Global\\.Rate",
                     "http://registry\\.gpii\\.net/common/pitch": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "ENU-Global\\.Pitch",
-                            "factor": 0.010101,
-                            "offset": -0.010101
+                            "type": "fluid.transforms.round",
+                            "scale": 1,
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "ENU-Global\\.Pitch",
+                                    "factor": 0.010101,
+                                    "offset": -0.010101
+                                }
+                            }
                         }
                     },
                     "http://registry\\.gpii\\.net/common/volumeTTS": {
@@ -4240,7 +4246,6 @@
                             "description": "Position of the magnified area",
                             "default": 2,
                             "enum": [
-                                1,
                                 2,
                                 3
                             ],
@@ -5114,6 +5119,56 @@
                 }
             }
         },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.mirrorScreen": {
+        "name": "Windows Screen Mirroring",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.nativeSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "functionName": "ScreenMirror"
+                },
+                "supportedSettings": {
+                    "ScreenMirrorConfig": {
+                        "schema": {
+                            "title": "Screen mirroring",
+                            "description": "Mirrors the primary screen into a secondary screen.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ScreenMirrorConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mirrorScreen.ScreenMirror",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mirrorScreen.ScreenMirror": "ScreenMirrorConfig.value"
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -7239,13 +7294,17 @@
                         "FollowFocus": "REG_DWORD",
                         "FollowCaret": "REG_DWORD",
                         "FollowMouse": "REG_DWORD",
+                        "FollowNarrator": "REG_DWORD",
                         "MagnificationMode": "REG_DWORD",
-                        "ZoomIncrement": "REG_DWORD"
+                        "FadeToMagIcon": "REG_DWORD",
+                        "ZoomIncrement": "REG_DWORD",
+                        "UseBitmapSmoothing": "REG_DWORD",
+                        "LensHeight": "REG_DWORD",
+                        "LensWidth": "REG_DWORD"
                     }
                 },
                 "supportedSettings": {
                     "Invert": {
-                        // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
                         "schema": {
                             "title": "Invert Colours",
                             "description": "Enable colour inversion for Magnifier",
@@ -7257,7 +7316,7 @@
                         "schema": {
                             "title": "Magnification",
                             "description": "Set up magnification level",
-                            "type": "integer",
+                            "type": "number",
                             "default": 200,
                             "minimum": 100,
                             "maximum": 1600
@@ -7287,10 +7346,19 @@
                             "enumLabels": ["Off", "On"]
                         }
                     },
+                    "FollowNarrator": {
+                        "schema": {
+                            "title": "Magnifier follows Narrator",
+                            "description": "Magnifier follows the Narrator cursor",
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
+                        }
+                    },
                     "MagnificationMode": {
                         "schema": {
                             "title": "Magnifier position",
                             "description": "Position of the magnified area",
+                            "type": "number",
                             "default": 2,
                             "enum": [
                                 1,
@@ -7298,18 +7366,70 @@
                                 3
                             ],
                             "enumLabels": [
-                                "TopHalf", "FullScreen", "Lens"
+                               "Docked",
+                               "FullScreen",
+                               "Lens"
                             ]
+                        }
+                    },
+                    "FadeToMagIcon": {
+                        "schema": {
+                            "title": "Collapse into magnifiying glass",
+                            "description": "Collapse Magnifier window into a floating transparent magnifying glass.",
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     },
                     "ZoomIncrement": {
                         "schema": {
                             "title": "Zoom Increment",
-                            "description": "How much to increase or decrease the zoom level at once.",
+                            "description": "Change zoom increments.",
+                            "type": "number",
+                            "default": 100,
+                            "enum": [
+                                25,
+                                50,
+                                100,
+                                150,
+                                200,
+                                400
+                            ],
+                            "enumLabels": [
+                               "25%",
+                               "50%",
+                               "100% (default)",
+                               "150%",
+                               "200%",
+                               "400%"
+                            ]
+                        }
+                    },
+                    "UseBitmapSmoothing": {
+                        "schema": {
+                            "title": "Smooth edges of images and text",
+                            "description": "Enables/Disables smoothing for edges",
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
+                        }
+                    },
+                    "LensHeight": {
+                        "schema": {
+                            "title": "Lens Height",
+                            "description": "Modifies the height of the magnifier lens.",
                             "type": "integer",
-                            "enum": [25, 50, 100, 150, 200, 400],
-                            "enumLabels": ["25 %", "50 %", "100 %", "150 %", "200 %", "400 %"],
-                            "default": 100
+                            "minimum": 10,
+                            "maximum": 100,
+                            "default": 30
+                        }
+                    },
+                    "LensWidth": {
+                        "schema": {
+                            "title": "Lens Width",
+                            "description": "Modifies the width of the magnifier lens.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 100,
+                            "default": 30
                         }
                     }
                 },
@@ -7395,8 +7515,66 @@
                         }
                     ]
                 }
+            },
+            "configureSystemSettings": {
+                "type": "gpii.windows.systemSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "Async": true,
+                    "CheckResult": true
+                },
+                "supportedSettings": {
+                    "SystemSettings_Accessibility_Magnifier_IsAutoStartEnabled": {
+                        "schema": {
+                            "title": "Auto Start Magnifier",
+                            "description": "Start Magnifier after sign-in.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "SystemSettings_Accessibility_Magnifier_IsAutoStartOnLogonDesktopEnabled": {
+                        "schema": {
+                            "title": "Auto Start Magnifier for everyone",
+                            "description": "Start Magnifier before sign-in.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "SystemSettings_Accessibility_Magnifier_IsAutoStartEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableAutoStart",
+                            "outputPath": "value"
+                        }
+                    },
+                    "SystemSettings_Accessibility_Magnifier_IsAutoStartOnLogonDesktopEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableSystemAutoStart",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableAutoStart": "SystemSettings_Accessibility_Magnifier_IsAutoStartEnabled.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableSystemAutoStart": "SystemSettings_Accessibility_Magnifier_IsAutoStartOnLogonDesktopEnabled.value"
+                }
             }
         },
+        "update": [
+            "settings.configure",
+            "settings.configureSystemSettings"
+        ],
+        "configure": [
+            "settings.configure",
+            "settings.configureSystemSettings"
+        ],
+        "restore": [
+            "settings.configure",
+            "settings.configureSystemSettings"
+        ],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.windows.enableRegisteredAT",
@@ -9034,6 +9212,61 @@
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/nightScreen": "SystemSettings_Display_BlueLight_ManualToggleQuickAction.value"
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.soundSentry": {
+        "name": "Windows 10 SoundSentry",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "capabilities": [
+        ],
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Accessibility\\SoundSentry",
+                    "dataTypes": {
+                        "WindowsEffect": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "WindowsEffect": {
+                        "schema": {
+                            "title": "SoundSentry",
+                            "description": "Selects the desired visual notification for sounds.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "No visual alert",
+                                "Flash the title of the active window",
+                                "Flash the active window",
+                                "Flash the entire screen"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                },
+                "inverseCapabilitiesTransformations": {
                 }
             }
         },

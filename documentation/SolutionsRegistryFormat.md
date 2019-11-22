@@ -308,7 +308,7 @@ containing references to all launchHandlers specified for that solution (if any)
 ### update
 
 The `update` block works very similarly to the lifecycle blocks. It describes what should happen when the configuration
-needs to be updated (e.g. due to context changes, PSP adjustments, etc).
+needs to be updated (e.g. due to preferences set changes, PSP adjustments, etc).
 
 The format of the `update` block allows for the same entries as the other lifecycle blocks - that is: arbitrary
 lifecycle action blocks and references to `settings.<blockname>` and `launchers.<blockname>`. Unlike for the other

@@ -89,7 +89,13 @@
                         "FollowMouse": 1,
                         "Invert": 1,
                         "Magnification": 150,
-                        "MagnificationMode": 3
+                        "MagnificationMode": 3,
+                        "FollowNarrator": 0,
+                        "FadeToMagIcon": 1,
+                        "ZoomIncrement": 50,
+                        "UseBitmapSmoothing": 1,
+                        "LensHeight": 50,
+                        "LensWidth": 50
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.screenResolution": {
                         "screen-resolution": {
@@ -251,6 +257,14 @@
                         "UseTextPrediction": 0,
                         "InsertSpace": 0,
                         "Dock": 0
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.mirrorScreen": {
+                        "ScreenMirrorConfig": {
+                            "value": false
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.soundSentry": {
+                        "WindowsEffect": 2
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.volumeControl": {
                         "Volume": {

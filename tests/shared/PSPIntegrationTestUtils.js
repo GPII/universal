@@ -26,9 +26,6 @@ fluid.defaults("gpii.tests.pspIntegration.testCaseHolder.common.linux", {
         pspClient: {
             type: "gpii.tests.pspIntegration.client"
         },
-        environmentChangedRequest: {
-            type: "gpii.tests.pspIntegration.environmentChangedRequestType"
-        },
         resetRequest: {
             type: "gpii.tests.pspIntegration.resetRequestType"
         }
@@ -37,12 +34,6 @@ fluid.defaults("gpii.tests.pspIntegration.testCaseHolder.common.linux", {
     events: {
         onInitialSettingsComplete: null
     }
-});
-
-fluid.defaults("gpii.tests.pspIntegration.environmentChangedRequestType", {
-    gradeNames: "kettle.test.request.http",
-    path: "/environmentChanged",
-    method: "PUT"
 });
 
 fluid.defaults("gpii.tests.pspIntegration.client", {
@@ -63,9 +54,9 @@ gpii.tests.pspIntegration.sendMsg = function (client, type, value) {
     });
 };
 
-gpii.tests.pspIntegration.sendContextChange = function (client, newContext) {
+gpii.tests.pspIntegration.sendPrefsSetNameChange = function (client, newContext) {
     gpii.tests.pspIntegration.sendMsg(client, "modelChanged", {
-        activeContextName: newContext
+        activePrefsSetName: newContext
     });
 };
 
@@ -208,7 +199,363 @@ gpii.tests.pspIntegration.settingsHandlers = {
     }
 };
 
-gpii.tests.pspIntegration.settingsHandlers.expectedSettingControls = {
+gpii.tests.pspIntegration.expectedSettingControls = {
+    noUser: {},
+    afterConnect: {
+        "http://registry\\.gpii\\.net/common/magnification": {
+            "value": 1.5,
+            "schema": {
+                "title": "Magnification",
+                "description": "Level of magnification",
+                "type": "number",
+                "default": 1,
+                "minimum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live"
+        },
+        "http://registry\\.gpii\\.net/common/volume": {
+            "value": 0.5,
+            "schema": {
+                "title": "Volume",
+                "description": "General volume of the operating system",
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            },
+            "liveness": "live"
+        }
+    },
+    afterChangeMagnificationByAppTerm: {
+        "http://registry\\.gpii\\.net/common/magnification": {
+            "schema": {
+                "title": "Magnification",
+                "description": "Level of magnification",
+                "type": "number",
+                "default": 1,
+                "minimum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live",
+            "value": 1.5
+        },
+        "http://registry\\.gpii\\.net/common/volume": {
+            "schema": {
+                "title": "Volume",
+                "description": "General volume of the operating system",
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            },
+            "liveness": "live",
+            "value": 0.5
+        },
+        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification": {
+            "value": 3,
+            "schema": {
+                "title": "Magnification",
+                "description": "Level of magnification",
+                "type": "number",
+                "default": 1,
+                "minimum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live",
+            "solutionName": "GNOME Shell Magnifier"
+        }
+    },
+    afterChangeShowCrosshairsByAppTerm: {
+        "http://registry\\.gpii\\.net/common/magnification": {
+            "schema": {
+                "title": "Magnification",
+                "description": "Level of magnification",
+                "type": "number",
+                "default": 1,
+                "minimum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live",
+            "value": 1.5
+        },
+        "http://registry\\.gpii\\.net/common/volume": {
+            "schema": {
+                "title": "Volume",
+                "description": "General volume of the operating system",
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            },
+            "liveness": "live",
+            "value": 0.5
+        },
+        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification": {
+            "value": 3,
+            "schema": {
+                "title": "Magnification",
+                "description": "Level of magnification",
+                "type": "number",
+                "default": 1,
+                "minimum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live",
+            "solutionName": "GNOME Shell Magnifier"
+        },
+        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/showCrosshairs": {
+            "value": 1,
+            "schema": {
+                "title": "Show crosshairs",
+                "description": "Whether to show crosshairs",
+                "type": "boolean",
+                "default": false
+            },
+            "liveness": "live",
+            "solutionName": "GNOME Shell Magnifier"
+        }
+    },
+    afterChangeScreenReaderByAppTerm: {
+        "http://registry\\.gpii\\.net/common/magnification": {
+            "schema": {
+                "title": "Magnification",
+                "description": "Level of magnification",
+                "type": "number",
+                "default": 1,
+                "minimum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live",
+            "value": 1.5
+        },
+        "http://registry\\.gpii\\.net/common/volume": {
+            "schema": {
+                "title": "Volume",
+                "description": "General volume of the operating system",
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            },
+            "liveness": "live",
+            "value": 0.5
+        },
+        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.orca.http://registry\\.gpii\\.net/common/screenReaderTTS/enabled": {
+            "value": true,
+            "schema": {
+                "title": "TTS enabled",
+                "description": "Whether to enable/disable text to speech from screen reader",
+                "type": "boolean",
+                "default": true
+            },
+            "liveness": "manualRestart",
+            "solutionName": "ORCA Screen Reader"
+        }
+    },
+    afterChangeToBright: {
+        "http://registry\\.gpii\\.net/common/magnification": {
+            "value": 2,
+            "schema": {
+                "title": "Magnification",
+                "description": "Level of magnification",
+                "type": "number",
+                "default": 1,
+                "minimum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live"
+        }
+    },
+    afterChangeMagnification: {
+        "http://registry\\.gpii\\.net/common/magnification": {
+            "value": 3,
+            "schema": {
+                "title": "Magnification",
+                "description": "Level of magnification",
+                "type": "number",
+                "default": 1,
+                "minimum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live"
+        }
+    },
+    afterChangeCursorSize: {
+        "http://registry\\.gpii\\.net/common/cursorSize": {
+            "value": 0.9,
+            "schema": {
+                "title": "Cursor Size",
+                "description": "Cursor size",
+                "type": "number",
+                "default": 0.5,
+                "minimum": 0,
+                "maximum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live"
+        }
+    },
+    afterChangeCursorSizeCombined: {
+        "http://registry\\.gpii\\.net/common/magnification": {
+            "schema": {
+                "title": "Magnification",
+                "description": "Level of magnification",
+                "type": "number",
+                "default": 1,
+                "minimum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live",
+            "value": 1.5
+        },
+        "http://registry\\.gpii\\.net/common/volume": {
+            "schema": {
+                "title": "Volume",
+                "description": "General volume of the operating system",
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            },
+            "liveness": "live",
+            "value": 0.5
+        },
+        "http://registry\\.gpii\\.net/common/cursorSize": {
+            "value": 0.9,
+            "schema": {
+                "title": "Cursor Size",
+                "description": "Cursor size",
+                "type": "number",
+                "default": 0.5,
+                "minimum": 0,
+                "maximum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live"
+        }
+    },
+    afterChangePitch: {
+        "http://registry\\.gpii\\.net/common/magnification": {
+            "schema": {
+                "title": "Magnification",
+                "description": "Level of magnification",
+                "type": "number",
+                "default": 1,
+                "minimum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live",
+            "value": 1.5
+        },
+        "http://registry\\.gpii\\.net/common/volume": {
+            "schema": {
+                "title": "Volume",
+                "description": "General volume of the operating system",
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            },
+            "liveness": "live",
+            "value": 0.5
+        },
+        "http://registry\\.gpii\\.net/common/pitch": {
+            "value": 0.8,
+            "schema": {
+                "title": "Pitch rate",
+                "description": "Text to speech output pitch rate",
+                "type": "number",
+                "default": 0.5,
+                "minimum": 0,
+                "maximum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "manualRestart"
+        }
+    },
+    noUserWithDefaultSettings: {
+        "http://registry\\.gpii\\.net/common/cursorSize": {
+            "schema": {
+                "title": "Cursor Size",
+                "description": "Cursor size",
+                "type": "number",
+                "default": 0.8,
+                "minimum": 0,
+                "maximum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live"
+        },
+        "http://registry\\.gpii\\.net/common/volume": {
+            "schema": {
+                "title": "Volume",
+                "description": "General volume of the operating system",
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "default": 1
+            },
+            "liveness": "live"
+        }
+    },
+    afterChangeMagnificationWithDefaultSettings: {
+        "http://registry\\.gpii\\.net/common/cursorSize": {
+            "schema": {
+                "title": "Cursor Size",
+                "description": "Cursor size",
+                "type": "number",
+                "default": 0.8,
+                "minimum": 0,
+                "maximum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live"
+        },
+        "http://registry\\.gpii\\.net/common/volume": {
+            "schema": {
+                "title": "Volume",
+                "description": "General volume of the operating system",
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "default": 1
+            },
+            "liveness": "live"
+        },
+        "http://registry\\.gpii\\.net/common/magnification": {
+            "value": 3,
+            "schema": {
+                "title": "Magnification",
+                "description": "Level of magnification",
+                "type": "number",
+                "default": 1,
+                "minimum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live"
+        }
+    },
+    afterChangeCursorSizeWitthDefaultSettings: {
+        "http://registry\\.gpii\\.net/common/cursorSize": {
+            "value": 0.9,
+            "schema": {
+                "title": "Cursor Size",
+                "description": "Cursor size",
+                "type": "number",
+                "default": 0.8,
+                "minimum": 0,
+                "maximum": 1,
+                "multipleOf": 0.1
+            },
+            "liveness": "live"
+        },
+        "http://registry\\.gpii\\.net/common/volume": {
+            "schema": {
+                "title": "Volume",
+                "description": "General volume of the operating system",
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "default": 1
+            },
+            "liveness": "live"
+        }
+    },
     readPrefsInitial: {
         "http://registry\\.gpii\\.net/common/magnification": {
             "value": 1.5,

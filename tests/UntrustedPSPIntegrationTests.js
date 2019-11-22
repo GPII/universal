@@ -168,19 +168,6 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
                 }
             }
         }
-    },
-    // 7
-    {
-        "flat": {
-            "contexts": {
-                "gpii-default": {
-                    "name": "Default preferences",
-                    "preferences": {
-                        "http://registry.gpii.net/common/magnification": 3
-                    }
-                }
-            }
-        }
     }
 ];
 
@@ -214,6 +201,7 @@ gpii.test.untrusted.pspIntegration.verifyRawPrefsAtStart = function (that, prefe
 };
 
 gpii.test.untrusted.pspIntegration.verifyRawPrefsAtEnd = function (that, preferences, sequenceNum, expectedChange) {
+    fluid.log(that.options.name, ", number ", sequenceNum, " in the sequence");
     var expectedPrefsChange = expectedChange ? expectedChange : gpii.test.untrusted.pspIntegration.expectedPrefsChange[sequenceNum];
 
     var expected = fluid.extend(true, {}, that.options.initialPrefs, expectedPrefsChange);
@@ -263,20 +251,20 @@ gpii.tests.pspIntegration.saveTestDefs = [
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "modelChanged"]
+                args: ["{arguments}.0", "modelChanged", gpii.tests.pspIntegration.settingsHandlers.afterConnect]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
                 args: [ "{pspClient}", "modelChanged", {
                     settingControls: {
                         "http://registry\\.gpii\\.net/common/pitch": {
-                            value: 0.85
+                            value: 0.8
                         }
                     }
                 }]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
-                args: ["{arguments}.0", "modelChanged"]
+                args: ["{arguments}.0", "modelChanged", gpii.tests.pspIntegration.settingsHandlers.afterChangePitch]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -313,7 +301,7 @@ gpii.tests.pspIntegration.saveTestDefs = [
                             "gpii-default": {
                                 "name": "Default preferences",
                                 "preferences": {
-                                    "http://registry.gpii.net/common/pitch": 0.85
+                                    "http://registry.gpii.net/common/pitch": 0.8
                                 }
                             }
                         }

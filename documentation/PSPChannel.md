@@ -46,7 +46,7 @@ in the system and no preferences have been read or applied:
         "type": "ADD",
         "value": {
             "gpiiKey": "noUser",
-            "activeContextName": "gpii-default",
+            "activePrefsSetName": "gpii-default",
             "settingControls": {},
             "preferences": {}
         }
@@ -126,7 +126,7 @@ When preferences are applied, the server will send back a `modelChanged` message
         "type": "ADD",
         "value": {
             "gpiiKey": "noUser",
-            "activeContextName": "gpii-default",
+            "activePrefsSetName": "gpii-default",
             "settingControls": {
                 "http://registry\\.gpii\\.net/common/volume": {
                     "value": 0.5,
@@ -193,7 +193,7 @@ An example of a `modelChanged` typed message:
         "type": "ADD",
         "value": {
             "gpiiKey": "noUser",
-            "activeContextName": "gpii-default",
+            "activePrefsSetName": "gpii-default",
             "settingControls": {
                 "http://registry\\.gpii\\.net/common/volume": {
                     "value": 0.5,
@@ -245,12 +245,12 @@ An example of switching to a preference set named "bright":
 {
     "type": "modelChanged",
     "value": {
-        "activeContextName": "bright"
+        "activePrefsSetName": "bright"
     }
 }
 ```
 
-The value at the path `value.activeContextName` specifies the name of the preference set to switch to.
+The value at the path `value.activePrefsSetName` specifies the name of the preference set to switch to.
 
 * The server response:
 
@@ -267,7 +267,7 @@ An example of a `modelChanged` typed message:
         "type": "ADD",
         "value": {
             "gpiiKey": "context1",
-            "activeContextName": "bright",
+            "activePrefsSetName": "bright",
             "settingControls": {
                 "http://registry\\.gpii\\.net/common/magnification": {
                     "schema": {
