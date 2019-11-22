@@ -1,10 +1,9 @@
 # Flow Manager
 
 The flow manager is the central point of coordination in the system for managing flow between different architecture
-components. For example, it coordinates the steps involved during logging in which require retrieving preferences,
+components. For example, it coordinates the steps involved during logging in, which require retrieving preferences,
 solutions, device data, etc. and passing these to the [MatchMaker Framework](MatchMakerFramework.md). Following those
-steps, the payload is sent via the [Context Manager](ContextManager.md) and then to the [Lifecycle
-Manager](LifecycleManager.md).
+steps, the payload is sent  to the [LifecycleManager](LifecycleManager.md).
 
 ## Important flows
 
@@ -99,6 +98,11 @@ Note that a separate logout of "reset" is not necessary. The final condition of 
 
 * **description**: Access tokens are credentials used to protect user preferences. An access token represents an
  authorization issued to a GPII application. It needs to be provided at retrieving or updating user preferences.
+ An access token will not be granted in these cases:
+  * The OAuth2 client associates with an allowed IP range and the ip of the incoming request doesn't belong to this
+   range.
+  * The OAuth2 client requests access to a nonexistent GPII key but this client doesn't have privilege to create new
+   GPII keys or preferences safes.
 * **route:** `/access_token` with these parameters in the `POST` body using the `application/x-www-form-urlencoded` Content-Type.
   * `grant_type`: must be set to "password".
   * `client_id`: the OAuth2 client id.
@@ -205,14 +209,7 @@ Note that a separate logout of "reset" is not necessary. The final condition of 
                 "applications": {}
             },
             "turn-down-light": {
-                "applications": {},
-                "conditions": [
-                    {
-                        "type": "http://registry.gpii.net/conditions/inRange",
-                        "min": 400,
-                        "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
-                    }
-                ]
+                "applications": {}
             }
         }
     }
@@ -221,7 +218,9 @@ Note that a separate logout of "reset" is not necessary. The final condition of 
 
 ### Update preferences on Cloud Based Flow Manager (PUT /:gpiiKey/settings)
 
-* **description**: Call the preferences server API to update user preferences. The preferences server API merges the
+* **description**: Call the preferences server API to update user preferences, or to create a GPII key and its
+ associated preferences safe if the GPII key does not exist but the OAuth2 client has privilege to create new GPII
+ keys and preferences safes. In the case of update existing preferences, the preferences server API merges the
  incoming preferences with the existing user preferences and update the merged preferences on the cloud based flow
  manager.
 * **route:** `/:gpiiKey/settings` where:
@@ -240,7 +239,7 @@ Note that a separate logout of "reset" is not necessary. The final condition of 
             "name": "Default preferences",
             "preferences": {
                 "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
-                "http://registry.gpii.net/common/initDelay": 0.120,
+                "http://registry.gpii.net/common/initDelay": 120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850
             }
         }
@@ -254,5 +253,14 @@ Note that a separate logout of "reset" is not necessary. The final condition of 
 {
     "gpiiKey": "carla",
     "message": "Successfully updated."
+}
+```
+
+The returned payload when the request is rejected:
+
+```json
+{
+    "isError": true,
+    "message": "Unauthorized"
 }
 ```

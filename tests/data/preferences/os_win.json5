@@ -1,0 +1,278 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.mouseTrailing": {
+                        "MouseTrails": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 10
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.mouseKeys": {
+                        "MouseKeysOn": {
+                            "path": "pvParam.dwFlags.MKF_MOUSEKEYSON",
+                            "value": true
+                        },
+                        "MaxSpeed": {
+                            "path": "pvParam.iMaxSpeed",
+                            "value": 100
+                        },
+                        "Acceleration": {
+                            "path": "pvParam.iTimeToMaxSpeed",
+                            "value": 1000
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.stickyKeys": {
+                        "StickyKeysOn": {
+                            "path": "pvParam.dwFlags.SKF_STICKYKEYSON",
+                            "value": true
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.toggleKeys": {
+                        "ToggleKeysOn": {
+                            "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON",
+                            "value": true
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.underlineMenuShortcuts": {
+                        "UnderlineMenuShortcutsOn": {
+                            "value": 1,
+                            "path": "pvParam"
+                        },
+                        "KeyboardPreferenceOn": {
+                            "value": 1,
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
+                        "Warning Sounds": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningSound": {
+                        "Sound on Activation": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.filterKeys": {
+                        "FilterKeysEnable": {
+                            "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
+                            "value": true
+                        },
+                        "BounceKeysInterval": {
+                            "path": "pvParam.iBounceMSec",
+                            "value": 1000
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.cursors": {
+                        "No": "%SystemRoot%\\cursors\\no_l.cur",
+                        "Hand": "",
+                        "Help": "%SystemRoot%\\cursors\\help_l.cur",
+                        "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
+                        "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
+                        "NWPen": "%SystemRoot%\\cursors\\pen_l.cur",
+                        "SizeNS": "%SystemRoot%\\cursors\\size4_l.cur",
+                        "SizeWE": "%SystemRoot%\\cursors\\size3_l.cur",
+                        "SizeAll": "%SystemRoot%\\cursors\\move_l.cur",
+                        "UpArrow": "%SystemRoot%\\cursors\\up_l.cur",
+                        "SizeNESW": "%SystemRoot%\\cursors\\size1_l.cur",
+                        "SizeNWSE": "%SystemRoot%\\cursors\\size2_l.cur",
+                        "AppStarting": "%SystemRoot%\\cursors\\wait_l.cur"
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.magnifier": {
+                        "FollowFocus": 0,
+                        "FollowCaret": 1,
+                        "FollowMouse": 1,
+                        "Invert": 1,
+                        "Magnification": 150,
+                        "MagnificationMode": 3,
+                        "FollowNarrator": 0,
+                        "FadeToMagIcon": 1,
+                        "ZoomIncrement": 50,
+                        "UseBitmapSmoothing": 1,
+                        "LensHeight": 50,
+                        "LensWidth": 50
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.screenResolution": {
+                        "screen-resolution": {
+                            "width": 800,
+                            "height": 600
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.screenDPI": {
+                        "screen-dpi": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.nightScreen": {
+                        "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                            "value": false
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.narrator": {
+                        "SpeechSpeed": 11,
+                        "SpeechPitch": 4,
+                        "CoupleNarratorCursorKeyboard": 1,
+                        "FollowInsertion": 0,
+                        "InteractionMouse": 1,
+                        "EchoWords": 1,
+                        "EchoChars": 1,
+                        "IntonationPause": 1,
+                        "ReadHints": 1,
+                        "PlayAudioCues": 1,
+                        "NarratorCursorHighlight": 1,
+                        "FastKeyEntryEnabled": 1,
+                        "ReadingWithIntent": 1,
+                        "ErrorNotificationType": 1,
+                        "CoupleNarratorCursorMouse": 1,
+                        "LockNarratorKeys": 1,
+                        "SpeechVolume": 80,
+                        "SpeechVoice": "Microsoft Zira - English (United States)",
+                        "ContextVerbosityLevel": 4,
+                        "RenderContextBeforeElement": 1,
+                        "DuckAudio": 1,
+                        "WinEnterLaunchEnabled": 1,
+                        "VerbosityLevel": 3,
+                        "DetailedFeedback": 1,
+                        "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
+                            "value": true
+                        },
+                        "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
+                            "value": true
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.typingEnhancement": {
+                        "EnableAutocorrection": 1,
+                        "EnableSpellchecking": 1,
+                        "EnableTextPrediction": 1,
+                        "EnablePredictionSpaceInsertion": 1,
+                        "EnableDoubleTapSpace": 1,
+                        "EnableKeyAudioFeedback": 1,
+                        "EnableAutoShiftEngage": 1,
+                        "EnableShiftLock": 1,
+                        "EnableCompatibilityKeyboard": 1,
+                        "EnableDesktopModeAutoInvoke": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": {
+                        "SwapMouseButtonsConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 1
+                        },
+                        "ScrollWheelModeConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 4294967294
+                        },
+                        "ScrollFocusRoutingConfig": {
+                            "path": "pvParam",
+                            "value": 1
+                        },
+                        "MouseCursorShadowEnable": {
+                            "path": "pvParam",
+                            "value": 1
+                        },
+                        "ScrollCharsConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 10
+                        },
+                        "WindowsTrackingConfig": {
+                            "path": "pvParam",
+                            "value": 1
+                        },
+                        "ActiveZOrder": {
+                            "path": "pvParam",
+                            "value": 0
+                        },
+                        "WindowsArrangement": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 1
+                        },
+                        "DoubleClickTimeConfig": {
+                            "value": 600
+                        },
+                        "PointerSpeedConfig": {
+                            "path": "pvParam",
+                            "value": 15
+                        },
+                        "EnhancePrecisionConfig": {
+                            "path": "pvParam",
+                            "value": [0, 0, 1]
+                        },
+                        "SnapToDefaultButtonConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 1
+                        },
+                        "HidePointerConfig": {
+                            "path": "pvParam",
+                            "value": 0
+                        },
+                        "MouseSonarConfig": {
+                            "path": "pvParam",
+                            "value": 1
+                        },
+                        "DoubleClickWidthConfig": {
+                            "value": 32
+                        },
+                        "DoubleClickHeightConfig": {
+                            "value": 32
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.language": {
+                        "MachinePreferredUILanguages": "en-US",
+                        "PreferredUILanguages": "en-US"
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.touchPadSettings": {
+                        "SystemSettings_Input_Touch_SetActivationTimeout": {
+                            "value": "Low sensitivity"
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.onscreenKeyboard": {
+                        "NavigationMode": 0,
+                        "ClickSound": 0,
+                        "ShowClearKeyboard": 0,
+                        "ShowNumPad": 1,
+                        "Mode": 2,
+                        "HoverPeriod": 1500,
+                        "ScanInterval": 1500,
+                        "UseDevice": 0,
+                        "UseKB": 0,
+                        "ScanKey": 113,
+                        "UseMouse": 1,
+                        "UseTextPrediction": 0,
+                        "InsertSpace": 0,
+                        "Dock": 0
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.mirrorScreen": {
+                        "ScreenMirrorConfig": {
+                            "value": false
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.soundSentry": {
+                        "WindowsEffect": 2
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.volumeControl": {
+                        "Volume": {
+                            "value": 0.7
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

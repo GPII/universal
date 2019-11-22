@@ -6,6 +6,7 @@
 // * a simplified User Interface (application-specific).
 {
     "flat": {
+        "name": "OLB Alicia App",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

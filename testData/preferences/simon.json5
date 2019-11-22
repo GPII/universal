@@ -17,7 +17,7 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.windows.touchPadSettings": {
-                        "Sensitivity": "Low sensitivity"
+                        "SystemSettings_Input_Touch_SetActivationTimeout": "Low sensitivity"
                     }
                 }
             }

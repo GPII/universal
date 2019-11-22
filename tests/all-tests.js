@@ -16,7 +16,6 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
-
 "use strict";
 
 var fluid = require("infusion"),
@@ -34,7 +33,6 @@ var testIncludes = [
     "./platform/cloud/SettingsGetTests.js",
     "./platform/cloud/SettingsPutTests.js",
     "./CloseConflictingAppsTests.js",
-    "./ContextIntegrationTests.js",
     "./DeviceReporterErrorTests.js",
     "./ErrorTests.js",
     "./IntegrationTests.js",
@@ -42,23 +40,21 @@ var testIncludes = [
     "./MultiSettingsHandlerTests.js",
     "./PayloadSizeTest.js",
     "./PSPIntegrationTests.js",
-    "./ResetWithEnvReportTests.js",
     "./ResetAtStartTests.js",
-    "./PreferencesServerErrorTests.js",
     "./StartupAPITests.js",
+    "./SuppressHttpEndpointsTests.js",
     "./UntrustedBrowserChannelTests.js",
-    "./UntrustedContextIntegrationTests.js",
     "./UntrustedDevelopmentTests.js",
     "./UntrustedPSPIntegrationTests.js",
-    "./UntrustedResetWithEnvReportTests.js",
     "./UntrustedResetAtStartTests.js",
+    "./UntrustedSuppressHttpEndpointsTests.js",
     "./UntrustedUserLogonHandlersTests.js",
     "./UntrustedUserLogonRequestTests.js",
     "./UserLogonHandlersEventsTests.js",
     "./UserLogonHandlersTests.js",
     "./UserLogonRequestTests.js",
     "../gpii/node_modules/accessRequester/test/AccessRequesterTests.js",
-    "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
+    "../gpii/node_modules/deviceReporter/test/StaticDeviceReporterTests.js",
     "../gpii/node_modules/eventLog/test/all-tests.js",
     "../gpii/node_modules/flatMatchMaker/test/FlatMatchMakerTests.js",
     "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
@@ -67,19 +63,24 @@ var testIncludes = [
     "../gpii/node_modules/flowManager/test/PSPChannelTests.js",
     "../gpii/node_modules/flowManager/test/SettingsDataSourceTests.js",
     "../gpii/node_modules/gpii-db-operation/test/DbDataStoreTests.js",
+    "../gpii/node_modules/gpii-ini-file/test/iniFileTests.js",
+    "../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/authGrantFinderTests.js",
+    "../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/authorizationServiceTests.js",
+    "../gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/test/OAuth2UtilitiesTests.js",
     "../gpii/node_modules/matchMakerFramework/test/MatchMakerFrameworkTests.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
-    "../gpii/node_modules/pouchManager/test/pouchManagerTests.js",
     "../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
-    "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
-    "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
+    "../gpii/node_modules/preferencesServer/test/preferencesServiceTests.js",
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
-    "../gpii/node_modules/settingsHandlers/test/WebSocketsSettingsHandlerTests.js",
+    "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/NoSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/SettingsHandlerUtilitiesTests.js",
+    "../gpii/node_modules/settingsHandlers/test/WebSocketsSettingsHandlerTests.js",
+    "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/singleInstance/test/SingleInstanceTests.js",
-    "../gpii/node_modules/userListeners/test/all-tests.js",
-    "../gpii/node_modules/gpii-ini-file/test/iniFileTests.js"
+    "../gpii/node_modules/solutionsRegistry/test/all-tests.js",
+    "../gpii/node_modules/transformer/test/TransformerTests.js",
+    "../gpii/node_modules/userListeners/test/all-tests.js"
 ];
 
 fluid.each(testIncludes, function (path) {

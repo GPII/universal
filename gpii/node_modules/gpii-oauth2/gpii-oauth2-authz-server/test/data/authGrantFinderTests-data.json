@@ -1,0 +1,86 @@
+[
+    {
+        "_id": "gpiiKey-1",
+        "type": "gpiiKey",
+        "gpiiKey": "carol_gpii_key"
+    },
+    {
+        "_id": "client-1",
+        "type": "gpiiAppInstallationClient",
+        "name": "Bakersfield AJC - PC1",
+        "computerType": "public",
+        "timestampCreated": "2019-05-28T18:11:22.101Z",
+        "timestampRevoked": null
+    },
+    {
+        "_id": "client-schemaV0.1",
+        "type": "gpiiAppInstallationClient",
+        "name": "Client for testing the backwards compatibility for data model schema 0.1",
+        "computerType": "public",
+        "timestampCreated": "2019-05-28T18:11:22.101Z",
+        "timestampRevoked": null
+    },
+    {
+        "_id": "clientCredential-1",
+        "type": "clientCredential",
+        "clientId": "client-1",
+        "oauth2ClientId": "nova-computer",
+        "oauth2ClientSecret": "nova-computer-secret",
+        "allowedIPBlocks": [
+            "::1/128"
+        ],
+        "allowedPrefsToWrite": [],
+        "isCreateGpiiKeyAllowed": true,
+        "isCreatePrefsSafeAllowed": true,
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2019-05-28T18:11:22.101Z",
+        "timestampRevoked": null
+    },
+    {
+        "_id": "clientCredential-schemaV0.1",
+        "type": "clientCredential",
+        "clientId": "client-schemaV0.1",
+        "oauth2ClientId": "schemaV0.1",
+        "oauth2ClientSecret": "schemaV0.1-secret",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2019-05-28T18:11:22.101Z",
+        "timestampRevoked": null
+    },
+    {
+        "_id": "gpiiAppInstallationAuthorization-1",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-1",
+        "gpiiKey": "carol_gpii_key",
+        "clientCredentialId": "clientCredential-1",
+        "accessToken": "Bakersfield_AJC_access_token",
+        "revoked": false,
+        "timestampCreated": "2019-01-17T07:00:00.001Z",
+        "timestampRevoked": null,
+        "timestampExpires": "2019-01-17T07:01:40.001Z"
+    },
+    {
+        "_id": "gpiiAppInstallationAuthorization-schemaV0.1",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-schemaV0.1",
+        "gpiiKey": "carol_gpii_key",
+        "clientCredentialId": "clientCredential-schemaV0.1",
+        "accessToken": "schemaV0.1_access_token",
+        "revoked": false,
+        "timestampCreated": "2019-01-17T07:00:00.001Z",
+        "timestampRevoked": null,
+        "timestampExpires": "2019-01-17T07:01:40.001Z"
+    },
+    {
+        "_id": "gpiiAppInstallationAuthorization-expired",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-1",
+        "gpiiKey": "carol_gpii_key",
+        "accessToken": "Bakersfield_AJC_access_token_expired",
+        "revoked": false,
+        "timestampCreated": "2019-01-17T07:00:00.001Z",
+        "timestampRevoked": null,
+        "timestampExpires": "2019-01-17T07:00:40.001Z"
+    }
+]

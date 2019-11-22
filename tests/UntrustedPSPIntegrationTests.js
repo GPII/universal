@@ -70,6 +70,12 @@ fluid.defaults("gpii.tests.untrusted.pspIntegration.testCaseHolder", {
     gradeNames: [
         "gpii.tests.pspIntegration.testCaseHolder.common.linux"
     ],
+    distributeOptions: {
+        "acceptance.defaultSettings": {
+            record: "{that}.options.defaultSettings",
+            target: "{that gpii.flowManager.local}.options.defaultSettings"
+        }
+    },
     components: {
         rawPrefsAtStart: {
             type: "gpii.test.untrusted.pspIntegration.rawPrefsRequest"
@@ -132,19 +138,23 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
     },
     // 4
     {
-    },
-    // 5
-    {
         "flat": {
             "contexts": {
                 "gpii-default": {
                     "name": "Default preferences",
                     "preferences": {
-                        "http://registry.gpii.net/common/magnification": 3
+                        "http://registry.gpii.net/common/magnification": 1.5,
+                        "http://registry.gpii.net/common/volume": 0.5,
+                        "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                            "http://registry.gpii.net/common/magnification": 3
+                        }
                     }
                 }
             }
         }
+    },
+    // 5
+    {
     },
     // 6
     {
@@ -191,6 +201,7 @@ gpii.test.untrusted.pspIntegration.verifyRawPrefsAtStart = function (that, prefe
 };
 
 gpii.test.untrusted.pspIntegration.verifyRawPrefsAtEnd = function (that, preferences, sequenceNum, expectedChange) {
+    fluid.log (that.options.name, ", number ", sequenceNum, " in the sequence");
     var expectedPrefsChange = expectedChange ? expectedChange : gpii.test.untrusted.pspIntegration.expectedPrefsChange[sequenceNum];
 
     var expected = fluid.extend(true, {}, that.options.initialPrefs, expectedPrefsChange);
@@ -206,102 +217,100 @@ gpii.tests.pspIntegration.saveTestDefs = [
         name: "Auto save and explicit save",
         expect: 13,
         sequence: [
-            [
-                {
-                    func: "{rawPrefsAtStart}.send"
-                }, {
-                    event: "{rawPrefsAtStart}.events.onComplete",
-                    listener: "gpii.test.untrusted.pspIntegration.verifyRawPrefsAtStart",
-                    args: ["{that}", "{arguments}.0"]
-                }, {
-                    func: "gpii.test.expandSettings",
-                    args: [ "{tests}", [ "contexts" ]]
-                }, {
-                    func: "gpii.test.snapshotSettings",
-                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
-                }, {
-                    event: "{testCaseHolder}.events.onSnapshotComplete",
-                    listener: "fluid.identity"
-                }, {
-                    func: "{loginRequest}.send"
-                }, {
-                    event: "{loginRequest}.events.onComplete",
-                    listener: "gpii.test.loginRequestListen"
-                }, {
-                    func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
-                }, {
-                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
-                    listener: "fluid.identity"
-                }, {
-                    func: "{pspClient}.connect"
-                }, {
-                    event: "{pspClient}.events.onConnect",
-                    listener: "gpii.tests.pspIntegration.connectionSucceeded"
-                }, {
-                    event: "{pspClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pspIntegration.checkPayload",
-                    args: ["{arguments}.0", "modelChanged"]
-                }, {
-                    funcName: "gpii.tests.pspIntegration.sendMsg",
-                    args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/pitch"], 0.85]
-                }, {
-                    event: "{pspClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pspIntegration.checkPayload",
-                    args: ["{arguments}.0", "modelChanged"]
-                }, {
-                    event: "{pspClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pspIntegration.checkPayload",
-                    args: ["{arguments}.0", "preferencesApplied"]
-                }, {
-                    func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
-                }, {
-                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
-                    listener: "fluid.identity"
-                }, {
-                    func: "{rawPrefsAfterAutoSave}.send"
-                }, {
-                    event: "{rawPrefsAfterAutoSave}.events.onComplete",
-                    listener: "gpii.test.untrusted.pspIntegration.verifyRawPrefsAfterAutoSave",
-                    args: ["{that}", "{arguments}.0"]
-                }, {
-                    funcName: "gpii.tests.pspIntegration.sendMsg",
-                    args: [ "{pspClient}", [ "saveButtonClickCount" ], 1]
-                }, {
-                    event: "{pspClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pspIntegration.checkPayload",
-                    args: ["{arguments}.0", "preferencesApplied"]
-                }, {
-                    func: "{rawPrefsAtEnd}.send"
-                }, {
-                    event: "{rawPrefsAtEnd}.events.onComplete",
-                    listener: "gpii.test.untrusted.pspIntegration.verifyRawPrefsAtEnd",
-                    args: ["{that}", "{arguments}.0", null, {
-                        "flat": {
-                            "contexts": {
-                                "gpii-default": {
-                                    "name": "Default preferences",
-                                    "preferences": {
-                                        "http://registry.gpii.net/common/pitch": 0.85
-                                    }
+            {
+                func: "{rawPrefsAtStart}.send"
+            }, {
+                event: "{rawPrefsAtStart}.events.onComplete",
+                listener: "gpii.test.untrusted.pspIntegration.verifyRawPrefsAtStart",
+                args: ["{that}", "{arguments}.0"]
+            }, {
+                func: "gpii.test.expandSettings",
+                args: [ "{tests}", [ "contexts" ]]
+            }, {
+                func: "gpii.test.snapshotSettings",
+                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{tests}.events.onSnapshotComplete.fire"]
+            }, {
+                event: "{tests}.events.onSnapshotComplete",
+                listener: "fluid.identity"
+            }, {
+                func: "{loginRequest}.send"
+            }, {
+                event: "{loginRequest}.events.onComplete",
+                listener: "gpii.test.loginRequestListen"
+            }, {
+                func: "gpii.test.checkConfiguration",
+                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+            }, {
+                event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                listener: "fluid.identity"
+            }, {
+                func: "{pspClient}.connect"
+            }, {
+                event: "{pspClient}.events.onConnect",
+                listener: "gpii.tests.pspIntegration.connectionSucceeded"
+            }, {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged"]
+            }, {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/pitch"], 0.8]
+            }, {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged"]
+            }, {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferencesApplied"]
+            }, {
+                func: "gpii.test.checkConfiguration",
+                args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+            }, {
+                event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                listener: "fluid.identity"
+            }, {
+                func: "{rawPrefsAfterAutoSave}.send"
+            }, {
+                event: "{rawPrefsAfterAutoSave}.events.onComplete",
+                listener: "gpii.test.untrusted.pspIntegration.verifyRawPrefsAfterAutoSave",
+                args: ["{that}", "{arguments}.0"]
+            }, {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", [ "saveButtonClickCount" ], 1]
+            }, {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "preferencesApplied"]
+            }, {
+                func: "{rawPrefsAtEnd}.send"
+            }, {
+                event: "{rawPrefsAtEnd}.events.onComplete",
+                listener: "gpii.test.untrusted.pspIntegration.verifyRawPrefsAtEnd",
+                args: ["{that}", "{arguments}.0", null, {
+                    "flat": {
+                        "contexts": {
+                            "gpii-default": {
+                                "name": "Default preferences",
+                                "preferences": {
+                                    "http://registry.gpii.net/common/pitch": 0.8
                                 }
                             }
                         }
-                    }]
-                }, {
-                    func: "{logoutRequest}.send"
-                }, {
-                    event: "{logoutRequest}.events.onComplete",
-                    listener: "gpii.test.logoutRequestListen"
-                }, {
-                    func: "gpii.test.checkRestoredConfiguration",
-                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
-                }, {
-                    event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
-                    listener: "fluid.identity"
-                }
-            ]
+                    }
+                }]
+            }, {
+                func: "{logoutRequest}.send"
+            }, {
+                event: "{logoutRequest}.events.onComplete",
+                listener: "gpii.test.logoutRequestListen"
+            }, {
+                func: "gpii.test.checkRestoredConfiguration",
+                args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{tests}.events.onCheckRestoredConfigurationComplete.fire"]
+            }, {
+                event: "{tests}.events.onCheckRestoredConfigurationComplete",
+                listener: "fluid.identity"
+            }
         ]
     }
 ];
@@ -309,8 +318,8 @@ gpii.tests.pspIntegration.saveTestDefs = [
 gpii.tests.untrusted.pspIntegration.addConfig = function (testDefIn) {
     return fluid.extend(true, {}, testDefIn, {
         config: {
-            configName: "gpii.tests.acceptance.linux.builtIn.untrustedPSPIntegration.config",
-            configPath: "%gpii-universal/tests/platform/linux/configs"
+            configName: "gpii.tests.acceptance.untrusted.pspIntegration.config.json",
+            configPath: "%gpii-universal/tests/configs"
         },
         gradeNames: [
             "gpii.tests.untrusted.pspIntegration.testCaseHolder",
@@ -334,11 +343,11 @@ gpii.tests.untrusted.pspIntegration.testDefs = fluid.transform(gpii.tests.pspInt
 
 // Test PSP integration with:
 // 1. auto-save only saves preferences that are allowed to be autosaved to the cloud.
-gpii.test.bootstrapServer(gpii.tests.untrusted.pspIntegration.testDefs);
+gpii.test.runCouchTestDefs(gpii.tests.untrusted.pspIntegration.testDefs);
 
 // Test PSP integration with:
 // 1. preferences that are not allowed to be autosaved should not be autosaved to the cloud;
 // 2. explicit save, such as when the save button is clicked, saves all updated preferences to the cloud.
-gpii.test.bootstrapServer(fluid.transform(gpii.tests.pspIntegration.saveTestDefs, function (testDefIn) {
+gpii.test.runCouchTestDefs(fluid.transform(gpii.tests.pspIntegration.saveTestDefs, function (testDefIn) {
     return gpii.tests.untrusted.pspIntegration.addConfig(testDefIn);
 }));

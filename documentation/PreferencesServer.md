@@ -9,7 +9,7 @@ The preferences server currently preferences APIs. The URLS are as follows:
 
 The Preferences Server is a server meant to be the public-facing, REST-based interface for consumers of preferences. Its
 main purpose is to be able to present a filtered view of the user preferences based on the requirements of the consumer,
-i.e. the preferences shown in a specific ontology, filtered according to a specific set of contexts.
+i.e. the preferences shown in a specific ontology, filtered according to a specified set of preferences.
 
 The bulk of work of the Preferences Server is done in other components of the GPII system, leaving the Preferences
 Server with the task of acting on the parameters supplied to the REST calls, calling the relevant functions in other
@@ -38,10 +38,10 @@ because the liveness endpoint does not check the connection between Preferences 
 
 It returns http status code 200 when Preferences Server itself is running. Otherwise, returns http status code 500.
 
-### GET /preferences/:token[?view=:view]
+### GET /preferences/:gpiiKey[?view=:view]
 
-Retrieves the preference sets for the token (`:token`). The optional `view` parameter is to retrieve the preferences in
-a different view (ontology). If no `view` is specified the 'flat' ontology will be defaulted to.
+Retrieves the preference sets for the GPII key (`:gpiiKey`). The optional `view` parameter is to retrieve the
+preferences in a different view (ontology). If no `view` is specified the 'flat' ontology will be defaulted to.
 
 #### Example of GET request with no view provided
 
@@ -59,7 +59,7 @@ Return payload:
             "name": "Default preferences",
             "preferences": {
                 "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
-                "http://registry.gpii.net/common/initDelay": 0.120,
+                "http://registry.gpii.net/common/initDelay": 120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850,
                 "http://registry.gpii.net/common/cursorAcceleration": 0.800,
                 "http://registry.gpii.net/common/mouseEmulation/enabled": true,
@@ -78,7 +78,7 @@ Return payload:
 
 An example of a GET request (given that the Preferences Server is located on preferences.gpii.net):
 
-`http://preferences.gpii.net/preferences/mytoken?view=ISO24751`
+`http://preferences.gpii.net/preferences/myGpiiKey?view=ISO24751`
 
 Return payload:
 
@@ -93,7 +93,7 @@ Return payload:
                     "mouseEmulation": {
                         "cursorSpeed": 0.85,
                         "cursorAcceleration": 0.8,
-                        "-provisional-initDelay": 0.12,
+                        "-provisional-initDelay": 120,
                         "-provisional-mouseEmulation/enabled": true
                     }
                 },
@@ -113,8 +113,8 @@ Return payload:
 
 ### POST /preferences/[?view=:view]
 
-This is used to post new preferences to the Preferences Server. A new token will automatically be generated and returned
-in the payload along with the saved preferences.
+This is used to post new preferences to the Preferences Server. A new GPII key will automatically be generated and
+returned in the payload along with the saved preferences.
 
 As with GET, this takes an optional `view` parameter denoting the ontology of the provided settings. If no `view` is
 provided, the preferences will be stored and interpreted as being in the `flat` format.
@@ -138,7 +138,7 @@ Example POST body:
             "name": "Default preferences",
             "preferences": {
                 "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
-                "http://registry.gpii.net/common/initDelay": 0.120,
+                "http://registry.gpii.net/common/initDelay": 120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850,
                 "http://registry.gpii.net/common/cursorAcceleration": 0.800,
                 "http://registry.gpii.net/common/mouseEmulation/enabled": true,
@@ -153,11 +153,11 @@ Example POST body:
 }
 ```
 
-The return payload will contain the stored preferences (keyed by `preferences`) and the newly generated token (keyed by
-`token`) under which the preference set is stored.
+The return payload will contain the stored preferences (keyed by `preferences`) and the newly generated GPII key
+(keyed by `gpiiKey`) under which the preference set is stored.
 
-Given that the above payload was stored with the token `123e4567-e89b-12d3-a456-426655440000` the return payload would
-be:
+Given that the above preferences was stored with the GPII key `123e4567-e89b-12d3-a456-426655440000`, the return
+payload would be:
 
 ```json
 {
@@ -168,7 +168,7 @@ be:
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
-                    "http://registry.gpii.net/common/initDelay": 0.120,
+                    "http://registry.gpii.net/common/initDelay": 120,
                     "http://registry.gpii.net/common/cursorSpeed": 0.850,
                     "http://registry.gpii.net/common/cursorAcceleration": 0.800,
                     "http://registry.gpii.net/common/mouseEmulation/enabled": true,
@@ -184,23 +184,24 @@ be:
 }
 ```
 
-### PUT /preferences/:token[?merge=:mergeview=:view]
+### PUT /preferences/:gpiiKey[?merge=:mergeview=:view]
 
-This is used to update an existing preference set to the Preferences Server. In case no preference set exists associated
-with that token, a new one will be created.
+This is used to create a new GPII key with its preferences, or update preferences for an existing GPII key to the
+Preferences Server. At the update, if no preferences safe is associated with the provided GPII key, a new safe will
+be automatically created.
 
 As with GET and PUT, this takes an optional `view` parameter denoting the ontology of the settings provided in the
 payload of the request body. If no `view` is provided, the preferences will be stored and interpreted as being in the
 `flat` format.
 
-As with PUT, this takes an optional boolean `merge` parameter denoting whether the incoming preferences should be merged
-with the existing preferences. If `merge` is `true`, the incoming preferences will be merged with the existing ones.
-Otherwise, the incoming preferences will override the existing ones. If no `merge` is provided, the default value will
-be `false`.
+As for the update, this takes an optional boolean `merge` parameter denoting whether the incoming preferences should be
+merged with the existing preferences. If `merge` is `true`, the incoming preferences will be merged with the existing
+ones. Otherwise, the incoming preferences will override the existing ones. If no `merge` is provided, the default value
+will be `false`.
 
-When settings are PUT to the preferences server, all the settings in that view will be overwritten. In other words, if I
-have some settings A, B and C already existing in my preference set (in a given view), and a put request is made
-containing only settings B and D, the resulting preference set will contain only settings B and D.
+When preferences are PUT to the preferences server, all the preferences in that view will be overwritten. In other
+words, if I have preferences A, B and C already existing in my preference set (in a given view), and a put request is
+made containing only settings B and D, the resulting preference set will contain only settings B and D.
 
 The preferences are allowed to be stored in different ontologies. A (transformable) user preference will only be stored
 once in the preference set. This also means that if a put request is make containing a preference A1, which already
@@ -213,9 +214,9 @@ be given below to help make this clearer.
 Below is an example of a put query to the following url (given that a Preferences Server is available at
 preferences.gpii.net):
 
-`http://preferences.gpii.net/preferences/mytoken?merge=true&view=flat`
+`http://preferences.gpii.net/preferences/myGpiiKey?merge=true&view=flat`
 
-Note that here, we store preferences to the token 'mytoken'. The body of the PUT should contain the preferences to be
+Note that here, we store preferences to the GPII key 'myKey'. The body of the PUT should contain the preferences to be
 stored. They should be in the format specified by `view` or in the flat format if no `view` is provided.
 
 putBody:
@@ -263,7 +264,7 @@ before the PUT request:
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/initDelay": 0.120,
+                    "http://registry.gpii.net/common/initDelay": 120,
                     "http://registry.gpii.net/common/cursorSpeed": 0.850,
                     "http://registry.gpii.net/common/cursorAcceleration": 0.800
                 }

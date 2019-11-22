@@ -1,0 +1,33 @@
+/*
+
+    A configuration that starts a Couch instance if needed on startup, and which always clean up the data if the
+    database already exists.  Note, you can control how Couch is started/stopped using an environment variable:
+
+    * (nothing, the default): Start a Docker container running CouchDB.
+    * `GPII_TEST_COUCH_USE_VAGRANT`: If this is set, create a Vagrant VM that runs Docker and CouchDB.
+    * `GPII_TEST_COUCH_USE_EXTERNAL`: If this is set, connect to an external instance of CouchDB running on port 25984.
+
+    For more information, see the documentation for the gpii-couchdb-test-harness package:
+
+    https://github.com/GPII/gpii-couchdb-test-harness
+
+*/
+{
+    "type": "gpii.config.couch.development.startWithCleanData",
+    "options": {
+        "components": {
+            "harness": {
+                "options": {
+                    "listeners": {
+                        "onCreate.startHarness": {
+                            func: "{that}.startup"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%gpii-universal/gpii/configs/shared/gpii.config.couch.development.base.json5"
+    ]
+}
