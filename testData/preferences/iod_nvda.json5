@@ -6,7 +6,7 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/net.gpii.test.iod": {
-                        "putty": {}
+                        "nvda": {}
                     }
                 }
             }
