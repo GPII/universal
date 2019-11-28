@@ -8690,9 +8690,8 @@
                     },
                     "CaptionSize": {
                         "schema": {
-                            "title": "Captions opacity",
-                            "description": "Determines the degree of opacity that the captions will have",
-                            "type": "number",
+                            "title": "Captions size",
+                            "description": "Determines the size of the captions that will be displayed",
                             "enum": [0, 1, 2, 3, 4],
                             "enumLabels": [
                                 "Default",
