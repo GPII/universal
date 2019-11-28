@@ -1,9 +1,9 @@
 # Matchmaker Framework
 
 The matchmaker framework is a component and a set of utitilities that can run either locally or remotely depending on
-the configuration. Together with the actual matchmaker, it is respnosible for deciding how the users device should be
-configured based on their preferences, current context and the solution registry data. More specifically, the matchmaker
-framework has the following responsibility:
+the configuration. Together with the actual matchmaker, it is responsible for deciding how the users device should be
+configured based on their preferences, the specified set of preferences therein, and the solution registry data. More
+specifically, the matchmaker framework has the following responsibility:
 
 * Doing the preprocessing - that is, preparing and augmenting the input payload for the specific matchmaker
 * Making the decision of which matchmaker to call, and then call that matchmaker (for example the
@@ -50,7 +50,7 @@ done like:
    dictated by a combination of the priorities in `gpii.flowmanager.processmatch.priorities`, and the `processMatch`
    listeners (which are different depending on whether the system runs in trusted or untrusted mode)
 * Preprocess:
-  * Triggered when the initial data has been collected (preferences, context, solution registry entries, etc)
+  * Triggered when the initial data has been collected (preferences, named preferences set, solution registry entries, etc)
   * Augments the MatchMaker input with inferred common terms (see under important utilities/functions in this document)
   * TODO: _Full solutions registry is currently being used when inferring common terms. This is because the users
     preference set might contain e.g. Linux app preferences, even if the user is logging into a windows box. We then
