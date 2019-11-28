@@ -8569,6 +8569,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Windows\\CurrentVersion\\ClosedCaptioning",
