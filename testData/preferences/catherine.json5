@@ -16,7 +16,7 @@
 //  - RegionColor: The color of the video region: Default.
 //  - RegionOpacity: The opacity of the video region: Default. (Video should be seen).
 //  - BackgroundColor: The background color for the box in which captions are drawn: White.
-//  - BackgroundTransparency: The transparency of the background box in which captions are drawn.
+//  - BackgroundOpacity: The transparency of the background box in which captions are drawn.
 //
 // Configure the system for modifying how captions are displayed in applications. Catherine ins't a English native
 // speaker, and she also doesn't have very good eyesight with low light, so, for seeing movies she prefers to
@@ -37,7 +37,7 @@
                         "RegionColor": 0,
                         "RegionOpacity": 0,
                         "BackgroundColor": 1,
-                        "BackgroundTransparency": 1
+                        "BackgroundOpacity": 1
                     }
                 }
             }
