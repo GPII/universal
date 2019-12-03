@@ -16,7 +16,7 @@
                             "http://registry.gpii.net/common/volume",
                             [
                                 "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier",
-                                "http://registry.gpii.net/common/magnification"
+                                "mag-factor"
                             ]
                         ]
                     }
