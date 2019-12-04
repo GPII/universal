@@ -1,13 +1,5 @@
 {
     "type": "gpii.tests.acceptance.pspIntegration.config",
-    "options": {
-        "distributeOptions": {
-            "acceptance.flowManagerOptions": {
-                "source": "{that}.options.flowManagerOptions",
-                "target": "{that gpii.flowManager.local}.options"
-            }
-        }
-    },
     "mergeConfigs": [
         "%gpii-universal/tests/platform/linux/configs/gpii.tests.acceptance.linux.builtIn.config",
         "./shared/gpii.tests.resetDefaultSettings.config.json5"

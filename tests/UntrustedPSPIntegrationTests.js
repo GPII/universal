@@ -70,12 +70,6 @@ fluid.defaults("gpii.tests.untrusted.pspIntegration.testCaseHolder", {
     gradeNames: [
         "gpii.tests.pspIntegration.testCaseHolder.common.linux"
     ],
-    distributeOptions: {
-        "acceptance.defaultSettings": {
-            record: "{that}.options.defaultSettings",
-            target: "{that gpii.flowManager.local}.options.defaultSettings"
-        }
-    },
     components: {
         rawPrefsAtStart: {
             type: "gpii.test.untrusted.pspIntegration.rawPrefsRequest"
