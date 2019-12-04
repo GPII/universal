@@ -72,7 +72,7 @@ gpii.credentialsUpdater.loadUpdateData = function (filename) {
         var updateData = JSON.parse(rawData);
         return updateData;
     } catch (err) {
-        fluid.fail("Couldn't load the update data. Check the content and try again.")
+        fluid.fail("Couldn't load the update data. Check the content and try again");
     }
 };
 
@@ -108,21 +108,21 @@ gpii.credentialsUpdater.getDoc = function (options) {
  * @param {Object} doc - The document that will be updated.
  */
 gpii.credentialsUpdater.updateDoc = function (options, doc) {
-  var updatedDocData = fluid.extend(doc, options.updateData);
+    var updatedDocData = fluid.extend(doc, options.updateData);
 
-  var requestOptions = {
-      url: options.couchDbUrl + "/" + options.clientCredentialId,
-      body: updatedDocData,
-      json: true
-  };
+    var requestOptions = {
+        url: options.couchDbUrl + "/" + options.clientCredentialId,
+        body: updatedDocData,
+        json: true
+    };
 
-  request.put(requestOptions, function (error, response, body) {
-      if (error) {
-          fluid.fail("Couldn't update the document. The error was: ", error);
-      } else {
-          fluid.log("The client credentials were successfully updated");
-      }
-  });
+    request.put(requestOptions, function (error /* response, body */) {
+        if (error) {
+            fluid.fail("Couldn't update the document. The error was: ", error);
+        } else {
+            fluid.log("The client credentials were successfully updated");
+        }
+    });
 };
 
 /**
