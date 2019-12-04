@@ -14,8 +14,6 @@
 //  * use Windows' built-in magnifier (instead of third-party solutions),
 //  * Cloud4Chrome does NOT invert colours,
 //  * Rule-Based Matchmaker.
-// * lower ambient light conditions (luminance lower than 200):
-//  * the same as the above, but Cloud4Chrome must now invert the colours.
 {
 
     "flat": {
@@ -60,14 +58,6 @@
                             "http://registry.gpii.net/applications/com.microsoft.windows.magnifier"
                         ],
                         "value": 1024
-                    }
-                ],
-                "conditions": [
-                    {
-                        "type": "http://registry.gpii.net/conditions/inRange",
-                        "max": 200,
-                        "min": 0,
-                        "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
                     }
                 ]
             }
