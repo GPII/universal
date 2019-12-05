@@ -1,0 +1,98 @@
+// # Natalie.json5
+//
+// This preference sets change settings related to Windows 10 Notifications.
+//
+// ## Testing
+//
+// Settings being changed should be check in:
+//  Windows 10 Settings App -> Notifications & Actions
+//
+{
+    "flat": {
+        "name": "Natalie",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.notifications": {
+                        "Enabled": true,
+                        "ShowOnLockScreen": false,
+                        "ShowRemindersAndVOIPOnLockScreen": true,
+                        "SignInSuggestionsEnabled": false,
+                        "TipsAndTricksEnabled": false,
+                        "EnableAppsNotifications": [
+                            {
+                                "elemId": "Cortana",
+                                "elemVal": true
+                            },
+                            {
+                                "elemId": "Settings",
+                                "elemVal": true
+                            }
+                        ],
+                        "EnableAppsBanners": [
+                            {
+                                "elemId": "Cortana",
+                                "elemVal": false
+                            },
+                            {
+                                "elemId": "Settings",
+                                "elemVal": false
+                            }
+                        ],
+                        "PrivateAppsNotificationsOnLockScreen": [
+                            {
+                                "elemId": "Cortana",
+                                "elemVal": false
+                            },
+                            {
+                                "elemId": "Settings",
+                                "elemVal": false
+                            }
+                        ],
+                        "ShowAppsNotificationsInActionCenter": [
+                            {
+                                "elemId": "Cortana",
+                                "elemVal": false
+                            },
+                            {
+                                "elemId": "Settings",
+                                "elemVal": false
+                            }
+                        ],
+                        "AppsNotificationSoundEnabled": [
+                            {
+                                "elemId": "Cortana",
+                                "elemVal": false
+                            },
+                            {
+                                "elemId": "Settings",
+                                "elemVal": false
+                            }
+                        ],
+                        "MaxAppsNotificationsInActionCenter": [
+                            {
+                                "elemId": "Cortana",
+                                "elemVal": "5"
+                            },
+                            {
+                                "elemId": "Settings",
+                                "elemVal": "5"
+                            }
+                        ],
+                        "AppsNotificationsPriority": [
+                            {
+                                "elemId": "Cortana",
+                                "elemVal": 2
+                            },
+                            {
+                                "elemId": "Settings",
+                                "elemVal": 2
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

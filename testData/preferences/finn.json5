@@ -1,0 +1,31 @@
+// # Finn.json5
+//
+// This preference sets change settings related to Windows 10 Focus Assist feature.
+//
+// ## Testing
+//
+// Settings being changed should be check in:
+//  Windows 10 Settings App -> Focus Assist Settings
+//
+{
+    "flat": {
+        "name": "Finn",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.focusAssist": {
+                        "Mode": "Alarms only",
+                        "QuietHoursEnabled": true,
+                        "QuietHoursStartTime": "17:00:00",
+                        "QuietHoursEndTime": "8:00:00",
+                        "OnGameModeEnabled": false,
+                        "OnPresentationModeEnabled": false,
+                        "OnFullScreenEnabled": false,
+                        "SummaryEnabled": false
+                    }
+                }
+            }
+        }
+    }
+}
