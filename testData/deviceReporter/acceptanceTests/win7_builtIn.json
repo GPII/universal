@@ -4,6 +4,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.notifications"
+    },
+
+    {
         "id": "com.microsoft.windows.onscreenKeyboard"
     },
 
@@ -49,6 +53,10 @@
 
     {
         "id": "com.microsoft.windows.filterKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.focusAssist"
     },
 
     {

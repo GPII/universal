@@ -12,6 +12,133 @@
                             "path": "pvParam",
                             "value": ""
                         }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.focusAssist": {
+                        "SystemSettings_Notifications_DoNotDisturb_Toggle": {
+                            "value": "Alarms only"
+                        },
+                        "SystemSettings_QuietMoments_On_Scheduled_Mode.SystemSettings_QuietMoments_Scheduled_Mode_Enabled": {
+                            "value": true
+                        },
+                        "SystemSettings_QuietMoments_On_Scheduled_Mode.SystemSettings_QuietMoments_Scheduled_Mode_StartTime": {
+                            "value": "17:00:00"
+                        },
+                        "SystemSettings_QuietMoments_On_Scheduled_Mode.SystemSettings_QuietMoments_Scheduled_Mode_EndTime": {
+                            "value": "06:00:00"
+                        },
+                        "SystemSettings_QuietMoments_On_Game_Mode.SystemSettings_QuietMoments_Game_Mode_Enabled": {
+                            "value": false
+                        },
+                        "SystemSettings_QuietMoments_On_Presentation_Mode.SystemSettings_QuietMoments_Presentation_Mode_Enabled": {
+                            "value": false
+                        },
+                        "SystemSettings_QuietMoments_On_Full_Screen_Mode.SystemSettings_QuietMoments_Full_Screen_Mode_Enabled": {
+                            "value": false
+                        },
+                        "SystemSettings_QuietMoments_Summary_Checkbox": {
+                            "value": false
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.notifications": {
+                        "SystemSettings_Notifications_ShowAppNotifications": {
+                            "value": true
+                        },
+                        "SystemSettings_Notifications_ToastsAboveLock": {
+                            "value": false
+                        },
+                        "SystemSettings_Notifications_CriticalToastsAboveLock": {
+                            "value": false
+                        },
+                        "SystemSettings_Notifications_SignInSuggestionsEnabled": {
+                            "value": false
+                        },
+                        "SystemSettings_Notifications_WindowsTipEnabled": {
+                            "value": false
+                        },
+                        "SystemSettings_Notifications_AppList.SystemSettings_Notifications_AppNotifications": {
+                            "value": [
+                                {
+                                    "elemId": "Cortana",
+                                    "elemVal": true
+                                },
+                                {
+                                    "elemId": "Settings",
+                                    "elemVal": true
+                                }
+                            ]
+                        },
+                        "SystemSettings_Notifications_AppList.SystemSettings_Notifications_AppNotificationBanners": {
+                            "value": [
+                                {
+                                    "elemId": "Cortana",
+                                    "elemVal": false
+                                },
+                                {
+                                    "elemId": "Settings",
+                                    "elemVal": false
+                                }
+                            ]
+                        },
+                        "SystemSettings_Notifications_AppList.SystemSettings_Notifications_AppNotificationKeepContentAboveLockPrivate": {
+                            "value": [
+                                {
+                                    "elemId": "Cortana",
+                                    "elemVal": false
+                                },
+                                {
+                                    "elemId": "Settings",
+                                    "elemVal": false
+                                }
+                            ]
+                        },
+                        "SystemSettings_Notifications_AppList.SystemSettings_Notifications_AppShowNotificationsInActionCenter": {
+                            "value": [
+                                {
+                                    "elemId": "Cortana",
+                                    "elemVal": false
+                                },
+                                {
+                                    "elemId": "Settings",
+                                    "elemVal": false
+                                }
+                            ]
+                        },
+                        "SystemSettings_Notifications_AppList.SystemSettings_Notifications_AppNotificationSoundToggle": {
+                            "value": [
+                                {
+                                    "elemId": "Cortana",
+                                    "elemVal": false
+                                },
+                                {
+                                    "elemId": "Settings",
+                                    "elemVal": false
+                                }
+                            ]
+                        },
+                        "SystemSettings_Notifications_AppList.SystemSettings_Notifications_AppNotificationMaxCollapsedGroupItemCountSetting": {
+                            "value": [
+                                {
+                                    "elemId": "Cortana",
+                                    "elemVal": "5"
+                                },
+                                {
+                                    "elemId": "Settings",
+                                    "elemVal": "5"
+                                }
+                            ]
+                        },
+                        "SystemSettings_Notifications_AppList.SystemSettings_Notifications_AppNotificationPrioritizationSetting": {
+                            "value": [
+                                {
+                                    "elemId": "Cortana",
+                                    "elemVal": 2
+                                },
+                                {
+                                    "elemId": "Settings",
+                                    "elemVal": 2
+                                }
+                            ]
+                        }
                     }
                 }
             }
