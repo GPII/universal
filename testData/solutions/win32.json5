@@ -4977,7 +4977,8 @@
                                     "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg"
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -5044,7 +5045,8 @@
                                     "default": ""
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -6315,7 +6317,8 @@
                                     "default": false
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam.dwFlags.FKF_FILTERKEYSON"
                     },
                     "SlowKeysInterval": {
                         "schema": {
@@ -6330,7 +6333,8 @@
                                     "default": 0 // 0 means no interval time
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam.iWaitMSec"
                     },
                     "BounceKeysInterval": {
                         "schema": {
@@ -6338,7 +6342,8 @@
                             "description": "Bounce keys interval time in milliseconds",
                             "type": "integer",
                             "default": 0
-                        }
+                        },
+                        "path": "pvParam.iBounceMSec"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -6533,7 +6538,8 @@
                                     "default": false
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
                     }
                 },
                 "capabilities": [
@@ -6758,7 +6764,8 @@
                                 "off",
                                 "on"
                             ]
-                        }
+                        },
+                        "path": "pvParam.Enabled"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -6832,7 +6839,8 @@
                                 "60s",
                                 "300s"
                             ]
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -7020,7 +7028,8 @@
                             "description": "Enable/Disable ToggleKeys feature",
                             "type": "boolean",
                             "default": false
-                        }
+                        },
+                        "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -7078,7 +7087,8 @@
                             "description": "Displays a underline showing which is the shortcut to active a menu item",
                             "type": "boolean",
                             "default": false
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -7118,6 +7128,10 @@
                             "description": "Set the keyboard as the preferred input method",
                             "type": "boolean",
                             "default": false
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -7632,7 +7646,8 @@
                                     "default": false
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam.dwFlags.MKF_MOUSEKEYSON"
                     },
                     "MaxSpeed": {
                         "schema": {
@@ -7640,7 +7655,8 @@
                             "description": "Speed of mouse keys",
                             "type": "number",
                             "multipleOf": 10
-                        }
+                        },
+                        "path": "pvParam.iMaxSpeed"
                     },
                     "Acceleration": {
                         "schema": {
@@ -7650,7 +7666,8 @@
                             "minimum": -1000,
                             // TODO: Not clear how to describe this setting
                             "maximum": 1000
-                        }
+                        },
+                        "path": "pvParam.iTimeToMaxSpeed"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -7780,6 +7797,10 @@
                                     "default": 0
                                 }
                             }
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -7840,6 +7861,10 @@
                                     ]
                                 }
                             }
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -7888,7 +7913,8 @@
                                     "enumLabels": ["RoutingFocus", "RoutingHybrid"]
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -7933,7 +7959,8 @@
                                     "default": false
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -7980,6 +8007,10 @@
                                     "maximum": 100
                                 }
                             }
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -8029,7 +8060,8 @@
                                     "default": 0
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -8075,7 +8107,8 @@
                                     "default": 0
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -8121,6 +8154,10 @@
                                     "default": 1
                                 }
                             }
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -8202,7 +8239,8 @@
                                     "default": 10
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -8250,7 +8288,8 @@
                                     "default": 1
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -8299,6 +8338,10 @@
                                     "default": 0
                                 }
                             }
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -8348,7 +8391,8 @@
                                     "default": 1
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -8394,7 +8438,8 @@
                                     "default": 0
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -8524,6 +8569,10 @@
                                     "maximum": 10
                                 }
                             }
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -9646,7 +9695,8 @@
                                 "path": { "type":  "string", "required":  true},
                                 "value": { "type":  "boolean", "required":  true}
                             }
-                        }
+                        },
+                        "path": "pvParam.dwFlags.SKF_STICKYKEYSON"
                     }
                 },
                 "capabilitiesTransformations": {
