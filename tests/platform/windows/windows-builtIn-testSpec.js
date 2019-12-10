@@ -1693,6 +1693,11 @@ gpii.tests.windows.builtInHighContrast = [
                                 "type": "struct",
                                 "name": "HIGHCONTRAST"
                             }
+                        },
+                        "supportedSettings": {
+                            "HighContrastOn": {
+                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+                            }
                         }
                     }
                 ]
