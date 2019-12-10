@@ -246,6 +246,7 @@
             "default": false
         }
     },
+    // TODO: These are heavily skewed towards windows, we will have to think about how to make truly "common" values.
     "http://registry.gpii.net/common/highContrastTheme": {
         "schema": {
             "title": "High Contrast theme",
@@ -253,16 +254,26 @@
             "type": "string",
             "default": "black-white",
             "enum": [
+                "regular-contrast",
                 "black-white",
                 "white-black",
                 "yellow-black",
-                "black-yellow"
+                "black-yellow",
+                "lime-black",
+                "black-brown",
+                "grey-black",
+                "grey-white"
             ],
             "enumLabels": [
+                "Regular Contrast",
                 "Black on White",
                 "White on Black",
                 "Yellow on Black",
-                "Black on Yellow"
+                "Black on Yellow",
+                "Lime on Black",
+                "Black on Brown",
+                "Grey on Dark",
+                "Grey on White"
             ]
         }
     },
@@ -318,6 +329,7 @@
             "default": true
         }
     },
+    // Currently adapted from: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows
     // TODO: This should be platform independent and pinned to some reasonable standard (such as RFC-5646).
     "http://registry.gpii.net/common/language": {
         "schema": {
