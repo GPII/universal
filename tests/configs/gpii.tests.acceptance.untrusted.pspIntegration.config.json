@@ -8,5 +8,8 @@
             }
         }
     },
-    "mergeConfigs": "%gpii-universal/tests/platform/linux/configs/gpii.tests.acceptance.linux.builtIn.untrusted.config.json"
+    "mergeConfigs": [
+        "%gpii-universal/tests/platform/linux/configs/gpii.tests.acceptance.linux.builtIn.untrusted.config.json",
+        "./shared/gpii.tests.resetDefaultSettings.config.json5"
+    ]
 }

@@ -37,7 +37,7 @@ socket.on("message", function (data) {
         return;
     };
 
-    // socket.send(JSON.stringify({"path": ["activeContextName"], "value": "bright", type: "ADD"}));
+    // socket.send(JSON.stringify({"path": ["activePrefsSetName"], "value": "bright", type: "ADD"}));
     socket.send(JSON.stringify(
         {
             "path": [ "preferences", "http://registry\\.gpii\\.net/common/DPIScale" ],

@@ -109,6 +109,18 @@ gpii.tests.windows.builtIn = [
                             "functionName": "Volume"
                         }
                     }
+                ],
+                "com.microsoft.windows.mirrorScreen": [
+                    {
+                        "settings": {
+                            "ScreenMirrorConfig": {
+                                "value": false
+                            }
+                        },
+                        "options": {
+                            "functionName": "ScreenMirror"
+                        }
+                    }
                 ]
             },
             "gpii.windows.spiSettingsHandler": {
@@ -428,6 +440,62 @@ gpii.tests.windows.builtIn = [
                             }
                         }
                     }
+                ],
+                "com.microsoft.windows.toggleKeys": [
+                    {
+                        "settings": {
+                            "ToggleKeysOn": {
+                                "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETTOGGLEKEYS",
+                            "setAction": "SPI_SETTOGGLEKEYS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "TOGGLEKEYS"
+                            }
+                        }
+                    }
+                ],
+                "com.microsoft.windows.underlineMenuShortcuts": [
+                    {
+                        "settings": {
+                            "UnderlineMenuShortcutsOn": {
+                                "path": "pvParam",
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETKEYBOARDCUES",
+                            "setAction": "SPI_SETKEYBOARDCUES",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "KeyboardPreferenceOn": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETKEYBOARDPREF",
+                            "setAction": "SPI_SETKEYBOARDPREF",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    }
                 ]
             },
             "gpii.windows.registrySettingsHandler": {
@@ -438,7 +506,13 @@ gpii.tests.windows.builtIn = [
                         "MagnificationMode": 3,
                         "FollowFocus": 0,
                         "FollowCaret": 1,
-                        "FollowMouse": 1
+                        "FollowMouse": 1,
+                        "FollowNarrator": 0,
+                        "FadeToMagIcon": 1,
+                        "ZoomIncrement": 50,
+                        "UseBitmapSmoothing": 1,
+                        "LensHeight": 50,
+                        "LensWidth": 50
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -449,7 +523,13 @@ gpii.tests.windows.builtIn = [
                             "FollowFocus": "REG_DWORD",
                             "FollowCaret": "REG_DWORD",
                             "FollowMouse": "REG_DWORD",
-                            "MagnificationMode": "REG_DWORD"
+                            "FollowNarrator": "REG_DWORD",
+                            "MagnificationMode": "REG_DWORD",
+                            "FadeToMagIcon": "REG_DWORD",
+                            "ZoomIncrement": "REG_DWORD",
+                            "UseBitmapSmoothing": "REG_DWORD",
+                            "LensHeight": "REG_DWORD",
+                            "LensWidth": "REG_DWORD"
                         }
                     }
                 }],
@@ -644,6 +724,42 @@ gpii.tests.windows.builtIn = [
                             "MachinePreferredUILanguages": "REG_SZ"
                         }
                     }
+                }],
+                "com.microsoft.windows.soundSentry": [{
+                    "settings": {
+                        "WindowsEffect": 2
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility\\SoundSentry",
+                        "dataTypes": {
+                            "WindowsEffect": "REG_DWORD"
+                        }
+                    }
+                }],
+                "com.microsoft.windows.shortcutWarningMessage": [{
+                    "settings": {
+                        "Warning Sounds": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility",
+                        "dataTypes": {
+                            "Warning Sounds": "REG_DWORD"
+                        }
+                    }
+                }],
+                "com.microsoft.windows.shortcutWarningSound": [{
+                    "settings": {
+                        "Sound on Activation": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility",
+                        "dataTypes": {
+                            "Sound on Activation": "REG_DWORD"
+                        }
+                    }
                 }]
             },
             "gpii.windows.displaySettingsHandler": {
@@ -718,12 +834,7 @@ gpii.tests.windows.builtIn = [
                 }]
             }
         },
-        gradeNames: "gpii.test.integration.actionHandlersAware.windows",
-        actionsHandlers: [
-            {
-                "type": "gpii.windows.updateLanguage"
-            }
-        ]
+        gradeNames: "gpii.test.integration.actionHandlersAware.windows"
     }, {
         name: "Testing os_win_2 using default matchmaker",
         gpiiKey: "os_win_2",
@@ -1584,18 +1695,7 @@ gpii.tests.windows.builtInHighContrast = [
                     }
                 ]
             }
-        },
-        actionsHandlers: [
-            {
-                "type": "gpii.windows.rm"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme"
-            }
-        ]
+        }
     }, {
         name: "Testing os_common_highContrast using default matchmaker",
         gpiiKey: "os_common_highContrast",
@@ -1622,18 +1722,7 @@ gpii.tests.windows.builtInHighContrast = [
                     }
                 ]
             }
-        },
-        actionsHandlers: [
-            {
-                "type": "gpii.windows.rm"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme"
-            }
-        ]
+        }
     }, {
         name: "Testing os_common_highContrast - magnifier running on startup",
         gpiiKey: "os_common_highContrast",
@@ -1698,18 +1787,7 @@ gpii.tests.windows.builtInHighContrast = [
                     }
                 ]
             }
-        },
-        actionsHandlers: [
-            {
-                "type": "gpii.windows.rm"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme"
-            }
-        ]
+        }
     }, {
         name: "Testing os_common_highContrast - magnifier and keyboard both running on startup",
         gpiiKey: "os_common_highContrast",
@@ -1774,18 +1852,7 @@ gpii.tests.windows.builtInHighContrast = [
                     }
                 ]
             }
-        },
-        actionsHandlers: [
-            {
-                "type": "gpii.windows.rm"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.applyCustomTheme"
-            },
-            {
-                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme"
-            }
-        ]
+        }
     }
 ];
 
@@ -1795,5 +1862,5 @@ module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.builtIn.testDefs",
     configName: "gpii.tests.acceptance.windows.builtIn.config",
     configPath: "%gpii-universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.actionHandlersAware.windows"],
-    module, require, __dirname);
+}, ["gpii.test.integration.testCaseHolder.windows"],
+    module, require);

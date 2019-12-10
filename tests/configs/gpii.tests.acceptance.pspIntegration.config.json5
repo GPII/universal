@@ -1,0 +1,7 @@
+{
+    "type": "gpii.tests.acceptance.pspIntegration.config",
+    "mergeConfigs": [
+        "%gpii-universal/tests/platform/linux/configs/gpii.tests.acceptance.linux.builtIn.config",
+        "./shared/gpii.tests.resetDefaultSettings.config.json5"
+    ]
+}

@@ -44,7 +44,7 @@ gpii.tests.untrusted.development.buildTestDefs = function (testDefs) {
 // to create nonexistent GPII keys and prefs safes.
 // Note that with all-in-local config, nonexistent GPII keys are able to key in and key out.
 gpii.tests.development.nonexistentKeyInWithPrivTestDefs = [{
-    name: "Flow Manager test: Key in and key out with a nonexistent GPII key",
+    name: "Flow Manager test: Key in and key out with a nonexistent GPII key (with privileges)",
     expect: 2,
     gpiiKey: "nonexistent_gpii_key",
     distributeOptions: {
@@ -58,7 +58,7 @@ gpii.tests.development.nonexistentKeyInWithPrivTestDefs = [{
 }];
 
 gpii.tests.development.nonexistentKeyInWithoutPrivTestDefs = [{
-    name: "Flow Manager test: Key in and key out with a nonexistent GPII key",
+    name: "Flow Manager test: Key in and key out with a nonexistent GPII key (without privileges)",
     expect: 3,
     gpiiKey: "nonexistent_gpii_key",
     gradeNames: ["gpii.test.testCaseHolder"],

@@ -47,11 +47,16 @@ rimraf(targetDir, function () {
     mkdirp(targetDir, function () {
         filenames.forEach(function (filename) {
             if (filename.endsWith(".json5")) {
-                var gpiiKeyId = filename.substr(0, filename.length - 6);
-                var preferences = fs.readFileSync(inputDir + "/" + filename, "utf-8");
-                var keyData = gpii.prefsSetsDbUtils.generateKeyData(gpiiKeyId, JSON5.parse(preferences), prefsSafeType);
-                gpiiKeys.push(keyData.gpiiKey);
-                prefsSafes.push(keyData.prefsSafe);
+                try {
+                    var gpiiKeyId = filename.substr(0, filename.length - 6);
+                    var preferences = fs.readFileSync(inputDir + "/" + filename, "utf-8");
+                    var keyData = gpii.prefsSetsDbUtils.generateKeyData(gpiiKeyId, JSON5.parse(preferences), prefsSafeType);
+                    gpiiKeys.push(keyData.gpiiKey);
+                    prefsSafes.push(keyData.prefsSafe);
+                } catch (e) {
+                    e.message += (" while converting preferences file " + filename);
+                    throw e;
+                }
             }
         });
 

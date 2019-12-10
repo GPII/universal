@@ -89,7 +89,22 @@ gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet = {
             "name": "Default preferences",
             "preferences": {
                 "http://registry.gpii.net/common/language": "en",
-                "http://registry.gpii.net/common/highContrast/enabled": true
+                "http://registry.gpii.net/common/highContrast/enabled": true,
+                "http://registry.gpii.net/common/highContrastTheme": "black-white",
+                "http://registry.gpii.net/applications/com.microsoft.office": {
+                    "word-ribbon": "StandardSet"
+                }
+            }
+        }
+    }
+};
+
+gpii.tests.cloud.oauth2.settingsPut.invalidPrefsSet = {
+    "contexts": {
+        "gpii-default": {
+            "name": "Default preferences",
+            "preferences": {
+                "http://registry.gpii.net/common/highContrast/enabled": "So true, funny how it seems."
             }
         }
     }
@@ -215,6 +230,42 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutWrongA
         settingsPutWrongAccessTokenSequence: {
             priority: "after:startServer",
             gradeNames: "gpii.tests.cloud.oauth2.settingsPut.settingsPutWrongAccessTokenSequence"
+        }
+    }
+});
+
+// Invalid payload, should be rejected.
+fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.settingsPutInvalidSequence", {
+    gradeNames: ["fluid.test.sequenceElement"],
+    sequence: [
+        {
+            funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
+            args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
+        },
+        {
+            event: "{accessTokenRequest}.events.onComplete",
+            listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse",
+            args: ["{arguments}.0", "{accessTokenRequest}"]
+        },
+        {
+            funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
+            args: ["{settingsPutRequest}", "{accessTokenRequest}.access_token", "{testCaseHolder}.options.updatedPrefsSet"]
+        },
+        {
+            event: "{settingsPutRequest}.events.onComplete",
+            listener: "gpii.tests.cloud.oauth2.settingsPut.verifyUpdateResponse",
+            args: ["{arguments}.0", "{settingsPutRequest}", 400, false, "Your request was invalid.  See the errors for details."]
+        }
+    ]
+});
+
+fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutInvalidSequence", {
+    gradeNames: ["gpii.test.disruption.settings.sequenceGrade"],
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsPut.requests",
+    sequenceElements: {
+        settingsPutWrongAccessTokenSequence: {
+            priority: "after:startServer",
+            gradeNames: "gpii.tests.cloud.oauth2.settingsPut.settingsPutInvalidSequence"
         }
     }
 });
@@ -364,6 +415,31 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
         disruptions: [{
             sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.mainSequence",
             expectedStatusCode: 401
+        }]
+    },
+
+    // Attempt to PUT an invalid payload
+    {
+        testDef: {
+            name: "Attempt to update preferences with an invalid payload.",
+
+            // The options below are for sending /access_token request
+            client_id: "nova-computer-failInAllowedPrefsToWrite",
+            client_secret: "nova-computer-secret-failInAllowedPrefsToWrite",
+            username: "os_gnome",
+            password: "dummy",
+
+            // The options below are required for sending /settings
+            gpiiKey: "os_gnome",
+            updatedPrefsSet: gpii.tests.cloud.oauth2.settingsPut.invalidPrefsSet,
+
+            // Expected info
+            expectedGpiiKey: undefined,
+            expectedMsg: "Invalid"
+        },
+        disruptions: [{
+            sequenceGrade: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutInvalidSequence",
+            expectedStatusCode: 400
         }]
     }
 ];

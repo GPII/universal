@@ -779,7 +779,7 @@
             "default": false
         }
     },
-    "http://registry.gpii.net/common/slowKeysEnable": {
+    "http://registry.gpii.net/common/slowKeys/enabled": {
         "schema": {
             "title": "Slow Keys",
             "description": "Whether to enable/disable slow keys",
@@ -824,6 +824,14 @@
         "schema": {
             "title": "Sticky Keys",
             "description": "Whether to enable/disable sticky keys",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "http://registry.gpii.net/common/toggleKeys": {
+        "schema": {
+            "title": "Toggle Keys",
+            "description": "Whether to enable/disable toggle keys",
             "type": "boolean",
             "default": false
         }
