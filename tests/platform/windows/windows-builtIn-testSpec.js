@@ -922,10 +922,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "MouseTrails": {
-                                "path": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                },
                                 "value": 10
                             }
                         },
@@ -943,7 +939,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "MouseKeysOn": {
-                                "path": "pvParam.dwFlags.MKF_MOUSEKEYSON",
                                 "value": true
                             }
                         },
@@ -962,7 +957,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "StickyKeysOn": {
-                                "path": "pvParam.dwFlags.SKF_STICKYKEYSON",
                                 "value": true
                             }
                         },
@@ -981,11 +975,9 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "FilterKeysEnable": {
-                                "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
                                 "value": false
                             },
                             "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
                                 "value": 0
                             }
                         },
@@ -1145,10 +1137,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "MouseTrails": {
-                                "path": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                },
                                 "value": 10
                             }
                         },
@@ -1166,7 +1154,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "MouseKeysOn": {
-                                "path": "pvParam.dwFlags.MKF_MOUSEKEYSON",
                                 "value": true
                             }
                         },
@@ -1185,7 +1172,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "StickyKeysOn": {
-                                "path": "pvParam.dwFlags.SKF_STICKYKEYSON",
                                 "value": true
                             }
                         },
@@ -1204,11 +1190,9 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "FilterKeysEnable": {
-                                "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
                                 "value": false
                             },
                             "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
                                 "value": 0
                             }
                         },
@@ -1368,10 +1352,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "MouseTrails": {
-                                "path": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                },
                                 "value": 10
                             }
                         },
@@ -1389,7 +1369,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "MouseKeysOn": {
-                                "path": "pvParam.dwFlags.MKF_MOUSEKEYSON",
                                 "value": true
                             }
                         },
@@ -1408,7 +1387,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "StickyKeysOn": {
-                                "path": "pvParam.dwFlags.SKF_STICKYKEYSON",
                                 "value": true
                             }
                         },
@@ -1427,11 +1405,9 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "FilterKeysEnable": {
-                                "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
                                 "value": false
                             },
                             "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
                                 "value": 0
                             }
                         },
@@ -1706,7 +1682,6 @@ gpii.tests.windows.builtInHighContrast = [
                     { // high contrast settings
                         "settings": {
                             "HighContrastOn": {
-                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
                                 "value": true
                             }
                         },
@@ -1771,7 +1746,6 @@ gpii.tests.windows.builtInHighContrast = [
                     { // high contrast settings
                         "settings": {
                             "HighContrastOn": {
-                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
                                 "value": true
                             }
                         },
@@ -1836,7 +1810,6 @@ gpii.tests.windows.builtInHighContrast = [
                     { // high contrast settings
                         "settings": {
                             "HighContrastOn": {
-                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
                                 "value": true
                             }
                         },
