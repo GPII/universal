@@ -142,6 +142,14 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "BOOL"
                             }
+                        },
+                        "supportedSettings": {
+                            "SwapMouseButtonsConfig": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
                         }
                     },
                     {
@@ -857,6 +865,11 @@ gpii.tests.windows.builtIn = [
                             "valueType": "TCHAR",
                             "length": 260
                         }
+                    },
+                    "supportedSettings": {
+                        "ImageConfig": {
+                            "path": "pvParam"
+                        }
                     }
                 }]
             },
@@ -932,6 +945,14 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "BOOL"
                             }
+                        },
+                        "supportedSettings": {
+                            "MouseTrails": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
                         }
                     }
                 ],
@@ -950,6 +971,11 @@ gpii.tests.windows.builtIn = [
                                 "type": "struct",
                                 "name": "MOUSEKEYS"
                             }
+                        },
+                        "supportedSettings": {
+                            "MouseKeysOn": {
+                                "path": "pvParam.dwFlags.MKF_MOUSEKEYSON"
+                            }
                         }
                     }
                 ],
@@ -967,6 +993,11 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "struct",
                                 "name": "STICKYKEYS"
+                            }
+                        },
+                        "supportedSettings": {
+                            "StickyKeysOn": {
+                                "path": "pvParam.dwFlags.SKF_STICKYKEYSON"
                             }
                         }
                     }
@@ -988,6 +1019,14 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "struct",
                                 "name": "FILTERKEYS"
+                            }
+                        },
+                        "supportedSettings": {
+                            "FilterKeysEnable": {
+                                "path": "pvParam.dwFlags.FKF_FILTERKEYSON"
+                            },
+                            "BounceKeysInterval": {
+                                "path": "pvParam.iBounceMSec"
                             }
                         }
                     }
@@ -1147,6 +1186,14 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "BOOL"
                             }
+                        },
+                        "supportedSettings": {
+                            "MouseTrails": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
                         }
                     }
                 ],
@@ -1165,6 +1212,11 @@ gpii.tests.windows.builtIn = [
                                 "type": "struct",
                                 "name": "MOUSEKEYS"
                             }
+                        },
+                        "supportedSettings": {
+                            "MouseKeysOn": {
+                                "path": "pvParam.dwFlags.MKF_MOUSEKEYSON"
+                            }
                         }
                     }
                 ],
@@ -1182,6 +1234,11 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "struct",
                                 "name": "STICKYKEYS"
+                            }
+                        },
+                        "supportedSettings": {
+                            "StickyKeysOn": {
+                                "path": "pvParam.dwFlags.SKF_STICKYKEYSON"
                             }
                         }
                     }
@@ -1203,6 +1260,14 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "struct",
                                 "name": "FILTERKEYS"
+                            }
+                        },
+                        "supportedSettings": {
+                            "FilterKeysEnable": {
+                                "path": "pvParam.dwFlags.FKF_FILTERKEYSON"
+                            },
+                            "BounceKeysInterval": {
+                                "path": "pvParam.iBounceMSec"
                             }
                         }
                     }
@@ -1362,6 +1427,14 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "BOOL"
                             }
+                        },
+                        "supportedSettings": {
+                            "MouseTrails": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
                         }
                     }
                 ],
@@ -1380,6 +1453,11 @@ gpii.tests.windows.builtIn = [
                                 "type": "struct",
                                 "name": "MOUSEKEYS"
                             }
+                        },
+                        "supportedSettings": {
+                            "MouseKeysOn": {
+                                "path": "pvParam.dwFlags.MKF_MOUSEKEYSON"
+                            }
                         }
                     }
                 ],
@@ -1397,6 +1475,11 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "struct",
                                 "name": "STICKYKEYS"
+                            }
+                        },
+                        "supportedSettings": {
+                            "StickyKeysOn": {
+                                "path": "pvParam.dwFlags.SKF_STICKYKEYSON"
                             }
                         }
                     }
@@ -1418,6 +1501,14 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "struct",
                                 "name": "FILTERKEYS"
+                            }
+                        },
+                        "supportedSettings": {
+                            "FilterKeysEnable": {
+                                "path": "pvParam.dwFlags.FKF_FILTERKEYSON"
+                            },
+                            "BounceKeysInterval": {
+                                "path": "pvParam.iBounceMSec"
                             }
                         }
                     }
@@ -1667,6 +1758,11 @@ gpii.tests.windows.builtInHighContrast = [
                                 "type": "struct",
                                 "name": "HIGHCONTRAST"
                             }
+                        },
+                        "supportedSettings": {
+                            "HighContrastOn": {
+                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+                            }
                         }
                     }
                 ]
@@ -1762,6 +1858,11 @@ gpii.tests.windows.builtInHighContrast = [
                                 "type": "struct",
                                 "name": "HIGHCONTRAST"
                             }
+                        },
+                        "supportedSettings": {
+                            "HighContrastOn": {
+                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+                            }
                         }
                     }
                 ]
@@ -1825,6 +1926,11 @@ gpii.tests.windows.builtInHighContrast = [
                             "pvParam": {
                                 "type": "struct",
                                 "name": "HIGHCONTRAST"
+                            }
+                        },
+                        "supportedSettings": {
+                            "HighContrastOn": {
+                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
                             }
                         }
                     }
