@@ -1,0 +1,30 @@
+// tony.json5
+//
+// Settings:
+//  - shortcutWarningMessage: Activate Windows 10 warning message when enabling settings through shortcuts.
+//  - shortcutWarningSounds: Activate Windows 10 warning sounds when changing settings through shortcuts.
+//  - toggleKeys: Activates Windows 10 toggle keys feature.
+//  - underlineMenuShortcuts: Enable underlining for menu shortcuts and sets keyboard as preferred input method.
+{
+    "flat": {
+        "name": "Tony",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/toggleKeys": true,
+                    "http://registry.gpii.net/applications/com.microsoft.windows.underlineMenuShortcuts": {
+                        "UnderlineMenuShortcutsOn": true,
+                        "KeyboardPreferenceOn": true
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
+                        "Warning Sounds": true
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningSounds": {
+                        "Sound on Activation": true
+                    }
+                }
+            }
+        }
+    }
+}

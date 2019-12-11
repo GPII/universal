@@ -56,8 +56,8 @@ fluid.defaults("gpii.tests.productionConfigTesting.settingsGet.testCaseHolder", 
         "gpii.tests.cloud.oauth2.accessTokensDeleteRequests"
     ],
     productionHostConfig: {
-        hostname: "flowmanager",
-        port: 9082
+        hostname: gpii.tests.productionConfigTesting.cloudUrl.hostname,
+        port: gpii.tests.productionConfigTesting.cloudUrl.port
     },
     distributeOptions: {
         "accessTokenRequest.hostConfig": {

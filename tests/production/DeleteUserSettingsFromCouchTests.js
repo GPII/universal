@@ -64,7 +64,7 @@ gpii.tests.productionConfigTesting.getPrefsSafeDoc = function (prefsSafeRequest,
         prefsSafeRequest.options.path = "/gpii/prefsSafe-" + prefsSafeRequest.options.gpiiKey;
         fluid.log("No Prefs Safe to retrieve for GPII key " + prefsSafeRequest.options.gpiiKey);
     }
-    prefsSafeRequest.send(null, { port: 5984 });
+    prefsSafeRequest.sendToDatabase();
 };
 
 gpii.tests.productionConfigTesting.testGetExtraAccessTokens = function (data, accessTokensRequest, docsToRemove) {
@@ -95,8 +95,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
         { funcName: "fluid.log", args: ["Deleting extra loaded data and access tokens generated during test runs:"]},
         {
             // remove the loaded GPII key "os_gnome" and its prefs safe
-            func: "{getOsGnomeKey}.send",
-            args: [null, { port: "5984" }]
+            func: "{getOsGnomeKey}.sendToDatabase"
         }, {
             event: "{getOsGnomeKey}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
@@ -110,8 +109,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
             // remove the GPII key "gpii_key_no_prefs_safe" and its generated prefs safe
-            func: "{getGpiiKeyNoPrefsSafe}.send",
-            args: [null, { port: "5984" }]
+            func: "{getGpiiKeyNoPrefsSafe}.sendToDatabase"
         }, {
             event: "{getGpiiKeyNoPrefsSafe}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
@@ -125,66 +123,57 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
             // remove loaded client credential data
-            func: "{getClientCredentialSchemaV01}.send",
-            args: [null, { port: "5984" }]
+            func: "{getClientCredentialSchemaV01}.sendToDatabase"
         }, {
             event: "{getClientCredentialSchemaV01}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
-            func: "{getClientCredentialNova}.send",
-            args: [null, { port: "5984" }]
+            func: "{getClientCredentialNova}.sendToDatabase"
         }, {
             event: "{getClientCredentialNova}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
-            func: "{getClientCredentialFailInIpVerification}.send",
-            args: [null, { port: "5984" }]
+            func: "{getClientCredentialFailInIpVerification}.sendToDatabase"
         }, {
             event: "{getClientCredentialFailInIpVerification}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
-            func: "{getClientCredentialFailInAllowedPrefsToWrite}.send",
-            args: [null, { port: "5984" }]
+            func: "{getClientCredentialFailInAllowedPrefsToWrite}.sendToDatabase"
         }, {
             event: "{getClientCredentialFailInAllowedPrefsToWrite}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
             // remove loaded client data
-            func: "{getClientOldSchema}.send",
-            args: [null, { port: "5984" }]
+            func: "{getClientOldSchema}.sendToDatabase"
         }, {
             event: "{getClientOldSchema}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
-            func: "{getClientNova}.send",
-            args: [null, { port: "5984" }]
+            func: "{getClientNova}.sendToDatabase"
         }, {
             event: "{getClientNova}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
-            func: "{getClientFailInIpVerification}.send",
-            args: [null, { port: "5984" }]
+            func: "{getClientFailInIpVerification}.sendToDatabase"
         }, {
             event: "{getClientFailInIpVerification}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
-            func: "{getClientFailInAllowedPrefsToWrite}.send",
-            args: [null, { port: "5984" }]
+            func: "{getClientFailInAllowedPrefsToWrite}.sendToDatabase"
         }, {
             event: "{getClientFailInAllowedPrefsToWrite}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
             // remove the GPII key "nonexistent_gpii_key" and its prefs safe
-            func: "{getNonExistentGpiiKey}.send",
-            args: [null, { port: "5984" }]
+            func: "{getNonExistentGpiiKey}.sendToDatabase"
         }, {
             event: "{getNonExistentGpiiKey}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion",
@@ -198,8 +187,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteUserSettings", {
             args: ["{arguments}.0", "{arguments}.1", "{that}.docsToRemove"]
         }, {
             // remove access tokens generated during all test runs
-            func: "{getExtraAccessTokens}.send",
-            args: [null, { port: "5984" }]
+            func: "{getExtraAccessTokens}.sendToDatabase"
         }, {
             event: "{getExtraAccessTokens}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testGetExtraAccessTokens",
@@ -235,173 +223,105 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
     gradeNames: ["gpii.test.common.testCaseHolder"],
     components: {
         getOsGnomeKey: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/os_gnome",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/os_gnome"
             }
         },
         getOsGnomeKeyPrefsSafe: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-
                 // set at gpii.tests.productionConfigTesting.getPrefsSafeDoc()
                 path: null,
-
-                method: "GET",
-                gpiiKey: "os_gnome",
-                expectedStatusCodes: [200, 404]
+                gpiiKey: "os_gnome"
             }
         },
         getGpiiKeyNoPrefsSafe: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/gpii_key_no_prefs_safe",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/gpii_key_no_prefs_safe"
             }
         },
         getGpiiKeyNoPrefsSafePrefsSafe: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-
                 // set at gpii.tests.productionConfigTesting.getPrefsSafeDoc()
                 path: null,
-
-                method: "GET",
-                gpiiKey: "gpii_key_no_prefs_safe",
-                expectedStatusCodes: [200, 404]
+                gpiiKey: "gpii_key_no_prefs_safe"
             }
         },
         getNonExistentGpiiKey: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/nonexistent_gpii_key",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/nonexistent_gpii_key"
             }
         },
         getNonExistentGpiiKeyPrefsSafe: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-
                 // set at gpii.tests.productionConfigTesting.getPrefsSafeDoc()
                 path: null,
-
-                method: "GET",
-                gpiiKey: "nonexistent_gpii_key",
-                expectedStatusCodes: [200, 404]
+                gpiiKey: "nonexistent_gpii_key"
             }
         },
         "getClientCredentialSchemaV01": {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/clientCredential-schemaV0.1",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/clientCredential-schemaV0.1"
             }
         },
         getClientCredentialNova: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/clientCredential-nova",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/clientCredential-nova"
             }
         },
         getClientCredentialFailInIpVerification: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/clientCredential-failInIpVerification",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/clientCredential-failInIpVerification"
             }
         },
         getClientCredentialFailInAllowedPrefsToWrite: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/clientCredential-failInAllowedPrefsToWrite",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/clientCredential-failInAllowedPrefsToWrite"
             }
         },
         getClientOldSchema: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/gpiiAppInstallationClient-schemaV0.1",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/gpiiAppInstallationClient-schemaV0.1"
             }
         },
         getClientNova: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/gpiiAppInstallationClient-nova",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/gpiiAppInstallationClient-nova"
             }
         },
         getClientFailInIpVerification: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/gpiiAppInstallationClient-nova-failInIpVerification",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/gpiiAppInstallationClient-nova-failInIpVerification"
             }
         },
         getClientFailInAllowedPrefsToWrite: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
-                path: "/gpii/gpiiAppInstallationClient-nova-failInAllowedPrefsToWrite",
-                method: "GET",
-                expectedStatusCodes: [200, 404]
+                path: "/gpii/gpiiAppInstallationClient-nova-failInAllowedPrefsToWrite"
             }
         },
         getExtraAccessTokens: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
                 path: "/gpii/_design/views/_view/findInfoByAccessToken",
-                method: "GET",
-                expectedStatusCodes: [200, 404],
                 extraGpiiKeys: gpii.tests.productionConfigTesting.loginGpiiKeys
             }
         },
         deleteInBulk: {
-            type: "kettle.test.request.http",
+            type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
-                port: "5984",
-                hostname: "couchdb",
                 path: "/gpii/_bulk_docs",
                 method: "POST",
                 expectedStatusCode: 201

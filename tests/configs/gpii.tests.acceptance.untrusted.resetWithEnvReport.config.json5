@@ -1,7 +1,0 @@
-{
-    "type": "gpii.tests.acceptance.untrusted.resetWithEnvReport.config",
-    "mergeConfigs": [
-        "%gpii-universal/gpii/configs/shared/gpii.config.untrusted.development.local.json5",
-        "./shared/gpii.tests.resetDefaultSettings.config.json5"
-    ]
-}
