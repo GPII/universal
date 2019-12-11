@@ -128,10 +128,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "SwapMouseButtonsConfig": {
-                                "path": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                },
                                 "value": 1
                             }
                         },
@@ -155,10 +151,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "ScrollWheelModeConfig": {
-                                "path": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                },
                                 "value": 4294967294
                             }
                         },
@@ -169,12 +161,19 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "UINT"
                             }
+                        },
+                        "supportedSettings": {
+                            "ScrollWheelModeConfig": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
                         }
                     },
                     {
                         "settings": {
                             "ScrollFocusRoutingConfig": {
-                                "path": "pvParam",
                                 "value": 1
                             }
                         },
@@ -185,12 +184,16 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "UINT"
                             }
+                        },
+                        "supportedSettings": {
+                            "ScrollFocusRoutingConfig": {
+                                "path": "pvParam"
+                            }
                         }
                     },
                     {
                         "settings": {
                             "MouseCursorShadowEnable": {
-                                "path": "pvParam",
                                 "value": 1
                             }
                         },
@@ -201,15 +204,16 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "BOOL"
                             }
+                        },
+                        "supportedSettings": {
+                            "MouseCursorShadowEnable": {
+                                "path": "pvParam"
+                            }
                         }
                     },
                     {
                         "settings": {
                             "ScrollCharsConfig": {
-                                "path": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                },
                                 "value": 10
                             }
                         },
@@ -220,12 +224,19 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "UINT"
                             }
+                        },
+                        "supportedSettings": {
+                            "ScrollCharsConfig": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
                         }
                     },
                     {
                         "settings": {
                             "WindowsTrackingConfig": {
-                                "path": "pvParam",
                                 "value": 1
                             }
                         },
@@ -236,12 +247,16 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "BOOL"
                             }
+                        },
+                        "supportedSettings": {
+                            "WindowsTrackingConfig": {
+                                "path": "pvParam"
+                            }
                         }
                     },
                     {
                         "settings": {
                             "ActiveZOrder": {
-                                "path": "pvParam",
                                 "value": 0
                             }
                         },
@@ -252,15 +267,16 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "BOOL"
                             }
+                        },
+                        "supportedSettings": {
+                            "ActiveZOrder": {
+                                "path": "pvParam"
+                            }
                         }
                     },
                     {
                         "settings": {
                             "WindowsArrangement": {
-                                "path": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                },
                                 "value": 1
                             }
                         },
@@ -271,12 +287,19 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "BOOL"
                             }
+                        },
+                        "supportedSettings": {
+                            "WindowsArrangement": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
                         }
                     },
                     {
                         "settings": {
                             "PointerSpeedConfig": {
-                                "path": "pvParam",
                                 "value": 15
                             }
                         },
@@ -287,12 +310,16 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "UINT"
                             }
+                        },
+                        "supportedSettings": {
+                            "PointerSpeedConfig": {
+                                "path": "pvParam"
+                            }
                         }
                     },
                     {
                         "settings": {
                             "EnhancePrecisionConfig": {
-                                "path": "pvParam",
                                 "value": [0, 0, 1]
                             }
                         },
@@ -305,15 +332,16 @@ gpii.tests.windows.builtIn = [
                                 "valueType": "INT",
                                 "length": 3
                             }
+                        },
+                        "supportedSettings": {
+                            "EnhancePrecisionConfig": {
+                                "path": "pvParam"
+                            }
                         }
                     },
                     {
                         "settings": {
                             "SnapToDefaultButtonConfig": {
-                                "path": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                },
                                 "value": 1
                             }
                         },
@@ -324,12 +352,19 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "UINT"
                             }
+                        },
+                        "supportedSettings": {
+                            "SnapToDefaultButtonConfig": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
                         }
                     },
                     {
                         "settings": {
                             "HidePointerConfig": {
-                                "path": "pvParam",
                                 "value": 0
                             }
                         },
@@ -340,12 +375,16 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "UINT"
                             }
+                        },
+                        "supportedSettings": {
+                            "HidePointerConfig": {
+                                "path": "pvParam"
+                            }
                         }
                     },
                     {
                         "settings": {
                             "MouseSonarConfig": {
-                                "path": "pvParam",
                                 "value": 1
                             }
                         },
@@ -356,6 +395,11 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "UINT"
                             }
+                        },
+                        "supportedSettings": {
+                            "MouseSonarConfig": {
+                                "path": "pvParam"
+                            }
                         }
                     }
                 ],
@@ -363,10 +407,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "MouseTrails": {
-                                "path": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                },
                                 "value": 10
                             }
                         },
@@ -377,6 +417,14 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "BOOL"
                             }
+                        },
+                        "supportedSettings": {
+                            "MouseTrails": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
                         }
                     }
                 ],
@@ -384,15 +432,12 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "MouseKeysOn": {
-                                "path": "pvParam.dwFlags.MKF_MOUSEKEYSON",
                                 "value": true
                             },
                             "MaxSpeed": {
-                                "path": "pvParam.iMaxSpeed",
                                 "value": 100
                             },
                             "Acceleration": {
-                                "path": "pvParam.iTimeToMaxSpeed",
                                 "value": 1000
                             }
                         },
@@ -404,6 +449,17 @@ gpii.tests.windows.builtIn = [
                                 "type": "struct",
                                 "name": "MOUSEKEYS"
                             }
+                        },
+                        "supportedSettings": {
+                            "MouseKeysOn": {
+                                "path": "pvParam.dwFlags.MKF_MOUSEKEYSON"
+                            },
+                            "MaxSpeed": {
+                                "path": "pvParam.iMaxSpeed"
+                            },
+                            "Acceleration": {
+                                "path": "pvParam.iTimeToMaxSpeed"
+                            }
                         }
                     }
                 ],
@@ -411,7 +467,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "StickyKeysOn": {
-                                "path": "pvParam.dwFlags.SKF_STICKYKEYSON",
                                 "value": true
                             }
                         },
@@ -423,6 +478,11 @@ gpii.tests.windows.builtIn = [
                                 "type": "struct",
                                 "name": "STICKYKEYS"
                             }
+                        },
+                        "supportedSettings": {
+                            "StickyKeysOn": {
+                                "path": "pvParam.dwFlags.SKF_STICKYKEYSON"
+                            }
                         }
                     }
                 ],
@@ -430,11 +490,9 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "FilterKeysEnable": {
-                                "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
                                 "value": true
                             },
                             "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
                                 "value": 1000
                             }
                         },
@@ -446,6 +504,17 @@ gpii.tests.windows.builtIn = [
                                 "type": "struct",
                                 "name": "FILTERKEYS"
                             }
+                        },
+                        "supportedSettings": {
+                            "FilterKeysEnable": {
+                                "path": "pvParam.dwFlags.FKF_FILTERKEYSON"
+                            },
+                            "SlowKeysInterval": {
+                                "path": "pvParam.iWaitMSec"
+                            },
+                            "BounceKeysInterval": {
+                                "path": "pvParam.iBounceMSec"
+                            }
                         }
                     }
                 ],
@@ -453,7 +522,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "ToggleKeysOn": {
-                                "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON",
                                 "value": true
                             }
                         },
@@ -465,6 +533,11 @@ gpii.tests.windows.builtIn = [
                                 "type": "struct",
                                 "name": "TOGGLEKEYS"
                             }
+                        },
+                        "supportedSettings": {
+                            "ToggleKeysOn": {
+                                "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON"
+                            }
                         }
                     }
                 ],
@@ -472,7 +545,6 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "UnderlineMenuShortcutsOn": {
-                                "path": "pvParam",
                                 "value": 1
                             }
                         },
@@ -483,15 +555,16 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "BOOL"
                             }
+                        },
+                        "supportedSettings": {
+                            "UnderlineMenuShortcutsOn": {
+                                "path": "pvParam"
+                            }
                         }
                     },
                     {
                         "settings": {
                             "KeyboardPreferenceOn": {
-                                "path": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                },
                                 "value": 1
                             }
                         },
@@ -501,6 +574,14 @@ gpii.tests.windows.builtIn = [
                             "uiParam": 0,
                             "pvParam": {
                                 "type": "BOOL"
+                            }
+                        },
+                        "supportedSettings": {
+                            "KeyboardPreferenceOn": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
                             }
                         }
                     }
