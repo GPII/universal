@@ -1827,7 +1827,6 @@ gpii.tests.windows.builtInHighContrast = [
                     { // high contrast settings
                         "settings": {
                             "HighContrastOn": {
-                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
                                 "value": true
                             }
                         },
