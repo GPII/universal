@@ -10509,6 +10509,7 @@
                             "type": "gpii.transformer.jsonArrayToTaggedArray",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold.ApplicationSettings\\.Speech\\.ScreenReadingItems",
                             "tag": "ReadItem",
+                            "key": "$t",
                             "elems": [
                                 "Buttons",
                                 "Lists",
