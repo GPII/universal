@@ -933,7 +933,6 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.desktopBackgroundColor": [{
                     "settings": {
                         "ImageConfig": {
-                            "path": "pvParam",
                             "value": ""
                         }
                     },
