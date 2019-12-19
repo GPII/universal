@@ -190,20 +190,20 @@ gpii.test.untrusted.pspIntegration.endSequence = [
 ];
 
 gpii.test.untrusted.pspIntegration.verifyRawPrefsAtStart = function (that, preferences) {
-    that.options.initialPrefs = JSON.parse(preferences);
+    that.initialPrefs = JSON.parse(preferences);
     jqUnit.assertValue("The initial preferences has been received", preferences);
 };
 
 gpii.test.untrusted.pspIntegration.verifyRawPrefsAtEnd = function (that, preferences, sequenceNum, expectedChange) {
-    fluid.log (that.options.name, ", number ", sequenceNum, " in the sequence");
+    fluid.log(that.options.name, ", number ", sequenceNum, " in the sequence");
     var expectedPrefsChange = expectedChange ? expectedChange : gpii.test.untrusted.pspIntegration.expectedPrefsChange[sequenceNum];
 
-    var expected = fluid.extend(true, {}, that.options.initialPrefs, expectedPrefsChange);
+    var expected = fluid.extend(true, {}, that.initialPrefs, expectedPrefsChange);
     jqUnit.assertDeepEq("The updated preferences have been saved to the cloud", expected, JSON.parse(preferences));
 };
 
 gpii.test.untrusted.pspIntegration.verifyRawPrefsAfterAutoSave = function (that, preferences) {
-    jqUnit.assertDeepEq("The preferences not in \"autosave\" metadata are not auto saved", that.options.initialPrefs, JSON.parse(preferences));
+    jqUnit.assertDeepEq("The preferences not in \"autosave\" metadata are not auto saved", that.initialPrefs, JSON.parse(preferences));
 };
 
 gpii.tests.pspIntegration.saveTestDefs = [

@@ -56,7 +56,7 @@ gpii.tests.untrusted.userLogonRequest.untrustedWithoutDbConnection = [{
                 "port": 8084,
                 "isError": true
             },
-            "{lifecycleManager}.userErrors.options.trackedUserErrors",
+            "{lifecycleManager}.userErrors.trackedUserErrors",
             {
                 "isError": true,
                 "messageKey": "NoConnection",
@@ -119,7 +119,7 @@ gpii.tests.untrusted.userLogonRequest.nonexistentKeyInTestDefs = [{
                 "isError": true,
                 "statusCode": 401
             },
-            "{lifecycleManager}.userErrors.options.trackedUserErrors",
+            "{lifecycleManager}.userErrors.trackedUserErrors",
             {
                 "isError": true,
                 "messageKey": "KeyInFail",
