@@ -111,7 +111,6 @@
                         "Options.SpeechMode": 1,
                         "Options.SpellAlphanumericData": 1,
                         "Options.SpellPhonetic": 1,
-                        "Options.Synthesizer": "nonsense",
                         "Options.SynthesizerResetFrequency": 5000,
                         "Options.TetherJawsToPC": 1,
                         "Options.TextAnalyser": 2,

@@ -10,7 +10,7 @@ The responsibilities worth highlighting for this component are:
 
 ## Translation from matchmaker output to lifecycle manager input
 
-One of the functionalities of the transformer is to translate from the matchmaker/context manager output into the format
+One of the functionalities of the transformer is to translate from the matchmaker output into the format
 required by the lifecycle manager. For this the function `gpii.transformer.toLifecycleFormat` should be used. See
 detailed documentation in code comments.
 

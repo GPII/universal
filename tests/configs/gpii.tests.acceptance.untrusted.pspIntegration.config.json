@@ -5,10 +5,6 @@
             "acceptance.cloudBasedConfig.preferencesServer": {
                 "record": "gpii.tests.untrusted.pspIntegration.preferencesServer",
                 "target": "{that cloudBasedConfig preferencesServer}.type"
-            },
-            "acceptance.flowManagerOptions": {
-                "source": "{that}.options.flowManagerOptions",
-                "target": "{that gpii.flowManager.local}.options"
             }
         }
     },
