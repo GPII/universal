@@ -74,7 +74,9 @@ fluid.defaults("gpii.tests.cloud.oauth2.accessTokensDeleteRequests", {
             type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
                 path: "/gpii/_design/views/_view/findInfoByAccessToken",
-                tokensToRemove: []       // set by successful request.
+                members: {
+                    tokensToRemove: []       // set by successful request.
+                }
             }
         },
         bulkDeleteRequest: {
@@ -100,7 +102,7 @@ fluid.defaults("gpii.tests.productionConfigTesting.deleteAccessTokensSequence", 
             listener: "gpii.tests.productionConfigTesting.testGetAccessTokensForDeletion"
         }, {
             funcName: "gpii.tests.productionConfigTesting.bulkDelete",
-            args: ["{bulkDeleteRequest}", "{getAccessTokensRequest}.options.tokensToRemove"]
+            args: ["{bulkDeleteRequest}", "{getAccessTokensRequest}.tokensToRemove"]
         }, {
             event: "{bulkDeleteRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.afterAccessTokensDeletion"
@@ -161,7 +163,7 @@ gpii.tests.productionConfigTesting.testGetAccessTokensForDeletion = function (da
         var aToken = aRow.value.authorization;
         if (fluid.contains(gpii.test.cloudBased.oauth2.accessTokenCache, aToken.accessToken)) {
             aToken._deleted = true;
-            accessTokensRequest.options.tokensToRemove.push(aToken);
+            accessTokensRequest.tokensToRemove.push(aToken);
             fluid.log("Will remove ", aToken.type, " for ", aToken.gpiiKey);
         }
     });
