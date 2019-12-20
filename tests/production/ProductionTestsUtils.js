@@ -46,7 +46,8 @@ fluid.defaults("gpii.tests.productionConfigTesting.dataBaseRequest", {
             args: [
                 "{that}",
                 gpii.tests.productionConfigTesting.couchdbUrl.port,
-                "{arguments}.0" // payload (optional)
+                "{arguments}.0", // payload (optional)
+                "{arguments}.1"  // directModel (optional)
             ]
         }
     }
@@ -184,6 +185,6 @@ gpii.tests.productionConfigTesting.afterAccessTokensDeletion = function (data, r
     gpii.test.cloudBased.oauth2.clearAccessTokenCache();
 };
 
-gpii.tests.productionConfigTesting.sendToRemoteHost = function (request, remotePort, payload) {
-    request.send(payload, { port: remotePort });
+gpii.tests.productionConfigTesting.sendToRemoteHost = function (request, remotePort, payload, directModel) {
+    request.send(payload, fluid.extend(true, { port: remotePort }, directModel));
 };
