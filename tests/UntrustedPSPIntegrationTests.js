@@ -318,7 +318,15 @@ gpii.tests.untrusted.pspIntegration.addConfig = function (testDefIn) {
         gradeNames: [
             "gpii.tests.untrusted.pspIntegration.testCaseHolder",
             "gpii.test.common.lifecycleManagerReceiver"
-        ]
+        ],
+        distributeOptions: {
+            "acceptance.defaultSettings": {
+                "record": {
+                    args: testDefIn.defaultSettings
+                },
+                "target": "{that defaultSettingsLoader}.options.invokers.get"
+            }
+        }
     });
 };
 
