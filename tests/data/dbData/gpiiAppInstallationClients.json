@@ -2,7 +2,7 @@
     {
         "_id": "gpiiAppInstallationClient-1",
         "type": "gpiiAppInstallationClient",
-        "schemaVersion": "0.2",
+        "schemaVersion": "0.3",
         "name": "Pilot Computers",
         "computerType": "public",
         "timestampCreated": "2017-11-21T18:11:22.101Z",
@@ -11,7 +11,7 @@
     {
         "_id": "gpiiAppInstallationClient-schemaV0.1",
         "type": "gpiiAppInstallationClient",
-        "schemaVersion": "0.2",
+        "schemaVersion": "0.3",
         "name": "To match the client credential data structure that is in the old schema version 0.1",
         "computerType": "public",
         "timestampCreated": "2017-11-21T18:11:22.101Z",
@@ -20,7 +20,7 @@
     {
         "_id": "gpiiAppInstallationClient-nova",
         "type": "gpiiAppInstallationClient",
-        "schemaVersion": "0.2",
+        "schemaVersion": "0.3",
         "name": "NOVA - success workflow tests",
         "computerType": "public",
         "timestampCreated": "2019-05-28T18:11:22.101Z",
@@ -29,7 +29,7 @@
     {
         "_id": "gpiiAppInstallationClient-nova-failInIpVerification",
         "type": "gpiiAppInstallationClient",
-        "schemaVersion": "0.2",
+        "schemaVersion": "0.3",
         "name": "NOVA - erroneous workflow test for the ip verification",
         "computerType": "public",
         "timestampCreated": "2019-05-28T18:11:22.101Z",
@@ -38,7 +38,7 @@
     {
         "_id": "gpiiAppInstallationClient-nova-failInAllowedPrefsToWrite",
         "type": "gpiiAppInstallationClient",
-        "schemaVersion": "0.2",
+        "schemaVersion": "0.3",
         "name": "NOVA - erroneous workflow test for the allowed preferences to write",
         "computerType": "public",
         "timestampCreated": "2019-05-28T18:11:22.101Z",

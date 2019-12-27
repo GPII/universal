@@ -365,7 +365,7 @@ Example Success Payload:
 {
     "id": "prefsSafe-alice",
     "type": "prefsSafe",
-    "schemaVersion": "0.2",
+    "schemaVersion": "0.3",
     "prefsSafeType": "user",
     "name": "alice",
     "email": null,
@@ -415,7 +415,7 @@ Example returned item:
     "prefsSafe": {
         "id": "prefsSafe-alice",
         "type": "prefsSafe",
-        "schemaVersion": "0.2",
+        "schemaVersion": "0.3",
         "prefsSafeType": "user",
         "name": "alice",
         "email": null,
@@ -439,14 +439,14 @@ Example returned item:
         {
             "id": "8f3085a7-b65b-4648-9a78-8ac7de766997",
             "type": "gpiiCloudSafeCredential",
-            "schemaVersion": "0.2",
+            "schemaVersion": "0.3",
             "prefsSafeId": "prefsSafe-alice",
             "gpiiExpressUserId": "org.couch.db.user:alice"
         },
         {
             "id": "57A68E84-03A9-4ADD-9365-11C75E4F1B0E",
             "type": "gpiiKey",
-            "schemaVersion": "0.2",
+            "schemaVersion": "0.3",
             "prefsSafeId": "prefsSafe-alice",
             "prefsSetId": "gpii-default",
             "revoked": false,
@@ -483,7 +483,7 @@ The POST payload should be a full preferences safe without an `id`:
 ```json
 {
     "type": "prefsSafe",
-    "schemaVersion": "0.2",
+    "schemaVersion": "0.3",
     "prefsSafeType": "user",
     "name": "Steve",
     "email": null,
@@ -532,7 +532,7 @@ Example PUT body:
 {
     "id": "prefsSafe-alice",
     "type": "prefsSafe",
-    "schemaVersion": "0.2",
+    "schemaVersion": "0.3",
     "prefsSafeType": "user",
     "name": "alice",
     "email": null,
@@ -625,14 +625,14 @@ An example payload for a particlar safe may be:
         {
             "id": "8f3085a7-b65b-4648-9a78-8ac7de766997",
             "type": "gpiiCloudSafeCredential",
-            "schemaVersion": "0.2",
+            "schemaVersion": "0.3",
             "prefsSafeId": "prefsSafe-alice",
             "gpiiExpressUserId": "org.couch.db.user:alice"
         },
         {
             "id": "57A68E84-03A9-4ADD-9365-11C75E4F1B0E",
             "type": "gpiiKey",
-            "schemaVersion": "0.2",
+            "schemaVersion": "0.3",
             "prefsSafeId": "prefsSafe-alice",
             "prefsSetId": "gpii-default",
             "revoked": false,
@@ -672,7 +672,7 @@ Example successful return payload:
 {
     "id": "3B3D3003-9F5F-4B66-98C1-1380EC86DDB1",
     "type": "gpiiKey",
-    "schemaVersion": "0.2",
+    "schemaVersion": "0.3",
     "prefsSafeId": "prefsSafe-alice",
     "prefsSetId": "gpii-lowlight",
     "revoked": false,
@@ -719,7 +719,7 @@ Example successful return payload:
 {
     "_id": "8f3085a7-b65b-4648-9a78-8ac7de766997",
     "type": "gpiiCloudSafeCredential",
-    "schemaVersion": "0.2",
+    "schemaVersion": "0.3",
     "prefsSafeId": "prefsSafe-1",
     "gpiiExpressUserId": "org.couch.db.user:prefs1user"
 }

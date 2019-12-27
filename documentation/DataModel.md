@@ -25,7 +25,7 @@ An example document:
     {
         "_id": "prefsSafe-7",
         "type": "prefsSafe",
-        "schemaVersion": "0.2",
+        "schemaVersion": "0.3",
         "prefsSafeType": "user",
         "name": null,
         "email": null,
@@ -61,7 +61,7 @@ An example document:
     {
         "_id": "np_tiny",
         "type": "gpiiKey",
-        "schemaVersion": "0.2",
+        "schemaVersion": "0.3",
         "prefsSafeId": "prefsSafe-7",
         "prefsSetId": "gpii-default",
         "revoked": false,
@@ -87,7 +87,7 @@ An example document:
     {
         "_id": "8f3085a7-b65b-4648-9a78-8ac7de766997",
         "type": "gpiiCloudSafeCredential",
-        "schemaVersion": "0.2",
+        "schemaVersion": "0.3",
         "prefsSafeId": "prefsSafe-7",
         "gpiiExpressUserId": "org.couch.db.user:prefs7user"
     }
