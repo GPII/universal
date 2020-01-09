@@ -858,6 +858,220 @@ gpii.tests.pspIntegration.testDefs = [
                 args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.afterChangeCursorSize"]
             }
         ]
+    }, {
+        name: "GPII-3828: PSPChannel reports default settings from the reset to default file when settingControls block is empty",
+        expect: 10,
+        "defaultSettings": {
+            "contexts": {
+                "gpii-default": {
+                    "preferences": {
+                        "http://registry.gpii.net/common/cursorSize": 0.8,
+                        "http://registry.gpii.net/common/volume": 1,
+                        "http://registry.gpii.net/applications/com.microsoft.office": {
+                            "word-ribbon": "Basics+StandardSet"
+                        }
+                    }
+                }
+            }
+        },
+        expectedSettingControls: {
+            noUser: {
+                "http://registry\\.gpii\\.net/common/cursorSize": {
+                    "schema": {
+                        "title": "Cursor Size",
+                        "description": "Cursor size",
+                        "type": "number",
+                        "default": 0.8,
+                        "minimum": 0,
+                        "maximum": 1,
+                        "multipleOf": 0.1
+                    },
+                    "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/common/volume": {
+                    "schema": {
+                        "title": "Volume",
+                        "description": "General volume of the operating system",
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1,
+                        "default": 1
+                    },
+                    "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon": {
+                    "schema": {
+                        "title": "Word Ribbon Layout",
+                        "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                        "enum": [
+                            "StandardSet",
+                            "Basics+StandardSet",
+                            "Essentials+StandardSet",
+                            "Basics+Essentials+StandardSet"
+                        ],
+                        "enumLabels": [
+                            "Standard Set",
+                            "Basics and Standard Set",
+                            "Essentials and Standard Set",
+                            "Basic, Essentials, and Standard Set"
+                        ],
+                        "default": "Basics+StandardSet"
+                    },
+                    "liveness": "live"
+                }
+            },
+            afterChangeMagnification: {
+                "http://registry\\.gpii\\.net/common/cursorSize": {
+                    "schema": {
+                        "title": "Cursor Size",
+                        "description": "Cursor size",
+                        "type": "number",
+                        "default": 0.8,
+                        "minimum": 0,
+                        "maximum": 1,
+                        "multipleOf": 0.1
+                    },
+                    "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/common/volume": {
+                    "schema": {
+                        "title": "Volume",
+                        "description": "General volume of the operating system",
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1,
+                        "default": 1
+                    },
+                    "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon": {
+                    "schema": {
+                        "title": "Word Ribbon Layout",
+                        "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                        "enum": [
+                            "StandardSet",
+                            "Basics+StandardSet",
+                            "Essentials+StandardSet",
+                            "Basics+Essentials+StandardSet"
+                        ],
+                        "enumLabels": [
+                            "Standard Set",
+                            "Basics and Standard Set",
+                            "Essentials and Standard Set",
+                            "Basic, Essentials, and Standard Set"
+                        ],
+                        "default": "Basics+StandardSet"
+                    },
+                    "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/common/magnification": {
+                    "value": 3,
+                    "schema": {
+                        "title": "Magnification",
+                        "description": "Level of magnification",
+                        "type": "number",
+                        "default": 1,
+                        "minimum": 1,
+                        "multipleOf": 0.1
+                    },
+                    "liveness": "live"
+                }
+            },
+            afterChangeCursorSize: {
+                "http://registry\\.gpii\\.net/common/cursorSize": {
+                    "value": 0.9,
+                    "schema": {
+                        "title": "Cursor Size",
+                        "description": "Cursor size",
+                        "type": "number",
+                        "default": 0.8,
+                        "minimum": 0,
+                        "maximum": 1,
+                        "multipleOf": 0.1
+                    },
+                    "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/common/volume": {
+                    "schema": {
+                        "title": "Volume",
+                        "description": "General volume of the operating system",
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1,
+                        "default": 1
+                    },
+                    "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon": {
+                    "schema": {
+                        "title": "Word Ribbon Layout",
+                        "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                        "enum": [
+                            "StandardSet",
+                            "Basics+StandardSet",
+                            "Essentials+StandardSet",
+                            "Basics+Essentials+StandardSet"
+                        ],
+                        "enumLabels": [
+                            "Standard Set",
+                            "Basics and Standard Set",
+                            "Essentials and Standard Set",
+                            "Basic, Essentials, and Standard Set"
+                        ],
+                        "default": "Basics+StandardSet"
+                    },
+                    "liveness": "live"
+                }
+            }
+        },
+        sequence: [
+            {
+                func: "{pspClient}.connect"
+            },
+            {
+                event: "{pspClient}.events.onConnect",
+                listener: "gpii.tests.pspIntegration.connectionSucceeded"
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.noUser"]
+            },
+            {
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", ["preferences", "http://registry\\.gpii\\.net/common/magnification"], 3]
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.afterChangeMagnification"]
+            },
+            {
+                func: "{resetRequest}.send"
+            },
+            {
+                event: "{resetRequest}.events.onComplete",
+                listener: "gpii.tests.pspIntegration.checkResetResponse",
+                args: ["{arguments}.0"]
+            },
+            {
+                // When "noUser" keys back in, PSP client receives empty settingControls block.
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.noUser"]
+            },
+            {
+                // change a setting that is in default settings from the reset to standard file.
+                // settingControls.settingKey.schema.default should be set to the value from the default setting.
+                funcName: "gpii.tests.pspIntegration.sendMsg",
+                args: [ "{pspClient}", ["preferences", "http://registry\\.gpii\\.net/common/cursorSize"], 0.9]
+            },
+            {
+                event: "{pspClient}.events.onReceiveMessage",
+                listener: "gpii.tests.pspIntegration.checkPayload",
+                args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.afterChangeCursorSize"]
+            }
+        ]
     }
 ];
 
