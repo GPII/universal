@@ -70,12 +70,6 @@ fluid.defaults("gpii.tests.untrusted.pspIntegration.testCaseHolder", {
     gradeNames: [
         "gpii.tests.pspIntegration.testCaseHolder.common.linux"
     ],
-    distributeOptions: {
-        "acceptance.defaultSettings": {
-            record: "{that}.options.defaultSettings",
-            target: "{that gpii.flowManager.local}.options.defaultSettings"
-        }
-    },
     components: {
         rawPrefsAtStart: {
             type: "gpii.test.untrusted.pspIntegration.rawPrefsRequest"
@@ -115,7 +109,7 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
                     "name": "Default preferences",
                     "preferences": {
                         "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                            "http://registry.gpii.net/common/magnification": 3
+                            "mag-factor": 3
                         }
                     }
                 }
@@ -146,7 +140,7 @@ gpii.test.untrusted.pspIntegration.expectedPrefsChange = [
                         "http://registry.gpii.net/common/magnification": 1.5,
                         "http://registry.gpii.net/common/volume": 0.5,
                         "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                            "http://registry.gpii.net/common/magnification": 3
+                            "mag-factor": 3
                         }
                     }
                 }
@@ -324,7 +318,15 @@ gpii.tests.untrusted.pspIntegration.addConfig = function (testDefIn) {
         gradeNames: [
             "gpii.tests.untrusted.pspIntegration.testCaseHolder",
             "gpii.test.common.lifecycleManagerReceiver"
-        ]
+        ],
+        distributeOptions: {
+            "acceptance.defaultSettings": {
+                "record": {
+                    args: testDefIn.defaultSettings
+                },
+                "target": "{that defaultSettingsLoader}.options.invokers.get"
+            }
+        }
     });
 };
 

@@ -172,7 +172,7 @@ gpii.tests.pspIntegration.data = {
                 "data": [{
                     "settings": {
                         "mag-factor": 3,
-                        "show-cross-hairs": 1
+                        "show-cross-hairs": true
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
@@ -442,7 +442,7 @@ gpii.tests.pspIntegration.testDefs = [
                 args: ["{arguments}.0", "modelChanged", "{that}.options.expectedSettingControls.afterConnect"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification"], 3]
+                args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.mag-factor"], 3]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -577,7 +577,7 @@ gpii.tests.pspIntegration.testDefs = [
                 args: ["{arguments}.0", "modelChanged"]
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification"], 3]
+                args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.mag-factor"], 3]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -594,7 +594,7 @@ gpii.tests.pspIntegration.testDefs = [
                 listener: "fluid.identity"
             }, {
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/showCrosshairs"], 1]
+                args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.show-cross-hairs"], true]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -791,7 +791,7 @@ gpii.tests.pspIntegration.testDefs = [
             }, {
                 // Issue a setting change that will be applied using the async mock settings handler
                 funcName: "gpii.tests.pspIntegration.sendMsg",
-                args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.orca.http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"], true]
+                args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.orca.enableSpeech"], true]
             }, {
                 event: "{pspClient}.events.onReceiveMessage",
                 listener: "gpii.tests.pspIntegration.checkPayload",
@@ -866,7 +866,10 @@ gpii.tests.pspIntegration.testDefs = [
                 "gpii-default": {
                     "preferences": {
                         "http://registry.gpii.net/common/cursorSize": 0.8,
-                        "http://registry.gpii.net/common/volume": 1
+                        "http://registry.gpii.net/common/volume": 1,
+                        "http://registry.gpii.net/applications/com.microsoft.office": {
+                            "word-ribbon": "Basics+StandardSet"
+                        }
                     }
                 }
             }
@@ -895,6 +898,26 @@ gpii.tests.pspIntegration.testDefs = [
                         "default": 1
                     },
                     "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon": {
+                    "schema": {
+                        "title": "Word Ribbon Layout",
+                        "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                        "enum": [
+                            "StandardSet",
+                            "Basics+StandardSet",
+                            "Essentials+StandardSet",
+                            "Basics+Essentials+StandardSet"
+                        ],
+                        "enumLabels": [
+                            "Standard Set",
+                            "Basics and Standard Set",
+                            "Essentials and Standard Set",
+                            "Basic, Essentials, and Standard Set"
+                        ],
+                        "default": "Basics+StandardSet"
+                    },
+                    "liveness": "live"
                 }
             },
             afterChangeMagnification: {
@@ -918,6 +941,26 @@ gpii.tests.pspIntegration.testDefs = [
                         "minimum": 0,
                         "maximum": 1,
                         "default": 1
+                    },
+                    "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon": {
+                    "schema": {
+                        "title": "Word Ribbon Layout",
+                        "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                        "enum": [
+                            "StandardSet",
+                            "Basics+StandardSet",
+                            "Essentials+StandardSet",
+                            "Basics+Essentials+StandardSet"
+                        ],
+                        "enumLabels": [
+                            "Standard Set",
+                            "Basics and Standard Set",
+                            "Essentials and Standard Set",
+                            "Basic, Essentials, and Standard Set"
+                        ],
+                        "default": "Basics+StandardSet"
                     },
                     "liveness": "live"
                 },
@@ -956,6 +999,26 @@ gpii.tests.pspIntegration.testDefs = [
                         "minimum": 0,
                         "maximum": 1,
                         "default": 1
+                    },
+                    "liveness": "live"
+                },
+                "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon": {
+                    "schema": {
+                        "title": "Word Ribbon Layout",
+                        "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                        "enum": [
+                            "StandardSet",
+                            "Basics+StandardSet",
+                            "Essentials+StandardSet",
+                            "Basics+Essentials+StandardSet"
+                        ],
+                        "enumLabels": [
+                            "Standard Set",
+                            "Basics and Standard Set",
+                            "Essentials and Standard Set",
+                            "Basic, Essentials, and Standard Set"
+                        ],
+                        "default": "Basics+StandardSet"
                     },
                     "liveness": "live"
                 }
