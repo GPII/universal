@@ -34,6 +34,7 @@ gpii.tests.pspIntegration.buildTestDefs = function (testDefs) {
             distributeOptions: {
                 "acceptance.defaultSettings": {
                     "record": {
+                        funcName: "fluid.identity",
                         args: testDef.defaultSettings
                     },
                     "target": "{that defaultSettingsLoader}.options.invokers.get"
