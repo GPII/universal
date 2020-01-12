@@ -79,7 +79,7 @@ for the reset API and how to use it.
 
 ### Fetch Default Settings from a Remote URL
 
-**Config file**: [``%flowManager/configs/gpii.flowManager.config.resetAtStart.base.json5`](../gpii/node_modules/flowManager/configs/gpii.flowManager.config.resetAtStart.base.json5)
+**Config file**: [``%flowManager/configs/gpii.flowManager.config.remoteDefaultSettings.base.json5`](../gpii/node_modules/flowManager/configs/gpii.flowManager.config.remoteDefaultSettings.base.json5)
 
 **Purpose**: This config fetches default settings from a remote URL. The default URL is set to
 `https://raw.githubusercontent.com/GPII/universal/master/testData/defaultSettings/defaultSettings.win32.json5`
