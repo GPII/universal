@@ -97,7 +97,6 @@ gpii.tests.resetDefaultSettings.buildTestDefs = function (testCases, config) {
             "distributeOptions": {
                 "acceptance.defaultSettings": {
                     "record": {
-                        funcName: "fluid.identity",
                         args: oneTestCase.defaultSettings
                     },
                     "target": "{that defaultSettingsLoader}.options.invokers.get"
