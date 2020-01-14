@@ -20,12 +20,76 @@
                     "schema": "org.gnome.desktop.a11y.magnifier"
                 },
                 "supportedSettings": {
-                    "mag-factor": {},
-                    "show-cross-hairs": {},
-                    "focus-tracking": {},
-                    "caret-tracking": {},
-                    "mouse-tracking": {},
-                    "screen-position": {}
+                    "mag-factor": {
+                        "schema": {
+                            "title": "Magnification",
+                            "description": "Set up magnification level",
+                            "type": "number",
+                            "default": 1,
+                            "minimum": 1,
+                            "maximum": 5
+                        }
+                    },
+                    "show-cross-hairs": {
+                        "schema": {
+                            "title": "Show crosshairs",
+                            "description": "Whether to show crosshairs",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "focus-tracking": {
+                        "schema": {
+                            "title": "Focus Tracking",
+                            "description": "The mouse pointer is always in view within the magnifier",
+                            "default": 0,
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": ["None", "Centered", "Push", "Proportional"]
+                        }
+                    },
+                    "caret-tracking": {
+                        "schema": {
+                            "title": "Caret Tracking",
+                            "description": "The mouse pointer is always in view within the magnifier",
+                            "default": 0,
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": ["None", "Centered", "Push", "Proportional"]
+                        }
+                    },
+                    "lens-mode": {
+                        "schema": {
+                            "title": "Enable lens mode",
+                            "description": "Whether the magnified view should be centered over the location of the system mouse and move with it",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "mouse-tracking": {
+                        "schema": {
+                            "title": "Mouse Tracking Mode",
+                            "description": "Determines the position of the magnified mouse image within the magnified view and how it reacts to system mouse movement",
+                            "default": "proportional",
+                            "enum": ["none", "centered", "push", "proportional"],
+                            "enumLabels": ["None", "Centered", "Push", "Proportional"]
+                        }
+                    },
+                    "screen-position": {
+                        "schema": {
+                            "title": "Screen Position",
+                            "description": "The position of the magnified view",
+                            "default": "full-screen",
+                            "enum": ["full-screen", "top-half", "bottom-half", "left-half", "right-half"],
+                            "enumLabels": ["Full screen", "Top half", "Bottom half", "Left half", "Right half"]
+                        }
+                    },
+                    "scroll-at-edges": {
+                        "schema": {
+                            "title": "Scroll magnified contents beyond the edges of the desktop",
+                            "description": "For centered mouse tracking, when the system pointer is at or near the edge of the screen, the magnified contents continue to scroll such that the screen edge moves into the magnified view",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "mag-factor": "http://registry\\.gpii\\.net/common/magnification",
@@ -122,10 +186,40 @@
                 "type": "gpii.gsettings",
                 "liveness": "live",
                 "supportedSettings": {
-                    "text-scaling-factor": {},
-                    "cursor-size": {},
-                    "gtk-theme": {},
-                    "icon-theme": {}
+                    "text-scaling-factor": {
+                        "schema": {
+                            "title": "Text scaling factor",
+                            "description": "Factor used to enlarge or reduce text display, without changing font size",
+                            "type": "number",
+                            "default": 1,
+                            "minimum": 0.5,
+                            "maximum": 3
+                        }
+                    },
+                    "cursor-size": {
+                        "schema": {
+                            "title": "Cursor size",
+                            "description": "Size of the cursor used as cursor theme",
+                            "type": "number",
+                            "default": 24
+                        }
+                    },
+                    "gtk-theme": {
+                        "schema": {
+                            "title": "Gtk+ Theme",
+                            "description": "Basename of the default theme used by gtk+",
+                            "type": "string",
+                            "default": "Adwaita"
+                        }
+                    },
+                    "icon-theme": {
+                        "schema": {
+                            "title": "Icon Theme",
+                            "description": "Icon theme to use for the panel, nautilus etc",
+                            "type": "string",
+                            "default": "Adwaita"
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "text-scaling-factor": {
@@ -439,17 +533,103 @@
                     "user": "${{gpiiKey}}"
                 },
                 "supportedSettings": {
-                    "enableTutorialMessages": {},
-                    "enableEchoByCharacter": {},
-                    "enableEchoByWord": {},
-                    "enableBraille": {},
-                    "enableSpeech": {},
-                    "sayAllStyle": {},
-                    "voices.default.rate": {},
-                    "voices.default.average-pitch": {},
-                    "voices.default.gain": {},
-                    "voices.default.family": {},
-                    "verbalizePunctuationStyle": {}
+                    "enableTutorialMessages": {
+                        "schema": {
+                            "title": "Enable Tutorial Messages",
+                            "description": "Enable tutorial messages",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 0
+                        }
+                    },
+                    "enableEchoByCharacter": {
+                        "schema": {
+                            "title": "Enable Echo by Character",
+                            "description": "Enable echo by character",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 0
+                        }
+                    },
+                    "enableEchoByWord": {
+                        "schema": {
+                            "title": "Enable Echo by Word",
+                            "description": "Enable echo by word",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 0
+                        }
+                    },
+                    "enableBraille": {
+                        "schema": {
+                            "title": "Enable Braille",
+                            "description": "Enable braille",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 0
+                        }
+                    },
+                    "enableSpeech": {
+                        "schema": {
+                            "title": "Enable Speech",
+                            "description": "Enable speech",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 0
+                        }
+                    },
+                    "sayAllStyle": {
+                        "schema": {
+                            "title": "Enable Say all Style",
+                            "description": "Enable say all style",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 0
+                        }
+                    },
+                    "voices.default.rate": {
+                        "schema": {
+                            "title": "Voice Rate",
+                            "description": "Config the voice rate",
+                            "type": "number",
+                            "default": 100
+                        }
+                    },
+                    "voices.default.average-pitch": {
+                        "schema": {
+                            "title": "Voice Average Pitch",
+                            "description": "Config the voice average pitch",
+                            "type": "number",
+                            "default": 10
+                        }
+                    },
+                    "voices.default.gain": {
+                        "schema": {
+                            "title": "Voice Gain",
+                            "description": "Config the voice gain",
+                            "type": "number",
+                            "default": 10
+                        }
+                    },
+                    "voices.default.family": {
+                        "schema": {
+                            "title": "Voice Family",
+                            "description": "Config the voice family to be used",
+                            "default": {
+                                "locale": "en",
+                                "name": "english"
+                            }
+                        }
+                    },
+                    "verbalizePunctuationStyle": {
+                        "schema": {
+                            "title": "Verbalize Punctuation Style",
+                            "description": "Config the verbalize punctuation style",
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": ["none", "some", "most", "all"],
+                            "default": 0
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "enableTutorialMessages": "http://registry\\.gpii\\.net/common/speakTutorialMessages",

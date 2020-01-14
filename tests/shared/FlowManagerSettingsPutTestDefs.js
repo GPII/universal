@@ -30,7 +30,7 @@ fluid.registerNamespace("gpii.tests.cloud.oauth2.settingsPut");
 gpii.tests.cloud.oauth2.settingsPut.prefsAllowedTests = [{
     name: "All preferences are in the allowed list",
     preferences: {
-        "http://registry.gpii.net/common/language": "en",
+        "http://registry.gpii.net/common/language": "en-US",
         "http://registry.gpii.net/common/highContrast/enabled": true
     },
     allowedPrefs: [
@@ -43,7 +43,7 @@ gpii.tests.cloud.oauth2.settingsPut.prefsAllowedTests = [{
 }, {
     name: "One or more preferences are not in the allowed list",
     preferences: {
-        "http://registry.gpii.net/common/language": "en",
+        "http://registry.gpii.net/common/language": "en-US",
         "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": true,
         "http://registry.gpii.net/common/highContrast/enabled": true
     },
@@ -57,7 +57,7 @@ gpii.tests.cloud.oauth2.settingsPut.prefsAllowedTests = [{
 }, {
     name: "One or more preferences are not in the allowed list",
     preferences: {
-        "http://registry.gpii.net/common/language": "en",
+        "http://registry.gpii.net/common/language": "en-US",
         "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": true,
         "http://registry.gpii.net/common/highContrast/enabled": true
     },
@@ -88,7 +88,7 @@ gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet = {
         "gpii-default": {
             "name": "Default preferences",
             "preferences": {
-                "http://registry.gpii.net/common/language": "en",
+                "http://registry.gpii.net/common/language": "en-US",
                 "http://registry.gpii.net/common/highContrast/enabled": true,
                 "http://registry.gpii.net/common/highContrastTheme": "black-white",
                 "http://registry.gpii.net/applications/com.microsoft.office": {

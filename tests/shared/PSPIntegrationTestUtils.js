@@ -203,6 +203,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     noUser: {},
     afterConnect: {
         "http://registry\\.gpii\\.net/common/magnification": {
+            "solutionName": "Magnification",
             "value": 1.5,
             "schema": {
                 "title": "Magnification",
@@ -215,6 +216,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "liveness": "live"
         },
         "http://registry\\.gpii\\.net/common/volume": {
+            "solutionName": "Volume",
             "value": 0.5,
             "schema": {
                 "title": "Volume",
@@ -228,6 +230,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     },
     afterChangeMagnificationByAppTerm: {
         "http://registry\\.gpii\\.net/common/magnification": {
+            "solutionName": "Magnification",
             "schema": {
                 "title": "Magnification",
                 "description": "Level of magnification",
@@ -240,6 +243,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "value": 1.5
         },
         "http://registry\\.gpii\\.net/common/volume": {
+            "solutionName": "Volume",
             "schema": {
                 "title": "Volume",
                 "description": "General volume of the operating system",
@@ -250,15 +254,15 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "liveness": "live",
             "value": 0.5
         },
-        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification": {
+        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.mag-factor": {
             "value": 3,
             "schema": {
                 "title": "Magnification",
-                "description": "Level of magnification",
+                "description": "Set up magnification level",
                 "type": "number",
                 "default": 1,
                 "minimum": 1,
-                "multipleOf": 0.1
+                "maximum": 5
             },
             "liveness": "live",
             "solutionName": "GNOME Shell Magnifier"
@@ -266,6 +270,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     },
     afterChangeShowCrosshairsByAppTerm: {
         "http://registry\\.gpii\\.net/common/magnification": {
+            "solutionName": "Magnification",
             "schema": {
                 "title": "Magnification",
                 "description": "Level of magnification",
@@ -278,6 +283,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "value": 1.5
         },
         "http://registry\\.gpii\\.net/common/volume": {
+            "solutionName": "Volume",
             "schema": {
                 "title": "Volume",
                 "description": "General volume of the operating system",
@@ -288,20 +294,20 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "liveness": "live",
             "value": 0.5
         },
-        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification": {
+        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.mag-factor": {
             "value": 3,
             "schema": {
                 "title": "Magnification",
-                "description": "Level of magnification",
+                "description": "Set up magnification level",
                 "type": "number",
                 "default": 1,
                 "minimum": 1,
-                "multipleOf": 0.1
+                "maximum": 5
             },
             "liveness": "live",
             "solutionName": "GNOME Shell Magnifier"
         },
-        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/showCrosshairs": {
+        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.show-cross-hairs": {
             "value": 1,
             "schema": {
                 "title": "Show crosshairs",
@@ -315,6 +321,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     },
     afterChangeScreenReaderByAppTerm: {
         "http://registry\\.gpii\\.net/common/magnification": {
+            "solutionName": "Magnification",
             "schema": {
                 "title": "Magnification",
                 "description": "Level of magnification",
@@ -327,6 +334,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "value": 1.5
         },
         "http://registry\\.gpii\\.net/common/volume": {
+            "solutionName": "Volume",
             "schema": {
                 "title": "Volume",
                 "description": "General volume of the operating system",
@@ -337,13 +345,20 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "liveness": "live",
             "value": 0.5
         },
-        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.orca.http://registry\\.gpii\\.net/common/screenReaderTTS/enabled": {
+        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.orca.enableSpeech": {
             "value": true,
             "schema": {
-                "title": "TTS enabled",
-                "description": "Whether to enable/disable text to speech from screen reader",
-                "type": "boolean",
-                "default": true
+                "title": "Enable Speech",
+                "description": "Enable speech",
+                "enum": [
+                    0,
+                    1
+                ],
+                "enumLabels": [
+                    "off",
+                    "on"
+                ],
+                "default": 0
             },
             "liveness": "manualRestart",
             "solutionName": "ORCA Screen Reader"
@@ -351,6 +366,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     },
     afterChangeToBright: {
         "http://registry\\.gpii\\.net/common/magnification": {
+            "solutionName": "Magnification",
             "value": 2,
             "schema": {
                 "title": "Magnification",
@@ -365,6 +381,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     },
     afterChangeMagnification: {
         "http://registry\\.gpii\\.net/common/magnification": {
+            "solutionName": "Magnification",
             "value": 3,
             "schema": {
                 "title": "Magnification",
@@ -379,6 +396,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     },
     afterChangeCursorSize: {
         "http://registry\\.gpii\\.net/common/cursorSize": {
+            "solutionName": "Cursor Size",
             "value": 0.9,
             "schema": {
                 "title": "Cursor Size",
@@ -394,6 +412,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     },
     afterChangeCursorSizeCombined: {
         "http://registry\\.gpii\\.net/common/magnification": {
+            "solutionName": "Magnification",
             "schema": {
                 "title": "Magnification",
                 "description": "Level of magnification",
@@ -406,6 +425,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "value": 1.5
         },
         "http://registry\\.gpii\\.net/common/volume": {
+            "solutionName": "Volume",
             "schema": {
                 "title": "Volume",
                 "description": "General volume of the operating system",
@@ -417,6 +437,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "value": 0.5
         },
         "http://registry\\.gpii\\.net/common/cursorSize": {
+            "solutionName": "Cursor Size",
             "value": 0.9,
             "schema": {
                 "title": "Cursor Size",
@@ -432,6 +453,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     },
     afterChangePitch: {
         "http://registry\\.gpii\\.net/common/magnification": {
+            "solutionName": "Magnification",
             "schema": {
                 "title": "Magnification",
                 "description": "Level of magnification",
@@ -444,6 +466,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "value": 1.5
         },
         "http://registry\\.gpii\\.net/common/volume": {
+            "solutionName": "Volume",
             "schema": {
                 "title": "Volume",
                 "description": "General volume of the operating system",
@@ -470,6 +493,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     },
     noUserWithDefaultSettings: {
         "http://registry\\.gpii\\.net/common/cursorSize": {
+            "solutionName": "Cursor Size",
             "schema": {
                 "title": "Cursor Size",
                 "description": "Cursor size",
@@ -482,6 +506,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "liveness": "live"
         },
         "http://registry\\.gpii\\.net/common/volume": {
+            "solutionName": "Volume",
             "schema": {
                 "title": "Volume",
                 "description": "General volume of the operating system",
@@ -489,12 +514,34 @@ gpii.tests.pspIntegration.expectedSettingControls = {
                 "minimum": 0,
                 "maximum": 1,
                 "default": 1
+            },
+            "liveness": "live"
+        },
+        "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon": {
+            "solutionName": "Microsoft Office",
+            "schema": {
+                "title": "Word Ribbon Layout",
+                "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                "enum": [
+                    "StandardSet",
+                    "Basics+StandardSet",
+                    "Essentials+StandardSet",
+                    "Basics+Essentials+StandardSet"
+                ],
+                "enumLabels": [
+                    "Standard Set",
+                    "Basics and Standard Set",
+                    "Essentials and Standard Set",
+                    "Basic, Essentials, and Standard Set"
+                ],
+                "default": "Basics+StandardSet"
             },
             "liveness": "live"
         }
     },
     afterChangeMagnificationWithDefaultSettings: {
         "http://registry\\.gpii\\.net/common/cursorSize": {
+            "solutionName": "Cursor Size",
             "schema": {
                 "title": "Cursor Size",
                 "description": "Cursor size",
@@ -507,6 +554,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "liveness": "live"
         },
         "http://registry\\.gpii\\.net/common/volume": {
+            "solutionName": "Volume",
             "schema": {
                 "title": "Volume",
                 "description": "General volume of the operating system",
@@ -517,7 +565,29 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             },
             "liveness": "live"
         },
+        "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon": {
+            "solutionName": "Microsoft Office",
+            "schema": {
+                "title": "Word Ribbon Layout",
+                "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                "enum": [
+                    "StandardSet",
+                    "Basics+StandardSet",
+                    "Essentials+StandardSet",
+                    "Basics+Essentials+StandardSet"
+                ],
+                "enumLabels": [
+                    "Standard Set",
+                    "Basics and Standard Set",
+                    "Essentials and Standard Set",
+                    "Basic, Essentials, and Standard Set"
+                ],
+                "default": "Basics+StandardSet"
+            },
+            "liveness": "live"
+        },
         "http://registry\\.gpii\\.net/common/magnification": {
+            "solutionName": "Magnification",
             "value": 3,
             "schema": {
                 "title": "Magnification",
@@ -532,6 +602,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     },
     afterChangeCursorSizeWitthDefaultSettings: {
         "http://registry\\.gpii\\.net/common/cursorSize": {
+            "solutionName": "Cursor Size",
             "value": 0.9,
             "schema": {
                 "title": "Cursor Size",
@@ -545,6 +616,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             "liveness": "live"
         },
         "http://registry\\.gpii\\.net/common/volume": {
+            "solutionName": "Volume",
             "schema": {
                 "title": "Volume",
                 "description": "General volume of the operating system",
@@ -554,10 +626,32 @@ gpii.tests.pspIntegration.expectedSettingControls = {
                 "default": 1
             },
             "liveness": "live"
+        },
+        "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon": {
+            "solutionName": "Microsoft Office",
+            "schema": {
+                "title": "Word Ribbon Layout",
+                "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                "enum": [
+                    "StandardSet",
+                    "Basics+StandardSet",
+                    "Essentials+StandardSet",
+                    "Basics+Essentials+StandardSet"
+                ],
+                "enumLabels": [
+                    "Standard Set",
+                    "Basics and Standard Set",
+                    "Essentials and Standard Set",
+                    "Basic, Essentials, and Standard Set"
+                ],
+                "default": "Basics+StandardSet"
+            },
+            "liveness": "live"
         }
     },
     readPrefsInitial: {
         "http://registry\\.gpii\\.net/common/magnification": {
+            "solutionName": "Magnification",
             "value": 1.5,
             "schema": {
                 "title": "Magnification",
@@ -571,6 +665,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     },
     readPrefsBright: {
         "http://registry\\.gpii\\.net/common/magnification": {
+            "solutionName": "Magnification",
             "value": 2,
             "schema": {
                 "title": "Magnification",
@@ -584,6 +679,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
     },
     readPrefsMulitple: {
         "http://registry\\.gpii\\.net/common/magnification": {
+            "solutionName": "Magnification",
             "value": 1.5,
             "schema": {
                 "title": "Magnification",
@@ -595,6 +691,7 @@ gpii.tests.pspIntegration.expectedSettingControls = {
             }
         },
         "http://registry\\.gpii\\.net/common/volume": {
+            "solutionName": "Volume",
             "value": 0.5,
             "schema": {
                 "title": "Volume",

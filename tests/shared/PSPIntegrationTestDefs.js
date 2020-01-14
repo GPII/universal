@@ -178,7 +178,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
             }
         ]
     }, {
-        name: "Settings change by PSP with scoped common term",
+        name: "Settings change by PSP with a scoped setting",
         expect: 11,
         sequence: [
             {
@@ -214,7 +214,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 funcName: "gpii.tests.pspIntegration.sendMsg",
                 args: [ "{pspClient}", "modelChanged", {
                     settingControls: {
-                        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification": {
+                        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.mag-factor": {
                             value: 3
                         }
                     }
@@ -367,7 +367,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 funcName: "gpii.tests.pspIntegration.sendMsg",
                 args: [ "{pspClient}", "modelChanged", {
                     settingControls: {
-                        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification": {
+                        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.mag-factor": {
                             value: 3
                         }
                     }
@@ -390,7 +390,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 funcName: "gpii.tests.pspIntegration.sendMsg",
                 args: [ "{pspClient}", "modelChanged", {
                     settingControls: {
-                        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/showCrosshairs": {
+                        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.show-cross-hairs": {
                             value: 1
                         }
                     }
@@ -597,7 +597,7 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 funcName: "gpii.tests.pspIntegration.sendMsg",
                 args: [ "{pspClient}", "modelChanged", {
                     settingControls: {
-                        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.orca.http://registry\\.gpii\\.net/common/screenReaderTTS/enabled": {
+                        "http://registry\\.gpii\\.net/applications/org\\.gnome\\.orca.enableSpeech": {
                             value: true
                         }
                     }
@@ -687,13 +687,13 @@ gpii.tests.pspIntegration.applyPrefsTestDefs = [
                 "gpii-default": {
                     "preferences": {
                         "http://registry.gpii.net/common/cursorSize": 0.8,
-                        "http://registry.gpii.net/common/volume": 1
+                        "http://registry.gpii.net/common/volume": 1,
+                        "http://registry.gpii.net/applications/com.microsoft.office": {
+                            "word-ribbon": "Basics+StandardSet"
+                        }
                     }
                 }
             }
-        },
-        expectedSettingControls: {
-
         },
         sequence: [
             {
