@@ -120,6 +120,13 @@ gpii.tests.cloudStatus.testCases = {
         config: gpii.tests.cloudStatus.configs.separateServersWithPrefsServer,
         expectedStatusCode: 200,
         expectedPayload: {"isReady": true}
+    },
+    testFullSHA: {
+        name:  "Test retrieval of the full SHA associated with the CBFM",
+        url: "/fullSHA",
+        config: gpii.tests.cloudStatus.configs.allLocalWithoutPrefsServer,
+        expectedStatusCode: 200,
+        expectedPayload: {"sha256": "2602bdf868aec49993d8780feec42d4e9f995e21"}
     }
 };
 
