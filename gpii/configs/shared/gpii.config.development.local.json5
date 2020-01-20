@@ -1,0 +1,29 @@
+/**
+ * This configuration acts as a base for `gpii.config.development.manualTesting` and many configurations used by
+ * integration tests. It runs the entire system including the local flow manager, the cloud based flow manager,
+ * the preferences server and matchmaker all locally. It doesn't start any backend database for data persistence.
+ *
+ * * The following components are running:
+ * ** Auth Server
+ * ** Flat MatchMaker
+ * ** Cloud Based Flow Manager
+ * ** Lifecycle Manager
+ * ** Local Flow Manager
+ * ** MatchMaker Framework
+ * ** Ontology Handler
+ * ** Preferences Server
+ * ** Solutions Registry (reading registry from file)
+ * ** Static Device Reporter (reading from file)
+ *
+ * Notes on testing:
+ * This setup is used as a basis for the platform specific acceptance tests. Since the acceptance tests might use slightly different paths for the tests (i.e. a special folder for reading prefs and solutionsRegistry),
+ * what is actually being used for testing is a slight variation of this config. For more details, see the txt files describing the configs in the acceptance tests folder of both universal and the platform specific repositories.
+ *
+ */
+{
+    "type": "gpii.config.development.local",
+    "mergeConfigs": [
+        "%deviceReporter/configs/gpii.deviceReporter.config.static.json5",
+        "%gpii-universal/gpii/configs/shared/gpii.config.development.base.local.json5"
+    ]
+}

@@ -86,13 +86,6 @@
                         ],
                         "value": 1024
                     }
-                ],
-                "conditions": [
-                    {
-                        "type": "http://registry.gpii.net/conditions/inRange",
-                        "min": 400,
-                        "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
-                    }
                 ]
             }
         }

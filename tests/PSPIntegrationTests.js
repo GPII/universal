@@ -28,10 +28,19 @@ gpii.tests.pspIntegration.buildTestDefs = function (testDefs) {
                 "gpii.test.common.lifecycleManagerReceiver"
             ],
             config: {
-                configName: "gpii.tests.acceptance.linux.builtIn.config",
-                configPath: "%gpii-universal/tests/platform/linux/configs"
+                configName: "gpii.tests.acceptance.pspIntegration.config",
+                configPath: "%gpii-universal/tests/configs"
+            },
+            distributeOptions: {
+                "acceptance.defaultSettings": {
+                    "record": {
+                        args: testDef.defaultSettings
+                    },
+                    "target": "{that defaultSettingsLoader}.options.invokers.get"
+                }
             }
         }, testDef);
     });
 };
-gpii.test.bootstrapServer(gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.testDefs));
+var builtTestDefs = gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.testDefs);
+gpii.test.runCouchTestDefs(builtTestDefs);

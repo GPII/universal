@@ -6,6 +6,7 @@
 // ** big font and big buttons.
 {
     "flat": {
+        "name": "TVM Vladimir",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
@@ -18,7 +19,7 @@
                     "http://registry.gpii.net/common/fontSize": 24,
                     "http://registry.gpii.net/common/magnification": 3,
                     "http://registry.gpii.net/common/highContrast": true,
-                    "http://registry.gpii.net/common/language": "en"
+                    "http://registry.gpii.net/common/language": "en-US"
                 }
             }
         }

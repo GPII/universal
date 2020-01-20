@@ -2,6 +2,7 @@
  * GPII Untrusted Flow Manager Development Tests
  *
  * Copyright 2015 OCAD University
+ * Copyright 2019 OCAD University
  *
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
@@ -26,15 +27,56 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.untrusted.development");
 
-gpii.tests.untrusted.development.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
-    var testDef = fluid.extend(true, {}, testDefIn, {
-        config: {
-            configName: "gpii.config.untrusted.development.local",
-            configPath: "%gpii-universal/gpii/configs"
-        }
+gpii.tests.untrusted.development.buildTestDefs = function (testDefs) {
+    return fluid.transform(testDefs, function (testDefIn) {
+        var testDef = fluid.extend(true, {}, testDefIn, {
+            config: {
+                configName: "gpii.config.untrusted.development.local",
+                configPath: "%gpii-universal/gpii/configs/shared"
+            }
+        });
+
+        return testDef;
     });
+};
 
-    return testDef;
-});
+// With untrusted config, nonexistent GPII keys can only key in with client credentials that have privilege
+// to create nonexistent GPII keys and prefs safes.
+// Note that with all-in-local config, nonexistent GPII keys are able to key in and key out.
+gpii.tests.development.nonexistentKeyInWithPrivTestDefs = [{
+    name: "Flow Manager test: Key in and key out with a nonexistent GPII key (with privileges)",
+    expect: 2,
+    gpiiKey: "nonexistent_gpii_key",
+    distributeOptions: {
+        "test.clientCredentialFilePath": {
+            "record": "%gpii-universal/tests/data/clientCredentials/nova.json",
+            "target": "{that gpii.flowManager.untrusted settingsDataSource}.options.clientCredentialFilePath",
+            priority: "after:flowManager.clientCredentialFilePath"
+        }
+    },
+    sequenceGrade: "gpii.tests.development.commonTestSequence"
+}];
 
-gpii.test.bootstrapServer(gpii.tests.untrusted.development.testDefs);
+gpii.tests.development.nonexistentKeyInWithoutPrivTestDefs = [{
+    name: "Flow Manager test: Key in and key out with a nonexistent GPII key (without privileges)",
+    expect: 3,
+    gpiiKey: "nonexistent_gpii_key",
+    gradeNames: ["gpii.test.testCaseHolder"],
+    sequence: [{
+        // login with a nonexistent GPII key
+        func: "{loginRequest}.send"
+    }, {
+        event: "{loginRequest}.events.onComplete",
+        listener: "kettle.test.assertErrorResponse",
+        args: {
+            errorTexts: "server_error while executing HTTP POST on url",
+            statusCode: 401,
+            string: "{arguments}.0",
+            request: "{loginRequest}"
+        }
+    }]
+}];
+
+gpii.test.runCouchTestDefs(gpii.tests.untrusted.development.buildTestDefs(gpii.tests.development.testDefs));
+gpii.test.runCouchTestDefs(gpii.tests.untrusted.development.buildTestDefs(gpii.tests.development.nonexistentKeyInWithPrivTestDefs));
+gpii.test.runCouchTestDefs(gpii.tests.untrusted.development.buildTestDefs(gpii.tests.development.nonexistentKeyInWithoutPrivTestDefs));

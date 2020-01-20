@@ -1,0 +1,17 @@
+// # otis.json5
+// Test user for Office UI customisations.
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.office": {
+                        "word-ribbon": "Basics+StandardSet",
+                        "OverrideTabletMode":  2
+                    }
+                }
+            }
+        }
+    }
+}

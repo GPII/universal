@@ -92,25 +92,24 @@ gpii.tests.windows.jaws.testDefs = [
                             "Options.SayAllIgnoreShiftKeys": 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
                     {
                         "settings": {
-                            "Options.PrimarySynthesizer" : "eloq",
                             "ENU-Global.Rate": 100,
                             "ENU-JAWSCursor.Rate": 100,
                             "ENU-Keyboard.Rate": 100,
                             "ENU-MenuAndDialog.Rate": 100,
                             "ENU-Message.Rate": 100,
                             "ENU-PCCursor.Rate": 100,
-                            "ENU-Global.Pitch": 75,
-                            "ENU-JAWSCursor.Pitch": 75,
-                            "ENU-Keyboard.Pitch": 75,
-                            "ENU-MenuAndDialog.Pitch": 75,
-                            "ENU-Message.Pitch": 75,
-                            "ENU-PCCursor.Pitch": 75,
+                            "ENU-Global.Pitch": 70,
+                            "ENU-JAWSCursor.Pitch": 70,
+                            "ENU-Keyboard.Pitch": 70,
+                            "ENU-MenuAndDialog.Pitch": 70,
+                            "ENU-Message.Pitch": 70,
+                            "ENU-PCCursor.Pitch": 70,
                             "ENU-Global.Volume": 100,
                             "ENU-JAWSCursor.Volume": 100,
                             "ENU-Keyboard.Volume": 100,
@@ -131,7 +130,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-PCCursor.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
@@ -158,25 +157,24 @@ gpii.tests.windows.jaws.testDefs = [
                             "Options.SayAllIgnoreShiftKeys": 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
                     {
                         "settings": {
-                            "Options.PrimarySynthesizer" : "eloq",
                             "ENU-Global.Rate": 100,
                             "ENU-JAWSCursor.Rate": 100,
                             "ENU-Keyboard.Rate": 100,
                             "ENU-MenuAndDialog.Rate": 100,
                             "ENU-Message.Rate": 100,
                             "ENU-PCCursor.Rate": 100,
-                            "ENU-Global.Pitch": 75,
-                            "ENU-JAWSCursor.Pitch": 75,
-                            "ENU-Keyboard.Pitch": 75,
-                            "ENU-MenuAndDialog.Pitch": 75,
-                            "ENU-Message.Pitch": 75,
-                            "ENU-PCCursor.Pitch": 75,
+                            "ENU-Global.Pitch": 70,
+                            "ENU-JAWSCursor.Pitch": 70,
+                            "ENU-Keyboard.Pitch": 70,
+                            "ENU-MenuAndDialog.Pitch": 70,
+                            "ENU-Message.Pitch": 70,
+                            "ENU-PCCursor.Pitch": 70,
                             "ENU-Global.Volume": 100,
                             "ENU-JAWSCursor.Volume": 100,
                             "ENU-Keyboard.Volume": 100,
@@ -197,7 +195,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-PCCursor.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
@@ -216,40 +214,39 @@ gpii.tests.windows.jaws.testDefs = [
                 "com.freedomscientific.jaws": [
                     {
                         "settings": {
-                            "Options.PrimarySynthesizer": "eloq",
                             "ENU-Global.Rate": 40,
                             "ENU-Global.Punctuation": 2,
-                            "ENU-Global.Pitch": 75,
+                            "ENU-Global.Pitch": 70,
                             "ENU-Global.Volume": 50,
                             "ENU-Global.SynthLangString": "French",
                             "ENU-Message.Rate": 40,
                             "ENU-Message.Punctuation": 2,
-                            "ENU-Message.Pitch": 75,
+                            "ENU-Message.Pitch": 70,
                             "ENU-Message.Volume": 50,
                             "ENU-Message.SynthLangString": "French",
                             "ENU-Keyboard.Rate": 40,
                             "ENU-Keyboard.Punctuation": 2,
-                            "ENU-Keyboard.Pitch": 75,
+                            "ENU-Keyboard.Pitch": 70,
                             "ENU-Keyboard.Volume": 50,
                             "ENU-Keyboard.SynthLangString": "French",
                             "ENU-PCCursor.Rate": 40,
                             "ENU-PCCursor.Punctuation": 2,
-                            "ENU-PCCursor.Pitch": 75,
+                            "ENU-PCCursor.Pitch": 70,
                             "ENU-PCCursor.Volume": 50,
                             "ENU-PCCursor.SynthLangString": "French",
                             "ENU-JAWSCursor.Rate": 40,
                             "ENU-JAWSCursor.Punctuation": 2,
-                            "ENU-JAWSCursor.Pitch": 75,
+                            "ENU-JAWSCursor.Pitch": 70,
                             "ENU-JAWSCursor.Volume": 50,
                             "ENU-JAWSCursor.SynthLangString": "French",
                             "ENU-MenuAndDialog.Rate": 40,
                             "ENU-MenuAndDialog.Punctuation": 2,
-                            "ENU-MenuAndDialog.Pitch": 75,
+                            "ENU-MenuAndDialog.Pitch": 70,
                             "ENU-MenuAndDialog.Volume": 50,
                             "ENU-MenuAndDialog.SynthLangString": "French"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
@@ -263,7 +260,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "Options.TypingEcho": 3
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]
@@ -282,7 +279,6 @@ gpii.tests.windows.jaws.testDefs = [
                 "com.freedomscientific.jaws": [
                     {
                         "settings": {
-                            "Options.PrimarySynthesizer": "eloq",
                             "ENU-Global.Rate": 40,
                             "ENU-Global.Punctuation": 0,
                             "ENU-Global.Pitch": 11,
@@ -315,7 +311,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-MenuAndDialog.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
@@ -328,7 +324,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "Options.SayAllIgnoreShiftKeys": 0
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]
@@ -347,7 +343,6 @@ gpii.tests.windows.jaws.testDefs = [
                 "com.freedomscientific.jaws": [
                     {
                         "settings": {
-                            "Options.PrimarySynthesizer": "eloq",
                             "ENU-Global.Rate": 100,
                             "ENU-Global.Punctuation": 2,
                             "ENU-Global.Pitch": 100,
@@ -380,7 +375,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-MenuAndDialog.SynthLangString": "French Canadian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
@@ -394,7 +389,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "Options.TypingEcho": 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]

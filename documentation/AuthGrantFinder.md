@@ -15,9 +15,16 @@ Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Key_Grant)
 
 ```JSON
 {
-    accessToken: "the_input_accessToken",
-    gpiiKey: "bob_gpii_key",
-    allowSettingsGet: true,
-    allowSettingsPut: true
+    "accessToken": "the_input_accessToken",
+    "gpiiKey": "bob_gpii_key",
+    "allowSettingsGet": true,
+    "allowSettingsPut": true,
+    "allowedPrefsToWrite": [
+        "http://registry.gpii.net/common/language",
+        "http://registry.gpii.net/common/DPIScale",
+        "http://registry.gpii.net/common/highContrast/enabled",
+        "http://registry.gpii.net/common/selfVoicing/enabled",
+        "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings"
+    ]
 }
 ```

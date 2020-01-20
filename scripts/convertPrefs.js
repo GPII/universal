@@ -9,7 +9,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 // This script reads files from an input directory that contains preferences JSON5 files and convert them to JSON files of GPII keys and
-// preferences safes suitable for direct loading into CouchDB or PouchDB, which comply with the new GPII data model:
+// preferences safes suitable for direct loading into CouchDB, which comply with the new GPII data model:
 // https://wiki.gpii.net/w/Keys,_KeyTokens,_and_Preferences in the target directory
 // Usage: node scripts/convertPrefs.js {input_path} {target_path} {prefsSafeType}, where {prefsSafeType} is one of "snapset" or "user" and defaults to "user"
 //
@@ -47,11 +47,16 @@ rimraf(targetDir, function () {
     mkdirp(targetDir, function () {
         filenames.forEach(function (filename) {
             if (filename.endsWith(".json5")) {
-                var gpiiKeyId = filename.substr(0, filename.length - 6);
-                var preferences = fs.readFileSync(inputDir + "/" + filename, "utf-8");
-                var keyData = gpii.prefsSetsDbUtils.generateKeyData(gpiiKeyId, JSON5.parse(preferences), prefsSafeType);
-                gpiiKeys.push(keyData.gpiiKey);
-                prefsSafes.push(keyData.prefsSafe);
+                try {
+                    var gpiiKeyId = filename.substr(0, filename.length - 6);
+                    var preferences = fs.readFileSync(inputDir + "/" + filename, "utf-8");
+                    var keyData = gpii.prefsSetsDbUtils.generateKeyData(gpiiKeyId, JSON5.parse(preferences), prefsSafeType);
+                    gpiiKeys.push(keyData.gpiiKey);
+                    prefsSafes.push(keyData.prefsSafe);
+                } catch (e) {
+                    e.message += (" while converting preferences file " + filename);
+                    throw e;
+                }
             }
         });
 

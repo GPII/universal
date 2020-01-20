@@ -33,46 +33,6 @@ gpii.tests.resetDefaultSettings.testSequence = {
     }]
 };
 
-// 2. GPII-3539: Concurrent actions from the environment report and reset to default
-// 2.1 The test sequence for testing GPII-3539
-gpii.tests.resetDefaultSettings.testSequenceWithEnvReport = {
-    expect: 2,
-    sequence: [{
-        func: "{resetRequest}.send"
-    }, {
-        func: "{environmentChangedRequest}.send",
-        args: { "http://registry.gpii.net/common/environment/auditory.noise": 30000 }
-    }, {
-        event: "{environmentChangedRequest}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["The environmentChanged request completes successfully", "", "{arguments}.0"]
-    }, {
-        event: "{resetRequest}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["The reset request completes successfully", "Reset successfully.", "{arguments}.0"]
-    }]
-};
-
-// 2.2 The testCaseHolder grade for testing GPI-3539
-fluid.defaults("gpii.tests.resetDefaultSettings.testCaseHolderWithEnvReport", {
-    gradeNames: ["gpii.test.common.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
-    components: {
-        environmentChangedRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                path: "/environmentChanged",
-                method: "PUT"
-            }
-        },
-        resetRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                path: "/user/reset/login"
-            }
-        }
-    }
-});
-
 // Test cases
 gpii.tests.resetDefaultSettings.resetAtStartTestCases = [{
     name: "Testing reset on system startup with a /enabled preference",
@@ -126,26 +86,9 @@ gpii.tests.resetDefaultSettings.resetAtStartTestCases = [{
     testSequence: gpii.tests.resetDefaultSettings.testSequence
 }];
 
-gpii.tests.resetDefaultSettings.testCasesWithEnvReport = [{
-    name: "GPII-3539: The concurrent actions from the environment report and reset to default should not throw an error",
-    gradeNames: ["gpii.tests.resetDefaultSettings.testCaseHolderWithEnvReport"],
-    defaultSettings: {
-        "contexts": {
-            "gpii-default": {
-                "preferences": {
-                    "http://registry.gpii.net/applications/org.gnome.orca": {
-                        "http://registry.gpii.net/common/screenReaderTTS/enabled": true
-                    }
-                }
-            }
-        }
-    },
-    testSequence: gpii.tests.resetDefaultSettings.testSequenceWithEnvReport
-}];
-
 gpii.tests.resetDefaultSettings.buildTestDefs = function (testCases, config) {
     return fluid.transform(testCases, function (oneTestCase) {
-        var gradeNamesForTest = oneTestCase.gradeNames ? oneTestCase.gradeNames : ["gpii.test.common.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"];
+        var gradeNamesForTest = oneTestCase.gradeNames ? oneTestCase.gradeNames : ["gpii.test.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"];
         var testSequence = oneTestCase.testSequence ? oneTestCase.testSequence : gpii.tests.resetDefaultSettings.testSequence;
         var testCaseOptions = fluid.censorKeys(oneTestCase, ["gradeNames", "defaultSettings", "testSequence"]);
         return fluid.extend(true, {
@@ -153,8 +96,10 @@ gpii.tests.resetDefaultSettings.buildTestDefs = function (testCases, config) {
             config: config,
             "distributeOptions": {
                 "acceptance.defaultSettings": {
-                    "record": oneTestCase.defaultSettings,
-                    "target": "{that gpii.flowManager.local}.options.defaultSettings"
+                    "record": {
+                        args: oneTestCase.defaultSettings
+                    },
+                    "target": "{that defaultSettingsLoader}.options.invokers.get"
                 }
             }
         }, testCaseOptions, testSequence);

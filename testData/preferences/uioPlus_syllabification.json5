@@ -5,12 +5,13 @@
 // While the Syllabification preference is set, there is currently no adjuster or enactor that supports this preference. No change will be reflected in UIO+ panel or the site.
 {
     "flat": {
+        "name": "UIO+ Syllabification",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/common/captions/enabled": false,
-                    "http://registry.gpii.net/common/characterSpace": 0,
+                    "http://registry.gpii.net/common/characterSpace": 1,
                     "http://registry.gpii.net/common/fontSize": 12,
                     "http://registry.gpii.net/common/highContrast/enabled": false,
                     "http://registry.gpii.net/common/highlightColor": "default",
