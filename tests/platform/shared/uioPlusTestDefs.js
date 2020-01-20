@@ -29,7 +29,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": false,
                             "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
@@ -58,7 +57,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": false,
                             "characterSpace": 2,
                             "contrastTheme": "wb",
                             "fontSize": 1,
@@ -87,7 +85,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": false,
                             "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 2,
@@ -116,7 +113,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": false,
                             "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
@@ -145,7 +141,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": false,
                             "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
@@ -174,7 +169,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": false,
                             "characterSpace": 2.2,
                             "contrastTheme": "default",
                             "fontSize": 1,
@@ -203,7 +197,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": false,
                             "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
@@ -232,7 +225,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": false,
                             "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
@@ -261,7 +253,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": false,
                             "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
@@ -290,7 +281,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": false,
                             "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
@@ -319,7 +309,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": false,
                             "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
@@ -341,35 +330,6 @@ gpii.tests.uioPlus.testDefs = [
         }
     },
     {
-        name: "Acceptance test for captions transformation for UIO+",
-        gpiiKey: "uioPlus_captions",
-        settingsHandlers: {
-            "gpii.settingsHandlers.webSockets": {
-                "data": [
-                    {
-                        "settings": {
-                            "captionsEnabled": true,
-                            "characterSpace": 2,
-                            "contrastTheme": "default",
-                            "fontSize": 1,
-                            "inputsLargerEnabled": false,
-                            "lineSpace": 1,
-                            "selectionTheme": "default",
-                            "selfVoicingEnabled": false,
-                            "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false,
-                            "tableOfContentsEnabled": false,
-                            "wordSpace": 1
-                        },
-                        "options": {
-                            "path": "net.gpii.uioPlus"
-                        }
-                    }
-                ]
-            }
-        }
-    },
-    {
         name: "Acceptance test for word space transformation for UIO+",
         gpiiKey: "uioPlus_word_space",
         settingsHandlers: {
@@ -377,7 +337,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": false,
                             "characterSpace": 2,
                             "contrastTheme": "default",
                             "fontSize": 1,
@@ -406,7 +365,6 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "captionsEnabled": true,
                             "characterSpace": 2,
                             "contrastTheme": "yb",
                             "fontSize": 1.3,

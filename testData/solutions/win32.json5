@@ -12424,14 +12424,6 @@
                     "path": "net.gpii.uioPlus"
                 },
                 "supportedSettings": {
-                    "captionsEnabled": {
-                        "schema": {
-                            "title": "Captions",
-                            "description": "Request videos to display captions.",
-                            "type": "boolean",
-                            "default": false
-                        }
-                    },
                     "characterSpace": {
                         "schema": {
                             "title": "Character Space",
@@ -12563,7 +12555,6 @@
                     }
                 },
                 "capabilitiesTransformations": {
-                    "captionsEnabled": "http://registry\\.gpii\\.net/common/captions/enabled",
                     "characterSpace": {
                         "transform": {
                             "type": "fluid.transforms.round",
