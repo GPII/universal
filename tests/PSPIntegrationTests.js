@@ -30,9 +30,20 @@ gpii.tests.pspIntegration.buildTestDefs = function (testDefs) {
             config: {
                 configName: "gpii.tests.acceptance.pspIntegration.config",
                 configPath: "%gpii-universal/tests/configs"
+            },
+            distributeOptions: {
+                "acceptance.defaultSettings": {
+                    "record": {
+                        args: testDef.defaultSettings
+                    },
+                    "target": "{that defaultSettingsLoader}.options.invokers.get"
+                }
             }
         }, testDef);
     });
 };
-var builtTestDefs = gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.testDefs);
-gpii.test.runCouchTestDefs(builtTestDefs);
+var builtApplySettingsTestDefs = gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.applyPrefsTestDefs);
+gpii.test.runCouchTestDefs(builtApplySettingsTestDefs);
+
+var builtReadSettingsTestDefs = gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.readPrefsTestDefs);
+gpii.test.runCouchTestDefs(builtReadSettingsTestDefs);
