@@ -33,5 +33,19 @@
                 "map": "function(doc) {emit(doc.schemaVersion, doc); }"
             }
         }
+    },
+    {
+        "_id": "_design/lookup",
+        "views": {
+            "byUsernameOrEmail": {
+                "map": "function (doc) {\n if (doc.type === 'user') { emit(doc.username, doc); \n emit(doc.email, doc); \n } \n}"
+            },
+            "byVerificationCode": {
+                "map": "function (doc) {\n if (doc.type === 'user' && doc.verification_code) { emit(doc.verification_code, doc); \n } \n}"
+            },
+            "byResetCode": {
+                "map": "function (doc) {\n if (doc.type === 'user' && doc.reset_code) { emit(doc.reset_code, doc); \n } \n}"
+            }
+        }
     }
 ]
