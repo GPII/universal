@@ -39,15 +39,22 @@ fluid.registerNamespace("gpii.tests.productionConfigTesting");
 require("../shared/DevelopmentTestDefs.js");
 require("./ProductionTestsUtils.js");
 
+gpii.tests.productionConfigTesting.validGpiiRevision = require(
+    fluid.module.resolvePath(
+        "%gpii-universal/gpii-revision.json"
+    )
+);
+
 // Flowmanager tests for:
 // /user/%gpiiKey/login and /user/%gpiiKey/logout (as defined in gpii.tests.development.testDefs),
 // /health,
 // /ready,
+// /revision
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         name: "Flow Manager production tests -- status, login, and logout",
         config: gpii.tests.productionConfigTesting.config,
-        expect: 6,
+        expect: 8,
         components: {
             healthRequest: {
                 type: "gpii.tests.productionConfigTesting.cloudStatusRequest",
@@ -61,6 +68,13 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                 options: {
                     path: "/ready",
                     expectedPayload: {"isReady": true}
+                }
+            },
+            revisionRequest: {
+                type:  "gpii.tests.productionConfigTesting.cloudStatusRequest",
+                options: {
+                    path: "/revision",
+                    expectedPayload: gpii.tests.productionConfigTesting.validGpiiRevision
                 }
             }
         },
@@ -82,6 +96,11 @@ fluid.defaults("gpii.tests.productionConfigTesting.cloudStatus", {
             func: "{readyRequest}.sendToCBFM"
         }, {
             event: "{readyRequest}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testResponse"
+        }, {
+            func: "{revisionRequest}.sendToCBFM"
+        }, {
+            event: "{revisionRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testResponse"
         },
         { funcName: "fluid.log", args: ["Cloud status tests end"]}

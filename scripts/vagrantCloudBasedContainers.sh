@@ -27,6 +27,11 @@ fi
 
 UNIVERSAL_IMAGE=vagrant-universal
 
+# The following SHA256 is not the actual latest revision that is used in
+# in production.  This is here for the tests, and written to the file
+# gpii-revision.json at the root universal folder.  See the Dockerfile.
+GITFULLREV="$(git rev-parse HEAD)"
+
 COUCHDB_IMAGE=couchdb
 COUCHDB_PORT=5984
 COUCHDB_HEALTHCHECK_DELAY=2
@@ -73,7 +78,7 @@ if [ "$NO_REBUILD" != "true" ] ; then
     docker rmi -f $UNIVERSAL_IMAGE 2>/dev/null || true
 
     # Build image
-    docker build -t $UNIVERSAL_IMAGE .
+    docker build --build-arg gitFullRev="$GITFULLREV" -t $UNIVERSAL_IMAGE .
 fi
 
 # Start the CouchDB container
