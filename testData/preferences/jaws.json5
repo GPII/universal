@@ -145,7 +145,7 @@
                         "Touch.TapTranslationMax": 99
                     }
                 },
-                "http://registry.gpii.net/applications/com.freedomscientific.jaws/enabled": true
+                // "http://registry.gpii.net/applications/com.freedomscientific.jaws/enabled": true
             }
         }
     }
