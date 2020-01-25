@@ -9,8 +9,8 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
-            "http://registry\\.gpii\\.net/applications/com.\\.freedomscientific\\.jaws"
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
+            // "http://registry\\.gpii\\.net/applications/com\\.freedomscientific\\.jaws"
         ],
         "settingsHandlers": {
             "configuration1": {
@@ -1674,7 +1674,7 @@
                                 "Speak Grammar /Proofing Error Count",
                                 "Speak Spelling Error Count and Speak Grammar /Proofing Error Count"
                             ],
-                            "default": 2
+                            "default": 0
                         }
                     },
                     "RichEdit and Edit Control Options.SelectionContextFlags": {
@@ -1691,7 +1691,7 @@
                                 "Say Misspelled",
                                 "Grammar and Advanced Proofing"
                             ],
-                            "default": 2
+                            "default": 0
                         }
                     },
 
@@ -2075,6 +2075,30 @@
                             "description": "Whether or not to intercept CreateDIBSection Note that this value is only read once per JAWS session at startup thus changing this value while JAWS is running has no effect.",
                             "type": "string",
                             "enum": [
+                                "Attributes and Colors",
+                                "Classic",
+                                "Classic (Attributes and Font info)",
+                                "Classic (Attributes)",
+                                "Classic (Attributes, Font and Color)",
+                                "Classic With Quotes",
+                                "Colors",
+                                "Indent (tab is 0.125 inches Script Manager)",
+                                "Indent (Tab is Eight Spaces)",
+                                "Indent (Tab is Four Spaces)",
+                                "Indent (Tab is Two Spaces)",
+                                "Kindle",
+                                "ProofReading (Attributes and Font Info)",
+                                "ProofReading (Attributes)",
+                                "ProofReading (Attributes, Font Info and color)",
+                                "SayAll Text Only",
+                                "SayAll Text With Sounds",
+                                "Wsual Studio .Net",
+                                "Visual Studio .Net (Colors)",
+                                "Wsual Studio .Net (Indent)",
+                                "Web RentACrowd",
+                                "Word Classic"
+                            ],
+                            "enumLabels": [
                                 "Attributes and Colors",
                                 "Classic",
                                 "Classic (Attributes and Font info)",
@@ -2711,6 +2735,12 @@
                                 1500,
                                 2000
                             ],
+                            "enumLabels": [
+                                "500",
+                                "1000",
+                                "1500",
+                                "2000"
+                            ],
                             "default": 1000
                         }
                     },
@@ -3169,7 +3199,7 @@
                             "title": "Structure Mode Inclusion Flags",
                             "description": "Store in a bitmask the elements to be included in 'Braille Structure Mode'.",
                             "type": "integer",
-                            "default": "8191"
+                            "default": 8191
                         },
                         "label": "bitmask"
                     },
@@ -4637,22 +4667,6 @@
                             "title": "Visual Tracking Color",
                             "description": "The colour to use when highlighting items selected using the touch cursor.",
                             "enum": [
-                                "Light Blue",
-                                "Deep Sky Blue",
-                                "Blue",
-                                "Dark Blue",
-                                "Purple",
-                                "Fuchsia",
-                                "Red",
-                                "Orange",
-                                "Yellow",
-                                "Lime Green",
-                                "Green",
-                                "Olive Drab",
-                                "Saddle Brown",
-                                "Burly Wood"
-                            ],
-                            "enumLabels": [
                                 11393254,
                                 49151,
                                 255,
@@ -4667,6 +4681,22 @@
                                 7048739,
                                 9127187,
                                 14596231
+                            ],
+                            "enumLabels": [
+                                "Light Blue",
+                                "Deep Sky Blue",
+                                "Blue",
+                                "Dark Blue",
+                                "Purple",
+                                "Fuchsia",
+                                "Red",
+                                "Orange",
+                                "Yellow",
+                                "Lime Green",
+                                "Green",
+                                "Olive Drab",
+                                "Saddle Brown",
+                                "Burly Wood"
                             ],
                             "default": 1293915
                         }
@@ -5685,6 +5715,12 @@
                                 "SAPI 5X",
                                 "SAPI 5X 64"
                             ],
+                            "enumLabels": [
+                                "eloq",
+                                "MSMobile",
+                                "SAPI 5X",
+                                "SAPI 5X 64"
+                            ],
                             "default": "eloq"
                         }
                     },
@@ -5693,6 +5729,18 @@
                             "title": "Primary language",
                             "description": "The primary language used for the voice profile.",
                             "enum": [
+                                "DEU",
+                                "ENG",
+                                "ENU",
+                                "ESM",
+                                "ESN",
+                                "FIN",
+                                "FRA",
+                                "FRC",
+                                "ITA",
+                                "PTB"
+                            ],
+                            "enumLabels": [
                                 "DEU",
                                 "ENG",
                                 "ENU",
@@ -5773,17 +5821,30 @@
                             "title": "Synth Language",
                             "description": "The language to use for all announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
-                            ]
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
+                            ],
+                            "default": "0x409"
                         }
                     },
                     "DEU-Global.UppercasePitchDelta": {
@@ -5811,6 +5872,23 @@
                             "title": "Global voice name",
                             "description": "The voice name to use by default.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hedda",
+                                "Microsoft Katja",
+                                "Microsoft Stefan",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hedda Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -5885,17 +5963,30 @@
                             "title": "Synth Language",
                             "description": "The language to use for all announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
-                            ]
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
+                            ],
+                            "default": "0x409"
                         }
                     },
                     "ENU-Global.UppercasePitchDelta": {
@@ -5923,6 +6014,24 @@
                             "title": "Global voice name",
                             "description": "The voice name to use by default.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // If synth is SAPI 5X 64
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -5998,17 +6107,30 @@
                             "title": "Synth Language",
                             "description": "The language to use for all announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
-                            ]
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
+                            ],
+                            "default": "0x409"
                         }
                     },
                     "ENG-Global.UppercasePitchDelta": {
@@ -6036,6 +6158,24 @@
                             "title": "Global voice name",
                             "description": "The voice name to use by default.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // If synth is SAPI 5X 64
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -6111,17 +6251,30 @@
                             "title": "Synth Language",
                             "description": "The language to use for all announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
-                            ]
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
+                            ],
+                            "default": "0x409"
                         }
                     },
                     "ESM-Global.UppercasePitchDelta": {
@@ -6172,7 +6325,33 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop"
+                                // - "Microsoft Helena Desktop"
+                            ],
+                            "enumLabels": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                // Spain
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // Mexican
+                                "Microsoft Raul",
+                                "Microsoft Sabina",
+                                // If synth is SAPI 5X
+                                // Spain
+                                "Microsoft Helena Desktop",
+                                // Mexican
+                                "Microsoft Sabina Desktop",
+                                // If synth is SAPI 5X 64
+                                // - "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -6232,17 +6411,30 @@
                             "title": "Synth Language",
                             "description": "The language to use for all announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
-                            ]
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
+                            ],
+                            "default": "0x409"
                         }
                     },
                     "ESN-Global.UppercasePitchDelta": {
@@ -6293,7 +6485,33 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop"
+                                // "Microsoft Helena Desktop"
+                            ],
+                            "enumLabels": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                // Spain
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // Mexican
+                                "Microsoft Raul",
+                                "Microsoft Sabina",
+                                // If synth is SAPI 5X
+                                // Spain
+                                "Microsoft Helena Desktop",
+                                // Mexican
+                                "Microsoft Sabina Desktop",
+                                // If synth is SAPI 5X 64
+                                // "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -6353,17 +6571,30 @@
                             "title": "Synth Language",
                             "description": "The language to use for all announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
-                            ]
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
+                            ],
+                            "default": "0x409"
                         }
                     },
                     "FIN-Global.UppercasePitchDelta": {
@@ -6391,6 +6622,17 @@
                             "title": "Global voice name",
                             "description": "The voice name to use by default.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -6459,17 +6701,30 @@
                             "title": "Synth Language",
                             "description": "The language to use for all announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
-                            ]
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
+                            ],
+                            "default": "0x409"
                         }
                     },
                     "FRA-Global.UppercasePitchDelta": {
@@ -6497,6 +6752,23 @@
                             "title": "Global voice name",
                             "description": "The voice name to use by default.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hortense",
+                                "Microsoft Julie",
+                                "Microsoft Paul",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hortense Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -6571,17 +6843,30 @@
                             "title": "Synth Language",
                             "description": "The language to use for all announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
-                            ]
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
+                            ],
+                            "default": "0x409"
                         }
                     },
                     "FRC-Global.UppercasePitchDelta": {
@@ -6609,6 +6894,23 @@
                             "title": "Global voice name",
                             "description": "The voice name to use by default.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hortense",
+                                "Microsoft Julie",
+                                "Microsoft Paul",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hortense Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -6671,16 +6973,28 @@
                             "title": "JAWS Cursor Language",
                             "description": "The language to use for announcements related to the JAWS cursor.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -6710,6 +7024,22 @@
                             "title": "Global voice name",
                             "description": "The voice name to use by default.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Cosmino",
+                                "Microsoft Elsa",
+                                // If synth is SAPI
+                                "Microsoft Elsa Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -6783,17 +7113,30 @@
                             "title": "Synth Language",
                             "description": "The language to use for all announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
-                            ]
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
+                            ],
+                            "default": "0x409"
                         }
                     },
                     "PTB-Global.UppercasePitchDelta": {
@@ -6821,6 +7164,22 @@
                             "title": "Global voice name",
                             "description": "The voice name to use by default.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Daniel",
+                                "Microsoft Maria",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Maria Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -6884,16 +7243,28 @@
                             "title": "JAWS Cursor Language",
                             "description": "The language to use for announcements related to the JAWS cursor.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -6923,6 +7294,23 @@
                             "title": "Global voice name",
                             "description": "The voice name to use by default.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hedda",
+                                "Microsoft Katja",
+                                "Microsoft Stefan",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hedda Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -6985,16 +7373,28 @@
                             "title": "JAWS Cursor Language",
                             "description": "The language to use for announcements related to the JAWS cursor.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -7024,6 +7424,24 @@
                             "title": "JAWS cursor voice name",
                             "description": "The voice name to use for JAWS cursor.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // If synth is SAPI 5X 64
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -7087,16 +7505,28 @@
                             "title": "JAWS Cursor Language",
                             "description": "The language to use for announcements related to the JAWS cursor.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -7126,6 +7556,24 @@
                             "title": "JAWS cursor voice name",
                             "description": "The voice name to use for JAWS cursor.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // If synth is SAPI 5X 64
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -7189,16 +7637,28 @@
                             "title": "JAWS Cursor Language",
                             "description": "The language to use for announcements related to the JAWS cursor.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -7251,7 +7711,33 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop"
+                                // - "Microsoft Helena Desktop"
+                            ],
+                            "enumLabels": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                // Spain
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // Mexican
+                                "Microsoft Raul",
+                                "Microsoft Sabina",
+                                // If synth is SAPI 5X
+                                // Spain
+                                "Microsoft Helena Desktop",
+                                // Mexican
+                                "Microsoft Sabina Desktop",
+                                // If synth is SAPI 5X 64
+                                // - "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -7299,16 +7785,28 @@
                             "title": "JAWS Cursor Language",
                             "description": "The language to use for announcements related to the JAWS cursor.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -7361,7 +7859,33 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop"
+                                // - "Microsoft Helena Desktop"
+                            ],
+                            "enumLabels": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                // Spain
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // Mexican
+                                "Microsoft Raul",
+                                "Microsoft Sabina",
+                                // If synth is SAPI 5X
+                                // Spain
+                                "Microsoft Helena Desktop",
+                                // Mexican
+                                "Microsoft Sabina Desktop",
+                                // If synth is SAPI 5X 64
+                                // - "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -7409,16 +7933,28 @@
                             "title": "JAWS Cursor Language",
                             "description": "The language to use for announcements related to the JAWS cursor.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -7448,6 +7984,17 @@
                             "title": "JAWS cursor voice name",
                             "description": "The voice name to use for JAWS cursor.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -7504,16 +8051,28 @@
                             "title": "JAWS Cursor Language",
                             "description": "The language to use for announcements related to the JAWS cursor.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -7543,6 +8102,23 @@
                             "title": "JAWS cursor voice name",
                             "description": "The voice name to use for JAWS cursor.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hortense",
+                                "Microsoft Julie",
+                                "Microsoft Paul",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hortense Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -7605,16 +8181,28 @@
                             "title": "JAWS Cursor Language",
                             "description": "The language to use for announcements related to the JAWS cursor.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -7644,6 +8232,23 @@
                             "title": "JAWS cursor voice name",
                             "description": "The voice name to use for JAWS cursor.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hortense",
+                                "Microsoft Julie",
+                                "Microsoft Paul",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hortense Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -7706,16 +8311,28 @@
                             "title": "JAWS Cursor Language",
                             "description": "The language to use for announcements related to the JAWS cursor.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -7745,6 +8362,22 @@
                             "title": "JAWS cursor voice name",
                             "description": "The voice name to use for JAWS cursor.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Cosmino",
+                                "Microsoft Elsa",
+                                // If synth is SAPI
+                                "Microsoft Elsa Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -7806,16 +8439,28 @@
                             "title": "JAWS Cursor Language",
                             "description": "The language to use for announcements related to the JAWS cursor.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -7845,6 +8490,22 @@
                             "title": "JAWS cursor voice name",
                             "description": "The voice name to use for JAWS cursor.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Daniel",
+                                "Microsoft Maria",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Maria Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -7908,16 +8569,28 @@
                             "title": "Keyboard language",
                             "description": "The language to use for announcements related to the keyboard.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -7947,6 +8620,23 @@
                             "title": "Keyboard voice name",
                             "description": "The voice name used for keyboard announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hedda",
+                                "Microsoft Katja",
+                                "Microsoft Stefan",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hedda Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -8009,16 +8699,28 @@
                             "title": "Keyboard language",
                             "description": "The language to use for announcements related to the keyboard.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -8048,6 +8750,24 @@
                             "title": "Keyboard voice name",
                             "description": "The voice name used for keyboard announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // If synth is SAPI 5X 64
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -8111,16 +8831,28 @@
                             "title": "Keyboard language",
                             "description": "The language to use for announcements related to the keyboard.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -8150,6 +8882,24 @@
                             "title": "Keyboard voice name",
                             "description": "The voice name used for keyboard announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // If synth is SAPI 5X 64
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -8213,16 +8963,28 @@
                             "title": "Keyboard language",
                             "description": "The language to use for announcements related to the keyboard.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -8275,7 +9037,33 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop"
+                                // - "Microsoft Helena Desktop"
+                            ],
+                            "enumLabels": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                // Spain
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // Mexican
+                                "Microsoft Raul",
+                                "Microsoft Sabina",
+                                // If synth is SAPI 5X
+                                // Spain
+                                "Microsoft Helena Desktop",
+                                // Mexican
+                                "Microsoft Sabina Desktop",
+                                // If synth is SAPI 5X 64
+                                //- "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -8323,16 +9111,28 @@
                             "title": "Keyboard language",
                             "description": "The language to use for announcements related to the keyboard.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -8385,7 +9185,33 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop"
+                                // - "Microsoft Helena Desktop"
+                            ],
+                            "enumLabels": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                // Spain
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // Mexican
+                                "Microsoft Raul",
+                                "Microsoft Sabina",
+                                // If synth is SAPI 5X
+                                // Spain
+                                "Microsoft Helena Desktop",
+                                // Mexican
+                                "Microsoft Sabina Desktop",
+                                // If synth is SAPI 5X 64
+                                // - "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -8433,16 +9259,28 @@
                             "title": "Keyboard language",
                             "description": "The language to use for announcements related to the keyboard.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -8472,6 +9310,17 @@
                             "title": "Keyboard voice name",
                             "description": "The voice name used for keyboard announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -8528,16 +9377,28 @@
                             "title": "Keyboard language",
                             "description": "The language to use for announcements related to the keyboard.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -8567,6 +9428,23 @@
                             "title": "Keyboard voice name",
                             "description": "The voice name used for keyboard announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hortense",
+                                "Microsoft Julie",
+                                "Microsoft Paul",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hortense Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -8629,16 +9507,28 @@
                             "title": "Keyboard language",
                             "description": "The language to use for announcements related to the keyboard.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -8668,6 +9558,23 @@
                             "title": "Keyboard voice name",
                             "description": "The voice name used for keyboard announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hortense",
+                                "Microsoft Julie",
+                                "Microsoft Paul",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hortense Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -8730,16 +9637,28 @@
                             "title": "JAWS Cursor Language",
                             "description": "The language to use for announcements related to the JAWS cursor.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -8769,6 +9688,22 @@
                             "title": "Keyboard voice name",
                             "description": "The voice name used for keyboard announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Cosmino",
+                                "Microsoft Elsa",
+                                // If synth is SAPI
+                                "Microsoft Elsa Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -8830,16 +9765,28 @@
                             "title": "Keyboard language",
                             "description": "The language to use for announcements related to the keyboard.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -8869,6 +9816,22 @@
                             "title": "Keyboard voice name",
                             "description": "The voice name used for keyboard announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Daniel",
+                                "Microsoft Maria",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Maria Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -8934,16 +9897,28 @@
                             "title": "MenuAndDialog language",
                             "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -8973,6 +9948,23 @@
                             "title": "MenuAndDialog voice name",
                             "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hedda",
+                                "Microsoft Katja",
+                                "Microsoft Stefan",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hedda Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -9035,16 +10027,28 @@
                             "title": "MenuAndDialog language",
                             "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -9074,6 +10078,24 @@
                             "title": "MenuAndDialog voice name",
                             "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // If synth is SAPI 5X 64
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -9137,16 +10159,28 @@
                             "title": "MenuAndDialog language",
                             "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -9176,6 +10210,24 @@
                             "title": "MenuAndDialog voice name",
                             "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // If synth is SAPI 5X 64
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -9239,16 +10291,28 @@
                             "title": "MenuAndDialog language",
                             "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -9301,7 +10365,33 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop"
+                                // - "Microsoft Helena Desktop"
+                            ],
+                            "enumLabels": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                // Spain
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // Mexican
+                                "Microsoft Raul",
+                                "Microsoft Sabina",
+                                // If synth is SAPI 5X
+                                // Spain
+                                "Microsoft Helena Desktop",
+                                // Mexican
+                                "Microsoft Sabina Desktop",
+                                // If synth is SAPI 5X 64
+                                // - "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -9349,16 +10439,28 @@
                             "title": "MenuAndDialog language",
                             "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -9411,7 +10513,33 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop"
+                                // - "Microsoft Helena Desktop"
+                            ],
+                            "enumLabels": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                // Spain
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // Mexican
+                                "Microsoft Raul",
+                                "Microsoft Sabina",
+                                // If synth is SAPI 5X
+                                // Spain
+                                "Microsoft Helena Desktop",
+                                // Mexican
+                                "Microsoft Sabina Desktop",
+                                // If synth is SAPI 5X 64
+                                // - "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -9459,16 +10587,28 @@
                             "title": "MenuAndDialog language",
                             "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -9498,6 +10638,17 @@
                             "title": "MenuAndDialog voice name",
                             "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -9554,16 +10705,28 @@
                             "title": "MenuAndDialog language",
                             "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -9593,6 +10756,23 @@
                             "title": "MenuAndDialog voice name",
                             "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hortense",
+                                "Microsoft Julie",
+                                "Microsoft Paul",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hortense Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -9655,16 +10835,28 @@
                             "title": "MenuAndDialog language",
                             "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -9694,6 +10886,23 @@
                             "title": "MenuAndDialog voice name",
                             "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hortense",
+                                "Microsoft Julie",
+                                "Microsoft Paul",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hortense Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -9756,16 +10965,28 @@
                             "title": "MenuAndDialog language",
                             "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -9795,6 +11016,22 @@
                             "title": "MenuAndDialog voice name",
                             "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Daniel",
+                                "Microsoft Maria",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Maria Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -9860,16 +11097,28 @@
                             "title": "Message language",
                             "description": "The language to use for message announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -9899,6 +11148,23 @@
                             "title": "Message voice name",
                             "description": "The voice name for message announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hedda",
+                                "Microsoft Katja",
+                                "Microsoft Stefan",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hedda Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -9961,16 +11227,28 @@
                             "title": "Message language",
                             "description": "The language to use for message announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -10000,6 +11278,24 @@
                             "title": "Message voice name",
                             "description": "The voice name for message announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // If synth is SAPI 5X 64
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -10063,16 +11359,28 @@
                             "title": "Message language",
                             "description": "The language to use for message announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -10102,6 +11410,24 @@
                             "title": "Message voice name",
                             "description": "The voice name for message announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // If synth is SAPI 5X 64
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -10165,16 +11491,28 @@
                             "title": "Message language",
                             "description": "The language to use for message announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -10227,7 +11565,33 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop"
+                                // - "Microsoft Helena Desktop"
+                            ],
+                            "enumLabels": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                // Spain
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // Mexican
+                                "Microsoft Raul",
+                                "Microsoft Sabina",
+                                // If synth is SAPI 5X
+                                // Spain
+                                "Microsoft Helena Desktop",
+                                // Mexican
+                                "Microsoft Sabina Desktop",
+                                // If synth is SAPI 5X 64
+                                // - "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -10275,16 +11639,28 @@
                             "title": "Message language",
                             "description": "The language to use for message announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -10337,7 +11713,33 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop"
+                                // - "Microsoft Helena Desktop"
+                            ],
+                            "enumLabels": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                // Spain
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // Mexican
+                                "Microsoft Raul",
+                                "Microsoft Sabina",
+                                // If synth is SAPI 5X
+                                // Spain
+                                "Microsoft Helena Desktop",
+                                // Mexican
+                                "Microsoft Sabina Desktop",
+                                // If synth is SAPI 5X 64
+                                // - "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -10385,16 +11787,28 @@
                             "title": "Message language",
                             "description": "The language to use for message announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -10424,6 +11838,17 @@
                             "title": "Message voice name",
                             "description": "The voice name for message announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -10480,16 +11905,28 @@
                             "title": "Message language",
                             "description": "The language to use for message announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -10519,6 +11956,23 @@
                             "title": "Message voice name",
                             "description": "The voice name for message announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hortense",
+                                "Microsoft Julie",
+                                "Microsoft Paul",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hortense Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -10581,16 +12035,28 @@
                             "title": "Message language",
                             "description": "The language to use for message announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -10620,6 +12086,23 @@
                             "title": "Message voice name",
                             "description": "The voice name for message announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hortense",
+                                "Microsoft Julie",
+                                "Microsoft Paul",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hortense Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -10682,16 +12165,28 @@
                             "title": "Message language",
                             "description": "The language to use for message announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -10721,6 +12216,22 @@
                             "title": "Message voice name",
                             "description": "The voice name for message announcements.",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Daniel",
+                                "Microsoft Maria",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Maria Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -10786,16 +12297,28 @@
                             "title": "PCCursor language",
                             "description": "The language to use for PCCursor announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -10825,6 +12348,23 @@
                             "title": "PCCursor voice name",
                             "description": "The voice for message announcements..",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hedda",
+                                "Microsoft Katja",
+                                "Microsoft Stefan",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hedda Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -10887,16 +12427,28 @@
                             "title": "PCCursor language",
                             "description": "The language to use for PCCursor announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -10926,6 +12478,24 @@
                             "title": "PCCursor voice name",
                             "description": "The voice for message announcements..",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // If synth is SAPI 5X 64
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -10989,16 +12559,28 @@
                             "title": "PCCursor language",
                             "description": "The language to use for PCCursor announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -11028,6 +12610,24 @@
                             "title": "PCCursor voice name",
                             "description": "The voice for message announcements..",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // If synth is SAPI 5X 64
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -11091,16 +12691,28 @@
                             "title": "PCCursor language",
                             "description": "The language to use for PCCursor announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -11153,7 +12765,33 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop"
+                                // - "Microsoft Helena Desktop"
+                            ],
+                            "enumLabels": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                // Spain
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // Mexican
+                                "Microsoft Raul",
+                                "Microsoft Sabina",
+                                // If synth is SAPI 5X
+                                // Spain
+                                "Microsoft Helena Desktop",
+                                // Mexican
+                                "Microsoft Sabina Desktop",
+                                // If synth is SAPI 5X 64
+                                // - "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -11201,16 +12839,28 @@
                             "title": "PCCursor language",
                             "description": "The language to use for PCCursor announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -11263,7 +12913,33 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop"
+                                // - "Microsoft Helena Desktop"
+                            ],
+                            "enumLabels": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                // Spain
+                                "Microsoft David",
+                                "Microsoft Mark",
+                                "Microsoft Zira",
+                                // Mexican
+                                "Microsoft Raul",
+                                "Microsoft Sabina",
+                                // If synth is SAPI 5X
+                                // Spain
+                                "Microsoft Helena Desktop",
+                                // Mexican
+                                "Microsoft Sabina Desktop",
+                                // If synth is SAPI 5X 64
+                                // - "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -11311,16 +12987,28 @@
                             "title": "PCCursor language",
                             "description": "The language to use for PCCursor announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -11350,6 +13038,17 @@
                             "title": "PCCursor voice name",
                             "description": "The voice for message announcements..",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -11406,16 +13105,28 @@
                             "title": "PCCursor language",
                             "description": "The language to use for PCCursor announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -11445,6 +13156,23 @@
                             "title": "PCCursor voice name",
                             "description": "The voice for message announcements..",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hortense",
+                                "Microsoft Julie",
+                                "Microsoft Paul",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hortense Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -11507,16 +13235,28 @@
                             "title": "PCCursor language",
                             "description": "The language to use for PCCursor announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -11546,6 +13286,23 @@
                             "title": "PCCursor voice name",
                             "description": "The voice for message announcements..",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Hortense",
+                                "Microsoft Julie",
+                                "Microsoft Paul",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Hortense Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
@@ -11608,16 +13365,28 @@
                             "title": "PCCursor language",
                             "description": "The language to use for PCCursor announcements.",
                             "enum": [
-                                "0x409", // English - US
-                                "0x407", // German
-                                "0x40b", // Finish
-                                "0x40c", // French - France
-                                "0x410", // Italian
-                                "0x416", // Portuguese - Brazil
-                                "0x809", // English - United Kingdom
-                                "0x80a", // Spanish - Mexico
-                                "0xc0a", // Spanish - Spain
-                                "0xc0c"  // French - Canada
+                                "0x409",
+                                "0x407",
+                                "0x40b",
+                                "0x40c",
+                                "0x410",
+                                "0x416",
+                                "0x809",
+                                "0x80a",
+                                "0xc0a",
+                                "0xc0c"
+                            ],
+                            "enumLabels": [
+                                "English - US",
+                                "German",
+                                "Finish",
+                                "French - France",
+                                "Italian",
+                                "Portuguese - Brazil",
+                                "English - United Kingdom",
+                                "Spanish - Mexico",
+                                "Spanish - Spain",
+                                "French - Canada",
                             ],
                             "default": "0x409"
                         }
@@ -11647,6 +13416,22 @@
                             "title": "PCCursor voice name",
                             "description": "The voice for message announcements..",
                             "enum": [
+                                // If synth is eloq
+                                "Reed",
+                                "Shelly",
+                                "Bobby",
+                                "Rocko",
+                                "Glen",
+                                "Sandy",
+                                "Grandma",
+                                "Grandpa",
+                                // If synth is mmobile
+                                "Microsoft Daniel",
+                                "Microsoft Maria",
+                                // If synth is SAPI 5X 64
+                                "Microsoft Maria Desktop"
+                            ],
+                            "enumLabels": [
                                 // If synth is eloq
                                 "Reed",
                                 "Shelly",
