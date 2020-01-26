@@ -30,14 +30,14 @@
                             "enum": [
                                 "0|0|0|Tutor",
                                 "1|1|1|Tutor",
-                                "2|2|2|Tutor",
+                                "2|2|2|Tutor"
                             ],
                             "enumLabels": [
                                 "Turn off menu and control help",
                                 "Announce menu and control help",
                                 "Announce custom messages only"
                             ],
-                            "default": "1|1|1|Tutor",
+                            "default": "1|1|1|Tutor"
                         }
                     },
 
@@ -51,7 +51,7 @@
                                 "0|0|0|Access Key",
                                 "1|1|1|Access Key",
                                 "2|2|2|Access Key",
-                                "3|3|3|Access Key",
+                                "3|3|3|Access Key"
                             ],
                             "enumLabels": [
                                 "Off",
@@ -59,7 +59,7 @@
                                 "Speak menus only",
                                 "Speak dialogs only"
                             ],
-                            "default": "1|1|1|Access Key",
+                            "default": "1|1|1|Access Key"
                         }
                     },
 
@@ -201,11 +201,1037 @@
                         }
                     },
 
+                    // ----------------------- User ---------------------------
+
+                    "Options.ProgressBarUpdateInterval": {
+                        "schema": {
+                            "title": "Progress Bar Update Interval",
+                            "description": "How often to announce progress bar updates, in milliseconds. Set to 0 to disable update announcements, and 1 to announce all.",
+                            "type": "integer",
+                            "default": 5000,
+                            "minimum": 0
+                        }
+                    },
+                    "Options.TypingEcho": {
+                        "schema": {
+                            "title": "Typing echo",
+                            "description": "How to announce typed words and/or characters.",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "Characters",
+                                "Words",
+                                "Characters and Words"
+                            ]
+                        }
+                    },
+                    "Options.ScreenEcho": {
+                        "schema": {
+                            "title": "Screen Echo",
+                            "description": "Specifies how much text is read when information on the screen changes.",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Echo No Text",
+                                "Echo Highlighted Text",
+                                "Echo All Text"
+                            ]
+                        }
+                    },
+
+                    "Options.TypingInterrupt": {
+                        "schema": {
+                            "title": "Typing Interrupt",
+                            "description": "Whether to stop speaking when the user types.",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ]
+                        }
+                    },
+                    // TODO: Doesn't seem to work.
+                    "Options.InsertKeyMode": {
+                        "schema": {
+                            "title": "Insert Key Mode",
+                            "description": "The operating mode of the insert key.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "JAWS",
+                                "Sticky"
+                            ]
+                        }
+                    },
+                    // NOTE: "Options.bVirtViewer" Duplicated from Basic Section
+                    "Options.KeyRepeat": {
+                        "schema": {
+                            "title": "Key Repeat",
+                            "description": "Whether or not to allow repeated keys.  Repeated keys are allowed by default.",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ]
+                        }
+                    },
+                    "Options.LowerOtherAppsVolumeWhileJAWSIsRunning": {
+                        "schema": {
+                            "title": "Lower Audio Volume of Programs while JAWS Speaks",
+                            "description": "Whether to lower the volume of programs other than JAWS when speaking.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    },
+
+                    // ----------------- WEB / HTML / PDF -----------------------
+
+                    // ----------- WEB / HTML / PDF - Reading -------------------
+
+                    "VirtualCursorVerbosity.VirtualCursorVerbosityLevel": {
+                        "schema": {
+                            "title": "Web Verbosity Level",
+                            "description": "Verbosity level used for reading Web pages, HTML files and PDF files.",
+                            "enum": [
+                                2,
+                                1,
+                                0
+                            ],
+                            "enumLabels": [
+                                "High",
+                                "Medium",
+                                "Low"
+                            ],
+                            "default": 0
+                        }
+                    },
+
+                    // --- WEB / HTML / PDF - Reading - Configure Web Verbosity Levels ---
+
+                    // TODO: The following settings have a string format
+                    // of type "0|0|0" where each of the number positions
+                    // states if the future is active for the different leves
+                    // of verbosity.
+                    //
+                    //   - High: "1|0|0"
+                    //   - Medium: "0|1|0"
+                    //   - Low: "0|0|1"
+
+                    "VirtualCursorVerbosity.BlockQuotation": {
+                        "schema": {
+                            "title": "Announce Block Quotation",
+                            "description": "Announce Start and End of Block Quotations.",
+                            "type": "string",
+                            "default": "1|1|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.Feed": {
+                        "schema": {
+                            "title": "Announce Feed",
+                            "description": "Announce Start and End of Feeds.",
+                            "type": "string",
+                            "default": "1|1|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.Figure": {
+                        "schema": {
+                            "title": "Announce Figure",
+                            "description": "Announce Start and End of Figures.",
+                            "type": "string",
+                            "default": "1|1|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.FlashObject": {
+                        "schema": {
+                            "title": "Announce Flash Object",
+                            "description": "Announce Start and End of Flash Objects.",
+                            "type": "string",
+                            "default": "1|0|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.Frame": {
+                        "schema": {
+                            "title": "Announce Frame",
+                            "description": "Announce Start and End of Frame.",
+                            "type": "string",
+                            "default": "1|0|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.GroupBox": {
+                        "schema": {
+                            "title": "Announce Group Box",
+                            "description": "Announce Start and End of Group Box.",
+                            "type": "string",
+                            "default": "1|1|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.List": {
+                        "schema": {
+                            "title": "Announce List",
+                            "description": "Announce Start and End of List.",
+                            "type": "string",
+                            "default": "1|1|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.Log": {
+                        "schema": {
+                            "title": "Announce Log",
+                            "description": "Announce Start and End of Log.",
+                            "type": "string",
+                            "default": "1|1|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.Note": {
+                        "schema": {
+                            "title": "Announce Note",
+                            "description": "Announce Start and End of Note.",
+                            "type": "string",
+                            "default": "1|1|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.ApplicationRegion": {
+                        "schema": {
+                            "title": "Announce Application Region",
+                            "description": "Announce Start and End of Application Region.",
+                            "type": "string",
+                            "default": "0|0|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.ArticleRegion": {
+                        "schema": {
+                            "title": "Announce Article Region",
+                            "description": "Announce Start and End of Article Region.",
+                            "type": "string",
+                            "default": "1|1|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.BannerRegion": {
+                        "schema": {
+                            "title": "Announce Banner Region",
+                            "description": "Announce Start and End of Banner Region.",
+                            "type": "string",
+                            "default": "1|0|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.ComplementaryRegion": {
+                        "schema": {
+                            "title": "Announce Complementary Region",
+                            "description": "Announce Start and End of Complementary Region.",
+                            "type": "string",
+                            "default": "1|0|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.ContentInfoRegion": {
+                        "schema": {
+                            "title": "Announce Content Info Region",
+                            "description": "Announce Start and End of Content Info.",
+                            "type": "string",
+                            "default": "1|0|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.DocumentRegion": {
+                        "schema": {
+                            "title": "Announce Article Region",
+                            "description": "Announce Start and End of Document Region.",
+                            "type": "string",
+                            "default": "0|0|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.FormRegion": {
+                        "schema": {
+                            "title": "Announce Form Regions",
+                            "description": "Announce Start and End of Form Regions.",
+                            "type": "string",
+                            "default": "1|0|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.MainRegion": {
+                        "schema": {
+                            "title": "Announce Main Region",
+                            "description": "Announce Start and End of Main Region.",
+                            "type": "string",
+                            "default": "1|1|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.NavigationRegion": {
+                        "schema": {
+                            "title": "Navigation Region",
+                            "description": "Announce Start and End of Navigation Regions.",
+                            "type": "string",
+                            "default": "1|0|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.Region": {
+                        "schema": {
+                            "title": "Announce Region",
+                            "description": "Announce Start and End of 'Regions'.",
+                            "type": "string",
+                            "default": "1|0|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.SearchRegion": {
+                        "schema": {
+                            "title": "Announce Search Regions",
+                            "description": "Announce Start and End of Search Regions.",
+                            "type": "string",
+                            "default": "1|0|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.TableOrGrid": {
+                        "schema": {
+                            "title": "Announce Table or Grids",
+                            "description": "Announce Start and End of \"Tables or Grids\".",
+                            "type": "string",
+                            "default": "1|1|1"
+                        }
+                    },
+                    "VirtualCursorVerbosity.TabPanel": {
+                        "schema": {
+                            "title": "Announce Tab Panels",
+                            "description": "Announce Start and End of Tab Panels.",
+                            "type": "string",
+                            "default": "1|1|0"
+                        }
+                    },
+                    "VirtualCursorVerbosity.Toolbar": {
+                        "schema": {
+                            "title": "Announce Toolbars",
+                            "description": "Announce Start and End of Toolbars.",
+                            "type": "string",
+                            "default": "1|1|0"
+                        }
+                    },
+
+                    // --- WEB / HTML / PDF - Reading - Custom Placemarker Page Summary ---
+
+                    "options.CustomPageSummary": {
+                        "schema": {
+                            "title": "",
+                            "description": "Announce Start and End of Toolbars.",
+                            "enum": [
+                                1,
+                                2,
+                                0
+                            ],
+                            "enumLabels": [
+                                "Speak Placemarkers On Page Load",
+                                "List Placemarkers in Results Viewer On Page Load",
+                                "Do nothing"
+                            ],
+                            "default": 0
+                        }
+                    },
+
+                    // ----------------------------------------------------------
+
+                    "HTML.SayAllOnDocumentLoad": {
+                        "schema": {
+                            "title": "Read Web Pages Automatically When Loaded",
+                            "description": "Whether to automatically read web pages when they're first loaded.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HTML.SkipPastRepeatedText": {
+                        "schema": {
+                            "title": "Skip Past Repeated Text",
+                            "description": "Whether to position the Virtual Cursor on the first line which is different than the previous page whenever a new page is displayed.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+
+                    // NOTE-TODO: "Enable Flexible Web" Setting is stored in SQLite file
+                    // located in "enu/FlexibleWeb.db". In order to support this file
+                    // a new settingHandler is necessary.
+
+                    "HTML.ExpandAbbreviations": {
+                        "schema": {
+                            "title": "Expand Abbreviations",
+                            "description": "Whether or not to expand abbreviations (using the abbr tag).",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "HTML.ExpandAcronyms": {
+                        "schema": {
+                            "title": "Expand Acronyms",
+                            "description": "Whether or not to expand acronyms (using the acronym tag).",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "HTML.AccessKeys": {
+                        "schema": {
+                            "title": "Speak Access Keys Within Web Page",
+                            "description": "Whether to announce HTML element access keys when reading a web page.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+
+                    // ---------------- WEB / HTML / PDF - Navigation -------------
+
+                    "HTML.SmartNavigation": {
+                        "schema": {
+                            "title": "Smart Navigation",
+                            "description": "Whether to enable \"smart navigation\" when reading web pages.",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "Controls",
+                                "Controls And Tables"
+                            ],
+                            "default": 0
+                        }
+                    },
+
+                    // --- WEB / HTML / PDF - Navigation - Document Presentation Mode ---
+
+                    "HTML.DocumentPresentationMode": {
+                      "schema": {
+                            "title": "Document Presentation Mode",
+                            "description": "The presentation mode used for document reading.",
+                            "enum": [0, 1],
+                            "enumLabels": ["Simple Layout", "Screen Layout"],
+                            "default": 0
+                        }
+                    },
+                    "HTML.DocPresModeMaxLineLength": {
+                        // NOTE: Doesn't appear to have relevant min-max values.
+                        "schema": {
+                              "title": "Maximum Line Lenght",
+                              "description": "Stablish a maximum line length.",
+                              "type": "integer",
+                              "default": 500
+                          }
+                    },
+
+                    // -----------------------------------------------------------
+
+                    "HTML.TextBlockLength": {
+                        "schema": {
+                            "title": "Text Block Length",
+                            "description": "The number of consecutive characters that must appear in a web page for JAWS to treat this as a block of text.",
+                            "type": "integer",
+                            "default": 25
+                        }
+                    },
+                    "HTML.LinesPerPage": {
+                        "schema": {
+                            "title": "Lines per Page",
+                            "description": "The number of consecutive lines to be considered as a page for JAWS.",
+                            "type": "integer",
+                            "default": 25
+                        }
+                    },
+                    "HTML.MaxLineLength": {
+                        "schema": {
+                            "title": "Max Line Length",
+                            "description": "The maximum number of characters which can appear on a line of a paragraph.",
+                            "type": "integer",
+                            "default": 150
+                        }
+                    },
+                    "HTML.ScreenFollowsVCursor": {
+                        "schema": {
+                            "title": "Screen Follows Virtual Cursor",
+                            "description": "Whether the screen should automatically scroll to display the line on which the Virtual Cursor is positioned.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HTML.WrapNavigation": {
+                        "schema": {
+                            "title": "Wrap Navigation",
+                            "description": "Whether or not to allow navigation keystrokes such as tab and shift tab to wrap to the top or bottom of the document.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+
+                    // --------- WEB / HTML / PDF - Images Graphics ------------
+
+                    "HTML.IncludeGraphics": {
+                        "schema": {
+                            "title": "Include Graphics",
+                            "description": "Whether/when to include graphics in web pages.",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "No Images",
+                                "Labeled Images",
+                                "All Images"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HTML.GraphicRenderingOption": {
+                        "schema": {
+                            "title": "Graphic Rendering Option",
+                            "description": "Select what to speak for an image.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "enumLabels": [
+                                "Title",
+                                "Alt Text",
+                                "Tooltip",
+                                "Longest of Above",
+                                "The first attribute found in the order list"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HTML.CustomGraphicAttrs": {
+                        "schema": {
+                            "title": "Custom Graphic Attrs",
+                            "description": "Specify the order in which attributes of an image should be searched.",
+                            "type": "string",
+                            "default": "title|alt|src"
+                        }
+                    },
+                    "HTML.GraphicalLinkLastResort": {
+                        "schema": {
+                            "title": "Graphical Link Last Resort",
+                            "description": "What to announce when a graphical link contains no title or alt text for its enclosing image and the enclosing anchor has no title.",
+                            "enum": [ 0, 1],
+                            "enumLabels": ["Speak Image's URL", "Speak Anchor's URL."],
+                            "default": 0
+                        }
+                    },
+
+                    // ---------------- WEB / HTML / PDF - Links ----------------
+
+                    "HTML.FilterConsecutiveDuplicateLinks": {
+                        "schema": {
+                            "title": "Filter Consecutive Duplicate Links",
+                            "description": "Whether to skip (not announce) consecutive duplicate links.",
+                            "type": "number",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HTML.IdentifyLinkType": {
+                        "schema": {
+                            "title": "Identify Link Type",
+                            "description": "Whether to distinguish the various types of links e.g. \"FTP link\", \"mailto link\" versus simply announcing \"link\" for all types of links.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HTML.IdentifySamePageLinks": {
+                        "schema": {
+                            "title": "Identify Same Page Links",
+                            "description": "Whether to identify links that point to other places on the current page by saying \"same page link\".",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HTML.LinkText": {
+                        "schema": {
+                            "title": "",
+                            "description": "Select what to speak for an image.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "enumLabels": [
+                                "Title",
+                                "Screen Text",
+                                "Tool Tip",
+                                "Longest of Above",
+                                "The first attribute found in the order list"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HTML.CustomTextLinkAttrs": {
+                        "schema": {
+                            "title": "Custom Text Link Attributes",
+                            "description": "Specify the order in which attributes of text links should be searched.",
+                            "type": "string",
+                            "default": "text|title|alt|href"
+                        }
+                    },
+                    "HTML.IncludeGraphicLinks": {
+                        "schema": {
+                            "title": "Include Image Links",
+                            "description": "Specify how to speak image links.",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "All Image Links",
+                                "Labelled Image Links",
+                                "No Image Links"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HTML.IncludeImageMapLinks": {
+                        "schema": {
+                            "title": "Identify Image Map Links",
+                            "description": "Specify how to speak \"Image Map Links\".",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "All Image Links",
+                                "Labelled Image Links",
+                                "No Image Links"
+                            ],
+                            "default": 1
+                        }
+                    },
+
+                    // ----------- WEB / HTML / PDF - Headers and Frames -------------
+
+                    "HTML.HeadingNavigation": {
+                        "schema": {
+                            "title": "Heading Navigation using 1-6",
+                            "description": "Specify how heading navigation should work when using keys 1-6.",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Restrict to Section",
+                                "Speak Ancestor Headings when Jumping to a New Section",
+                                "Play Sound when Jumping to a New Section"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HTML.HeadingIndication": {
+                        "schema": {
+                            "title": "Indicate Headings",
+                            "description": "Specify which headings should be announced.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "enumLabels": [
+                                "No Headings",
+                                "Headings Only",
+                                "Headings with Level",
+                                "Play Sound",
+                                "Speak Heading with Heading Voice"
+                            ],
+                            "default": 2
+                        }
+                    },
+                    "HTML.IgnoreInlineFrames": {
+                        "schema": {
+                            "title": "Ignore Inline Frames",
+                            "description": "Whether to ignore inline frames, such as those used for advertising.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    },
+
+                    // ----------- WEB / HTML / PDF - Tables -------------
+
+                    "HTML.IndicateColSpan": {
+                        "schema": {
+                            "title": "Indicate ColSpan for Braille",
+                            "description": "Whether to announce column spans when reading table data in web pages.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+
+                    // -----------  TODO: Unkwnonw -------------
+
+                    "HTML.TableDetection": {
+                        "schema": {
+                            "title": "Table Detection",
+                            "description": "Whether to announce all tables, or only data tables.",
+                            "enum": [0, 1],
+                            "enumLabels": ["Indicate all tables", "Only indicate data tables"],
+                            "default": 1
+                        }
+                    },
+
+                    // -----------------------------------------
+
+                    "OSM.TableDetection": {
+                        "schema": {
+                            "title": "Table Presentation Information",
+                            "description": "Which tables to read as tables (data tables, or all tables).",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "data tables only",
+                                "all tables"
+                            ],
+                            "default": 0
+                        }
+                    },
+
+                    // ----- WEB / HTML / PDF - Miscellaneous ----
+
+                    "Options.EnableEdge": {
+                        "schema": {
+                            "title": "Enable Edge",
+                            "description": "Whether JAWS should provide popular JAWS browser features in Edge such as Virtual Cursor, Navigation Quick Keys, List of Objects, and many more.",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 1
+                        }
+                    },
+                    "HTML.EmbeddedActiveXSupport": {
+                        "schema": {
+                            "title": "Embedded ActiveX Support",
+                            "description": "Whether or not to support embedded ActiveX controls such as Macromedia Flash Movies. If enabled, only objects defined in JActiveX.ini are affected by this setting.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HTML.FormFieldPromptOptions": {
+                        "schema": {
+                            "title": "Form Field Prompt Options",
+                            "description": "Which attributes to prefer when describing form fields.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "enumLabels": [
+                                "Label Tag",
+                                "Title",
+                                "Alt Text",
+                                "Longest of the above",
+                                "Both Label and Title if different",
+                                "Both Label and Alt if different"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "HTML.PageRefreshFilter": {
+                        // NOTE-TODO: Even if the setting is an integer the values
+                        // that is possible to set through the interface are three:
+                        //    - Refresh As Needed: 0
+                        //    - Refresh Every 60 Seconds: 60000
+                        //    - Suppress All Refreshes: -1
+                        "schema": {
+                            "title": "Page Refresh Filter",
+                            "description": "How often, in milliseconds, to allow all refreshes. Set to 0 to allow all refreshes without any delay.",
+                            "type": "integer",
+                            "default": 0
+                        }
+                    },
+                    "Options.VirtualDocumentLinkActivationMethod": {
+                        "schema": {
+                            "title": "Link Activation",
+                            "description": "How to activate a link when the enter key is pressed. Either simulates a mouse click or passes along the enter keypress.",
+                            "enum": [0,1],
+                            "enumLabels": ["Enter simulates mouse click.", "Enter sends Enter key."],
+                            "default": 0
+                        }
+                    },
+                    "HTML.ButtonTextOptions": {
+                        "schema": {
+                            "title": "Button Text Options",
+                            "description": "Indicate which elements from a Button speak.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "enumLabels": [
+                                "Title",
+                                "Screen Text",
+                                "Alt",
+                                "Value",
+                                "Longest of Above",
+                                "The first attribute found in the order list"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HTML.CustomButtonAttrs": {
+                        "schema": {
+                            "title": "Custom Button Attributes",
+                            "description": "Specify the order in which attributes of Buttons should be searched.",
+                            "type": "string",
+                            "default": "text|title|alt|href"
+                        }
+                    },
+                    "HTML.IndicateElementAttributes": {
+                        "schema": {
+                            "title": "Indicate Element Attributes",
+                            "description": "Whether to announce any HTML attributes defined in the \"HTML Attributes Behavior\" map of the current scheme.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "Options.AllowWebAppReservedKeystrokes": {
+                        "schema": {
+                            "title": "Allow Webapp-reserved Keystrokes",
+                            "description": "When both JAWS and a website such as Facebook support a key shortcut, whether to handle the key in JAWS (the default) or pass the key to the web app.",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 1
+                        }
+                    },
+
                     // --------------------- Forms Mode -------------------------
 
                     // ---------- Forms Mode: Select Forms Mode -----------------
 
                     "FormsMode.AutoFormsMode": {
+                        // TODO: The value of the "Auto" choice is a guess, should
+                        // be verified
+                        "schema": {
+                            "title": "Forms Mode",
+                            "description": "Selects the form mode for input information in HTML.",
+                            "enum": [
+                                1,
+                                2,
+                                0
+                            ],
+                            "enumLabels": [
+                                "Auto",
+                                "SemiAuto",
+                                "Manual"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "FormsMode.AutoFormsModeThreshold": {
+                        "schema": {
+                            "title": "Navigation Quick Key Delay",
+                            "description": "Selects the delay to be used with the quick navigation key.",
+                            "enum": [
+                                500,
+                                1000,
+                                1500,
+                                2000,
+                                3000,
+                                4000,
+                                5000,
+                                0
+                            ],
+                            "enumLabels": [
+                                ".5 Seconds",
+                                "1 Seconds",
+                                "1.5 Seconds",
+                                "2 Seconds",
+                                "3 Seconds",
+                                "4 Seconds",
+                                "5 Seconds",
+                                "Never"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "FormsMode.FormsModeAutoOff": {
+                        "schema": {
+                            "title": "Forms Mode Auto Off",
+                            "description": "Disable Forms Mode when a New page loads.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "FormsMode.IndicateFormsModeWithSounds": {
+                        "schema": {
+                            "title": "Forms Sound Indication",
+                            "description": "Enables forms indication using sounds.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "FormsMode.EnterFormsModeSound": {
+                        "schema": {
+                            "title": "Entering Forms Sound",
+                            "description": "Sets the sound to be played when entering a form.",
+                            "type": "string",
+                            "default": "Boink2.wav"
+                        }
+                    },
+                    "FormsMode.ExitFormsModeSound=": {
+                        "schema": {
+                            "title": "Exiting Forms Sound",
+                            "description": "Sets the sound to be played when exiting a form.",
+                            "type": "string",
+                            "default": "Boink1.wav"
+                        }
                     },
 
                     // ------------------ Text Processing -----------------------
@@ -1747,21 +2773,6 @@
                         }
                     },
 
-                    "Braille.ContractedBrailleInput": {
-                        "schema": {
-                            "title": "Contracted Braille Input",
-                            "description": "Enable contracted braille to be entered on the braille display's keyboard.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
                     "Braille.FilterControlCharacters": {
                         "schema": {
                             "title": "Filter Control Characters",
@@ -2302,6 +3313,469 @@
 
                     // ------------------------------------------------------------------
 
+                    // ---------------------- Caret And Cursor --------------------------
+
+                    "Options.SayCursorShapeChange": {
+                        "schema": {
+                            "title": "Say Cursor Shape Change",
+                            "description": "Whether to announce a change in the shape of the cursor.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ]
+                        }
+                    },
+                    "Options.CaretBlinkRate": {
+                        "schema": {
+                            "title": "Caret Blink Rate",
+                            "description": "How fast the caret blinks, in milliseconds.",
+                            "type": "integer",
+                            "default": 53,
+                            "minimum": 1
+                        }
+                    },
+
+                    // ---------- Caret And Cursor: Vertical Caret Dimensions ----------
+
+                    "OSM.MouseClickFudgeX": {
+                        "schema": {
+                            "title": "Mouse Click Fudge X",
+                            "description": "Number of pixels to the right of the current JAWS cursor at which a mouse click should be simulated",
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    "OSM.MouseClickFudgeY": {
+                        "schema": {
+                            "title": "Mouse Click Fudge Y",
+                            "description": "Number of pixels below the current JAWS cursor at which a mouse click should be simulated",
+                            "type": "integer",
+                            "default": -2
+                        }
+                    },
+                    "OSM.VertCaretMinY": {
+                        "schema": {
+                            "title": "Vertical Caret Minimum Y Dimension",
+                            "description": "Minimum number pixels of height for the 'Vertical Caret'",
+                            "type": "integer",
+                            "default": 4
+                        }
+                    },
+                    "OSM.VertCaretMinX": {
+                        "schema": {
+                            "title": "Vertical Caret Minimum X Dimension",
+                            "description": "Minimum number pixels of width for the 'Vertical Caret'",
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    "OSM.VertCaretMaxY": {
+                        "schema": {
+                            "title": "Vertical Caret Maximum Y Dimension",
+                            "description": "Maximum number pixels of height for the 'Vertical Caret'",
+                            "type": "integer",
+                            "default": 110
+                        }
+                    },
+                    "OSM.VertCaretMaxX": {
+                        "schema": {
+                            "title": "Vertical Caret Maximum X Dimension",
+                            "description": "Maximum number pixels of width for the 'Vertical Caret'",
+                            "type": "integer",
+                            "default": 4
+                        }
+                    },
+
+                    // ------- Caret And Cursor: Horizontal Caret Dimensions ----------
+
+                    "OSM.HorizCaretMinY": {
+                        "schema": {
+                            "title": "Horizontal Caret Minimum Y Dimension",
+                            "description": "Minimum number pixels of height for the 'Horizontal Caret'",
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    "OSM.HorizCaretMinX": {
+                        "schema": {
+                            "title": "Horizontal Caret Minimum X Dimension",
+                            "description": "Minimum number pixels of width for the 'Horizontal Caret'",
+                            "type": "integer",
+                            "default": 4
+                        }
+                    },
+                    "OSM.HorizCaretMaxY": {
+                        "schema": {
+                            "title": "Horizontal Caret Maximum Y Dimension",
+                            "description": "Maximum number pixels of height for the 'Horizontal Caret'",
+                            "type": "integer",
+                            "default": 4
+                        }
+                    },
+                    "OSM.HorizCaretMaxX": {
+                        "schema": {
+                            "title": "Horizontal Caret Maximum X Dimension",
+                            "description": "Maximum number pixels of width for the 'Horizontal Caret'",
+                            "type": "integer",
+                            "default": 14
+                        }
+                    },
+
+                    // ------------------- Synthesizer -------------------
+
+                    "Options.SimultaneousSynthAndWave": {
+                        "schema": {
+                            "title": "Simultaneous Synth and Wave",
+                            "description": "Whether to enable smoother playing of WAV files when using the DEC Talk Access 32 software synthesizer. This option is only available in Default.jcf. Changes to this setting take effect the next time you start JAWS.  Disabled by default.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ]
+                        }
+                    },
+                    "Options.SynthesizerResetFrequency": {
+                        "schema": {
+                            "title": "Synthesizer Reset Frequency",
+                            "description": "How often to reset communication with the synthesizer, in milliseconds.",
+                            "type": "integer",
+                            "default": 2000,
+                            "minimum": 0
+                        }
+                    },
+
+                    // ---------------- Punctuation ------------------
+
+                    // TODO: Research how "Customize Voice Aliases" works
+
+                    // TODO: "Punctuation Level" not present in this config file.
+
+                    // -----------------------------------------------
+
+                    // ---------------- Voice Aliases ----------------
+
+                    // TODO: Research how "Customize Voice Aliases" works
+
+                    // ------------------------------------------------
+
+                    // ---------------- Windows Classes ---------------
+
+                    // TODO: Research how "Customize Window Classes" works
+
+                    // ------------------------------------------------
+
+                    // ------------------ Keyboard --------------------
+
+                    // ------------- Keyboard - General ---------------
+
+                    "Options.QuickKeyNavigationMode": {
+                        "schema": {
+                            "title": "Quick Key Navigation Mode",
+                            "description": "Navigation Quick Keys let you move through Web pages with easy to remember commands, such as T for table, F for form field, N for non link text, and V for visited link. These commands are only available when the Virtual Cursor is active. Use these radio buttons to set Navigation Quick Keys off, on, or on only during Say All reading. The default is on.",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "On",
+                                "On during \"Say All\""
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "Options.JAWSInsertKey": {
+                        "schema": {
+                            "title": "JAWS Insert Key",
+                            "description": "Whether/which insert keys can be used as a JAWS Insert.",
+                            "type": "number",
+                            "default": 3,
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "None",
+                                "Numpad Insert",
+                                "Extended Insert",
+                                "Use both Numpad and Extended Inserted"
+                            ]
+                        }
+                    },
+                    "Options.InitialNumlockState": {
+                        "schema": {
+                            "title": "Initial State of NumLock Key",
+                            "description": "The initial state of the NumLock key.",
+                            "type": "number",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Turn off at startup",
+                                "Turn on at startup",
+                                "Do not modify"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "Options.UseExtendedKeys": {
+                        "schema": {
+                            "title": "Use Extended Keys",
+                            "description": "Whether to distinguish between extended and number pad keys.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Treat Extended and Numpad keys the same",
+                                "Differentiate between Extended and Numpad keys"
+                            ]
+                        }
+                    },
+                    "Options.GeneralizeModifiers": {
+                        "schema": {
+                            "title": "Generalize Modifiers",
+                            "description": "Differentiate Between Left and Right Paired Keys.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Treat Extended and Numpad keys the same",
+                                "Differentiate between Extended and Numpad keys"
+                            ]
+                        }
+                    },
+                    "Options.OnScreenKeyboard": {
+                        "schema": {
+                            "title": "Allow On Screen Keyboards",
+                            "description": "Whether to allow on screen keyboards.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    },
+
+                    // ----------- Keyboard - Manage Key Labels -------
+
+                    // TODO: Complete descriptions
+
+                    "KeyLabels.Add": {
+                        "schema": {
+                            "title": "Manage Add Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string",
+                            "default": "1|+"
+                        }
+                    },
+                    "KeyLabels.Apps": {
+                        "schema": {
+                            "title": "Manage Apps Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Attn": {
+                        "schema": {
+                            "title": "Manage Attn Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Back": {
+                        "schema": {
+                            "title": "User requested information messages",
+                            "description": "Enable messaging user requested information with different levels of verbosity.",
+                            "type": "string",
+                            "default": "1|+"
+                        }
+                    },
+                    "KeyLabels.Cancel": {
+                    },
+                    "KeyLabels.Capital": {
+                    },
+                    "KeyLabels.Clear": {
+                    },
+                    "KeyLabels.Control": {
+                    },
+                    "KeyLabels.CrSel": {
+                    },
+                    "KeyLabels.Decimal": {
+                    },
+                    "KeyLabels.Delete": {
+                    },
+                    "KeyLabels.Divide": {
+                    },
+                    "KeyLabels.Down": {
+                    },
+                    "KeyLabels.End": {
+                    },
+                    "KeyLabels.ErEOF": {},
+                    "KeyLabels.Escape": {},
+                    "KeyLabels.Execute": {},
+                    "KeyLabels.ExSel": {},
+                    "KeyLabels.F1": {},
+                    "KeyLabels.F10": {},
+                    "KeyLabels.F11": {},
+                    "KeyLabels.F12": {},
+                    "KeyLabels.F13": {},
+                    "KeyLabels.F14": {},
+                    "KeyLabels.F15": {},
+                    "KeyLabels.F16": {},
+                    "KeyLabels.F17": {},
+                    "KeyLabels.F18": {},
+                    "KeyLabels.F19": {},
+                    "KeyLabels.F2": {},
+                    "KeyLabels.F20": {},
+                    "KeyLabels.F21": {},
+                    "KeyLabels.F22": {},
+                    "KeyLabels.F23": {},
+                    "KeyLabels.F3": {},
+                    "KeyLabels.F4": {},
+                    "KeyLabels.F5": {},
+                    "KeyLabels.F6": {},
+                    "KeyLabels.F7": {},
+                    "KeyLabels.F8": {},
+                    "KeyLabels.F9": {},
+                    "KeyLabels.Help": {},
+                    "KeyLabels.Home": {},
+                    "KeyLabels.Insert": {},
+                    "KeyLabels.Left": {},
+                    "KeyLabels.Letters": {},
+                    "KeyLabels.LWin": {},
+                    "KeyLabels.Menu": {},
+                    "KeyLabels.ModifiedPrintable": {},
+                    "KeyLabels.Multiply": {},
+                    "KeyLabels.Next": {},
+                    "KeyLabels.Numbers": {},
+                    "KeyLabels.NumLock": {},
+                    "KeyLabels.NumPad0": {},
+                    "KeyLabels.NumPad1": {},
+                    "KeyLabels.NumPad2": {},
+                    "KeyLabels.NumPad3": {},
+                    "KeyLabels.NumPad4": {},
+                    "KeyLabels.NumPad5": {},
+                    "KeyLabels.NumPad6": {},
+                    "KeyLabels.NumPad7": {},
+                    "KeyLabels.NumPad8": {},
+                    "KeyLabels.OEM_clear": {},
+                    "KeyLabels.PA1": {},
+                    "KeyLabels.Pause": {},
+                    "KeyLabels.Play": {},
+                    "KeyLabels.Print": {},
+                    "KeyLabels.Prior": {},
+                    "KeyLabels.Return": {},
+                    "KeyLabels.Right": {},
+                    "KeyLabels.RWin": {},
+                    "KeyLabels.Scroll": {},
+                    "KeyLabels.Select": {},
+                    "KeyLabels.Separator": {},
+                    "KeyLabels.Shift": {},
+                    "KeyLabels.SnapShot ": {},
+                    "KeyLabels.Space": {},
+                    "KeyLabels.Subtract": {},
+                    "KeyLabels.Symbols": {},
+                    "KeyLabels.Tab": {},
+                    "KeyLabels.Up": {},
+                    "KeyLabels.Zoom": {},
+
+                    // ----------- Keyboard - Touch Keyboard -------
+
+                    "Options.TouchTypingMode": {
+                        "schema": {
+                            "title": "Touch Typing Mode",
+                            "description": "Which keyboard mode to use for the touch keyboard.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Standard Typing",
+                                "Touch typing"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "Options.TouchTypingEcho": {
+                        "schema": {
+                            "title": "Touch Typing Echo",
+                            "description": "Whether/how to echo text entered using the touch keyboard.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "None",
+                                "Characters",
+                                "Words",
+                                "Both characters and words"
+                            ],
+                            "default": 3
+                        }
+                    },
+                    "Options.TouchKeyboardNotification": {
+                        "schema": {
+                            "title": "Touch Keyboard Notification",
+                            "description": "Whether/how to notify when the touch keyboard appears/disappears.",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "By Message",
+                                "By Sound",
+                                "By both Message and Sound"
+                            ],
+                            "default": 2
+                        }
+                    },
+                    "Options.TouchKeyboardChildPanelNotification": {
+                        "schema": {
+                            "title": "Touch Alternative Character Panel Popup Notification",
+                            "description": "How to announce the appearance of a panel of alternate keys in the touch keyboard.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "By both Message and Sound",
+                                "By Sound only"
+                            ],
+                            "default": 0
+                        }
+                    },
+
+                    // ----------- Keyboard - Touch Keyboard -------
+
                     "FSCasts.EnableNotifications": {
                         "schema": {
                             "title": "FSCast Notifications",
@@ -2331,21 +3805,6 @@
                                 "off",
                                 "on"
                             ]
-                        }
-                    },
-                    "HTML.AccessKeys": {
-                        "schema": {
-                            "title": "Speak Access Keys Within Web Page",
-                            "description": "Whether to announce HTML element access keys when reading a web page.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
                         }
                     },
                     "HTML.Acronyms": {
@@ -2379,90 +3838,6 @@
                             "default": 1
                         }
                     },
-                    "HTML.EmbeddedActiveXSupport": {
-                        "schema": {
-                            "title": "Embedded ActiveX Support",
-                            "description": "Whether or not to support embedded ActiveX controls such as Macromedia Flash Movies.  If enabled, only objects defined in JActiveX.ini are affected by this setting.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "HTML.ExpandAbbreviations": {
-                        "schema": {
-                            "title": "Expand Abbreviations",
-                            "description": "Whether or not to expand abbreviations (using the abbr tag).",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    "HTML.ExpandAcronyms": {
-                        "schema": {
-                            "title": "Expand Acronyms",
-                            "description": "Whether or not to expand acronyms (using the acronym tag).",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    "HTML.FilterConsecutiveDuplicateLinks": {
-                        "schema": {
-                            "title": "Filter Consecutive Duplicate Links",
-                            "description": "Whether to skip (not announce) consecutive duplicate links.",
-                            "type": "number",
-                            "default": 1,
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ]
-                        }
-                    },
-                    "HTML.FormFieldPromptOptions": {
-                        "schema": {
-                            "title": "Form Field Prompt Options",
-                            "description": "Which attributes to prefer when describing form fields.",
-                            "enum": [
-                                0,
-                                1,
-                                2,
-                                3,
-                                4,
-                                5
-                            ],
-                            "enumLabels": [
-                                "favor label tag",
-                                "favor title attribute",
-                                "favor alt attribute",
-                                "favor longest",
-                                "use both label and title if different",
-                                "use both label and alt if different"
-                            ],
-                            "default": 0
-                        }
-                    },
                     "HTML.FormsModeAutoOff": {
                         "schema": {
                             "title": "Forms Mode Auto Off",
@@ -2474,107 +3849,6 @@
                             "enumLabels": [
                                 "Leave Forms Mode on",
                                 "Turn Forms Mode off automatically"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "HTML.GraphicalLinkLastResort": {
-                        "schema": {
-                            "title": "Graphical Link Last Resort",
-                            "description": "What to announce when a graphical link contains no title or alt text for its enclosing image and the enclosing anchor has no title.",
-                            "enum": [ 0, 1],
-                            "enumLabels": ["Read the image's src", "Read the image's enclosing anchor's href."],
-                            "default": 0
-                        }
-                    },
-                    "HTML.IdentifyLinkType": {
-                        "schema": {
-                            "title": "Identify Link Type",
-                            "description": "Whether to distinguish the various types of links e.g. \"FTP link\", \"mailto link\" versus simply announcing \"link\" for all types of links.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "HTML.IdentifySamePageLinks": {
-                        "schema": {
-                            "title": "Identify Same Page Links",
-                            "description": "Whether to identify links that point to other places on the current page by saying \"same page link\".",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "HTML.IgnoreInlineFrames": {
-                        "schema": {
-                            "title": "Ignore Inline Frames",
-                            "description": "Whether to ignore inline frames, such as those used for advertising.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    "HTML.IncludeGraphics": {
-                        "schema": {
-                            "title": "Include Graphics",
-                            "description": "Whether/when to include graphics in web pages.",
-                            "enum": [
-                                0,
-                                1,
-                                2
-                            ],
-                            "enumLabels": [
-                                "never include graphics",
-                                "include graphics that have labels, i.e. alt=attributes",
-                                "include all graphics"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "HTML.IndicateColSpan": {
-                        "schema": {
-                            "title": "Indicate ColSpan for Braille",
-                            "description": "Whether to announce column spans when reading table data in web pages.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "HTML.IndicateElementAttributes": {
-                        "schema": {
-                            "title": "Indicate Element Attributes",
-                            "description": "Whether to announce any HTML attributes defined in the \"HTML Attributes Behavior\" map of the current scheme.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
                             ],
                             "default": 1
                         }
@@ -2591,91 +3865,6 @@
                                 "off",
                                 "on"
                             ],
-                            "default": 1
-                        }
-                    },
-                    "HTML.MaxLineLength": {
-                        "schema": {
-                            "title": "Max Line Length",
-                            "description": "The maximum number of characters which can appear on a line of a paragraph.",
-                            "type": "integer",
-                            "default": 150
-                        }
-                    },
-                    "HTML.PageRefreshFilter": {
-                        "schema": {
-                            "title": "Page Refresh Filter",
-                            "description": "How often, in milliseconds, to allow all refreshes.  Set to 0 to allow all refreshes without any delay.",
-                            "type": "integer",
-                            "default": 0
-                        }
-                    },
-                    "HTML.SayAllOnDocumentLoad": {
-                        "schema": {
-                            "title": "Read Web Pages Automatically When Loaded",
-                            "description": "Whether to automatically read web pages when they're first loaded.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "HTML.ScreenFollowsVCursor": {
-                        "schema": {
-                            "title": "Screen Follows Virtual Cursor",
-                            "description": "Whether the screen should automatically scroll to display the line on which the Virtual Cursor is positioned.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "HTML.SkipPastRepeatedText": {
-                        "schema": {
-                            "title": "Skip Past Repeated Text",
-                            "description": "Whether to position the Virtual Cursor on the first line which is different than the previous page whenever a new page is displayed.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "HTML.SmartNavigation": {
-                        "schema": {
-                            "title": "Smart Navigation",
-                            "description": "Whether to enable \"smart navigation\" when reading web pages.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    "HTML.TableDetection": {
-                        "schema": {
-                            "title": "Table Detection",
-                            "description": "Whether to announce all tables, or only data tables.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Indicate all tables", "Only indicate data tables"],
                             "default": 1
                         }
                     },
@@ -2727,33 +3916,10 @@
                             "default": 2
                         }
                     },
-                    "HTML.TextBlockLength": {
-                        "schema": {
-                            "title": "Text Block Length",
-                            "description": "The number of consecutive characters that must appear in a web page for JAWS to treat this as a block of text.",
-                            "type": "integer",
-                            "default": 25
-                        }
-                    },
                     "HTML.UseLegacyIESupport": {
                         "schema": {
                             "title": "Use Legacy IE Support",
                             "description": "Whether or not to use legacy IE support instead of the default FS Dom Server support.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "HTML.WrapNavigation": {
-                        "schema": {
-                            "title": "Wrap Navigation",
-                            "description": "Whether or not to allow navigation keystrokes such as tab and shift tab to wrap to the top or bottom of the document.",
                             "enum": [
                                 0,
                                 1
@@ -2771,15 +3937,6 @@
                             "description": "The text to read before text that appears in all capital letters.",
                             "type": "string",
                             "default": "all cap"
-                        }
-                    },
-                    "Options.AllowWebAppReservedKeystrokes": {
-                        "schema": {
-                            "title": "Allow Webapp-reserved Keystrokes",
-                            "description": "When both JAWS and a website such as Facebook support a key shortcut, whether to handle the key in JAWS (the default) or pass the key to the web app.",
-                            "enum": [0, 1],
-                            "enumLabels": ["off", "on"],
-                            "default": 1
                         }
                     },
                     "Options.AnnounceMultilineEdit": {
@@ -2806,15 +3963,6 @@
                             "description": "The text to read before a capital letter.",
                             "type": "string",
                             "default": "cap"
-                        }
-                    },
-                    "Options.CaretBlinkRate": {
-                        "schema": {
-                            "title": "Caret Blink Rate",
-                            "description": "How fast the caret blinks, in milliseconds.",
-                            "type": "integer",
-                            "default": 53,
-                            "minimum": 1
                         }
                     },
                     "Options.CaretDetect": {
@@ -2859,24 +4007,6 @@
                             ]
                         }
                     },
-                    "Options.CustomPageSummary": {
-                        "schema": {
-                            "title": "Custom Page Summary",
-                            "description": "What to do when a virtual document loads for which a custom page summary has been defined.",
-                            "type": "number",
-                            "default": 0,
-                            "enum": [
-                                0,
-                                1,
-                                2
-                            ],
-                            "enumLabels": [
-                                "do nothing (\"Say All\" will be started as normal)",
-                                "The summary will be spoken and focus left on the page at the place defined by the page",
-                                "the summary will be presented in the virtual viewer for the user to immediately read"
-                            ]
-                        }
-                    },
                     // There's not even anything in the JAWS documentation for this. Disabled for now.
                     // "Options.DosScreenReader": {
                     //     "schema": {
@@ -2888,15 +4018,6 @@
                     //        "enumLabels": []
                     //     }
                     // },
-                    "Options.EnableEdge": {
-                        "schema": {
-                            "title": "Enable Edge",
-                            "description": "Whether JAWS should provide popular JAWS browser features in Edge such as Virtual Cursor, Navigation Quick Keys, List of Objects, and many more.",
-                            "enum": [0, 1],
-                            "enumLabels": ["off", "on"],
-                            "default": 1
-                        }
-                    },
                     "Options.IndicateAttributesInDialogsAndMenus": {
                         "schema": {
                             "title": "Indicate Attributes on Dialogs and Menus",
@@ -2911,62 +4032,6 @@
                             "enumLabels": [
                                 "off",
                                 "on"
-                            ]
-                        }
-                    },
-                    "Options.InitialNumlockState": {
-                        "schema": {
-                            "title": "Initial State of NumLock Key",
-                            "description": "The initial state of the NumLock key.",
-                            "type": "number",
-                            "enum": [
-                                0,
-                                1,
-                                2
-                            ],
-                            "enumLabels": [
-                                "off at startup",
-                                "on at startup",
-                                "leave unmodified"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    // TODO: Doesn't seem to work.
-                    "Options.InsertKeyMode": {
-                        "schema": {
-                            "title": "Insert Key Mode",
-                            "description": "The operating mode of the insert key.",
-                            "type": "number",
-                            "default": 0,
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "JAWS",
-                                "Sticky"
-                            ]
-                        }
-                    },
-                    // TODO: VERIFY WITH EXTREME PREJUDICE
-                    "Options.JAWSInsertKey": {
-                        "schema": {
-                            "title": "JAWS Insert Key",
-                            "description": "Whether/which insert keys can be used as a JAWS Insert.",
-                            "type": "number",
-                            "default": 3,
-                            "enum": [
-                                0,
-                                1,
-                                2,
-                                3
-                            ],
-                            "enumLabels": [
-                                "none",
-                                "Numpad Insert",
-                                "Extended Insert",
-                                "both Numpad and Extended"
                             ]
                         }
                     },
@@ -2987,22 +4052,6 @@
                                 "Some",
                                 "Most",
                                 "All"
-                            ]
-                        }
-                    },
-                    "Options.KeyRepeat": {
-                        "schema": {
-                            "title": "Key Repeat",
-                            "description": "Whether or not to allow repeated keys.  Repeated keys are allowed by default.",
-                            "type": "number",
-                            "default": 1,
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
                             ]
                         }
                     },
@@ -3041,21 +4090,6 @@
                     //         ]
                     //     }
                     // },
-                    "Options.LowerOtherAppsVolumeWhileJAWSIsRunning": {
-                        "schema": {
-                            "title": "Lower Audio Volume of Programs while JAWS Speaks",
-                            "description": "Whether to lower the volume of programs other than JAWS when speaking.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
                     "Options.MigrationWizardDisplayed": {
                         "schema": {
                             "title": "Migration Wizard Displayed",
@@ -3158,21 +4192,6 @@
                             "default": 0
                         }
                     },
-                    "Options.OnScreenKeyboard": {
-                        "schema": {
-                            "title": "Allow On Screen Keyboards",
-                            "description": "Whether to allow on screen keyboards.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
                     "Options.ProcessToolTipEvent": {
                         "schema": {
                             "title": "Process Tooltip Event",
@@ -3189,89 +4208,12 @@
                             ]
                         }
                     },
-                    "Options.ProgressBarUpdateInterval": {
-                        "schema": {
-                            "title": "Progress Bar Update Interval",
-                            "description": "How often to announce progress bar updates, in milliseconds.  Set to 0 to disable update announcements.",
-                            "type": "integer",
-                            "default": 5000,
-                            "minimum": 0
-                        }
-                    },
-                    "Options.QuickKeyNavigationMode": {
-                        "schema": {
-                            "title": "Quick Key Navigation Mode",
-                            "description": "Navigation Quick Keys let you move through Web pages with easy to remember commands, such as T for table, F for form field, N for non link text, and V for visited link. These commands are only available when the Virtual Cursor is active. Use these radio buttons to set Navigation Quick Keys off, on, or on only during Say All reading. The default is on.",
-                            "type": "number",
-                            "default": 1,
-                            "enum": [
-                                0,
-                                1,
-                                2
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on",
-                                "only on during \"Say All\""
-                            ]
-                        }
-                    },
                     "Options.ReadingInterrupt": {
                         "schema": {
                             "title": "Reading Interrupt",
                             "description": "Whether to interrupt speech when a key that is bound to a macro is pressed.",
                             "type": "number",
                             "default": 1,
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ]
-                        }
-                    },
-                    "Options.SayCursorShapeChange": {
-                        "schema": {
-                            "title": "Say Cursor Shape Change",
-                            "description": "Whether to announce a change in the shape of the cursor.",
-                            "type": "number",
-                            "default": 0,
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ]
-                        }
-                    },
-                    "Options.ScreenEcho": {
-                        "schema": {
-                            "title": "Screen Echo",
-                            "description": "Use the radio buttons in this group to determine how much text is read when information on the screen changes. This includes highlighted text, all text as it appears, or no speech echo as text appears or changes on screen. The default setting is Echo Highlighted Text. Changing the Screen Echo setting may affect the reading of menus and other items. For this reason, it is recommended that you only make Screen Echo changes in application-specific settings files.",
-                            "type": "number",
-                            "default": 1,
-                            "enum": [
-                                0,
-                                1,
-                                2
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "highlight",
-                                "all"
-                            ]
-                        }
-                    },
-                    "Options.SimultaneousSynthAndWave": {
-                        "schema": {
-                            "title": "Simultaneous Synth and Wave",
-                            "description": "Whether to enable smoother playing of WAV files when using the DEC Talk Access 32 software synthesizer. This option is only available in Default.jcf. Changes to this setting take effect the next time you start JAWS.  Disabled by default.",
-                            "type": "number",
-                            "default": 0,
                             "enum": [
                                 0,
                                 1
@@ -3356,15 +4298,6 @@
                             "default": "Synth1"
                         }
                     },
-                    "Options.SynthesizerResetFrequency": {
-                        "schema": {
-                            "title": "Synthesizer Reset Frequency",
-                            "description": "How often to reset communication with the synthesizer, in milliseconds.",
-                            "type": "integer",
-                            "default": 2000,
-                            "minimum": 0
-                        }
-                    },
                     "Options.TetherJawsToPC": {
                         "schema": {
                             "title": "Tether Jaws to PC",
@@ -3400,6 +4333,7 @@
                             "default": 0
                         }
                     },
+
                     // TODO: Discuss whether / how to handle "bit fields" like these.
                     // "Options.TextAnalyserSymbolFlags": {
                     //                             "schema": {
@@ -3413,72 +4347,7 @@
                     //     "title": "Inconsistencies to Check",
                     //     "description": "Which types of inconsistencies to check.  Defaults to \"all\"."
                     // },
-                    "Options.TouchKeyboardChildPanelNotification": {
-                        "schema": {
-                            "title": "Touch Alternative Character Panel Popup Notification",
-                            "description": "How to announce the appearance of a panel of alternate keys in the touch keyboard.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "by both message and sound",
-                                "by sound only"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    "Options.TouchKeyboardNotification": {
-                        "schema": {
-                            "title": "Touch Keyboard Notification",
-                            "description": "Whether/how to notify when the touch keyboard appears/disappears.",
-                            "enum": [
-                                0,
-                                1,
-                                2
-                            ],
-                            "enumLabels": [
-                                "by message",
-                                "by sound",
-                                "by both message and sound"
-                            ],
-                            "default": 2
-                        }
-                    },
-                    "Options.TouchTypingEcho": {
-                        "schema": {
-                            "title": "Touch Typing Echo",
-                            "description": "Whether/how to echo text entered using the touch keyboard.",
-                            "enum": [
-                                0,
-                                1,
-                                2,
-                                3
-                            ],
-                            "enumLabels": [
-                                "none",
-                                "characters",
-                                "words",
-                                "both characters and words"
-                            ],
-                            "default": 3
-                        }
-                    },
-                    "Options.TouchTypingMode": {
-                        "schema": {
-                            "title": "Touch Typing Mode",
-                            "description": "Which keyboard mode to use for the touch keyboard.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "standard",
-                                "touch typing"
-                            ],
-                            "default": 1
-                        }
-                    },
+
                     // Can't find information in the help file or default settings.  Disabled for now.
                     // "Options.TreeViewCheckBoxes": {
                     //     "schema": {
@@ -3496,58 +4365,7 @@
                     //         ]
                     //     }
                     // },
-                    "Options.TypingEcho": {
-                        "schema": {
-                            "title": "Typing echo",
-                            "description": "How to announce typed words and/or characters.",
-                            "type": "number",
-                            "default": 1,
-                            "enum": [
-                                0,
-                                1,
-                                2,
-                                3
-                            ],
-                            "enumLabels": [
-                                "don't announce characters or words",
-                                "announce characters",
-                                "announce words",
-                                "announce characters and words"
-                            ]
-                        }
-                    },
-                    "Options.TypingInterrupt": {
-                        "schema": {
-                            "title": "Typing Interrupt",
-                            "description": "Whether to stop speaking when the user types.",
-                            "type": "number",
-                            "default": 1,
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ]
-                        }
-                    },
-                    "Options.UseExtendedKeys": {
-                        "schema": {
-                            "title": "Use Extended Keys",
-                            "description": "Whether to distinguish between extended and number pad keys.",
-                            "type": "number",
-                            "default": 0,
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "Treat Extended and Numpad keys the same",
-                                "Differentiate between Extended and Numpad keys"
-                            ]
-                        }
-                    },
+
                     "Options.UseVirtualInfoInFormsMode": {
                         "schema": {
                             "title": "Use Virtual Info in Forms Mode",
@@ -3582,15 +4400,6 @@
                     //     }
                     // },
 
-                    "Options.VirtualDocumentLinkActivationMethod": {
-                        "schema": {
-                            "title": "Virtual Document Link Activation Method",
-                            "description": "How to activate a link when the enter key is pressed.  Either simulates a mouse click or passes along the enter keypress.",
-                            "enum": [0,1],
-                            "enumLabels": ["Enter simulates mouse click.", "Enter sends enter key."],
-                            "default": 0
-                        }
-                    },
                     "Options.VIRTUALMSAAREFRESH": {
                         "schema": {
                             "title": "Virtual MSAA Refresh",
@@ -3703,66 +4512,6 @@
                             "default": 0
                         }
                     },
-                    "Options.ViewMode": {
-                        "schema": {
-                            "title": "System Tray view mode",
-                            "description": "Run JAWS from the System Tray.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    "Options.confirmWhenExitingJAWS": {
-                        "schema": {
-                            "title": "Confirm when exiting",
-                            "description": "Prompt to confirm when exiting JAWS.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "Options.AutomaticNotificationOfUpdates": {
-                        "schema": {
-                            "title": "Updates Notifications",
-                            "description": "Automatic notification of updates.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "Options.bVirtViewer": {
-                        "schema": {
-                            "title": "Virtual Viewer",
-                            "description": "Show Virtual Viewer on screen.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
 
                     // ------------ Graphics and Symbols ------------
 
@@ -3811,22 +4560,6 @@
                             "default": 0
                         }
                     },
-                    "OSM.MouseClickFudgeX": {
-                        "schema": {
-                            "title": "Mouse Click Fudge X",
-                            "description": "number of pixels to the right of the current JAWS cursor at which a mouse click should be simulated",
-                            "type": "integer",
-                            "default": 1
-                        }
-                    },
-                    "OSM.MouseClickFudgeY": {
-                        "schema": {
-                            "title": "Mouse Click Fudge Y",
-                            "description": "number of pixels below the current JAWS cursor at which a mouse click should be simulated",
-                            "type": "integer",
-                            "default": -2
-                        }
-                    },
                     "OSM.PixelsPerBlankLine": {
                         "schema": {
                             "title": "Pixels Per Blank Line",
@@ -3864,21 +4597,6 @@
                                 "on"
                             ],
                             "default": 1
-                        }
-                    },
-                    "OSM.TableDetection": {
-                        "schema": {
-                            "title": "Table Presentation Information",
-                            "description": "Which tables to read as tables (data tables, or all tables).",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "data tables only",
-                                "all tables"
-                            ],
-                            "default": 0
                         }
                     },
                     "OSM.TextOutDelay": {
@@ -3981,7 +4699,7 @@
                             "type": "string",
                             "default": "Eloquence"
                         }
-                    },
+                    }
                 },
                 "capabilitiesTransformations": {
                     "Options\\.SayAllIndicateCaps": {
@@ -4685,7 +5403,7 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop",
+                                "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -4806,7 +5524,7 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop",
+                                "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -4912,11 +5630,7 @@
                                 "Glen",
                                 "Sandy",
                                 "Grandma",
-                                "Grandpa",
-                                // If synth is mmobile
-                                // - Not available
-                                // If synth is SAPI 5X 64
-                                // - Not available
+                                "Grandpa"
                             ],
                             "default": "Reed"
                         }
@@ -5768,7 +6482,7 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop",
+                                "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -5878,7 +6592,7 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop",
+                                "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -5973,11 +6687,7 @@
                                 "Glen",
                                 "Sandy",
                                 "Grandma",
-                                "Grandpa",
-                                // If synth is mmobile
-                                // - Not available
-                                // If synth is SAPI 5X 64
-                                // - Not available
+                                "Grandpa"
                             ],
                             "default": "Reed"
                         }
@@ -6796,7 +7506,7 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop",
+                                "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -6906,7 +7616,7 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop",
+                                "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -7001,11 +7711,7 @@
                                 "Glen",
                                 "Sandy",
                                 "Grandma",
-                                "Grandpa",
-                                // If synth is mmobile
-                                // - Not available
-                                // If synth is SAPI 5X 64
-                                // - Not available
+                                "Grandpa"
                             ],
                             "default": "Reed"
                         }
@@ -7419,45 +8125,45 @@
 
                     // -------- German - MENU AND DIALOG ----------
 
-                    "DEU-Keyboard.Parent": {
+                    "DEU-MenuAndDialog.Parent": {
                         "schema": {
                             // NOTE: This setting should remain private and not be exposed
-                            "title": "Keyboard parent config",
+                            "title": "MenuAndDialog parent config",
                             "description": "The parent config from which to inherit.",
                             "type": "string",
                             "default": "Global"
                         }
                     },
-                    "DEU-Keyboard.Pitch": {
+                    "DEU-MenuAndDialog.Pitch": {
                         "schema": {
-                            "title": "Keyboard pitch",
-                            "description": "The pitch to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog pitch",
+                            "description": "The pitch to use for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 100,
                             "default": 65
                         }
                     },
-                    "DEU-Keyboard.Punctuation": {
+                    "DEU-MenuAndDialog.Punctuation": {
                         "schema": {
-                            "title": "Keyboard punctuation",
-                            "description": "How much punctuation to announce for the keyboard.",
+                            "title": "MenuAndDialog punctuation",
+                            "description": "How much punctuation to announce for the MenuAndDialog.",
                             "enum": [0, 1, 2, 3],
                             "enumLabels": ["None", "Some", "Most", "All"],
                             "default": 1
                         }
                     },
-                    "DEU-Keyboard.Rate": {
+                    "DEU-MenuAndDialog.Rate": {
                         "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                            "title": "MenuAndDialog rate",
+                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
                             "type": "integer"
                         }
                     },
-                    "DEU-Keyboard.SynthLangString": {
+                    "DEU-MenuAndDialog.SynthLangString": {
                         "schema": {
-                            "title": "Keyboard language",
-                            "description": "The language to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog language",
+                            "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
                                 "0x409", // English - US
                                 "0x407", // German
@@ -7473,7 +8179,7 @@
                             "default": "0x409"
                         }
                     },
-                    "DEU-Keyboard.UppercasePitchDelta": {
+                    "DEU-MenuAndDialog.UppercasePitchDelta": {
                         "schema": {
                             "title": "Uppercase pitch delta",
                             "description": "Pitch variation as you type or arrow accross capital letters.",
@@ -7483,20 +8189,20 @@
                             "default": 50
                         }
                     },
-                    "DEU-Keyboard.Volume": {
+                    "DEU-MenuAndDialog.Volume": {
                         "schema": {
-                            "title": "Keyboard volume",
-                            "description": "The volume for announcements related to the keyboard.",
+                            "title": "MenuAndDialog volume",
+                            "description": "The volume for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 10,
                             "maximum": 100,
                             "default": 100
                         }
                     },
-                    "DEU-Keyboard.VoiceName": {
+                    "DEU-MenuAndDialog.VoiceName": {
                         "schema": {
-                            "title": "Keyboard voice name",
-                            "description": "The voice name used for keyboard announcements.",
+                            "title": "MenuAndDialog voice name",
+                            "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
                                 // If synth is eloq
                                 "Reed",
@@ -7520,45 +8226,45 @@
 
                     // -------- ENGLISH (UNITED STATES) - MENU AND DIALOG ----------
 
-                    "ENU-Keyboard.Parent": {
+                    "ENU-MenuAndDialog.Parent": {
                         "schema": {
                             // NOTE: This setting should remain private and not be exposed
-                            "title": "Keyboard parent config",
+                            "title": "MenuAndDialog parent config",
                             "description": "The parent config from which to inherit.",
                             "type": "string",
                             "default": "Global"
                         }
                     },
-                    "ENU-Keyboard.Pitch": {
+                    "ENU-MenuAndDialog.Pitch": {
                         "schema": {
-                            "title": "Keyboard pitch",
-                            "description": "The pitch to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog pitch",
+                            "description": "The pitch to use for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 100,
                             "default": 65
                         }
                     },
-                    "ENU-Keyboard.Punctuation": {
+                    "ENU-MenuAndDialog.Punctuation": {
                         "schema": {
-                            "title": "Keyboard punctuation",
-                            "description": "How much punctuation to announce for the keyboard.",
+                            "title": "MenuAndDialog punctuation",
+                            "description": "How much punctuation to announce for the MenuAndDialog.",
                             "enum": [0, 1, 2, 3],
                             "enumLabels": ["None", "Some", "Most", "All"],
                             "default": 1
                         }
                     },
-                    "ENU-Keyboard.Rate": {
+                    "ENU-MenuAndDialog.Rate": {
                         "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                            "title": "MenuAndDialog rate",
+                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
                             "type": "integer"
                         }
                     },
-                    "ENU-Keyboard.SynthLangString": {
+                    "ENU-MenuAndDialog.SynthLangString": {
                         "schema": {
-                            "title": "Keyboard language",
-                            "description": "The language to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog language",
+                            "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
                                 "0x409", // English - US
                                 "0x407", // German
@@ -7574,7 +8280,7 @@
                             "default": "0x409"
                         }
                     },
-                    "ENU-Keyboard.UppercasePitchDelta": {
+                    "ENU-MenuAndDialog.UppercasePitchDelta": {
                         "schema": {
                             "title": "Uppercase pitch delta",
                             "description": "Pitch variation as you type or arrow accross capital letters.",
@@ -7584,20 +8290,20 @@
                             "default": 50
                         }
                     },
-                    "ENU-Keyboard.Volume": {
+                    "ENU-MenuAndDialog.Volume": {
                         "schema": {
-                            "title": "Keyboard volume",
-                            "description": "The volume for announcements related to the keyboard.",
+                            "title": "MenuAndDialog volume",
+                            "description": "The volume for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 10,
                             "maximum": 100,
                             "default": 100
                         }
                     },
-                    "ENU-Keyboard.VoiceName": {
+                    "ENU-MenuAndDialog.VoiceName": {
                         "schema": {
-                            "title": "Keyboard voice name",
-                            "description": "The voice name used for keyboard announcements.",
+                            "title": "MenuAndDialog voice name",
+                            "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
                                 // If synth is eloq
                                 "Reed",
@@ -7622,45 +8328,45 @@
 
                     // -------- ENGLISH (United Kingdom) - MENU AND DIALOG ----------
 
-                    "ENG-Keyboard.Parent": {
+                    "ENG-MenuAndDialog.Parent": {
                         "schema": {
                             // NOTE: This setting should remain private and not be exposed
-                            "title": "Keyboard parent config",
+                            "title": "MenuAndDialog parent config",
                             "description": "The parent config from which to inherit.",
                             "type": "string",
                             "default": "Global"
                         }
                     },
-                    "ENG-Keyboard.Pitch": {
+                    "ENG-MenuAndDialog.Pitch": {
                         "schema": {
-                            "title": "Keyboard pitch",
-                            "description": "The pitch to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog pitch",
+                            "description": "The pitch to use for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 100,
                             "default": 65
                         }
                     },
-                    "ENG-Keyboard.Punctuation": {
+                    "ENG-MenuAndDialog.Punctuation": {
                         "schema": {
-                            "title": "Keyboard punctuation",
-                            "description": "How much punctuation to announce for the keyboard.",
+                            "title": "MenuAndDialog punctuation",
+                            "description": "How much punctuation to announce for the MenuAndDialog.",
                             "enum": [0, 1, 2, 3],
                             "enumLabels": ["None", "Some", "Most", "All"],
                             "default": 1
                         }
                     },
-                    "ENG-Keyboard.Rate": {
+                    "ENG-MenuAndDialog.Rate": {
                         "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                            "title": "MenuAndDialog rate",
+                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
                             "type": "integer"
                         }
                     },
-                    "ENG-Keyboard.SynthLangString": {
+                    "ENG-MenuAndDialog.SynthLangString": {
                         "schema": {
-                            "title": "Keyboard language",
-                            "description": "The language to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog language",
+                            "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
                                 "0x409", // English - US
                                 "0x407", // German
@@ -7676,7 +8382,7 @@
                             "default": "0x409"
                         }
                     },
-                    "ENG-Keyboard.UppercasePitchDelta": {
+                    "ENG-MenuAndDialog.UppercasePitchDelta": {
                         "schema": {
                             "title": "Uppercase pitch delta",
                             "description": "Pitch variation as you type or arrow accross capital letters.",
@@ -7686,20 +8392,20 @@
                             "default": 50
                         }
                     },
-                    "ENG-Keyboard.Volume": {
+                    "ENG-MenuAndDialog.Volume": {
                         "schema": {
-                            "title": "Keyboard volume",
-                            "description": "The volume for announcements related to the keyboard.",
+                            "title": "MenuAndDialog volume",
+                            "description": "The volume for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 10,
                             "maximum": 100,
                             "default": 100
                         }
                     },
-                    "ENG-Keyboard.VoiceName": {
+                    "ENG-MenuAndDialog.VoiceName": {
                         "schema": {
-                            "title": "Keyboard voice name",
-                            "description": "The voice name used for keyboard announcements.",
+                            "title": "MenuAndDialog voice name",
+                            "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
                                 // If synth is eloq
                                 "Reed",
@@ -7724,45 +8430,45 @@
 
                     // -------- SPANISH (Mexico) - MENU AND DIALOG ----------
 
-                    "ESM-Keyboard.Parent": {
+                    "ESM-MenuAndDialog.Parent": {
                         "schema": {
                             // NOTE: This setting should remain private and not be exposed
-                            "title": "Keyboard parent config",
+                            "title": "MenuAndDialog parent config",
                             "description": "The parent config from which to inherit.",
                             "type": "string",
                             "default": "Global"
                         }
                     },
-                    "ESM-Keyboard.Pitch": {
+                    "ESM-MenuAndDialog.Pitch": {
                         "schema": {
-                            "title": "Keyboard pitch",
-                            "description": "The pitch to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog pitch",
+                            "description": "The pitch to use for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 100,
                             "default": 65
                         }
                     },
-                    "ESM-Keyboard.Punctuation": {
+                    "ESM-MenuAndDialog.Punctuation": {
                         "schema": {
-                            "title": "Keyboard punctuation",
-                            "description": "How much punctuation to announce for the keyboard.",
+                            "title": "MenuAndDialog punctuation",
+                            "description": "How much punctuation to announce for the MenuAndDialog.",
                             "enum": [0, 1, 2, 3],
                             "enumLabels": ["None", "Some", "Most", "All"],
                             "default": 1
                         }
                     },
-                    "ESM-Keyboard.Rate": {
+                    "ESM-MenuAndDialog.Rate": {
                         "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                            "title": "MenuAndDialog rate",
+                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
                             "type": "integer"
                         }
                     },
-                    "ESM-Keyboard.SynthLangString": {
+                    "ESM-MenuAndDialog.SynthLangString": {
                         "schema": {
-                            "title": "Keyboard language",
-                            "description": "The language to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog language",
+                            "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
                                 "0x409", // English - US
                                 "0x407", // German
@@ -7778,7 +8484,7 @@
                             "default": "0x409"
                         }
                     },
-                    "ESM-Keyboard.UppercasePitchDelta": {
+                    "ESM-MenuAndDialog.UppercasePitchDelta": {
                         "schema": {
                             "title": "Uppercase pitch delta",
                             "description": "Pitch variation as you type or arrow accross capital letters.",
@@ -7788,20 +8494,20 @@
                             "default": 50
                         }
                     },
-                    "ESM-Keyboard.Volume": {
+                    "ESM-MenuAndDialog.Volume": {
                         "schema": {
-                            "title": "Keyboard volume",
-                            "description": "The volume for announcements related to the keyboard.",
+                            "title": "MenuAndDialog volume",
+                            "description": "The volume for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 10,
                             "maximum": 100,
                             "default": 100
                         }
                     },
-                    "ESM-Keyboard.VoiceName": {
+                    "ESM-MenuAndDialog.VoiceName": {
                         "schema": {
-                            "title": "Keyboard voice name",
-                            "description": "The voice name used for keyboard announcements.",
+                            "title": "MenuAndDialog voice name",
+                            "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
                                 // If synth is eloq
                                 "Reed",
@@ -7826,7 +8532,7 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop",
+                                "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -7834,45 +8540,45 @@
 
                     // -------- SPANISH (Spain) - MENU AND DIALOG ----------
 
-                    "ESN-Keyboard.Parent": {
+                    "ESN-MenuAndDialog.Parent": {
                         "schema": {
                             // NOTE: This setting should remain private and not be exposed
-                            "title": "Keyboard parent config",
+                            "title": "MenuAndDialog parent config",
                             "description": "The parent config from which to inherit.",
                             "type": "string",
                             "default": "Global"
                         }
                     },
-                    "ESN-Keyboard.Pitch": {
+                    "ESN-MenuAndDialog.Pitch": {
                         "schema": {
-                            "title": "Keyboard pitch",
-                            "description": "The pitch to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog pitch",
+                            "description": "The pitch to use for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 100,
                             "default": 65
                         }
                     },
-                    "ESN-Keyboard.Punctuation": {
+                    "ESN-MenuAndDialog.Punctuation": {
                         "schema": {
-                            "title": "Keyboard punctuation",
-                            "description": "How much punctuation to announce for the keyboard.",
+                            "title": "MenuAndDialog punctuation",
+                            "description": "How much punctuation to announce for the MenuAndDialog.",
                             "enum": [0, 1, 2, 3],
                             "enumLabels": ["None", "Some", "Most", "All"],
                             "default": 1
                         }
                     },
-                    "ESN-Keyboard.Rate": {
+                    "ESN-MenuAndDialog.Rate": {
                         "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                            "title": "MenuAndDialog rate",
+                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
                             "type": "integer"
                         }
                     },
-                    "ESN-Keyboard.SynthLangString": {
+                    "ESN-MenuAndDialog.SynthLangString": {
                         "schema": {
-                            "title": "Keyboard language",
-                            "description": "The language to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog language",
+                            "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
                                 "0x409", // English - US
                                 "0x407", // German
@@ -7888,7 +8594,7 @@
                             "default": "0x409"
                         }
                     },
-                    "ESN-Keyboard.UppercasePitchDelta": {
+                    "ESN-MenuAndDialog.UppercasePitchDelta": {
                         "schema": {
                             "title": "Uppercase pitch delta",
                             "description": "Pitch variation as you type or arrow accross capital letters.",
@@ -7898,20 +8604,20 @@
                             "default": 50
                         }
                     },
-                    "ESN-Keyboard.Volume": {
+                    "ESN-MenuAndDialog.Volume": {
                         "schema": {
-                            "title": "Keyboard volume",
-                            "description": "The volume for announcements related to the keyboard.",
+                            "title": "MenuAndDialog volume",
+                            "description": "The volume for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 10,
                             "maximum": 100,
                             "default": 100
                         }
                     },
-                    "ESN-Keyboard.VoiceName": {
+                    "ESN-MenuAndDialog.VoiceName": {
                         "schema": {
-                            "title": "Keyboard voice name",
-                            "description": "The voice name used for keyboard announcements.",
+                            "title": "MenuAndDialog voice name",
+                            "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
                                 // If synth is eloq
                                 "Reed",
@@ -7936,7 +8642,7 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop",
+                                "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -7944,45 +8650,45 @@
 
                     // -------- Finnish - MENU AND DIALOG ----------
 
-                    "FIN-Keyboard.Parent": {
+                    "FIN-MenuAndDialog.Parent": {
                         "schema": {
                             // NOTE: This setting should remain private and not be exposed
-                            "title": "Keyboard parent config",
+                            "title": "MenuAndDialog parent config",
                             "description": "The parent config from which to inherit.",
                             "type": "string",
                             "default": "Global"
                         }
                     },
-                    "FIN-Keyboard.Pitch": {
+                    "FIN-MenuAndDialog.Pitch": {
                         "schema": {
-                            "title": "Keyboard pitch",
-                            "description": "The pitch to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog pitch",
+                            "description": "The pitch to use for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 100,
                             "default": 65
                         }
                     },
-                    "FIN-Keyboard.Punctuation": {
+                    "FIN-MenuAndDialog.Punctuation": {
                         "schema": {
-                            "title": "Keyboard punctuation",
-                            "description": "How much punctuation to announce for the keyboard.",
+                            "title": "MenuAndDialog punctuation",
+                            "description": "How much punctuation to announce for the MenuAndDialog.",
                             "enum": [0, 1, 2, 3],
                             "enumLabels": ["None", "Some", "Most", "All"],
                             "default": 1
                         }
                     },
-                    "FIN-Keyboard.Rate": {
+                    "FIN-MenuAndDialog.Rate": {
                         "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                            "title": "MenuAndDialog rate",
+                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
                             "type": "integer"
                         }
                     },
-                    "FIN-Keyboard.SynthLangString": {
+                    "FIN-MenuAndDialog.SynthLangString": {
                         "schema": {
-                            "title": "Keyboard language",
-                            "description": "The language to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog language",
+                            "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
                                 "0x409", // English - US
                                 "0x407", // German
@@ -7998,7 +8704,7 @@
                             "default": "0x409"
                         }
                     },
-                    "FIN-Keyboard.UppercasePitchDelta": {
+                    "FIN-MenuAndDialog.UppercasePitchDelta": {
                         "schema": {
                             "title": "Uppercase pitch delta",
                             "description": "Pitch variation as you type or arrow accross capital letters.",
@@ -8008,20 +8714,20 @@
                             "default": 50
                         }
                     },
-                    "FIN-Keyboard.Volume": {
+                    "FIN-MenuAndDialog.Volume": {
                         "schema": {
-                            "title": "Keyboard volume",
-                            "description": "The volume for announcements related to the keyboard.",
+                            "title": "MenuAndDialog volume",
+                            "description": "The volume for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 10,
                             "maximum": 100,
                             "default": 100
                         }
                     },
-                    "FIN-Keyboard.VoiceName": {
+                    "FIN-MenuAndDialog.VoiceName": {
                         "schema": {
-                            "title": "Keyboard voice name",
-                            "description": "The voice name used for keyboard announcements.",
+                            "title": "MenuAndDialog voice name",
+                            "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
                                 // If synth is eloq
                                 "Reed",
@@ -8031,11 +8737,7 @@
                                 "Glen",
                                 "Sandy",
                                 "Grandma",
-                                "Grandpa",
-                                // If synth is mmobile
-                                // - Not available
-                                // If synth is SAPI 5X 64
-                                // - Not available
+                                "Grandpa"
                             ],
                             "default": "Reed"
                         }
@@ -8043,45 +8745,45 @@
 
                     // -------- French (France) - MENU AND DIALOG ----------
 
-                    "FRA-Keyboard.Parent": {
+                    "FRA-MenuAndDialog.Parent": {
                         "schema": {
                             // NOTE: This setting should remain private and not be exposed
-                            "title": "Keyboard parent config",
+                            "title": "MenuAndDialog parent config",
                             "description": "The parent config from which to inherit.",
                             "type": "string",
                             "default": "Global"
                         }
                     },
-                    "FRA-Keyboard.Pitch": {
+                    "FRA-MenuAndDialog.Pitch": {
                         "schema": {
-                            "title": "Keyboard pitch",
-                            "description": "The pitch to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog pitch",
+                            "description": "The pitch to use for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 100,
                             "default": 65
                         }
                     },
-                    "FRA-Keyboard.Punctuation": {
+                    "FRA-MenuAndDialog.Punctuation": {
                         "schema": {
-                            "title": "Keyboard punctuation",
-                            "description": "How much punctuation to announce for the keyboard.",
+                            "title": "MenuAndDialog punctuation",
+                            "description": "How much punctuation to announce for the MenuAndDialog.",
                             "enum": [0, 1, 2, 3],
                             "enumLabels": ["None", "Some", "Most", "All"],
                             "default": 1
                         }
                     },
-                    "FRA-Keyboard.Rate": {
+                    "FRA-MenuAndDialog.Rate": {
                         "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                            "title": "MenuAndDialog rate",
+                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
                             "type": "integer"
                         }
                     },
-                    "FRA-Keyboard.SynthLangString": {
+                    "FRA-MenuAndDialog.SynthLangString": {
                         "schema": {
-                            "title": "Keyboard language",
-                            "description": "The language to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog language",
+                            "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
                                 "0x409", // English - US
                                 "0x407", // German
@@ -8097,7 +8799,7 @@
                             "default": "0x409"
                         }
                     },
-                    "FRA-Keyboard.UppercasePitchDelta": {
+                    "FRA-MenuAndDialog.UppercasePitchDelta": {
                         "schema": {
                             "title": "Uppercase pitch delta",
                             "description": "Pitch variation as you type or arrow accross capital letters.",
@@ -8107,20 +8809,20 @@
                             "default": 50
                         }
                     },
-                    "FRA-Keyboard.Volume": {
+                    "FRA-MenuAndDialog.Volume": {
                         "schema": {
-                            "title": "Keyboard volume",
-                            "description": "The volume for announcements related to the keyboard.",
+                            "title": "MenuAndDialog volume",
+                            "description": "The volume for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 10,
                             "maximum": 100,
                             "default": 100
                         }
                     },
-                    "FRA-Keyboard.VoiceName": {
+                    "FRA-MenuAndDialog.VoiceName": {
                         "schema": {
-                            "title": "Keyboard voice name",
-                            "description": "The voice name used for keyboard announcements.",
+                            "title": "MenuAndDialog voice name",
+                            "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
                                 // If synth is eloq
                                 "Reed",
@@ -8144,45 +8846,45 @@
 
                     // -------- French (Canada) - MENU AND DIALOG ----------
 
-                    "FRC-Keyboard.Parent": {
+                    "FRC-MenuAndDialog.Parent": {
                         "schema": {
                             // NOTE: This setting should remain private and not be exposed
-                            "title": "Keyboard parent config",
+                            "title": "MenuAndDialog parent config",
                             "description": "The parent config from which to inherit.",
                             "type": "string",
                             "default": "Global"
                         }
                     },
-                    "FRC-Keyboard.Pitch": {
+                    "FRC-MenuAndDialog.Pitch": {
                         "schema": {
-                            "title": "Keyboard pitch",
-                            "description": "The pitch to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog pitch",
+                            "description": "The pitch to use for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 100,
                             "default": 65
                         }
                     },
-                    "FRC-Keyboard.Punctuation": {
+                    "FRC-MenuAndDialog.Punctuation": {
                         "schema": {
-                            "title": "Keyboard punctuation",
-                            "description": "How much punctuation to announce for the keyboard.",
+                            "title": "MenuAndDialog punctuation",
+                            "description": "How much punctuation to announce for the MenuAndDialog.",
                             "enum": [0, 1, 2, 3],
                             "enumLabels": ["None", "Some", "Most", "All"],
                             "default": 1
                         }
                     },
-                    "FRC-Keyboard.Rate": {
+                    "FRC-MenuAndDialog.Rate": {
                         "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                            "title": "MenuAndDialog rate",
+                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
                             "type": "integer"
                         }
                     },
-                    "FRC-Keyboard.SynthLangString": {
+                    "FRC-MenuAndDialog.SynthLangString": {
                         "schema": {
-                            "title": "Keyboard language",
-                            "description": "The language to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog language",
+                            "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
                                 "0x409", // English - US
                                 "0x407", // German
@@ -8198,7 +8900,7 @@
                             "default": "0x409"
                         }
                     },
-                    "FRC-Keyboard.UppercasePitchDelta": {
+                    "FRC-MenuAndDialog.UppercasePitchDelta": {
                         "schema": {
                             "title": "Uppercase pitch delta",
                             "description": "Pitch variation as you type or arrow accross capital letters.",
@@ -8208,20 +8910,20 @@
                             "default": 50
                         }
                     },
-                    "FRC-Keyboard.Volume": {
+                    "FRC-MenuAndDialog.Volume": {
                         "schema": {
-                            "title": "Keyboard volume",
-                            "description": "The volume for announcements related to the keyboard.",
+                            "title": "MenuAndDialog volume",
+                            "description": "The volume for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 10,
                             "maximum": 100,
                             "default": 100
                         }
                     },
-                    "FRC-Keyboard.VoiceName": {
+                    "FRC-MenuAndDialog.VoiceName": {
                         "schema": {
-                            "title": "Keyboard voice name",
-                            "description": "The voice name used for keyboard announcements.",
+                            "title": "MenuAndDialog voice name",
+                            "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
                                 // If synth is eloq
                                 "Reed",
@@ -8245,45 +8947,45 @@
 
                     // -------- Brazil - MENU AND DIALOG ----------
 
-                    "PTB-Keyboard.Parent": {
+                    "PTB-MenuAndDialog.Parent": {
                         "schema": {
                             // NOTE: This setting should remain private and not be exposed
-                            "title": "Keyboard parent config",
+                            "title": "MenuAndDialog parent config",
                             "description": "The parent config from which to inherit.",
                             "type": "string",
                             "default": "Global"
                         }
                     },
-                    "PTB-Keyboard.Pitch": {
+                    "PTB-MenuAndDialog.Pitch": {
                         "schema": {
-                            "title": "Keyboard pitch",
-                            "description": "The pitch to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog pitch",
+                            "description": "The pitch to use for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 100,
                             "default": 65
                         }
                     },
-                    "PTB-Keyboard.Punctuation": {
+                    "PTB-MenuAndDialog.Punctuation": {
                         "schema": {
-                            "title": "Keyboard punctuation",
-                            "description": "How much punctuation to announce for the keyboard.",
+                            "title": "MenuAndDialog punctuation",
+                            "description": "How much punctuation to announce for the MenuAndDialog.",
                             "enum": [0, 1, 2, 3],
                             "enumLabels": ["None", "Some", "Most", "All"],
                             "default": 1
                         }
                     },
-                    "PTB-Keyboard.Rate": {
+                    "PTB-MenuAndDialog.Rate": {
                         "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                            "title": "MenuAndDialog rate",
+                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
                             "type": "integer"
                         }
                     },
-                    "PTB-Keyboard.SynthLangString": {
+                    "PTB-MenuAndDialog.SynthLangString": {
                         "schema": {
-                            "title": "Keyboard language",
-                            "description": "The language to use for announcements related to the keyboard.",
+                            "title": "MenuAndDialog language",
+                            "description": "The language to use for announcements related to the MenuAndDialog.",
                             "enum": [
                                 "0x409", // English - US
                                 "0x407", // German
@@ -8299,7 +9001,7 @@
                             "default": "0x409"
                         }
                     },
-                    "PTB-Keyboard.UppercasePitchDelta": {
+                    "PTB-MenuAndDialog.UppercasePitchDelta": {
                         "schema": {
                             "title": "Uppercase pitch delta",
                             "description": "Pitch variation as you type or arrow accross capital letters.",
@@ -8309,20 +9011,20 @@
                             "default": 50
                         }
                     },
-                    "PTB-Keyboard.Volume": {
+                    "PTB-MenuAndDialog.Volume": {
                         "schema": {
-                            "title": "Keyboard volume",
-                            "description": "The volume for announcements related to the keyboard.",
+                            "title": "MenuAndDialog volume",
+                            "description": "The volume for announcements related to the MenuAndDialog.",
                             "type": "integer",
                             "minimum": 10,
                             "maximum": 100,
                             "default": 100
                         }
                     },
-                    "PTB-Keyboard.VoiceName": {
+                    "PTB-MenuAndDialog.VoiceName": {
                         "schema": {
-                            "title": "Keyboard voice name",
-                            "description": "The voice name used for keyboard announcements.",
+                            "title": "MenuAndDialog voice name",
+                            "description": "The voice name used for MenuAndDialog announcements.",
                             "enum": [
                                 // If synth is eloq
                                 "Reed",
@@ -8756,7 +9458,7 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop",
+                                "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -8866,7 +9568,7 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop",
+                                "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -8961,11 +9663,7 @@
                                 "Glen",
                                 "Sandy",
                                 "Grandma",
-                                "Grandpa",
-                                // If synth is mmobile
-                                // - Not available
-                                // If synth is SAPI 5X 64
-                                // - Not available
+                                "Grandpa"
                             ],
                             "default": "Reed"
                         }
@@ -9686,7 +10384,7 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop",
+                                "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -9796,7 +10494,7 @@
                                 // Mexican
                                 "Microsoft Sabina Desktop",
                                 // If synth is SAPI 5X 64
-                                "Microsoft Helena Desktop",
+                                "Microsoft Helena Desktop"
                             ],
                             "default": "Reed"
                         }
@@ -9891,11 +10589,7 @@
                                 "Glen",
                                 "Sandy",
                                 "Grandma",
-                                "Grandpa",
-                                // If synth is mmobile
-                                // - Not available
-                                // If synth is SAPI 5X 64
-                                // - Not available
+                                "Grandpa"
                             ],
                             "default": "Reed"
                         }
@@ -13421,7 +14115,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
-                    "filename": "${{environment}.PROGRAMDATA}\\Freedom Scientific\\JAWS\\2019\\SETTINGS\\Init\\JFW.INI",
+                    "filename": "${{environment}.PROGRAMDATA}\\Freedom Scientific\\JAWS\\2019\\SETTINGS\\Init\\JFW.INI"
                 },
                 "supportedSettings": {
                     // -----------------------      -------------------------
@@ -14413,7 +15107,7 @@
                         }
                     }
                 }
-            },
+            }
             // MAGic also supports a subset of JAWS settings using its built-in "JAWS lite".
             // "configuration2": {
             //     "type": "gpii.settingsHandlers.INISettingsHandler",
@@ -14656,7 +15350,7 @@
             //             }
             //         }
             //     }
-            // }
+            // } */
         },
         "launchHandlers": {
             "launcher": {
