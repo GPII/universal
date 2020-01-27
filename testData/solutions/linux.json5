@@ -32,8 +32,8 @@
                     },
                     "show-cross-hairs": {
                         "schema": {
-                            "title": "Show Cross Hairs",
-                            "description": "Cross hairs follows the mouse cursor",
+                            "title": "Show crosshairs",
+                            "description": "Whether to show crosshairs",
                             "type": "boolean",
                             "default": false
                         }
