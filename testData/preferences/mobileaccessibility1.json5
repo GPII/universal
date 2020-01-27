@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Mobile Accessibility 1",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

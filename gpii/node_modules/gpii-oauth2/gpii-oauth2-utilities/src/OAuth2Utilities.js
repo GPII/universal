@@ -15,9 +15,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = fluid || require("infusion");
 
 var gpii = fluid.registerNamespace("gpii");
+var ipaddr = require("ipaddr.js");
+
 fluid.registerNamespace("gpii.oauth2");
 
-gpii.oauth2.parseBearerAuthorizationHeader = function (req) {
+gpii.oauth2.parseAccessTokenFromRequest = function (req) {
     if (req.headers && req.headers.authorization) {
         var parts = req.headers.authorization.split(/\s+/);
         if (parts.length === 2 && parts[0].toLowerCase() === "bearer") {
@@ -27,9 +29,8 @@ gpii.oauth2.parseBearerAuthorizationHeader = function (req) {
     return undefined;
 };
 
-gpii.oauth2.getAuthorization = function (req, authGrantFinder) {
+gpii.oauth2.getAuthorization = function (accessToken, authGrantFinder) {
     var promiseTogo = fluid.promise();
-    var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
 
     if (!accessToken) {
         promiseTogo.reject(gpii.dbOperation.errors.unauthorized);
@@ -88,4 +89,37 @@ gpii.oauth2.getExpiresIn = function (timestampStarts, timestampExpires) {
     var startsTimeInMsec = timestampStarts.getTime();
     var expiresTimeInMsec = new Date(timestampExpires).getTime();
     return expiresTimeInMsec > startsTimeInMsec ? Math.round((expiresTimeInMsec - startsTimeInMsec) / 1000) : 0;
+};
+
+/**
+ * Verify if the given IP address is in the allowed IP blocks.
+ * @param {String} ipAddress - An IP to verify.
+ * @param {Array} allowedIPBlocks - An array of allowed IP blocks.
+ * @return {Boolean} Return true if the IP is within the range. Otherwise, return false.
+ */
+gpii.oauth2.isIPINRange = function (ipAddress, allowedIPBlocks) {
+    allowedIPBlocks = fluid.makeArray(allowedIPBlocks);
+    var addr = ipaddr.process(ipAddress);
+
+    for (var i in allowedIPBlocks) {
+        var oneIPBlock = allowedIPBlocks[i];
+        if (oneIPBlock.indexOf("/") > 0) {
+            // The IP block specifies a range of IP addresses such as "192.168.1.0/24"(IPV4) or "::1/128"(IPV6)
+            try {
+                if (addr.match(ipaddr.parseCIDR(oneIPBlock))) {
+                    return true;
+                }
+            } catch (e) {
+                // Catch the error when kinds of ipAddress and oneIPBlock don't match: one is in IPV4 format while
+                // the other is in IPV6 format. Ignore this error and continue with verifying other IP blocks.
+            }
+        } else {
+            // The IP block specifies a single IP address such as "192.168.1.0"(IPV4) or "::1"(IPV6)
+            var range = ipaddr.parse(oneIPBlock);
+            if (addr.toString() === range.toString()) {
+                return true;
+            }
+        }
+    };
+    return false;
 };
