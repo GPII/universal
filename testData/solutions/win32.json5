@@ -6242,7 +6242,7 @@
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "Zt.exe",
                             "options": {
-                                "message": "WM_CLOSE"
+                                "closeWindow": true
                             }
                         }
                     ]
