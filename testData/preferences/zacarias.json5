@@ -30,7 +30,7 @@
 
                         // [VocalizerExpressive-French Speech - Screen Reader]
                         // ==================================================================
-                        "VocalizerExpressive-French Speech - Screen Reader.Speaker": "Default",
+                        "VocalizerExpressive-French Speech - Screen Reader.Speaker": "",
                         "VocalizerExpressive-French Speech - Screen Reader.Valid": 1,
                         "VocalizerExpressive-French Speech - Screen Reader.SettingsValid": 1,
                         "VocalizerExpressive-French Speech - Screen Reader.Muted": 0,
@@ -40,7 +40,7 @@
                         "VocalizerExpressive-French Speech - Screen Reader.Pitch": 30,
 
                         // [VocalizerExpressive-French Speech - DocReader]
-                        "VocalizerExpressive-French Speech - DocReader.Speaker": "Default",
+                        "VocalizerExpressive-French Speech - DocReader.Speaker": "",
                         "VocalizerExpressive-French Speech - DocReader.Valid": 1,
                         "VocalizerExpressive-French Speech - DocReader.SettingsValid": 1,
                         "VocalizerExpressive-French Speech - DocReader.Muted": 0,
@@ -57,7 +57,10 @@
                         "PointerScheme.PtrEnhIndex": 1,
 
                         "PRIMARY.magPower": 160,
-                        "STATIC 1.magPower": 160
+                        "STATIC 1.magPower": 160,
+
+                        // Due to bug with literalValues this setting needs to be present
+                        "Preferences.PromptOnExit": 0
                     }
                 }
             }

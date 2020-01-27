@@ -28,11 +28,11 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.aisquared.zoomtext": {
                         "ZtSpeech.SapiProductName": "VocalizerExpressive-Dutch",
-                        "ZtSpeech.Language": 12,
+                        "ZtSpeech.Language": 19,
 
                         // [VocalizerExpressive-Dutch Speech - Screen Reader]
                         // ==================================================================
-                        "VocalizerExpressive-Dutch Speech - Screen Reader.Speaker": "Default",
+                        "VocalizerExpressive-Dutch Speech - Screen Reader.Speaker": "",
                         "VocalizerExpressive-Dutch Speech - Screen Reader.Valid": 1,
                         "VocalizerExpressive-Dutch Speech - Screen Reader.SettingsValid": 1,
                         "VocalizerExpressive-Dutch Speech - Screen Reader.Muted": 0,
@@ -42,7 +42,7 @@
                         "VocalizerExpressive-Dutch Speech - Screen Reader.Pitch": 35,
 
                         // [VocalizerExpressive-Dutch Speech - DocReader]
-                        "VocalizerExpressive-Dutch Speech - DocReader.Speaker": "Default",
+                        "VocalizerExpressive-Dutch Speech - DocReader.Speaker": "",
                         "VocalizerExpressive-Dutch Speech - DocReader.Valid": 1,
                         "VocalizerExpressive-Dutch Speech - DocReader.SettingsValid": 1,
                         "VocalizerExpressive-Dutch Speech - DocReader.Muted": 0,
@@ -61,7 +61,10 @@
                         "PRIMARY.magPower": 140,
                         "STATIC 1.magPower": 140,
 
-                        "Tracking.RouteMouse": 0
+                        "Tracking.RouteMouse": 0,
+
+                        // Due to bug with literalValues this setting needs to be present
+                        "Preferences.PromptOnExit": 0
                     }
                 }
             }

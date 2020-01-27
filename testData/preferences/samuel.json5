@@ -42,7 +42,7 @@
 
                         // [VocalizerExpressive-Spanish Speech - Screen Reader]
                         // ==================================================================
-                        "VocalizerExpressive-Spanish Speech - Screen Reader.Speaker": "Default",
+                        "VocalizerExpressive-Spanish Speech - Screen Reader.Speaker": "",
                         "VocalizerExpressive-Spanish Speech - Screen Reader.Valid": 1,
                         "VocalizerExpressive-Spanish Speech - Screen Reader.SettingsValid": 1,
                         "VocalizerExpressive-Spanish Speech - Screen Reader.Muted": 0,
@@ -52,7 +52,7 @@
                         "VocalizerExpressive-Spanish Speech - Screen Reader.Pitch": 40,
 
                         // [VocalizerExpressive-Spanish Speech - DocReader]
-                        "VocalizerExpressive-Spanish Speech - DocReader.Speaker": "Default",
+                        "VocalizerExpressive-Spanish Speech - DocReader.Speaker": "",
                         "VocalizerExpressive-Spanish Speech - DocReader.Valid": 1,
                         "VocalizerExpressive-Spanish Speech - DocReader.SettingsValid": 1,
                         "VocalizerExpressive-Spanish Speech - DocReader.Muted": 0,
@@ -72,7 +72,10 @@
                         "PRIMARY.magPower": 210,
                         "STATIC 1.magPower": 210,
 
-                        "MagEngine.MouseConstraint": 3
+                        "MagEngine.MouseConstraint": 3,
+
+                        // Due to bug with literalValues this setting needs to be present
+                        "Preferences.PromptOnExit": 0
                     }
                 }
             }
