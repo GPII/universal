@@ -1,8 +1,8 @@
 // # multi_context
 //
-// A preference set for testing the PSP's multiple contexts functionality.
+// A preference set for testing the PSP's multiple preference sets functionality.
 //
-// Provides control over `Magnification`, `Volume Control` or both (depending on the selected context).
+// Provides control over `Magnification`, `Volume Control` or both (depending on the selected preference set).
 {
     "flat": {
         "name": "Multiple Contexts",
