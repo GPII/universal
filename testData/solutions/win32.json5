@@ -4977,7 +4977,8 @@
                                     "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg"
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -4986,12 +4987,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Image",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam"
-                            }
                         }
                     }
                 },
@@ -5044,7 +5039,8 @@
                                     "default": ""
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -5053,12 +5049,6 @@
                             "type": "fluid.transforms.literalValue",
                             "input": "",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam"
-                            }
                         }
                     }
                 },
@@ -6315,7 +6305,8 @@
                                     "default": false
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam.dwFlags.FKF_FILTERKEYSON"
                     },
                     "SlowKeysInterval": {
                         "schema": {
@@ -6330,7 +6321,8 @@
                                     "default": 0 // 0 means no interval time
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam.iWaitMSec"
                     },
                     "BounceKeysInterval": {
                         "schema": {
@@ -6338,7 +6330,8 @@
                             "description": "Bounce keys interval time in milliseconds",
                             "type": "integer",
                             "default": 0
-                        }
+                        },
+                        "path": "pvParam.iBounceMSec"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -6351,12 +6344,6 @@
                             "right": false,
                             "operator": "||",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.dwFlags.FKF_FILTERKEYSON"
-                            }
                         }
                     },
                     "SlowKeysInterval": {
@@ -6372,12 +6359,6 @@
                             },
                             "false": 0,
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iWaitMSec"
-                            }
                         }
                     },
                     "BounceKeysInterval": {
@@ -6409,12 +6390,6 @@
                             },
                             "false": 0,
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iBounceMSec"
-                            }
                         }
                     }
                 },
@@ -6533,7 +6508,8 @@
                                     "default": false
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
                     }
                 },
                 "capabilities": [
@@ -6566,12 +6542,6 @@
                                 }
                             },
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
-                            }
                         }
                     }
                 },
@@ -6758,7 +6728,8 @@
                                 "off",
                                 "on"
                             ]
-                        }
+                        },
+                        "path": "pvParam.Enabled"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -6767,12 +6738,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.audioDescription.AudioDescriptionEnabled",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.Enabled"
-                            }
                         }
                     }
                 },
@@ -6832,7 +6797,8 @@
                                 "60s",
                                 "300s"
                             ]
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -6841,12 +6807,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.notificationDuration.NotificationDuration",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam"
-                            }
                         }
                     }
                 },
@@ -7020,7 +6980,8 @@
                             "description": "Enable/Disable ToggleKeys feature",
                             "type": "boolean",
                             "default": false
-                        }
+                        },
+                        "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -7029,12 +6990,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/toggleKeys",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.dwFlags.TKF_TOGGLEKEYSON"
-                            }
                         }
                     }
                 },
@@ -7078,7 +7033,8 @@
                             "description": "Displays a underline showing which is the shortcut to active a menu item",
                             "type": "boolean",
                             "default": false
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -7087,12 +7043,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam"
-                            }
                         }
                     }
                 },
@@ -7118,6 +7068,10 @@
                             "description": "Set the keyboard as the preferred input method",
                             "type": "boolean",
                             "default": false
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -7127,15 +7081,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.KeyboardPrefEnabled",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                }
-                            }
                         }
                     }
                 },
@@ -7632,7 +7577,8 @@
                                     "default": false
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam.dwFlags.MKF_MOUSEKEYSON"
                     },
                     "MaxSpeed": {
                         "schema": {
@@ -7640,7 +7586,8 @@
                             "description": "Speed of mouse keys",
                             "type": "number",
                             "multipleOf": 10
-                        }
+                        },
+                        "path": "pvParam.iMaxSpeed"
                     },
                     "Acceleration": {
                         "schema": {
@@ -7650,7 +7597,8 @@
                             "minimum": -1000,
                             // TODO: Not clear how to describe this setting
                             "maximum": 1000
-                        }
+                        },
+                        "path": "pvParam.iTimeToMaxSpeed"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -7659,12 +7607,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulation/enabled",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.dwFlags.MKF_MOUSEKEYSON"
-                            }
                         }
                     },
                     "MaxSpeed": {
@@ -7679,12 +7621,6 @@
                                 }
                             },
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iMaxSpeed"
-                            }
                         }
                     },
                     "Acceleration": {
@@ -7708,12 +7644,6 @@
                                 }
                             },
                             "operator": "+"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iTimeToMaxSpeed"
-                            }
                         }
                     }
                 },
@@ -7780,6 +7710,10 @@
                                     "default": 0
                                 }
                             }
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -7789,12 +7723,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SwapMouseButtons",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "literalValue": {
-                                "get": "pvParam",
-                                "set": "uiParam"
-                            }
                         }
                     }
                 },
@@ -7840,6 +7768,10 @@
                                     ]
                                 }
                             }
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -7849,12 +7781,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "literalValue": {
-                                "get": "pvParam",
-                                "set": "uiParam"
-                            }
                         }
                     }
                 },
@@ -7888,7 +7814,8 @@
                                     "enumLabels": ["RoutingFocus", "RoutingHybrid"]
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -7897,9 +7824,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "literalValue": "pvParam"
                         }
                     }
                 },
@@ -7933,7 +7857,8 @@
                                     "default": false
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -7942,9 +7867,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "literalValue": "pvParam"
                         }
                     }
                 },
@@ -7980,6 +7902,10 @@
                                     "maximum": 100
                                 }
                             }
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -7989,12 +7915,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollChars",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "literalValue": {
-                                "get": "pvParam",
-                                "set": "uiParam"
-                            }
                         }
                     }
                 },
@@ -8029,7 +7949,8 @@
                                     "default": 0
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -8038,9 +7959,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "literalValue": "pvParam"
                         }
                     }
                 },
@@ -8075,7 +7993,8 @@
                                     "default": 0
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -8084,9 +8003,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "literalValue": "pvParam"
                         }
                     }
                 },
@@ -8121,6 +8037,10 @@
                                     "default": 1
                                 }
                             }
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -8130,12 +8050,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.AutoWinArrangement",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "literalValue": {
-                                "get": "pvParam",
-                                "set": "uiParam"
-                            }
                         }
                     }
                 },
@@ -8202,7 +8116,8 @@
                                     "default": 10
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -8211,9 +8126,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.PointerSpeed",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "literalValue": "pvParam"
                         }
                     }
                 },
@@ -8250,7 +8162,8 @@
                                     "default": 1
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -8262,9 +8175,6 @@
                             "outputPath": "value",
                             "true": [6, 10, 1],
                             "false": [0, 0, 1]
-                        },
-                        "path": {
-                            "literalValue": "pvParam"
                         }
                     }
                 },
@@ -8299,6 +8209,10 @@
                                     "default": 0
                                 }
                             }
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -8308,12 +8222,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SnapToDefaultButton",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "literalValue": {
-                                "get": "pvParam",
-                                "set": "uiParam"
-                            }
                         }
                     }
                 },
@@ -8348,7 +8256,8 @@
                                     "default": 1
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -8357,9 +8266,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.HidePointer",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "literalValue": "pvParam"
                         }
                     }
                 },
@@ -8394,7 +8300,8 @@
                                     "default": 0
                                 }
                             }
-                        }
+                        },
+                        "path": "pvParam"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -8403,9 +8310,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseSonar",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "literalValue": "pvParam"
                         }
                     }
                 },
@@ -8524,6 +8428,10 @@
                                     "maximum": 10
                                 }
                             }
+                        },
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
                         }
                     }
                 },
@@ -8533,15 +8441,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/mouseTrailing",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                }
-                            }
                         }
                     }
                 },
@@ -9646,7 +9545,8 @@
                                 "path": { "type":  "string", "required":  true},
                                 "value": { "type":  "boolean", "required":  true}
                             }
-                        }
+                        },
+                        "path": "pvParam.dwFlags.SKF_STICKYKEYSON"
                     }
                 },
                 "capabilitiesTransformations": {
@@ -9655,12 +9555,6 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/stickyKeys",
                             "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.dwFlags.SKF_STICKYKEYSON"
-                            }
                         }
                     }
                 },
