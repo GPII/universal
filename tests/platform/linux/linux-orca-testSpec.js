@@ -184,58 +184,6 @@ gpii.tests.linux.orca.testDefs = [
                 }]
             }
         }
-    },
-    {
-        name: "Testing screenreader_nvda",
-        gpiiKey: "screenreader_nvda",
-        initialState: {
-            "gpii.gsettings.launch": {
-                "org.gnome.orca": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "key": "screen-reader-enabled"
-                    }
-                }]
-            }
-        },
-        settingsHandlers: {
-            "gpii.orca": {
-                "org.gnome.orca": [
-                    {
-                        "settings": {
-                            "sayAllStyle": 1,
-                            "enableSpeech": true,
-                            "enableEchoByWord": true,
-                            "enableEchoByCharacter": false,
-                            "voices.default.rate": 101.84090909090908,
-                            "enableTutorialMessages": false,
-                            "voices.default.family": {
-                                "locale": "en",
-                                "name": "en-westindies"
-                            },
-                            "verbalizePunctuationStyle": 0
-                        },
-                        "options": {
-                            "user": "screenreader_nvda"
-                        }
-                    }
-                ]
-            },
-            "gpii.gsettings.launch": {
-                "org.gnome.orca": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "key": "screen-reader-enabled"
-                    }
-                }]
-            }
-        }
     }
 ];
 
