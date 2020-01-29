@@ -6,36 +6,50 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.windows.mouseTrailing": {
                         "MouseTrails": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
                             "value": 10
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.mouseKeys": {
                         "MouseKeysOn": {
+                            "path": "pvParam.dwFlags.MKF_MOUSEKEYSON",
                             "value": true
                         },
                         "MaxSpeed": {
+                            "path": "pvParam.iMaxSpeed",
                             "value": 100
                         },
                         "Acceleration": {
+                            "path": "pvParam.iTimeToMaxSpeed",
                             "value": 1000
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.stickyKeys": {
                         "StickyKeysOn": {
+                            "path": "pvParam.dwFlags.SKF_STICKYKEYSON",
                             "value": true
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.toggleKeys": {
                         "ToggleKeysOn": {
+                            "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON",
                             "value": true
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.underlineMenuShortcuts": {
                         "UnderlineMenuShortcutsOn": {
-                            "value": 1
+                            "value": 1,
+                            "path": "pvParam"
                         },
                         "KeyboardPreferenceOn": {
-                            "value": 1
+                            "value": 1,
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
@@ -46,9 +60,11 @@
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.filterKeys": {
                         "FilterKeysEnable": {
+                            "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
                             "value": true
                         },
                         "BounceKeysInterval": {
+                            "path": "pvParam.iBounceMSec",
                             "value": 1000
                         }
                     },
@@ -141,45 +157,73 @@
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": {
                         "SwapMouseButtonsConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
                             "value": 1
                         },
                         "ScrollWheelModeConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
                             "value": 4294967294
                         },
                         "ScrollFocusRoutingConfig": {
+                            "path": "pvParam",
                             "value": 1
                         },
                         "MouseCursorShadowEnable": {
+                            "path": "pvParam",
                             "value": 1
                         },
                         "ScrollCharsConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
                             "value": 10
                         },
                         "WindowsTrackingConfig": {
+                            "path": "pvParam",
                             "value": 1
                         },
                         "ActiveZOrder": {
+                            "path": "pvParam",
                             "value": 0
                         },
                         "WindowsArrangement": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
                             "value": 1
                         },
                         "DoubleClickTimeConfig": {
                             "value": 600
                         },
                         "PointerSpeedConfig": {
+                            "path": "pvParam",
                             "value": 15
                         },
                         "EnhancePrecisionConfig": {
+                            "path": "pvParam",
                             "value": [0, 0, 1]
                         },
                         "SnapToDefaultButtonConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
                             "value": 1
                         },
                         "HidePointerConfig": {
+                            "path": "pvParam",
                             "value": 0
                         },
                         "MouseSonarConfig": {
+                            "path": "pvParam",
                             "value": 1
                         },
                         "DoubleClickWidthConfig": {
