@@ -12,7 +12,7 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/language": "es"
+                    "http://registry.gpii.net/common/language": "es-ES"
                 }
             }
         }

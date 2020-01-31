@@ -3521,10 +3521,16 @@
                     "http://registry\\.gpii\\.net/common/speechRate": "ENU-Global\\.Rate",
                     "http://registry\\.gpii\\.net/common/pitch": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "ENU-Global\\.Pitch",
-                            "factor": 0.010101,
-                            "offset": -0.010101
+                            "type": "fluid.transforms.round",
+                            "scale": 1,
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "ENU-Global\\.Pitch",
+                                    "factor": 0.010101,
+                                    "offset": -0.010101
+                                }
+                            }
                         }
                     },
                     "http://registry\\.gpii\\.net/common/volumeTTS": {

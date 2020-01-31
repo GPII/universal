@@ -151,7 +151,7 @@ gpii.tests.windows.nvda.testDef = [
                         "settings": {
                             "speech.espeak.rate": 17,
                             "speech.espeak.volume": 75,
-                            "speech.espeak.pitch": 15,
+                            "speech.espeak.pitch": 10,
                             "speech.espeak.rateBoost": true,
                             "speech.symbolLevel": 300,
                             "speech.espeak.voice": "en\\en-wi",
@@ -162,33 +162,6 @@ gpii.tests.windows.nvda.testDef = [
                             "keyboard.speakTypedCharacters": false,
                             "presentation.reportHelpBalloons": false,
                             "speech.espeak.sayCapForCapitals": true
-                        },
-                        "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
-                        }
-                    }
-                ]
-            },
-            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
-        }
-    }, {
-        name: "Testing screenreader_orca",
-        gpiiKey: "screenreader_orca",
-        initialState: {
-            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
-        },
-        settingsHandlers: {
-            "gpii.settingsHandlers.INISettingsHandler": {
-                "org.nvda-project": [
-                    {
-                        "settings": {
-                            "speech.symbolLevel": 300,
-                            "speech.espeak.rate": 17,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "keyboard.speakTypedWords": true,
-                            "speech.espeak.rateBoost": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
