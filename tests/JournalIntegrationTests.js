@@ -313,7 +313,7 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 explode: {
                     type: "gpii.tests.journal.explodingSettingsHandler",
                     supportedSettings: {
-                        cursorSize: {}
+                        AppStarting: {}
                     },
                     capabilitiesTransformations: {
                         AppStarting: {
@@ -328,7 +328,7 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 maybeThrow: {
                     type: "gpii.tests.journal.throwingSettingsHandler",
                     supportedSettings: {
-                        cursorSize: {}
+                        AppStarting: {}
                     },
                     capabilitiesTransformations: {
                         AppStarting: {
@@ -342,7 +342,7 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 },
                 configure: {
                     supportedSettings: {
-                        cursorSize: {}
+                        AppStarting: {}
                     }
                 }
             },

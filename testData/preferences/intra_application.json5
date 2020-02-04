@@ -1,0 +1,15 @@
+// Test user for "intra application" transforms, including "aliases" and other remappings of application settings.
+{
+  "flat": {
+    "contexts": {
+      "gpii-default": {
+        "name": "Default preferences",
+        "preferences": {
+          "http://registry.gpii.net/applications/com.microsoft.windows.desktopBackground": {
+            "Image": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg"
+          }
+        }
+      }
+    }
+  }
+}

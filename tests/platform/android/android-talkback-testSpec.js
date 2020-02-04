@@ -73,42 +73,6 @@ gpii.tests.android.talkback = [
         }
     },
     {
-        name: "Testing screenreader_orca using Flat matchmaker",
-        gpiiKey: "screenreader_orca",
-        settingsHandlers: {
-            "gpii.androidSettings": {
-                "some.app.id": [
-                    {
-                        "settings": {
-                            "tts_default_rate": 681
-                        },
-                        "options": {
-                            "settingType": "Secure"
-                        }
-                    }
-                ]
-            }
-        }
-    },
-    {
-        name: "Testing screenreader_nvda using Flat matchmaker",
-        gpiiKey: "screenreader_nvda",
-        settingsHandlers: {
-            "gpii.androidSettings": {
-                "some.app.id": [
-                    {
-                        "settings": {
-                            "tts_default_rate": 675
-                        },
-                        "options": {
-                            "settingType": "Secure"
-                        }
-                    }
-                ]
-            }
-        }
-    },
-    {
         name: "Testing screenreader_nvda using Flat matchmaker",
         gpiiKey: "screenreader_common",
         settingsHandlers: {
