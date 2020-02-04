@@ -9,7 +9,8 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
+            "http://registry\\.gpii\\.net/applications/com.\\.freedomscientific\\.jaws"
         ],
         "settingsHandlers": {
             "configuration1": {
@@ -3584,14 +3585,16 @@
 
                     // ----------- Keyboard - Manage Key Labels -------
 
-                    // TODO: Complete descriptions
+                    // NOTE: The format of the setting is of the kind: "KeyLabels.Add": "1|+",
+                    // where the first value represents if the setting label
+                    // is muted or not, and the second the keylabel used for
+                    // describing it.
 
                     "KeyLabels.Add": {
                         "schema": {
                             "title": "Manage Add Keylabel",
                             "description": "Change Keylabel and Muting.",
-                            "type": "string",
-                            "default": "1|+"
+                            "type": "string"
                         }
                     },
                     "KeyLabels.Apps": {
@@ -3610,100 +3613,557 @@
                     },
                     "KeyLabels.Back": {
                         "schema": {
-                            "title": "User requested information messages",
-                            "description": "Enable messaging user requested information with different levels of verbosity.",
-                            "type": "string",
-                            "default": "1|+"
+                            "title": "Manage Back Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
                         }
                     },
                     "KeyLabels.Cancel": {
+                        "schema": {
+                            "title": "Manage Cancel Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
                     },
                     "KeyLabels.Capital": {
+                        "schema": {
+                            "title": "Manage Capital Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
                     },
                     "KeyLabels.Clear": {
+                        "schema": {
+                            "title": "Manage Clear Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
                     },
                     "KeyLabels.Control": {
+                        "schema": {
+                            "title": "Manage Control Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
                     },
                     "KeyLabels.CrSel": {
+                        "schema": {
+                            "title": "Manage CrSel Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
                     },
                     "KeyLabels.Decimal": {
+                        "schema": {
+                            "title": "Manage Decimal Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
                     },
                     "KeyLabels.Delete": {
+                        "schema": {
+                            "title": "Manage Delete Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
                     },
                     "KeyLabels.Divide": {
+                        "schema": {
+                            "title": "Manage Divide Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
                     },
                     "KeyLabels.Down": {
+                        "schema": {
+                            "title": "Manage Down Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
                     },
                     "KeyLabels.End": {
+                        "schema": {
+                            "title": "Manage End Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
                     },
-                    "KeyLabels.ErEOF": {},
-                    "KeyLabels.Escape": {},
-                    "KeyLabels.Execute": {},
-                    "KeyLabels.ExSel": {},
-                    "KeyLabels.F1": {},
-                    "KeyLabels.F10": {},
-                    "KeyLabels.F11": {},
-                    "KeyLabels.F12": {},
-                    "KeyLabels.F13": {},
-                    "KeyLabels.F14": {},
-                    "KeyLabels.F15": {},
-                    "KeyLabels.F16": {},
-                    "KeyLabels.F17": {},
-                    "KeyLabels.F18": {},
-                    "KeyLabels.F19": {},
-                    "KeyLabels.F2": {},
-                    "KeyLabels.F20": {},
-                    "KeyLabels.F21": {},
-                    "KeyLabels.F22": {},
-                    "KeyLabels.F23": {},
-                    "KeyLabels.F3": {},
-                    "KeyLabels.F4": {},
-                    "KeyLabels.F5": {},
-                    "KeyLabels.F6": {},
-                    "KeyLabels.F7": {},
-                    "KeyLabels.F8": {},
-                    "KeyLabels.F9": {},
-                    "KeyLabels.Help": {},
-                    "KeyLabels.Home": {},
-                    "KeyLabels.Insert": {},
-                    "KeyLabels.Left": {},
-                    "KeyLabels.Letters": {},
-                    "KeyLabels.LWin": {},
-                    "KeyLabels.Menu": {},
-                    "KeyLabels.ModifiedPrintable": {},
-                    "KeyLabels.Multiply": {},
-                    "KeyLabels.Next": {},
-                    "KeyLabels.Numbers": {},
-                    "KeyLabels.NumLock": {},
-                    "KeyLabels.NumPad0": {},
-                    "KeyLabels.NumPad1": {},
-                    "KeyLabels.NumPad2": {},
-                    "KeyLabels.NumPad3": {},
-                    "KeyLabels.NumPad4": {},
-                    "KeyLabels.NumPad5": {},
-                    "KeyLabels.NumPad6": {},
-                    "KeyLabels.NumPad7": {},
-                    "KeyLabels.NumPad8": {},
-                    "KeyLabels.OEM_clear": {},
-                    "KeyLabels.PA1": {},
-                    "KeyLabels.Pause": {},
-                    "KeyLabels.Play": {},
-                    "KeyLabels.Print": {},
-                    "KeyLabels.Prior": {},
-                    "KeyLabels.Return": {},
-                    "KeyLabels.Right": {},
-                    "KeyLabels.RWin": {},
-                    "KeyLabels.Scroll": {},
-                    "KeyLabels.Select": {},
-                    "KeyLabels.Separator": {},
-                    "KeyLabels.Shift": {},
-                    "KeyLabels.SnapShot ": {},
-                    "KeyLabels.Space": {},
-                    "KeyLabels.Subtract": {},
-                    "KeyLabels.Symbols": {},
-                    "KeyLabels.Tab": {},
-                    "KeyLabels.Up": {},
-                    "KeyLabels.Zoom": {},
+                    "KeyLabels.ErEOF": {
+                        "schema": {
+                            "title": "Manage ErEOF Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Escape": {
+                        "schema": {
+                            "title": "Manage Escape Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Execute": {
+                        "schema": {
+                            "title": "Manage Execute Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.ExSel": {
+                        "schema": {
+                            "title": "Manage ExSel Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F1": {
+                        "schema": {
+                            "title": "Manage F1 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F10": {
+                        "schema": {
+                            "title": "Manage F10 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F11": {
+                        "schema": {
+                            "title": "Manage F11 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F12": {
+                        "schema": {
+                            "title": "Manage F12 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F13": {
+                        "schema": {
+                            "title": "Manage F13 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F14": {
+                        "schema": {
+                            "title": "Manage F14 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F15": {
+                        "schema": {
+                            "title": "Manage F15 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F16": {
+                        "schema": {
+                            "title": "Manage F16 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F17": {
+                        "schema": {
+                            "title": "Manage F17 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F18": {
+                        "schema": {
+                            "title": "Manage F18 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F19": {
+                        "schema": {
+                            "title": "Manage F19 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F2": {
+                        "schema": {
+                            "title": "Manage F2 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F20": {
+                        "schema": {
+                            "title": "Manage F20 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F21": {
+                        "schema": {
+                            "title": "Manage F21 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F22": {
+                        "schema": {
+                            "title": "Manage F22 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F23": {
+                        "schema": {
+                            "title": "Manage F23 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F3": {
+                        "schema": {
+                            "title": "Manage F3 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F4": {
+                        "schema": {
+                            "title": "Manage F4 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F5": {
+                        "schema": {
+                            "title": "Manage F5 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F6": {
+                        "schema": {
+                            "title": "Manage F6 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F7": {
+                        "schema": {
+                            "title": "Manage F7 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F8": {
+                        "schema": {
+                            "title": "Manage F8 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.F9": {
+                        "schema": {
+                            "title": "Manage F9 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Help": {
+                        "schema": {
+                            "title": "Manage Help Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Home": {
+                        "schema": {
+                            "title": "Manage Home Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Insert": {
+                        "schema": {
+                            "title": "Manage Insert Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Left": {
+                        "schema": {
+                            "title": "Manage Left Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Letters": {
+                        "schema": {
+                            "title": "Manage Letters Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.LWin": {
+                        "schema": {
+                            "title": "Manage LWin Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Menu": {
+                        "schema": {
+                            "title": "Manage Menu Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.ModifiedPrintable": {
+                        "schema": {
+                            "title": "Manage ModifiedPrintable Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Multiply": {
+                        "schema": {
+                            "title": "Manage Multiply Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Next": {
+                        "schema": {
+                            "title": "Manage Next Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Numbers": {
+                        "schema": {
+                            "title": "Manage Numbers Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.NumLock": {
+                        "schema": {
+                            "title": "Manage NumLock Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.NumPad0": {
+                        "schema": {
+                            "title": "Manage NumPad0 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.NumPad1": {
+                        "schema": {
+                            "title": "Manage NumPad1 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.NumPad2": {
+                        "schema": {
+                            "title": "Manage NumPad2 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.NumPad3": {
+                        "schema": {
+                            "title": "Manage NumPad3 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.NumPad4": {
+                        "schema": {
+                            "title": "Manage NumPad4 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.NumPad5": {
+                        "schema": {
+                            "title": "Manage NumPad5 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.NumPad6": {
+                        "schema": {
+                            "title": "Manage NumPad6 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.NumPad7": {
+                        "schema": {
+                            "title": "Manage NumPad7 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.NumPad8": {
+                        "schema": {
+                            "title": "Manage NumPad8 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.OEM_clear": {
+                        "schema": {
+                            "title": "Manage OEM_clear Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.PA1": {
+                        "schema": {
+                            "title": "Manage PA1 Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Pause": {
+                        "schema": {
+                            "title": "Manage Pause Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Play": {
+                        "schema": {
+                            "title": "Manage Play Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Print": {
+                        "schema": {
+                            "title": "Manage Print Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Prior": {
+                        "schema": {
+                            "title": "Manage Prior Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Return": {
+                        "schema": {
+                            "title": "Manage Return Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Right": {
+                        "schema": {
+                            "title": "Manage Right Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.RWin": {
+                        "schema": {
+                            "title": "Manage RWin Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Scroll": {
+                        "schema": {
+                            "title": "Manage Scroll Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Select": {
+                        "schema": {
+                            "title": "Manage Select Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Separator": {
+                        "schema": {
+                            "title": "Manage Separator Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Shift": {
+                        "schema": {
+                            "title": "Manage Shift Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.SnapShot ": {
+                        "schema": {
+                            "title": "Manage SnapShot Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Space": {
+                        "schema": {
+                            "title": "Manage Space Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Subtract": {
+                        "schema": {
+                            "title": "Manage Subtract Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Symbols": {
+                        "schema": {
+                            "title": "Manage Symbols Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Tab": {
+                        "schema": {
+                            "title": "Manage Tab Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Up": {
+                        "schema": {
+                            "title": "Manage Up Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
+                    "KeyLabels.Zoom": {
+                        "schema": {
+                            "title": "Manage Zoom Keylabel",
+                            "description": "Change Keylabel and Muting.",
+                            "type": "string"
+                        }
+                    },
 
                     // ----------- Keyboard - Touch Keyboard -------
 
@@ -3774,8 +4234,613 @@
                         }
                     },
 
-                    // ----------- Keyboard - Touch Keyboard -------
+                    // -------------- Custom Highligth -------------
 
+                    // -------- TODO: Check how to access ----------
+
+                    // ---------------- Research It ----------------
+
+                    "Research It Options.Primary": {
+                        "schema": {
+                            "title": "Primary Research Option",
+                            "description": "Defines the primary research option.",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude1": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude1\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude2": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude2\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude3": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude3\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude4": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude4\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude5": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude5\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude6": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude6\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude7": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude7\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude8": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude8\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude9": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude9\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude10": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude10\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude11": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude11\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude12": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude12\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude13": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude13\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude14": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude14\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude15": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude15\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude16": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude16\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+                    "Research It Exclusions.Exclude17": {
+                        "schema": {
+                            "title": "Research Exclusions \"Exclude17\"",
+                            "description": "Defines a exclusion for \"Research It\".",
+                            "type": "string"
+                        }
+                    },
+
+                    // ------------------ Text Analyzer ------------------
+
+                    // ---- Text Analyzer - Text Analyzer ----
+
+                    "Options.TextAnalyser": {
+                        "schema": {
+                            "title": "Text Analyser",
+                            "description": "Indicates text analyzer behavior.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "Turn Off",
+                                "Indicate with Sound",
+                                "Speak Count",
+                                "Describe Inconsistences"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "Options.TextAnalyserTypeFlags": {
+                        "schema": {
+                            "title": "Text Analyser Type",
+                            "description": "Indicates how the text analyzer should threat different symbols.",
+                            "type": "integer"
+                        },
+                        "label": "bitmask"
+                    },
+                    "Options.TextAnalyserSymbolFlags": {
+                        "schema": {
+                            "title": "Text Analyser Symbols",
+                            "description": "Indicates the symbols the text analyzer should check.",
+                            "type": "integer"
+                        },
+                        "label": "bitmask"
+                    },
+
+                    // ------------------ Convenient OCR ------------------
+
+                    // NOTE: The language codes used to describe the primary and secondary languages
+                    // are taken from the following list:
+                    //
+                    //  -https://docs.microsoft.com/es-es/windows/win32/intl/language-identifier-constants-and-strings
+                    //
+
+                    "OCR.PrimaryRecognitionLanguage": {
+                        "schema": {
+                            "title": "Primary OCR Recognition Language",
+                            "description": "Indicates the primary language for OCR.",
+                            "type": "integer",
+                            "default": 1033
+                        }
+                    },
+                    "OCR.SecondaryRecognitionLanguage": {
+                        "schema": {
+                            "title": "Secondary OCR Recognition Language",
+                            "description": "Indicates the secondary language for OCR.",
+                            "type": "integer",
+                            "default": 1033
+                        }
+                    },
+
+                    // --------------------- Gestures -----------------------
+
+                    "Touch.TapEventDurationMax": {
+                        "schema": {
+                            "title": "Explore Delay",
+                            "description": "Sets the maximum duration of the tapping event.",
+                            "type": "integer",
+                            "default": 210,
+                            "minimum": 160,
+                            "maximum": 410
+                        }
+                    },
+                    "Touch.TapInterEventDurationMax": {
+                        "schema": {
+                            "title": "Double Tab Speed",
+                            "description": "Sets the time interval between individual taps in a double or triple tap.",
+                            "type": "integer",
+                            "default": 600,
+                            "minimum": 300,
+                            "maximum": 900
+                        }
+                    },
+                    "Touch.TapTranslationMax": {
+                        "schema": {
+                            "title": "Tap Radius",
+                            "description": "Sets the size of the finger contact spot on the touch screen.",
+                            "type": "integer",
+                            "default": 20,
+                            "minimum": 10,
+                            "maximum": 60
+                        }
+                    },
+                    "Touch.FlickVelocityMin": {
+                        "schema": {
+                            "title": "Flick Velocity",
+                            "description": "Sets the minimum finger velocity on the touch screen above which the movement is recognized as a flick.",
+                            "type": "integer",
+                            "default": 67,
+                            "minimum": 7,
+                            "maximum": 112
+                        }
+                    },
+
+                    // ------------------- Mouse Echo ---------------------
+
+                    "Options.MouseSpeechEnabled": {
+                        "schema": {
+                            "title": "Enable Mouse Echo",
+                            "description": "Whether or not to enable the mouse echo, i.e. reading content under the mouse pointer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "Options.MouseMovementStopsSpeech": {
+                        "schema": {
+                            "title": "Mouse Echo Interrupt",
+                            "description": "Whether to stop speaking when the mouse is moved.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "Options.MouseSpeechInstant": {
+                        "schema": {
+                            "title": "Mouse Echo Instant",
+                            "description": "Enable text reading while the mouse is in motion so you do not have to pause to hear the text under the mouse.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "Options.MouseSpeechDelay": {
+                        "schema": {
+                            "title": "Mouse Echo Delay",
+                            "description": "How long to delay announcing content under the mouse, in milliseconds. Defaults to 0 (no delay).",
+                            "type": "integer",
+                            "default": 400,
+                            "minimum": 200,
+                            "maximum": 2000
+                        }
+                    },
+                    "Options.MouseSpeechEchoUnit": {
+                        "schema": {
+                            "title": "Mouse Echo Unit",
+                            "description": "The unit of text to announce when the mouse pauses over text in a control.  Defaults to reading the whole line.",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "Character",
+                                "Word",
+                                "Line",
+                                "Paragraph"
+                            ],
+                            "default": 2
+                        }
+                    },
+                    "Options.MouseEchoSpeaksHelpAndDescription": {
+                        "schema": {
+                            "title": "Speak Description of Item",
+                            "description": "Whether to speak the description of an item on mouseover.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "Options.MouseEchoSpeaksControlTypeAndState": {
+                        "schema": {
+                            "title": "Speak Control Type and State of Item",
+                            "description": "Whether to speak the type of control and state of item when mousing over a control.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+
+                    // ------------ Visual Tracking ------------
+
+                    "Options.VTUseVirtualPCCursor": {
+                        "schema": {
+                            "title": "Use Virtual PC Cursor",
+                            "description": "Whether to use the virtual PC cursor when reading HTML documents.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "Options.VTUseVirtualRibbon": {
+                        "schema": {
+                            "title": "Use Virtual Ribbon Menu",
+                            "description": "Whether to turn on the virtual ribbon menu.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "Options.VTUseTouchCursor": {
+                        "schema": {
+                            "title": "Highlight Touch Cursor",
+                            "description": "Whether or not to highlight selected items when using the touch cursor or touch gestures.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    },
+
+                    // ---- Visual Tracking - Visual Settings ----
+
+                    "Options.VTcolor": {
+                        "schema": {
+                            "title": "Visual Tracking Color",
+                            "description": "The colour to use when highlighting items selected using the touch cursor.",
+                            "enum": [
+                                "Light Blue",
+                                "Deep Sky Blue",
+                                "Blue",
+                                "Dark Blue",
+                                "Purple",
+                                "Fuchsia",
+                                "Red",
+                                "Orange",
+                                "Yellow",
+                                "Lime Green",
+                                "Green",
+                                "Olive Drab",
+                                "Saddle Brown",
+                                "Burly Wood"
+                            ],
+                            "enumLabels": [
+                                11393254,
+                                49151,
+                                255,
+                                139,
+                                8388736,
+                                16711935,
+                                16711680,
+                                16753920,
+                                16776960,
+                                1293915,
+                                32768,
+                                7048739,
+                                9127187,
+                                14596231
+                            ],
+                            "default": 1293915
+                        }
+                    },
+                    "Options.VTstyle": {
+                        "schema": {
+                            "title": "Visual Tracking Style",
+                            "description": "The style of highlighting to use.",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Box",
+                                "Block",
+                                "Underline"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "Options.VTtransparency": {
+                        "schema": {
+                            "title": "Visual Tracking Transparency",
+                            "description": "How transparent to make the visual highlighting of selected items.",
+                            "type": "integer",
+                            "maximum": 100,
+                            "minimum": 0,
+                            "default": 25
+                        }
+                    },
+                    "Options.VTthickness": {
+                        "schema": {
+                            "title": "Visual Tracking Thickness",
+                            "description": "How thick to make the \"box\" and \"underline\" highlighting styles.",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 10,
+                            "default": 2
+                        }
+                    },
+                    "Options.VTspacing": {
+                        "schema": {
+                            "title": "Visual Tracking Spacing",
+                            "description": "The amount of spacing between the highlight box and the highlighted item.",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 10,
+                            "default": 2
+                        }
+                    },
+
+                    // ------------  Miscellaneous ---------------
+
+                    "OSM.EditPromptSearch": {
+                        "schema": {
+                            "title": "Search for Prompts",
+                            "description": "Determine to what extent JAWS searches for prompts.",
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Minimum Search",
+                                "Extended Search",
+                                "Maximum Search"
+                            ],
+                            "default": 2
+                        }
+                    },
+                    "OSM.HookingMode": {
+                        "schema": {
+                            "title": "Use Accessibility Driver for Screen Capture",
+                            "description": "Whether to use the legacy accessibility driver.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "Options.VirtualRibbonSupport": {
+                        "schema": {
+                            "title": "Virtual Ribbon Support",
+                            "description": "Whether to use the Virtual PC cursor to read HTML documents. When using the Virtual PC cursor, Web pages and other HTML documents are read as if they were formatted into single columns, with each link or form field on a line of its own.  This mode allows you to navigate or select text in a Web page as if you were in a standard text document, while also giving you the ability to fill out forms or activate links.",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 0
+                        }
+                    },
+                    "OSM.UseVirtualPCCursor": {
+                        "schema": {
+                            "title": "Virtual PC Cursor",
+                            "description": "Whether to use the virtual PC cursor when reading HTML documents.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "Options.AnnounceMultilineEdit": {
+                        "schema": {
+                            "title": "Announce Multiline Edit Controls",
+                            "description": "Whether to announce multi-line edit controls.",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 0
+                        }
+                    },
+                    "OSM.TextOutDelay": {
+                        "schema": {
+                            "title": "Text Out Delay",
+                            "description": "The number of milliseconds to wait before announcing newly written text. Setting this to a non-zero value may cause terminal programs to respond in a less choppy fashion.",
+                            "type": "integer",
+                            "default": 0
+                        }
+                    },
+                    "OSM.PixelsPerSpace": {
+                        "schema": {
+                            "title": "Pixels Per Space",
+                            "description": "When simulating spaces in blank portions of a line, the number of pixels used to represent each space.",
+                            "type": "integer",
+                            "default": 8
+                        }
+                    },
+                    "OSM.PixelsPerTab": {
+                        "schema": {
+                            "title": "Pixels Per Tab",
+                            "description": "The number of pixels per tab, used to estimate the number of tab spaces contained within the blank portion of a line.",
+                            "type": "integer",
+                            "default": 10
+                        }
+                    },
+                    "OSM.TrackFocusRect": {
+                        "schema": {
+                            "title": "Track Focus Rectangle",
+                            "description": "Set to one causes MAGic to track the focus rectangle in standard controls that utilize focus rectangles.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "OSM.LeftMargin": {
+                        "schema": {
+                            "title": "Left Margin in Pixels",
+                            "description": "Ignores the distance specified in pixels from the left border of the window.",
+                            "type": "integer",
+                            "default": 0
+                        }
+                    },
+                    "OSM.UnderlineProximity": {
+                        "schema": {
+                            "title": "Underline Proximity",
+                            "description": "How far away in pixels can an underline be before being considered an actual underline.",
+                            "type": "integer",
+                            "default": 0
+                        }
+                    },
                     "FSCasts.EnableNotifications": {
                         "schema": {
                             "title": "FSCast Notifications",
@@ -3789,6 +4854,130 @@
                                 "on"
                             ],
                             "default": 1
+                        }
+                    },
+
+                    // --------  Miscellaneous - Submit Anonymouse Usage Data ------------
+
+                    // NOTE-TODO: Setting not present in the default config file.
+
+                    // -------------------------------------------------------------------
+
+                    // ----------------  Miscellaneous - Error Reporting -----------------
+
+                    // NOTE-TODO: Setting not present in the default config file.
+
+                    // -------------------------------------------------------------------
+
+                    // ------------ Graphics and Symbols ------------
+
+                    "OSM.GraphicsMode": {
+                        "schema": {
+                            "title": "Graphics Mode",
+                            "description": "How to handle graphic CRC values.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Store graphic CRC values when the graphics are being drawn to the screen.",
+                                "Compute them from the screen image at the time they are requested to be spoken."
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "OSM.IgnoreSetSysModal": {
+                        "schema": {
+                            "title": "Ignore Set Sys Modal",
+                            "description": "Whether to disallow Windows calling the SetSysModalWindow function. In most cases this is desirable, because System Modal Windows cannot be spoken.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "OSM.IncludeLines": {
+                        "schema": {
+                            "title": "Include Lines",
+                            "description": "Whether to include line segments in the Off Screen Model. This is required for Excel and other programs which draw a focus rectangle.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "OSM.SpeakSysModalMessageBox": {
+                        "schema": {
+                            "title": "Speak Sys Modal Message Box",
+                            "description": "Whether to announce System Modal Message Boxes.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "OSM.TrackCommandBars": {
+                        "schema": {
+                            "title": "Track Command Bars",
+                            "description": "Whether to track the menu bar in Office applications.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "OSM.TrimBrailleGraphicLabels": {
+                        "schema": {
+                            "title": "Trim Braille Graphic Labels",
+                            "description": "Whether to trim the size of a braille graphic. Useful to preserve the virtical positioning of braille text.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    },
+
+                    // ------------ GLOBAL ------------
+
+                    "OSM.PixelsPerBlankLine": {
+                        "schema": {
+                            "title": "Pixels Per Blank Line",
+                            "description": "how many pixels (high) per blank line",
+                            "type": "integer",
+                            "default": 13
+                        }
+                    },
+                    "Voice Profiles.ActiveVoiceProfileName": {
+                        "schema": {
+                            "title": "Active Voice Profile Name",
+                            "description": "The active voice profile.",
+                            "type": "string",
+                            "default": "Eloquence"
                         }
                     },
                     "HTML.Abbreviations": {
@@ -3937,15 +5126,6 @@
                             "description": "The text to read before text that appears in all capital letters.",
                             "type": "string",
                             "default": "all cap"
-                        }
-                    },
-                    "Options.AnnounceMultilineEdit": {
-                        "schema": {
-                            "title": "Announce Multiline Edit Controls",
-                            "description": "Whether to announce multi-line edit controls.",
-                            "enum": [0, 1],
-                            "enumLabels": ["off", "on"],
-                            "default": 0
                         }
                     },
                     // This does not seem safe to update, as we have no idea which displays are available on a given machine.
@@ -4105,93 +5285,6 @@
                             "default": 0
                         }
                     },
-                    "Options.MouseEchoSpeaksControlTypeAndState": {
-                        "schema": {
-                            "title": "Speak Control Type and State of Item",
-                            "description": "Whether to speak the type of control and state of item when mousing over a control.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "Options.MouseEchoSpeaksHelpAndDescription": {
-                        "schema": {
-                            "title": "Speak Description of Item",
-                            "description": "Whether to speak the description of an item on mouseover.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    "Options.MouseMovementStopsSpeech": {
-                        "schema": {
-                            "title": "Mouse Echo Interrupt",
-                            "description": "Whether to stop speaking when the mouse is moved.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "Options.MouseSpeechDelay": {
-                        "schema": {
-                            "title": "Mouse Echo Delay",
-                            "description": "How long to delay announcing content under the mouse, in milliseconds.  Defaults to 0 (no delay).",
-                            "type": "integer",
-                            "default": 0
-                        }
-                    },
-                    "Options.MouseSpeechEchoUnit": {
-                        "schema": {
-                            "title": "Mouse Echo Unit",
-                            "description": "The unit of text to announce when the mouse pauses over text in a control.  Defaults to reading the whole line.",
-                            "enum": [
-                                0,
-                                1,
-                                2,
-                                3
-                            ],
-                            "enumLabels": [
-                                "character",
-                                "word",
-                                "line",
-                                "paragraph"
-                            ],
-                            "default": 2
-                        }
-                    },
-                    "Options.MouseSpeechEnabled": {
-                        "schema": {
-                            "title": "Enable Mouse Echo",
-                            "description": "Whether or not to enable the mouse echo, i.e. reading content under the mouse pointer.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
                     "Options.ProcessToolTipEvent": {
                         "schema": {
                             "title": "Process Tooltip Event",
@@ -4287,7 +5380,7 @@
                             "default": 1
                         }
                     },
-                    // TODO: Verify.  Look at the INI file and suggest defaults?
+                    // TODO: Verify. Look at the INI file and suggest defaults?
                     "Options.Synthesizer": {
                         "schema": {
                             "title": "Synthesizer",
@@ -4314,40 +5407,6 @@
                             ]
                         }
                     },
-                    "Options.TextAnalyser": {
-                        "schema": {
-                            "title": "Text Analyzer",
-                            "description": "The type of alert to use when announcing formatting errors.",
-                            "enum": [
-                                0,
-                                1,
-                                2,
-                                3
-                            ],
-                            "enumLabels": [
-                                "turn off",
-                                "indicate with sound",
-                                "speak count",
-                                "describe inconsistencies"
-                            ],
-                            "default": 0
-                        }
-                    },
-
-                    // TODO: Discuss whether / how to handle "bit fields" like these.
-                    // "Options.TextAnalyserSymbolFlags": {
-                    //                             "schema": {
-                    //                        }
-                    // "title": "Indicate Mismatched Symbols",
-                    //     "description": "Which mismatched symbols (such as mismatched opening and closing parentheses) to indicate when editing. Defaults to announcing all supported mismatching symbols."
-                    // },
-                    // "Options.TextAnalyserTypeFlags": {
-                    //                         "schema": {
-                    //                        }
-                    //     "title": "Inconsistencies to Check",
-                    //     "description": "Which types of inconsistencies to check.  Defaults to \"all\"."
-                    // },
-
                     // Can't find information in the help file or default settings.  Disabled for now.
                     // "Options.TreeViewCheckBoxes": {
                     //     "schema": {
@@ -4365,7 +5424,6 @@
                     //         ]
                     //     }
                     // },
-
                     "Options.UseVirtualInfoInFormsMode": {
                         "schema": {
                             "title": "Use Virtual Info in Forms Mode",
@@ -4382,7 +5440,7 @@
                             ]
                         }
                     },
-                    // No documentation or onscreen option.  Disabled for now.
+                    // No documentation or onscreen option. Disabled for now.
                     // "Options.UseWindowsKeyboardHook": {
                     //     "schema": {
                     //         "title": "Use Windows Keyboard Hook",
@@ -4399,7 +5457,6 @@
                     //         ]
                     //     }
                     // },
-
                     "Options.VIRTUALMSAAREFRESH": {
                         "schema": {
                             "title": "Virtual MSAA Refresh",
@@ -4407,297 +5464,6 @@
                             "type": "integer",
                             "default": 0,
                             "minimum": -1
-                        }
-                    },
-                    "Options.VirtualRibbonSupport": {
-                        "schema": {
-                            "title": "Virtual Ribbon Support",
-                            "description": "Whether to use the Virtual PC cursor to read HTML documents. When using the Virtual PC cursor, Web pages and other HTML documents are read as if they were formatted into single columns, with each link or form field on a line of its own.  This mode allows you to navigate or select text in a Web page as if you were in a standard text document, while also giving you the ability to fill out forms or activate links.",
-                            "enum": [0, 1],
-                            "enumLabels": ["off", "on"],
-                            "default": 1
-                        }
-                    },
-                    // TODO: DEFAULT
-                    "Options.VTcolor": {
-                        "schema": {
-                            "title": "Visual Tracking Color",
-                            "description": "The colour to use when highlighting items selected using the touch cursor.",
-                            "type": "integer"
-                        }
-                    },
-                    // TODO: DEFAULT
-                    "Options.VTspacing": {
-                        "schema": {
-                            "title": "Visual Tracking Spacing",
-                            "description": "The amount of spacing between the highlight box and the highlighted item.",
-                            "type": "integer"
-                        }
-                    },
-                    "Options.VTstyle": {
-                        "schema": {
-                            "title": "Visual Tracking Style",
-                            "description": "The style of highlighting to use.",
-                            "enum": [
-                                0,
-                                1,
-                                2
-                            ],
-                            "enumLabels": [
-                                "box",
-                                "block",
-                                "underline"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    // TODO: DEFAULT
-                    "Options.VTthickness": {
-                        "schema": {
-                            "title": "Visual Tracking Thickness",
-                            "description": "How thick to make the \"box\" and \"underline\" highlighting styles.",
-                            "type": "integer"
-                        }
-                    },
-                    // TODO: DEFAULT
-                    "Options.VTtransparency": {
-                        "schema": {
-                            "title": "Visual Tracking Transparency",
-                            "description": "How transparent to make the visual highlighting of selected items.",
-                            "type": "integer"
-                        }
-                    },
-                    "Options.VTUseTouchCursor": {
-                        "schema": {
-                            "title": "Highlight Touch Cursor",
-                            "description": "Whether or not to highlight selected items when using the touch cursor or touch gestures.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    "Options.VTUseVirtualPCCursor": {
-                        "schema": {
-                            "title": "Use Virtual PC Cursor",
-                            "description": "Whether to use the virtual PC cursor when reading HTML documents.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "Options.VTUseVirtualRibbon": {
-                        "schema": {
-                            "title": "Use Virtual Ribbon Menu",
-                            "description": "Whether to turn on the virtual ribbon menu.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
-
-                    // ------------ Graphics and Symbols ------------
-
-                    "OSM.GraphicsMode": {
-                        "schema": {
-                            "title": "Graphics Mode",
-                            "description": "How to handle graphic CRC values.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "Store graphic CRC values when the graphics are being drawn to the screen.",
-                                "Compute them from the screen image at the time they are requested to be spoken."
-                            ],
-                            "default": 0
-                        }
-                    },
-                    "OSM.IgnoreSetSysModal": {
-                        "schema": {
-                            "title": "Ignore Set Sys Modal",
-                            "description": "Whether to disallow Windows calling the SetSysModalWindow function. In most cases this is desirable, because System Modal Windows cannot be spoken.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "OSM.IncludeLines": {
-                        "schema": {
-                            "title": "Include Lines",
-                            "description": "Whether to include line segments in the Off Screen Model. This is required for Excel and other programs which draw a focus rectangle.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    "OSM.PixelsPerBlankLine": {
-                        "schema": {
-                            "title": "Pixels Per Blank Line",
-                            "description": "how many pixels (high) per blank line",
-                            "type": "integer",
-                            "default": 13
-                        }
-                    },
-                    "OSM.PixelsPerSpace": {
-                        "schema": {
-                            "title": "Pixels Per Space",
-                            "description": "When simulating spaces in blank portions of a line, the number of pixels used to represent each space.",
-                            "type": "integer",
-                            "default": 8
-                        }
-                    },
-                    "OSM.PixelsPerTab": {
-                        "schema": {
-                            "title": "Pixels Per Tab",
-                            "description": "The number of pixels per tab, used to estimate the number of tab spaces contained within the blank portion of a line.",
-                            "type": "integer",
-                            "default": 10
-                        }
-                    },
-                    "OSM.SpeakSysModalMessageBox": {
-                        "schema": {
-                            "title": "Speak Sys Modal Message Box",
-                            "description": "Whether to announce System Modal Message Boxes.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "OSM.TextOutDelay": {
-                        "schema": {
-                            "title": "Text Out Delay",
-                            "description": "The number of milliseconds to wait before announcing newly written text. Setting this to a non-zero value may cause terminal programs to respond in a less choppy fashion.",
-                            "type": "integer",
-                            "default": 0
-                        }
-                    },
-                    "OSM.TrackCommandBars": {
-                        "schema": {
-                            "title": "Track Command Bars",
-                            "description": "Whether to track the menu bar in Office applications.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "OSM.TrackFocusRect": {
-                        "schema": {
-                            "title": "Track Focus Rectangle",
-                            "description": "Set to one causes MAGic to track the focus rectangle in standard controls that utilize focus rectangles.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "OSM.TrimBrailleGraphicLabels": {
-                        "schema": {
-                            "title": "Trim Braille Graphic Labels",
-                            "description": "Whether to trim the size of a braille graphic. Useful to preserve the virtical positioning of braille text.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    "OSM.UnderlineProximity": {
-                        "schema": {
-                            "title": "Underline Proximity",
-                            "description": "How far away in pixels can an underline be before being considered an actual underline.",
-                            "type": "integer",
-                            "default": 0
-                        }
-                    },
-                    // TODO: Document default.
-                    "Touch.FlickVelocityMin": {
-                        "schema": {
-                            "title": "Flick Velocity",
-                            "description": "The minimum finger velocity to treat as a \"flick\".",
-                            "type": "integer"
-                        }
-                    },
-                    // TODO: Document default.
-                    "Touch.TapEventDurationMax": {
-                        "schema": {
-                            "title": "Explore Delay",
-                            "description": "The delay between touching a touch screen and displaying the explore menu, in milliseconds.",
-                            "type": "integer"
-                        }
-                    },
-                    // TODO: Document default.
-                    "Touch.TapInterEventDurationMax": {
-                        "schema": {
-                            "title": "Double Tap Speed",
-                            "description": "The threshold for treating two taps as a double-tap, expressed in milliseconds between taps.",
-                            "type": "integer"
-                        }
-                    },
-                    // TODO: Document default.
-                    "Touch.TapTranslationMax": {
-                        "schema": {
-                            "title": "Tap Radius",
-                            "description": "The size of the finger contact spot on the touch screen.",
-                            "type": "integer"
-                        }
-                    },
-                    "Voice Profiles.ActiveVoiceProfileName": {
-                        "schema": {
-                            "title": "Active Voice Profile Name",
-                            "description": "The active voice profile.",
-                            "type": "string",
-                            "default": "Eloquence"
                         }
                     }
                 },
