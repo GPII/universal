@@ -14498,7 +14498,7 @@
                 "capabilitiesTransformations": {
                     "Options\\.confirmWhenExitingJAWS": {
                         "literalValue": 0
-                    },
+                    }
 
                     // TODO-NOTE: This transforms should be dependent in the current "Options.PrimaryLanguage"
                     // setting, and change just the target ones.
