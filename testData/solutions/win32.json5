@@ -14496,12 +14496,27 @@
                     }
                 },
                 "capabilitiesTransformations": {
+                    "Options\\.confirmWhenExitingJAWS": {
+                        "literalValue": 0
+                    },
+
+                    // TODO-NOTE: This transforms should be dependent in the current "Options.PrimaryLanguage"
+                    // setting, and change just the target ones.
+
+                    // ---------------------------- speechRate --------------------------------
+
+                    /*
                     "ENU-Global\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "ENU-JAWSCursor\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "ENU-Keyboard\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "ENU-MenuAndDialog\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "ENU-Message\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "ENU-PCCursor\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    */
+
+                    // ------------------------------- Pitch --------------------------------
+
+                    /*
                     "ENU-Global\\.Pitch": {
                         "transform": {
                             "type": "fluid.transforms.round",
@@ -14580,6 +14595,11 @@
                             }
                         }
                     },
+                    */
+
+                    // ------------------------------- Volume --------------------------------
+
+                    /*
                     "ENU-Global\\.Volume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -14622,6 +14642,11 @@
                             "factor": 100
                         }
                     },
+                    */
+
+                    // ---------------------------- Punctuation --------------------------------
+
+                    /*
                     "ENU-Global\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -14694,6 +14719,11 @@
                             }
                         }
                     },
+                    */
+
+                    // -------------------------- SynthLangString --------------------------------
+
+                    /*
                     // TODO: This should be shared between all variations within this solution
                     "ENU-Global\\.SynthLangString": {
                         "transform": {
@@ -14808,9 +14838,18 @@
                             }
                         }
                     }
+                    */
                 },
                 "inverseCapabilitiesTransformations": {
+                    // ---------------------------- speechRate --------------------------------
+
+                    /*
                     "http://registry\\.gpii\\.net/common/speechRate": "ENU-Global\\.Rate",
+                    */
+
+                    // ------------------------------- Pitch --------------------------------
+
+                    /*
                     "http://registry\\.gpii\\.net/common/pitch": {
                         "transform": {
                             "type": "fluid.transforms.round",
@@ -14825,6 +14864,11 @@
                             }
                         }
                     },
+                    */
+
+                    // ------------------------------- Volume --------------------------------
+
+                    /*
                     "http://registry\\.gpii\\.net/common/volumeTTS": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -14832,6 +14876,11 @@
                             "factor": 0.01
                         }
                     },
+                    */
+
+                    // ---------------------------- Punctuation --------------------------------
+
+                    /*
                     "http://registry\\.gpii\\.net/common/punctuationVerbosity": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -14856,6 +14905,11 @@
                             ]
                         }
                     },
+                    */
+
+                    // -------------------------- SynthLangString --------------------------------
+
+                    /*
                     // TODO: Review the "common" language settings WRT various solution language settings.
                     "http://registry\\.gpii\\.net/common/auditoryOutLanguage": {
                         "transform": {
@@ -14875,6 +14929,7 @@
                             }
                         }
                     }
+                    */
                 }
             },
             "configuration3": {
@@ -14957,37 +15012,27 @@
            "launcher": {
                "type": "gpii.launchHandlers.flexibleHandler",
                "options": {
-                   "getState": [
-                       {
-                           "type": "gpii.processReporter.find",
-                           "command": "jfw.exe"
-                       }
-                   ],
-                   "setTrue": [
-                       {
-                           "type": "gpii.launch.exec",
-                           "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2019.exe\\}\""
-                       }
-                   ],
-                   "setFalse": [
-                       {
-                           "type": "gpii.windows.closeProcessByName",
-                           "filename": "jfw.exe"
-                       },
-                       {
-                           "type": "gpii.windows.closeProcessByName",
-                           "filename": "fsSynth32.exe"
-                       },
-                       {
-                           "type": "gpii.windows.closeProcessByName",
-                           "filename": "jhookldr.exe"
-                       },
-                       // New for JAWS 2018 and higher.
-                       {
-                           "type": "gpii.windows.closeProcessByName",
-                           "filename": "ScannerHandler.exe"
-                       }
-                   ]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "jfw.exe"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2019.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "jfw.exe",
+                            "options": {
+                                "closeWindow": true
+                            }
+                        }
+                    ]
                }
            }
         },
