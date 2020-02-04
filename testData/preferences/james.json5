@@ -1,8 +1,6 @@
 /*
-
-    A fixture to test many JAWS settings at once by setting them to something other than the default.
-
-*/
+ * A fixture to test many JAWS settings at once by setting them to something other than the default.
+ */
 {
     "flat": {
         "name": "James",

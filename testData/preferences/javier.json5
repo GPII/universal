@@ -1,8 +1,6 @@
 /*
-
-    A fixture to test many JAWS settings at once by setting them to something other than the default.
-
-*/
+ * A fixture to test many JAWS settings at once by setting them to something other than the default.
+ */
 {
     "flat": {
         "name": "Javier",
@@ -12,6 +10,7 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
                         "Options.PrimaryLanguage": "ESN",
+
                         "ESM-Message.Rate": 90,
                         "ESM-Message.Punctuation": 1,
                         "ESM-PCCursor.Rate": 90,
