@@ -63,6 +63,7 @@ var testIncludes = [
     "../gpii/node_modules/flowManager/test/PrefsServerDataSourceTests.js",
     "../gpii/node_modules/flowManager/test/PSPChannelTests.js",
     "../gpii/node_modules/flowManager/test/SettingsDataSourceTests.js",
+    "../gpii/node_modules/flowManager/test/RepositorySolutionsLoaderTests.js",
     "../gpii/node_modules/gpii-db-operation/test/DbDataStoreTests.js",
     "../gpii/node_modules/gpii-ini-file/test/iniFileTests.js",
     "../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/authGrantFinderTests.js",
