@@ -11,6 +11,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.AppData}\\Freedom Scientific\\ZoomText\\2019\\Config\\zten-US.zxc",
                     "encoding": "utf16le"
@@ -179,7 +180,7 @@
                                 "Medium",
                                 "Thick"
                             ],
-                            "default": 0
+                            "default": 2
                         }
                     },
                     "PointerScheme.PtrEnhColor": {
@@ -237,6 +238,13 @@
                     },
                     // Bitmask Setting
                     "PointerScheme.PtrEnhModifier": {
+                        // TODO: Unknown
+                        "schema": {
+                            "title": "Pointer Scheme pointer modifiers",
+                            "description": "Bitmask holding 'pointer behavior modifiers'.",
+                            "type": "integer"
+                        },
+                        "label": "bitmask"
                     },
                     // [CursorScheme]
                     "CursorScheme.CursorEnhEnable": {
@@ -363,7 +371,15 @@
                         }
                     },
                     // Bitmask Setting
-                    "CursorScheme.PtrEnhModifier": {},
+                    "CursorScheme.PtrEnhModifier": {
+                        // TODO: Unknown
+                        "schema": {
+                            "title": "Cursor Scheme pointer modifiers",
+                            "description": "Bitmask holding 'pointer behavior modifiers'.",
+                            "type": "integer"
+                        },
+                        "label": "bitmask"
+                    },
                     // [ColorScheme]
                     "ColorScheme.ColorSchEnable": {
                         "schema": {
@@ -712,6 +728,13 @@
                     },
                     // Bitmask setting
                     "FocusScheme.FocusENHModifier": {
+                        // TODO: Unknown
+                        "schema": {
+                            "title": "Focus Modifiers",
+                            "description": "Bitmask holding 'focus behavior modifiers'.",
+                            "type": "integer"
+                        },
+                        "label": "bitmask"
                     },
                     // [EchoTyping]
                     "EchoTyping.Mode": {
@@ -903,16 +926,12 @@
                     // [Microsoft David Desktop - English (United States)-English Speech - Screen Reader]
                     // ==================================================================
                     "Microsoft David Desktop - English (United States)-English Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - Default.
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Default"
-                            ],
-                            "enumLabels": [
-                                "Default"
-                            ],
-                            "default": "Default"
+                            "type": "string"
                         }
                     },
                     "Microsoft David Desktop - English (United States)-English Speech - Screen Reader.Valid": {
@@ -956,9 +975,9 @@
                             "title": "Speech Rate (WPM)",
                             "description": "Specifies speech rate for the current synthesizer.",
                             "type": "integer",
-                            "minimum": 0,
-                            "maximum": 100,
-                            "default": 65
+                            "minimum": 50,
+                            "maximum": 400,
+                            "default": 100
                         }
                     },
                     "Microsoft David Desktop - English (United States)-English Speech - Screen Reader.Volume": {
@@ -1003,16 +1022,12 @@
                     },
                     // [Microsoft David Desktop - English (United States)-English Speech - DocReader]
                     "Microsoft David Desktop - English (United States)-English Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - Default.
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Default"
-                            ],
-                            "enumLabels": [
-                                "Default"
-                            ],
-                            "default": "Default"
+                            "type": "string"
                         }
                     },
                     "Microsoft David Desktop - English (United States)-English Speech - DocReader.Valid": {
@@ -1056,9 +1071,9 @@
                             "title": "Speech Rate (WPM)",
                             "description": "Specifies speech rate for the current synthesizer.",
                             "type": "integer",
-                            "minimum": 0,
-                            "maximum": 100,
-                            "default": 65
+                            "minimum": 50,
+                            "maximum": 400,
+                            "default": 100
                         }
                     },
                     "Microsoft David Desktop - English (United States)-English Speech - DocReader.Volume": {
@@ -1105,16 +1120,12 @@
                     // [Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader]
                     // ==================================================================
                     "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - Default.
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Default"
-                            ],
-                            "enumLabels": [
-                                "Default"
-                            ],
-                            "default": "Default"
+                            "type": "string"
                         }
                     },
                     "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Valid": {
@@ -1158,9 +1169,9 @@
                             "title": "Speech Rate (WPM)",
                             "description": "Specifies speech rate for the current synthesizer.",
                             "type": "integer",
-                            "minimum": 0,
-                            "maximum": 100,
-                            "default": 65
+                            "minimum": 50,
+                            "maximum": 400,
+                            "default": 100
                         }
                     },
                     "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Volume": {
@@ -1205,16 +1216,12 @@
                     },
                     // [Microsoft Zira Desktop - English (United States)-English Speech - DocReader]
                     "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - Default.
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Default"
-                            ],
-                            "enumLabels": [
-                                "Default"
-                            ],
-                            "default": "Default"
+                            "type": "string"
                         }
                     },
                     "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Valid": {
@@ -1258,9 +1265,9 @@
                             "title": "Speech Rate (WPM)",
                             "description": "Specifies speech rate for the current synthesizer.",
                             "type": "integer",
-                            "minimum": 0,
-                            "maximum": 100,
-                            "default": 65
+                            "minimum": 50,
+                            "maximum": 400,
+                            "default": 100
                         }
                     },
                     "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Volume": {
@@ -1307,20 +1314,14 @@
                     // [msmobile-English Speech - Screen Reader]
                     // ==================================================================
                     "msmobile-English Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Microsoft David, United States"
+                        //  - "Microsoft Mark, United States"
+                        //  - "Microsoft Zira, United States"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Microsoft David, United States",
-                                "Microsoft Mark, United States",
-                                "Microsoft Zira, United States"
-                            ],
-                            "enumLabels": [
-                                "Microsoft David, United States",
-                                "Microsoft Mark, United States",
-                                "Microsoft Zira, United States"
-                            ],
-                            "default": "Microsoft David, United States"
+                            "type": "string"
                         }
                     },
                     "msmobile-English Speech - Screen Reader.Valid": {
@@ -1422,20 +1423,14 @@
                     // [msmobile-English Speech - DocReader]
                     // ==================================================================
                     "msmobile-English Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Microsoft David, United States"
+                        //  - "Microsoft Mark, United States"
+                        //  - "Microsoft Zira, United States"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Microsoft David, United States",
-                                "Microsoft Mark, United States",
-                                "Microsoft Zira, United States"
-                            ],
-                            "enumLabels": [
-                                "Microsoft David, United States",
-                                "Microsoft Mark, United States",
-                                "Microsoft Zira, United States"
-                            ],
-                            "default": "Microsoft David, United States"
+                            "type": "string"
                         }
                     },
                     "msmobile-English Speech - DocReader.Valid": {
@@ -1538,20 +1533,14 @@
                     // [VocalizerExpressive-English Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-English Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Tom Compact, United States",
+                        //  - "Zoe Compact, United States",
+                        //  - "Malcolm Compact, British"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Tom Compact, United States",
-                                "Zoe Compact, United States",
-                                "Malcolm Compact, British"
-                            ],
-                            "enumLabels": [
-                                "Tom Compact, United States",
-                                "Zoe Compact, United States",
-                                "Malcolm Compact, British"
-                            ],
-                            "default": "Tom Compact, United States"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-English Speech - Screen Reader.Valid": {
@@ -1653,20 +1642,14 @@
                     // [VocalizerExpressive-English Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-English Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Tom Compact, United States",
+                        //  - "Zoe Compact, United States",
+                        //  - "Malcolm Compact, British"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Tom Compact, United States",
-                                "Zoe Compact, United States",
-                                "Malcolm Compact, British"
-                            ],
-                            "enumLabels": [
-                                "Tom Compact, United States",
-                                "Zoe Compact, United States",
-                                "Malcolm Compact, British"
-                            ],
-                            "default": "Tom Compact, United States"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-English Speech - DocReader.Valid": {
@@ -1769,16 +1752,12 @@
                     // [VocalizerExpressive-German Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-German Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Anna Compact",
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Anna Compact"
-                            ],
-                            "enumLabels": [
-                                "Anna Compact"
-                            ],
-                            "default": "Anna Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-German Speech - Screen Reader.Valid": {
@@ -1876,16 +1855,12 @@
                     // [VocalizerExpressive-German Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-German Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Anna Compact",
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Anna Compact"
-                            ],
-                            "enumLabels": [
-                                "Anna Compact"
-                            ],
-                            "default": "Anna Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-German Speech - DocReader.Valid": {
@@ -1984,16 +1959,12 @@
                     // [VocalizerExpressive-French Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-French Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Audrey Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Audrey Compact"
-                            ],
-                            "enumLabels": [
-                                "Audrey Compact"
-                            ],
-                            "default": "Anna Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-French Speech - Screen Reader.Valid": {
@@ -2091,16 +2062,12 @@
                     // [VocalizerExpressive-French Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-French Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Anna Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Anna Compact"
-                            ],
-                            "enumLabels": [
-                                "Anna Compact"
-                            ],
-                            "default": "Anna Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-French Speech - DocReader.Valid": {
@@ -2199,16 +2166,12 @@
                     // [VocalizerExpressive-Spanish Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Spanish Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Jorge Compact, Castilian"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Jorge Compact, Castilian"
-                            ],
-                            "enumLabels": [
-                                "Jorge Compact, Castilian"
-                            ],
-                            "default": "Jorge Compact, Castilian"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Spanish Speech - Screen Reader.Valid": {
@@ -2306,16 +2269,12 @@
                     // [VocalizerExpressive-Spanish Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Spanish Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Jorge Compact, Castilian"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Jorge Compact, Castilian"
-                            ],
-                            "enumLabels": [
-                                "Jorge Compact, Castilian"
-                            ],
-                            "default": "Jorge Compact, Castilian"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Spanish Speech - DocReader.Valid": {
@@ -2414,16 +2373,12 @@
                     // [VocalizerExpressive-Dutch Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Dutch Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Claire Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Claire Compact"
-                            ],
-                            "enumLabels": [
-                                "Claire Compact"
-                            ],
-                            "default": "Claire Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Dutch Speech - Screen Reader.Valid": {
@@ -2521,16 +2476,12 @@
                     // [VocalizerExpressive-Dutch Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Dutch Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Claire Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Claire Compact"
-                            ],
-                            "enumLabels": [
-                                "Claire Compact"
-                            ],
-                            "default": "Claire Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Dutch Speech - DocReader.Valid": {
@@ -2629,16 +2580,12 @@
                     // [VocalizerExpressive-Arabic Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Arabic Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Tarik Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Tarik Compact"
-                            ],
-                            "enumLabels": [
-                                "Tarik Compact"
-                            ],
-                            "default": "Tarik Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Arabic Speech - Screen Reader.Valid": {
@@ -2736,16 +2683,12 @@
                     // [VocalizerExpressive-Arabic Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Arabic Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Tarik Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Tarik Compact"
-                            ],
-                            "enumLabels": [
-                                "Tarik Compact"
-                            ],
-                            "default": "Tarik Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Arabic Speech - DocReader.Valid": {
@@ -2844,18 +2787,13 @@
                     // [VocalizerExpressive-Portuguese Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Portuguese Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Felipe Compact, Brazilian"
+                        //  - "Catarina Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Felipe Compact, Brazilian",
-                                "Catarina Compact"
-                            ],
-                            "enumLabels": [
-                                "Felipe Compact, Brazilian",
-                                "Catarina Compact"
-                            ],
-                            "default": "Felipe Compact, Brazilian"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Portuguese Speech - Screen Reader.Valid": {
@@ -2955,18 +2893,13 @@
                     // [VocalizerExpressive-Portuguese Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Portuguese Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Felipe Compact, Brazilian"
+                        //  - "Catarina Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Felipe Compact, Brazilian",
-                                "Catarina Compact"
-                            ],
-                            "enumLabels": [
-                                "Felipe Compact, Brazilian",
-                                "Catarina Compact"
-                            ],
-                            "default": "Felipe Compact, Brazilian"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Portuguese Speech - DocReader.Valid": {
@@ -3067,16 +3000,12 @@
                     // [VocalizerExpressive-Czech Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Czech Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Zuzana Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Zuzana Compact"
-                            ],
-                            "enumLabels": [
-                                "Zuzana Compact"
-                            ],
-                            "default": "Zuzana Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Czech Speech - Screen Reader.Valid": {
@@ -3174,16 +3103,12 @@
                     // [VocalizerExpressive-Czech Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Czech Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Zuzana Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Zuzana Compact"
-                            ],
-                            "enumLabels": [
-                                "Zuzana Compact"
-                            ],
-                            "default": "Zuzana Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Czech Speech - DocReader.Valid": {
@@ -3282,16 +3207,12 @@
                     // [VocalizerExpressive-Danish Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Danish Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Sara Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Sara Compact"
-                            ],
-                            "enumLabels": [
-                                "Sara Compact"
-                            ],
-                            "default": "Sara Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Danish Speech - Screen Reader.Valid": {
@@ -3389,16 +3310,12 @@
                     // [VocalizerExpressive-Danish Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Danish Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Sara Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Sara Compact"
-                            ],
-                            "enumLabels": [
-                                "Sara Compact"
-                            ],
-                            "default": "Sara Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Danish Speech - DocReader.Valid": {
@@ -3497,16 +3414,12 @@
                     // [VocalizerExpressive-Finnish Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Finnish Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Satu Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Satu Compact"
-                            ],
-                            "enumLabels": [
-                                "Satu Compact"
-                            ],
-                            "default": "Satu Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Finnish Speech - Screen Reader.Valid": {
@@ -3604,16 +3517,12 @@
                     // [VocalizerExpressive-Finnish Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Finnish Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Satu Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Satu Compact"
-                            ],
-                            "enumLabels": [
-                                "Satu Compact"
-                            ],
-                            "default": "Satu Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Finnish Speech - DocReader.Valid": {
@@ -3712,16 +3621,12 @@
                     // [VocalizerExpressive-Hebrew Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Hebrew Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Carmit Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Carmit Compact"
-                            ],
-                            "enumLabels": [
-                                "Carmit Compact"
-                            ],
-                            "default": "Carmit Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Hebrew Speech - Screen Reader.Valid": {
@@ -3819,16 +3724,12 @@
                     // [VocalizerExpressive-Hebrew Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Hebrew Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Carmit Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Carmit Compact"
-                            ],
-                            "enumLabels": [
-                                "Carmit Compact"
-                            ],
-                            "default": "Carmit Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Hebrew Speech - DocReader.Valid": {
@@ -3927,16 +3828,12 @@
                     // [VocalizerExpressive-Hungarian Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Hungarian Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Mariska Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Mariska Compact"
-                            ],
-                            "enumLabels": [
-                                "Mariska Compact"
-                            ],
-                            "default": "Mariska Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Hungarian Speech - Screen Reader.Valid": {
@@ -4034,16 +3931,12 @@
                     // [VocalizerExpressive-Hungarian Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Hungarian Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Mariska Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Mariska Compact"
-                            ],
-                            "enumLabels": [
-                                "Mariska Compact"
-                            ],
-                            "default": "Mariska Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Hungarian Speech - DocReader.Valid": {
@@ -4142,16 +4035,12 @@
                     // [VocalizerExpressive-Italian Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Italian Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Alice Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Alice Compact"
-                            ],
-                            "enumLabels": [
-                                "Alice Compact"
-                            ],
-                            "default": "Alice Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Italian Speech - Screen Reader.Valid": {
@@ -4249,16 +4138,12 @@
                     // [VocalizerExpressive-Italian Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Italian Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Alice Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Alice Compact"
-                            ],
-                            "enumLabels": [
-                                "Alice Compact"
-                            ],
-                            "default": "Alice Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Italian Speech - DocReader.Valid": {
@@ -4357,16 +4242,12 @@
                     // [VocalizerExpressive-Korean Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Korean Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Sora Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Sora Compact"
-                            ],
-                            "enumLabels": [
-                                "Sora Compact"
-                            ],
-                            "default": "Sora Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Korean Speech - Screen Reader.Valid": {
@@ -4464,16 +4345,12 @@
                     // [VocalizerExpressive-Korean Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Korean Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Sora Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Sora Compact"
-                            ],
-                            "enumLabels": [
-                                "Sora Compact"
-                            ],
-                            "default": "Sora Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Korean Speech - DocReader.Valid": {
@@ -4572,16 +4449,12 @@
                     // [VocalizerExpressive-Norwegian Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Norwegian Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Henrik Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Henrik Compact"
-                            ],
-                            "enumLabels": [
-                                "Henrik Compact"
-                            ],
-                            "default": "Henrik Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Norwegian Speech - Screen Reader.Valid": {
@@ -4679,16 +4552,12 @@
                     // [VocalizerExpressive-Norwegian Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Norwegian Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Henrik Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Henrik Compact"
-                            ],
-                            "enumLabels": [
-                                "Henrik Compact"
-                            ],
-                            "default": "Henrik Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Norwegian Speech - DocReader.Valid": {
@@ -4787,16 +4656,12 @@
                     // [VocalizerExpressive-Polish Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Polish Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Krzysztof Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Krzysztof Compact"
-                            ],
-                            "enumLabels": [
-                                "Krzysztof Compact"
-                            ],
-                            "default": "Krzysztof Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Polish Speech - Screen Reader.Valid": {
@@ -4894,16 +4759,12 @@
                     // [VocalizerExpressive-Polish Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Polish Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Krzysztof Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Krzysztof Compact"
-                            ],
-                            "enumLabels": [
-                                "Krzysztof Compact"
-                            ],
-                            "default": "Krzysztof Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Polish Speech - DocReader.Valid": {
@@ -5002,16 +4863,12 @@
                     // [VocalizerExpressive-Romanian Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Romanian Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Ioana Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Ioana Compact"
-                            ],
-                            "enumLabels": [
-                                "Ioana Compact"
-                            ],
-                            "default": "Ioana Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Romanian Speech - Screen Reader.Valid": {
@@ -5109,16 +4966,12 @@
                     // [VocalizerExpressive-Romanian Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Romanian Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Ioana Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Ioana Compact"
-                            ],
-                            "enumLabels": [
-                                "Ioana Compact"
-                            ],
-                            "default": "Ioana Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Romanian Speech - DocReader.Valid": {
@@ -5217,16 +5070,12 @@
                     // [VocalizerExpressive-Swedish Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Swedish Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Oskar Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Oskar Compact"
-                            ],
-                            "enumLabels": [
-                                "Oskar Compact"
-                            ],
-                            "default": "Oskar Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Swedish Speech - Screen Reader.Valid": {
@@ -5324,16 +5173,12 @@
                     // [VocalizerExpressive-Swedish Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Swedish Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Oskar Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Oskar Compact"
-                            ],
-                            "enumLabels": [
-                                "Oskar Compact"
-                            ],
-                            "default": "Oskar Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Swedish Speech - DocReader.Valid": {
@@ -5433,16 +5278,12 @@
                     // [VocalizerExpressive-Slovak Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Slovak Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Laura Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Laura Compact"
-                            ],
-                            "enumLabels": [
-                                "Laura Compact"
-                            ],
-                            "default": "Laura Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Slovak Speech - Screen Reader.Valid": {
@@ -5540,16 +5381,12 @@
                     // [VocalizerExpressive-Slovak Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Slovak Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Laura Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Laura Compact"
-                            ],
-                            "enumLabels": [
-                                "Laura Compact"
-                            ],
-                            "default": "Laura Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Slovak Speech - DocReader.Valid": {
@@ -5648,16 +5485,12 @@
                     // [VocalizerExpressive-Turkish Speech - Screen Reader]
                     // ==================================================================
                     "VocalizerExpressive-Turkish Speech - Screen Reader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Yelda Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Yelda Compact"
-                            ],
-                            "enumLabels": [
-                                "Yelda Compact"
-                            ],
-                            "default": "Yelda Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Turkish Speech - Screen Reader.Valid": {
@@ -5755,16 +5588,12 @@
                     // [VocalizerExpressive-Turkish Speech - DocReader]
                     // ==================================================================
                     "VocalizerExpressive-Turkish Speech - DocReader.Speaker": {
+                        // NOTE: Possible known values:
+                        //  - "Yelda Compact"
                         "schema": {
                             "title": "Voice Name",
                             "description": "Specifies the voice name to use.",
-                            "enum": [
-                                "Yelda Compact"
-                            ],
-                            "enumLabels": [
-                                "Yelda Compact"
-                            ],
-                            "default": "Yelda Compact"
+                            "type": "string"
                         }
                     },
                     "VocalizerExpressive-Turkish Speech - DocReader.Valid": {
@@ -5862,6 +5691,13 @@
 
                     // [Tracking]
                     "Tracking.AlignFlags": {
+                        // TODO: Unknown
+                        "schema": {
+                            "title": "Align Flags",
+                            "description": "Bitmask holding 'align flags'.",
+                            "type": "integer"
+                        },
+                        "label": "bitmask"
                     },
                     "Tracking.RouteMouse": {
                         "schema": {
@@ -5893,18 +5729,19 @@
                             "default": 1
                         }
                     },
-                    // [MagEngine] // TODO: Needs transform
+                    // [MagEngine]
+                    //
+                    // NOTE: UI values to bitmask:
+                    //   - "Hold Shift key to move only horizontally or vertically": 0
+                    //   - "Hold Ctrl key to stay within the active window": 1
                     "MagEngine.MouseConstraint": {
                         "schema": {
                             "title": "Pointer Constraint",
                             "description": "Specifies desired pointer movement constratins.",
-                            "type": "array",
-                            "default": [],
-                            "values": [
-                                ["Hold Shift key to move only horizontally or vertically"],
-                                ["Hold Ctrl key to stay within the active window"]
-                            ]
-                        }
+                            "type": "integer",
+                            "default": 0
+                        },
+                        "label": "bitmask"
                     },
                     // [Smooth Panning]
                     "Smooth Panning.Enabled": {
@@ -5951,6 +5788,12 @@
                     // [BACKGROUND]
                     "BACKGROUND.WindowFlags": {
                         // TODO: Unknown
+                        "schema": {
+                            "title": "Window Flags",
+                            "description": "Bitmask holding 'window flags'.",
+                            "type": "integer"
+                        },
+                        "label": "bitmask"
                     },
                     // [PRIMARY]
                     "PRIMARY.magPower": {
@@ -6024,6 +5867,73 @@
                                 5900,
                                 6000
                             ],
+                            "enumLabels": [
+                                "100",
+                                "120",
+                                "140",
+                                "160",
+                                "180",
+                                "200",
+                                "225",
+                                "250",
+                                "275",
+                                "300",
+                                "350",
+                                "400",
+                                "500",
+                                "600",
+                                "700",
+                                "800",
+                                "900",
+                                "1000",
+                                "1400",
+                                "1500",
+                                "1600",
+                                "1700",
+                                "1800",
+                                "1900",
+                                "2000",
+                                "2100",
+                                "2200",
+                                "2300",
+                                "2400",
+                                "2500",
+                                "2600",
+                                "2700",
+                                "2800",
+                                "2900",
+                                "3000",
+                                "3100",
+                                "3200",
+                                "3300",
+                                "3400",
+                                "3500",
+                                "3600",
+                                "3700",
+                                "3800",
+                                "3900",
+                                "4000",
+                                "4100",
+                                "4200",
+                                "4300",
+                                "4400",
+                                "4500",
+                                "4600",
+                                "4700",
+                                "4800",
+                                "4900",
+                                "5000",
+                                "5100",
+                                "5200",
+                                "5300",
+                                "5400",
+                                "5500",
+                                "5600",
+                                "5700",
+                                "5800",
+                                "5900",
+                                "6000"
+                            ],
                             "default": 200
                         }
                     },
@@ -6039,8 +5949,6 @@
                                 // TODO: Non portable
                                 // =========================================================
                                 3,
-                                3,
-                                4,
                                 4
                                 // =========================================================
                             ],
@@ -6050,10 +5958,8 @@
                                 "Lens",
                                 "Line",
                                 // TODO: Non portable
-                                "Docked Top",
-                                "Docked Bottom",
-                                "Docked Left",
-                                "Docked Right"
+                                "Docked Top | Docked Bottom",
+                                "Docked Left | Docked Right"
                                 // =========================================================
                             ],
                             "default": 0
@@ -6061,6 +5967,12 @@
                     },
                     "PRIMARY.WindowFlags": {
                         // TODO: Unknown
+                        "schema": {
+                            "title": "Window Flags",
+                            "description": "Bitmask holding 'Window Flags'.",
+                            "type": "integer"
+                        },
+                        "label": "bitmask"
                     },
                     // [STATIC 1]
                     "STATIC 1.magPower": {
@@ -6133,6 +6045,73 @@
                                 5800,
                                 5900,
                                 6000
+                            ],
+                            "enumLabels": [
+                                "100",
+                                "120",
+                                "140",
+                                "160",
+                                "180",
+                                "200",
+                                "225",
+                                "250",
+                                "275",
+                                "300",
+                                "350",
+                                "400",
+                                "500",
+                                "600",
+                                "700",
+                                "800",
+                                "900",
+                                "1000",
+                                "1400",
+                                "1500",
+                                "1600",
+                                "1700",
+                                "1800",
+                                "1900",
+                                "2000",
+                                "2100",
+                                "2200",
+                                "2300",
+                                "2400",
+                                "2500",
+                                "2600",
+                                "2700",
+                                "2800",
+                                "2900",
+                                "3000",
+                                "3100",
+                                "3200",
+                                "3300",
+                                "3400",
+                                "3500",
+                                "3600",
+                                "3700",
+                                "3800",
+                                "3900",
+                                "4000",
+                                "4100",
+                                "4200",
+                                "4300",
+                                "4400",
+                                "4500",
+                                "4600",
+                                "4700",
+                                "4800",
+                                "4900",
+                                "5000",
+                                "5100",
+                                "5200",
+                                "5300",
+                                "5400",
+                                "5500",
+                                "5600",
+                                "5700",
+                                "5800",
+                                "5900",
+                                "6000"
                             ],
                             "default": 200
                         }

@@ -69,8 +69,8 @@
                         "PointerScheme.PtrEnhEnable": 1,
                         "PointerScheme.PtrEnhIndex": 6,
 
-                        "PRIMARY.magPower": 210,
-                        "STATIC 1.magPower": 210,
+                        "PRIMARY.magPower": 225,
+                        "STATIC 1.magPower": 225,
 
                         "MagEngine.MouseConstraint": 3
                     }
