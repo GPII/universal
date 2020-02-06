@@ -51,10 +51,7 @@
 
                         "EchoTyping.Mode": 32771,
                         "PointerScheme.PtrEnhEnable": 1,
-                        "PointerScheme.PtrEnhIndex": 2,
-
-                        // Due to bug with literalValues this setting needs to be present
-                        "Preferences.PromptOnExit": 0
+                        "PointerScheme.PtrEnhIndex": 2
                     },
                     "http://registry.gpii.net/common/magnification": 3
                 }

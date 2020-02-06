@@ -61,10 +61,7 @@
                         "PRIMARY.magPower": 140,
                         "STATIC 1.magPower": 140,
 
-                        "Tracking.RouteMouse": 0,
-
-                        // Due to bug with literalValues this setting needs to be present
-                        "Preferences.PromptOnExit": 0
+                        "Tracking.RouteMouse": 0
                     }
                 }
             }

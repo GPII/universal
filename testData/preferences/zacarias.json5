@@ -57,10 +57,7 @@
                         "PointerScheme.PtrEnhIndex": 1,
 
                         "PRIMARY.magPower": 160,
-                        "STATIC 1.magPower": 160,
-
-                        // Due to bug with literalValues this setting needs to be present
-                        "Preferences.PromptOnExit": 0
+                        "STATIC 1.magPower": 160
                     }
                 }
             }

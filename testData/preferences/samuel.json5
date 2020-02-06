@@ -72,10 +72,7 @@
                         "PRIMARY.magPower": 210,
                         "STATIC 1.magPower": 210,
 
-                        "MagEngine.MouseConstraint": 3,
-
-                        // Due to bug with literalValues this setting needs to be present
-                        "Preferences.PromptOnExit": 0
+                        "MagEngine.MouseConstraint": 3
                     }
                 }
             }
