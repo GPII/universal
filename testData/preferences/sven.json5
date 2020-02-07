@@ -1,7 +1,12 @@
 // # Sven.json5
 //
 // This preference set change serveral settings from Windows built in
-// speech recognition feature.
+// speech recognition feature, including:
+//      - Language - The language to use for the recognition: Spanish.
+//      - ModeForOff - Waiting mode: Deactivated.
+//      - SingleTerminalSpace - Number of spaces to be inserted after the spacebar: 1.
+//      - EnableDocumentHarvesting - Review documents and mail to improve accurary: On.
+//      - RunAtStartup: Speech recognition should be started at system start: On.
 {
     "flat": {
         "name": "Sven",
@@ -9,7 +14,7 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/language": "es-Es",
+                    "http://registry.gpii.net/common/language": "es-ES",
                     "http://registry.gpii.net/applications/com.microsoft.windows.speechRecognition": {
                         "c0a": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Recognizers\\Tokens\\MS-3082-80-DESK",
                         "ModeForOff": 2,
