@@ -4821,7 +4821,8 @@
                     "path": "Control Panel\\Desktop",
                     "dataTypes": {
                         "TileWallpaper": "REG_SZ",
-                        "WallpaperStyle": "REG_SZ"
+                        "WallpaperStyle": "REG_SZ",
+                        "Scaling": "REG_SZ"
                     }
                 },
                 "supportedSettings": {
