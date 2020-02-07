@@ -10106,14 +10106,53 @@
         },
         "capabilities": [],
         "settingsHandlers": {
-            "configureLanguageEn": {
+            "configureLanguage": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Speech\\Recognizers\\LanguageDefaults",
                     "dataTypes": {
-                        "409": "REG_SZ"
+                        "401": "REG_SZ",  // 1025 -> "Arabic (Saudi Arabia)"
+                        "402": "REG_SZ",  // 1026 -> "Bulgarian (Bulgaria)"
+                        "c04": "REG_SZ",  // 3076 -> "Chinese (Hong Kong SAR)"
+                        "804": "REG_SZ",  // 2052 -> "Chinese (PRC)"
+                        "404": "REG_SZ",  // 1028 -> "Chinese (Taiwan)"
+                        "41a": "REG_SZ",  // 1050 -> "Croatian (Croatia)"
+                        "405": "REG_SZ",  // 1029 -> "Czech (Czech Republic)"
+                        "406": "REG_SZ",  // 1030 -> "Danish (Denmark)"
+                        "413": "REG_SZ",  // 1043 -> "Dutch (Netherlands)"
+                        "409": "REG_SZ",  // 1033 -> "English (United States)"
+                        "809": "REG_SZ",  // 2057 -> "English (United Kingdom)"
+                        "425": "REG_SZ",  // 1061 -> "Estonian (Estonia)"
+                        "40b": "REG_SZ",  // 1035 -> "Finnish (Finland)"
+                        "c0c": "REG_SZ",  // 3084 -> "French (Canada)"
+                        "40c": "REG_SZ",  // 1036 -> "French (France)"
+                        "407": "REG_SZ",  // 1031 -> "German (Germany)"
+                        "408": "REG_SZ",  // 1032 -> "Greek (Greece)"
+                        "40d": "REG_SZ",  // 1037 -> "Hebrew (Israel)"
+                        "40e": "REG_SZ",  // 1038 -> "Hungarian (Hungary)"
+                        "410": "REG_SZ",  // 1040 -> "Italian (Italy)"
+                        "411": "REG_SZ",  // 1041 -> "Japanese (Japan)"
+                        "412": "REG_SZ",  // 1042 -> "Korean (Korea)"
+                        "426": "REG_SZ",  // 1062 -> "Latvian (Latvia)"
+                        "427": "REG_SZ",  // 1063 -> "Lithuanian (Lithuania)"
+                        "414": "REG_SZ",  // 1044 -> "Norwegian, Bokmål (Norway)"
+                        "415": "REG_SZ",  // 1045 -> "Polish (Poland)"
+                        "416": "REG_SZ",  // 1046 -> "Portuguese (Brazil)"
+                        "816": "REG_SZ",  // 2070 -> "Portuguese (Portugal)"
+                        "418": "REG_SZ",  // 1048 -> "Romanian (Romania)"
+                        "419": "REG_SZ",  // 1049 -> "Russian (Russia)"
+                        "81a": "REG_SZ",  // 2074 -> "Serbian (Latin, Serbia)"
+                        "241a": "REG_SZ", // 9242 -> "Serbian (Latin, Serbia)"
+                        "41b": "REG_SZ",  // 1051 -> "Slovak (Slovakia)"
+                        "424": "REG_SZ",  // 1060 -> "Slovenian (Slovenia)"
+                        "80a": "REG_SZ",  // 2058 -> "Spanish (Mexico)"
+                        "c0a": "REG_SZ",  // 3082 -> "Spanish (Spain)"
+                        "41d": "REG_SZ",  // 1053 -> "Swedish (Sweden)"
+                        "41e": "REG_SZ",  // 1054 -> "Thai (Thailand)"
+                        "41f": "REG_SZ",  // 1055 -> "Turkish (Turkey)"
+                        "422": "REG_SZ",  // 1058 -> "Ukrainian (Ukraine)
                     }
                 },
                 "supportedSettings": {
@@ -10121,200 +10160,289 @@
                         "schema": {
                             "title": "Language",
                             "description": "Select the language used for the speech recognition",
-                            "enum": [
-                                1025,
-                                1026,
-                                3076,
-                                2052,
-                                1028,
-                                1050,
-                                1029,
-                                1030,
-                                1043,
-                                1033,
-                                2057,
-                                1061,
-                                1035,
-                                3084,
-                                1036,
-                                1031,
-                                1032,
-                                1037,
-                                1038,
-                                1040,
-                                1041,
-                                1042,
-                                1062,
-                                1063,
-                                1044,
-                                1045,
-                                1046,
-                                2070,
-                                1048,
-                                1049,
-                                2074,
-                                9242,
-                                1051,
-                                1060,
-                                2058,
-                                3082,
-                                1053,
-                                1054,
-                                1055,
-                                1058
-                            ],
-                            "enumLabels": [
-                                "Arabic (Saudi Arabia)",
-                                "Bulgarian (Bulgaria)",
-                                "Chinese (Hong Kong SAR)",
-                                "Chinese (PRC)",
-                                "Chinese (Taiwan)",
-                                "Croatian (Croatia)",
-                                "Czech (Czech Republic)",
-                                "Danish (Denmark)",
-                                "Dutch (Netherlands)",
-                                "English (United States)",
-                                "English (United Kingdom)",
-                                "Estonian (Estonia)",
-                                "Finnish (Finland)",
-                                "French (Canada)",
-                                "French (France)",
-                                "German (Germany)",
-                                "Greek (Greece)",
-                                "Hebrew (Israel)",
-                                "Hungarian (Hungary)",
-                                "Italian (Italy)",
-                                "Japanese (Japan)",
-                                "Korean (Korea)",
-                                "Latvian (Latvia)",
-                                "Lithuanian (Lithuania)",
-                                "Norwegian, Bokmål (Norway)",
-                                "Polish (Poland)",
-                                "Portuguese (Brazil)",
-                                "Portuguese (Portugal)",
-                                "Romanian (Romania)",
-                                "Russian (Russia)",
-                                "Serbian (Latin, Serbia)",
-                                "Serbian (Latin, Serbia)",
-                                "Slovak (Slovakia)",
-                                "Slovenian (Slovenia)",
-                                "Spanish (Mexico)",
-                                "Spanish (Spain)",
-                                "Swedish (Sweden)",
-                                "Thai (Thailand)",
-                                "Turkish (Turkey)",
-                                "Ukrainian (Ukraine)"
-                            ]
+                            "type": "string"
                         }
-                    }
-                },
-                "capabilitiesTransformations": {
-                },
-                "inverseCapabilitiesTransformations": {
-                }
-            },
-
-            "configureLanguageEs": {
-                "type": "gpii.windows.registrySettingsHandler",
-                "liveness": "liveRestart",
-                "options": {
-                    "hKey": "HKEY_CURRENT_USER",
-                    "path": "Software\\Microsoft\\Speech\\Recognizers\\LanguageDefaults",
-                    "dataTypes": {
-                        "c0a": "REG_SZ"
-                    }
-                },
-                "supportedSettings": {
+                    },
+                    "401": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "402": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "c04": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "804": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "41a": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "406": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "413": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "409": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "809": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "425": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "40b": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "c0c": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "40c": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "407": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "408": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "40d": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "40e": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "410": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "411": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "412": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "426": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "427": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "414": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "415": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "416": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "816": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "418": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "419": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "81a": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "241a": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "41b": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "424": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "80a": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
                     "c0a": {
                         "schema": {
                             "title": "Language",
                             "description": "Select the language used for the speech recognition",
-                            "enum": [
-                                1025,
-                                1026,
-                                3076,
-                                2052,
-                                1028,
-                                1050,
-                                1029,
-                                1030,
-                                1043,
-                                1033,
-                                2057,
-                                1061,
-                                1035,
-                                3084,
-                                1036,
-                                1031,
-                                1032,
-                                1037,
-                                1038,
-                                1040,
-                                1041,
-                                1042,
-                                1062,
-                                1063,
-                                1044,
-                                1045,
-                                1046,
-                                2070,
-                                1048,
-                                1049,
-                                2074,
-                                9242,
-                                1051,
-                                1060,
-                                2058,
-                                3082,
-                                1053,
-                                1054,
-                                1055,
-                                1058
-                            ],
-                            "enumLabels": [
-                                "Arabic (Saudi Arabia)",
-                                "Bulgarian (Bulgaria)",
-                                "Chinese (Hong Kong SAR)",
-                                "Chinese (PRC)",
-                                "Chinese (Taiwan)",
-                                "Croatian (Croatia)",
-                                "Czech (Czech Republic)",
-                                "Danish (Denmark)",
-                                "Dutch (Netherlands)",
-                                "English (United States)",
-                                "English (United Kingdom)",
-                                "Estonian (Estonia)",
-                                "Finnish (Finland)",
-                                "French (Canada)",
-                                "French (France)",
-                                "German (Germany)",
-                                "Greek (Greece)",
-                                "Hebrew (Israel)",
-                                "Hungarian (Hungary)",
-                                "Italian (Italy)",
-                                "Japanese (Japan)",
-                                "Korean (Korea)",
-                                "Latvian (Latvia)",
-                                "Lithuanian (Lithuania)",
-                                "Norwegian, Bokmål (Norway)",
-                                "Polish (Poland)",
-                                "Portuguese (Brazil)",
-                                "Portuguese (Portugal)",
-                                "Romanian (Romania)",
-                                "Russian (Russia)",
-                                "Serbian (Latin, Serbia)",
-                                "Serbian (Latin, Serbia)",
-                                "Slovak (Slovakia)",
-                                "Slovenian (Slovenia)",
-                                "Spanish (Mexico)",
-                                "Spanish (Spain)",
-                                "Swedish (Sweden)",
-                                "Thai (Thailand)",
-                                "Turkish (Turkey)",
-                                "Ukrainian (Ukraine)"
-                            ]
+                            "type": "string"
                         }
-                    }
+                    },
+                    "41d": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "41e": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "41f": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
+                    "422": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Select the language used for the speech recognition",
+                            "type": "string"
+                        }
+                    },
                 },
                 "capabilitiesTransformations": {
                 },
@@ -10388,14 +10516,16 @@
                     "ModeForOff": {
                         "schema": {
                             "title": "Voice activation",
-                            "description": "Select the language used for the speech recognition",
+                            "description": "Select the mode in which the speech recognition should remains.",
                             "enum": [
+                                0,
                                 1,
                                 2
                             ],
                             "enumLabels": [
-                                "Off",
-                                "On"
+                                "Activated: Listen all that you say",
+                                "Suspended: Listen only \"activate the microphone\"",
+                                "Deactivated: Don't listen anything that you say"
                             ],
                             "default": 1
                         }
@@ -10463,14 +10593,12 @@
             }
         },
         "configure": [
-            "settings.configureLanguageEn",
-            "settings.configureLanguageEs",
+            "settings.configureLanguage",
             "settings.configureOptions",
             "settings.configureStartup"
         ],
         "restore": [
-            "settings.configureLanguageEn",
-            "settings.configureLanguageEs",
+            "settings.configureLanguage",
             "settings.configureOptions",
             "settings.configureStartup"
         ],
