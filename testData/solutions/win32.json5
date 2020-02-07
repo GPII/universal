@@ -10152,17 +10152,10 @@
                         "41d": "REG_SZ",  // 1053 -> "Swedish (Sweden)"
                         "41e": "REG_SZ",  // 1054 -> "Thai (Thailand)"
                         "41f": "REG_SZ",  // 1055 -> "Turkish (Turkey)"
-                        "422": "REG_SZ",  // 1058 -> "Ukrainian (Ukraine)
+                        "422": "REG_SZ"   // 1058 -> "Ukrainian (Ukraine)
                     }
                 },
                 "supportedSettings": {
-                    "409": {
-                        "schema": {
-                            "title": "Language",
-                            "description": "Select the language used for the speech recognition",
-                            "type": "string"
-                        }
-                    },
                     "401": {
                         "schema": {
                             "title": "Language",
@@ -10442,7 +10435,7 @@
                             "description": "Select the language used for the speech recognition",
                             "type": "string"
                         }
-                    },
+                    }
                 },
                 "capabilitiesTransformations": {
                 },
