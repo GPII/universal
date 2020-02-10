@@ -10506,7 +10506,7 @@
                     "ApplicationSettings": "ApplicationSettings",
                     "ApplicationSettings\\.Speech\\.ScreenReadingItems\\.ScreenReadItem": {
                         "transform": {
-                            "type": "gpii.transformer.jsonArrayToTaggedArray",
+                            "type": "gpii.transformer.JSONArrayToTaggedArray",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold.ApplicationSettings\\.Speech\\.ScreenReadingItems",
                             "tag": "ReadItem",
                             "key": "$t",
@@ -10527,7 +10527,7 @@
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/applications/com\\.texthelp\\.readWriteGold.ApplicationSettings\\.Speech\\.ScreenReadingItems": {
                         "transform" : {
-                            "type": "gpii.transformer.jsonArrayToTaggedArray.invert",
+                            "type": "gpii.transformer.JSONArrayToTaggedArray.invert",
                             "inputPath": "ApplicationSettings\\.Speech\\.ScreenReadingItems\\.ScreenReadItem.value"
                         }
                     }
