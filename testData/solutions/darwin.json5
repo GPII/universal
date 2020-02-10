@@ -1,5 +1,5 @@
 {
-    "fakemag1": {
+    "net.gpii.test.fakemag1": {
         "name": "Fake Magnifier 1",
         "contexts": {
             "OS": [
@@ -38,7 +38,7 @@
         ]
     },
 
-    "fakemag2": {
+    "net.gpii.test.fakemag2": {
         "name": "Fake Magnifier 2 - fully featured",
         "contexts": {
             "OS": [
@@ -78,7 +78,7 @@
         ]
     },
 
-    "fakescreenreader1": {
+    "net.gpii.test.fakescreenreader1": {
         "name": "fake screenreader",
         "contexts": {
             "OS": [

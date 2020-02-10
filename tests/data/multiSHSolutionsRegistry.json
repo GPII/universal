@@ -1,6 +1,6 @@
 {
     "win32": {
-        "fakemag1": {
+        "net.gpii.test.fakemag1": {
             "name": "Fake Magnifier 1",
             "contexts": {
                 "OS": [
