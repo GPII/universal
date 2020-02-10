@@ -323,8 +323,6 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
                             "org.gnome.desktop.a11y.magnifier": {
                                 "active": true,
                                 "settings": {
-                                    "http://registry.gpii.net/common/magnification": 1.5,
-                                    "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
                                     "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
                                         "mag-factor": 1.5,
                                         "screen-position": "full-screen"
@@ -334,8 +332,6 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
                             "org.gnome.desktop.interface": {
                                 "active": true,
                                 "settings": {
-                                    "http://registry.gpii.net/common/fontSize": 9,
-                                    "http://registry.gpii.net/common/cursorSize": 0.9,
                                     "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
                                         "cursor-size": 90,
                                         "text-scaling-factor": 0.75
@@ -345,7 +341,6 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
                             "org.alsa-project": {
                                 "active": true,
                                 "settings": {
-                                    "http://registry.gpii.net/common/volume": 0.5,
                                     "http://registry.gpii.net/applications/org.alsa-project": {
                                         "masterVolume": 50
                                     }
@@ -402,8 +397,6 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
                             "org.gnome.desktop.a11y.magnifier": {
                                 "active": true,
                                 "settings": {
-                                    "http://registry.gpii.net/common/magnification": 1.5,
-                                    "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
                                     "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
                                         "mag-factor": 1.5,
                                         "screen-position": "full-screen"
@@ -413,8 +406,6 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
                             "org.gnome.desktop.interface": {
                                 "active": true,
                                 "settings": {
-                                    "http://registry.gpii.net/common/fontSize": 9,
-                                    "http://registry.gpii.net/common/cursorSize": 0.9,
                                     "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
                                         "cursor-size": 90,
                                         "text-scaling-factor": 0.75
@@ -424,7 +415,6 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
                             "org.alsa-project": {
                                 "active": true,
                                 "settings": {
-                                    "http://registry.gpii.net/common/volume": 0.5,
                                     "http://registry.gpii.net/applications/org.alsa-project": {
                                         "masterVolume": 50
                                     }
@@ -482,8 +472,6 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
                             "org.gnome.desktop.a11y.magnifier": {
                                 "active": true,
                                 "settings": {
-                                    "http://registry.gpii.net/common/magnification": 1.5,
-                                    "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
                                     "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
                                         "mag-factor": 1.5,
                                         "screen-position": "full-screen"
@@ -493,8 +481,6 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
                             "org.gnome.desktop.interface": {
                                 "active": true,
                                 "settings": {
-                                    "http://registry.gpii.net/common/fontSize": 9,
-                                    "http://registry.gpii.net/common/cursorSize": 0.9,
                                     "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
                                         "cursor-size": 90,
                                         "text-scaling-factor": 0.75
@@ -504,7 +490,6 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
                             "org.alsa-project": {
                                 "active": true,
                                 "settings": {
-                                    "http://registry.gpii.net/common/volume": 0.5,
                                     "http://registry.gpii.net/applications/org.alsa-project": {
                                         "masterVolume": 50
                                     }

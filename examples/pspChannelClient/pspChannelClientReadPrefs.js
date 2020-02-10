@@ -1,7 +1,7 @@
 /*!
  * Test client for PSPChannel WebSockets
  *
- * Copyright 2017 Raising the Floor - International
+ * Copyright 2019 OCAD University
  *
  * The R&D leading to these results received funding from the
  * Department of Education - Grant H421A150005 (GPII-APCP). However,
@@ -21,6 +21,7 @@ var ws = require("ws");
 
 // The client starts the communication
 var socket = new ws("ws://localhost:8081/pspChannel"); // eslint-disable-line new-cap
+var readRequestCount = 0;
 
 // When the connection is done, the server will send the initial data of the current session if any
 socket.on("open", function () {
@@ -31,18 +32,31 @@ socket.on("message", function (data) {
     var message = JSON.parse(data);
     console.log("## Received the following message: " + JSON.stringify(message, null, 4));
 
-    if (message.type === "preferencesApplied") {
-        console.log("Preferences have been applied");
+    if (message.type === "preferenceReadSuccess") {
+        console.log("Preference has been read");
+        socket.close();
+        return;
+    };
+    if (message.type === "preferenceReadFail") {
+        console.log("Preference cannot be read");
         socket.close();
         return;
     };
 
-    // socket.send(JSON.stringify({"path": ["activeContextName"], "value": "bright", type: "ADD"}));
-    socket.send(JSON.stringify(
-        {
-            "path": [ "preferences", "http://registry\\.gpii\\.net/common/DPIScale" ],
-            "type": "ADD",
-            "value": 1.75
-        }));
-
+    if (readRequestCount === 0) {
+        readRequestCount++;
+        // Only send the read request once
+        socket.send(JSON.stringify(
+            {
+                "type": "pullModel",
+                value: {
+                    settingControls: {
+                        "http://registry\\.gpii\\.net/common/magnification": {
+                            value: 1
+                        }
+                    }
+                }
+            })
+        );
+    }
 });
