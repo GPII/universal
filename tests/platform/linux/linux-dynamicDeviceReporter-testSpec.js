@@ -141,63 +141,6 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                 "expectInstalled": ["orca"]
             }
         }
-    },
-    {
-        name: "Testing screenreader_nvda using Flat matchmaker",
-        gpiiKey: "screenreader_nvda",
-        initialState: {
-            "gpii.gsettings.launch": {
-                "org.gnome.orca": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "key": "screen-reader-enabled"
-                    }
-                }]
-            }
-        },
-        settingsHandlers: {
-            "gpii.orca": {
-                "some.app.id": [
-                    {
-                        "settings": {
-                            "sayAllStyle": 1,
-                            "enableSpeech": true,
-                            "enableEchoByWord": true,
-                            "enableEchoByCharacter": false,
-                            "voices.default.rate": 101.84090909090908,
-                            "enableTutorialMessages": false,
-                            "voices.default.family": {
-                                "locale": "en",
-                                "name": "en-westindies"
-                            },
-                            "verbalizePunctuationStyle": 0
-                        },
-                        "options": {
-                            "user": "screenreader_nvda"
-                        }
-                    }
-                ]
-            },
-            "gpii.gsettings.launch": {
-                "org.gnome.orca": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "key": "screen-reader-enabled"
-                    }
-                }]
-            }
-        },
-        deviceReporters: {
-            "gpii.packageKit.find": {
-                "expectInstalled": ["orca"]
-            }
-        }
     }
 ];
 
