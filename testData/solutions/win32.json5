@@ -6279,7 +6279,7 @@
         ]
     },
     "com.microsoft.windows.colorFilters": {
-        "name": "Windows Built-in Screen Magnifier",
+        "name": "Windows Built-in Color Fiters",
         "contexts": {
             "OS": [
                 {
