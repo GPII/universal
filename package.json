@@ -16,7 +16,7 @@
         "@google-cloud/trace-agent": "3.4.0",
         "gpii-couchdb-test-harness": "1.0.0-dev.20190627T080736Z.0e3a1fd.GPII-3531",
         "gpii-json-schema": "2.1.2-dev.20190704T103720Z.3c177e5.GPII-4009",
-        "infusion": "3.0.0-dev.20190328T144119Z.ec44dbfab",
+        "infusion": "3.0.0-dev.20200213T130945Z.c3c22dc4c",
         "ipaddr.js": "1.9.0",
         "json5": "2.1.0",
         "kettle": "1.10.1",
