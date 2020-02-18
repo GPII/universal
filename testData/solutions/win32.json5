@@ -9491,6 +9491,57 @@
             }
         ]
     },
+    "com.microsoft.windows.showSounds": {
+        "name": "Windows 10 show sounds",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "capabilities": [
+        ],
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Accessibility\\ShowSounds",
+                    "dataTypes": {
+                        "On": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "On": {
+                        "schema": {
+                            "title": "Text captions",
+                            "description": "Turn on text captions for spoken dialog (when available).",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "On"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                },
+                "inverseCapabilitiesTransformations": {
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
     "com.microsoft.windows.onscreenKeyboard": {
         "name": "Windows Built-in Onscreen Keyboard",
         "contexts": {

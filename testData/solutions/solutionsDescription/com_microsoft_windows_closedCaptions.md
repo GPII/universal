@@ -1,4 +1,4 @@
-# Windows Display Language
+# Windows Closed Captions
 
 ## Details
 
@@ -80,3 +80,6 @@ The following steps allows checking the actual changes in the subtitles:
 ## Limitations
 
 * Currently we are not able to trigger the subtitles because the system setting intended for that task isn't honored.
+
+As described in this comment from [GPII-2750](https://issues.gpii.net/browse/GPII-2750?focusedCommentId=42709&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-42709)
+feedback has been reported to Microsoft regarding this limitation.
