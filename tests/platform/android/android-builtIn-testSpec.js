@@ -96,19 +96,6 @@ gpii.tests.android.builtIn = [
         }
     },
     {
-        name: "Testing os_gnome using default matchmaker",
-        gpiiKey: "os_gnome",
-        settingsHandlers: {
-            "gpii.androidPersistentConfiguration": {
-                "some.app.id": [{
-                    "settings": {
-                        "fontScale": 0.75
-                    }
-                }]
-            }
-        }
-    },
-    {
         name: "Testing os_common using default matchmaker",
         gpiiKey: "os_common",
         settingsHandlers: {

@@ -109,6 +109,18 @@ gpii.tests.windows.builtIn = [
                             "functionName": "Volume"
                         }
                     }
+                ],
+                "com.microsoft.windows.mirrorScreen": [
+                    {
+                        "settings": {
+                            "ScreenMirrorConfig": {
+                                "value": false
+                            }
+                        },
+                        "options": {
+                            "functionName": "ScreenMirror"
+                        }
+                    }
                 ]
             },
             "gpii.windows.spiSettingsHandler": {
@@ -460,6 +472,62 @@ gpii.tests.windows.builtIn = [
                             }
                         }
                     }
+                ],
+                "com.microsoft.windows.toggleKeys": [
+                    {
+                        "settings": {
+                            "ToggleKeysOn": {
+                                "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETTOGGLEKEYS",
+                            "setAction": "SPI_SETTOGGLEKEYS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "TOGGLEKEYS"
+                            }
+                        }
+                    }
+                ],
+                "com.microsoft.windows.underlineMenuShortcuts": [
+                    {
+                        "settings": {
+                            "UnderlineMenuShortcutsOn": {
+                                "path": "pvParam",
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETKEYBOARDCUES",
+                            "setAction": "SPI_SETKEYBOARDCUES",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "KeyboardPreferenceOn": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETKEYBOARDPREF",
+                            "setAction": "SPI_SETKEYBOARDPREF",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    }
                 ]
             },
             "gpii.windows.registrySettingsHandler": {
@@ -470,7 +538,13 @@ gpii.tests.windows.builtIn = [
                         "MagnificationMode": 3,
                         "FollowFocus": 0,
                         "FollowCaret": 1,
-                        "FollowMouse": 1
+                        "FollowMouse": 1,
+                        "FollowNarrator": 0,
+                        "FadeToMagIcon": 1,
+                        "ZoomIncrement": 50,
+                        "UseBitmapSmoothing": 1,
+                        "LensHeight": 50,
+                        "LensWidth": 50
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -481,7 +555,13 @@ gpii.tests.windows.builtIn = [
                             "FollowFocus": "REG_DWORD",
                             "FollowCaret": "REG_DWORD",
                             "FollowMouse": "REG_DWORD",
-                            "MagnificationMode": "REG_DWORD"
+                            "FollowNarrator": "REG_DWORD",
+                            "MagnificationMode": "REG_DWORD",
+                            "FadeToMagIcon": "REG_DWORD",
+                            "ZoomIncrement": "REG_DWORD",
+                            "UseBitmapSmoothing": "REG_DWORD",
+                            "LensHeight": "REG_DWORD",
+                            "LensWidth": "REG_DWORD"
                         }
                     }
                 }],
@@ -674,6 +754,42 @@ gpii.tests.windows.builtIn = [
                         "path": "Control Panel\\Desktop\\MuiCached",
                         "dataTypes": {
                             "MachinePreferredUILanguages": "REG_SZ"
+                        }
+                    }
+                }],
+                "com.microsoft.windows.soundSentry": [{
+                    "settings": {
+                        "WindowsEffect": 2
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility\\SoundSentry",
+                        "dataTypes": {
+                            "WindowsEffect": "REG_DWORD"
+                        }
+                    }
+                }],
+                "com.microsoft.windows.shortcutWarningMessage": [{
+                    "settings": {
+                        "Warning Sounds": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility",
+                        "dataTypes": {
+                            "Warning Sounds": "REG_DWORD"
+                        }
+                    }
+                }],
+                "com.microsoft.windows.shortcutWarningSound": [{
+                    "settings": {
+                        "Sound on Activation": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility",
+                        "dataTypes": {
+                            "Sound on Activation": "REG_DWORD"
                         }
                     }
                 }]
@@ -1454,127 +1570,6 @@ gpii.tests.windows.builtIn = [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "osk.exe"
-                            }
-                        ]
-                    }
-                }]
-            }
-        }
-    }, {
-        name: "Testing os_gnome using default matchmaker",
-        gpiiKey: "os_gnome",
-        initialState: {
-            "gpii.windows.enableRegisteredAT": {
-                "com.microsoft.windows.magnifier": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        "verifySettings": true,
-                        retryOptions: {
-                            rewriteEvery: 0,
-                            numRetries: 20,
-                            retryInterval: 1000
-                        },
-                        "registryName": "magnifierpane",
-                        "getState": [
-                            {
-                                "type": "gpii.processReporter.find",
-                                "command": "Magnify.exe"
-                            }
-                        ]
-                    }
-                }],
-                "com.microsoft.windows.onscreenKeyboard": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        "registryName": "osk",
-                        "getState": [
-                            {
-                                "type": "gpii.processReporter.find",
-                                "command": "osk.exe"
-                            }
-                        ]
-                    }
-                }]
-            }
-        },
-        settingsHandlers: {
-            "gpii.windows.registrySettingsHandler": {
-                "com.microsoft.windows.magnifier": [{ // magnifier stuff
-                    "settings": {
-                        "Magnification": 150,
-                        "MagnificationMode": 2
-                    },
-                    "options": {
-                        "hKey": "HKEY_CURRENT_USER",
-                        "path": "Software\\Microsoft\\ScreenMagnifier",
-                        "dataTypes": {
-                            "Magnification": "REG_DWORD",
-                            "Invert": "REG_DWORD",
-                            "FollowFocus": "REG_DWORD",
-                            "FollowCaret": "REG_DWORD",
-                            "FollowMouse": "REG_DWORD",
-                            "MagnificationMode": "REG_DWORD"
-                        }
-                    }
-                }],
-                "com.microsoft.windows.cursors": [{ // cursor size stuff
-                    "settings": {
-                        "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
-                        "Help": "%SystemRoot%\\cursors\\help_l.cur",
-                        "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
-                        "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
-                        "NWPen": "%SystemRoot%\\cursors\\pen_l.cur",
-                        "SizeNS": "%SystemRoot%\\cursors\\size4_l.cur",
-                        "SizeWE": "%SystemRoot%\\cursors\\size3_l.cur",
-                        "SizeAll": "%SystemRoot%\\cursors\\move_l.cur",
-                        "UpArrow": "%SystemRoot%\\cursors\\up_l.cur",
-                        "SizeNESW": "%SystemRoot%\\cursors\\size1_l.cur",
-                        "SizeNWSE": "%SystemRoot%\\cursors\\size2_l.cur",
-                        "AppStarting": "%SystemRoot%\\cursors\\wait_l.cur"
-                    },
-                    "options": {
-                        "hKey": "HKEY_CURRENT_USER",
-                        "path": "Control Panel\\Cursors",
-                        "dataTypes": {
-                            "Arrow": "REG_SZ",
-                            "Hand": "REG_SZ",
-                            "Help": "REG_SZ",
-                            "AppStarting": "REG_SZ",
-                            "No": "REG_SZ",
-                            "NWPen": "REG_SZ",
-                            "SizeAll": "REG_SZ",
-                            "SizeNESW": "REG_SZ",
-                            "SizeNS": "REG_SZ",
-                            "SizeNWSE": "REG_SZ",
-                            "SizeWE": "REG_SZ",
-                            "UpArrow": "REG_SZ",
-                            "Wait": "REG_SZ"
-                        }
-                    }
-                }]
-            },
-            "gpii.windows.enableRegisteredAT": {
-                "com.microsoft.windows.magnifier": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        "verifySettings": true,
-                        retryOptions: {
-                            rewriteEvery: 0,
-                            numRetries: 20,
-                            retryInterval: 1000
-                        },
-                        "registryName": "magnifierpane",
-                        "getState": [
-                            {
-                                "type": "gpii.processReporter.find",
-                                "command": "Magnify.exe"
                             }
                         ]
                     }
