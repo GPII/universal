@@ -1,0 +1,81 @@
+// # Ryan.json5
+//
+// This preference set changes several preferences from Read&Write Gold 12
+//
+// ## Testing
+//
+// This changes the following settings from the AT software:
+//      Speech:
+//          + Voice: Mexican Spanish Paulina - Vocalizer
+//          + Voice Speed: 70
+//          + Use arrow keys to change speed: false
+//          + Word Pause: 0.2
+//          + Voice Pitch: 40
+//
+//      Auto read:
+//          + Speak as I type: true
+//          + Speak on each letter: true
+//          + Speak on each word: false
+//          + Speak on each sentence: true
+//
+//      Screen reading:
+//          + Read by: Words
+//          + Continuous reading: false
+//          + Read the web: true
+//
+//      Speech highlighting:
+//          + Speech highlighting method: Speak using one word display
+//          + Font: Times New Roman
+//          + Font size: 16
+//          + Highlighting colors: Bright green on violet
+{
+    "flat": {
+        "name": "Ryan",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
+                        // Speech
+                        "ApplicationSettings.Speech.CurrentVoice.$t": "Mexican Spanish Paulina - Vocalizer",
+                        "ApplicationSettings.Speech.VoiceSpeed.$t": 70,
+                        "ApplicationSettings.Speech.UseVoiceSpeedHotKey.$t": false,
+                        "ApplicationSettings.Speech.WordPause.$t": 200,
+                        "ApplicationSettings.Speech.VoicePitch.$t": 40,
+                        // Speech -> Auto Read
+                        "ApplicationSettings.Speech.SpeakAsIType.$t": true,
+                        // Speech -> Auto Read -> Speak as I type
+                        "ApplicationSettings.Speech.SpeakOnEachLetter.$t": true,
+                        // Speech -> Auto Read -> Speak as I type
+                        "ApplicationSettings.Speech.SpeakOnEachWord.$t": false,
+                        // Speech -> Auto Read -> Speak as I type
+                        "ApplicationSettings.Speech.SpeakOnEachSentence.$t": false,
+                        // Speech -> Screen reading
+                        "ApplicationSettings.Speech.ScreenReadingEnabled.$t": true,
+                        // Speech -> Screen reading -> Items to read
+                        // TODO: Setting is stored in an array format in XML, we need to check how
+                        // XMLSettingsHandler handles this case.
+                        // "ApplicationSettings.Speech.ScreenReadingItems.$t":,
+                        // Speech -> Read by
+                        "ApplicationSettings.Speech.SelectionType.$t": 0,
+                        // Speech -> Continuous reading
+                        "ApplicationSettings.Speech.ContinuousReading.$t": false,
+                        // Speech -> Read the web
+                        "ApplicationSettings.Speech.ReadTheWeb.$t": true,
+                        // Speech -> Speech highlighting
+                        "ApplicationSettings.Speech.HighlightingMethod.$t": 2,
+                        // Speech -> Speech highlighting -> Font
+                        "ApplicationSettings.Speech.TextReaderOneWordFontName.$t": "Times New Roman",
+                        "ApplicationSettings.Speech.optSpeechHighTRFontName.$t": "Times New Roman",
+                        // Speech -> Speech highlighting -> Font size
+                        "ApplicationSettings.Speech.TextReaderOneWordFontSize.$t": 16,
+                        "ApplicationSettings.Speech.optSpeechHighTRFontSize.$t": 16,
+                        // Speech -> Speech highlighting -> Highlighting colors
+                        "ApplicationSettings.Speech.HighlightingBackColour.$t": "Violet",
+                        "ApplicationSettings.Speech.HighlightingForeColour.$t": "Chartreuse"
+                    }
+                }
+            }
+        }
+    }
+}

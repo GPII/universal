@@ -1,5 +1,5 @@
 /**
-GPII Context Integration Tests
+GPII Journal Integration Tests
 
 Copyright 2016 Raising the Floor - International
 
@@ -56,7 +56,13 @@ gpii.tests.journal.initialSettings = {
                 "MagnificationMode": 4,
                 "FollowFocus": 0,
                 "FollowCaret": 1,
-                "FollowMouse": 1
+                "FollowMouse": 1,
+                "FollowNarrator": 1,
+                "FadeToMagIcon": 0,
+                "ZoomIncrement": 100,
+                "UseBitmapSmoothing": 1,
+                "LensHeight": 30,
+                "LensWidth": 30
             },
             "options": {
                 "mockSync": true,
@@ -68,7 +74,13 @@ gpii.tests.journal.initialSettings = {
                     "FollowFocus": "REG_DWORD",
                     "FollowCaret": "REG_DWORD",
                     "FollowMouse": "REG_DWORD",
-                    "MagnificationMode": "REG_DWORD"
+                    "FollowNarrator": "REG_DWORD",
+                    "MagnificationMode": "REG_DWORD",
+                    "FadeToMagIcon": "REG_DWORD",
+                    "ZoomIncrement": "REG_DWORD",
+                    "UseBitmapSmoothing": "REG_DWORD",
+                    "LensHeight": "REG_DWORD",
+                    "LensWidth": "REG_DWORD"
                 }
             }
         }
@@ -112,29 +124,6 @@ gpii.tests.journal.initialSettings = {
                     },
                     "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
                         "value": false
-                    }
-                }
-            }
-        ]
-    },
-    "gpii.windows.wmiSettingsHandler": {
-        "com.microsoft.windows.brightness": [
-            {
-                "settings": {
-                    "Brightness": {
-                        "value": null
-                    }
-                },
-                "options": {
-                    "Brightness": {
-                        "namespace": "root\\WMI",
-                        "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
-                        "set": {
-                            "className": "WmiMonitorBrightnessMethods",
-                            "method": "WmiSetBrightness",
-                            "params": [0xFFFFFFFF, "$value"],
-                            "returnVal": ["uint", 0]
-                        }
                     }
                 }
             }
@@ -186,6 +175,28 @@ gpii.tests.journal.initialSettings = {
                 },
                 "options": {
                     "functionName": "DoubleClickHeight"
+                }
+            },
+            {
+                "settings": {
+                    "Volume": {
+                        "value": 0.5
+                    }
+                },
+                "options": {
+                    "functionName": "Volume"
+                }
+            }
+        ],
+        "com.microsoft.windows.mirrorScreen": [
+            {
+                "settings": {
+                    "ScreenMirrorConfig": {
+                        "value": false
+                    }
+                },
+                "options": {
+                    "functionName": "ScreenMirror"
                 }
             }
         ]
@@ -302,7 +313,7 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 explode: {
                     type: "gpii.tests.journal.explodingSettingsHandler",
                     supportedSettings: {
-                        cursorSize: {}
+                        AppStarting: {}
                     },
                     capabilitiesTransformations: {
                         AppStarting: {
@@ -317,7 +328,7 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 maybeThrow: {
                     type: "gpii.tests.journal.throwingSettingsHandler",
                     supportedSettings: {
-                        cursorSize: {}
+                        AppStarting: {}
                     },
                     capabilitiesTransformations: {
                         AppStarting: {
@@ -331,7 +342,7 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 },
                 configure: {
                     supportedSettings: {
-                        cursorSize: {}
+                        AppStarting: {}
                     }
                 }
             },

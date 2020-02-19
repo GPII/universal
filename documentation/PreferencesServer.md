@@ -9,7 +9,7 @@ The preferences server currently preferences APIs. The URLS are as follows:
 
 The Preferences Server is a server meant to be the public-facing, REST-based interface for consumers of preferences. Its
 main purpose is to be able to present a filtered view of the user preferences based on the requirements of the consumer,
-i.e. the preferences shown in a specific ontology, filtered according to a specific set of contexts.
+i.e. the preferences shown in a specific ontology, filtered according to a specified set of preferences.
 
 The bulk of work of the Preferences Server is done in other components of the GPII system, leaving the Preferences
 Server with the task of acting on the parameters supplied to the REST calls, calling the relevant functions in other
@@ -59,7 +59,7 @@ Return payload:
             "name": "Default preferences",
             "preferences": {
                 "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
-                "http://registry.gpii.net/common/initDelay": 0.120,
+                "http://registry.gpii.net/common/initDelay": 120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850,
                 "http://registry.gpii.net/common/cursorAcceleration": 0.800,
                 "http://registry.gpii.net/common/mouseEmulation/enabled": true,
@@ -93,7 +93,7 @@ Return payload:
                     "mouseEmulation": {
                         "cursorSpeed": 0.85,
                         "cursorAcceleration": 0.8,
-                        "-provisional-initDelay": 0.12,
+                        "-provisional-initDelay": 120,
                         "-provisional-mouseEmulation/enabled": true
                     }
                 },
@@ -138,7 +138,7 @@ Example POST body:
             "name": "Default preferences",
             "preferences": {
                 "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
-                "http://registry.gpii.net/common/initDelay": 0.120,
+                "http://registry.gpii.net/common/initDelay": 120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850,
                 "http://registry.gpii.net/common/cursorAcceleration": 0.800,
                 "http://registry.gpii.net/common/mouseEmulation/enabled": true,
@@ -168,7 +168,7 @@ payload would be:
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
-                    "http://registry.gpii.net/common/initDelay": 0.120,
+                    "http://registry.gpii.net/common/initDelay": 120,
                     "http://registry.gpii.net/common/cursorSpeed": 0.850,
                     "http://registry.gpii.net/common/cursorAcceleration": 0.800,
                     "http://registry.gpii.net/common/mouseEmulation/enabled": true,
@@ -264,7 +264,7 @@ before the PUT request:
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/initDelay": 0.120,
+                    "http://registry.gpii.net/common/initDelay": 120,
                     "http://registry.gpii.net/common/cursorSpeed": 0.850,
                     "http://registry.gpii.net/common/cursorAcceleration": 0.800
                 }

@@ -21,6 +21,7 @@ var fluid = require("infusion"),
 fluid.module.register("gpii-universal", __dirname, require);
 
 // TODO: proper module loader will eliminate these requires (FLUID-5521)
+require("./gpii/node_modules/solutionsRegistry");
 require("./gpii/node_modules/transformer");
 require("./gpii/node_modules/deviceReporter");
 require("./gpii/node_modules/lifecycleManager");
@@ -31,7 +32,6 @@ require("./gpii/node_modules/preferencesServer");
 require("./gpii/node_modules/ontologyHandler");
 require("./gpii/node_modules/matchMakerFramework");
 require("./gpii/node_modules/flatMatchMaker");
-require("./gpii/node_modules/contextManager");
 require("./gpii/node_modules/journal");
 require("./gpii/node_modules/eventLog");
 require("./gpii/node_modules/processReporter");

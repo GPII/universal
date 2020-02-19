@@ -5,11 +5,8 @@ Descriptions:
 This will run the acceptance tests with dynamic device reporting.
 It uses 2 preference sets: screenreader_nvda and readwritegold_application1.
 
-Due to some current limitations/issues with the current flat matchmaker, JAWS
-should not be installed, and sociable should not be listed as installed, because
-they will both attempt to launch with an NVDA NP.
-
 Requirements:
+
 * NVDA installed
 * Read and Write Gold not installed
 

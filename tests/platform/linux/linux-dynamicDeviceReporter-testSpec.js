@@ -27,7 +27,6 @@ fluid.registerNamespace("gpii.tests.deviceReporterAware.linux.orca");
 gpii.tests.deviceReporterAware.linux.orca.testDefs = [
     {
         name: "Testing screenreader_common using Flat matchmaker",
-        gradeNames: "gpii.test.integration.deviceReporterAware.linux",
         gpiiKey: "screenreader_common",
         initialState: {
             "gpii.gsettings.launch": {
@@ -59,7 +58,7 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                                 "name": "en-westindies"
                             },
                             "verbalizePunctuationStyle": 0,
-                            "voices.default.average-pitch": 1.5
+                            "voices.default.average-pitch": 1.0
                         },
                         "options": {
                             "user": "screenreader_common"
@@ -87,7 +86,6 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
     },
     {
         name: "Testing screenreader_orca using Flat matchmaker",
-        gradeNames: "gpii.test.integration.deviceReporterAware.linux",
         gpiiKey: "screenreader_orca",
         initialState: {
             "gpii.gsettings.launch": {
@@ -118,68 +116,10 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                                 "name": "en-westindies"
                             },
                             "verbalizePunctuationStyle": 0,
-                            "voices.default.average-pitch": 1.5
+                            "voices.default.average-pitch": 1.0
                         },
                         "options": {
                             "user": "screenreader_orca"
-                        }
-                    }
-                ]
-            },
-            "gpii.gsettings.launch": {
-                "org.gnome.orca": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "key": "screen-reader-enabled"
-                    }
-                }]
-            }
-        },
-        deviceReporters: {
-            "gpii.packageKit.find": {
-                "expectInstalled": ["orca"]
-            }
-        }
-    },
-    {
-        name: "Testing screenreader_nvda using Flat matchmaker",
-        gradeNames: "gpii.test.integration.deviceReporterAware.linux",
-        gpiiKey: "screenreader_nvda",
-        initialState: {
-            "gpii.gsettings.launch": {
-                "org.gnome.orca": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "key": "screen-reader-enabled"
-                    }
-                }]
-            }
-        },
-        settingsHandlers: {
-            "gpii.orca": {
-                "some.app.id": [
-                    {
-                        "settings": {
-                            "sayAllStyle": 1,
-                            "enableSpeech": true,
-                            "enableEchoByWord": true,
-                            "enableEchoByCharacter": false,
-                            "voices.default.rate": 101.84090909090908,
-                            "enableTutorialMessages": false,
-                            "voices.default.family": {
-                                "locale": "en",
-                                "name": "en-westindies"
-                            },
-                            "verbalizePunctuationStyle": 0
-                        },
-                        "options": {
-                            "user": "screenreader_nvda"
                         }
                     }
                 ]
@@ -208,5 +148,5 @@ module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.deviceReporterAware.linux.orca.testDefs",
     configName: "gpii.tests.acceptance.linux.dynamicDeviceReporter.config",
     configPath: "%gpii-universal/tests/platform/linux/configs"
-}, ["gpii.test.integration.testCaseHolder.linux", "gpii.test.integration.deviceReporterAware.linux"],
+}, ["gpii.test.integration.testCaseHolder.linux"],
     module, require, __dirname);

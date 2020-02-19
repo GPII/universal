@@ -24,10 +24,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 "use strict";
 
-var http = require("http"),
-    url = require("url"),
+var url = require("url"),
     fs = require("fs"),
     fluid = require("infusion");
+
+fluid.require("%gpii-universal/scripts/shared/dbRequestUtils.js");
 
 var gpii = fluid.registerNamespace("gpii");
 fluid.registerNamespace("gpii.dataLoader");
@@ -53,7 +54,7 @@ gpii.dataLoader.initOptions = function (processArgv) {
     dbOptions.staticDataDir = processArgv[3];
     dbOptions.buildDataDir = processArgv[4];
     // for debugging
-    dbOptions.justDelete = processArgv.length > 5 && processArgv[5] === "--justDelete";
+    dbOptions.justDelete = fluid.contains(processArgv, "--justDelete");
 
     // Set up database specific options
     dbOptions.viewsUrl = dbOptions.couchDbUrl + "/_design/views";
@@ -115,85 +116,6 @@ gpii.dataLoader.loadStaticDataFromDisk = function (options) {
 };
 
 /**
- * Response handler function used for the callback argument of an
- * {http.ClientRequest}.
- * @callback ResponseCallback
- * @param {http.IncomingMessage} response - Response object.
- */
-
-/**
- * Function that processes the data passed via the {ResponseCallback}.
- * @callback ResponseDataHandler
- * @param {String} responseString - The raw response data.
- * @param {Object} options - Other information used by this handler; documented
- *                           by specific data handler functions.
- */
-
-/**
- * POST request headers.
- * @typedef {Object} PostRequestHeaders
- * @property {String} Accept - "application/json" (constant).
- * @property {String} Content-Length - Computed and filled in per request (variable).
- * @property {String} Content-Type - "application/json" (constant).
- */
-
-/**
- * The POST request options for bulk updates.
- * @typedef {Object} PostRequestOptions
- * @property {String} hostname - The database host name (constant).
- * @property {String} port - The port associated with the URL (constant).
- * @property {String} path - The bulk documents command: "/gpii/_bulk_docs" (constant).
- * @property {String} auth - Authorization for access (constant).
- * @property {String} method - "POST" (constant).
- * @property {PostRequestHeaders} headers - The POST headers.
- */
-
-/**
- * Utility to configure a step:  Creates a response callback, binds it to an
- * http database request, and configures a promise to resolve/reject when the
- * response callback finishes or fails.
- * @param {Object} details - Specific information for the request and response.
- *                           These details are set appropriately by the caller:
- * @param {String} details.requestErrMsg - Error message to display on a request
- *                                         error.
- * @param {ResponseDataHandler} details.responseDataHandler -
- *                                  Function for processing the data returned in
- *                                  the response.
- * @param {String} details.responseErrMsg - Error message to display on a
- *                                          response error.
- * @param {Array} details.dataToPost - Optional: if present, a POST request is
- *                                     used.
- * @param {String} details.requestUrl - If not a POST request, the URL for a GET
- *                                      request.
- * @param {Object} options - Post request:
- * @param {PostRequestOptions} options.postOptions - If a POST request is used,
- *                                                   contains the specifics of
- *                                                   the request.
- * @return {Promise} - A promise that resolves the configured step.
- */
-gpii.dataLoader.configureStep = function (details, options) {
-    var togo = fluid.promise();
-    var response = gpii.dataLoader.createResponseHandler(
-        details.responseDataHandler,
-        options,
-        togo,
-        details.responseErrMsg
-    );
-    var request;
-    if (details.dataToPost) {
-        request = gpii.dataLoader.createPostRequest(
-            details.dataToPost, response, options
-        );
-    } else {
-        request = gpii.dataLoader.queryDatabase(
-            details.requestUrl, response, details.requestErrMsg
-        );
-    }
-    request.end();
-    return togo;
-};
-
-/**
  * Create the step that loads the static data into the database.
  * @param {Object} options - The static data:
  * @param {Array} options.staticData - The static data to load.
@@ -208,7 +130,7 @@ gpii.dataLoader.createStaticDataStep = function (options) {
         },
         responseErrMsg: "Error loading static data into database: "
     };
-    return gpii.dataLoader.configureStep(details, options);
+    return gpii.dbRequest.configureStep(details, options);
 };
 
 /**
@@ -229,7 +151,7 @@ gpii.dataLoader.createFetchOldViewsStep = function (options) {
         },
         responseErrMsg: "Error retrieving old views from database: "
     };
-    return gpii.dataLoader.configureStep(details, options);
+    return gpii.dbRequest.configureStep(details, options);
 };
 
 /**
@@ -265,7 +187,7 @@ gpii.dataLoader.createUpdateViewsStep = function (options) {
             },
             responseErrMsg: "Error updating views: "
         };
-        return gpii.dataLoader.configureStep(details, options);
+        return gpii.dbRequest.configureStep(details, options);
     }
 };
 
@@ -340,109 +262,6 @@ gpii.dataLoader.markPrefsSafesGpiiKeysForDeletion = function (gpiiKeyRecords, sn
 };
 
 /**
- * Utility to wrap all the pieces to make a bulk documents deletion request
- * for the snapset Prefs Safes and their associated GPII keys.
- * @param {ResponseCallback} batchDeleteResponse - Reponse handler for the batch
- *                                                 delete request.
- * @param {Object} options - The records to be deleted:
- * @param {Array} options.snapsetPrefsSafes - "snapset" PrefsSafes to delete.
- * @param {Array} options.gpiiKeys - Associated GPII Keys to delete.
- * @return {http.ClientRequest} - The http request object.
- */
-gpii.dataLoader.configureBatchDelete = function (batchDeleteResponse, options) {
-    var docsToRemove = options.snapsetPrefsSafes.concat(options.gpiiKeys);
-    return gpii.dataLoader.createPostRequest(
-        docsToRemove, batchDeleteResponse, options
-    );
-};
-
-/**
- * Create an http request for a bulk docs POST request using the given data.
- * @param {Object} dataToPost - JSON data to POST and process in bulk.
- * @param {ResponseCallback} responseHandler - http response callback for the
- *                                             request.
- * @param {Object} options - Post request options:
- * @param {PostRequestOptions} options.postOptions - the POST request specifics.
- * @return {http.ClientRequest} - An http request object.
- */
-gpii.dataLoader.createPostRequest = function (dataToPost, responseHandler, options) {
-    var batchPostData = JSON.stringify({"docs": dataToPost});
-    options.postOptions.headers["Content-Length"] = Buffer.byteLength(batchPostData);
-    var batchDocsRequest = http.request(options.postOptions, responseHandler);
-    batchDocsRequest.write(batchPostData);
-    return batchDocsRequest;
-};
-
-/**
- * Generate a response handler, setting up the given promise to resolve/reject
- * at the correct time.
- * @param {ResponseDataHandler} handleEnd - Function that processes the response
- *                                          data when the response receives an
- *                                          "end" event.
- * @param {Object} options - Data loader options passed to `handleEnd()`.
- * @param {Promise} promise - Promise to resolve/reject on a response "end" or
- *                           "error" event.
- * @param {String} errorMsg - Optional error message to prepend to the error
- *                            received from a response "error" event.
- * @return {ResponseCallback} - Reponse callback function suitable for an http
- *                              request.
- */
-gpii.dataLoader.createResponseHandler = function (handleEnd, options, promise, errorMsg) {
-    if (!errorMsg) {
-        errorMsg = "";
-    }
-    return function (response) {
-        var responseString = "";
-
-        response.setEncoding("utf8");
-        response.on("data", function (chunk) {
-            responseString += chunk;
-        });
-        response.on("end", function () {
-            if (response.statusCode >= 400) {   // error
-                var fullErrorMsg = errorMsg +
-                                   response.statusCode + " - " +
-                                   response.statusMessage;
-                // Document-not-found or 404 errors include a reason in the
-                // response.
-                // http://docs.couchdb.org/en/stable/api/basics.html#http-status-codes
-                if (response.statusCode === 404) {
-                    fullErrorMsg = fullErrorMsg + ", " +
-                                   JSON.parse(responseString).reason;
-                }
-                promise.reject(fullErrorMsg);
-            }
-            else {
-                var value = handleEnd(responseString, options);
-                promise.resolve(value);
-            }
-        });
-        response.on("error", function (e) {
-            fluid.log(errorMsg + e.message);
-            promise.reject(e);
-        });
-    };
-};
-
-/**
- * General mechanism to create a database request, set up an error handler and
- * return.  It is up to the caller to trigger the request by calling its end()
- * function.
- * @param {String} databaseURL - URL to query the database with.
- * @param {ResponseCallback} handleResponse - callback that processes the
- *                                            response from the request.
- * @param {String} errorMsg - optional error message for request errors.
- * @return {http.ClientRequest} - The http request object.
- */
-gpii.dataLoader.queryDatabase = function (databaseURL, handleResponse, errorMsg) {
-    var aRequest = http.request(databaseURL, handleResponse);
-    aRequest.on("error", function (e) {
-        fluid.log(errorMsg + e.message);
-    });
-    return aRequest;
-};
-
-/**
  * Read all the json files from the given directory, then loop to put their
  * contents into an array of Objects.
  * @param {String} dataDir - Directory containing the files to load.
@@ -477,7 +296,7 @@ gpii.dataLoader.createFetchSnapsetsStep = function (options) {
         responseDataHandler: gpii.dataLoader.processSnapsets,
         responseErrMsg: "Error retrieving snapsets Prefs Safes: "
     };
-    return gpii.dataLoader.configureStep(details, options);
+    return gpii.dbRequest.configureStep(details, options);
 };
 
 /**
@@ -496,7 +315,7 @@ gpii.dataLoader.createFetchGpiiKeysStep = function (options) {
         responseDataHandler: gpii.dataLoader.processGpiiKeys,
         responseErrMsg: "Error finding snapset Prefs Safes associated GPII Keys: "
     };
-    return gpii.dataLoader.configureStep(details, options);
+    return gpii.dbRequest.configureStep(details, options);
 };
 
 /**
@@ -534,7 +353,7 @@ gpii.dataLoader.createBatchDeleteStep = function (options) {
         dataToPost: options.snapsetPrefsSafes.concat(options.gpiiKeys),
         responseDataHandler: gpii.dataLoader.logSnapsetDeletion
     };
-    return gpii.dataLoader.configureStep(details, options);
+    return gpii.dbRequest.configureStep(details, options);
 };
 
 /**
@@ -564,7 +383,7 @@ gpii.dataLoader.createBatchUploadStep = function (options) {
         dataToPost: newSnapsetsData,
         responseDataHandler: gpii.dataLoader.logSnapsetsUpload
     };
-    return gpii.dataLoader.configureStep(details, options);
+    return gpii.dbRequest.configureStep(details, options);
 };
 
 /**

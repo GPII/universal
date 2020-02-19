@@ -61,6 +61,14 @@
     },
 
     {
+        "id": "com.microsoft.windows.audioDescription"
+    },
+
+    {
+        "id": "com.microsoft.windows.notificationDuration"
+    },
+
+    {
         "id": "com.microsoft.windows.mouseKeys"
     },
 
@@ -70,6 +78,22 @@
 
     {
         "id": "com.microsoft.windows.mouseTrailing"
+    },
+
+    {
+        "id": "com.microsoft.windows.toggleKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.underlineMenuShortcuts"
+    },
+
+    {
+        "id": "com.microsoft.windows.shortcutWarningMessage"
+    },
+
+    {
+        "id": "com.microsoft.windows.shortcutWarningSound"
     },
 
     {
@@ -117,6 +141,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.mirrorScreen"
+    },
+
+    {
         "id": "com.microsoft.windows.brightness"
     },
 
@@ -130,6 +158,10 @@
 
     {
         "id": "com.microsoft.windows.focus"
+    },
+
+    {
+        "id": "com.microsoft.windows.soundSentry"
     },
 
     {
@@ -186,5 +218,9 @@
 
     {
         "id": "org.nvda-project"
+    },
+
+    {
+        "id": "com.microsoft.office"
     }
 ]

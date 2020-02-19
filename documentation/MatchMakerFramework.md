@@ -1,9 +1,9 @@
 # Matchmaker Framework
 
 The matchmaker framework is a component and a set of utitilities that can run either locally or remotely depending on
-the configuration. Together with the actual matchmaker, it is respnosible for deciding how the users device should be
-configured based on their preferences, current context and the solution registry data. More specifically, the matchmaker
-framework has the following responsibility:
+the configuration. Together with the actual matchmaker, it is responsible for deciding how the users device should be
+configured based on their preferences, the specified set of preferences therein, and the solution registry data. More
+specifically, the matchmaker framework has the following responsibility:
 
 * Doing the preprocessing - that is, preparing and augmenting the input payload for the specific matchmaker
 * Making the decision of which matchmaker to call, and then call that matchmaker (for example the
@@ -44,14 +44,13 @@ done like:
 
 ## Detailed Description:
 
-### Main steps of the match maker frameworks matching process
+### Main steps of the matchMaker frameworks matching process
 
 1. The matchmaking process is triggered by the `processMatch` event of the FlowManager. The actual matchmaking flow is
    dictated by a combination of the priorities in `gpii.flowmanager.processmatch.priorities`, and the `processMatch`
    listeners (which are different depending on whether the system runs in trusted or untrusted mode)
 * Preprocess:
-  * Triggered when the initial data has been collected (preferences, context, solution registry entries, etc)
-  * Augments the match maker input with inferred common terms (see under important utilities/functions in this document)
+  * Triggered when the initial data has been collected (preferences, named preferences set, solution registry entries, etc)
   * TODO: _Full solutions registry is currently being used when inferring common terms. This is because the users
     preference set might contain e.g. Linux app preferences, even if the user is logging into a windows box. We then
     need the linux solutions registry entries to get information (if available) about how to transform the linux app
@@ -64,10 +63,10 @@ done like:
     in a block keyed by `matchMakerOutput`.
   * The return payload is built in: `gpii.matchMakerFramework.utils.buildReturnPayload`
 
-### Important utilities and concepts in the Match Maker Framework
+### Important utilities and concepts in the MatchMaker Framework
 
 **The Flat Matchmaker**: While this is not part of the matchmaker framework, it is important to mention the Flat
-Match Maker, which is an (the only) implementation of a matchmaker, which uses most of the utilities described in this
+MatchMaker, which is an (the only) implementation of a matchmaker, which uses most of the utilities described in this
 document. It is described in details here:
 [https://github.com/GPII/universal/blob/master/documentation/FlatMatchMaker.md](./FlatMatchMaker.md)
 
@@ -79,26 +78,6 @@ conflicting solutions (i.e. of the same type) will be rejected. Adding solution 
 `gpii.matchMakerFramework.utils.addSolutionTypeInformation` function.
 
 The apptology is described in more details here: [Apptology.md](Apptology.md).
-
-**Common Term Inference**: If the solution registry entry for a solution has an `inverseCapabilitiesTransformations`
-block specified, or does not have a `capabilitiesTransformations` (in which case, the system attempts to automatically
-calculate the inverses), the matchmaker framework can infer common terms from application specific settings. This
-means, that if the user has application specific settings for e.g. windows magnifier, the equivalent common term
-preferences can be inferred and used in the matchmaking process (e.g. finding the relevant settings for the linux
-magnifier). The inference happens via the `gpii.matchMakerFramework.utils.inferCommonTerms` function, and if these
-should be merged with an preference set, this can be done via the
-`gpii.matchMakerFramework.utils.addInferredCommonTerms` function. It is worth stressing two things: The use of inferred
-common terms is not mandatory in a matchmaking flow, but available via the above functions, and something which _is_
-being used in the flat matchmaker. Secondly, there is no metadata generated saying that the common terms are
-inferred, meaning that once added to an preference set, the matchmaker has no way of knowing whether the term was
-originally in the preference set or was inferred.
-
-Also, hte full solutions registry is currently being used when inferring common terms. This is because the users
-preference set might contain e.g. Linux app preferences, even if the user is logging into a windows box. We then need
-the linux solutions registry entries to get information (if available) about how to transform the linux app preferences
-into common terms (that in turn can be translated into app settings for windows). This should be changed into a more
-dynamically loaded solution registry fetching based on the users application settings, once the solutions registry has
-been turned into a queriable service.
 
 **gpii.matchmakerframework.utils.disposeSolution:** In many ways the “Heart” of the matchmaking process. It is
 responsible for adding priorities, augmenting the solution and preference data and finally passing it to some
@@ -116,7 +95,7 @@ disposition (matchmaker) strategy that is passed as a parameter. In more details
 4. A leaves structure of the preferences is calculated in the `gpii.matchMakerFramework.utils.computeLeaves` function.
    This is a structure with a key for each preference in an EL-path format and a value of true. This, in conjunction with
    the solutions skeleton is useful for looking up matches via fluids' getPath functionality.
-5. Once all this data has been prepared, the information is sent to the strategy (e.g. flat match makers algorithm)
+5. Once all this data has been prepared, the information is sent to the strategy (e.g. flat MatchMakers algorithm)
 6. Finally a disposition is assigned to each solution based on the output of the strategy.
 
 **Preference filtering:** When using a the untrusted flowmanager, security dictates that no "irrelevant" or unnused
