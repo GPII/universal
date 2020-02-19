@@ -253,7 +253,6 @@ gpii.tests.windows.jaws.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
-                            "Braille.BrailleMode": 1,
                             "Options.SayAllMode": 1,
                             "Options.SayAllIndicateCaps": 0,
                             "Options.SayAllIgnoreShiftKeys": 0,
@@ -318,7 +317,6 @@ gpii.tests.windows.jaws.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
-                            "Braille.BrailleMode": 0,
                             "Options.SayAllMode": 0,
                             "Options.SayAllIndicateCaps": 0,
                             "Options.SayAllIgnoreShiftKeys": 0
@@ -382,7 +380,6 @@ gpii.tests.windows.jaws.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
-                            "Braille.BrailleMode": 2,
                             "Options.SayAllMode": 2,
                             "Options.SayAllIndicateCaps": 1,
                             "Options.SayAllIgnoreShiftKeys": 1,

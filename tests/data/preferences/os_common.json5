@@ -15,7 +15,7 @@
                     "http://registry.gpii.net/common/cursorAcceleration": 1,
                     "http://registry.gpii.net/common/cursorSpeed": 1,
                     "http://registry.gpii.net/common/stickyKeys": true,
-                    "http://registry.gpii.net/common/debounceEnable": true,
+                    "http://registry.gpii.net/common/debounce/enabled": true,
                     "http://registry.gpii.net/common/debounceInterval": 1,
                     "http://registry.gpii.net/common/onScreenKeyboard/enabled": true
                 }
