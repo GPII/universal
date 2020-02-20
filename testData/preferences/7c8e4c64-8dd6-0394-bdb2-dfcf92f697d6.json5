@@ -1,0 +1,12 @@
+// See GPII-4369
+{
+    "flat": {
+        "name": "7c8e4c64-8dd6-0394-bdb2-dfcf92f697d6",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {}
+            }
+        }
+    }
+}
