@@ -5229,6 +5229,13 @@
                             default: "%SystemRoot%\\cursors\\aero_arrow.cur"
                         }
                     },
+                    "Crosshair": {
+                        schema: {
+                            title: "Crosshair",
+                            description: "The 'crosshair' cursor to use.",
+                            type: "string"
+                        }
+                    },
                     "Hand": {
                         schema: {
                             title: "Hand Cursor",
@@ -5243,6 +5250,13 @@
                             description: "The 'help' cursor icon.",
                             type: "string",
                             default: "%SystemRoot%\\cursors\\aero_helpsel.cur"
+                        }
+                    },
+                    "IBeam": {
+                        schema: {
+                            title: "IBeam",
+                            description: "The 'IBeam' cursor to use.",
+                            type: "string"
                         }
                     },
                     "No": {
@@ -5431,63 +5445,62 @@
                             ]
                         }
                     },
-                    // TODO: Remove this or add as a supported setting.
-//                    "Crosshair": {
-//                        "transform": {
-//                            "type": "fluid.transforms.quantize",
-//                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
-//                            "ranges": [
-//                                {
-//                                    "upperBound": 0.333,
-//                                    "output": {
-//                                        "transform": {
-//                                            "type": "fluid.transforms.valueMapper",
-//                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
-//                                            "match": {
-//                                                "White": "",
-//                                                "Black": "%SystemRoot%\\cursors\\cross_r.cur",
-//                                                "ReverseBlack": "%SystemRoot%\\cursors\\cross_i.cur"
-//                                            },
-//                                            "noMatch": {
-//                                                "outputValue": ""
-//                                            }
-//                                        }
-//                                    }
-//                                }, {
-//                                    "upperBound": 0.666,
-//                                    "output": {
-//                                        "transform": {
-//                                            "type": "fluid.transforms.valueMapper",
-//                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
-//                                            "match": {
-//                                                "White": "%SystemRoot%\\cursors\\cross_m.cur",
-//                                                "Black": "%SystemRoot%\\cursors\\cross_rm.cur",
-//                                                "ReverseBlack": "%SystemRoot%\\cursors\\cross_im.cur"
-//                                            },
-//                                            "noMatch": {
-//                                                "outputValue": "%SystemRoot%\\cursors\\cross_m.cur"
-//                                            }
-//                                        }
-//                                    }
-//                                }, {
-//                                    "output": {
-//                                        "transform": {
-//                                            "type": "fluid.transforms.valueMapper",
-//                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
-//                                            "match": {
-//                                                "White": "%SystemRoot%\\cursors\\cross_l.cur",
-//                                                "Black": "%SystemRoot%\\cursors\\cross_rl.cur",
-//                                                "ReverseBlack": "%SystemRoot%\\cursors\\cross_il.cur"
-//                                            },
-//                                            "noMatch": {
-//                                                "outputValue": "%SystemRoot%\\cursors\\cross_l.cur"
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                            ]
-//                        }
-//                    },
+                    "Crosshair": {
+                        "transform": {
+                            "type": "fluid.transforms.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\cross_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\cross_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\cross_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\cross_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\cross_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\cross_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\cross_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\cross_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\cross_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\cross_l.cur"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "Hand": {
                         "transform": {
                             "type": "fluid.transforms.quantize",
@@ -5561,63 +5574,62 @@
                             ]
                         }
                     },
-                    // TODO: Remove this or add as a supported setting.
-//                    "IBeam": {
-//                        "transform": {
-//                            "type": "fluid.transforms.quantize",
-//                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
-//                            "ranges": [
-//                                {
-//                                    "upperBound": 0.333,
-//                                    "output": {
-//                                        "transform": {
-//                                            "type": "fluid.transforms.valueMapper",
-//                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
-//                                            "match": {
-//                                                "White": "",
-//                                                "Black": "%SystemRoot%\\cursors\\beam_r.cur",
-//                                                "ReverseBlack": "%SystemRoot%\\cursors\\beam_i.cur"
-//                                            },
-//                                            "noMatch": {
-//                                                "outputValue": ""
-//                                            }
-//                                        }
-//                                    }
-//                                }, {
-//                                    "upperBound": 0.666,
-//                                    "output": {
-//                                        "transform": {
-//                                            "type": "fluid.transforms.valueMapper",
-//                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
-//                                            "match": {
-//                                                "White": "%SystemRoot%\\cursors\\beam_m.cur",
-//                                                "Black": "%SystemRoot%\\cursors\\beam_rm.cur",
-//                                                "ReverseBlack": "%SystemRoot%\\cursors\\beam_im.cur"
-//                                            },
-//                                            "noMatch": {
-//                                                "outputValue": "%SystemRoot%\\cursors\\beam_m.cur"
-//                                            }
-//                                        }
-//                                    }
-//                                }, {
-//                                    "output": {
-//                                        "transform": {
-//                                            "type": "fluid.transforms.valueMapper",
-//                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
-//                                            "match": {
-//                                                "White": "%SystemRoot%\\cursors\\beam_l.cur",
-//                                                "Black": "%SystemRoot%\\cursors\\beam_rl.cur",
-//                                                "ReverseBlack": "%SystemRoot%\\cursors\\beam_il.cur"
-//                                            },
-//                                            "noMatch": {
-//                                                "outputValue": "%SystemRoot%\\cursors\\beam_l.cur"
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                            ]
-//                        }
-//                    },
+                    "IBeam": {
+                        "transform": {
+                            "type": "fluid.transforms.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\beam_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\beam_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\beam_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\beam_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\beam_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\beam_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\beam_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\beam_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\beam_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\beam_l.cur"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "No": {
                         "transform": {
                             "type": "fluid.transforms.quantize",
