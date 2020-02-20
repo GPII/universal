@@ -217,7 +217,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-Global.Rate": 40,
                             "ENU-Global.Punctuation": 2,
                             "ENU-Global.Pitch": 70,
-                            "ENU-Global.Volume": 50,
+                            "ENU-Global.Volume": 55,
                             "ENU-Global.SynthLangString": "French",
                             "ENU-Message.Rate": 40,
                             "ENU-Message.Punctuation": 2,
