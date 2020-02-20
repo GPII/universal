@@ -828,10 +828,11 @@
     "http://registry.gpii.net/common/speechRate": {
         "schema": {
             "title": "Speech rate",
-            "description": "Text to speech output speech rate",
+            "description": "Text to speech output speech rate in words per minute.",
             "type": "integer",
             "default": 150,
-            "minimum": 1
+            "minimum": 1,
+            "maximum": 1000
         }
     },
     "http://registry.gpii.net/common/stickyKeys": {

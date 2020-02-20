@@ -3178,44 +3178,86 @@
                     },
                     "ENU-Global\\.Volume": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
+                            "type": "fluid.transforms.binaryOp",
+                            "operator": "+",
+                            "left": 10,
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 90
+                                }
+                            }
                         }
                     },
                     "ENU-JAWSCursor\\.Volume": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
+                            "type": "fluid.transforms.binaryOp",
+                            "operator": "+",
+                            "left": 10,
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 90
+                                }
+                            }
                         }
                     },
                     "ENU-Keyboard\\.Volume": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
+                            "type": "fluid.transforms.binaryOp",
+                            "operator": "+",
+                            "left": 10,
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 90
+                                }
+                            }
                         }
                     },
                     "ENU-MenuAndDialog\\.Volume": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
+                            "type": "fluid.transforms.binaryOp",
+                            "operator": "+",
+                            "left": 10,
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 90
+                                }
+                            }
                         }
                     },
                     "ENU-Message\\.Volume": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
+                            "type": "fluid.transforms.binaryOp",
+                            "operator": "+",
+                            "left": 10,
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 90
+                                }
+                            }
                         }
                     },
                     "ENU-PCCursor\\.Volume": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
+                            "type": "fluid.transforms.binaryOp",
+                            "operator": "+",
+                            "left": 10,
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 90
+                                }
+                            }
                         }
                     },
                     "ENU-Global\\.Punctuation": {
@@ -4747,19 +4789,6 @@
                             "description": "Set the screen brightness.",
                             "type": "object",
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "type": "number",
                                     "default": 0,
@@ -8833,8 +8862,7 @@
                                                 "transform": {
                                                     "type": "fluid.transforms.linearScale",
                                                     "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "factor": 0.1,
-                                                    "offset": -5
+                                                    "factor": 0.066666666666667
                                                 }
                                             }
                                         },
@@ -8845,7 +8873,7 @@
                                                     "type": "fluid.transforms.linearScale",
                                                     "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
                                                     "factor": 0.033333333333,
-                                                    "offset": -5
+                                                    "offset": 5
                                                 }
                                             }
                                         },
@@ -9116,11 +9144,18 @@
                 },
                 "capabilitiesTransformations": {
                     "SpeechVolume": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100,
-                            "offset": 0
+                        // The common term is 0->1, we're 0.01->1
+                        transform: {
+                            type: "fluid.transforms.binaryOp",
+                            left: 0.01,
+                            right: {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "right": 0.99,
+                                    "operator": "*"
+                                }
+                            }
                         }
                     },
                     "ShowKeyboardIntroduction": "http://registry\\.gpii\\.net/common/speakTutorialMessages",
@@ -9600,24 +9635,29 @@
                     // The common term goes from -2 to 4, our setting goes from 1 to 5, so we add 3 and multiply by 5/7
                     "screen-dpi": {
                         transform: {
-                            type: "fluid.transforms.binaryOp",
-                            left: {
+                            "type": "fluid.transforms.round",
+                            "input": {
                                 transform: {
                                     type: "fluid.transforms.binaryOp",
-                                    left: 5,
-                                    right: 7,
-                                    operator: "/"
+                                    left: {
+                                        transform: {
+                                            type: "fluid.transforms.binaryOp",
+                                            left: 5,
+                                            right: 7,
+                                            operator: "/"
+                                        }
+                                    },
+                                    right: {
+                                        transform: {
+                                            type: "fluid.transforms.binaryOp",
+                                            leftPath: "http://registry\\.gpii\\.net/common/DPIScale",
+                                            right: 3,
+                                            operator: "+"
+                                        }
+                                    },
+                                    operator: "*"
                                 }
-                            },
-                            right: {
-                                transform: {
-                                    type: "fluid.transforms.binaryOp",
-                                    leftPath: "http://registry\\.gpii\\.net/common/DPIScale",
-                                    right: 3,
-                                    operator: "+"
-                                }
-                            },
-                            operator: "*"
+                            }
                         }
                     }
                 }
@@ -9947,11 +9987,16 @@
                         "schema": {
                             "title": "System volume",
                             "description": "Changes the current system volume.",
-                            "type": "number",
-                            "default": 0.5,
-                            "minimum": 0,
-                            "maximum": 1,
-                            "multipleOf": 0.01
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "number",
+                                    "default": 0.5,
+                                    "minimum": 0,
+                                    "maximum": 1,
+                                    "multipleOf": 0.01
+                                }
+                            }
                         }
                     }
                 },
@@ -15320,38 +15365,9 @@
                             "type": "fluid.transforms.round",
                             "input": {
                                 "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "right": 3.10,
-                                    "operator": "/",
-                                    "left": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "right": 80,
-                                            "operator": "-",
-                                            "left": {
-                                                "transform": {
-                                                    "type": "fluid.transforms.condition",
-                                                    "truePath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "false": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                            "operator": "/",
-                                                            "right": 3
-                                                        }
-                                                    },
-                                                    "condition": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                            "operator": "<=",
-                                                            "right": 390
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                    "factor": 0.1
                                 }
                             }
                         }
@@ -15464,38 +15480,9 @@
                             "type": "fluid.transforms.round",
                             "input": {
                                 "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "right": 3.10,
-                                    "operator": "/",
-                                    "left": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "right": 80,
-                                            "operator": "-",
-                                            "left": {
-                                                "transform": {
-                                                    "type": "fluid.transforms.condition",
-                                                    "truePath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "false": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                            "operator": "/",
-                                                            "right": 3
-                                                        }
-                                                    },
-                                                    "condition": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                            "operator": "<=",
-                                                            "right": 390
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                    "factor": 0.1
                                 }
                             }
                         }
@@ -15529,38 +15516,9 @@
                             "type": "fluid.transforms.round",
                             "input": {
                                 "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "right": 3.10,
-                                    "operator": "/",
-                                    "left": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "right": 80,
-                                            "operator": "-",
-                                            "left": {
-                                                "transform": {
-                                                    "type": "fluid.transforms.condition",
-                                                    "truePath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "false": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                            "operator": "/",
-                                                            "right": 3
-                                                        }
-                                                    },
-                                                    "condition": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                            "operator": "<=",
-                                                            "right": 390
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                    "factor": 0.1
                                 }
                             }
                         }
