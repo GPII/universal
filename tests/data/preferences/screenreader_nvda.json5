@@ -8,7 +8,7 @@
                         "speech.synth": "espeak",
                         "speech.outputDevice": "Microsoft Sound Mapper",
                         "speech.symbolLevel": 300,
-                        "speech.espeak.rate": 17,
+                        "speech.espeak.rate": 40,
                         "speech.espeak.voice": "en-us",
                         "speech.espeak.pitch": 60,
                         "speech.espeak.volume": 80,

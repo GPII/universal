@@ -127,7 +127,7 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "speech.espeak.rate": 17,
+                            "speech.espeak.rate": 40,
                             "speech.espeak.volume": 80,
                             "speech.espeak.pitch": 60,
                             "speech.espeak.rateBoost": "True",

@@ -79,7 +79,7 @@ gpii.tests.windows.nvda.testDef = [
                 "org.nvda-project": [
                     {
                         "settings": {
-                            "speech.espeak.rate": 17,
+                            "speech.espeak.rate": 40,
                             "speech.espeak.volume": 80,
                             "speech.espeak.pitch": 60,
                             "speech.espeak.rateBoost": "True",
@@ -114,7 +114,7 @@ gpii.tests.windows.nvda.testDef = [
                 "org.nvda-project": [
                     {
                         "settings": {
-                            "speech.espeak.rate": 17,
+                            "speech.espeak.rate": 40,
                             "speech.espeak.volume": 80,
                             "speech.espeak.pitch": 60,
                             "speech.espeak.rateBoost": "True",
@@ -149,7 +149,7 @@ gpii.tests.windows.nvda.testDef = [
                 "org.nvda-project": [
                     {
                         "settings": {
-                            "speech.espeak.rate": 17,
+                            "speech.espeak.rate": 40,
                             "speech.espeak.volume": 75,
                             "speech.espeak.pitch": 10,
                             "speech.espeak.rateBoost": "True",
