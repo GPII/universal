@@ -4974,12 +4974,13 @@
                         "length": 260
                     }
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "ImageConfig": {
                         "schema": {
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": { "type":  "string"},
                                 "value": {
@@ -5036,12 +5037,13 @@
                         "length": 260
                     }
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "ImageConfig": {
                         "schema": {
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": { "type":  "string", "required": true},
                                 "value": {
@@ -6230,12 +6232,12 @@
                         "name": "FILTERKEYS"
                     }
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "FilterKeysEnable": {
                         "schema": {
                             "title": "Filter keys",
                             "description": "Enable/Disable filter keys",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "type": "object",
                             "properties": {
                                 "path": { "type":  "string", "required": true},
@@ -6251,7 +6253,7 @@
                         "schema": {
                             "title": "Slow keys interval",
                             "description": "Slow keys interval time in milliseconds",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": { "type":  "string", "required": true},
                                 "value": {
@@ -6458,12 +6460,13 @@
                         "name": "HIGHCONTRAST"
                     }
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "HighContrastOn": {
                         "schema": {
                             "title": "High Contrast",
                             "description": "Whether to enable/disable High Contrast",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": { "type":  "string", "required": true},
                                 "value": {
@@ -7633,12 +7636,13 @@
                         "name": "MOUSEKEYS"
                     }
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "MouseKeysOn": {
                         "schema": {
                             "title": "Mouse keys",
                             "description": "Enable/Disable mouse keys",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": { "type":  "string", "required": true},
                                 "value": {
@@ -7784,12 +7788,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "SwapMouseButtonsConfig": {
                         "schema": {
                             "title": "Swap mouse primary button",
                             "description": "Swap mouse left/right buttons",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -7842,12 +7847,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "ScrollWheelModeConfig": {
                         "schema": {
                             "title": "Mouse scroll wheel mode",
                             "description": "Changes the number of lines to scroll when moving the scrollwheel.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -7910,12 +7916,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "ScrollFocusRoutingConfig": {
                         "schema": {
                             "title": "Mouse scroll focus routing",
                             "description": "Changes the way mouse scrolling is passed to applications.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -7963,12 +7970,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "MouseCursorShadowEnable": {
                         "schema": {
                             "title": "Mouse cursor shadow",
                             "description": "Enables or disables mouse cursor shadow.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -8016,12 +8024,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "ScrollCharsConfig": {
                         "schema": {
                             "title": "Mouse wheel horizontal scroll",
                             "description": "Changes the number of chars that are scrolled horizontally.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -8074,12 +8083,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "WindowsTrackingConfig": {
                         "schema": {
                             "title": "Mouse Windows tracking",
                             "description": "Windows are focused when mouse is stopped over them.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -8127,12 +8137,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "ActiveZOrder": {
                         "schema": {
                             "title": "Windows Tracking",
                             "description": "Windows receive focus when mouse hovers over them.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -8180,12 +8191,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "WindowsArrangement": {
                         "schema": {
                             "title": "Configures Window arrangement",
                             "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -8235,10 +8247,15 @@
                         "schema": {
                             "title": "Double click time",
                             "description": "Changes the amount of time that can elapse between a first click and a second click for the OS to consider the mouse action a double-click.",
-                            "type": "integer",
-                            "default": 500,
-                            "minimum": 500,
-                            "maximum": 5000
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "integer",
+                                    "default": 500,
+                                    "minimum": 500,
+                                    "maximum": 5000
+                                }
+                            }
                         }
                     }
                 },
@@ -8263,12 +8280,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "PointerSpeedConfig": {
                         "schema": {
                             "title": "Configures pointer speed",
                             "description": "Selects a pointer speed.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -8320,12 +8338,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "EnhancePrecisionConfig": {
                         "schema": {
                             "title": "Enhance pointer precision",
                             "description": "Enable/Disables enhanced pointer precision.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -8381,12 +8400,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "SnapToDefaultButtonConfig": {
                         "schema": {
                             "title": "Snap To",
                             "description": "Automatically move pointer to the default button in a dialogue.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -8437,12 +8457,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "HidePointerConfig": {
                         "schema": {
                             "title": "Hide pointer while typing",
                             "description": "Enable/Disables hiding the pointer while typing.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -8490,12 +8511,13 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "MouseSonarConfig": {
                         "schema": {
                             "title": "Mouse sonar",
                             "description": "Enable/Disable showing mouse location when pressing the CTRL key.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -8543,11 +8565,16 @@
                         "schema": {
                             "title": "Double-click rectangle width",
                             "description": "Changes the width of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
-                            "type": "integer",
-                            "default": 4,
-                            "minimum": 1,
-                            "maximum": 64,
-                            "multipleOf": 1
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "integer",
+                                    "default": 4,
+                                    "minimum": 1,
+                                    "maximum": 64,
+                                    "multipleOf": 1
+                                }
+                            }
                         }
                     }
                 },
@@ -8572,11 +8599,16 @@
                         "schema": {
                             "title": "Double-click rectangle height",
                             "description": "Changes the height of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
-                            "type": "integer",
-                            "default": 4,
-                            "minimum": 1,
-                            "maximum": 64,
-                            "multipleOf": 1
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "integer",
+                                    "default": 4,
+                                    "minimum": 1,
+                                    "maximum": 64,
+                                    "multipleOf": 1
+                                }
+                            }
                         }
                     }
                 },
@@ -8618,13 +8650,14 @@
                         "type": "UINT"
                     }
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "MouseTrails": {
                         "schema": {
                             // Exactly the same schema as mouseTrailing common term
                             "title": "Mouse trails",
                             "description": "Amount of mouse trailing",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -9741,12 +9774,13 @@
                         "name": "STICKYKEYS"
                     }
                 },
+                // TODO: Make a general pattern for SPI settings.
                 "supportedSettings": {
                     "StickyKeysOn": {
-                        // TODO: Make a general pattern for SPI settings.
                         schema: {
                             "title": "Sticky Keys On",
                             "description": "Whether or not sticky keys should be turned on.",
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     oneOf: [
@@ -9817,19 +9851,25 @@
                         "schema": {
                             "title": "Touchpad sensitivity",
                             "description": "Changes Windows 10 precision touchpad sensitivity.",
-                            "default": "Medium sensitivity",
-                            "enum": [
-                                "Low sensitivity",
-                                "Medium sensitivity",
-                                "High sensitivity",
-                                "Most sensitive"
-                            ],
-                            "enumLabels": [
-                                "Low sensitivity",
-                                "Medium sensitivity",
-                                "High sensitivity",
-                                "Most sensitive"
-                            ]
+                            "type": "object",
+                            "properties": {
+                                "value": {
+
+                                    "default": "Medium sensitivity",
+                                    "enum": [
+                                        "Low sensitivity",
+                                        "Medium sensitivity",
+                                        "High sensitivity",
+                                        "Most sensitive"
+                                    ],
+                                    "enumLabels": [
+                                        "Low sensitivity",
+                                        "Medium sensitivity",
+                                        "High sensitivity",
+                                        "Most sensitive"
+                                    ]
+                                }
+                            }
                         }
                     }
                 },
