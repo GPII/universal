@@ -6231,39 +6231,54 @@
                         "schema": {
                             "title": "Enable color filtering",
                             "description": "Enable or disables Windows color filters.",
-                            "type": "boolean",
-                            "default": false
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     },
                     "SystemSettings_Accessibility_ColorFiltering_FilterType": {
                         "schema": {
                             "title": "Color filter type",
                             "description": "Selects the Windows color filter to be used.",
-                            "enum": [
-                                0,
-                                1,
-                                2,
-                                3,
-                                4,
-                                5
-                            ],
-                            "enumLabels": [
-                                "Grayscale",
-                                "Inverted",
-                                "Grayscale inverted",
-                                "Red-green (green weak, deuteranopia)",
-                                "Red-green (red weak, protanopia)",
-                                "Blue-yellow (tritanopia)"
-                            ],
-                            "default": 1
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "enum": [
+                                        0,
+                                        1,
+                                        2,
+                                        3,
+                                        4,
+                                        5
+                                    ],
+                                    "enumLabels": [
+                                        "Grayscale",
+                                        "Inverted",
+                                        "Grayscale inverted",
+                                        "Red-green (green weak, deuteranopia)",
+                                        "Red-green (red weak, protanopia)",
+                                        "Blue-yellow (tritanopia)"
+                                    ],
+                                    "default": 1
+                                }
+                            }
                         }
                     },
                     "SystemSettings_Accessibility_ColorFiltering_IsShortcutKeyEnabled": {
                         "schema": {
                             "title": "Shortcut key for color filters",
-                            "description": "Allow the shurtcut key (Windows + Ctrl + C) to toggle color filter on or off.",
-                            "type": "boolean",
-                            "default": false
+                            "description": "Allow the shortcut key (Windows + Ctrl + C) to toggle color filter on or off.",
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     }
                 },
