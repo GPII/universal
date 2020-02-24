@@ -26,9 +26,7 @@
                     "http://registry.gpii.net/common/pitch": 0.4,
                     "http://registry.gpii.net/common/volumeTTS": 0.5,
 
-                    "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
-                        HighContrastOn: true
-                    }
+                    "http://registry.gpii.net/applications/com.microsoft.windows.highContrast/enabled": true
                 }
             }
         }
