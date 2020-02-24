@@ -4840,8 +4840,8 @@
                             "title": "Desktop wallpaper tiling",
                             "description": "Sets the wallpaper to tiling style.",
                             "enum": [
-                                0,
-                                1
+                                "0",
+                                "1"
                             ],
                             "enumLabels": [
                                 "off",
@@ -4854,11 +4854,11 @@
                             "title": "Desktop wallpaper style",
                             "description": "Sets the wallpaper style.",
                             "enum": [
-                                0,
-                                2,
-                                6,
-                                10,
-                                22
+                                "0",
+                                "2",
+                                "6",
+                                "10",
+                                "22"
                             ],
                             "enumLabels": [
                                 "None",
@@ -4898,15 +4898,15 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Scaling",
                             "match": {
-                                "Fill": 0,
-                                "Fit": 0,
-                                "Stretch": 0,
-                                "Tile": 1,
-                                "Center": 0,
-                                "Span": 0
+                                "Fill": "0",
+                                "Fit": "0",
+                                "Stretch": "0",
+                                "Tile": "1",
+                                "Center": "0",
+                                "Span": "0"
                             },
                             "noMatch": {
-                                "outputValue": 0
+                                "outputValue": "0"
                             }
                         }
                     },
@@ -4915,15 +4915,15 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Scaling",
                             "match": {
-                                "Fill": 6,
-                                "Fit": 10,
-                                "Stretch": 2,
-                                "Tile": 0,
-                                "Center": 0,
-                                "Span": 22
+                                "Fill": "6",
+                                "Fit": "10",
+                                "Stretch": "2",
+                                "Tile": "0",
+                                "Center": "0",
+                                "Span": "22"
                             },
                             "noMatch": {
-                                "outputValue": 6
+                                "outputValue": "6"
                             }
                         }
                     }
