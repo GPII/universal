@@ -1524,10 +1524,9 @@
                             "title": "Font Size",
                             "description": "Adjust text size.",
                             "type": "number",
-                            "default": 12,
-                            "minimum": 3,
-                            "maximum": 60,
-                            "multipleOf": 1
+                            "default": 1,
+                            "minimum": 0.25,
+                            "maximum": 5
                         }
                     },
                     "inputsLargerEnabled": {
@@ -1619,7 +1618,7 @@
                             "input": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
-                                    "offset": 1,
+                                    "offset": -1,
                                     "inputPath": "http://registry\\.gpii\\.net/common/characterSpace"
                                 }
                             }
@@ -1665,8 +1664,8 @@
                                         "white-black": "wb",
                                         "black-yellow": "by",
                                         "yellow-black": "yb",
-                                        "gray-dark": "gd",
-                                        "gray-white": "gw",
+                                        "grey-black": "lgdg",
+                                        "grey-white": "gw",
                                         "black-brown": "bbr"
                                     }
                                 }
