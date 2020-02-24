@@ -20,6 +20,16 @@
                 },
                 "capabilitiesTransformations": {
                     "magnification": "http://registry\\.gpii\\.net/common/magnification"
+                },
+                "supportedSettings": {
+                    "magnification": {
+                        schema: {
+                            title: "Magnification Level",
+                            description: "How many times to magnify content when magnification is enabled.",
+                            type: "number",
+                            default: 1.10
+                        }
+                    }
                 }
             }
         },
@@ -60,6 +70,23 @@
                 "capabilitiesTransformations": {
                     "magnification": "http://registry\\.gpii\\.net/common/magnification",
                     "invert": "http://registry\\.gpii\\.net/common/invertColours"
+                },
+                "supportedSettings": {
+                    "magnification": {
+                        "schema": {
+                            "title": "Magnification Level",
+                            "description": "How many times to magnify content when magnification is enabled.",
+                            "type": "number",
+                            "default": 1.10
+                        }
+                    },
+                    "invert": {
+                        "schema": {
+                            "title": "Invert Colours",
+                            "description": "Enable colour inversion for Magnifier",
+                            "type": "boolean"
+                        }
+                    }
                 }
             }
         },
@@ -101,6 +128,30 @@
                     "pitch": "http://registry\\.gpii\\.net/common/pitch",
                     "volumeTTS": "http://registry\\.gpii\\.net/common/volumeTTS",
                     "rate": "http://registry\\.gpii\\.net/common/speechRate"
+                },
+                "supportedSettings": {
+                    "pitch": {
+                        "schema": {
+                            "title": "Speech Pitch",
+                            "description": "The pitch at which text is announced.",
+                            "minimum": 0,
+                            "maximum": 20
+                        }
+                    },
+                    "volumeTTS": {
+                        "schema": {
+                            "title": "Volume TTS",
+                            "description": "Volume TTS",
+                            "type": "integer"
+                        }
+                    },
+                    "rate": {
+                        "schema": {
+                            "title": "Rate",
+                            "description": "Speech rate for all announcements (scale varies by voice).",
+                            "type": "integer"
+                        }
+                    }
                 }
             }
         },
