@@ -23,7 +23,7 @@
                 "record": {
                     "funcName": "gpii.tests.flowManager.browserChannel.getRepositorySolutions"
                 },
-                "target": "{that flowManager repositorySolutionsLoader}.options.invokers.getSolutions"
+                "target": "{that flowManager solutionsRegistryDataSource repositorySolutionsLoader}.options.invokers.getSolutions"
             }
         }
     },
