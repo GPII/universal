@@ -5220,7 +5220,7 @@
                             title: "Application Startup Cursor",
                             description: "The animated cursor that displays while an application is starting up.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_working.ani"
+                            default: "%SystemRoot%\\cursors\\wait_i.ani"
                         }
                     },
                     "Arrow": {
@@ -5228,7 +5228,7 @@
                             title: "Arrow Cursor",
                             description: "The 'arrow' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_arrow.cur"
+                            default: "%SystemRoot%\\cursors\\arrow_i.cur"
                         }
                     },
                     "Crosshair": {
@@ -5243,7 +5243,7 @@
                             title: "Hand Cursor",
                             description: "The 'hand' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_link.cur"
+                            default: ""
                         }
                     },
                     "Help": {
@@ -5251,7 +5251,7 @@
                             title: "Help Cursor",
                             description: "The 'help' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_helpsel.cur"
+                            default: "%SystemRoot%\\cursors\\help_i.cur"
                         }
                     },
                     "IBeam": {
@@ -5266,7 +5266,7 @@
                             title: "'No' Cursor",
                             description: "The cursor icon used to indicate that the resource under the pointer cannot be clicked.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_unavail.cur"
+                            default: "%SystemRoot%\\cursors\\no_l.cur"
                         }
                     },
                     "NWPen": {
@@ -5274,7 +5274,7 @@
                             title: "Pen Cursor",
                             description: "The 'pen' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_pen.cur"
+                            default: "%SystemRoot%\\cursors\\pen_i.cur"
                         }
                     },
                     "SizeAll": {
@@ -5282,7 +5282,7 @@
                             title: "'Resize All' Cursor",
                             description: "The 'resize all' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_move.cur"
+                            default: "%SystemRoot%\\cursors\\move_i.cur"
                         }
                     },
                     "SizeNESW": {
@@ -5290,7 +5290,7 @@
                             title: "'Resize NESW' Cursor",
                             description: "The 'resize NESW' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_nesw.cur"
+                            default: "%SystemRoot%\\cursors\\size1_i.cur"
                         }
                     },
                     "SizeNS": {
@@ -5298,7 +5298,7 @@
                             title: "'Resize Height' Cursor",
                             description: "The 'resize height' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_ns.cur"
+                            default: "%SystemRoot%\\cursors\\size4_i.cur"
                         }
                     },
                     "SizeNWSE": {
@@ -5306,7 +5306,7 @@
                             title: "'Resize NWSE' Cursor",
                             description: "The 'resize NWSE' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_nwse.cur"
+                            default: "%SystemRoot%\\cursors\\size2_i.cur"
                         }
                     },
                     "SizeWE": {
@@ -5314,7 +5314,7 @@
                             title: "'Resize WE' Cursor",
                             description: "The 'resize WE' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_ew.cur"
+                            default: "%SystemRoot%\\cursors\\size3_i.cur"
                         }
                     },
                     "UpArrow": {
@@ -5322,7 +5322,7 @@
                             title: "'Up Arrow' Cursor",
                             description: "The 'up arrow' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_up.cur"
+                            default: "%SystemRoot%\\cursors\\up_i.cur"
                         }
                     },
                     "Wait": {
@@ -5330,7 +5330,7 @@
                             title: "'Wait' Cursor",
                             description: "The cursor icon to display while the system is busy.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_busy.ani"
+                            default: "%SystemRoot%\\cursors\\busy_i.ani"
                         }
                     }
                 },
@@ -5510,7 +5510,7 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_busy.ani"
+                                    "output": "%SystemRoot%\\cursors\\busy_i.ani"
                                 }, {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\wait_im.cur"
