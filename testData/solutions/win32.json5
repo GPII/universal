@@ -6459,73 +6459,112 @@
                         "schema": {
                             "title": "Focus assit mode",
                             "description": "Changes the Focus assit mode.",
-                            "type": "string",
-                            "enum": [
-                                "Off",
-                                "Priority only",
-                                "Alarms only"
-                            ],
-                            "enumLabels": [
-                                "Off",
-                                "Priority only",
-                                "Alarms only"
-                            ]
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "enum": [
+                                        "Off",
+                                        "Priority only",
+                                        "Alarms only"
+                                    ],
+                                    "enumLabels": [
+                                        "Off",
+                                        "Priority only",
+                                        "Alarms only"
+                                    ]
+                                }
+                            }
                         }
                     },
                     "SystemSettings_QuietMoments_On_Scheduled_Mode.SystemSettings_QuietMoments_Scheduled_Mode_Enabled": {
                         "schema": {
                             "title": "Enable Quiet Hours",
                             "description": "Enables or disables quiet hours.",
-                            "type": "boolean",
-                            "default": false
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     },
                     "SystemSettings_QuietMoments_On_Scheduled_Mode.SystemSettings_QuietMoments_Scheduled_Mode_StartTime": {
                         "schema": {
                             "title": "Quiet Times start time",
                             "description": "Establishes the start hour for activating Focust assit.",
-                            "type": "string",
-                            "default": "23:00:00"
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "string",
+                                    "default": "23:00:00"
+                                }
+                            }
                         }
                     },
                     "SystemSettings_QuietMoments_On_Scheduled_Mode.SystemSettings_QuietMoments_Scheduled_Mode_EndTime": {
                         "schema": {
                             "title": "Quiet Hours end time",
                             "description": "Establishes the end hour for turning Focust assit off.",
-                            "type": "string",
-                            "default": "7:00:00"
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "string",
+                                    "default": "7:00:00"
+                                }
+                            }
                         }
                     },
                     "SystemSettings_QuietMoments_On_Game_Mode.SystemSettings_QuietMoments_Game_Mode_Enabled": {
                         "schema": {
                             "title": "Gaming focus assit",
                             "description": "Enables or disables focus assit during gaming.",
-                            "type": "boolean",
-                            "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
                         }
                     },
                     "SystemSettings_QuietMoments_On_Presentation_Mode.SystemSettings_QuietMoments_Presentation_Mode_Enabled": {
                         "schema": {
                             "title": "Presentation focus assit",
                             "description": "Enables or disables focus assit during presentations.",
-                            "type": "boolean",
-                            "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
                         }
                     },
                     "SystemSettings_QuietMoments_On_Full_Screen_Mode.SystemSettings_QuietMoments_Full_Screen_Mode_Enabled": {
                         "schema": {
                             "title": "Fullscreen focus assit",
                             "description": "Enables or disables focus assit when an application is on fullscreen mode.",
-                            "type": "boolean",
-                            "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
                         }
                     },
                     "SystemSettings_QuietMoments_Summary_Checkbox": {
                         "schema": {
                             "title": "Focus assit summary",
                             "description": "Enables or disables showing a summary of the missed notifications while focus assist was on.",
-                            "type": "boolean",
-                            "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
                         }
                     }
                 },
@@ -6675,57 +6714,87 @@
                         "schema": {
                             "title": "Show apps notifications",
                             "description": "Enable or disables notifications from other apps and senders.",
-                            "type": "boolean",
-                            "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
                         }
                     },
                     "SystemSettings_Notifications_ToastsAboveLock": {
                         "schema": {
                             "title": "Notifications on lock screen",
                             "description": "Enables or disables showing notifications on the lock screen.",
-                            "type": "boolean",
-                            "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
                         }
                     },
                     "SystemSettings_Notifications_CriticalToastsAboveLock": {
                         "schema": {
                             "title": "Reminders and VOIP calls on lock screen",
                             "description": "Enables or disables showing reminders and VOIP calls on lock screen.",
-                            "type": "boolean",
-                            "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
                         }
                     },
                     "SystemSettings_Notifications_SignInSuggestionsEnabled": {
                         "schema": {
                             "title": "Sign in suggestions",
                             "description": "Ocassionally show Window's welcome experience after updates or sigin.",
-                            "type": "boolean",
-                            "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
                         }
                     },
                     "SystemSettings_Notifications_WindowsTipEnabled": {
                         "schema": {
                             "title": "Notification tips and tricks",
                             "description": "Get tips, tricks and suggestions as you use Windows.",
-                            "type": "boolean",
-                            "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
                         }
                     },
                     "SystemSettings_Notifications_AppList.SystemSettings_Notifications_AppNotifications": {
                         "schema": {
                             "title": "Application notifications",
                             "description": "Enable or disables specific applications notifications.",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "elemId": {
-                                        "type": "string",
-                                        "description": "The application name to select for changing its propertie."
-                                    },
-                                    "elemVal": {
-                                        "type": "boolean",
-                                        "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "elemId": {
+                                                "type": "string",
+                                                "description": "The application name to select for changing its propertie."
+                                            },
+                                            "elemVal": {
+                                                "type": "boolean",
+                                                "default": true
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -6735,16 +6804,22 @@
                         "schema": {
                             "title": "Notification banners",
                             "description": "Enable or disables specific applications notification banners.",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "elemId": {
-                                        "type": "string",
-                                        "description": "The application name to select for changing its propertie."
-                                    },
-                                    "elemVal": {
-                                        "type": "boolean",
-                                        "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "elemId": {
+                                                "type": "string",
+                                                "description": "The application name to select for changing its propertie."
+                                            },
+                                            "elemVal": {
+                                                "type": "boolean",
+                                                "default": true
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -6754,17 +6829,22 @@
                         "schema": {
                             "title": "Private application notifications",
                             "description": "Keeps specific applications notifications private on lock screen.",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "elemId": {
-                                        "type": "string",
-                                        "description": "The application name to select for changing its propertie."
-                                    },
-                                    "elemVal": {
-                                        "type": "boolean",
-                                        "default": false
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "elemId": {
+                                                "type": "string",
+                                                "description": "The application name to select for changing its propertie."
+                                            },
+                                            "elemVal": {
+                                                "type": "boolean",
+                                                "default": false
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -6774,17 +6854,22 @@
                         "schema": {
                             "title": "Show notifications in action center",
                             "description": "Enable or disables showing specific applications notifications in action center.",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "elemId": {
-                                        "type": "string",
-                                        "description": "The application name to select for changing its propertie."
-                                    },
-                                    "elemVal": {
-                                        "type": "boolean",
-                                        "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "elemId": {
+                                                "type": "string",
+                                                "description": "The application name to select for changing its propertie."
+                                            },
+                                            "elemVal": {
+                                                "type": "boolean",
+                                                "default": true
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -6794,17 +6879,22 @@
                         "schema": {
                             "title": "Notification sound",
                             "description": "Enable or disables specific applications notifications sound.",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "elemId": {
-                                        "type": "string",
-                                        "description": "The application name to select for changing its propertie."
-                                    },
-                                    "elemVal": {
-                                        "type": "boolean",
-                                        "default": true
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "elemId": {
+                                                "type": "string",
+                                                "description": "The application name to select for changing its propertie."
+                                            },
+                                            "elemVal": {
+                                                "type": "boolean",
+                                                "default": true
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -6814,18 +6904,22 @@
                         "schema": {
                             "title": "Number of notifications visible in action center",
                             "description": "Specifies the maximum number of notifications to show in action center per application.",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "elemId": {
-                                        "type": "string",
-                                        "description": "The application name to select for changing its propertie."
-                                    },
-                                    "elemVal": {
-                                        "type": "number",
-                                        "enum": ["1", "3", "5", "10", "20"],
-                                        "enumLabels": ["1", "3", "5", "10", "20"]
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "elemId": {
+                                                "type": "string",
+                                                "description": "The application name to select for changing its propertie."
+                                            },
+                                            "elemVal": {
+                                                "enum": ["1", "3", "5", "10", "20"],
+                                                "enumLabels": ["1", "3", "5", "10", "20"]
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -6835,18 +6929,23 @@
                         "schema": {
                             "title": "Action center notifications priority",
                             "description": "Specifies the priority of specific applications notifications to be shown in action center.",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "elemId": {
-                                        "type": "string",
-                                        "description": "The application name to select for changing its propertie."
-                                    },
-                                    "elemVal": {
-                                        "type": "number",
-                                        "enum": [1, 2, 3],
-                                        "enumLabels": ["Normal", "High", "Top"]
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "elemId": {
+                                                "type": "string",
+                                                "description": "The application name to select for changing its propertie."
+                                            },
+                                            "elemVal": {
+                                                "type": "number",
+                                                "enum": [1, 2, 3],
+                                                "enumLabels": ["Normal", "High", "Top"]
+                                            }
+                                        }
                                     }
                                 }
                             }
