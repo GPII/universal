@@ -6,10 +6,10 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/org.gnome.orca": {
                         "sayAllStyle": 1,
-                        "enableEchoByWord": true,
-                        "enableEchoByCharacter": false,
+                        "enableEchoByWord": 1,
+                        "enableEchoByCharacter": 0,
                         "voices.default.rate": 102.27272727272727,
-                        "enableTutorialMessages": false,
+                        "enableTutorialMessages": 0,
                         "voices.default.family": {
                             "locale": "en",
                             "name": "en-westindies"

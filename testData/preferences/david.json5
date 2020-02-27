@@ -22,7 +22,7 @@
                         "ApplicationSettings.AppBar.IconSize.$t": "Small",
                         "ApplicationSettings.AppBar.ToolbarIconSet.$t": "Color",
                         "ApplicationSettings.AppBar.ShowText.$t": true,
-                        "ApplicationSettings.AppBar.optToolbarBackColour.$t": 1500,
+                        "ApplicationSettings.AppBar.optToolbarBackColour.$t": "#008080",
                         "ApplicationSettings.AppBar.RunOnStartUp.$t": false
                     }
                 }

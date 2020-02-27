@@ -41,7 +41,7 @@
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.underlineMenuShortcuts": {
                         "UnderlineMenuShortcutsOn": {
-                            "value": 1,
+                            "value": true,
                             "path": "pvParam"
                         },
                         "KeyboardPreferenceOn": {
@@ -53,7 +53,7 @@
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
-                        "Warning Sounds": 1
+                        "Warning Sounds": { value:  true }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningSound": {
                         "Sound on Activation": 1
@@ -98,17 +98,17 @@
                         "LensWidth": 50
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.screenResolution": {
-                        "screen-resolution": {
+                        "screen-resolution": [{
                             "width": 800,
                             "height": 600
-                        }
+                        }]
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.screenDPI": {
                         "screen-dpi": 1
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.nightScreen": {
                         "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
-                            "value": false
+                            "value": 0
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.narrator": {
@@ -144,16 +144,16 @@
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.typingEnhancement": {
-                        "EnableAutocorrection": 1,
-                        "EnableSpellchecking": 1,
-                        "EnableTextPrediction": 1,
-                        "EnablePredictionSpaceInsertion": 1,
-                        "EnableDoubleTapSpace": 1,
-                        "EnableKeyAudioFeedback": 1,
-                        "EnableAutoShiftEngage": 1,
-                        "EnableShiftLock": 1,
-                        "EnableCompatibilityKeyboard": 1,
-                        "EnableDesktopModeAutoInvoke": 1
+                        "EnableAutocorrection": true,
+                        "EnableSpellchecking": true,
+                        "EnableTextPrediction": true,
+                        "EnablePredictionSpaceInsertion": true,
+                        "EnableDoubleTapSpace": true,
+                        "EnableKeyAudioFeedback": true,
+                        "EnableAutoShiftEngage": true,
+                        "EnableShiftLock": true,
+                        "EnableCompatibilityKeyboard": true,
+                        "EnableDesktopModeAutoInvoke": true
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": {
                         "SwapMouseButtonsConfig": {
@@ -234,7 +234,7 @@
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.language": {
-                        "MachinePreferredUILanguages": "en-US",
+                        "MachinePreferredUILanguages": ["en-US"],
                         "PreferredUILanguages": "en-US"
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.touchPadSettings": {
