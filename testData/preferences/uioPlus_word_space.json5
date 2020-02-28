@@ -21,7 +21,7 @@
                     "http://registry.gpii.net/common/simplifiedUi/enabled": false,
                     "http://registry.gpii.net/common/syllabification/enabled": false,
                     "http://registry.gpii.net/common/tableOfContents": false,
-                    "http://registry.gpii.net/common/wordSpace": 0.2
+                    "http://registry.gpii.net/common/wordSpace": 2
                 }
             }
         }
