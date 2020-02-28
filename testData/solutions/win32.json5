@@ -6341,13 +6341,7 @@
                                     "transform": {
                                         "type": "fluid.transforms.condition",
                                         "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
-                                        "true": {
-                                            "transform": {
-                                                "type": "fluid.transforms.linearScale",
-                                                "inputPath": "http://registry\\.gpii\\.net/common/debounceInterval",
-                                                "factor": 1000
-                                            }
-                                        },
+                                        "true": 1000,
                                         "false": 0
                                     }
                                 },
@@ -6409,26 +6403,6 @@
                                 }
                             },
                             "truePath": "FilterKeysEnable.value"
-                        }
-                    },
-                    "http://registry\\.gpii\\.net/common/debounceInterval": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "BounceKeysInterval.value",
-                                    "right": 0,
-                                    "operator": ">"
-                                }
-                            },
-                            "true": {
-                                "transform": {
-                                    "type": "fluid.transforms.linearScale",
-                                    "inputPath": "BounceKeysInterval.value",
-                                    "factor": 0.001
-                                }
-                            }
                         }
                     }
                 }
@@ -7716,35 +7690,6 @@
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
                                 "input": "pvParam.iMaxSpeed"
-                            }
-                        }
-                    },
-                    "Acceleration": {
-                        "value": {
-                            "transform": {
-                                "type": "fluid.transforms.binaryOp",
-                                "left": {
-                                    "transform": {
-                                        "type": "fluid.transforms.linearScale",
-                                        "inputPath": "http://registry\\.gpii\\.net/common/initDelay",
-                                        "factor": 1000
-                                    }
-                                },
-                                "right": {
-                                    "transform": {
-                                        "type": "fluid.transforms.linearScale",
-                                        "inputPath": "http://registry\\.gpii\\.net/common/cursorAcceleration",
-                                        "factor": 1000,
-                                        "offset": 1000
-                                    }
-                                },
-                                "operator": "+"
-                            }
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iTimeToMaxSpeed"
                             }
                         }
                     }

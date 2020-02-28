@@ -334,15 +334,18 @@
                 "type": "gpii.gsettings",
                 "liveness": "live",
                 "supportedSettings": {
-                    "font": {}
-                },
-                "capabilitiesTransformations": {
-                    "font": "http://registry\\.gpii\\.net/common/0"
+                    // We need at least one setting with a schema in order for the solution to show in the "codex" at all.
+                    "font": {
+                        "schema": {
+                            "title": "Font",
+                            "description": "Font.",
+                            "type": "string"
+                        }
+                    }
                 },
                 "options": {
                     "schema": "org.gnome.nautilus.desktop"
-                },
-                "inverseCapabilitiesTransformations": {}
+                }
             }
         },
         "isInstalled": [
@@ -399,7 +402,14 @@
                 "supportedSettings": {
                     "stickykeys-enable": {},
                     "slowkeys-enable": {},
-                    "slowkeys-delay": {},
+                    // We need at least one setting with a schema in order for the solution to show in the "codex" at all.
+                    "slowkeys-delay": {
+                        "schema": {
+                            "title": "Slowkeys Delay",
+                            "description": "Slowkeys delay.",
+                            "type": "integer"
+                        }
+                    },
                     "bouncekeys-enable": {},
                     "bouncekeys-delay": {},
                     "mousekeys-enable": {},
@@ -418,13 +428,6 @@
                         }
                     },
                     "bouncekeys-enable": "http://registry\\.gpii\\.net/common/debounce/enabled",
-                    "bouncekeys-delay": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/debounceInterval",
-                            "factor": 1000
-                        }
-                    },
                     "mousekeys-enable": "http://registry\\.gpii\\.net/common/mouseEmulation/enabled",
                     "mousekeys-init-delay": {
                         "transform": {
@@ -437,13 +440,6 @@
                         "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSpeed",
-                            "factor": 1000
-                        }
-                    },
-                    "mousekeys-accel-time": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/cursorAcceleration",
                             "factor": 1000
                         }
                     }
@@ -1261,7 +1257,13 @@
                 "type": "gpii.alsa",
                 "liveness": "live",
                 "supportedSettings": {
-                    "masterVolume": {}
+                    "masterVolume": {
+                        "schema": {
+                            "title": "Master volume",
+                            "description": "Master volume.",
+                            "type": "number"
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "masterVolume": {
@@ -1450,7 +1452,26 @@
                 "type": "gpii.xrandr",
                 "liveness": "liveRestart",
                 "supportedSettings": {
-                    "screen-resolution": {}
+                    "screen-resolution": {
+                        schema: {
+                            "title": "Screen resolution",
+                            "description": "Screen resolution",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "height": {
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "width": {
+                                        "type": "integer",
+                                        "minimum": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

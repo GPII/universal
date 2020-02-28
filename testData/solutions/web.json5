@@ -13,13 +13,46 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "liveness": "live",
                 "supportedSettings": {
-                    "screenReaderTTS/enabled": {},
-                    "fontSize": {},
-                    "magnifierEnabled": {},
-                    "magnification": {},
-                    "highContrast/enabled": {},
-                    "highContrastTheme": {},
-                    "invertColours": {}
+                    "screenReaderTTS/enabled": {
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    // We need at least one setting with a schema in order for the solution to show in the "codex" at all.
+                    "fontSize": {
+                        "schema": {
+                            "title": "Font Size",
+                            "description": "Font size.",
+                            "enum": ["medium", "large", "x-large"],
+                            "enumLabels": ["Medium", "Large", "Extra Large"]
+                        }
+                    },
+                    "magnifierEnabled": {
+                        "schema": { "type":  "boolean" }
+                    },
+                    "magnification": {
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    "highContrast/enabled": {
+                        "schema": { "type":  "boolean" }
+                    },
+                    "highContrastTheme": {
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "invertColours": {
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "simplifier": {
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "screenReaderTTS/enabled": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
@@ -192,10 +225,31 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "liveness": "live",
                 "supportedSettings": {
-                    "transform": {},
-                    "volume": {},
-                    "language": {},
-                    "theme": {}
+                    "fontSize": {
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "hapticFeedback": {
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    "language": {
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "theme": {
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "volume": {
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "theme": {
@@ -420,12 +474,28 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "liveness": "live",
                 "supportedSettings": {
-                    "language": {},
-                    "contrastTheme": {},
-                    "fontSize": {},
+                    "language": {
+                        "schema": { "type":  "string" }
+                    },
+                    "contrastTheme": {
+                        "schema": { "type":  "string" }
+                    },
+                    // We need at least one setting with a schema in order for the solution to show in the "codex" at all.
+                    "fontSize": {
+                        schema: {
+                            "title": "Font Size",
+                            "description": "Font size.",
+                            "enum": ["default", "big"],
+                            "enumLabels": ["Default", "Big"]
+                        }
+                    },
                     "timeOut": {},
-                    "buttonSize": {},
-                    "fontFace": {}
+                    "buttonSize": {
+                        "schema": { "type":  "string" }
+                    },
+                    "fontFace": {
+                        "schema": { "type":  "string" }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "language": "http://registry\\.gpii\\.net/common/language",
@@ -503,7 +573,9 @@
                     "interpreterType": {},
                     "interpreterName": {},
                     "pictogramsEnabled": {},
-                    "simplifiedUiEnabled": {},
+                    "simplifiedUiEnabled": {
+                        "schema": { "type":  "boolean" }
+                    },
                     "textStyle": {},
                     "lineSpacing": {},
                     "inputsLarger": {}

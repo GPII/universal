@@ -13,17 +13,18 @@
                         "fontSize": "medium",
                         "simplifier": false,
                         "highContrastTheme": "white-black"
-                    },
-                    "http://registry.gpii.net/applications/org.mozilla.cloud4firefox": {
-                        "screenReaderTTS/enabled": false,
-                        "highContrast/enabled": true,
-                        "invertColours": false,
-                        "magnifierEnabled": true,
-                        "magnification": 2,
-                        "fontSize": "medium",
-                        "simplifier": false,
-                        "highContrastTheme": "black-white"
                     }
+                    // No longer exists, preserved as a comment for reference.
+//                    "http://registry.gpii.net/applications/org.mozilla.cloud4firefox": {
+//                        "screenReaderTTS/enabled": false,
+//                        "highContrast/enabled": true,
+//                        "invertColours": false,
+//                        "magnifierEnabled": true,
+//                        "magnification": 2,
+//                        "fontSize": "medium",
+//                        "simplifier": false,
+//                        "highContrastTheme": "black-white"
+//                    }
                 }
             }
         }
