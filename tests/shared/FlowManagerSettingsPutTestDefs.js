@@ -484,7 +484,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.updateSnapsetSequence", {
                 null,
                 {
                     "headers": {
-                        "Authorization": "{accessTokenUpdateSnapsetRequest}.options.stashedAuth"
+                        "Authorization": "{accessTokenUpdateSnapsetRequest}.stashedAuth"
                     }
                 }
             ]
@@ -497,7 +497,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.updateSnapsetSequence", {
                 gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet,
                 {
                     "headers": {
-                        "Authorization": "{accessTokenUpdateSnapsetRequest}.options.stashedAuth"
+                        "Authorization": "{accessTokenUpdateSnapsetRequest}.stashedAuth"
                     }
                 }
             ]
@@ -604,7 +604,7 @@ gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testResponse = function (data,
 gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testAndStashAccessResponse = function (data, request) {
     var token = gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse(data, request);
     var auth = "Bearer " + token.access_token;
-    request.options.stashedAuth = auth;
+    request.stashedAuth = auth;
 };
 
 gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testLifecycleResponse = function (data, request) {

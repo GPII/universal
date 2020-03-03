@@ -47,7 +47,7 @@ gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion = function (dat
         var thisDoc = JSON.parse(data);
         thisDoc._deleted = true;
         // saved for the furthur use in getPrefsSafeDoc() for getting corresponding prefs safe of this GPII key
-        request.options.docToRemove = thisDoc;
+        request.docToRemove = thisDoc;
         fluid.log("Will remove ", thisDoc.type, " ", thisDoc._id);
         docsToRemove.push(thisDoc);
     } else {
@@ -56,15 +56,16 @@ gpii.tests.productionConfigTesting.testGetThenSaveDocForDeletion = function (dat
 };
 
 gpii.tests.productionConfigTesting.getPrefsSafeDoc = function (prefsSafeRequest, gpiiKeyRequest) {
-    var gpiiKeyToRemove = gpiiKeyRequest.options.docToRemove;
+    var gpiiKeyToRemove = gpiiKeyRequest.docToRemove;
+    var path;
     if (gpiiKeyToRemove && gpiiKeyToRemove.prefsSafeId) {
-        prefsSafeRequest.options.path = "/gpii/" + gpiiKeyToRemove.prefsSafeId;
+        path = "/gpii/" + gpiiKeyToRemove.prefsSafeId;
     } else {
         // This path should force a 404
-        prefsSafeRequest.options.path = "/gpii/prefsSafe-" + prefsSafeRequest.options.gpiiKey;
+        path = "/gpii/prefsSafe-" + prefsSafeRequest.options.gpiiKey;
         fluid.log("No Prefs Safe to retrieve for GPII key " + prefsSafeRequest.options.gpiiKey);
     }
-    prefsSafeRequest.sendToDatabase();
+    prefsSafeRequest.sendToDatabase(undefined, { path: path });
 };
 
 gpii.tests.productionConfigTesting.testGetExtraAccessTokens = function (data, accessTokensRequest, docsToRemove) {
@@ -264,7 +265,7 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = [{
                 gpiiKey: "nonexistent_gpii_key"
             }
         },
-        "getClientCredentialSchemaV01": {
+        getClientCredentialSchemaV01: {
             type: "gpii.tests.productionConfigTesting.dataBaseRequest",
             options: {
                 path: "/gpii/clientCredential-schemaV0.1"
