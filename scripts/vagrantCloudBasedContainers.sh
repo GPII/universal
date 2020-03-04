@@ -32,7 +32,7 @@ UNIVERSAL_IMAGE=vagrant-universal
 # gpii-revision.json at the root universal folder.  See the Dockerfile.
 GITFULLREV="$(git rev-parse HEAD)"
 
-COUCHDB_IMAGE=couchdb
+COUCHDB_IMAGE=couchdb:2.3.1
 COUCHDB_PORT=5984
 COUCHDB_HEALTHCHECK_DELAY=2
 COUCHDB_HEALTHCHECK_TIMEOUT=30
