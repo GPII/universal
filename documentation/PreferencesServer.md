@@ -64,8 +64,7 @@ Return payload:
                 "http://registry.gpii.net/common/mouseEmulation/enabled": true,
                 "http://registry.gpii.net/common/unknown": true,
                 "http://registry.gpii.net/applications/org.alsa-project": {
-                    "volume": 14,
-                    "pitch": 100
+                    "masterVolume": 14
                 }
             }
         }
@@ -98,8 +97,7 @@ Return payload:
                 "applications": {
                     "org.alsa-project": {
                         "parameters": {
-                            "volume": 14,
-                            "pitch": 100
+                            "masterVolume": 14
                         }
                     }
                 }
@@ -141,8 +139,7 @@ Example POST body:
                 "http://registry.gpii.net/common/mouseEmulation/enabled": true,
                 "http://registry.gpii.net/common/unknown": true,
                 "http://registry.gpii.net/applications/org.alsa-project": {
-                    "volume": 14,
-                    "pitch": 100
+                    "masterVolume": 14
                 }
             }
         }
@@ -170,8 +167,7 @@ payload would be:
                     "http://registry.gpii.net/common/mouseEmulation/enabled": true,
                     "http://registry.gpii.net/common/unknown": true,
                     "http://registry.gpii.net/applications/org.alsa-project": {
-                        "volume": 14,
-                        "pitch": 100
+                        "masterVolume": 14
                     }
                 }
             }

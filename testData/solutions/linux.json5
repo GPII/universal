@@ -628,11 +628,39 @@
                     }
                 },
                 "capabilitiesTransformations": {
-                    "enableTutorialMessages": "http://registry\\.gpii\\.net/common/speakTutorialMessages",
-                    "enableEchoByCharacter": "http://registry\\.gpii\\.net/common/keyEcho",
-                    "enableEchoByWord": "http://registry\\.gpii\\.net/common/wordEcho",
+                    "enableTutorialMessages": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/speakTutorialMessages",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
+                    "enableEchoByCharacter": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/keyEcho",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
+                    "enableEchoByWord": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/wordEcho",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
                     "enableBraille": "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput",
-                    "enableSpeech": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
+                    "enableSpeech": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
                     "sayAllStyle": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -1093,9 +1121,6 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/speakTutorialMessages": "enableTutorialMessages",
-                    "http://registry\\.gpii\\.net/common/keyEcho": "enableEchoByCharacter",
-                    "http://registry\\.gpii\\.net/common/wordEcho": "enableEchoByWord",
                     "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput": "enableBraille",
                     "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled": "enableSpeech",
                     "transform": [

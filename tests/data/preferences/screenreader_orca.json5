@@ -15,7 +15,7 @@
                             "name": "en-westindies"
                         },
                         "voices.default.average-pitch": 1.0,
-                        "voices.default.gain": 7.5,
+                        "voices.default.gain": 7,
                         "verbalizePunctuationStyle": 0
                     }
                 }

@@ -18,7 +18,109 @@
                             "type": "boolean"
                         }
                     },
-                    // We need at least one setting with a schema in order for the solution to show in the "codex" at all.
+                    "fontSize": {
+                        "schema": {
+                            "title": "Font Size",
+                            "description": "Font size.",
+                            "enum": ["medium", "large", "x-large"],
+                            "enumLabels": ["Medium", "Large", "Extra Large"]
+                        }
+                    },
+                    "magnifierEnabled": {
+                        "schema": { "type":  "boolean" }
+                    },
+                    "magnification": {
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    "highContrast/enabled": {
+                        "schema": { "type":  "boolean" }
+                    },
+                    "highContrastTheme": {
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "invertColours": {
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "simplifier": {
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "screenReaderTTS/enabled": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
+                    "fontSize": {
+                        "transform":{
+                            "type": "fluid.transforms.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 12,
+                                    "output": "medium"
+                                },
+                                {
+                                    "upperBound": 18,
+                                    "output": "large"
+                                },
+                                {
+                                    "output": "x-large"
+                                }
+                            ]
+                        }
+                    },
+                    "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnification/enabled",
+                    "magnification": {
+                        "transform": {
+                            "type": "fluid.transforms.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/magnification",
+                            "ranges": [
+                                {
+                                    "upperBound": 1.2,
+                                    "output": 1
+                                },
+                                {
+                                    "upperBound": 2.5,
+                                    "output": 2
+                                },
+                                {
+                                    "output": 3
+                                }
+                            ]
+                        }
+                    },
+                    "highContrast/enabled": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                    "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
+                },
+                "inverseCapabilitiesTransformations": {}
+            }
+        }
+    },
+    "org.mozilla.cloud4firefox": {
+        "name": "Cloud4Firefox",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "myconf": {
+                "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "live",
+                "supportedSettings": {
+                    "screenReaderTTS/enabled": {
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
                     "fontSize": {
                         "schema": {
                             "title": "Font Size",

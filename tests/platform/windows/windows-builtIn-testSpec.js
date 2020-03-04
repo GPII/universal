@@ -465,7 +465,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "UnderlineMenuShortcutsOn": {
                                 "path": "pvParam",
-                                "value": 1
+                                "value": true
                             }
                         },
                         "options": {
@@ -636,16 +636,16 @@ gpii.tests.windows.builtIn = [
                     }
                 }, { // TypingEnhancement
                     "settings": {
-                        "EnableAutocorrection": 1,
-                        "EnableSpellchecking": 1,
-                        "EnableTextPrediction": 1,
-                        "EnablePredictionSpaceInsertion": 1,
-                        "EnableDoubleTapSpace": 1,
-                        "EnableKeyAudioFeedback": 1,
-                        "EnableAutoShiftEngage": 1,
-                        "EnableShiftLock": 1,
-                        "EnableCompatibilityKeyboard": 1,
-                        "EnableDesktopModeAutoInvoke": 1
+                        "EnableAutocorrection": true,
+                        "EnableSpellchecking": true,
+                        "EnableTextPrediction": true,
+                        "EnablePredictionSpaceInsertion": true,
+                        "EnableDoubleTapSpace": true,
+                        "EnableKeyAudioFeedback": true,
+                        "EnableAutoShiftEngage": true,
+                        "EnableShiftLock": true,
+                        "EnableCompatibilityKeyboard": true,
+                        "EnableDesktopModeAutoInvoke": true
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -715,7 +715,7 @@ gpii.tests.windows.builtIn = [
                     }
                 }, {
                     "settings": {
-                        "MachinePreferredUILanguages": "en-US"
+                        "MachinePreferredUILanguages": ["en-US"]
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -739,7 +739,7 @@ gpii.tests.windows.builtIn = [
                 }],
                 "com.microsoft.windows.shortcutWarningMessage": [{
                     "settings": {
-                        "Warning Sounds": 1
+                        "Warning Sounds": { value: true }
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -765,10 +765,10 @@ gpii.tests.windows.builtIn = [
             "gpii.windows.displaySettingsHandler": {
                 "com.microsoft.windows.screenResolution": [{
                     "settings": {
-                        "screen-resolution": {
+                        "screen-resolution": [{
                             "width": 800,
                             "height": 600
-                        },
+                        }],
                         "screen-dpi": 1
                     }
                 }]
@@ -799,7 +799,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.nightScreen": [{
                     "settings": {
                         "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
-                            "value": false
+                            "value": 0
                         }
                     },
                     "options": {
