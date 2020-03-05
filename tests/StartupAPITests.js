@@ -40,9 +40,16 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         jqUnit.assertEquals("Default Config should be dev all local.", configs[0].typeName,
                 "gpii.config.development.manualTesting");
 
-        gpii.stop();
-        configs = gpii.queryConfigs();
-        jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
+        jqUnit.stop();
+
+        // TODO: If we decide to keep these tests, find a cleaner solution, for example rewriting as IoC tests.
+        // If we try this before start is finished, we we will cause problems.  So, we wait.
+        setTimeout(function () {
+            jqUnit.start();
+            gpii.stop();
+            configs = gpii.queryConfigs();
+            jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
+        }, 5000);
     };
 
     gpii.startupAPI.tests.customConfigName = function () {
