@@ -41,7 +41,6 @@ var testIncludes = [
     "./PayloadSizeTest.js",
     "./PSPIntegrationTests.js",
     "./ResetAtStartTests.js",
-    "./StartupAPITests.js",
     "./SuppressHttpEndpointsTests.js",
     "./UntrustedBrowserChannelTests.js",
     "./UntrustedDevelopmentTests.js",
