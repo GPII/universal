@@ -9715,13 +9715,17 @@
                         "schema": {
                             "title": "Screen resolution",
                             "description": "Screen resolution of the default display.",
-                            "type": "array"
-                            // TODO: Discuss and fix this.
-                            // TODO: Not sure about this type
-                            // TODO: This must be filled in on the fly with available screen resolutions
-                            //"items": {
-                            //    "enum": []
-                            //}
+                            "type": "object",
+                            // Although in other contexts we've accepted an array, the windows display settings handler
+                            // throws a hard fail unless this is an object. See:
+                            //
+                            // https://github.com/GPII/windows/blob/97953e9b2f19fa0524d5c667291e4e3e6641fb9f/gpii/node_modules/displaySettingsHandler/src/displaySettingsHandler.js#L223
+                            //
+                            "properties": {
+                                "width": { type:  "integer", required:  true },
+                                "height": { type:  "integer", required:  true },
+                                "additionalProperties": false
+                            }
                         }
                     }
                 }
