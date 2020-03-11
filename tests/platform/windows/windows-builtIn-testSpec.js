@@ -423,11 +423,11 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": true
+                                "value": "true"
                             },
                             "BounceKeysInterval": {
                                 "path": "pvParam.iBounceMSec",
-                                "value": 1000
+                                "value": "1000"
                             }
                         },
                         "options": {
@@ -799,7 +799,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.nightScreen": [{
                     "settings": {
                         "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
-                            "value": 0
+                            "value": false
                         }
                     },
                     "options": {
@@ -982,11 +982,11 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": true
+                                "value": "true"
                             },
                             "BounceKeysInterval": {
                                 "path": "pvParam.iBounceMSec",
-                                "value": 1000
+                                "value": "1000"
                             }
                         },
                         "options": {
@@ -1205,11 +1205,11 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": true
+                                "value": "true"
                             },
                             "BounceKeysInterval": {
                                 "path": "pvParam.iBounceMSec",
-                                "value": 1000
+                                "value": "1000"
                             }
                         },
                         "options": {
@@ -1428,11 +1428,11 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": true
+                                "value": "true"
                             },
                             "BounceKeysInterval": {
                                 "path": "pvParam.iBounceMSec",
-                                "value": 1000
+                                "value": "1000"
                             }
                         },
                         "options": {

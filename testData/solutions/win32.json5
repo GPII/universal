@@ -6245,8 +6245,9 @@
                                 "path": { "type":  "string", "required": true},
                                 "value": {
                                     "required": true,
-                                    "type": "boolean",
-                                    "default": false
+                                    "enum": ["true", "false"],
+                                    "enumLabels": ["True", "False"],
+                                    "default": "false"
                                 }
                             }
                         }
@@ -6266,6 +6267,7 @@
                             }
                         }
                     },
+                    // TODO: Confirm which format is required by the settings handler.
                     "BounceKeysInterval": {
                         "schema": {
                             "title": "Bounce keys interval",
@@ -6275,8 +6277,8 @@
                                 "path": { "type":  "string", "required": true},
                                 "value": {
                                     "required": true,
-                                    "type": "integer",
-                                    "default": 0
+                                    "type": "string",
+                                    "default": "0"
                                 }
                             }
                         }
@@ -6286,12 +6288,19 @@
                     "FilterKeysEnable": {
                         "value": {
                             "transform": {
-                                "type": "fluid.transforms.binaryOp",
-                                "leftPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
-                                "left": false,
-                                "rightPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
-                                "right": false,
-                                "operator": "||"
+                                "type": "fluid.transforms.condition",
+                                "condition": {
+                                    "transform": {
+                                        "type": "fluid.transforms.binaryOp",
+                                        "leftPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
+                                        "left": false,
+                                        "rightPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
+                                        "right": false,
+                                        "operator": "||"
+                                    }
+                                },
+                                "true": "true",
+                                "false": "false"
                             }
                         },
                         "path": {
@@ -6305,10 +6314,12 @@
                         "value": {
                             "transform": {
                                 "type": "fluid.transforms.condition",
+                                "condition": false, // If there's no setting, make sure it's counted as false.
                                 "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
                                 "true": {
                                     "transform": {
                                         "type": "fluid.transforms.linearScale",
+                                        "input": 0.5, // The default if there is now slow key interval set.
                                         "inputPath": "http://registry\\.gpii\\.net/common/slowKeysInterval",
                                         "factor": 1000
                                     }
@@ -6326,25 +6337,25 @@
                     "BounceKeysInterval": {
                         "value": {
                             "transform": {
-                                "type": "fluid.transforms.condition",
-                                "condition": {
-                                    "transform": {
-                                        "type": "fluid.transforms.binaryOp",
-                                        "leftPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
-                                        "left": false,
-                                        "right": false,
-                                        "operator": "==="
-                                    }
-                                },
-                                "true": {
+                                "type": "fluid.transforms.numberToString",
+                                "input": {
                                     "transform": {
                                         "type": "fluid.transforms.condition",
-                                        "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
-                                        "true": 1000,
-                                        "false": 0
+                                        "condition": false, // If there's no setting, make sure it's counted as false.
+                                        "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
+                                        // If close keys is enabled, bounce keys should be disabled.
+                                        "true": 0,
+                                        "false": {
+                                            "transform": {
+                                                "type": "fluid.transforms.condition",
+                                                "condition": false, // If there's no setting, make sure it's counted as false.
+                                                "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
+                                                "true": 1000,
+                                                "false": 0
+                                            }
+                                        }
                                     }
-                                },
-                                "false": 0
+                                }
                             }
                         },
                         "path": {
@@ -6396,12 +6407,47 @@
                             "condition": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "BounceKeysInterval.value",
+                                    "left": {
+                                        transform: {
+                                            "type": "fluid.transforms.stringToNumber",
+                                            "input": "BounceKeysInterval.value"
+                                        }
+                                    },
                                     "right": 0,
                                     "operator": ">"
                                 }
                             },
                             "truePath": "FilterKeysEnable.value"
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/debounceInterval": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.stringToNumber",
+                                            "inputPath": "BounceKeysInterval.value"
+                                        }
+                                    },
+                                    "right": 0,
+                                    "operator": ">"
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "input": {
+                                        "transform": {
+                                            "type": "fluid.transforms.stringToNumber",
+                                            "inputPath": "BounceKeysInterval.value"
+                                        }
+                                    },
+                                    "factor": 0.001
+                                }
+                            }
                         }
                     }
                 }
@@ -9267,14 +9313,7 @@
                 ],
                 "capabilitiesTransformations": {
                     "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
-                        "value": {
-                            transform: {
-                                type: "fluid.transforms.condition",
-                                conditionPath: "http://registry\\.gpii\\.net/common/nightScreen",
-                                "true": 1,
-                                "false": 0
-                            }
-                        }
+                        "value": "http://registry\\.gpii\\.net/common/nightScreen"
                     }
                 },
                 "supportedSettings": {
@@ -9285,16 +9324,12 @@
                             "type": "object",
                             "properties": {
                                 "value": {
-                                    "enum": [0, 1],
-                                    "enumLabels": ["Off", "On"],
-                                    "default": 0
+                                    "type": "boolean",
+                                    "default": false
                                 }
                             }
                         }
                     }
-                },
-                "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/nightScreen": "SystemSettings_Display_BlueLight_ManualToggleQuickAction.value"
                 }
             }
         },

@@ -61,11 +61,11 @@
                     "http://registry.gpii.net/applications/com.microsoft.windows.filterKeys": {
                         "FilterKeysEnable": {
                             "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                            "value": true
+                            "value": "true"
                         },
                         "BounceKeysInterval": {
                             "path": "pvParam.iBounceMSec",
-                            "value": 1000
+                            "value": "1000"
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.cursors": {
@@ -108,7 +108,7 @@
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.nightScreen": {
                         "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
-                            "value": 0
+                            "value": false
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.narrator": {
