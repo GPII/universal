@@ -932,7 +932,7 @@ gpii.tests.windows.builtIn = [
                                     "get": "pvParam",
                                     "set": "uiParam"
                                 },
-                                "value": 0
+                                "value": 10
                             }
                         },
                         "options": {
