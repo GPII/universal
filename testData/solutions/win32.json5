@@ -6245,9 +6245,8 @@
                                 "path": { "type":  "string", "required": true},
                                 "value": {
                                     "required": true,
-                                    "enum": ["true", "false"],
-                                    "enumLabels": ["True", "False"],
-                                    "default": "false"
+                                    "type": "boolean",
+                                    "default": false
                                 }
                             }
                         }
@@ -6298,8 +6297,8 @@
                                         "operator": "||"
                                     }
                                 },
-                                "true": "true",
-                                "false": "false"
+                                "true": true,
+                                "false": false
                             }
                         },
                         "path": {

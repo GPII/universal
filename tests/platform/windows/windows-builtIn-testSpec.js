@@ -423,7 +423,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": "true"
+                                "value": true
                             },
                             "BounceKeysInterval": {
                                 "path": "pvParam.iBounceMSec",
@@ -982,11 +982,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": "true"
-                            },
-                            "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
-                                "value": 1000
+                                "value": true
                             }
                         },
                         "options": {
@@ -1205,11 +1201,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": "true"
-                            },
-                            "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
-                                "value": 1000
+                                "value": true
                             }
                         },
                         "options": {
@@ -1428,11 +1420,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": "true"
-                            },
-                            "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
-                                "value": 1000
+                                "value": true
                             }
                         },
                         "options": {

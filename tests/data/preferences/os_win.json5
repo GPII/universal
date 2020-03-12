@@ -61,7 +61,7 @@
                     "http://registry.gpii.net/applications/com.microsoft.windows.filterKeys": {
                         "FilterKeysEnable": {
                             "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                            "value": "true"
+                            "value": true
                         },
                         // TODO: Figure out why the SPI settings handler kills the parent process if this is set to "1000" (number as string).
                         "BounceKeysInterval": {
