@@ -423,11 +423,11 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": true
+                                "value": false
                             },
                             "BounceKeysInterval": {
                                 "path": "pvParam.iBounceMSec",
-                                "value": 1000
+                                "value": 0
                             }
                         },
                         "options": {
