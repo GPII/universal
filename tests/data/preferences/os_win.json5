@@ -228,10 +228,10 @@
                             "value": 1
                         },
                         "DoubleClickWidthConfig": {
-                            "value": 32
+                            "value": 4
                         },
                         "DoubleClickHeightConfig": {
-                            "value": 32
+                            "value": 4
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.language": {

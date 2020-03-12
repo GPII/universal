@@ -82,7 +82,7 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "DoubleClickWidthConfig": {
-                                "value": 32
+                                "value": 4
                             }
                         },
                         "options": {
@@ -132,7 +132,7 @@ gpii.tests.windows.builtIn = [
                                     "get": "pvParam",
                                     "set": "uiParam"
                                 },
-                                "value": 1
+                                "value": 0
                             }
                         },
                         "options": {
@@ -404,7 +404,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "StickyKeysOn": {
                                 "path": "pvParam.dwFlags.SKF_STICKYKEYSON",
-                                "value": true
+                                "value": false
                             }
                         },
                         "options": {
@@ -446,7 +446,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "ToggleKeysOn": {
                                 "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON",
-                                "value": true
+                                "value": false
                             }
                         },
                         "options": {
@@ -465,7 +465,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "UnderlineMenuShortcutsOn": {
                                 "path": "pvParam",
-                                "value": true
+                                "value": 0
                             }
                         },
                         "options": {
@@ -484,7 +484,7 @@ gpii.tests.windows.builtIn = [
                                     "get": "pvParam",
                                     "set": "uiParam"
                                 },
-                                "value": 1
+                                "value": 0
                             }
                         },
                         "options": {
@@ -737,9 +737,10 @@ gpii.tests.windows.builtIn = [
                         }
                     }
                 }],
+                // TODO: Break this apart and test each setting individually
                 "com.microsoft.windows.shortcutWarningMessage": [{
                     "settings": {
-                        "Warning Sounds": { value: true }
+                        "Warning Sounds": 0
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
