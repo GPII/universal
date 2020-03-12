@@ -427,7 +427,7 @@ gpii.tests.windows.builtIn = [
                             },
                             "BounceKeysInterval": {
                                 "path": "pvParam.iBounceMSec",
-                                "value": "1000"
+                                "value": 1000
                             }
                         },
                         "options": {
@@ -986,7 +986,7 @@ gpii.tests.windows.builtIn = [
                             },
                             "BounceKeysInterval": {
                                 "path": "pvParam.iBounceMSec",
-                                "value": "1000"
+                                "value": 1000
                             }
                         },
                         "options": {
@@ -1209,7 +1209,7 @@ gpii.tests.windows.builtIn = [
                             },
                             "BounceKeysInterval": {
                                 "path": "pvParam.iBounceMSec",
-                                "value": "1000"
+                                "value": 1000
                             }
                         },
                         "options": {
@@ -1432,7 +1432,7 @@ gpii.tests.windows.builtIn = [
                             },
                             "BounceKeysInterval": {
                                 "path": "pvParam.iBounceMSec",
-                                "value": "1000"
+                                "value": 1000
                             }
                         },
                         "options": {

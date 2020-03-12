@@ -63,9 +63,10 @@
                             "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
                             "value": "true"
                         },
+                        // TODO: Figure out why the SPI settings handler kills the parent process if this is set to "1000" (number as string).
                         "BounceKeysInterval": {
                             "path": "pvParam.iBounceMSec",
-                            "value": "1000"
+                            "value": 1000
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.cursors": {

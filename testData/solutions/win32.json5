@@ -6267,7 +6267,6 @@
                             }
                         }
                     },
-                    // TODO: Confirm which format is required by the settings handler.
                     "BounceKeysInterval": {
                         "schema": {
                             "title": "Bounce keys interval",
@@ -6277,8 +6276,8 @@
                                 "path": { "type":  "string", "required": true},
                                 "value": {
                                     "required": true,
-                                    "type": "string",
-                                    "default": "0"
+                                    "type": "integer",
+                                    "default": 0
                                 }
                             }
                         }
@@ -6337,23 +6336,18 @@
                     "BounceKeysInterval": {
                         "value": {
                             "transform": {
-                                "type": "fluid.transforms.numberToString",
-                                "input": {
+                                "type": "fluid.transforms.condition",
+                                "condition": false, // If there's no setting, make sure it's counted as false.
+                                "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
+                                // If close keys is enabled, bounce keys should be disabled.
+                                "true": 0,
+                                "false": {
                                     "transform": {
                                         "type": "fluid.transforms.condition",
                                         "condition": false, // If there's no setting, make sure it's counted as false.
-                                        "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
-                                        // If close keys is enabled, bounce keys should be disabled.
-                                        "true": 0,
-                                        "false": {
-                                            "transform": {
-                                                "type": "fluid.transforms.condition",
-                                                "condition": false, // If there's no setting, make sure it's counted as false.
-                                                "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
-                                                "true": 1000,
-                                                "false": 0
-                                            }
-                                        }
+                                        "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
+                                        "true": 1000,
+                                        "false": 0
                                     }
                                 }
                             }
@@ -6407,12 +6401,8 @@
                             "condition": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
-                                    "left": {
-                                        transform: {
-                                            "type": "fluid.transforms.stringToNumber",
-                                            "input": "BounceKeysInterval.value"
-                                        }
-                                    },
+                                    "leftPath": "BounceKeysInterval.value",
+                                    "left": 0,
                                     "right": 0,
                                     "operator": ">"
                                 }
@@ -6426,12 +6416,8 @@
                             "condition": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
-                                    "left": {
-                                        "transform": {
-                                            "type": "fluid.transforms.stringToNumber",
-                                            "inputPath": "BounceKeysInterval.value"
-                                        }
-                                    },
+                                    "leftPath": "BounceKeysInterval.value",
+                                    "left": 0,
                                     "right": 0,
                                     "operator": ">"
                                 }
@@ -6439,12 +6425,7 @@
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
-                                    "input": {
-                                        "transform": {
-                                            "type": "fluid.transforms.stringToNumber",
-                                            "inputPath": "BounceKeysInterval.value"
-                                        }
-                                    },
+                                    "inputPath": "BounceKeysInterval.value",
                                     "factor": 0.001
                                 }
                             }
