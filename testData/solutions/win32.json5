@@ -6265,22 +6265,23 @@
                                 }
                             }
                         }
-                    },
-                    "BounceKeysInterval": {
-                        "schema": {
-                            "title": "Bounce keys interval",
-                            "description": "Bounce keys interval time in milliseconds",
-                            "type": "object",
-                            "properties": {
-                                "path": { "type":  "string", "required": true},
-                                "value": {
-                                    "required": true,
-                                    "type": "integer",
-                                    "default": 0
-                                }
-                            }
-                        }
                     }
+                    // TODO: Reenable this once we can confirm a safe range of values that work with the SPI settings handler.
+//                    "BounceKeysInterval": {
+//                        "schema": {
+//                            "title": "Bounce keys interval",
+//                            "description": "Bounce keys interval time in milliseconds",
+//                            "type": "object",
+//                            "properties": {
+//                                "path": { "type":  "string", "required": true},
+//                                "value": {
+//                                    "required": true,
+//                                    "type": "integer",
+//                                    "default": 0
+//                                }
+//                            }
+//                        }
+//                    }
                 },
                 "capabilitiesTransformations": {
                     "FilterKeysEnable": {
@@ -6331,33 +6332,34 @@
                                 "input": "pvParam.iWaitMSec"
                             }
                         }
-                    },
-                    "BounceKeysInterval": {
-                        "value": {
-                            "transform": {
-                                "type": "fluid.transforms.condition",
-                                "condition": false, // If there's no setting, make sure it's counted as false.
-                                "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
-                                // If close keys is enabled, bounce keys should be disabled.
-                                "true": 0,
-                                "false": {
-                                    "transform": {
-                                        "type": "fluid.transforms.condition",
-                                        "condition": false, // If there's no setting, make sure it's counted as false.
-                                        "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
-                                        "true": 1000,
-                                        "false": 0
-                                    }
-                                }
-                            }
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iBounceMSec"
-                            }
-                        }
                     }
+                    // TODO: Reenable this once we can confirm a safe range of values that work with the SPI settings handler.
+//                    "BounceKeysInterval": {
+//                        "value": {
+//                            "transform": {
+//                                "type": "fluid.transforms.condition",
+//                                "condition": false, // If there's no setting, make sure it's counted as false.
+//                                "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
+//                                // If close keys is enabled, bounce keys should be disabled.
+//                                "true": 0,
+//                                "false": {
+//                                    "transform": {
+//                                        "type": "fluid.transforms.condition",
+//                                        "condition": false, // If there's no setting, make sure it's counted as false.
+//                                        "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
+//                                        "true": 1000,
+//                                        "false": 0
+//                                    }
+//                                }
+//                            }
+//                        },
+//                        "path": {
+//                            "transform": {
+//                                "type": "fluid.transforms.literalValue",
+//                                "input": "pvParam.iBounceMSec"
+//                            }
+//                        }
+//                    }
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/slowKeys/enabled": {

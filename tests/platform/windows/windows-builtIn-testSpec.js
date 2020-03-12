@@ -424,11 +424,12 @@ gpii.tests.windows.builtIn = [
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
                                 "value": false
-                            },
-                            "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
-                                "value": 0
                             }
+                            // TODO: Reenable this once we can confirm a safe range of values that work with the SPI settings handler.
+                            // "BounceKeysInterval": {
+                            //     "path": "pvParam.iBounceMSec",
+                            //     "value": 0
+                            // }
                         },
                         "options": {
                             "getAction": "SPI_GETFILTERKEYS",
