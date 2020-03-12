@@ -269,7 +269,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "PointerSpeedConfig": {
                                 "path": "pvParam",
-                                "value": 15
+                                "value": 14
                             }
                         },
                         "options": {
@@ -285,7 +285,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "EnhancePrecisionConfig": {
                                 "path": "pvParam",
-                                "value": [0, 0, 1]
+                                "value": [6, 10, 1]
                             }
                         },
                         "options": {
@@ -502,7 +502,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.magnifier": [{ // magnifier stuff
                     "settings": {
                         "Invert": 1,
-                        "Magnification": 150,
+                        "Magnification": 100,
                         "MagnificationMode": 3,
                         "FollowFocus": 0,
                         "FollowCaret": 1,
@@ -1151,7 +1151,7 @@ gpii.tests.windows.builtIn = [
                                     "get": "pvParam",
                                     "set": "uiParam"
                                 },
-                                "value": 0
+                                "value": 10
                             }
                         },
                         "options": {
@@ -1370,7 +1370,7 @@ gpii.tests.windows.builtIn = [
                                     "get": "pvParam",
                                     "set": "uiParam"
                                 },
-                                "value": 0
+                                "value": 10
                             }
                         },
                         "options": {
