@@ -132,7 +132,7 @@ gpii.tests.windows.builtIn = [
                                     "get": "pvParam",
                                     "set": "uiParam"
                                 },
-                                "value": 0
+                                "value": 1
                             }
                         },
                         "options": {
@@ -359,7 +359,7 @@ gpii.tests.windows.builtIn = [
                                     "get": "pvParam",
                                     "set": "uiParam"
                                 },
-                                "value": 0
+                                "value": 10
                             }
                         },
                         "options": {
@@ -404,7 +404,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "StickyKeysOn": {
                                 "path": "pvParam.dwFlags.SKF_STICKYKEYSON",
-                                "value": false
+                                "value": true
                             }
                         },
                         "options": {
@@ -423,7 +423,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": false
+                                "value": true
                             }
                             // TODO: Reenable this once we can confirm a safe range of values that work with the SPI settings handler.
                             // "BounceKeysInterval": {
@@ -447,7 +447,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "ToggleKeysOn": {
                                 "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON",
-                                "value": false
+                                "value": true
                             }
                         },
                         "options": {
@@ -466,7 +466,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "UnderlineMenuShortcutsOn": {
                                 "path": "pvParam",
-                                "value": 0
+                                "value": 1
                             }
                         },
                         "options": {
@@ -485,7 +485,7 @@ gpii.tests.windows.builtIn = [
                                     "get": "pvParam",
                                     "set": "uiParam"
                                 },
-                                "value": 0
+                                "value": 1
                             }
                         },
                         "options": {
@@ -503,7 +503,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.magnifier": [{ // magnifier stuff
                     "settings": {
                         "Invert": 1,
-                        "Magnification": 100,
+                        "Magnification": 150,
                         "MagnificationMode": 3,
                         "FollowFocus": 0,
                         "FollowCaret": 1,
@@ -671,18 +671,18 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.onscreenKeyboard": [{
                     "settings": {
                         "NavigationMode": 0,
-                        "ClickSound": 1,
-                        "ShowClearKeyboard": 1,
-                        "ShowNumPad": 0,
-                        "Mode": 1,
-                        "HoverPeriod": 1000,
-                        "ScanInterval": 1000,
-                        "UseDevice": 1,
-                        "UseKB": 1,
-                        "ScanKey": 32,
-                        "UseMouse": 0,
-                        "UseTextPrediction": 1,
-                        "InsertSpace": 1,
+                        "ClickSound": 0,
+                        "ShowClearKeyboard": 0,
+                        "ShowNumPad": 1,
+                        "Mode": 2,
+                        "HoverPeriod": 1500,
+                        "ScanInterval": 1500,
+                        "UseDevice": 0,
+                        "UseKB": 0,
+                        "ScanKey": 113,
+                        "UseMouse": 1,
+                        "UseTextPrediction": 0,
+                        "InsertSpace": 0,
                         "Dock": 0
                     },
                     "options": {
@@ -720,7 +720,7 @@ gpii.tests.windows.builtIn = [
                 }, {
                     "settings": {
                         // TODO: This does not match the schema!
-                        "MachinePreferredUILanguages": "en-US"
+                        "MachinePreferredUILanguages": ""
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -732,7 +732,7 @@ gpii.tests.windows.builtIn = [
                 }],
                 "com.microsoft.windows.soundSentry": [{
                     "settings": {
-                        "WindowsEffect": 49
+                        "WindowsEffect": 2
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -772,18 +772,17 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.screenResolution": [{
                     "settings": {
                         "screen-resolution": {
-                            "width": 1024,
-                            "height": 768
+                            "width": 800,
+                            "height": 600
                         },
-                        "screen-dpi": 0
+                        "screen-dpi": 1
                     }
                 }]
             },
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
                     "settings": {
-                        // TODO: This is obviously not right and is only being changed to unstick the pipeline.  FIX.
-                        "running": false
+                        "running": true
                     },
                     "options": {
                         "verifySettings": true,
@@ -817,7 +816,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.touchPadSettings": [{
                     "settings": {
                         "SystemSettings_Input_Touch_SetActivationTimeout": {
-                            "value": "Medium sensitivity"
+                            "value": "Low sensitivity"
                         }
                     },
                     "options": {
@@ -828,7 +827,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.narrator": [{
                     "settings": {
                         "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
-                            "value": false
+                            "value": true
                         },
                         "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
                             "value": true
