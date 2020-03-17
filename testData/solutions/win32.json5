@@ -6861,22 +6861,19 @@
                     "http://registry\\.gpii\\.net/common/language"
                 ],
                 "capabilitiesTransformations": {
-                    "MachinePreferredUILanguages": [{
+                    "MachinePreferredUILanguages": {
                         "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/language"
                         }
-                    }]
+                    }
                 },
                 "supportedSettings": {
                     "MachinePreferredUILanguages": {
                         "schema": {
                             "title": "The Machine Preferred UI Language",
                             "description": "Machine Preferred UI language.",
-                            "type": "array",
-                            "items": {
-                                type: "string"
-                            }
+                            "type": "string"
                         }
                     }
                 }

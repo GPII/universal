@@ -269,7 +269,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "PointerSpeedConfig": {
                                 "path": "pvParam",
-                                "value": 14
+                                "value": 15
                             }
                         },
                         "options": {
@@ -466,7 +466,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "UnderlineMenuShortcutsOn": {
                                 "path": "pvParam",
-                                "value": 1
+                                "value": true
                             }
                         },
                         "options": {
@@ -719,7 +719,6 @@ gpii.tests.windows.builtIn = [
                     }
                 }, {
                     "settings": {
-                        // TODO: This does not match the schema!
                         "MachinePreferredUILanguages": ""
                     },
                     "options": {
@@ -745,7 +744,7 @@ gpii.tests.windows.builtIn = [
                 // TODO: Break this apart and test each setting individually
                 "com.microsoft.windows.shortcutWarningMessage": [{
                     "settings": {
-                        "Warning Sounds": 0
+                        "Warning Sounds": { value: true }
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
