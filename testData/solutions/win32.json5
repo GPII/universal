@@ -7080,8 +7080,8 @@
                                     "required": true
                                 },
                                 "value": {
-                                    "type": "boolean",
-                                    "default": false
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"]
                                 }
                             }
                         }
@@ -7089,7 +7089,14 @@
                 },
                 "capabilitiesTransformations": {
                     "UnderlineMenuShortcutsOn": {
-                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled",
+                        "value": {
+                            "transform": {
+                                "type": "fluid.transforms.condition",
+                                "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled",
+                                "true": 1,
+                                "false": 0
+                            }
+                        },
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
@@ -7200,19 +7207,19 @@
                         "schema": {
                             "title": "Shortcut warning messages",
                             "description": "Enable/Disable warning messages when changing a setting with a shortcut",
-                            "type": "object",
-                            "properties": {
-                                "value": {
-                                    "type": "boolean",
-                                    "default": false
-                                }
-                            }
+                            "enum": [0,1],
+                            "enumLabels": ["Off", "On"]
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "Warning Sounds": {
-                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled"
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled",
+                            "true": 1,
+                            "false": 0
+                        }
                     }
                 },
                 "inverseCapabilitiesTransformations": {

@@ -466,7 +466,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "UnderlineMenuShortcutsOn": {
                                 "path": "pvParam",
-                                "value": true
+                                "value": 1
                             }
                         },
                         "options": {
@@ -719,7 +719,7 @@ gpii.tests.windows.builtIn = [
                     }
                 }, {
                     "settings": {
-                        "MachinePreferredUILanguages": ""
+                        "MachinePreferredUILanguages": "en-US"
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -744,7 +744,7 @@ gpii.tests.windows.builtIn = [
                 // TODO: Break this apart and test each setting individually
                 "com.microsoft.windows.shortcutWarningMessage": [{
                     "settings": {
-                        "Warning Sounds": { value: true }
+                        "Warning Sounds": 1
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",

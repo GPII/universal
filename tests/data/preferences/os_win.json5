@@ -41,7 +41,7 @@
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.underlineMenuShortcuts": {
                         "UnderlineMenuShortcutsOn": {
-                            "value": true,
+                            "value": 1,
                             "path": "pvParam"
                         },
                         "KeyboardPreferenceOn": {
@@ -53,7 +53,7 @@
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
-                        "Warning Sounds": { value:  true }
+                        "Warning Sounds": 1
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningSound": {
                         "Sound on Activation": 1
