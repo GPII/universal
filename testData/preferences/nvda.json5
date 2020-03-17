@@ -114,7 +114,7 @@
                         "speech.espeak.trustVoiceLanguage": "False",
                         "speech.espeak.useSpellingFunctionality": "False",
                         "speech.espeak.voice": "en-gb-scotland",
-                        "speech.espeak.volume": 75,
+                        "speech.espeak.volume": 70,
                         "speech.oneCore.autoDialectSwitching": "True",
                         "speech.oneCore.autoLanguageSwitching": "False",
                         "speech.oneCore.beepForCapitals": "True",

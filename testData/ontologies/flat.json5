@@ -177,13 +177,6 @@
             "maximum": 100
         }
     },
-    "http://registry.gpii.net/common/cursorAcceleration": {
-        "schema": {
-            "title": "Cursor acceleration",
-            "description": "The acceleration of the mouse cursor", // needs to be defined
-            "type": "number"
-        }
-    },
     "http://registry.gpii.net/common/cursorColor": {
         "schema": {
             "title": "Cursor Color",
@@ -220,13 +213,6 @@
             "description": "Whether to enable/disable debounce",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/debounceInterval": {
-        "schema": {
-            "title": "Debounce Interval",
-            "description": "Debounce interval", // needs to be defined
-            "type": "number"
         }
     },
     "http://registry.gpii.net/common/DPIScale": {
