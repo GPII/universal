@@ -6,11 +6,11 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/info.cloud4all.JME": {
-                        "theme": "Black-White",
                         "fontSize": "veryLarge",
+                        "hapticFeedback": 2,
                         "language": "English",
-                        "volume": 50,
-                        "hapticFeedback": 2
+                        "theme": "Black-White",
+                        "volume": 50
                     }
                 }
             }

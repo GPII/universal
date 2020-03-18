@@ -9,28 +9,28 @@
                         "ApplicationSettings.ScreenMasking.ScreenMask.$t": "UnderlineTypingLine",
                         // Screen Masking -> Tint whole screen subsettings
                         "ApplicationSettings.ScreenMasking.TintScreenColour.$t": "#a7efce",
-                        "ApplicationSettings.ScreenMasking.TintScreenOpacity.$t": "0.5",
-                        "ApplicationSettings.ScreenMasking.ReadingLight.$t": "true",
+                        "ApplicationSettings.ScreenMasking.TintScreenOpacity.$t": 0.5,
+                        "ApplicationSettings.ScreenMasking.ReadingLight.$t": true,
                         "ApplicationSettings.ScreenMasking.ReadingLightColour.$t": "#00FFFFFF",
-                        "ApplicationSettings.ScreenMasking.ReadingLightOpacity.$t": "0.5",
-                        "ApplicationSettings.ScreenMasking.ReadingLightHeight.$t": "150",
+                        "ApplicationSettings.ScreenMasking.ReadingLightOpacity.$t": 0.5,
+                        "ApplicationSettings.ScreenMasking.ReadingLightHeight.$t": 150,
                         // Screen Masking -> Underline typing line
                         "ApplicationSettings.ScreenMasking.UnderlineTypingLineColour.$t": "#a7efce",
-                        "ApplicationSettings.ScreenMasking.UnderlineTypingLineOpacity.$t": "0.3",
-                        "ApplicationSettings.ScreenMasking.UnderlineTypingLineHeight.$t": "15",
+                        "ApplicationSettings.ScreenMasking.UnderlineTypingLineOpacity.$t": 0.3,
+                        "ApplicationSettings.ScreenMasking.UnderlineTypingLineHeight.$t": 15,
                         // Screen Masking -> Tint typing line
                         "ApplicationSettings.ScreenMasking.TintTypingLineColour.$t": "#FF00FFFF",
-                        "ApplicationSettings.ScreenMasking.TintTypingLineOpacity.$t": "0.6",
+                        "ApplicationSettings.ScreenMasking.TintTypingLineOpacity.$t": 0.6,
                         // Screen Masking -> Change page color
                         "ApplicationSettings.ScreenMasking.SystemBackgroundColour.$t": "#a7efce",
                         // Screen Masking -> Underline cursor
                         "ApplicationSettings.ScreenMasking.UnderlineCursorColour.$t": "#a7efce",
-                        "ApplicationSettings.ScreenMasking.UnderlineCursorOpacity.$t": "0.4",
-                        "ApplicationSettings.ScreenMasking.UnderlineCursorHeight.$t": "20",
+                        "ApplicationSettings.ScreenMasking.UnderlineCursorOpacity.$t": 0.4,
+                        "ApplicationSettings.ScreenMasking.UnderlineCursorHeight.$t": 20,
                         // Screenshot Reader
                         "ApplicationSettings.Screenshot.CaptureBy.$t": "Drawing Freehand",
                         "ApplicationSettings.Screenshot.ScreenshotTo.$t": "Window",
-                        "ApplicationSettings.Screenshot.AppendToMsWordDoc.$t": "false"
+                        "ApplicationSettings.Screenshot.AppendToMsWordDoc.$t": false
                     }
                 }
             }
