@@ -47,12 +47,12 @@ gpii.tests.linux.orca.testDefs = [
                     {
                         "settings": {
                             "sayAllStyle": 1,
-                            "enableSpeech": true,
-                            "enableEchoByWord": true,
-                            "enableEchoByCharacter": false,
+                            "enableSpeech": 1,
+                            "enableEchoByWord": 1,
+                            "enableEchoByCharacter": 0,
                             "voices.default.rate": 102.27272727272727,
-                            "voices.default.gain": 7.5,
-                            "enableTutorialMessages": false,
+                            "voices.default.gain": 7,
+                            "enableTutorialMessages": 0,
                             "voices.default.family": {
                                 "locale": "en",
                                 "name": "en-westindies"
@@ -100,12 +100,12 @@ gpii.tests.linux.orca.testDefs = [
                     {
                         "settings": {
                             "sayAllStyle": 1,
-                            "enableSpeech": true,
-                            "enableEchoByWord": true,
-                            "enableEchoByCharacter": false,
+                            "enableSpeech": 1,
+                            "enableEchoByWord": 1,
+                            "enableEchoByCharacter": 0,
                             "voices.default.rate": 102.27272727272727,
-                            "voices.default.gain": 7.5,
-                            "enableTutorialMessages": false,
+                            "voices.default.gain": 7,
+                            "enableTutorialMessages": 0,
                             "voices.default.family": {
                                 "locale": "en",
                                 "name": "en-westindies"
@@ -154,11 +154,11 @@ gpii.tests.linux.orca.testDefs = [
                     {
                         "settings": {
                             "sayAllStyle": 1,
-                            "enableEchoByWord": true,
-                            "enableEchoByCharacter": false,
+                            "enableEchoByWord": 1,
+                            "enableEchoByCharacter": 0,
                             "voices.default.rate": 102.27272727272727,
-                            "voices.default.gain": 7.5,
-                            "enableTutorialMessages": false,
+                            "voices.default.gain": 7,
+                            "enableTutorialMessages": 0,
                             "voices.default.family": {
                                 "locale": "en",
                                 "name": "en-westindies"
