@@ -8,7 +8,7 @@
           "http://registry.gpii.net/applications/com.microsoft.windows.desktopBackground": {
             "Image": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg", // Transformed to "ImageConfig" setting
             "SolidColor": { r:  128, g: 128, b: 128 }, // Transformed to "SolidColorConfig" setting
-            "WallpaperStyle": 6 // Transformed to "Scaling" setting
+            "WallpaperStyle": "6" // Transformed to "Scaling" setting
           },
           "http://registry.gpii.net/applications/com.microsoft.windows.mirrorScreen": {
             "ScreenMirror": true // Transformed to "ScreenMirrorConfig" setting

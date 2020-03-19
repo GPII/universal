@@ -6,40 +6,40 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
                         // Prediction
-                        "ApplicationSettings.Prediction.DisplayAlphabetic.$t": "true",
-                        "ApplicationSettings.Prediction.FollowCursor.$t": "true",
-                        "ApplicationSettings.Prediction.AutoHeightAdjust.$t": "true",
-                        "ApplicationSettings.Prediction.winPredictOneWordAhead.$t": "true",
-                        "ApplicationSettings.Prediction.InsertSpaceAfterPred.$t": "false",
-                        "ApplicationSettings.Prediction.UseSpellingForPredictions.$t": "false",
+                        "ApplicationSettings.Prediction.DisplayAlphabetic.$t": true,
+                        "ApplicationSettings.Prediction.FollowCursor.$t": true,
+                        "ApplicationSettings.Prediction.AutoHeightAdjust.$t": true,
+                        "ApplicationSettings.Prediction.winPredictOneWordAhead.$t": true,
+                        "ApplicationSettings.Prediction.InsertSpaceAfterPred.$t": false,
+                        "ApplicationSettings.Prediction.UseSpellingForPredictions.$t": false,
                         // Prediction Speech
-                        "ApplicationSettings.Prediction.SpeakPredictionOnMouseHover.$t": "false",
+                        "ApplicationSettings.Prediction.SpeakPredictionOnMouseHover.$t": false,
                         // This two settings are excluyent, need to encode that
-                        "ApplicationSettings.Prediction.SpeakOnWordClick.$t": "true",
-                        "ApplicationSettings.Prediction.InsertOnWordClick.$t": "false",
+                        "ApplicationSettings.Prediction.SpeakOnWordClick.$t": true,
+                        "ApplicationSettings.Prediction.InsertOnWordClick.$t": false,
                         // Prediction Learning
-                        "ApplicationSettings.Prediction.SpellCheckBeforeLearn.$t": "false",
-                        "ApplicationSettings.Prediction.AutoLearnAsType.$t": "false",
+                        "ApplicationSettings.Prediction.SpellCheckBeforeLearn.$t": false,
+                        "ApplicationSettings.Prediction.AutoLearnAsType.$t": false,
                         // Scanning
-                        "ApplicationSettings.Scanning.dpi.$t": "600",
+                        "ApplicationSettings.Scanning.dpi.$t": 600,
                         "ApplicationSettings.Scanning.colormode.$t": "GrayScale",
-                        "ApplicationSettings.Scanning.HideInterface.$t": "false",
-                        // Device Setup (Advanced settigns)
-                        "ApplicationSettings.Scanning.Countdown.$t": "true",
-                        "ApplicationSettings.Scanning.CountdownInterval.$t": "10",
-                        "ApplicationSettings.Scanning.ADF.$t": "true",
-                        "ApplicationSettings.Scanning.Duplex.$t": "true",
+                        "ApplicationSettings.Scanning.HideInterface.$t": false,
+                        // Device Setup (Advanced settings)
+                        "ApplicationSettings.Scanning.Countdown.$t": true,
+                        "ApplicationSettings.Scanning.CountdownInterval.$t": 10,
+                        "ApplicationSettings.Scanning.ADF.$t": true,
+                        "ApplicationSettings.Scanning.Duplex.$t": true,
                         // Save Options
-                        "ApplicationSettings.Scanning.AutoSave.$t": "true",
+                        "ApplicationSettings.Scanning.AutoSave.$t": true,
                         "ApplicationSettings.Scanning.DefaultFilePath.$t": "C:\\Users\\vagrant\\Download",
                         "ApplicationSettings.Scanning.DefaultFileName.$t": "ScannedDoc",
                         // PDF Output
-                        "ApplicationSettings.Scanning.PdfTextOnly.$t": "true",
-                        "ApplicationSettings.Scanning.MSWordRetainFormat.$t": "true",
-                        "ApplicationSettings.Scanning.CoverFirstPage.$t": "false",
+                        "ApplicationSettings.Scanning.PdfTextOnly.$t": true,
+                        "ApplicationSettings.Scanning.MSWordRetainFormat.$t": true,
+                        "ApplicationSettings.Scanning.CoverFirstPage.$t": false,
                         // Output Types
-                        "ApplicationSettings.Scanning.EnableEpub.$t": "true",
-                        "ApplicationSettings.Scanning.EnableWeb.$t": "true"
+                        "ApplicationSettings.Scanning.EnableEpub.$t": true,
+                        "ApplicationSettings.Scanning.EnableWeb.$t": true
                     }
                 }
             }

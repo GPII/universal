@@ -27,8 +27,7 @@
                     "http://registry.gpii.net/common/magnifierPosition": "TopHalf",
                     "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
                         "invertColours": false
-                    },
-                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                    }
                 },
                 "metadata": [
                     {
@@ -48,8 +47,7 @@
                     "http://registry.gpii.net/common/magnifierPosition": "TopHalf",
                     "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
                         "invertColours": true
-                    },
-                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                    }
                 },
                 "metadata": [
                     {

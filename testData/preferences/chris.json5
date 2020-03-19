@@ -24,11 +24,7 @@
                 "preferences": {
                     "http://registry.gpii.net/common/screenReaderTTS/enabled": true,
                     "http://registry.gpii.net/common/screenReaderBrailleOutput": true,
-                    "http://registry.gpii.net/common/speechRate": 350,
-                    "http://registry.gpii.net/applications/com.microsoft.windows.displaySettings": {
-                        "isActive": true
-                    },
-                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                    "http://registry.gpii.net/common/speechRate": 350
                 },
                 "metadata": [
                     {
