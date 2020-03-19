@@ -841,8 +841,8 @@ gpii.tests.windows.builtIn = [
         },
         gradeNames: "gpii.test.integration.actionHandlersAware.windows"
     }, {
-        name: "Testing os_win_2 using default matchmaker",
-        gpiiKey: "os_win_2",
+        name: "Testing os_win_solidColor using default matchmaker",
+        gpiiKey: "os_win_solidColor",
         initialState: {},
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
@@ -880,7 +880,178 @@ gpii.tests.windows.builtIn = [
                 }]
             }
         }
-    }, {
+    },
+    {
+        name: "Testing os_win_solidColor_tf using default matchmaker",
+        gpiiKey: "os_win_solidColor_tf",
+        initialState: {},
+        settingsHandlers: {
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.desktopBackgroundColor": [{
+                    "settings": {
+                        "ImageConfig": {
+                            "path": "pvParam",
+                            "value": ""
+                        }
+                    },
+                    "options": {
+                        "getAction": "SPI_GETDESKWALLPAPER",
+                        "setAction": "SPI_SETDESKWALLPAPER",
+                        "uiParam": 260,
+                        "pvParam": {
+                            "type": "array",
+                            "valueType": "TCHAR",
+                            "length": 260
+                        }
+                    }
+                }]
+            },
+            "gpii.windows.nativeSettingsHandler": {
+                "com.microsoft.windows.desktopBackgroundColor": [{
+                    "settings": {
+                        "SolidColorConfig": {
+                            "value": {
+                                "r": 67, "g": 187, "b": 19
+                            }
+                        }
+                    },
+                    "options": {
+                        "functionName": "SolidColor"
+                    }
+                }]
+            }
+        }
+    },
+    {
+        name: "Testing os_win_wallpaper_fill using default matchmaker",
+        gpiiKey: "os_win_wallpaper_fill",
+        initialState: {},
+        settingsHandlers: {
+            "gpii.windows.registrySettingsHandler": {
+                "com.microsoft.windows.desktopBackground": [{
+                    "settings": {
+                        "TileWallpaper": "0",
+                        "WallpaperStyle": "10"
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Desktop",
+                        "dataTypes": {
+                            "TileWallpaper": "REG_SZ",
+                            "WallpaperStyle": "REG_SZ"
+                        }
+                    }
+                }]
+            },
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.desktopBackground": [{
+                    "settings": {
+                        "ImageConfig": {
+                            "path": "pvParam",
+                            "value": "C:\\Windows\\Web\\Wallpaper\\Theme1\\img3.jpg"
+                        }
+                    },
+                    "options": {
+                        "getAction": "SPI_GETDESKWALLPAPER",
+                        "setAction": "SPI_SETDESKWALLPAPER",
+                        "uiParam": 260,
+                        "pvParam": {
+                            "type": "array",
+                            "valueType": "TCHAR",
+                            "length": 260
+                        }
+                    }
+                }]
+            }
+        }
+    },
+    {
+        name: "Testing os_win_wallpaper_fit using default matchmaker",
+        gpiiKey: "os_win_wallpaper_fit",
+        initialState: {},
+        settingsHandlers: {
+            "gpii.windows.registrySettingsHandler": {
+                "com.microsoft.windows.desktopBackground": [{
+                    "settings": {
+                        "TileWallpaper": "0",
+                        "WallpaperStyle": "6"
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Desktop",
+                        "dataTypes": {
+                            "TileWallpaper": "REG_SZ",
+                            "WallpaperStyle": "REG_SZ"
+                        }
+                    }
+                }]
+            },
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.desktopBackground": [{
+                    "settings": {
+                        "ImageConfig": {
+                            "path": "pvParam",
+                            "value": "C:\\Windows\\Web\\Wallpaper\\Theme1\\img2.jpg"
+                        }
+                    },
+                    "options": {
+                        "getAction": "SPI_GETDESKWALLPAPER",
+                        "setAction": "SPI_SETDESKWALLPAPER",
+                        "uiParam": 260,
+                        "pvParam": {
+                            "type": "array",
+                            "valueType": "TCHAR",
+                            "length": 260
+                        }
+                    }
+                }]
+            }
+        }
+    },
+    {
+        name: "Testing os_win_wallpaper_tile using default matchmaker",
+        gpiiKey: "os_win_wallpaper_tile",
+        initialState: {},
+        settingsHandlers: {
+            "gpii.windows.registrySettingsHandler": {
+                "com.microsoft.windows.desktopBackground": [{
+                    "settings": {
+                        "TileWallpaper": "1",
+                        "WallpaperStyle": "0"
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Desktop",
+                        "dataTypes": {
+                            "TileWallpaper": "REG_SZ",
+                            "WallpaperStyle": "REG_SZ"
+                        }
+                    }
+                }]
+            },
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.desktopBackground": [{
+                    "settings": {
+                        "ImageConfig": {
+                            "path": "pvParam",
+                            "value": "C:\\Windows\\Web\\Wallpaper\\Theme1\\img4.jpg"
+                        }
+                    },
+                    "options": {
+                        "getAction": "SPI_GETDESKWALLPAPER",
+                        "setAction": "SPI_SETDESKWALLPAPER",
+                        "uiParam": 260,
+                        "pvParam": {
+                            "type": "array",
+                            "valueType": "TCHAR",
+                            "length": 260
+                        }
+                    }
+                }]
+            }
+        }
+    },
+    {
         name: "Testing os_common using default matchmaker",
         gpiiKey: "os_common",
         initialState: {
