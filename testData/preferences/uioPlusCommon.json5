@@ -35,7 +35,7 @@
                     "http://registry.gpii.net/common/simplifiedUi/enabled": true,
                     "http://registry.gpii.net/common/syllabification/enabled": true,
                     "http://registry.gpii.net/common/tableOfContents": true,
-                    "http://registry.gpii.net/common/wordSpace": 0.2
+                    "http://registry.gpii.net/common/wordSpace": 1
                 }
             }
         }

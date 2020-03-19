@@ -2722,17 +2722,6 @@
                             }
                         }
                     },
-                    "Braille\\.BrailleMode": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "http://registry\\.gpii\\.net/common/brailleMode",
-                            "match": {
-                                "line": 0,
-                                "structured": 1,
-                                "speechHistory": 2
-                            }
-                        }
-                    },
                     "Options\\.SayAllIgnoreShiftKeys": {
                         "transform": {
                             "type": "valueMapper",
@@ -2829,26 +2818,6 @@
                                 {
                                     "inputValue": 2,
                                     "outputValue": "paragraph"
-                                }
-                            ]
-                        }
-                    },
-                    "http://registry\\.gpii\\.net/common/brailleMode": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "Braille\\.BrailleMode",
-                            "match": [
-                                {
-                                    "inputValue": 0,
-                                    "outputValue": "line"
-                                },
-                                {
-                                    "inputValue": 1,
-                                    "outputValue": "structured"
-                                },
-                                {
-                                    "inputValue": 2,
-                                    "outputValue": "speechHistory"
                                 }
                             ]
                         }
@@ -3209,44 +3178,86 @@
                     },
                     "ENU-Global\\.Volume": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
+                            "type": "fluid.transforms.binaryOp",
+                            "operator": "+",
+                            "left": 10,
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 90
+                                }
+                            }
                         }
                     },
                     "ENU-JAWSCursor\\.Volume": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
+                            "type": "fluid.transforms.binaryOp",
+                            "operator": "+",
+                            "left": 10,
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 90
+                                }
+                            }
                         }
                     },
                     "ENU-Keyboard\\.Volume": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
+                            "type": "fluid.transforms.binaryOp",
+                            "operator": "+",
+                            "left": 10,
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 90
+                                }
+                            }
                         }
                     },
                     "ENU-MenuAndDialog\\.Volume": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
+                            "type": "fluid.transforms.binaryOp",
+                            "operator": "+",
+                            "left": 10,
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 90
+                                }
+                            }
                         }
                     },
                     "ENU-Message\\.Volume": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
+                            "type": "fluid.transforms.binaryOp",
+                            "operator": "+",
+                            "left": 10,
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 90
+                                }
+                            }
                         }
                     },
                     "ENU-PCCursor\\.Volume": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
+                            "type": "fluid.transforms.binaryOp",
+                            "operator": "+",
+                            "left": 10,
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 90
+                                }
+                            }
                         }
                     },
                     "ENU-Global\\.Punctuation": {
@@ -3330,7 +3341,7 @@
                                 "en-US": "American English",
                                 "en-GB": "British English",
                                 "fr": "French",
-                                "fr-CA": "French Canadian",
+                                "fr-CA": "French",
                                 "it": "Italian",
                                 "pt-BR": "Brazilian Portuguese",
                                 "de": "German",
@@ -3349,7 +3360,7 @@
                                 "en-US": "American English",
                                 "en-GB": "British English",
                                 "fr": "French",
-                                "fr-CA": "French Canadian",
+                                "fr-CA": "French",
                                 "it": "Italian",
                                 "pt-BR": "Brazilian Portuguese",
                                 "de": "German",
@@ -3368,7 +3379,7 @@
                                 "en-US": "American English",
                                 "en-GB": "British English",
                                 "fr": "French",
-                                "fr-CA": "French Canadian",
+                                "fr-CA": "French",
                                 "it": "Italian",
                                 "pt-BR": "Brazilian Portuguese",
                                 "de": "German",
@@ -3387,7 +3398,7 @@
                                 "en-US": "American English",
                                 "en-GB": "British English",
                                 "fr": "French",
-                                "fr-CA": "French Canadian",
+                                "fr-CA": "French",
                                 "it": "Italian",
                                 "pt-BR": "Brazilian Portuguese",
                                 "de": "German",
@@ -3406,7 +3417,7 @@
                                 "en-US": "American English",
                                 "en-GB": "British English",
                                 "fr": "French",
-                                "fr-CA": "French Canadian",
+                                "fr-CA": "French",
                                 "it": "Italian",
                                 "pt-BR": "Brazilian Portuguese",
                                 "de": "German",
@@ -3425,7 +3436,7 @@
                                 "en-US": "American English",
                                 "en-GB": "British English",
                                 "fr": "French",
-                                "fr-CA": "French Canadian",
+                                "fr-CA": "French",
                                 "it": "Italian",
                                 "pt-BR": "Brazilian Portuguese",
                                 "de": "German",
@@ -3492,7 +3503,6 @@
                                 "American English": "en-US",
                                 "British English": "en-GB",
                                 "French": "fr",
-                                "French Canadian": "fr-CA",
                                 "Italian": "it",
                                 "Brazilian Portuguese": "pt-BR",
                                 "German": "de",
@@ -4369,7 +4379,6 @@
                 "capabilitiesTransformations": {
                     "mag\\.size": "http://registry\\.gpii\\.net/common/magnification",
                     "mag\\.TextViewerFontSize": "http://registry\\.gpii\\.net/common/fontSize",
-                    "mag\\.TextViewerFontFaceName": "http://registry\\.gpii\\.net/common/fontFaceFontName",
                     "mag\\.startmagnified": {
                         "transform": {
                             "type": "fluid.transforms.condition",
@@ -4383,14 +4392,13 @@
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/showCrosshairs",
                             "true": "Bold Yellow with Full Cross+Mouse",
-                            "false": "3D Blue with Oval"
+                            "false": "3D Blue with Oval+Mouse"
                         }
                     }
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/magnification": "mag\\.size",
                     "http://registry\\.gpii\\.net/common/fontSize": "mag\\.TextViewerFontSize",
-                    "http://registry\\.gpii\\.net/common/fontFaceFontName": "mag\\.TextViewerFontFaceName",
                     "http://registry\\.gpii\\.net/common/showCrosshairs": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -4770,11 +4778,7 @@
                 },
                 "capabilitiesTransformations": {
                     "Brightness": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/screenBrightness",
-                            "outputPath": "value"
-                        }
+                        "value": "http://registry\\.gpii\\.net/common/screenBrightness"
                     }
                 },
                 "supportedSettings": {
@@ -4782,10 +4786,15 @@
                         "schema": {
                             "title": "Brightness",
                             "description": "Set the screen brightness.",
-                            "type": "number",
-                            "default": 0,
-                            "minimum": 0,
-                            "maximum": 100
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "number",
+                                    "default": 0,
+                                    "minimum": 0,
+                                    "maximum": 100
+                                }
+                            }
                         }
                     }
                 },
@@ -4830,8 +4839,8 @@
                             "title": "Desktop wallpaper tiling",
                             "description": "Sets the wallpaper to tiling style.",
                             "enum": [
-                                0,
-                                1
+                                "0",
+                                "1"
                             ],
                             "enumLabels": [
                                 "off",
@@ -4844,11 +4853,11 @@
                             "title": "Desktop wallpaper style",
                             "description": "Sets the wallpaper style.",
                             "enum": [
-                                0,
-                                2,
-                                6,
-                                10,
-                                22
+                                "0",
+                                "2",
+                                "6",
+                                "10",
+                                "22"
                             ],
                             "enumLabels": [
                                 "None",
@@ -4858,29 +4867,30 @@
                                 "Span"
                             ]
                         }
-                    },
-                    "Scaling": {
-                        "schema": {
-                            "title": "Desktop wallpaper scaling",
-                            "description": "Sets the wallpaper to scaling type.",
-                            "enum": [
-                                "Fill",
-                                "Fit",
-                                "Stretch",
-                                "Tile",
-                                "Center",
-                                "Span"
-                            ],
-                            "enumLabels": [
-                                "Fill",
-                                "Fit",
-                                "Stretch",
-                                "Tile",
-                                "Center",
-                                "Span"
-                            ]
-                        }
                     }
+                    // TODO: Use this as an early test case for user-facing vs. settings handler facing work.
+//                    "Scaling": {
+//                        "schema": {
+//                            "title": "Desktop wallpaper scaling",
+//                            "description": "Sets the wallpaper to scaling type.",
+//                            "enum": [
+//                                "Fill",
+//                                "Fit",
+//                                "Stretch",
+//                                "Tile",
+//                                "Center",
+//                                "Span"
+//                            ],
+//                            "enumLabels": [
+//                                "Fill",
+//                                "Fit",
+//                                "Stretch",
+//                                "Tile",
+//                                "Center",
+//                                "Span"
+//                            ]
+//                        }
+//                    }
                 },
                 "capabilitiesTransformations": {
                     "TileWallpaper": {
@@ -4964,12 +4974,13 @@
                         "length": 260
                     }
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "ImageConfig": {
                         "schema": {
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": { "type":  "string"},
                                 "value": {
@@ -4982,11 +4993,7 @@
                 },
                 "capabilitiesTransformations": {
                     "ImageConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Image",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Image",
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
@@ -5030,12 +5037,13 @@
                         "length": 260
                     }
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "ImageConfig": {
                         "schema": {
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": { "type":  "string", "required": true},
                                 "value": {
@@ -5049,10 +5057,11 @@
                 },
                 "capabilitiesTransformations": {
                     "ImageConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.literalValue",
-                            "input": "",
-                            "outputPath": "value"
+                        "value": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": ""
+                            }
                         },
                         "path": {
                             "transform": {
@@ -5107,11 +5116,7 @@
                 },
                 "capabilitiesTransformations": {
                     "SolidColorConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor",
-                            "outputPath": "value"
-                        }
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor"
                     }
                 },
                 "inverseCapabilitiesTransformations": {
@@ -5147,18 +5152,19 @@
                         "schema": {
                             "title": "Screen mirroring",
                             "description": "Mirrors the primary screen into a secondary screen.",
-                            "type": "boolean",
-                            "default": false
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "ScreenMirrorConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mirrorScreen.ScreenMirror",
-                            "outputPath": "value"
-                        }
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mirrorScreen.ScreenMirror"
                     }
                 },
                 "inverseCapabilitiesTransformations": {
@@ -5195,8 +5201,10 @@
                     "dataTypes": {
                         "AppStarting": "REG_SZ",
                         "Arrow": "REG_SZ",
+                        "Crosshair": "REG_SZ",
                         "Hand": "REG_SZ",
                         "Help": "REG_SZ",
+                        "IBeam": "REG_SZ",
                         "No": "REG_SZ",
                         "NWPen": "REG_SZ",
                         "SizeAll": "REG_SZ",
@@ -5214,7 +5222,7 @@
                             title: "Application Startup Cursor",
                             description: "The animated cursor that displays while an application is starting up.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_working.ani"
+                            default: "%SystemRoot%\\cursors\\wait_i.ani"
                         }
                     },
                     "Arrow": {
@@ -5222,7 +5230,14 @@
                             title: "Arrow Cursor",
                             description: "The 'arrow' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_arrow.cur"
+                            default: "%SystemRoot%\\cursors\\arrow_i.cur"
+                        }
+                    },
+                    "Crosshair": {
+                        schema: {
+                            title: "Crosshair",
+                            description: "The 'crosshair' cursor to use.",
+                            type: "string"
                         }
                     },
                     "Hand": {
@@ -5230,7 +5245,7 @@
                             title: "Hand Cursor",
                             description: "The 'hand' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_link.cur"
+                            default: ""
                         }
                     },
                     "Help": {
@@ -5238,7 +5253,14 @@
                             title: "Help Cursor",
                             description: "The 'help' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_helpsel.cur"
+                            default: "%SystemRoot%\\cursors\\help_i.cur"
+                        }
+                    },
+                    "IBeam": {
+                        schema: {
+                            title: "IBeam",
+                            description: "The 'IBeam' cursor to use.",
+                            type: "string"
                         }
                     },
                     "No": {
@@ -5246,7 +5268,7 @@
                             title: "'No' Cursor",
                             description: "The cursor icon used to indicate that the resource under the pointer cannot be clicked.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_unavail.cur"
+                            default: "%SystemRoot%\\cursors\\no_l.cur"
                         }
                     },
                     "NWPen": {
@@ -5254,7 +5276,7 @@
                             title: "Pen Cursor",
                             description: "The 'pen' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_pen.cur"
+                            default: "%SystemRoot%\\cursors\\pen_i.cur"
                         }
                     },
                     "SizeAll": {
@@ -5262,7 +5284,7 @@
                             title: "'Resize All' Cursor",
                             description: "The 'resize all' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_move.cur"
+                            default: "%SystemRoot%\\cursors\\move_i.cur"
                         }
                     },
                     "SizeNESW": {
@@ -5270,7 +5292,7 @@
                             title: "'Resize NESW' Cursor",
                             description: "The 'resize NESW' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_nesw.cur"
+                            default: "%SystemRoot%\\cursors\\size1_i.cur"
                         }
                     },
                     "SizeNS": {
@@ -5278,7 +5300,7 @@
                             title: "'Resize Height' Cursor",
                             description: "The 'resize height' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_ns.cur"
+                            default: "%SystemRoot%\\cursors\\size4_i.cur"
                         }
                     },
                     "SizeNWSE": {
@@ -5286,7 +5308,7 @@
                             title: "'Resize NWSE' Cursor",
                             description: "The 'resize NWSE' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_nwse.cur"
+                            default: "%SystemRoot%\\cursors\\size2_i.cur"
                         }
                     },
                     "SizeWE": {
@@ -5294,7 +5316,7 @@
                             title: "'Resize WE' Cursor",
                             description: "The 'resize WE' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_ew.cur"
+                            default: "%SystemRoot%\\cursors\\size3_i.cur"
                         }
                     },
                     "UpArrow": {
@@ -5302,7 +5324,7 @@
                             title: "'Up Arrow' Cursor",
                             description: "The 'up arrow' cursor icon.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_up.cur"
+                            default: "%SystemRoot%\\cursors\\up_i.cur"
                         }
                     },
                     "Wait": {
@@ -5310,7 +5332,7 @@
                             title: "'Wait' Cursor",
                             description: "The cursor icon to display while the system is busy.",
                             type: "string",
-                            default: "%SystemRoot%\\cursors\\aero_busy.ani"
+                            default: "%SystemRoot%\\cursors\\busy_i.ani"
                         }
                     }
                 },
@@ -5490,45 +5512,12 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": {
-                                        "transform": {
-                                            "type": "fluid.transforms.valueMapper",
-                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
-                                            "match": {
-                                                "ReverseBlack": "%SystemRoot%\\cursors\\aero_link_i.cur"
-                                            },
-                                            "noMatch": {
-                                                "outputValue": ""
-                                            }
-                                        }
-                                    }
+                                    "output": "%SystemRoot%\\cursors\\busy_i.ani"
                                 }, {
                                     "upperBound": 0.666,
-                                    "output": {
-                                        "transform": {
-                                            "type": "fluid.transforms.valueMapper",
-                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
-                                            "match": {
-                                                "ReverseBlack": "%SystemRoot%\\cursors\\aero_link_im.cur"
-                                            },
-                                            "noMatch": {
-                                                "outputValue": ""
-                                            }
-                                        }
-                                    }
+                                    "output": "%SystemRoot%\\cursors\\wait_im.cur"
                                 }, {
-                                    "output": {
-                                        "transform": {
-                                            "type": "fluid.transforms.valueMapper",
-                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
-                                            "match": {
-                                                "ReverseBlack": "%SystemRoot%\\cursors\\aero_link_il.cur"
-                                            },
-                                            "noMatch": {
-                                                "outputValue": ""
-                                            }
-                                        }
-                                    }
+                                    "output": "%SystemRoot%\\cursors\\wait_l.cur"
                                 }
                             ]
                         }
@@ -5750,62 +5739,6 @@
                                             },
                                             "noMatch": {
                                                 "outputValue": "%SystemRoot%\\cursors\\pen_l.cur"
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "Scheme Source": {
-                        "transform": {
-                            "type": "fluid.transforms.quantize",
-                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
-                            "ranges": [
-                                {
-                                    "upperBound": 0.333,
-                                    "output": {
-                                        "transform": {
-                                            "type": "fluid.transforms.valueMapper",
-                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
-                                            "match": {
-                                                "White": 0,
-                                                "Black": 2,
-                                                "ReverseBlack": 2
-                                            },
-                                            "noMatch": {
-                                                "outputValue": 0
-                                            }
-                                        }
-                                    }
-                                }, {
-                                    "upperBound": 0.666,
-                                    "output": {
-                                        "transform": {
-                                            "type": "fluid.transforms.valueMapper",
-                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
-                                            "match": {
-                                                "White": 0,
-                                                "Black": 2,
-                                                "ReverseBlack": 2
-                                            },
-                                            "noMatch": {
-                                                "outputValue": 0
-                                            }
-                                        }
-                                    }
-                                }, {
-                                    "output": {
-                                        "transform": {
-                                            "type": "fluid.transforms.valueMapper",
-                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
-                                            "match": {
-                                                "White": 0,
-                                                "Black": 2,
-                                                "ReverseBlack": 2
-                                            },
-                                            "noMatch": {
-                                                "outputValue": 0
                                             }
                                         }
                                     }
@@ -6301,12 +6234,13 @@
                         "name": "FILTERKEYS"
                     }
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "FilterKeysEnable": {
                         "schema": {
                             "title": "Filter keys",
                             "description": "Enable/Disable filter keys",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": { "type":  "string", "required": true},
                                 "value": {
@@ -6321,7 +6255,7 @@
                         "schema": {
                             "title": "Slow keys interval",
                             "description": "Slow keys interval time in milliseconds",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": { "type":  "string", "required": true},
                                 "value": {
@@ -6331,26 +6265,42 @@
                                 }
                             }
                         }
-                    },
-                    "BounceKeysInterval": {
-                        "schema": {
-                            "title": "Bounce keys interval",
-                            "description": "Bounce keys interval time in milliseconds",
-                            "type": "integer",
-                            "default": 0
-                        }
                     }
+                    // TODO: Reenable this once we can confirm a safe range of values that work with the SPI settings handler.
+//                    "BounceKeysInterval": {
+//                        "schema": {
+//                            "title": "Bounce keys interval",
+//                            "description": "Bounce keys interval time in milliseconds",
+//                            "type": "object",
+//                            "properties": {
+//                                "path": { "type":  "string", "required": true},
+//                                "value": {
+//                                    "required": true,
+//                                    "type": "integer",
+//                                    "default": 0
+//                                }
+//                            }
+//                        }
+//                    }
                 },
                 "capabilitiesTransformations": {
                     "FilterKeysEnable": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
-                            "left": false,
-                            "rightPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
-                            "right": false,
-                            "operator": "||",
-                            "outputPath": "value"
+                        "value": {
+                            "transform": {
+                                "type": "fluid.transforms.condition",
+                                "condition": {
+                                    "transform": {
+                                        "type": "fluid.transforms.binaryOp",
+                                        "leftPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
+                                        "left": false,
+                                        "rightPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
+                                        "right": false,
+                                        "operator": "||"
+                                    }
+                                },
+                                "true": true,
+                                "false": false
+                            }
                         },
                         "path": {
                             "transform": {
@@ -6360,18 +6310,21 @@
                         }
                     },
                     "SlowKeysInterval": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
-                            "true": {
-                                "transform": {
-                                    "type": "fluid.transforms.linearScale",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/slowKeysInterval",
-                                    "factor": 1000
-                                }
-                            },
-                            "false": 0,
-                            "outputPath": "value"
+                        "value": {
+                            "transform": {
+                                "type": "fluid.transforms.condition",
+                                "condition": false, // If there's no setting, make sure it's counted as false.
+                                "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
+                                "true": {
+                                    "transform": {
+                                        "type": "fluid.transforms.linearScale",
+                                        "input": 0.5, // The default if there is now slow key interval set.
+                                        "inputPath": "http://registry\\.gpii\\.net/common/slowKeysInterval",
+                                        "factor": 1000
+                                    }
+                                },
+                                "false": 0
+                            }
                         },
                         "path": {
                             "transform": {
@@ -6379,44 +6332,34 @@
                                 "input": "pvParam.iWaitMSec"
                             }
                         }
-                    },
-                    "BounceKeysInterval": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
-                                    "left": false,
-                                    "right": false,
-                                    "operator": "==="
-                                }
-                            },
-                            "true": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
-                                    "true": {
-                                        "transform": {
-                                            "type": "fluid.transforms.linearScale",
-                                            "inputPath": "http://registry\\.gpii\\.net/common/debounceInterval",
-                                            "factor": 1000
-                                        }
-                                    },
-                                    "false": 0,
-                                    "outputPath": "value"
-                                }
-                            },
-                            "false": 0,
-                            "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iBounceMSec"
-                            }
-                        }
                     }
+                    // TODO: Reenable this once we can confirm a safe range of values that work with the SPI settings handler.
+//                    "BounceKeysInterval": {
+//                        "value": {
+//                            "transform": {
+//                                "type": "fluid.transforms.condition",
+//                                "condition": false, // If there's no setting, make sure it's counted as false.
+//                                "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
+//                                // If close keys is enabled, bounce keys should be disabled.
+//                                "true": 0,
+//                                "false": {
+//                                    "transform": {
+//                                        "type": "fluid.transforms.condition",
+//                                        "condition": false, // If there's no setting, make sure it's counted as false.
+//                                        "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
+//                                        "true": 1000,
+//                                        "false": 0
+//                                    }
+//                                }
+//                            }
+//                        },
+//                        "path": {
+//                            "transform": {
+//                                "type": "fluid.transforms.literalValue",
+//                                "input": "pvParam.iBounceMSec"
+//                            }
+//                        }
+//                    }
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/slowKeys/enabled": {
@@ -6460,6 +6403,7 @@
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
                                     "leftPath": "BounceKeysInterval.value",
+                                    "left": 0,
                                     "right": 0,
                                     "operator": ">"
                                 }
@@ -6474,6 +6418,7 @@
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
                                     "leftPath": "BounceKeysInterval.value",
+                                    "left": 0,
                                     "right": 0,
                                     "operator": ">"
                                 }
@@ -6519,12 +6464,13 @@
                         "name": "HIGHCONTRAST"
                     }
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "HighContrastOn": {
                         "schema": {
                             "title": "High Contrast",
                             "description": "Whether to enable/disable High Contrast",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": { "type":  "string", "required": true},
                                 "value": {
@@ -6543,29 +6489,30 @@
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
                         // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "left": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
-                                    "left": false,
-                                    "operator": "||",
-                                    "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                                    "right": false
+                        "value": {
+                            "transform": {
+                                "type": "fluid.transforms.binaryOp",
+                                "left": {
+                                    "transform": {
+                                        "type": "fluid.transforms.binaryOp",
+                                        "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                                        "left": false,
+                                        "operator": "||",
+                                        "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                        "right": false
+                                    }
+                                },
+                                "operator": "&&",
+                                "right": {
+                                    "transform": {
+                                        "type": "fluid.transforms.binaryOp",
+                                        "left": "",
+                                        "leftPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                        "operator": "!==",
+                                        "right": "regular-contrast"
+                                    }
                                 }
-                            },
-                            "operator": "&&",
-                            "right": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "left": "",
-                                    "leftPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                                    "operator": "!==",
-                                    "right": "regular-contrast"
-                                }
-                            },
-                            "outputPath": "value"
+                            }
                         },
                         "path": {
                             "transform": {
@@ -6630,14 +6577,14 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
                             "match": {
-                                "black-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcwhite.theme",
-                                "white-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcblack.theme",
-                                "yellow-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc1.theme",
-                                "black-yellow": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\blackOnYellow.theme",
-                                "lime-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc2.theme",
-                                "black-brown": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\blackOnBrown.theme",
-                                "grey-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
-                                "grey-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnWhite.theme"
+                                "black-white": "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
+                                "white-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
+                                "yellow-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
+                                "black-yellow": "%SystemRoot%\\resources\\Ease of Access Themes\\blackOnYellow.theme",
+                                "lime-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hc2.theme",
+                                "black-brown": "%SystemRoot%\\resources\\Ease of Access Themes\\blackOnBrown.theme",
+                                "grey-black": "%SystemRoot%\\resources\\Ease of Access Themes\\grayOnDark.theme",
+                                "grey-white": "%SystemRoot%\\resources\\Ease of Access Themes\\grayOnWhite.theme"
                             }
                         }
                     }
@@ -6749,25 +6696,39 @@
                         "schema": {
                             "title": "Video audio description",
                             "description": "Hear descriptions of what's happening in videos",
-                            "default": 0,
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ]
+                            "type": "object",
+                            "properties": {
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                "value": {
+                                    "default": 0,
+                                    "enum": [
+                                        0,
+                                        1
+                                    ],
+                                    "enumLabels": [
+                                        "off",
+                                        "on"
+                                    ]
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "AudioDescriptionOn": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.audioDescription.AudioDescriptionEnabled",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.audioDescription.AudioDescriptionEnabled",
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
@@ -6814,34 +6775,48 @@
                         "schema": {
                             "title": "Notification duration",
                             "description": "Changes the time system notifications are displayed",
-                            "type": "number",
-                            "default": 5,
-                            "enum": [
-                                5,
-                                7,
-                                15,
-                                30,
-                                60,
-                                300
-                            ],
-                            "enumLabels": [
-                                "5s",
-                                "7s",
-                                "15s",
-                                "30s",
-                                "60s",
-                                "300s"
-                            ]
+                            "type": "object",
+                            properties: {
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                "value": {
+                                    "type": "number",
+                                    "default": 5,
+                                    "enum": [
+                                        5,
+                                        7,
+                                        15,
+                                        30,
+                                        60,
+                                        300
+                                    ],
+                                    "enumLabels": [
+                                        "5s",
+                                        "7s",
+                                        "15s",
+                                        "30s",
+                                        "60s",
+                                        "300s"
+                                    ]
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "Duration": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.notificationDuration.NotificationDuration",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.notificationDuration.NotificationDuration",
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
@@ -6886,12 +6861,12 @@
                     "http://registry\\.gpii\\.net/common/language"
                 ],
                 "capabilitiesTransformations": {
-                    "MachinePreferredUILanguages": [{
+                    "MachinePreferredUILanguages": {
                         "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/language"
                         }
-                    }]
+                    }
                 },
                 "supportedSettings": {
                     "MachinePreferredUILanguages": {
@@ -6917,12 +6892,7 @@
                     "http://registry\\.gpii\\.net/common/language"
                 ],
                 "capabilitiesTransformations": {
-                    "PreferredUILanguages": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/language"
-                        }
-                    }
+                    "PreferredUILanguages": "http://registry\\.gpii\\.net/common/language"
                 },
                 "supportedSettings": {
                     "PreferredUILanguages": {
@@ -6960,7 +6930,10 @@
                         "schema": {
                             "title": "Language",
                             "description": "Language.",
-                            "type": "string"
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
                         }
                     }
                 }
@@ -7018,18 +6991,33 @@
                         "schema": {
                             "title": "ToggleKeys accesibility feature",
                             "description": "Enable/Disable ToggleKeys feature",
-                            "type": "boolean",
-                            "default": false
+                            "type": "object",
+                            "properties": {
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "required": true
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "ToggleKeysOn": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/toggleKeys",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/common/toggleKeys",
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
@@ -7076,17 +7064,38 @@
                         "schema": {
                             "title": "Enable/Disable underlaying menu shortcuts",
                             "description": "Displays a underline showing which is the shortcut to active a menu item",
-                            "type": "boolean",
-                            "default": false
+                            "type": "object",
+                            "properties": {
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                "value": {
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"]
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "UnderlineMenuShortcutsOn": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled",
-                            "outputPath": "value"
+                        "value": {
+                            "transform": {
+                                "type": "fluid.transforms.condition",
+                                "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled",
+                                "true": 1,
+                                "false": 0
+                            }
                         },
                         "path": {
                             "transform": {
@@ -7116,18 +7125,32 @@
                         "schema": {
                             "title": "Keyboard as preferred input method",
                             "description": "Set the keyboard as the preferred input method",
-                            "type": "boolean",
-                            "default": false
+                            "type": "object",
+                            "properties": {
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "KeyboardPreferenceOn": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.KeyboardPrefEnabled",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.KeyboardPrefEnabled",
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
@@ -7184,17 +7207,18 @@
                         "schema": {
                             "title": "Shortcut warning messages",
                             "description": "Enable/Disable warning messages when changing a setting with a shortcut",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0,1],
+                            "enumLabels": ["Off", "On"]
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "Warning Sounds": {
                         "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled",
-                            "outputPath": "value"
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled",
+                            "true": 1,
+                            "false": 0
                         }
                     }
                 },
@@ -7235,8 +7259,9 @@
                         "schema": {
                             "title": "Shortcut warning sounds",
                             "description": "Enable/Disable warning sounds when changing a setting with a shortcut",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [0,1],
+                            "enumLabels": ["Off", "On"],
+                            "default": 0
                         }
                     }
                 },
@@ -7358,7 +7383,6 @@
                         "schema": {
                             "title": "Magnifier position",
                             "description": "Position of the magnified area",
-                            "type": "number",
                             "default": 2,
                             "enum": [
                                 1,
@@ -7528,33 +7552,35 @@
                         "schema": {
                             "title": "Auto Start Magnifier",
                             "description": "Start Magnifier after sign-in.",
-                            "type": "boolean",
-                            "default": false
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     },
                     "SystemSettings_Accessibility_Magnifier_IsAutoStartOnLogonDesktopEnabled": {
                         "schema": {
                             "title": "Auto Start Magnifier for everyone",
                             "description": "Start Magnifier before sign-in.",
-                            "type": "boolean",
-                            "default": false
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "SystemSettings_Accessibility_Magnifier_IsAutoStartEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableAutoStart",
-                            "outputPath": "value"
-                        }
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableAutoStart"
                     },
                     "SystemSettings_Accessibility_Magnifier_IsAutoStartOnLogonDesktopEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableSystemAutoStart",
-                            "outputPath": "value"
-                        }
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableSystemAutoStart"
                     }
                 },
                 "inverseCapabilitiesTransformations": {
@@ -7618,12 +7644,13 @@
                         "name": "MOUSEKEYS"
                     }
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "MouseKeysOn": {
                         "schema": {
                             "title": "Mouse keys",
                             "description": "Enable/Disable mouse keys",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
                                 "path": { "type":  "string", "required": true},
                                 "value": {
@@ -7638,28 +7665,37 @@
                         "schema": {
                             "title": "Mouse keys speed",
                             "description": "Speed of mouse keys",
-                            "type": "number",
-                            "multipleOf": 10
+                            "type": "object",
+                            "properties": {
+                                "path": { "type":  "string"},
+                                "value": {
+                                    "type": "number",
+                                    "minimum": 10,
+                                    "maximum": 360
+                                }
+                            }
                         }
                     },
                     "Acceleration": {
                         "schema": {
                             "title": "Mouse keys acceleration",
                             "description": "Acceleration of mouse keys",
-                            "type": "number",
-                            "minimum": -1000,
-                            // TODO: Not clear how to describe this setting
-                            "maximum": 1000
+                            "type": "object",
+                            "properties": {
+                                "path": { "type":  "string"},
+                                "value": {
+                                    "type": "number",
+                                    "minimum": -1000,
+                                    // TODO: Not clear how to describe this setting
+                                    "maximum": 1000
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "MouseKeysOn": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulation/enabled",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/common/mouseEmulation/enabled",
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
@@ -7668,51 +7704,23 @@
                         }
                     },
                     "MaxSpeed": {
-                        "transform": {
-                            "type": "fluid.transforms.round",
-                            "input": {
-                                "transform": {
-                                    "type": "fluid.transforms.linearScale",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/cursorSpeed",
-                                    "factor": 350,
-                                    "offset": 10
+                        "value": {
+                            "transform": {
+                                "type": "fluid.transforms.round",
+                                "input": {
+                                    "transform": {
+                                        "type": "fluid.transforms.linearScale",
+                                        "inputPath": "http://registry\\.gpii\\.net/common/cursorSpeed",
+                                        "factor": 350,
+                                        "offset": 10
+                                    }
                                 }
-                            },
-                            "outputPath": "value"
+                            }
                         },
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
                                 "input": "pvParam.iMaxSpeed"
-                            }
-                        }
-                    },
-                    "Acceleration": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "left": {
-                                "transform": {
-                                    "type": "fluid.transforms.linearScale",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/initDelay",
-                                    "factor": 1000,
-                                    "outputPath": "value"
-                                }
-                            },
-                            "right": {
-                                "transform": {
-                                    "type": "fluid.transforms.linearScale",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/cursorAcceleration",
-                                    "factor": 1000,
-                                    "offset": 1000,
-                                    "outputPath": "value"
-                                }
-                            },
-                            "operator": "+"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iTimeToMaxSpeed"
                             }
                         }
                     }
@@ -7759,24 +7767,32 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "SwapMouseButtonsConfig": {
                         "schema": {
                             "title": "Swap mouse primary button",
                             "description": "Swap mouse left/right buttons",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                // This one is already in use in the QSS and can't be booleanised yet.
                                 "value": {
                                     "required": true,
-                                    "enum": [
-                                        0,
-                                        1
-                                    ],
-                                    "enumLabels": [
-                                        "off",
-                                        "on"
-                                    ],
+                                    "enum": [0,1],
+                                    "enumLabels": ["Off", "On"],
                                     "default": 0
                                 }
                             }
@@ -7785,11 +7801,7 @@
                 },
                 "capabilitiesTransformations": {
                     "SwapMouseButtonsConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SwapMouseButtons",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SwapMouseButtons",
                         "path": {
                             "literalValue": {
                                 "get": "pvParam",
@@ -7814,14 +7826,27 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "ScrollWheelModeConfig": {
                         "schema": {
                             "title": "Mouse scroll wheel mode",
                             "description": "Changes the number of lines to scroll when moving the scrollwheel.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
                                     "default": 3,
@@ -7845,11 +7870,7 @@
                 },
                 "capabilitiesTransformations": {
                     "ScrollWheelModeConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
                         "path": {
                             "literalValue": {
                                 "get": "pvParam",
@@ -7874,14 +7895,27 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "ScrollFocusRoutingConfig": {
                         "schema": {
                             "title": "Mouse scroll focus routing",
                             "description": "Changes the way mouse scrolling is passed to applications.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
                                     "enum": [0, 1],
@@ -7893,11 +7927,7 @@
                 },
                 "capabilitiesTransformations": {
                     "ScrollFocusRoutingConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting",
                         "path": {
                             "literalValue": "pvParam"
                         }
@@ -7919,14 +7949,27 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "MouseCursorShadowEnable": {
                         "schema": {
                             "title": "Mouse cursor shadow",
                             "description": "Enables or disables mouse cursor shadow.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -7938,11 +7981,7 @@
                 },
                 "capabilitiesTransformations": {
                     "MouseCursorShadowEnable": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow",
                         "path": {
                             "literalValue": "pvParam"
                         }
@@ -7964,14 +8003,27 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "ScrollCharsConfig": {
                         "schema": {
                             "title": "Mouse wheel horizontal scroll",
                             "description": "Changes the number of chars that are scrolled horizontally.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
                                     "type": "integer",
@@ -7985,11 +8037,7 @@
                 },
                 "capabilitiesTransformations": {
                     "ScrollCharsConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollChars",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollChars",
                         "path": {
                             "literalValue": {
                                 "get": "pvParam",
@@ -8014,19 +8062,31 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "WindowsTrackingConfig": {
                         "schema": {
                             "title": "Mouse Windows tracking",
                             "description": "Windows are focused when mouse is stopped over them.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
-                                    "enum": [0, 1],
-                                    "enumLabels": ["Off", "On"],
-                                    "default": 0
+                                    "type": "boolean",
+                                    "default": false
                                 }
                             }
                         }
@@ -8034,11 +8094,7 @@
                 },
                 "capabilitiesTransformations": {
                     "WindowsTrackingConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled",
                         "path": {
                             "literalValue": "pvParam"
                         }
@@ -8060,19 +8116,31 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "ActiveZOrder": {
                         "schema": {
                             "title": "Windows Tracking",
                             "description": "Windows receive focus when mouse hovers over them.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
-                                    "enum": [0, 1],
-                                    "enumLabels": ["Off", "On"],
-                                    "default": 0
+                                    "type": "boolean",
+                                    "default": false
                                 }
                             }
                         }
@@ -8080,11 +8148,7 @@
                 },
                 "capabilitiesTransformations": {
                     "ActiveZOrder": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled",
                         "path": {
                             "literalValue": "pvParam"
                         }
@@ -8106,19 +8170,31 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "WindowsArrangement": {
                         "schema": {
                             "title": "Configures Window arrangement",
                             "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
-                                    "enum": [0, 1],
-                                    "enumLabels": ["Off", "On"],
-                                    "default": 1
+                                    "type": "boolean",
+                                    "default": true
                                 }
                             }
                         }
@@ -8126,12 +8202,8 @@
                 },
                 "capabilitiesTransformations": {
                     "WindowsArrangement": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.AutoWinArrangement",
-                            "outputPath": "value"
-                        },
-                        "path": {
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.AutoWinArrangement",
+                       "path": {
                             "literalValue": {
                                 "get": "pvParam",
                                 "set": "uiParam"
@@ -8154,20 +8226,21 @@
                         "schema": {
                             "title": "Double click time",
                             "description": "Changes the amount of time that can elapse between a first click and a second click for the OS to consider the mouse action a double-click.",
-                            "type": "integer",
-                            "default": 500,
-                            "minimum": 500,
-                            "maximum": 5000
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "integer",
+                                    "default": 500,
+                                    "minimum": 500,
+                                    "maximum": 5000
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "DoubleClickTimeConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickTime",
-                            "outputPath": "value"
-                        }
+                        value: "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickTime"
                     }
                 },
                 "inverseCapabilitiesTransformations": {
@@ -8186,14 +8259,27 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "PointerSpeedConfig": {
                         "schema": {
                             "title": "Configures pointer speed",
                             "description": "Selects a pointer speed.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
                                     "type": "integer",
@@ -8207,11 +8293,7 @@
                 },
                 "capabilitiesTransformations": {
                     "PointerSpeedConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.PointerSpeed",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.PointerSpeed",
                         "path": {
                             "literalValue": "pvParam"
                         }
@@ -8235,19 +8317,31 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "EnhancePrecisionConfig": {
                         "schema": {
                             "title": "Enhance pointer precision",
                             "description": "Enable/Disables enhanced pointer precision.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
-                                    "enum": [0, 1],
-                                    "enumLabels": ["Off", "On"],
-                                    "default": 1
+                                    "type": "boolean",
+                                    "default": true
                                 }
                             }
                         }
@@ -8255,13 +8349,14 @@
                 },
                 "capabilitiesTransformations": {
                     "EnhancePrecisionConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnhancePrecision",
-                            "condition": true,
-                            "outputPath": "value",
-                            "true": [6, 10, 1],
-                            "false": [0, 0, 1]
+                        "value": {
+                            "transform": {
+                                "type": "fluid.transforms.condition",
+                                "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnhancePrecision",
+                                "condition": true,
+                                "true": [6, 10, 1],
+                                "false": [0, 0, 1]
+                            }
                         },
                         "path": {
                             "literalValue": "pvParam"
@@ -8284,19 +8379,31 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "SnapToDefaultButtonConfig": {
                         "schema": {
                             "title": "Snap To",
                             "description": "Automatically move pointer to the default button in a dialogue.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
-                                    "enum": [0, 1],
-                                    "enumLabels": ["Off", "On"],
-                                    "default": 0
+                                    "type": "boolean",
+                                    "default": false
                                 }
                             }
                         }
@@ -8304,11 +8411,7 @@
                 },
                 "capabilitiesTransformations": {
                     "SnapToDefaultButtonConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SnapToDefaultButton",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SnapToDefaultButton",
                         "path": {
                             "literalValue": {
                                 "get": "pvParam",
@@ -8333,19 +8436,31 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "HidePointerConfig": {
                         "schema": {
                             "title": "Hide pointer while typing",
                             "description": "Enable/Disables hiding the pointer while typing.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
-                                    "enum": [0, 1],
-                                    "enumLabels": ["Off", "On"],
-                                    "default": 1
+                                    "type": "boolean",
+                                    "default": true
                                 }
                             }
                         }
@@ -8353,11 +8468,7 @@
                 },
                 "capabilitiesTransformations": {
                     "HidePointerConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.HidePointer",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.HidePointer",
                         "path": {
                             "literalValue": "pvParam"
                         }
@@ -8379,19 +8490,31 @@
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "MouseSonarConfig": {
                         "schema": {
                             "title": "Mouse sonar",
                             "description": "Enable/Disable showing mouse location when pressing the CTRL key.",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
-                                    "enum": [0, 1],
-                                    "enumLabels": ["Off", "On"],
-                                    "default": 0
+                                    "type": "boolean",
+                                    "default": false
                                 }
                             }
                         }
@@ -8399,11 +8522,7 @@
                 },
                 "capabilitiesTransformations": {
                     "MouseSonarConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseSonar",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseSonar",
                         "path": {
                             "literalValue": "pvParam"
                         }
@@ -8425,22 +8544,23 @@
                         "schema": {
                             "title": "Double-click rectangle width",
                             "description": "Changes the width of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
-                            "type": "integer",
-                            "default": 4,
-                            "minimum": 1,
-                            "maximum": 64,
-                            "multipleOf": 1
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "integer",
+                                    "default": 4,
+                                    "minimum": 1,
+                                    "maximum": 64,
+                                    "multipleOf": 1
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "DoubleClickWidthConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickWidth",
-                            "outputPath": "value"
-                        }
-                    }
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickWidth"
+                   }
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickWidth": "DoubleClickWidthConfig.value"
@@ -8458,21 +8578,22 @@
                         "schema": {
                             "title": "Double-click rectangle height",
                             "description": "Changes the height of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
-                            "type": "integer",
-                            "default": 4,
-                            "minimum": 1,
-                            "maximum": 64,
-                            "multipleOf": 1
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "integer",
+                                    "default": 4,
+                                    "minimum": 1,
+                                    "maximum": 64,
+                                    "multipleOf": 1
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "DoubleClickHeightConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickHeight",
-                            "outputPath": "value"
-                        }
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickHeight"
                     }
                 },
                 "inverseCapabilitiesTransformations": {
@@ -8508,20 +8629,34 @@
                         "type": "UINT"
                     }
                 },
+                // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                 "supportedSettings": {
                     "MouseTrails": {
                         "schema": {
                             // Exactly the same schema as mouseTrailing common term
                             "title": "Mouse trails",
                             "description": "Amount of mouse trailing",
-                            // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": {
                                     "required": true,
                                     "type": "integer",
                                     "minimum": 0,
-                                    "maximum": 10
+                                    "maximum": 10,
+                                    "default": 0
                                 }
                             }
                         }
@@ -8529,11 +8664,7 @@
                 },
                 "capabilitiesTransformations": {
                     "MouseTrails": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/mouseTrailing",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/common/mouseTrailing",
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
@@ -8755,8 +8886,7 @@
                                                 "transform": {
                                                     "type": "fluid.transforms.linearScale",
                                                     "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "factor": 0.1,
-                                                    "offset": -5
+                                                    "factor": 0.066666666666667
                                                 }
                                             }
                                         },
@@ -8767,7 +8897,7 @@
                                                     "type": "fluid.transforms.linearScale",
                                                     "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
                                                     "factor": 0.033333333333,
-                                                    "offset": -5
+                                                    "offset": 5
                                                 }
                                             }
                                         },
@@ -9038,57 +9168,32 @@
                 },
                 "capabilitiesTransformations": {
                     "SpeechVolume": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100,
-                            "offset": 0
+                        // The common term is 0->1, we're 0.01->1
+                        transform: {
+                            type: "fluid.transforms.binaryOp",
+                            left: 0.01,
+                            right: {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "right": 0.99,
+                                    "operator": "*"
+                                }
+                            }
                         }
                     },
-                    "ShowKeyboardIntroduction": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "false": 0,
-                            "true": 1,
-                            "conditionPath": "http://registry\\.gpii\\.net/common/speakTutorialMessages"
-                        }
-                    },
+                    "ShowKeyboardIntroduction": "http://registry\\.gpii\\.net/common/speakTutorialMessages",
                     "ShowBrowserSelection": {
                         "transform": {
                             "type": "fluid.transforms.literalValue",
-                            "input": 0
+                            "input": false
                         }
                     },
-                    "ContextVerbosityLevel": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ControlContextVerbosity"
-                        }
-                    },
-                    "RenderContextBeforeElement": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ReadContextBeforeControls"
-                        }
-                    },
-                    "DuckAudio": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.LowerAppsVolume"
-                        }
-                    },
-                    "WinEnterLaunchEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.StartWithShortcut"
-                        }
-                    },
-                    "VerbosityLevel": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.TextVerbosityLevel"
-                        }
-                    }
+                    "ContextVerbosityLevel": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ControlContextVerbosity",
+                    "RenderContextBeforeElement": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ReadContextBeforeControls",
+                    "DuckAudio": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.LowerAppsVolume",
+                    "WinEnterLaunchEnabled": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.StartWithShortcut",
+                    "VerbosityLevel": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.TextVerbosityLevel"
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ControlContextVerbosity": "ContextVerbosityLevel",
@@ -9111,35 +9216,37 @@
                         "schema": {
                             "title": "Auto Start Narrator",
                             "description": "Start Narrator after sign-in.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"],
-                            "default": 0
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 0
+                                }
+                            }
                         }
                     },
                     "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
                         "schema": {
                             "title": "Auto Start Narrator for everyone",
                             "description": "Start Narrator before sign-in.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"],
-                            "default": 0
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"],
+                                    "default": 0
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.EnableAutoStart",
-                            "outputPath": "value"
-                        }
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.EnableAutoStart"
                     },
                     "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.EnableSystemAutoStart",
-                            "outputPath": "value"
-                        }
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.EnableSystemAutoStart"
                     }
                 },
                 "inverseCapabilitiesTransformations": {
@@ -9192,11 +9299,7 @@
                 ],
                 "capabilitiesTransformations": {
                     "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/nightScreen",
-                            "outputPath": "value"
-                        }
+                        "value": "http://registry\\.gpii\\.net/common/nightScreen"
                     }
                 },
                 "supportedSettings": {
@@ -9204,14 +9307,15 @@
                         "schema": {
                             "title": "Night Screen",
                             "description": "Reduce the blue emitted from the screen.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"],
-                            "default": 0
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
                         }
                     }
-                },
-                "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/nightScreen": "SystemSettings_Display_BlueLight_ManualToggleQuickAction.value"
                 }
             }
         },
@@ -9479,36 +9583,11 @@
                     "NavigationMode": {
                         "literalValue": 0
                     },
-                    "ShowClearKeyboard": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.ShowPositionKeys"
-                        }
-                    },
-                    "Mode": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.KeyPressMode"
-                        }
-                    },
-                    "UseDevice": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseDeviceForScan"
-                        }
-                    },
-                    "UseKB": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseKBForScan"
-                        }
-                    },
-                    "UseMouse": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseMouseForScan"
-                        }
-                    }
+                    "ShowClearKeyboard": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.ShowPositionKeys",
+                    "Mode": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.KeyPressMode",
+                    "UseDevice": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseDeviceForScan",
+                    "UseKB": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseKBForScan",
+                    "UseMouse": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseMouseForScan"
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.ShowPositionKeys": "ShowClearKeyboard",
@@ -9566,7 +9645,34 @@
                     }
                 },
                 "capabilitiesTransformations": {
-                    "screen-dpi": "http://registry\\.gpii\\.net/common/DPIScale"
+                    // The common term goes from -2 to 4, our setting goes from 1 to 5, so we add 3 and multiply by 5/7
+                    "screen-dpi": {
+                        transform: {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                transform: {
+                                    type: "fluid.transforms.binaryOp",
+                                    left: {
+                                        transform: {
+                                            type: "fluid.transforms.binaryOp",
+                                            left: 5,
+                                            right: 7,
+                                            operator: "/"
+                                        }
+                                    },
+                                    right: {
+                                        transform: {
+                                            type: "fluid.transforms.binaryOp",
+                                            leftPath: "http://registry\\.gpii\\.net/common/DPIScale",
+                                            right: 3,
+                                            operator: "+"
+                                        }
+                                    },
+                                    operator: "*"
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -9595,13 +9701,17 @@
                         "schema": {
                             "title": "Screen resolution",
                             "description": "Screen resolution of the default display.",
-                            "type": "array"
-                            // TODO: Discuss and fix this.
-                            // TODO: Not sure about this type
-                            // TODO: This must be filled in on the fly with available screen resolutions
-                            //"items": {
-                            //    "enum": []
-                            //}
+                            "type": "object",
+                            // Although in other contexts we've accepted an array, the windows display settings handler
+                            // throws a hard fail unless this is an object. See:
+                            //
+                            // https://github.com/GPII/windows/blob/97953e9b2f19fa0524d5c667291e4e3e6641fb9f/gpii/node_modules/displaySettingsHandler/src/displaySettingsHandler.js#L223
+                            //
+                            "properties": {
+                                "width": { type:  "integer", required:  true },
+                                "height": { type:  "integer", required:  true },
+                                "additionalProperties": false
+                            }
                         }
                     }
                 }
@@ -9636,14 +9746,27 @@
                         "name": "STICKYKEYS"
                     }
                 },
+                // TODO: Make a general pattern for SPI settings.
                 "supportedSettings": {
                     "StickyKeysOn": {
-                        // TODO: Make a general pattern for SPI settings.
                         schema: {
                             "title": "Sticky Keys On",
                             "description": "Whether or not sticky keys should be turned on.",
+                            "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required":  true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": { "type":  "boolean", "required":  true}
                             }
                         }
@@ -9651,11 +9774,7 @@
                 },
                 "capabilitiesTransformations": {
                     "StickyKeysOn": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/stickyKeys",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/common/stickyKeys",
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
@@ -9696,11 +9815,7 @@
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "SystemSettings_Input_Touch_SetActivationTimeout": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchPadSettings.Sensitivity",
-                            "outputPath": "value"
-                        }
+                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchPadSettings.Sensitivity"
                     }
                 },
                 "supportedSettings": {
@@ -9708,19 +9823,25 @@
                         "schema": {
                             "title": "Touchpad sensitivity",
                             "description": "Changes Windows 10 precision touchpad sensitivity.",
-                            "default": "Medium sensitivity",
-                            "enum": [
-                                "Low sensitivity",
-                                "Medium sensitivity",
-                                "High sensitivity",
-                                "Most sensitive"
-                            ],
-                            "enumLabels": [
-                                "Low sensitivity",
-                                "Medium sensitivity",
-                                "High sensitivity",
-                                "Most sensitive"
-                            ]
+                            "type": "object",
+                            "properties": {
+                                "value": {
+
+                                    "default": "Medium sensitivity",
+                                    "enum": [
+                                        "Low sensitivity",
+                                        "Medium sensitivity",
+                                        "High sensitivity",
+                                        "Most sensitive"
+                                    ],
+                                    "enumLabels": [
+                                        "Low sensitivity",
+                                        "Medium sensitivity",
+                                        "High sensitivity",
+                                        "Most sensitive"
+                                    ]
+                                }
+                            }
                         }
                     }
                 },
@@ -9857,182 +9978,9 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/autocorrectionEnabled",
-                    "http://registry\\.gpii\\.net/common/spellCheckEnabled",
-                    "http://registry\\.gpii\\.net/common/textPredictionEnabled",
-                    "http://registry\\.gpii\\.net/common/textPredictionWithSpaceEnabled",
-                    "http://registry\\.gpii\\.net/common/doubleTabSpaceEnabled",
-                    "http://registry\\.gpii\\.net/common/keyAudioFeedbackEnabled",
-                    "http://registry\\.gpii\\.net/common/autoShiftEngageEnabled",
-                    "http://registry\\.gpii\\.net/common/shiftLockEnabled",
-                    "http://registry\\.gpii\\.net/common/compatibilityKeyboardEnabled",
-                    "http://registry\\.gpii\\.net/common/desktopModeAutoInvokeEnabled"
-                ],
-                "capabilitiesTransformations": {
-                    "EnableAutocorrection": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "false": 0,
-                            "true": 1,
-                            "conditionPath": "http://registry\\.gpii\\.net/common/autocorrectionEnabled"
-                        }
-                    },
-                    "EnableSpellchecking": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "false": 0,
-                            "true": 1,
-                            "conditionPath": "http://registry\\.gpii\\.net/common/spellCheckEnabled"
-                        }
-                    },
-                    "EnableTextPrediction": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "false": 0,
-                            "true": 1,
-                            "conditionPath": "http://registry\\.gpii\\.net/common/textPredictionEnabled"
-                        }
-                    },
-                    "EnablePredictionSpaceInsertion": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "false": 0,
-                            "true": 1,
-                            "conditionPath": "http://registry\\.gpii\\.net/common/textPredictionWithSpaceEnabled"
-                        }
-                    },
-                    "EnableDoubleTapSpace": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "false": 0,
-                            "true": 1,
-                            "conditionPath": "http://registry\\.gpii\\.net/common/doubleTabSpaceEnabled"
-                        }
-                    },
-                    "EnableKeyAudioFeedback": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "false": 0,
-                            "true": 1,
-                            "conditionPath": "http://registry\\.gpii\\.net/common/keyAudioFeedbackEnabled"
-                        }
-                    },
-                    "EnableAutoShiftEngage": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "false": 0,
-                            "true": 1,
-                            "conditionPath": "http://registry\\.gpii\\.net/common/autoShiftEngageEnabled"
-                        }
-                    },
-                    "EnableShiftLock": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "false": 0,
-                            "true": 1,
-                            "conditionPath": "http://registry\\.gpii\\.net/common/shiftLockEnabled"
-                        }
-                    },
-                    "EnableCompatibilityKeyboard": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "false": 0,
-                            "true": 1,
-                            "conditionPath": "http://registry\\.gpii\\.net/common/compatibilityKeyboardEnabled"
-                        }
-                    },
-                    "EnableDesktopModeAutoInvoke": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "false": 0,
-                            "true": 1,
-                            "conditionPath": "http://registry\\.gpii\\.net/common/desktopModeAutoInvokeEnabled"
-                        }
-                    }
-                },
-                "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/autocorrectionEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "EnableAutocorrection",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    },
-                    "http://registry\\.gpii\\.net/common/spellCheckEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "EnableSpellchecking",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    },
-                    "http://registry\\.gpii\\.net/common/textPredictionEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "EnableTextPrediction",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    },
-                    "http://registry\\.gpii\\.net/common/textPredictionWithSpaceEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "EnablePredictionSpaceInsertion",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    },
-                    "http://registry\\.gpii\\.net/common/doubleTabSpaceEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "EnableDoubleTapSpace",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    },
-                    "http://registry\\.gpii\\.net/common/keyAudioFeedbackEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "EnableKeyAudioFeedback",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    },
-                    "http://registry\\.gpii\\.net/common/autoShiftEngageEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "EnableAutoShiftEngage",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    },
-                    "http://registry\\.gpii\\.net/common/shiftLockEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "EnableShiftLock",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    },
-                    "http://registry\\.gpii\\.net/common/compatibilityKeyboardEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "EnableCompatibilityKeyboard",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    },
-                    "http://registry\\.gpii\\.net/common/desktopModeAutoInvokeEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "EnableDesktopModeAutoInvoke",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    }
-                }
+                "capabilities": [],
+                "capabilitiesTransformations": {},
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "isInstalled": [
@@ -10063,21 +10011,22 @@
                         "schema": {
                             "title": "System volume",
                             "description": "Changes the current system volume.",
-                            "type": "number",
-                            "default": 0.5,
-                            "minimum": 0,
-                            "maximum": 1,
-                            "multipleOf": 0.01
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "number",
+                                    "default": 0.5,
+                                    "minimum": 0,
+                                    "maximum": 1,
+                                    "multipleOf": 0.01
+                                }
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "Volume": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
-                            "outputPath": "value"
-                        }
+                        "value": "http://registry\\.gpii\\.net/common/volume"
                     }
                 },
                 "inverseCapabilitiesTransformations": {
@@ -10657,14 +10606,12 @@
                             "default": false
                         }
                     },
+                    // TODO: Add a sensible default.
                     "ApplicationSettings.AppBar.optToolbarBackColour.$t": {
                         "schema": {
                             "title": "Toolbar color",
-                            "description": "Changes the ammount of time for considering a click when hovering over a key",
-                            "type": "integer",
-                            "default": 1000,
-                            "minimum": 500,
-                            "maximum": 3000
+                            "description": "Changes the amount of time for considering a click when hovering over a key.",
+                            "type": "string"
                         }
                     },
                     "ApplicationSettings.AppBar.RunOnStartUp.$t": {
@@ -12466,10 +12413,10 @@
                         "schema": {
                             "title": "Font Size",
                             "description": "Adjust text size.",
-                            "type": "integer",
-                            "default": 12,
-                            "minimum": 3,
-                            "maximum": 60
+                            "type": "number",
+                            "default": 1,
+                            "minimum": 0.25,
+                            "maximum": 5
                         }
                     },
                     "inputsLargerEnabled": {
@@ -12562,7 +12509,7 @@
                             "input": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
-                                    "offset": 1,
+                                    "offset": -1,
                                     "inputPath": "http://registry\\.gpii\\.net/common/characterSpace"
                                 }
                             }
@@ -15395,11 +15342,30 @@
                     }
                 },
                 "capabilitiesTransformations": {
-                    "keyboard\\.speakTypedCharacters": "http://registry\\.gpii\\.net/common/keyEcho",
-                    "keyboard\\.speakTypedWords": "http://registry\\.gpii\\.net/common/wordEcho",
-
-                    "presentation\\.reportHelpBalloons": "http://registry\\.gpii\\.net/common/speakTutorialMessages",
-
+                    "keyboard\\.speakTypedCharacters": {
+                        transform: {
+                            type: "fluid.transforms.condition",
+                            conditionPath: "http://registry\\.gpii\\.net/common/keyEcho",
+                            "true": "True",
+                            "false": "False"
+                        }
+                    },
+                    "keyboard\\.speakTypedWords": {
+                        transform: {
+                            type: "fluid.transforms.condition",
+                            conditionPath: "http://registry\\.gpii\\.net/common/wordEcho",
+                            "true": "True",
+                            "false": "False"
+                        }
+                    },
+                    "presentation\\.reportHelpBalloons": {
+                        transform: {
+                            type: "fluid.transforms.condition",
+                            conditionPath: "http://registry\\.gpii\\.net/common/speakTutorialMessages",
+                            "true": "True",
+                            "false": "False"
+                        }
+                    },
                     "speech\\.espeak\\.pitch": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -15412,65 +15378,46 @@
                             "type": "fluid.transforms.round",
                             "input": {
                                 "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "right": 3.10,
-                                    "operator": "/",
-                                    "left": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "right": 80,
-                                            "operator": "-",
-                                            "left": {
-                                                "transform": {
-                                                    "type": "fluid.transforms.condition",
-                                                    "truePath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "false": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                            "operator": "/",
-                                                            "right": 3
-                                                        }
-                                                    },
-                                                    "condition": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                            "operator": "<=",
-                                                            "right": 390
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                    "factor": 0.1
                                 }
                             }
                         }
                     },
                     "speech\\.espeak\\.rateBoost": {
                         "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                            "operator": ">",
-                            "right": 390
+                            type: "fluid.transforms.condition",
+                            condition: {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                    "operator": ">",
+                                    "right": 390
+                                }
+                            },
+                            "true": "True",
+                            "false": "False"
                         }
                     },
-                    "speech\\.espeak\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
+                    "speech\\.espeak\\.sayCapForCapitals": {
+                        transform: {
+                            type: "fluid.transforms.condition",
+                            conditionPath: "http://registry\\.gpii\\.net/common/announceCapitals",
+                            "true": "True",
+                            "false":  "False"
+                        }
+                    },
                     // TODO: Figure out a way to reuse this material between language-supporting features.  Common term?
                     "speech\\.espeak\\.voice": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
                             "match": {
-                                "en": "en\\en",
-                                "en-GB": "en\\en",
-                                "en-US": "en\\en-us",
-                                "en-scotland": "en\\en-sc",
-                                "en-BZ": "en\\en-wi",
-                                "en-BS": "en\\en-wi",
-                                "en-AG": "en\\en-wi",
-                                "en-AI": "en\\en-wi",
+                                "en": "en-us",
+                                "en-GB": "en-gb",
+                                "en-US": "en-us",
+                                "en-scotland": "en-gb-scotland",
                                 "af": "af",
                                 "bg": "bg",
                                 "bs": "bs",
@@ -15480,7 +15427,6 @@
                                 "da": "da",
                                 "de": "de",
                                 "el": "el",
-                                "grc": "test\\grc",
                                 "eo": "eo",
                                 "es": "es",
                                 "es-419": "es-la",
@@ -15496,7 +15442,6 @@
                                 "id": "id",
                                 "is": "is",
                                 "it": "it",
-                                "jbo": "test\\jbo",
                                 "ka": "ka",
                                 "kn": "kn",
                                 "ku": "ku",
@@ -15504,10 +15449,8 @@
                                 "lv": "lv",
                                 "mk": "mk",
                                 "ml": "ml",
-                                "nci": "test\\nci",
                                 "nl": "nl",
                                 "no": "no",
-                                "pap": "test\\pap",
                                 "pl": "pl",
                                 "pt-BR": "pt",
                                 "pt-PT": "pt-pt",
@@ -15524,6 +15467,9 @@
                                 "zh-cmn": "zh",
                                 "cmn": "zh",
                                 "zh-yue": "zh-yue"
+                            },
+                            "noMatch":  {
+                                outputValue: "en-us"
                             }
                         }
                     },
@@ -15547,43 +15493,21 @@
                             "type": "fluid.transforms.round",
                             "input": {
                                 "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "right": 3.10,
-                                    "operator": "/",
-                                    "left": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "right": 80,
-                                            "operator": "-",
-                                            "left": {
-                                                "transform": {
-                                                    "type": "fluid.transforms.condition",
-                                                    "truePath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "false": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                            "operator": "/",
-                                                            "right": 3
-                                                        }
-                                                    },
-                                                    "condition": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                            "operator": "<=",
-                                                            "right": 390
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                    "factor": 0.1
                                 }
                             }
                         }
                     },
-                    "speech\\.oneCore\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
+                    "speech\\.oneCore\\.sayCapForCapitals": {
+                        transform: {
+                            type: "fluid.transforms.condition",
+                            conditionPath: "http://registry\\.gpii\\.net/common/announceCapitals",
+                            "true": "True",
+                            "false":  "False"
+                        }
+                    },
                     // TODO: "speech\\.oneCore\\.voice" cannot be updated to reflect the current language without additional research, i.e. installing all languages.
                     "speech\\.oneCore\\.volume": {
                         "transform": {
@@ -15605,43 +15529,21 @@
                             "type": "fluid.transforms.round",
                             "input": {
                                 "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "right": 3.10,
-                                    "operator": "/",
-                                    "left": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "right": 80,
-                                            "operator": "-",
-                                            "left": {
-                                                "transform": {
-                                                    "type": "fluid.transforms.condition",
-                                                    "truePath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "false": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                            "operator": "/",
-                                                            "right": 3
-                                                        }
-                                                    },
-                                                    "condition": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                            "operator": "<=",
-                                                            "right": 390
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                    "factor": 0.1
                                 }
                             }
                         }
                     },
-                    "speech\\.sapi5\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
+                    "speech\\.sapi5\\.sayCapForCapitals": {
+                        transform: {
+                            type: "fluid.transforms.condition",
+                            conditionPath: "http://registry\\.gpii\\.net/common/announceCapitals",
+                            "true": "True",
+                            "false":  "False"
+                        }
+                    },
                     // TODO: "speech\\.sapi5\\.voice" cannot be updated to reflect the current language without additional research, i.e. installing all languages.
                     "speech\\.sapi5\\.volume": {
                         "transform": {
@@ -15651,8 +15553,14 @@
                         }
                     },
 
-                    "speech\\.silence\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
-
+                    "speech\\.silence\\.sayCapForCapitals": {
+                        transform: {
+                            type: "fluid.transforms.condition",
+                            conditionPath: "http://registry\\.gpii\\.net/common/announceCapitals",
+                            "true": "True",
+                            "false":  "False"
+                        }
+                    },
                     "speech\\.symbolLevel": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -15671,8 +15579,8 @@
                             "type": "fluid.transforms.arrayToSetMembership",
                             "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
                             "outputPath": "",
-                            "presentValue": true,
-                            "missingValue": false,
+                            "presentValue": "True",
+                            "missingValue": "False",
                             "options": {
                                 "focus": "reviewCursor\\.followFocus",
                                 "caret": "reviewCursor\\.followCaret",
@@ -15828,10 +15736,8 @@
                             "defaultInputPath": "speech\\.espeak\\.voice",
                             "defaultOutputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
                             "match": {
-                                "en\\en": "en",
-                                "en\\en-us": "en-US",
-                                "en\\en-sc": "en-scotland",
-                                "en\\en-wi": "en-BZ",
+                                "en-us": "en-US",
+                                "en-gb-scotland": "en-scotland",
                                 "af": "af",
                                 "bg": "bg",
                                 "bs": "bs",
@@ -15841,7 +15747,6 @@
                                 "da": "da",
                                 "de": "de",
                                 "el": "el",
-                                "test\\grc": "grc",
                                 "eo": "eo",
                                 "es": "es",
                                 "es-la": "es-419",
@@ -15857,7 +15762,6 @@
                                 "id": "id",
                                 "is": "is",
                                 "it": "it",
-                                "test\\jbo": "jbo",
                                 "ka": "ka",
                                 "kn": "kn",
                                 "ku": "ku",
@@ -15865,11 +15769,8 @@
                                 "lv": "lv",
                                 "mk": "mk",
                                 "ml": "ml",
-                                "test\\nci": "nci",
                                 "nl": "nl",
                                 "no": "no",
-                                "test\\pap": "pap",
-                                "pl": "pl",
                                 "pt": "pt-BR",
                                 "pt-pt": "pt-PT",
                                 "ro": "ro",
@@ -16071,8 +15972,8 @@
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.tabletMode",
-                            "true": 1,
-                            "false": 0
+                            "true": 2,
+                            "false": 1
                         }
                     },
                     "OverridePointerMode": {
