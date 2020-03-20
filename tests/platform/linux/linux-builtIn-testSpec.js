@@ -310,57 +310,6 @@ gpii.tests.linux.builtIn = [
                 }]
             }
         }
-    },
-    {
-        name: "Testing os_win using default matchmaker",
-        gpiiKey: "os_win",
-        initialState: {
-            "gpii.gsettings.launch": {
-                "org.gnome.desktop.a11y.magnifier": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "key": "screen-magnifier-enabled"
-                    }
-                }]
-            }
-        },
-        settingsHandlers: {
-            "gpii.gsettings": {
-                "some.app.id": [{
-                    "settings": {
-                        "mag-factor": 1.5,
-                        "screen-position": "full-screen",
-                        "mouse-tracking": "proportional",
-                        "caret-tracking": "proportional",
-                        "focus-tracking": "none"
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.magnifier"
-                    }
-                }, {
-                    "settings": {
-                        "cursor-size": 41
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.interface"
-                    }
-                }]
-            },
-            "gpii.gsettings.launch": {
-                "org.gnome.desktop.a11y.magnifier": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "key": "screen-magnifier-enabled"
-                    }
-                }]
-            }
-        }
     }
 ];
 
@@ -469,35 +418,6 @@ gpii.tests.linux.builtInHighContrast = [
         settingsHandlers: {
             "gpii.gsettings": {
                 "org.gnome.desktop.interface": [{
-                    "settings": {
-                        "gtk-theme": "HighContrast",
-                        "icon-theme": "HighContrast"
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.interface"
-                    }
-                }]
-            }
-        }
-    }, {
-        name: "Testing os_win_highContrast using default matchmaker",
-        gpiiKey: "os_win_highContrast",
-        initialState: {
-            "gpii.gsettings.launch": {
-                "org.gnome.desktop.a11y.magnifier": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "key": "screen-magnifier-enabled"
-                    }
-                }]
-            }
-        },
-        settingsHandlers: {
-            "gpii.gsettings": {
-                "some.app.id": [{
                     "settings": {
                         "gtk-theme": "HighContrast",
                         "icon-theme": "HighContrast"

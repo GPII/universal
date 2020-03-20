@@ -64,20 +64,6 @@ gpii.tests.android.builtIn = [
         name: "Testing os_android_common using default matchmaker",
         gpiiKey: "os_android_common",
         settingsHandlers: {
-            "gpii.androidSettings": {
-                "some.app.id": [{
-                    "settings": {
-                        "dim_screen": 1,
-                        "haptic_feedback_enabled": 1,
-                        "accelerometer_rotation": 0,
-                        "user_rotation": 1,
-                        "screen_off_timeout": 15000
-                    },
-                    "options": {
-                        "settingType": "System"
-                    }
-                }]
-            },
             "gpii.androidAudioManager.volume": {
                 "some.app.id": [{
                     "settings": {
@@ -90,19 +76,6 @@ gpii.tests.android.builtIn = [
                     "settings": {
                         "fontScale": 2,
                         "locale": "en_GB"
-                    }
-                }]
-            }
-        }
-    },
-    {
-        name: "Testing os_gnome using default matchmaker",
-        gpiiKey: "os_gnome",
-        settingsHandlers: {
-            "gpii.androidPersistentConfiguration": {
-                "some.app.id": [{
-                    "settings": {
-                        "fontScale": 0.75
                     }
                 }]
             }

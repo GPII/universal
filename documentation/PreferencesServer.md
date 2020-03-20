@@ -61,12 +61,10 @@ Return payload:
                 "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
                 "http://registry.gpii.net/common/initDelay": 120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850,
-                "http://registry.gpii.net/common/cursorAcceleration": 0.800,
                 "http://registry.gpii.net/common/mouseEmulation/enabled": true,
                 "http://registry.gpii.net/common/unknown": true,
                 "http://registry.gpii.net/applications/org.alsa-project": {
-                    "volume": 14,
-                    "pitch": 100
+                    "masterVolume": 14
                 }
             }
         }
@@ -92,7 +90,6 @@ Return payload:
                     "onscreenKeyboard": true,
                     "mouseEmulation": {
                         "cursorSpeed": 0.85,
-                        "cursorAcceleration": 0.8,
                         "-provisional-initDelay": 120,
                         "-provisional-mouseEmulation/enabled": true
                     }
@@ -100,8 +97,7 @@ Return payload:
                 "applications": {
                     "org.alsa-project": {
                         "parameters": {
-                            "volume": 14,
-                            "pitch": 100
+                            "masterVolume": 14
                         }
                     }
                 }
@@ -140,12 +136,10 @@ Example POST body:
                 "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
                 "http://registry.gpii.net/common/initDelay": 120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850,
-                "http://registry.gpii.net/common/cursorAcceleration": 0.800,
                 "http://registry.gpii.net/common/mouseEmulation/enabled": true,
                 "http://registry.gpii.net/common/unknown": true,
                 "http://registry.gpii.net/applications/org.alsa-project": {
-                    "volume": 14,
-                    "pitch": 100
+                    "masterVolume": 14
                 }
             }
         }
@@ -170,12 +164,10 @@ payload would be:
                     "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
                     "http://registry.gpii.net/common/initDelay": 120,
                     "http://registry.gpii.net/common/cursorSpeed": 0.850,
-                    "http://registry.gpii.net/common/cursorAcceleration": 0.800,
                     "http://registry.gpii.net/common/mouseEmulation/enabled": true,
                     "http://registry.gpii.net/common/unknown": true,
                     "http://registry.gpii.net/applications/org.alsa-project": {
-                        "volume": 14,
-                        "pitch": 100
+                        "masterVolume": 14
                     }
                 }
             }
@@ -265,8 +257,7 @@ before the PUT request:
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/common/initDelay": 120,
-                    "http://registry.gpii.net/common/cursorSpeed": 0.850,
-                    "http://registry.gpii.net/common/cursorAcceleration": 0.800
+                    "http://registry.gpii.net/common/cursorSpeed": 0.850
                 }
             }
         }

@@ -60,3 +60,27 @@ Then start up the server by running the following command from the universal fol
 `node gpii.js`
 
 This will set up the system to run in cloud-based mode, but with everything running on the same (local) device.
+
+## Special Configs
+
+### Hide Key-in, Key-out Endpoints
+
+**Config file**: [``%flowManager/configs/gpii.flowManager.config.suppressHttpEndpoints.base.json5`](../gpii/node_modules/flowManager/configs/gpii.flowManager.config.suppressHttpEndpoints.base.json5)
+
+**Purpose**: This config is often used when starting the system in the production environment. For security reason,
+it stops exposing these key-in and key-out http endpoints: /login, /logout, /proximityTriggered.
+
+### Reset the Computer to Default Settings When the System Starts
+
+**Config file**: [``%flowManager/configs/gpii.flowManager.config.resetAtStart.base.json5`](../gpii/node_modules/flowManager/configs/gpii.flowManager.config.resetAtStart.base.json5)
+
+**Purpose**: This config resets the computer to the default settings at the system startup. See [Reset Computer](ResetComputer.md)
+for the reset API and how to use it.
+
+### Fetch Default Settings from a Remote URL
+
+**Config file**: [``%flowManager/configs/gpii.flowManager.config.remoteDefaultSettings.base.json5`](../gpii/node_modules/flowManager/configs/gpii.flowManager.config.remoteDefaultSettings.base.json5)
+
+**Purpose**: This config fetches default settings from a remote URL. The default URL is set to
+`https://raw.githubusercontent.com/GPII/universal/master/testData/defaultSettings/defaultSettings.win32.json5`
+in this config. See [Reset Computer](ResetComputer.md) for what are default settings.
