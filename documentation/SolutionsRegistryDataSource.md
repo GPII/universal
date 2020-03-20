@@ -38,15 +38,23 @@ solutions in order to respond with the solutions relevant to a particular
 client.
 
 The solutions registries are loaded from the local file system at system
-startup.  Here, "local" refers to the file system associated with machine that 
+startup.  Here, "local" refers to the file system associated with machine that
 the Cloud Base FlowManager is running on.  The SolutionsRegistryDataSource is a
 subcomponent of the flow manager, and there is a sequence of operations and
 events that occurs during its instantiation:
 
-1. `loadSolutions.loadFromLocalDisk`,
-  * The solutions registry files are loaded from the local file system,
-2. `loadSolutions.solutionsLoaded`
-  * Fires a `solutionsRegistryReady` event.
+<ol>
+<li><code>loadSolutions.loadFromLocalDisk</code>,
+  <ul>
+  <li>The solutions registry files are loaded from the local file system,</li>
+  </ul>
+</li>
+<li><code>loadSolutions.solutionsLoaded</code>
+  <ul>
+  <li>Fires a <code>solutionsRegistryReady</code> event.</li>
+  </ul>
+</li>
+</ol>
 
 The `solutionsRegistryReady` informs the flow manager that its
 SolutionsRegistryDataSource is ready to provide solutions upon request.
@@ -57,33 +65,53 @@ As in the case of the Cloud Based FlowManager, the solutions registries are
 included in the distribution of GPII for the client.  However, they are not
 updated as frequently as those in the cloud.  In particular, the solutions
 registry may be stale for the platform that the client is running on.  However,
-the registry associated with the latest version of the cloud based GPII is 
+the registry associated with the latest version of the cloud based GPII is
 available in `gpii-universal`'s source code repository (github), and can be
 downloaded from there.  In this regard, the Cloud Based FlowManager provides a
 `/revision` end-point that responds with the full `SHA256` of the revision of
 the source associated with the latest solutions registries.
 
 The SolutionsRegistryDataSource associated with the Local FlowManager uses the
-initialized following sequence of events and operations at startup:
+following sequence of events and operations at startup:
 
-1. `loadSolutions.loadFromLocalDisk`,
-  * The solutions registry files are loaded from the local file system,
-2. `loadSolutions.getRevision`,
-  * Make an http request of the Cloud Based FlowManager for the revision of the
-   source code of the GPII used by the cloud,
-3. `loadSolutions.loadFromRepository`,
-  * Make an http request of the source code respository, passing:
-    * the platform ID associated with the OS that the client is runing on, e.g.
-    "darwin",
-    * the revision fetched at the previous step,
-  * The solutions registry corresponding to the platform and revision provided is
- downloaded from the source code repository and overlays the one fetched from
- the local file system at the first step.
-4. `loadSolutions.solutionsLoaded`
- * Fires a `solutionsRegistryReady` event
+<ol>
+<li><code>loadSolutions.loadFromLocalDisk</code>,
+  <ul>
+  <li>The solutions registry files are loaded from the local file system,</li>
+  </ul>
+</li>
+<li><code>loadSolutions.getRevision</code>,
+  <ul>
+  <li>Make an http request of the Cloud Based FlowManager for the revision of
+      the source code of the GPII used by the cloud,
+  </li>
+  </ul>
+</li>
+<li><code>loadSolutions.loadFromRepository</code>,
+  <ul>
+  <li>Make an http request of the source code respository, passing:
+    <ul>
+    <li>the platform ID associated with the OS that the client is runing on,
+        e.g. "darwin",
+    </li>
+    <li>the revision fetched at the previous step,</li>
+    </ul>
+  </li>
+  <li>The solutions registry corresponding to the platform and revision provided
+      is downloaded from the source code repository and overlays the one fetched
+      from the local file system at the first step.
+  </li>
+  </ul>
+</li>
+<li><code>loadSolutions.solutionsLoaded</code>
+  <ul>
+  <li>Fires a <code>solutionsRegistryReady</code> event</li>
+  </ul>
+</li>
+</ol>
 
 The above sequence is embeded within the Local FlowManager's `flowManagerReady`
-startup interlock such that all initialition is completed before the GPII client
+startup interlock such that all initialization is completed before the GPII client
 responds to user interactions.
 
 Note that both the `getRevision` and/or the `loadFromRepository` steps could
