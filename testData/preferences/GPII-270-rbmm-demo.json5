@@ -5,11 +5,7 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/matchMakerType": "ruleBased",
-
                     "http://registry.gpii.net/common/fontSize": 24,
-                    "http://registry.gpii.net/common/foregroundColor": "white",
-                    "http://registry.gpii.net/common/backgroundColor": "black",
                     "http://registry.gpii.net/common/magnification": 2.0,
                     "http://registry.gpii.net/common/tracking": ["mouse"],
                     "http://registry.gpii.net/common/speechRate": 42,
@@ -26,9 +22,7 @@
                     "http://registry.gpii.net/common/pitch": 0.4,
                     "http://registry.gpii.net/common/volumeTTS": 0.5,
 
-                    "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
-                        HighContrastOn: true
-                    }
+                    "http://registry.gpii.net/applications/com.microsoft.windows.highContrast/enabled": true
                 }
             }
         }

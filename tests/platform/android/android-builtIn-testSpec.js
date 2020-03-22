@@ -64,20 +64,6 @@ gpii.tests.android.builtIn = [
         name: "Testing os_android_common using default matchmaker",
         gpiiKey: "os_android_common",
         settingsHandlers: {
-            "gpii.androidSettings": {
-                "some.app.id": [{
-                    "settings": {
-                        "dim_screen": 1,
-                        "haptic_feedback_enabled": 1,
-                        "accelerometer_rotation": 0,
-                        "user_rotation": 1,
-                        "screen_off_timeout": 15000
-                    },
-                    "options": {
-                        "settingType": "System"
-                    }
-                }]
-            },
             "gpii.androidAudioManager.volume": {
                 "some.app.id": [{
                     "settings": {
