@@ -1,3 +1,5 @@
+// TODO: This file will soon be deprecated, it's only still here as a merge point for onboarding pull requests already in progress.
+// Please use %solutionsRegistry/src/generated/win32.json5 instead.
 {
     "com.freedomscientific.jaws": {
         "name": "JAWS",
