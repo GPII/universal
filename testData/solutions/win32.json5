@@ -5196,8 +5196,10 @@
                     "dataTypes": {
                         "AppStarting": "REG_SZ",
                         "Arrow": "REG_SZ",
+                        "Crosshair": "REG_SZ",
                         "Hand": "REG_SZ",
                         "Help": "REG_SZ",
+                        "IBeam": "REG_SZ",
                         "No": "REG_SZ",
                         "NWPen": "REG_SZ",
                         "SizeAll": "REG_SZ",
