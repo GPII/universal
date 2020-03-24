@@ -6,16 +6,16 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/org.gnome.orca": {
                         "sayAllStyle": 1,
-                        "enableEchoByWord": true,
-                        "enableEchoByCharacter": false,
+                        "enableEchoByWord": 1,
+                        "enableEchoByCharacter": 0,
                         "voices.default.rate": 102.27272727272727,
-                        "enableTutorialMessages": false,
+                        "enableTutorialMessages": 0,
                         "voices.default.family": {
                             "locale": "en",
                             "name": "en-westindies"
                         },
                         "voices.default.average-pitch": 1.0,
-                        "voices.default.gain": 7.5,
+                        "voices.default.gain": 7,
                         "verbalizePunctuationStyle": 0
                     }
                 }
