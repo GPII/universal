@@ -41,6 +41,10 @@
                 "record": "http://localhost:8084",
                 "target": "{that cloudBasedConfig flowManager prefsServerDataSource}.options.prefsServerURL",
                 "priority": "after:flowManager.prefsServerDataSource.default"
+            },
+            "flowManager.local.revisionRequester": {
+                "record": "http://localhost",
+                "target": "{that flowManager solutionsRegistryDataSource revisionRequester}.options.cloudURL"
             }
         }
     }
