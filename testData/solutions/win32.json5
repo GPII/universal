@@ -9852,9 +9852,7 @@
                 },
                 "capabilitiesTransformations": {
                     // 8b7c8957 broke the QS.
-                    "capabilitiesTransformations": {
-                        "screen-dpi": "http://registry\\.gpii\\.net/common/DPIScale"
-                    }
+                    "screen-dpi": "http://registry\\.gpii\\.net/common/DPIScale"
                 }
             }
         },
