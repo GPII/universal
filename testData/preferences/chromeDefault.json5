@@ -7,7 +7,7 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
                         "screenReaderTTS/enabled": false,
-                        "highContrast": "none",
+                        "highContrastTheme": "none",
                         "magnification": 1,
                         "fontSize": "medium",
                         "simplifier": true

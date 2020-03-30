@@ -102,9 +102,9 @@ gpii.tests.windows.readwrite.testDefs = [
                         "settings": {
                             "ApplicationSettings.AppBar.IconSize.$t": "Small",
                             "ApplicationSettings.AppBar.ToolbarIconSet.$t": "Color",
-                            "ApplicationSettings.AppBar.ShowText.$t": "true",
+                            "ApplicationSettings.AppBar.ShowText.$t": true,
                             "ApplicationSettings.AppBar.optToolbarBackColour.$t": "#008080",
-                            "ApplicationSettings.AppBar.RunOnStartUp.$t": "false"
+                            "ApplicationSettings.AppBar.RunOnStartUp.$t": false
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\12\\RWSettings.xml",
@@ -130,9 +130,9 @@ gpii.tests.windows.readwrite.testDefs = [
                         "settings": {
                             "ApplicationSettings.AppBar.IconSize.$t": "Small",
                             "ApplicationSettings.AppBar.ToolbarIconSet.$t": "Color",
-                            "ApplicationSettings.AppBar.ShowText.$t": "true",
+                            "ApplicationSettings.AppBar.ShowText.$t": true,
                             "ApplicationSettings.AppBar.optToolbarBackColour.$t": "#008080",
-                            "ApplicationSettings.AppBar.RunOnStartUp.$t": "false"
+                            "ApplicationSettings.AppBar.RunOnStartUp.$t": false
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\12\\RWSettings.xml",
@@ -157,23 +157,23 @@ gpii.tests.windows.readwrite.testDefs = [
                     {
                         "settings": {
                             // Check It
-                            "ApplicationSettings.Spelling.OrderByContext.$t": "false",
-                            "ApplicationSettings.Spelling.SpeakSpellingOnHover.$t": "false",
-                            "ApplicationSettings.Spelling.ShowCheckIt.$t": "true",
-                            "ApplicationSettings.Spelling.RightClickMSWord.$t": "true",
+                            "ApplicationSettings.Spelling.OrderByContext.$t": false,
+                            "ApplicationSettings.Spelling.SpeakSpellingOnHover.$t": false,
+                            "ApplicationSettings.Spelling.ShowCheckIt.$t": true,
+                            "ApplicationSettings.Spelling.RightClickMSWord.$t": true,
                             // Dictionary
                             "ApplicationSettings.Dictionary.WebDictionary.$t": "Bing",
-                            "ApplicationSettings.Dictionary.PopupDictionary.$t": "true",
-                            "ApplicationSettings.Dictionary.ToggleImages.$t": "true",
+                            "ApplicationSettings.Dictionary.PopupDictionary.$t": true,
+                            "ApplicationSettings.Dictionary.ToggleImages.$t": true,
                             // Highlights
-                            "ApplicationSettings.StudySkills.CollectYellowHighlight.$t": "false",
-                            "ApplicationSettings.StudySkills.CollectBlueHighlight.$t": "true",
-                            "ApplicationSettings.StudySkills.CollectGreenHighlight.$t": "false",
-                            "ApplicationSettings.StudySkills.CollectPinkHighlight.$t": "false",
+                            "ApplicationSettings.StudySkills.CollectYellowHighlight.$t": false,
+                            "ApplicationSettings.StudySkills.CollectBlueHighlight.$t": true,
+                            "ApplicationSettings.StudySkills.CollectGreenHighlight.$t": false,
+                            "ApplicationSettings.StudySkills.CollectPinkHighlight.$t": false,
                             "ApplicationSettings.StudySkills.CollectOrder.$t": "Position",
                             "ApplicationSettings.StudySkills.ColorSeparator.$t": "Page",
                             "ApplicationSettings.StudySkills.HighlightSeparator.$t": "Tab",
-                            "ApplicationSettings.StudySkills.MultiDocHighlighting.$t": "false"
+                            "ApplicationSettings.StudySkills.MultiDocHighlighting.$t": false
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\12\\RWSettings.xml",
@@ -198,23 +198,23 @@ gpii.tests.windows.readwrite.testDefs = [
                     {
                         "settings": {
                             // Check It
-                            "ApplicationSettings.Spelling.OrderByContext.$t": "false",
-                            "ApplicationSettings.Spelling.SpeakSpellingOnHover.$t": "false",
-                            "ApplicationSettings.Spelling.ShowCheckIt.$t": "true",
-                            "ApplicationSettings.Spelling.RightClickMSWord.$t": "true",
+                            "ApplicationSettings.Spelling.OrderByContext.$t": false,
+                            "ApplicationSettings.Spelling.SpeakSpellingOnHover.$t": false,
+                            "ApplicationSettings.Spelling.ShowCheckIt.$t": true,
+                            "ApplicationSettings.Spelling.RightClickMSWord.$t": true,
                             // Dictionary
                             "ApplicationSettings.Dictionary.WebDictionary.$t": "Bing",
-                            "ApplicationSettings.Dictionary.PopupDictionary.$t": "true",
-                            "ApplicationSettings.Dictionary.ToggleImages.$t": "true",
+                            "ApplicationSettings.Dictionary.PopupDictionary.$t": true,
+                            "ApplicationSettings.Dictionary.ToggleImages.$t": true,
                             // Highlights
-                            "ApplicationSettings.StudySkills.CollectYellowHighlight.$t": "false",
-                            "ApplicationSettings.StudySkills.CollectBlueHighlight.$t": "true",
-                            "ApplicationSettings.StudySkills.CollectGreenHighlight.$t": "false",
-                            "ApplicationSettings.StudySkills.CollectPinkHighlight.$t": "false",
+                            "ApplicationSettings.StudySkills.CollectYellowHighlight.$t": false,
+                            "ApplicationSettings.StudySkills.CollectBlueHighlight.$t": true,
+                            "ApplicationSettings.StudySkills.CollectGreenHighlight.$t": false,
+                            "ApplicationSettings.StudySkills.CollectPinkHighlight.$t": false,
                             "ApplicationSettings.StudySkills.CollectOrder.$t": "Position",
                             "ApplicationSettings.StudySkills.ColorSeparator.$t": "Page",
                             "ApplicationSettings.StudySkills.HighlightSeparator.$t": "Tab",
-                            "ApplicationSettings.StudySkills.MultiDocHighlighting.$t": "false"
+                            "ApplicationSettings.StudySkills.MultiDocHighlighting.$t": false
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\12\\RWSettings.xml",
@@ -239,40 +239,40 @@ gpii.tests.windows.readwrite.testDefs = [
                     {
                         "settings": {
                             // Prediction
-                            "ApplicationSettings.Prediction.DisplayAlphabetic.$t": "true",
-                            "ApplicationSettings.Prediction.FollowCursor.$t": "true",
-                            "ApplicationSettings.Prediction.AutoHeightAdjust.$t": "true",
-                            "ApplicationSettings.Prediction.winPredictOneWordAhead.$t": "true",
-                            "ApplicationSettings.Prediction.InsertSpaceAfterPred.$t": "false",
-                            "ApplicationSettings.Prediction.UseSpellingForPredictions.$t": "false",
+                            "ApplicationSettings.Prediction.DisplayAlphabetic.$t": true,
+                            "ApplicationSettings.Prediction.FollowCursor.$t": true,
+                            "ApplicationSettings.Prediction.AutoHeightAdjust.$t": true,
+                            "ApplicationSettings.Prediction.winPredictOneWordAhead.$t": true,
+                            "ApplicationSettings.Prediction.InsertSpaceAfterPred.$t": false,
+                            "ApplicationSettings.Prediction.UseSpellingForPredictions.$t": false,
                             // Prediction Speech
-                            "ApplicationSettings.Prediction.SpeakPredictionOnMouseHover.$t": "false",
+                            "ApplicationSettings.Prediction.SpeakPredictionOnMouseHover.$t": false,
                             // This two settings are excluyent, need to encode that
-                            "ApplicationSettings.Prediction.SpeakOnWordClick.$t": "true",
-                            "ApplicationSettings.Prediction.InsertOnWordClick.$t": "false",
+                            "ApplicationSettings.Prediction.SpeakOnWordClick.$t": true,
+                            "ApplicationSettings.Prediction.InsertOnWordClick.$t": false,
                             // Prediction Learning
-                            "ApplicationSettings.Prediction.SpellCheckBeforeLearn.$t": "false",
-                            "ApplicationSettings.Prediction.AutoLearnAsType.$t": "false",
+                            "ApplicationSettings.Prediction.SpellCheckBeforeLearn.$t": false,
+                            "ApplicationSettings.Prediction.AutoLearnAsType.$t": false,
                             // Scanning
-                            "ApplicationSettings.Scanning.dpi.$t": "600",
+                            "ApplicationSettings.Scanning.dpi.$t": 600,
                             "ApplicationSettings.Scanning.colormode.$t": "GrayScale",
-                            "ApplicationSettings.Scanning.HideInterface.$t": "false",
+                            "ApplicationSettings.Scanning.HideInterface.$t": false,
                             // Device Setup (Advanced settigns)
-                            "ApplicationSettings.Scanning.Countdown.$t": "true",
-                            "ApplicationSettings.Scanning.CountdownInterval.$t": "10",
-                            "ApplicationSettings.Scanning.ADF.$t": "true",
-                            "ApplicationSettings.Scanning.Duplex.$t": "true",
+                            "ApplicationSettings.Scanning.Countdown.$t": true,
+                            "ApplicationSettings.Scanning.CountdownInterval.$t": 10,
+                            "ApplicationSettings.Scanning.ADF.$t": true,
+                            "ApplicationSettings.Scanning.Duplex.$t": true,
                             // Save Options
-                            "ApplicationSettings.Scanning.AutoSave.$t": "true",
+                            "ApplicationSettings.Scanning.AutoSave.$t": true,
                             "ApplicationSettings.Scanning.DefaultFilePath.$t": "C:\\Users\\vagrant\\Download",
                             "ApplicationSettings.Scanning.DefaultFileName.$t": "ScannedDoc",
                             // PDF Output
-                            "ApplicationSettings.Scanning.PdfTextOnly.$t": "true",
-                            "ApplicationSettings.Scanning.MSWordRetainFormat.$t": "true",
-                            "ApplicationSettings.Scanning.CoverFirstPage.$t": "false",
+                            "ApplicationSettings.Scanning.PdfTextOnly.$t": true,
+                            "ApplicationSettings.Scanning.MSWordRetainFormat.$t": true,
+                            "ApplicationSettings.Scanning.CoverFirstPage.$t": false,
                             // Output Types
-                            "ApplicationSettings.Scanning.EnableEpub.$t": "true",
-                            "ApplicationSettings.Scanning.EnableWeb.$t": "true"
+                            "ApplicationSettings.Scanning.EnableEpub.$t": true,
+                            "ApplicationSettings.Scanning.EnableWeb.$t": true
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\12\\RWSettings.xml",
@@ -297,40 +297,40 @@ gpii.tests.windows.readwrite.testDefs = [
                     {
                         "settings": {
                             // Prediction
-                            "ApplicationSettings.Prediction.DisplayAlphabetic.$t": "true",
-                            "ApplicationSettings.Prediction.FollowCursor.$t": "true",
-                            "ApplicationSettings.Prediction.AutoHeightAdjust.$t": "true",
-                            "ApplicationSettings.Prediction.winPredictOneWordAhead.$t": "true",
-                            "ApplicationSettings.Prediction.InsertSpaceAfterPred.$t": "false",
-                            "ApplicationSettings.Prediction.UseSpellingForPredictions.$t": "false",
+                            "ApplicationSettings.Prediction.DisplayAlphabetic.$t": true,
+                            "ApplicationSettings.Prediction.FollowCursor.$t": true,
+                            "ApplicationSettings.Prediction.AutoHeightAdjust.$t": true,
+                            "ApplicationSettings.Prediction.winPredictOneWordAhead.$t": true,
+                            "ApplicationSettings.Prediction.InsertSpaceAfterPred.$t": false,
+                            "ApplicationSettings.Prediction.UseSpellingForPredictions.$t": false,
                             // Prediction Speech
-                            "ApplicationSettings.Prediction.SpeakPredictionOnMouseHover.$t": "false",
+                            "ApplicationSettings.Prediction.SpeakPredictionOnMouseHover.$t": false,
                             // This two settings are excluyent, need to encode that
-                            "ApplicationSettings.Prediction.SpeakOnWordClick.$t": "true",
-                            "ApplicationSettings.Prediction.InsertOnWordClick.$t": "false",
+                            "ApplicationSettings.Prediction.SpeakOnWordClick.$t": true,
+                            "ApplicationSettings.Prediction.InsertOnWordClick.$t": false,
                             // Prediction Learning
-                            "ApplicationSettings.Prediction.SpellCheckBeforeLearn.$t": "false",
-                            "ApplicationSettings.Prediction.AutoLearnAsType.$t": "false",
+                            "ApplicationSettings.Prediction.SpellCheckBeforeLearn.$t": false,
+                            "ApplicationSettings.Prediction.AutoLearnAsType.$t": false,
                             // Scanning
-                            "ApplicationSettings.Scanning.dpi.$t": "600",
+                            "ApplicationSettings.Scanning.dpi.$t": 600,
                             "ApplicationSettings.Scanning.colormode.$t": "GrayScale",
-                            "ApplicationSettings.Scanning.HideInterface.$t": "false",
+                            "ApplicationSettings.Scanning.HideInterface.$t": false,
                             // Device Setup (Advanced settigns)
-                            "ApplicationSettings.Scanning.Countdown.$t": "true",
-                            "ApplicationSettings.Scanning.CountdownInterval.$t": "10",
-                            "ApplicationSettings.Scanning.ADF.$t": "true",
-                            "ApplicationSettings.Scanning.Duplex.$t": "true",
+                            "ApplicationSettings.Scanning.Countdown.$t": true,
+                            "ApplicationSettings.Scanning.CountdownInterval.$t": 10,
+                            "ApplicationSettings.Scanning.ADF.$t": true,
+                            "ApplicationSettings.Scanning.Duplex.$t": true,
                             // Save Options
-                            "ApplicationSettings.Scanning.AutoSave.$t": "true",
+                            "ApplicationSettings.Scanning.AutoSave.$t": true,
                             "ApplicationSettings.Scanning.DefaultFilePath.$t": "C:\\Users\\vagrant\\Download",
                             "ApplicationSettings.Scanning.DefaultFileName.$t": "ScannedDoc",
                             // PDF Output
-                            "ApplicationSettings.Scanning.PdfTextOnly.$t": "true",
-                            "ApplicationSettings.Scanning.MSWordRetainFormat.$t": "true",
-                            "ApplicationSettings.Scanning.CoverFirstPage.$t": "false",
+                            "ApplicationSettings.Scanning.PdfTextOnly.$t": true,
+                            "ApplicationSettings.Scanning.MSWordRetainFormat.$t": true,
+                            "ApplicationSettings.Scanning.CoverFirstPage.$t": false,
                             // Output Types
-                            "ApplicationSettings.Scanning.EnableEpub.$t": "true",
-                            "ApplicationSettings.Scanning.EnableWeb.$t": "true"
+                            "ApplicationSettings.Scanning.EnableEpub.$t": true,
+                            "ApplicationSettings.Scanning.EnableWeb.$t": true
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\12\\RWSettings.xml",
@@ -358,28 +358,28 @@ gpii.tests.windows.readwrite.testDefs = [
                             "ApplicationSettings.ScreenMasking.ScreenMask.$t": "UnderlineTypingLine",
                             // Screen Masking -> Tint whole screen subsettings
                             "ApplicationSettings.ScreenMasking.TintScreenColour.$t": "#a7efce",
-                            "ApplicationSettings.ScreenMasking.TintScreenOpacity.$t": "0.5",
-                            "ApplicationSettings.ScreenMasking.ReadingLight.$t": "true",
+                            "ApplicationSettings.ScreenMasking.TintScreenOpacity.$t": 0.5,
+                            "ApplicationSettings.ScreenMasking.ReadingLight.$t": true,
                             "ApplicationSettings.ScreenMasking.ReadingLightColour.$t": "#00FFFFFF",
-                            "ApplicationSettings.ScreenMasking.ReadingLightOpacity.$t": "0.5",
-                            "ApplicationSettings.ScreenMasking.ReadingLightHeight.$t": "150",
+                            "ApplicationSettings.ScreenMasking.ReadingLightOpacity.$t": 0.5,
+                            "ApplicationSettings.ScreenMasking.ReadingLightHeight.$t": 150,
                             // Screen Masking -> Underline typing line
                             "ApplicationSettings.ScreenMasking.UnderlineTypingLineColour.$t": "#a7efce",
-                            "ApplicationSettings.ScreenMasking.UnderlineTypingLineOpacity.$t": "0.3",
-                            "ApplicationSettings.ScreenMasking.UnderlineTypingLineHeight.$t": "15",
+                            "ApplicationSettings.ScreenMasking.UnderlineTypingLineOpacity.$t": 0.3,
+                            "ApplicationSettings.ScreenMasking.UnderlineTypingLineHeight.$t": 15,
                             // Screen Masking -> Tint typing line
                             "ApplicationSettings.ScreenMasking.TintTypingLineColour.$t": "#FF00FFFF",
-                            "ApplicationSettings.ScreenMasking.TintTypingLineOpacity.$t": "0.6",
+                            "ApplicationSettings.ScreenMasking.TintTypingLineOpacity.$t": 0.6,
                             // Screen Masking -> Change page color
                             "ApplicationSettings.ScreenMasking.SystemBackgroundColour.$t": "#a7efce",
                             // Screen Masking -> Underline cursor
                             "ApplicationSettings.ScreenMasking.UnderlineCursorColour.$t": "#a7efce",
-                            "ApplicationSettings.ScreenMasking.UnderlineCursorOpacity.$t": "0.4",
-                            "ApplicationSettings.ScreenMasking.UnderlineCursorHeight.$t": "20",
+                            "ApplicationSettings.ScreenMasking.UnderlineCursorOpacity.$t": 0.4,
+                            "ApplicationSettings.ScreenMasking.UnderlineCursorHeight.$t": 20,
                             // Screenshot Reader
                             "ApplicationSettings.Screenshot.CaptureBy.$t": "Drawing Freehand",
                             "ApplicationSettings.Screenshot.ScreenshotTo.$t": "Window",
-                            "ApplicationSettings.Screenshot.AppendToMsWordDoc.$t": "false"
+                            "ApplicationSettings.Screenshot.AppendToMsWordDoc.$t": false
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\12\\RWSettings.xml",
@@ -407,28 +407,28 @@ gpii.tests.windows.readwrite.testDefs = [
                             "ApplicationSettings.ScreenMasking.ScreenMask.$t": "UnderlineTypingLine",
                             //  Screen Masking -> Tint whole screen subsettings
                             "ApplicationSettings.ScreenMasking.TintScreenColour.$t": "#a7efce",
-                            "ApplicationSettings.ScreenMasking.TintScreenOpacity.$t": "0.5",
-                            "ApplicationSettings.ScreenMasking.ReadingLight.$t": "true",
+                            "ApplicationSettings.ScreenMasking.TintScreenOpacity.$t": 0.5,
+                            "ApplicationSettings.ScreenMasking.ReadingLight.$t": true,
                             "ApplicationSettings.ScreenMasking.ReadingLightColour.$t": "#00FFFFFF",
-                            "ApplicationSettings.ScreenMasking.ReadingLightOpacity.$t": "0.5",
-                            "ApplicationSettings.ScreenMasking.ReadingLightHeight.$t": "150",
+                            "ApplicationSettings.ScreenMasking.ReadingLightOpacity.$t": 0.5,
+                            "ApplicationSettings.ScreenMasking.ReadingLightHeight.$t": 150,
                             // Screen Masking -> Underline typing line
                             "ApplicationSettings.ScreenMasking.UnderlineTypingLineColour.$t": "#a7efce",
-                            "ApplicationSettings.ScreenMasking.UnderlineTypingLineOpacity.$t": "0.3",
-                            "ApplicationSettings.ScreenMasking.UnderlineTypingLineHeight.$t": "15",
+                            "ApplicationSettings.ScreenMasking.UnderlineTypingLineOpacity.$t": 0.3,
+                            "ApplicationSettings.ScreenMasking.UnderlineTypingLineHeight.$t": 15,
                             // Screen Masking -> Tint typing line
                             "ApplicationSettings.ScreenMasking.TintTypingLineColour.$t": "#FF00FFFF",
-                            "ApplicationSettings.ScreenMasking.TintTypingLineOpacity.$t": "0.6",
+                            "ApplicationSettings.ScreenMasking.TintTypingLineOpacity.$t": 0.6,
                             // Screen Masking -> Change page color
                             "ApplicationSettings.ScreenMasking.SystemBackgroundColour.$t": "#a7efce",
                             // Screen Masking -> Underline cursor
                             "ApplicationSettings.ScreenMasking.UnderlineCursorColour.$t": "#a7efce",
-                            "ApplicationSettings.ScreenMasking.UnderlineCursorOpacity.$t": "0.4",
-                            "ApplicationSettings.ScreenMasking.UnderlineCursorHeight.$t": "20",
+                            "ApplicationSettings.ScreenMasking.UnderlineCursorOpacity.$t": 0.4,
+                            "ApplicationSettings.ScreenMasking.UnderlineCursorHeight.$t": 20,
                             // Screenshot Reader
                             "ApplicationSettings.Screenshot.CaptureBy.$t": "Drawing Freehand",
                             "ApplicationSettings.Screenshot.ScreenshotTo.$t": "Window",
-                            "ApplicationSettings.Screenshot.AppendToMsWordDoc.$t": "false"
+                            "ApplicationSettings.Screenshot.AppendToMsWordDoc.$t": false
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\12\\RWSettings.xml",
@@ -454,38 +454,38 @@ gpii.tests.windows.readwrite.testDefs = [
                         "settings": {
                             // Speech
                             "ApplicationSettings.Speech.CurrentVoice.$t": "Mexican Spanish Paulina - Vocalizer",
-                            "ApplicationSettings.Speech.VoiceSpeed.$t": "70",
-                            "ApplicationSettings.Speech.UseVoiceSpeedHotKey.$t": "false",
-                            "ApplicationSettings.Speech.WordPause.$t": "200",
-                            "ApplicationSettings.Speech.VoicePitch.$t": "40",
+                            "ApplicationSettings.Speech.VoiceSpeed.$t": 70,
+                            "ApplicationSettings.Speech.UseVoiceSpeedHotKey.$t": false,
+                            "ApplicationSettings.Speech.WordPause.$t": 200,
+                            "ApplicationSettings.Speech.VoicePitch.$t": 40,
                             // Speech -> Auto Read
-                            "ApplicationSettings.Speech.SpeakAsIType.$t": "true",
+                            "ApplicationSettings.Speech.SpeakAsIType.$t": true,
                             // Speech -> Auto Read -> Speak as I type
-                            "ApplicationSettings.Speech.SpeakOnEachLetter.$t": "true",
+                            "ApplicationSettings.Speech.SpeakOnEachLetter.$t": true,
                             // Speech -> Auto Read -> Speak as I type
-                            "ApplicationSettings.Speech.SpeakOnEachWord.$t": "false",
+                            "ApplicationSettings.Speech.SpeakOnEachWord.$t": false,
                             // Speech -> Auto Read -> Speak as I type
-                            "ApplicationSettings.Speech.SpeakOnEachSentence.$t": "false",
+                            "ApplicationSettings.Speech.SpeakOnEachSentence.$t": false,
                             // Speech -> Screen reading
-                            "ApplicationSettings.Speech.ScreenReadingEnabled.$t": "true",
+                            "ApplicationSettings.Speech.ScreenReadingEnabled.$t": true,
                             // Speech -> Screen reading -> Items to read
                             // TODO: Setting is stored in an array format in XML, we need to check how
                             // XMLSettingsHandler handles this case.
                             // "ApplicationSettings.Speech.ScreenReadingItems.$t":,
                             // Speech -> Read by
-                            "ApplicationSettings.Speech.SelectionType.$t": "0",
+                            "ApplicationSettings.Speech.SelectionType.$t": 0,
                             // Speech -> Continuous reading
-                            "ApplicationSettings.Speech.ContinuousReading.$t": "false",
+                            "ApplicationSettings.Speech.ContinuousReading.$t": false,
                             // Speech -> Read the web
-                            "ApplicationSettings.Speech.ReadTheWeb.$t": "true",
+                            "ApplicationSettings.Speech.ReadTheWeb.$t": true,
                             // Speech -> Speech highlighting
-                            "ApplicationSettings.Speech.HighlightingMethod.$t": "2",
+                            "ApplicationSettings.Speech.HighlightingMethod.$t": 2,
                             // Speech -> Speech highlighting -> Font
                             "ApplicationSettings.Speech.TextReaderOneWordFontName.$t": "Times New Roman",
                             "ApplicationSettings.Speech.optSpeechHighTRFontName.$t": "Times New Roman",
                             // Speech -> Speech highlighting -> Font size
-                            "ApplicationSettings.Speech.TextReaderOneWordFontSize.$t": "16",
-                            "ApplicationSettings.Speech.optSpeechHighTRFontSize.$t": "16",
+                            "ApplicationSettings.Speech.TextReaderOneWordFontSize.$t": 16,
+                            "ApplicationSettings.Speech.optSpeechHighTRFontSize.$t": 16,
                             // Speech -> Speech highlighting -> Highlighting colors
                             "ApplicationSettings.Speech.HighlightingBackColour.$t": "Violet",
                             "ApplicationSettings.Speech.HighlightingForeColour.$t": "Chartreuse"
@@ -514,38 +514,38 @@ gpii.tests.windows.readwrite.testDefs = [
                         "settings": {
                             // Speech
                             "ApplicationSettings.Speech.CurrentVoice.$t": "Mexican Spanish Paulina - Vocalizer",
-                            "ApplicationSettings.Speech.VoiceSpeed.$t": "70",
-                            "ApplicationSettings.Speech.UseVoiceSpeedHotKey.$t": "false",
-                            "ApplicationSettings.Speech.WordPause.$t": "200",
-                            "ApplicationSettings.Speech.VoicePitch.$t": "40",
+                            "ApplicationSettings.Speech.VoiceSpeed.$t": 70,
+                            "ApplicationSettings.Speech.UseVoiceSpeedHotKey.$t": false,
+                            "ApplicationSettings.Speech.WordPause.$t": 200,
+                            "ApplicationSettings.Speech.VoicePitch.$t": 40,
                             // Speech -> Auto Read
-                            "ApplicationSettings.Speech.SpeakAsIType.$t": "true",
+                            "ApplicationSettings.Speech.SpeakAsIType.$t": true,
                             // Speech -> Auto Read -> Speak as I type
-                            "ApplicationSettings.Speech.SpeakOnEachLetter.$t": "true",
+                            "ApplicationSettings.Speech.SpeakOnEachLetter.$t": true,
                             // Speech -> Auto Read -> Speak as I type
-                            "ApplicationSettings.Speech.SpeakOnEachWord.$t": "false",
+                            "ApplicationSettings.Speech.SpeakOnEachWord.$t": false,
                             // Speech -> Auto Read -> Speak as I type
-                            "ApplicationSettings.Speech.SpeakOnEachSentence.$t": "false",
+                            "ApplicationSettings.Speech.SpeakOnEachSentence.$t": false,
                             // Speech -> Screen reading
-                            "ApplicationSettings.Speech.ScreenReadingEnabled.$t": "true",
+                            "ApplicationSettings.Speech.ScreenReadingEnabled.$t": true,
                             // Speech -> Screen reading -> Items to read
                             // TODO: Setting is stored in an array format in XML, we need to check how
                             // XMLSettingsHandler handles this case.
                             // "ApplicationSettings.Speech.ScreenReadingItems.$t":,
                             // Speech -> Read by
-                            "ApplicationSettings.Speech.SelectionType.$t": "0",
+                            "ApplicationSettings.Speech.SelectionType.$t": 0,
                             // Speech -> Continuous reading
-                            "ApplicationSettings.Speech.ContinuousReading.$t": "false",
+                            "ApplicationSettings.Speech.ContinuousReading.$t": false,
                             // Speech -> Read the web
-                            "ApplicationSettings.Speech.ReadTheWeb.$t": "true",
+                            "ApplicationSettings.Speech.ReadTheWeb.$t": true,
                             // Speech -> Speech highlighting
-                            "ApplicationSettings.Speech.HighlightingMethod.$t": "2",
+                            "ApplicationSettings.Speech.HighlightingMethod.$t": 2,
                             // Speech -> Speech highlighting -> Font
                             "ApplicationSettings.Speech.TextReaderOneWordFontName.$t": "Times New Roman",
                             "ApplicationSettings.Speech.optSpeechHighTRFontName.$t": "Times New Roman",
                             // Speech -> Speech highlighting -> Font size
-                            "ApplicationSettings.Speech.TextReaderOneWordFontSize.$t": "16",
-                            "ApplicationSettings.Speech.optSpeechHighTRFontSize.$t": "16",
+                            "ApplicationSettings.Speech.TextReaderOneWordFontSize.$t": 16,
+                            "ApplicationSettings.Speech.optSpeechHighTRFontSize.$t": 16,
                             // Speech -> Speech highlighting -> Highlighting colors
                             "ApplicationSettings.Speech.HighlightingBackColour.$t": "Violet",
                             "ApplicationSettings.Speech.HighlightingForeColour.$t": "Chartreuse"
@@ -577,11 +577,11 @@ gpii.tests.windows.readwrite.testDefs = [
                             "ApplicationSettings.Translation.ToLanguage.$t": "da",
                             // Vocabulary List
                             // TODO: Verify with Microsoft word installation
-                            "ApplicationSettings.Vocabulary.VocabListWindow.$t": "true",
-                            "ApplicationSettings.Vocabulary.VocabListImages.$t": "false",
-                            "ApplicationSettings.Vocabulary.VocabListDefinitions.$t": "true",
+                            "ApplicationSettings.Vocabulary.VocabListWindow.$t": true,
+                            "ApplicationSettings.Vocabulary.VocabListImages.$t": false,
+                            "ApplicationSettings.Vocabulary.VocabListDefinitions.$t": true,
                             // Voice Note
-                            "ApplicationSettings.VoiceNote.InsertInDoc.$t": "true"
+                            "ApplicationSettings.VoiceNote.InsertInDoc.$t": true
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\12\\RWSettings.xml",
@@ -610,11 +610,11 @@ gpii.tests.windows.readwrite.testDefs = [
                             "ApplicationSettings.Translation.ToLanguage.$t": "da",
                             // Vocabulary List
                             // TODO: Verify with Microsoft word installation
-                            "ApplicationSettings.Vocabulary.VocabListWindow.$t": "true",
-                            "ApplicationSettings.Vocabulary.VocabListImages.$t": "false",
-                            "ApplicationSettings.Vocabulary.VocabListDefinitions.$t": "true",
+                            "ApplicationSettings.Vocabulary.VocabListWindow.$t": true,
+                            "ApplicationSettings.Vocabulary.VocabListImages.$t": false,
+                            "ApplicationSettings.Vocabulary.VocabListDefinitions.$t": true,
                             // Voice Note
-                            "ApplicationSettings.VoiceNote.InsertInDoc.$t": "true"
+                            "ApplicationSettings.VoiceNote.InsertInDoc.$t": true
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\12\\RWSettings.xml",
