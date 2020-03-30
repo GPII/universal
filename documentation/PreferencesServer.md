@@ -341,14 +341,14 @@ There are two important things to note here:
    to `http://registry.gpii.net/common/fontSize`. Since we do not allow the same setting to be present multiple times in
    the NP set, the fontSize has been stored in the flat ontology and removed from the ISO24751 block.
 
-### GET /prefssafe/:prefsSafeId
+### GET /prefsSafe/:prefsSafeId
 
 This end point will return the entire preferences safe, including the embedded preference sets. The URL param is the
 `id` of the preferences safe. This will not return any attached keys, credentials, or other records.
 
 #### Example GET
 
-URL: `http://preferences.gpii.net/prefssafe/prefsSafe-alice`
+URL: `http://preferences.gpii.net/prefsSafe/prefsSafe-alice`
 
 Example Success Payload:
 
@@ -385,11 +385,11 @@ returned:
 {
     "isError": true,
     "errorCode": "GPII_ERR_NO_PREFSSAFE",
-    "message": "Missing prefssafe"
+    "message": "Missing prefsSafe"
 }
 ```
 
-### GET /prefssafe-with-keys/:prefsSafeId
+### GET /prefsSafe-with-keys/:prefsSafeId
 
 This endpoint will return the entire preferences safe structure, along with records directory related to it, such
 as keys and credentials. A top level object will contain the preferences safe under key `prefsSafe`, and the related
@@ -397,7 +397,7 @@ documents under key `keys`.
 
 #### Example GET
 
-URL: `http://preferences.gpii.net/prefssafe-with-keys/prefsSafe-alice`
+URL: `http://preferences.gpii.net/prefsSafe-with-keys/prefsSafe-alice`
 
 Example returned item:
 
@@ -455,11 +455,11 @@ If the safe with the specified `prefsSafeId` does not exist, the following error
 {
     "isError": true,
     "errorCode": "GPII_ERR_NO_PREFSSAFE",
-    "message": "Missing prefssafe"
+    "message": "Missing prefsSafe"
 }
 ```
 
-### POST /prefssafe
+### POST /prefsSafe
 
 Creates a new preferences safe in the system. Takes a full preferences safe JSON payload, albiet without a `id`.
 The returned payload will include the entire preferences safe, including the updated `timestampCreated` field,
@@ -467,7 +467,7 @@ and a newly provisioned `id`.
 
 #### Example POST
 
-URL: `http://preferences.gpii.net/prefssafe`
+URL: `http://preferences.gpii.net/prefsSafe`
 
 The POST payload should be a full preferences safe without an `id`:
 
@@ -508,14 +508,14 @@ with the contents of the system error:
 }
 ```
 
-### PUT /prefssafe/:prefsSafeId
+### PUT /prefsSafe/:prefsSafeId
 
 Updates an existing preferences safe in the database, using the full preferences safe format. Will return the
 updated safe, which should include an updated `timestampUpdated` field.
 
 #### Example PUT
 
-URL: `http://preferences.gpii.net/prefssafe/prefsSafe-alice`
+URL: `http://preferences.gpii.net/prefsSafe/prefsSafe-alice`
 
 Example PUT body:
 
@@ -557,7 +557,7 @@ suitable message will be returned.
 }
 ```
 
-### GET /prefssafes
+### GET /prefsSafes
 
 Returns a list of preferences safes, including only basic information about each one. Ideal for building a table
 or listing of preferences safes. Each item in the list representing a preferences safe will include `id`, `name`,
@@ -566,7 +566,7 @@ paging, etc.
 
 #### Example GET
 
-URL: `http://preferences.gpii.net/prefssafes`
+URL: `http://preferences.gpii.net/prefsSafes`
 
 Example return payload:
 
@@ -596,7 +596,7 @@ Example return payload:
 There should never be an error payload for this endpoint. In the situation where there are no preferences
 safes stored in the system it will merely contain zero rows.
 
-### GET /prefssafe-keys/:prefsSafeId
+### GET /prefsSafe-keys/:prefsSafeId
 
 This will return the associated keys and credentials documents for a given preferences safe, in a `rows` field.
 Also included is a `total_rows` and `offset` field, but do note that the `total_rows` field is not accurate as
@@ -604,7 +604,7 @@ of the time of writing, and should be ignored.
 
 #### Example GET
 
-URL: `http://preferences.gpii.net/prefssafe-keys/prefsSafe-alice`
+URL: `http://preferences.gpii.net/prefsSafe-keys/prefsSafe-alice`
 
 An example payload for a particlar safe may be:
 
@@ -635,7 +635,7 @@ An example payload for a particlar safe may be:
 }
 ```
 
-### POST /prefssafe-key-create
+### POST /prefsSafe-key-create
 
 This endpoint will add a new `gpiiKey` document to the system. There are no URL parameters, but the JSON body takes
 3 fields, one of them optional. Required are the `prefsSafeId` and `prefsSetId`. These indicate the preferences safe,
@@ -646,7 +646,7 @@ detailing the failure.
 
 #### Example POST:
 
-URL: `http://preferences.gpii.net/prefssafe-key-create`
+URL: `http://preferences.gpii.net/prefsSafe-key-create`
 
 Example POST Body:
 
