@@ -84,3 +84,12 @@ for the reset API and how to use it.
 **Purpose**: This config fetches default settings from a remote URL. The default URL is set to
 `https://raw.githubusercontent.com/GPII/universal/master/testData/defaultSettings/defaultSettings.win32.json5`
 in this config. See [Reset Computer](ResetComputer.md) for what are default settings.
+
+### Handle Revision Endpoint in Production
+
+**Config file**: [`%universal/gpii/configs/gpii.config.production.local.flowManager.revision.json5`](../gpii/configs/gpii.config.production.local.flowManager.revision.json5)
+
+**Purpose**: This config is used in a production system where the cloud based
+flowManager supports a valid `/revision` end point.  For development
+testing, the default is to assume there is no valid revision, and no request for
+the revision is made (see [GpiiRevisionRequester.js](../gpii/node_modules/flowManager/src/GpiiRevisionRequester.js)).

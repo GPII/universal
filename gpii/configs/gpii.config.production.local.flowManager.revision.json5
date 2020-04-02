@@ -1,0 +1,25 @@
+/**
+ * This configuration is for the production version of the system where the
+ * local flowManager provides its solutions registry dataSource with the url to
+ * the cloud based flowManager's /revision endpoint.
+ *
+ */
+{
+    "type": "gpii.config.production.local.flowManager.revision",
+    "options": {
+        "distributeOptions": {
+            "flowManager.defaultRevisionCloudURL": {
+                "record": "http://localhost:8084",
+                "target": "{that flowManager solutionsRegistryDataSource revisionRequester}.options.cloudURL"
+            },
+            "flowManager.gpiiRevisionCloudURL": {
+                "record": "@expand:kettle.resolvers.env(GPII_CLOUD_URL)",
+                "target": "{that flowManager solutionsRegistryDataSource revisionRequester}.options.cloudURL",
+                "priority": "after:flowManager.defaultRevisionCloudURL"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%flowManager/configs/gpii.flowManager.config.untrusted.base.json5"
+    ]
+}
