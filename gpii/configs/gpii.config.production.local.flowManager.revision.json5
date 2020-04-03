@@ -2,7 +2,6 @@
  * This configuration is for the production version of the system where the
  * local flowManager provides its solutions registry dataSource with the url to
  * the cloud based flowManager's /revision endpoint.
- *
  */
 {
     "type": "gpii.config.production.local.flowManager.revision",
