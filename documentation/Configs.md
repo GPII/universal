@@ -93,3 +93,4 @@ in this config. See [Reset Computer](ResetComputer.md) for what are default sett
 flowManager supports a valid `/revision` end point.  For development
 testing, the default is to assume there is no valid revision, and no request for
 the revision is made (see [GpiiRevisionRequester.js](../gpii/node_modules/flowManager/src/GpiiRevisionRequester.js)).
+This is done by setting its `cloudURL` option to `null`.
