@@ -4,7 +4,7 @@
         "mainServerPort": "@expand:kettle.resolvers.env(GPII_FLOWMANAGER_LISTEN_PORT)"
     },
     "mergeConfigs": [
-        "%gpii-universal/gpii/configs/gpii.config.production.local.flowManager.revision.json5",
+        "%gpii-universal/gpii/node_modules/flowManager/configs/gpii.config.local.flowManager.revision.json5",
         "%gpii-universal/gpii/configs/shared/gpii.config.untrusted.development.json5"
     ]
 }
