@@ -18,12 +18,6 @@
                     "funcName": "gpii.tests.flowManager.browserChannel.reportPlatform"
                 },
                 "target": "{that localConfig deviceReporter platformReporter}.options.invokers.reportPlatform"
-            },
-            "browserChannel.tests.repositorySolutionsLoader": {
-                "record": {
-                    "funcName": "gpii.tests.flowManager.browserChannel.getRepositorySolutions"
-                },
-                "target": "{that flowManager solutionsRegistryDataSource repositorySolutionsLoader}.options.invokers.getSolutions"
             }
         }
     },
