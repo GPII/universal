@@ -770,10 +770,10 @@ gpii.tests.windows.builtIn = [
             "gpii.windows.displaySettingsHandler": {
                 "com.microsoft.windows.screenResolution": [{
                     "settings": {
-                        "screen-resolution": [{
+                        "screen-resolution": {
                             "width": 800,
                             "height": 600
-                        }],
+                        },
                         "screen-dpi": 1
                     }
                 }]
