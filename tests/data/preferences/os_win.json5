@@ -100,10 +100,10 @@
                         "LensWidth": 50
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.screenResolution": {
-                        "screen-resolution": {
+                        "screen-resolution": [{
                             "width": 800,
                             "height": 600
-                        }
+                        }]
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.screenDPI": {
                         "screen-dpi": 1
