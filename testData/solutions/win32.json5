@@ -16242,7 +16242,7 @@
                 }
             },
             "configure.ribbons": {
-                "type": "gpii.settingsHandlers.remoteFileSettingsHandler",
+                "type": "gpii.settingsHandlers.remoteFileSettingsHandler.office",
                 "liveness": "live",
                 "options": {
                     "settings": {
