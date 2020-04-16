@@ -87,7 +87,7 @@ in this config. See [Reset Computer](ResetComputer.md) for what are default sett
 
 ### Load Solutions from the Repository in Production Contexts
 
-**Config file**: [`%universal/gpii/configs/gpii.config.local.flowManager.loadSolutionsFromRepository.json5`](../gpii/configs/gpii.config.local.flowManager.loadSolutionsFromRepository.json5)
+**Config file**: [`%flowManager/configs/gpii.config.local.flowManager.loadSolutionsFromRepository.json5`](../gpii/node_modules/flowManager/configs/gpii.config.local.flowManager.loadSolutionsFromRepository.json5)
 
 **Purpose**: This add-on config is for use in production where the cloud based
 flow manager supports a valid `/revision` end point, and where the local
