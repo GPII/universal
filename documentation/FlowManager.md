@@ -115,11 +115,19 @@ payload structure to start a matchMaking process.
  cloud based components of the GPII.
 * **route:** `/revision`
 * **method:** `GET`
-* **return:** A JSON document containing the revision:
+* **return:** On success, an http status code of 200 and a payload containing the revision, e.g.:
 
-```json
+```json5
+{"sha256": "2602bdf868aec49993d8780feec42d4e9f995e21"}
+```
+
+Otherwise, returns status code 404 and an error payload:
+
+```json5
 {
-    "sha256": "2602bdf868aec49993d8780feec42d4e9f995e21"
+    "isError": true,
+    "message": "Error retrieving full git revision: %reason",
+    "statusCode": 404
 }
 ```
 

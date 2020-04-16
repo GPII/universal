@@ -96,7 +96,7 @@ following sequence of events and operations at startup:
   <ul>
   <li>Make an http request of the source code respository, passing:
     <ul>
-    <li>the platform ID associated with the OS that the client is runing on,
+    <li>the platform ID associated with the OS that the client is running on,
         e.g. "darwin",
     </li>
     <li>the revision fetched at the previous step,</li>
