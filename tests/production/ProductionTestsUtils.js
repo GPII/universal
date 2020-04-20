@@ -88,6 +88,40 @@ fluid.defaults("gpii.tests.cloud.oauth2.accessTokensDeleteRequests", {
     }
 });
 
+// The customized testEnvironment component that adds and listens to the aggregate event "onSystemReady"
+fluid.defaults("gpii.tests.productionConfigTesting.testEnvironment", {
+    gradeNames: ["gpii.test.serverEnvironment"],
+    distributeOptions: {
+        "resetAtStartSuccess.escalate": {
+            record: {
+                resetAtStartSuccess: "{testEnvironment}.events.resetAtStartSuccess"
+            },
+            target: "{that gpii.flowManager.local}.options.events"
+        },
+        "productionConfigTesting.startServerSequence": {
+            record: [
+                { // This sequence point is required because of a QUnit bug - it defers the start of sequence by 13ms "to avoid any current callbacks" in its words
+                    func: "{testEnvironment}.events.constructServer.fire"
+                },
+                {
+                    event: "{testEnvironment}.events.onSystemReady",
+                    listener: "fluid.identity"
+                }
+            ],
+            target: "{that gpii.test.startServerSequence}.options.sequence"
+        }
+    },
+    events: {
+        resetAtStartSuccess: null,
+        onSystemReady: {
+            events: {
+                resetAtStartSuccess: "resetAtStartSuccess",
+                onServerReady: "onServerReady"
+            }
+        }
+    }
+});
+
 // Sequence elements for cleaning up extra access tokens
 fluid.defaults("gpii.tests.productionConfigTesting.deleteAccessTokensSequence", {
     gradeNames: ["fluid.test.sequenceElement"],
