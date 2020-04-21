@@ -80,9 +80,9 @@ gpii.tests.productionConfigTesting.loadingSolutionsTransform.testDefs = [{
     config: gpii.tests.productionConfigTesting.config,
     testEnvironmentGrade: "gpii.tests.productionConfigTesting.testEnvironment",
     distributeOptions: {
-        // Override the default getRevision() to record the value it gets after
+        // Override the default getRevision() to record the value it resolves after
         // requesting the revision.
-        "capture.revision": {
+        "store.revision": {
             "record": {
                 "loadSolutions.getRevision": {
                     "listener": "gpii.tests.productionConfigTesting.loadingSolutionsTransform.getRevisionTest",
@@ -90,6 +90,15 @@ gpii.tests.productionConfigTesting.loadingSolutionsTransform.testDefs = [{
                 }
             },
             "target": "{that gpii.flowManager.local solutionsRegistryDataSource}.options.listeners"
+        },
+        "store.registries": {
+            "record":{
+                "solutionsRegistryReady": {
+                    "listener": "gpii.tests.productionConfigTesting.loadingSolutionsTransform.storeRegistries",
+                    "args": ["{that}"]
+                }
+            },
+            "target": "{that flowManager solutionsRegistryDataSource}.options.listeners"
         }
     },
     sequenceGrade: "gpii.tests.productionConfigTesting.loadingSolutionsTransform"
@@ -99,30 +108,36 @@ gpii.tests.productionConfigTesting.loadingSolutionsTransform.testDefs = [{
 gpii.tests.productionConfigTesting.loadingSolutionsTransform.getRevisionTest = function (solutionRegistryDataSource) {
     var revisionPromise = solutionRegistryDataSource.revisionRequester.getRevision();
     revisionPromise.then(function (revision) {
-        solutionRegistryDataSource.revision = revision;
+        gpii.tests.productionConfigTesting.loadingSolutionsTransform.revision = revision;
     });
-    // For tests:  keep a reference to this solutions registry data source.
-    gpii.tests.productionConfigTesting.loadingSolutionsTransform.solutionsRegistryDataSource = solutionRegistryDataSource;
-
     return revisionPromise;
 };
 
-// Check that the solutions were loaded from local file system and repository
+// After the SRDS has finished loading the registries, keep a copy of them for
+// testing.
+gpii.tests.productionConfigTesting.loadingSolutionsTransform.storeRegistries = function (solutionRegistryDataSource) {
+    gpii.tests.productionConfigTesting.loadingSolutionsTransform.fullSolutionsRegistry =
+        solutionRegistryDataSource.fullSolutionsRegistry;
+
+    gpii.tests.productionConfigTesting.loadingSolutionsTransform.repositorySolutionsRegistry =
+        solutionRegistryDataSource.repositorySolutionsRegistry;
+};
+
+// Check that the solutions were loaded from local file system and repository,
 // and that the revision used matches.
 gpii.tests.productionConfigTesting.checkSolutionsRegistries = function () {
-    var solutionRegistryDataSource = gpii.tests.productionConfigTesting.loadingSolutionsTransform.solutionsRegistryDataSource;
-    jqUnit.assertNotNull(
-        "Check loading of solutions registries from local file system",
-        solutionRegistryDataSource.fullSolutionsRegistry
-    );
     jqUnit.assertDeepEq(
         "Check revision",
         gpii.tests.productionConfigTesting.validGpiiRevision,
-        solutionRegistryDataSource.revision
+        gpii.tests.productionConfigTesting.loadingSolutionsTransform.revision
+    );
+    jqUnit.assertNotNull(
+        "Check loading of solutions registries from local file system",
+        gpii.tests.productionConfigTesting.loadingSolutionsTransform.fullSolutionsRegistry
     );
     jqUnit.assertNotNull(
         "Check loading from soruce code respository",
-        solutionRegistryDataSource.repositorySolutionsRegistry
+        gpii.tests.productionConfigTesting.loadingSolutionsTransform.repositorySolutionsRegistry
     );
 };
 
