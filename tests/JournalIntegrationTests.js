@@ -187,18 +187,6 @@ gpii.tests.journal.initialSettings = {
                     "functionName": "Volume"
                 }
             }
-        ],
-        "com.microsoft.windows.mirrorScreen": [
-            {
-                "settings": {
-                    "ScreenMirrorConfig": {
-                        "value": false
-                    }
-                },
-                "options": {
-                    "functionName": "ScreenMirror"
-                }
-            }
         ]
     }
 };
