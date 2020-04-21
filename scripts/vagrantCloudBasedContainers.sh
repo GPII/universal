@@ -27,10 +27,12 @@ fi
 
 UNIVERSAL_IMAGE=vagrant-universal
 
-# The following SHA256 is not the actual latest revision that is used in
-# in production.  This is here for the tests, and written to the file
-# gpii-revision.json at the root universal folder.  See the Dockerfile.
-GITFULLREV="$(git rev-parse HEAD)"
+# The following SHA256 is guaranteed to be a revison on github, and recent.  It
+# is not guaranteed to be the latest revision that is used in production; it
+# could be an even later revision.  It is sufficient for the tests.  It is
+# written to the file "gpii-revision.json" at the root universal folder.
+# See the Dockerfile.
+GITFULLREV="$(git rev-parse @{upstream})"
 
 COUCHDB_IMAGE=couchdb:2.3.1
 COUCHDB_PORT=5984
