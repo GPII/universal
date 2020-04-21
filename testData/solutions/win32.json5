@@ -5245,7 +5245,7 @@
                             title: "Hand Cursor",
                             description: "The 'hand' cursor icon.",
                             type: "string",
-                            default: ""
+                            default: "%SystemRoot%\\cursors\\aero_link.cur"
                         }
                     },
                     "Help": {
