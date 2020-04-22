@@ -28,11 +28,20 @@ fi
 UNIVERSAL_IMAGE=vagrant-universal
 
 # The following SHA256 is guaranteed to be a revison on github, and recent.  It
-# is not guaranteed to be the latest revision that is used in production; it
-# could be an even later revision.  It is sufficient for the tests.  It is
-# written to the file "gpii-revision.json" at the root universal folder.
-# See the Dockerfile.
+# is not necessarily the latest revision that is used in production -- it
+# could be a later revision -- but it is sufficient for the tests.  For local
+# development, @{upsteram} is used in case the local changes have not been
+# pushed.  CI has no upstream, and uses HEAD instead.  The result is written to
+# the file "gpii-revision.json" at the root universal folder.  See the
+# Dockerfile.
 GITFULLREV="$(git rev-parse @{upstream})"
+if [ $? != 0 ]
+then
+    echo "No upstream, using HEAD for revision.json"
+    GITFULLREV="$(git rev-parse HEAD)"
+else
+    echo "Using upstream for revision.json"
+fi
 
 COUCHDB_IMAGE=couchdb:2.3.1
 COUCHDB_PORT=5984
