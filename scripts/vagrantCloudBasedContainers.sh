@@ -30,7 +30,7 @@ UNIVERSAL_IMAGE=vagrant-universal
 # The following SHA256 is guaranteed to be a revison on github, and recent.  It
 # is not necessarily the latest revision that is used in production -- it
 # could be a later revision -- but it is sufficient for the tests.  For local
-# development, @{upsteram} is used in case the local changes have not been
+# development, @{upstream} is used in case the local changes have not been
 # pushed.  CI has no upstream, and uses HEAD instead.  The result is written to
 # the file "gpii-revision.json" at the root universal folder.  See the
 # Dockerfile.
