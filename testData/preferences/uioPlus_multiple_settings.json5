@@ -6,7 +6,6 @@
 //
 // ## Preferences
 //
-// * Captions: enabled
 // * Character Space: increased (1)
 // * Font Size: increased (1.3)
 // * High Contrast: Enabled
@@ -26,7 +25,6 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/captions/enabled": true,
                     "http://registry.gpii.net/common/characterSpace": 1,
                     "http://registry.gpii.net/common/fontSize": 16,
                     "http://registry.gpii.net/common/highContrast/enabled": true,
