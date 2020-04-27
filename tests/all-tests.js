@@ -60,7 +60,7 @@ var testIncludes = [
     "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
     "../gpii/node_modules/flowManager/test/CaptureTests.js",
     "../gpii/node_modules/flowManager/test/SolutionsRegistryDataSourceTests.js",
-//    "../gpii/node_modules/flowManager/test/DefaultSettingsLoaderTests.js",
+    "../gpii/node_modules/flowManager/test/DefaultSettingsLoaderTests.js",
     "../gpii/node_modules/flowManager/test/PrefsServerDataSourceTests.js",
     "../gpii/node_modules/flowManager/test/PSPChannelTests.js",
     "../gpii/node_modules/flowManager/test/SettingsDataSourceTests.js",
