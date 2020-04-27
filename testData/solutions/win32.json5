@@ -9414,7 +9414,13 @@
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.StartWithShortcut": "WinEnterLaunchEnabled",
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.TextVerbosityLevel": "VerbosityLevel"
                 }
-            },
+            }/*,
+ * This settings handler block has been commented out since these settings have become
+ * unstable as a result of https://issues.gpii.net/browse/GPII-4231.
+ * https://issues.gpii.net/browse/GPII-4462 will track work to potentially rewrite this
+ * settings handler back in C# and remove the instability. It's also possible
+ * that this instability has resulted from missing "update"/"configure"/"restore" blocks as seen
+ * with the magnifier
             "configureSystemSettings": {
                 "type": "gpii.windows.systemSettingsHandler",
                 "liveness": "live",
@@ -9466,6 +9472,7 @@
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.EnableSystemAutoStart": "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled.value"
                 }
             }
+*/
         },
         "launchHandlers": {
             "launcher": {

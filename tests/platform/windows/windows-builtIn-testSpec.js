@@ -822,7 +822,8 @@ gpii.tests.windows.builtIn = [
                         "Async": true,
                         "CheckResult": true
                     }
-                }],
+                }]/*,
+ * These settings have been commented out for https://issues.gpii.net/browse/GPII-4462
                 "com.microsoft.windows.narrator": [{
                     "settings": {
                         "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
@@ -836,7 +837,7 @@ gpii.tests.windows.builtIn = [
                         "Async": true,
                         "CheckResult": true
                     }
-                }]
+                }]*/
             }
         },
         gradeNames: "gpii.test.integration.actionHandlersAware.windows"
