@@ -4868,30 +4868,30 @@
                                 "Span"
                             ]
                         }
-                    }
+                    },
                     // TODO: Use this as an early test case for user-facing vs. settings handler facing work.
-//                    "Scaling": {
-//                        "schema": {
-//                            "title": "Desktop wallpaper scaling",
-//                            "description": "Sets the wallpaper to scaling type.",
-//                            "enum": [
-//                                "Fill",
-//                                "Fit",
-//                                "Stretch",
-//                                "Tile",
-//                                "Center",
-//                                "Span"
-//                            ],
-//                            "enumLabels": [
-//                                "Fill",
-//                                "Fit",
-//                                "Stretch",
-//                                "Tile",
-//                                "Center",
-//                                "Span"
-//                            ]
-//                        }
-//                    }
+                   "Scaling": {
+                       "schema": {
+                           "title": "Desktop wallpaper scaling",
+                           "description": "Sets the wallpaper to scaling type.",
+                           "enum": [
+                               "Fill",
+                               "Fit",
+                               "Stretch",
+                               "Tile",
+                               "Center",
+                               "Span"
+                           ],
+                           "enumLabels": [
+                               "Fill",
+                               "Fit",
+                               "Stretch",
+                               "Tile",
+                               "Center",
+                               "Span"
+                           ]
+                       }
+                   }
                 },
                 "capabilitiesTransformations": {
                     "TileWallpaper": {
