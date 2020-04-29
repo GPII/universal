@@ -62,15 +62,17 @@
                         "FilterKeysEnable": {
                             "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
                             "value": true
-                        },
-                        "BounceKeysInterval": {
-                            "path": "pvParam.iBounceMSec",
-                            "value": 1000
                         }
+                        // TODO: Figure out why the SPI settings handler kills the parent process if this is set to "1000" (number as string).
+                        // TODO: Reenable this once we can confirm a safe range of values that work with the SPI settings handler.
+//                        "BounceKeysInterval": {
+//                            "path": "pvParam.iBounceMSec",
+//                            "value": 1000
+//                        }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.cursors": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -135,25 +137,27 @@
                         "DuckAudio": 1,
                         "WinEnterLaunchEnabled": 1,
                         "VerbosityLevel": 3,
-                        "DetailedFeedback": 1,
+                        "DetailedFeedback": 1/*,
+* These settings have been commented out for https://issues.gpii.net/browse/GPII-4462
                         "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
                             "value": true
                         },
                         "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
                             "value": true
                         }
+*/
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.typingEnhancement": {
-                        "EnableAutocorrection": 1,
-                        "EnableSpellchecking": 1,
-                        "EnableTextPrediction": 1,
-                        "EnablePredictionSpaceInsertion": 1,
-                        "EnableDoubleTapSpace": 1,
-                        "EnableKeyAudioFeedback": 1,
-                        "EnableAutoShiftEngage": 1,
-                        "EnableShiftLock": 1,
-                        "EnableCompatibilityKeyboard": 1,
-                        "EnableDesktopModeAutoInvoke": 1
+                        "EnableAutocorrection": true,
+                        "EnableSpellchecking": true,
+                        "EnableTextPrediction": true,
+                        "EnablePredictionSpaceInsertion": true,
+                        "EnableDoubleTapSpace": true,
+                        "EnableKeyAudioFeedback": true,
+                        "EnableAutoShiftEngage": true,
+                        "EnableShiftLock": true,
+                        "EnableCompatibilityKeyboard": true,
+                        "EnableDesktopModeAutoInvoke": true
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": {
                         "SwapMouseButtonsConfig": {
@@ -209,7 +213,7 @@
                         },
                         "EnhancePrecisionConfig": {
                             "path": "pvParam",
-                            "value": [0, 0, 1]
+                            "value": [6, 10, 1]
                         },
                         "SnapToDefaultButtonConfig": {
                             "path": {
@@ -227,10 +231,10 @@
                             "value": 1
                         },
                         "DoubleClickWidthConfig": {
-                            "value": 32
+                            "value": 4
                         },
                         "DoubleClickHeightConfig": {
-                            "value": 32
+                            "value": 4
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.language": {

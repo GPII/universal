@@ -17,4 +17,3 @@ Descriptions:
  * uioPlus_support_tool
  * uioPlus_syllabification
  * uioPlus_toc
- * uioPlus_captions

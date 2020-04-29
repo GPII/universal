@@ -82,7 +82,7 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "DoubleClickWidthConfig": {
-                                "value": 32
+                                "value": 4
                             }
                         },
                         "options": {
@@ -92,7 +92,7 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "DoubleClickHeightConfig": {
-                                "value": 32
+                                "value": 4
                             }
                         },
                         "options": {
@@ -285,7 +285,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "EnhancePrecisionConfig": {
                                 "path": "pvParam",
-                                "value": [0, 0, 1]
+                                "value": [6, 10, 1]
                             }
                         },
                         "options": {
@@ -424,11 +424,12 @@ gpii.tests.windows.builtIn = [
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
                                 "value": true
-                            },
-                            "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
-                                "value": 1000
                             }
+                            // TODO: Reenable this once we can confirm a safe range of values that work with the SPI settings handler.
+                            // "BounceKeysInterval": {
+                            //     "path": "pvParam.iBounceMSec",
+                            //     "value": 0
+                            // }
                         },
                         "options": {
                             "getAction": "SPI_GETFILTERKEYS",
@@ -536,7 +537,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -634,36 +635,39 @@ gpii.tests.windows.builtIn = [
                             "DetailedFeedback": "REG_DWORD"
                         }
                     }
-                }, { // TypingEnhancement
-                    "settings": {
-                        "EnableAutocorrection": 1,
-                        "EnableSpellchecking": 1,
-                        "EnableTextPrediction": 1,
-                        "EnablePredictionSpaceInsertion": 1,
-                        "EnableDoubleTapSpace": 1,
-                        "EnableKeyAudioFeedback": 1,
-                        "EnableAutoShiftEngage": 1,
-                        "EnableShiftLock": 1,
-                        "EnableCompatibilityKeyboard": 1,
-                        "EnableDesktopModeAutoInvoke": 1
-                    },
-                    "options": {
-                        "hKey": "HKEY_CURRENT_USER",
-                        "path": "Software\\Microsoft\\TabletTip\\1.7",
-                        "dataTypes": {
-                            "EnableAutocorrection": "REG_DWORD",
-                            "EnableSpellchecking": "REG_DWORD",
-                            "EnableTextPrediction": "REG_DWORD",
-                            "EnablePredictionSpaceInsertion": "REG_DWORD",
-                            "EnableDoubleTapSpace": "REG_DWORD",
-                            "EnableKeyAudioFeedback": "REG_DWORD",
-                            "EnableAutoShiftEngage": "REG_DWORD",
-                            "EnableShiftLock": "REG_DWORD",
-                            "EnableCompatibilityKeyboard": "REG_DWORD",
-                            "EnableDesktopModeAutoInvoke": "REG_DWORD"
-                        }
-                    }
-                }],
+                }
+                // TODO: Confirm working individually using programatic tests.
+                // { // TypingEnhancement
+                //     "settings": {
+                //         "EnableAutocorrection": true,
+                //         "EnableSpellchecking": true,
+                //         "EnableTextPrediction": true,
+                //         "EnablePredictionSpaceInsertion": true,
+                //         "EnableDoubleTapSpace": true,
+                //         "EnableKeyAudioFeedback": true,
+                //         "EnableAutoShiftEngage": true,
+                //         "EnableShiftLock": true,
+                //         "EnableCompatibilityKeyboard": true,
+                //         "EnableDesktopModeAutoInvoke": true
+                //     },
+                //     "options": {
+                //         "hKey": "HKEY_CURRENT_USER",
+                //         "path": "Software\\Microsoft\\TabletTip\\1.7",
+                //         "dataTypes": {
+                //             "EnableAutocorrection": "REG_DWORD",
+                //             "EnableSpellchecking": "REG_DWORD",
+                //             "EnableTextPrediction": "REG_DWORD",
+                //             "EnablePredictionSpaceInsertion": "REG_DWORD",
+                //             "EnableDoubleTapSpace": "REG_DWORD",
+                //             "EnableKeyAudioFeedback": "REG_DWORD",
+                //             "EnableAutoShiftEngage": "REG_DWORD",
+                //             "EnableShiftLock": "REG_DWORD",
+                //             "EnableCompatibilityKeyboard": "REG_DWORD",
+                //             "EnableDesktopModeAutoInvoke": "REG_DWORD"
+                //         }
+                //     }
+                // }
+                ],
                 "com.microsoft.windows.onscreenKeyboard": [{
                     "settings": {
                         "NavigationMode": 0,
@@ -737,6 +741,7 @@ gpii.tests.windows.builtIn = [
                         }
                     }
                 }],
+                // TODO: Break this apart and test each setting individually
                 "com.microsoft.windows.shortcutWarningMessage": [{
                     "settings": {
                         "Warning Sounds": 1
@@ -817,7 +822,8 @@ gpii.tests.windows.builtIn = [
                         "Async": true,
                         "CheckResult": true
                     }
-                }],
+                }]/*,
+ * These settings have been commented out for https://issues.gpii.net/browse/GPII-4462
                 "com.microsoft.windows.narrator": [{
                     "settings": {
                         "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
@@ -831,7 +837,7 @@ gpii.tests.windows.builtIn = [
                         "Async": true,
                         "CheckResult": true
                     }
-                }]
+                }]*/
             }
         },
         gradeNames: "gpii.test.integration.actionHandlersAware.windows"
@@ -982,11 +988,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": false
-                            },
-                            "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
-                                "value": 0
+                                "value": true
                             }
                         },
                         "options": {
@@ -1027,7 +1029,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1205,11 +1207,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": false
-                            },
-                            "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
-                                "value": 0
+                                "value": true
                             }
                         },
                         "options": {
@@ -1250,7 +1248,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1428,11 +1426,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": false
-                            },
-                            "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
-                                "value": 0
+                                "value": true
                             }
                         },
                         "options": {
@@ -1473,7 +1467,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",

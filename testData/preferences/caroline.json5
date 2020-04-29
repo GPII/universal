@@ -1,0 +1,22 @@
+//# Caroline
+//
+// This preference set sets the Windows color filters for a user with deuteranopia.
+//
+//## Testing
+//
+// Color should change when the user is logged in, green color should be weaker than before.
+{
+    "flat": {
+        "name": "Caroline",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.colorFilters": {
+                        "FilterType": 3
+                    }
+                }
+            }
+        }
+    }
+}

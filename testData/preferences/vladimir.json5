@@ -10,7 +10,7 @@
 // ## Details
 // `vladimir.json5`: preference set with with a combination of common and application-specific terms for the following settings:
 //  * default preferences:
-//  * a white-on-black constrast theme,
+//  * a white-on-black contrast theme,
 //  * cursor size 0.5 (default),
 //  * mouse trailing,
 //  * screen reader with TTS using a speech rate of 300 wpm,
@@ -35,8 +35,7 @@
                     "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
                         "fontSize": "medium",
                         "highContrast/enabled": true
-                    },
-                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                    }
                 },
                 "metadata": [
                     {
@@ -68,8 +67,7 @@
                     "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
                         "fontSize": "medium",
                         "highContrast/enabled": true
-                    },
-                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                    }
                 },
                 "metadata": [
                     {
