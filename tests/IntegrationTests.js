@@ -25,6 +25,7 @@ fluid.contextAware.makeChecks({
 });
 
 fluid.require("%gpii-universal");
+fluid.logObjectRenderChars = 102400;
 
 gpii.loadTestingSupport();
 

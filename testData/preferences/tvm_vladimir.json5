@@ -18,7 +18,7 @@
                     },
                     "http://registry.gpii.net/common/fontSize": 24,
                     "http://registry.gpii.net/common/magnification": 3,
-                    "http://registry.gpii.net/common/highContrast": true,
+                    "http://registry.gpii.net/common/highContrast/enabled": true,
                     "http://registry.gpii.net/common/language": "en-US"
                 }
             }
