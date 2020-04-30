@@ -51,7 +51,6 @@ done like:
    listeners (which are different depending on whether the system runs in trusted or untrusted mode)
 * Preprocess:
   * Triggered when the initial data has been collected (preferences, named preferences set, solution registry entries, etc)
-  * Augments the MatchMaker input with inferred common terms (see under important utilities/functions in this document)
   * TODO: _Full solutions registry is currently being used when inferring common terms. This is because the users
     preference set might contain e.g. Linux app preferences, even if the user is logging into a windows box. We then
     need the linux solutions registry entries to get information (if available) about how to transform the linux app
@@ -79,26 +78,6 @@ conflicting solutions (i.e. of the same type) will be rejected. Adding solution 
 `gpii.matchMakerFramework.utils.addSolutionTypeInformation` function.
 
 The apptology is described in more details here: [Apptology.md](Apptology.md).
-
-**Common Term Inference**: If the solution registry entry for a solution has an `inverseCapabilitiesTransformations`
-block specified, or does not have a `capabilitiesTransformations` (in which case, the system attempts to automatically
-calculate the inverses), the matchmaker framework can infer common terms from application specific settings. This
-means, that if the user has application specific settings for e.g. windows magnifier, the equivalent common term
-preferences can be inferred and used in the matchmaking process (e.g. finding the relevant settings for the linux
-magnifier). The inference happens via the `gpii.matchMakerFramework.utils.inferCommonTerms` function, and if these
-should be merged with an preference set, this can be done via the
-`gpii.matchMakerFramework.utils.addInferredCommonTerms` function. It is worth stressing two things: The use of inferred
-common terms is not mandatory in a matchmaking flow, but available via the above functions, and something which _is_
-being used in the flat matchmaker. Secondly, there is no metadata generated saying that the common terms are
-inferred, meaning that once added to an preference set, the matchmaker has no way of knowing whether the term was
-originally in the preference set or was inferred.
-
-Also, hte full solutions registry is currently being used when inferring common terms. This is because the users
-preference set might contain e.g. Linux app preferences, even if the user is logging into a windows box. We then need
-the linux solutions registry entries to get information (if available) about how to transform the linux app preferences
-into common terms (that in turn can be translated into app settings for windows). This should be changed into a more
-dynamically loaded solution registry fetching based on the users application settings, once the solutions registry has
-been turned into a queriable service.
 
 **gpii.matchmakerframework.utils.disposeSolution:** In many ways the “Heart” of the matchmaking process. It is
 responsible for adding priorities, augmenting the solution and preference data and finally passing it to some

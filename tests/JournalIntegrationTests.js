@@ -115,7 +115,8 @@ gpii.tests.journal.initialSettings = {
                     }
                 }
             }
-        ],
+        ]/*,
+  *  These settings have been commented out for https://issues.gpii.net/browse/GPII-4462
         "com.microsoft.windows.narrator": [
             {
                 "settings": {
@@ -128,6 +129,7 @@ gpii.tests.journal.initialSettings = {
                 }
             }
         ]
+  */
     },
     "gpii.windows.enableRegisteredAT": {
         "com.microsoft.windows.magnifier": [{
@@ -313,7 +315,7 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 explode: {
                     type: "gpii.tests.journal.explodingSettingsHandler",
                     supportedSettings: {
-                        cursorSize: {}
+                        AppStarting: {}
                     },
                     capabilitiesTransformations: {
                         AppStarting: {
@@ -328,7 +330,7 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 maybeThrow: {
                     type: "gpii.tests.journal.throwingSettingsHandler",
                     supportedSettings: {
-                        cursorSize: {}
+                        AppStarting: {}
                     },
                     capabilitiesTransformations: {
                         AppStarting: {
@@ -342,7 +344,7 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 },
                 configure: {
                     supportedSettings: {
-                        cursorSize: {}
+                        AppStarting: {}
                     }
                 }
             },

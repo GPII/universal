@@ -14,14 +14,14 @@
                 "preferences": {
                     "http://registry.gpii.net/common/toggleKeys": true,
                     "http://registry.gpii.net/applications/com.microsoft.windows.underlineMenuShortcuts": {
-                        "UnderlineMenuShortcutsOn": true,
-                        "KeyboardPreferenceOn": true
+                        "Enabled": true,
+                        "KeyboardPrefEnabled": true
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
-                        "Warning Sounds": true
+                        "Enabled": true
                     },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningSounds": {
-                        "Sound on Activation": true
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningSound": {
+                        "Sound on Activation": 1
                     }
                 }
             }

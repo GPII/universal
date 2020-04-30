@@ -177,11 +177,13 @@
             "maximum": 100
         }
     },
-    "http://registry.gpii.net/common/cursorAcceleration": {
+    "http://registry.gpii.net/common/cursorColor": {
         "schema": {
-            "title": "Cursor acceleration",
-            "description": "The acceleration of the mouse cursor", // needs to be defined
-            "type": "number"
+            "title": "Cursor Color",
+            "description": "Cursor color",
+            enum: ["White", "Black", "ReverseBlack"],
+            enumLabels: ["White", "Black", "Black (reversed)"],
+            default: "White"
         }
     },
     "http://registry.gpii.net/common/cursorSize": {
@@ -198,23 +200,19 @@
     "http://registry.gpii.net/common/cursorSpeed": {
         "schema": {
             "title": "Cursor speed",
-            "description": "The speed of the mouse cursor", // needs to be defined
-            "type": "number"
+            "description": "The speed of the mouse cursor",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.5 // TODO: Discuss why this is needed for the transform checks and if there are alternative approaches.
         }
     },
-    "http://registry.gpii.net/common/debounceEnable": {
+    "http://registry.gpii.net/common/debounce/enabled": {
         "schema": {
             "title": "Debounce",
             "description": "Whether to enable/disable debounce",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/debounceInterval": {
-        "schema": {
-            "title": "Debounce Interval",
-            "description": "Debounce interval", // needs to be defined
-            "type": "number"
         }
     },
     "http://registry.gpii.net/common/DPIScale": {
@@ -233,7 +231,7 @@
             "description": "Font size of the text",
             "type": "number",
             "default": 12,
-            "minimum": 0.1,
+            "minimum": 3,
             //TODO: Do we need to define a maximum value to avoid the user to leave the computer unusable?
             "multipleOf": 0.1
         }
@@ -302,6 +300,7 @@
             "title": "Keyboard init delay", // needs to be defined
             "description": "Keyboard's init delay",
             "type": "integer",
+            "default": 0,
             "minimum": 0 // in milliseconds
         }
     },
@@ -642,7 +641,8 @@
             "description": "Amount of mouse trailing",
             "type": "integer",
             "minimum": 0,
-            "maximum": 10
+            "maximum": 10,
+            "default": 0
         }
     },
     "http://registry.gpii.net/common/nightScreen": {
@@ -814,10 +814,11 @@
     "http://registry.gpii.net/common/speechRate": {
         "schema": {
             "title": "Speech rate",
-            "description": "Text to speech output speech rate",
+            "description": "Text to speech output speech rate in words per minute.",
             "type": "integer",
             "default": 150,
-            "minimum": 1
+            "minimum": 1,
+            "maximum": 1000
         }
     },
     "http://registry.gpii.net/common/stickyKeys": {
@@ -897,7 +898,7 @@
             "title": "TTS tracking mode",
             "description": "Tracking mode for TTS.",
             "type": "array",
-            "default": "focus",
+            "default": ["focus"],
             "items": {
                 "enum": [
                     "mouse",
@@ -937,6 +938,17 @@
             "description": "Whether to speak each word as it is typed",
             "type": "boolean",
             "default": false
+        }
+    },
+    "http://registry.gpii.net/common/wordSpace": {
+        "schema": {
+            "title": "Word spacing",
+            "description": "The relative spacing between words",
+            "type": "number",
+            "default": -1,
+            "minimum": -1,
+            "maximum": 2,
+            "multipleOf": 0.1
         }
     }
 }

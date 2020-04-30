@@ -11,7 +11,6 @@
                     "http://registry.gpii.net/common/punctuationVerbosity": "most",
                     "http://registry.gpii.net/common/announceCapitals": false,
                     "http://registry.gpii.net/common/readingUnit": "sentence",
-                    "http://registry.gpii.net/common/brailleMode": "structured",
                     "http://registry.gpii.net/common/stickyKeys": false,
                     "http://registry.gpii.net/common/wordEcho": true,
                     "http://registry.gpii.net/common/keyEcho": true
