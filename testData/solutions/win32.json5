@@ -3341,7 +3341,7 @@
                                 "en-US": "American English",
                                 "en-GB": "British English",
                                 "fr": "French",
-                                "fr-CA": "French Canadian",
+                                "fr-CA": "French",
                                 "it": "Italian",
                                 "pt-BR": "Brazilian Portuguese",
                                 "de": "German",
@@ -3360,7 +3360,7 @@
                                 "en-US": "American English",
                                 "en-GB": "British English",
                                 "fr": "French",
-                                "fr-CA": "French Canadian",
+                                "fr-CA": "French",
                                 "it": "Italian",
                                 "pt-BR": "Brazilian Portuguese",
                                 "de": "German",
@@ -3379,7 +3379,7 @@
                                 "en-US": "American English",
                                 "en-GB": "British English",
                                 "fr": "French",
-                                "fr-CA": "French Canadian",
+                                "fr-CA": "French",
                                 "it": "Italian",
                                 "pt-BR": "Brazilian Portuguese",
                                 "de": "German",
@@ -3398,7 +3398,7 @@
                                 "en-US": "American English",
                                 "en-GB": "British English",
                                 "fr": "French",
-                                "fr-CA": "French Canadian",
+                                "fr-CA": "French",
                                 "it": "Italian",
                                 "pt-BR": "Brazilian Portuguese",
                                 "de": "German",
@@ -3417,7 +3417,7 @@
                                 "en-US": "American English",
                                 "en-GB": "British English",
                                 "fr": "French",
-                                "fr-CA": "French Canadian",
+                                "fr-CA": "French",
                                 "it": "Italian",
                                 "pt-BR": "Brazilian Portuguese",
                                 "de": "German",
@@ -3436,7 +3436,7 @@
                                 "en-US": "American English",
                                 "en-GB": "British English",
                                 "fr": "French",
-                                "fr-CA": "French Canadian",
+                                "fr-CA": "French",
                                 "it": "Italian",
                                 "pt-BR": "Brazilian Portuguese",
                                 "de": "German",
@@ -3503,7 +3503,6 @@
                                 "American English": "en-US",
                                 "British English": "en-GB",
                                 "French": "fr",
-                                "French Canadian": "fr-CA",
                                 "Italian": "it",
                                 "Brazilian Portuguese": "pt-BR",
                                 "German": "de",
@@ -4831,7 +4830,8 @@
                     "path": "Control Panel\\Desktop",
                     "dataTypes": {
                         "TileWallpaper": "REG_SZ",
-                        "WallpaperStyle": "REG_SZ"
+                        "WallpaperStyle": "REG_SZ",
+                        "Scaling": "REG_SZ"
                     }
                 },
                 "supportedSettings": {
@@ -4869,28 +4869,29 @@
                             ]
                         }
                     },
-                    "Scaling": {
-                        "schema": {
-                            "title": "Desktop wallpaper scaling",
-                            "description": "Sets the wallpaper to scaling type.",
-                            "enum": [
-                                "Fill",
-                                "Fit",
-                                "Stretch",
-                                "Tile",
-                                "Center",
-                                "Span"
-                            ],
-                            "enumLabels": [
-                                "Fill",
-                                "Fit",
-                                "Stretch",
-                                "Tile",
-                                "Center",
-                                "Span"
-                            ]
-                        }
-                    }
+                    // TODO: Use this as an early test case for user-facing vs. settings handler facing work.
+                   "Scaling": {
+                       "schema": {
+                           "title": "Desktop wallpaper scaling",
+                           "description": "Sets the wallpaper to scaling type.",
+                           "enum": [
+                               "Fill",
+                               "Fit",
+                               "Stretch",
+                               "Tile",
+                               "Center",
+                               "Span"
+                           ],
+                           "enumLabels": [
+                               "Fill",
+                               "Fit",
+                               "Stretch",
+                               "Tile",
+                               "Center",
+                               "Span"
+                           ]
+                       }
+                   }
                 },
                 "capabilitiesTransformations": {
                     "TileWallpaper": {
@@ -5201,8 +5202,10 @@
                     "dataTypes": {
                         "AppStarting": "REG_SZ",
                         "Arrow": "REG_SZ",
+                        "Crosshair": "REG_SZ",
                         "Hand": "REG_SZ",
                         "Help": "REG_SZ",
+                        "IBeam": "REG_SZ",
                         "No": "REG_SZ",
                         "NWPen": "REG_SZ",
                         "SizeAll": "REG_SZ",
@@ -6209,6 +6212,218 @@
             }
         ]
     },
+    "com.microsoft.windows.colorFilters": {
+        "name": "Windows Built-in Color Fiters",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "capabilities": [
+        ],
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.systemSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "CheckResult": true
+                },
+                "supportedSettings": {
+                    "SystemSettings_Accessibility_ColorFiltering_IsEnabled": {
+                        "schema": {
+                            "title": "Enable color filtering",
+                            "description": "Enable or disables Windows color filters.",
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
+                        }
+                    },
+                    "SystemSettings_Accessibility_ColorFiltering_FilterType": {
+                        "schema": {
+                            "title": "Color filter type",
+                            "description": "Selects the Windows color filter to be used.",
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "enum": [
+                                        0,
+                                        1,
+                                        2,
+                                        3,
+                                        4,
+                                        5
+                                    ],
+                                    "enumLabels": [
+                                        "Grayscale",
+                                        "Inverted",
+                                        "Grayscale inverted",
+                                        "Red-green (green weak, deuteranopia)",
+                                        "Red-green (red weak, protanopia)",
+                                        "Blue-yellow (tritanopia)"
+                                    ],
+                                    "default": 1
+                                }
+                            }
+                        }
+                    },
+                    "SystemSettings_Accessibility_ColorFiltering_IsShortcutKeyEnabled": {
+                        "schema": {
+                            "title": "Shortcut key for color filters",
+                            "description": "Allow the shortcut key (Windows + Ctrl + C) to toggle color filter on or off.",
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "SystemSettings_Accessibility_ColorFiltering_IsEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.colorFilters.FilterType",
+                            "defaultOutputPath": "value",
+                            "match": [
+                                {
+                                    "inputValue": 0,
+                                    "outputValue": false
+                                }
+                            ],
+                            "noMatch": {
+                                "outputValue": true
+                            }
+                        }
+                    },
+                    "SystemSettings_Accessibility_ColorFiltering_FilterType": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.colorFilters.FilterType",
+                            "defaultOutputPath": "value",
+                            "match": [
+                                {
+                                    "inputValue": 1,
+                                    "outputValue": 0
+                                },
+                                {
+                                    "intputValue": 2,
+                                    "outputValue": 1
+                                },
+                                {
+                                    "inputValue": 3,
+                                    "outputValue": 2
+                                },
+                                {
+                                    "inputValue": 4,
+                                    "outputValue": 3
+                                },
+                                {
+                                    "inputValue": 5,
+                                    "outputValue": 4
+                                },
+                                {
+                                    "inputValue": 6,
+                                    "outputValue": 5
+                                }
+                            ],
+                            "noMatch": {
+                                "outputValue": 0
+                            }
+                        }
+                    },
+                    "SystemSettings_Accessibility_ColorFiltering_IsShortcutKeyEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.colorFilters.ShortcutKeyEnable",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.colorFilters.Enable": "SystemSettings_Accessibility_ColorFiltering_IsEnabled.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.colorFilters.FilterType": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "SystemSettings_Accessibility_ColorFiltering_IsEnabled.value",
+                            "defaultOutputPath": "value",
+                            "match": [
+                                {
+                                    "inputValue": 0,
+                                    "outputValue": 0
+                                },
+                                {
+                                    "inputValue": 1,
+                                    "outputValue": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "SystemSettings_Accessibility_ColorFiltering_FilterType.value",
+                                            "defaultOutputPath": "value",
+                                            "match": [
+                                                {
+                                                    "inputValue": 0,
+                                                    "outputValue": 1
+                                                },
+                                                {
+                                                    "intputValue": 1,
+                                                    "outputValue": 2
+                                                },
+                                                {
+                                                    "inputValue": 2,
+                                                    "outputValue": 3
+                                                },
+                                                {
+                                                    "inputValue": 3,
+                                                    "outputValue": 4
+                                                },
+                                                {
+                                                    "inputValue": 4,
+                                                    "outputValue": 5
+                                                },
+                                                {
+                                                    "inputValue": 5,
+                                                    "outputValue": 6
+                                                }
+                                            ],
+                                            "noMatch": {
+                                                "outputValue": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "noMatch": {
+                                "outputValue": 0
+                            }
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.colorFilters.ShortcutKeyEnable": "SystemSettings_Accessibility_ColorFiltering_IsShortcutKeyEnabled.value"
+                }
+            }
+        },
+        "update": [
+            "settings.configure"
+        ],
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
     "com.microsoft.windows.filterKeys": {
         "name": "Windows FilterKeys",
         "contexts": {
@@ -6263,33 +6478,41 @@
                                 }
                             }
                         }
-                    },
-                    "BounceKeysInterval": {
-                        "schema": {
-                            "title": "Bounce keys interval",
-                            "description": "Bounce keys interval time in milliseconds",
-                            "type": "object",
-                            "properties": {
-                                "path": { "type":  "string", "required": true},
-                                "value": {
-                                    "required": true,
-                                    "type": "integer",
-                                    "default": 0
-                                }
-                            }
-                        }
                     }
+                    // TODO: Reenable this once we can confirm a safe range of values that work with the SPI settings handler.
+//                    "BounceKeysInterval": {
+//                        "schema": {
+//                            "title": "Bounce keys interval",
+//                            "description": "Bounce keys interval time in milliseconds",
+//                            "type": "object",
+//                            "properties": {
+//                                "path": { "type":  "string", "required": true},
+//                                "value": {
+//                                    "required": true,
+//                                    "type": "integer",
+//                                    "default": 0
+//                                }
+//                            }
+//                        }
+//                    }
                 },
                 "capabilitiesTransformations": {
                     "FilterKeysEnable": {
                         "value": {
                             "transform": {
-                                "type": "fluid.transforms.binaryOp",
-                                "leftPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
-                                "left": false,
-                                "rightPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
-                                "right": false,
-                                "operator": "||"
+                                "type": "fluid.transforms.condition",
+                                "condition": {
+                                    "transform": {
+                                        "type": "fluid.transforms.binaryOp",
+                                        "leftPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
+                                        "left": false,
+                                        "rightPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
+                                        "right": false,
+                                        "operator": "||"
+                                    }
+                                },
+                                "true": true,
+                                "false": false
                             }
                         },
                         "path": {
@@ -6303,10 +6526,12 @@
                         "value": {
                             "transform": {
                                 "type": "fluid.transforms.condition",
+                                "condition": false, // If there's no setting, make sure it's counted as false.
                                 "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
                                 "true": {
                                     "transform": {
                                         "type": "fluid.transforms.linearScale",
+                                        "input": 0.5, // The default if there is now slow key interval set.
                                         "inputPath": "http://registry\\.gpii\\.net/common/slowKeysInterval",
                                         "factor": 1000
                                     }
@@ -6320,44 +6545,34 @@
                                 "input": "pvParam.iWaitMSec"
                             }
                         }
-                    },
-                    "BounceKeysInterval": {
-                        "value": {
-                            "transform": {
-                                "type": "fluid.transforms.condition",
-                                "condition": {
-                                    "transform": {
-                                        "type": "fluid.transforms.binaryOp",
-                                        "leftPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
-                                        "left": false,
-                                        "right": false,
-                                        "operator": "==="
-                                    }
-                                },
-                                "true": {
-                                    "transform": {
-                                        "type": "fluid.transforms.condition",
-                                        "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
-                                        "true": {
-                                            "transform": {
-                                                "type": "fluid.transforms.linearScale",
-                                                "inputPath": "http://registry\\.gpii\\.net/common/debounceInterval",
-                                                "factor": 1000
-                                            }
-                                        },
-                                        "false": 0
-                                    }
-                                },
-                                "false": 0
-                            }
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iBounceMSec"
-                            }
-                        }
                     }
+                    // TODO: Reenable this once we can confirm a safe range of values that work with the SPI settings handler.
+//                    "BounceKeysInterval": {
+//                        "value": {
+//                            "transform": {
+//                                "type": "fluid.transforms.condition",
+//                                "condition": false, // If there's no setting, make sure it's counted as false.
+//                                "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
+//                                // If close keys is enabled, bounce keys should be disabled.
+//                                "true": 0,
+//                                "false": {
+//                                    "transform": {
+//                                        "type": "fluid.transforms.condition",
+//                                        "condition": false, // If there's no setting, make sure it's counted as false.
+//                                        "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
+//                                        "true": 1000,
+//                                        "false": 0
+//                                    }
+//                                }
+//                            }
+//                        },
+//                        "path": {
+//                            "transform": {
+//                                "type": "fluid.transforms.literalValue",
+//                                "input": "pvParam.iBounceMSec"
+//                            }
+//                        }
+//                    }
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/slowKeys/enabled": {
@@ -6401,6 +6616,7 @@
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
                                     "leftPath": "BounceKeysInterval.value",
+                                    "left": 0,
                                     "right": 0,
                                     "operator": ">"
                                 }
@@ -6415,6 +6631,7 @@
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
                                     "leftPath": "BounceKeysInterval.value",
+                                    "left": 0,
                                     "right": 0,
                                     "operator": ">"
                                 }
@@ -6857,22 +7074,19 @@
                     "http://registry\\.gpii\\.net/common/language"
                 ],
                 "capabilitiesTransformations": {
-                    "MachinePreferredUILanguages": [{
+                    "MachinePreferredUILanguages": {
                         "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/language"
                         }
-                    }]
+                    }
                 },
                 "supportedSettings": {
                     "MachinePreferredUILanguages": {
                         "schema": {
                             "title": "The Machine Preferred UI Language",
                             "description": "Machine Preferred UI language.",
-                            "type": "array",
-                            "items": {
-                                type: "string"
-                            }
+                            "type": "string"
                         }
                     }
                 }
@@ -7079,8 +7293,8 @@
                                     "required": true
                                 },
                                 "value": {
-                                    "type": "boolean",
-                                    "default": false
+                                    "enum": [0, 1],
+                                    "enumLabels": ["Off", "On"]
                                 }
                             }
                         }
@@ -7088,7 +7302,14 @@
                 },
                 "capabilitiesTransformations": {
                     "UnderlineMenuShortcutsOn": {
-                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled",
+                        "value": {
+                            "transform": {
+                                "type": "fluid.transforms.condition",
+                                "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled",
+                                "true": 1,
+                                "false": 0
+                            }
+                        },
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
@@ -7199,19 +7420,19 @@
                         "schema": {
                             "title": "Shortcut warning messages",
                             "description": "Enable/Disable warning messages when changing a setting with a shortcut",
-                            "type": "object",
-                            "properties": {
-                                "value": {
-                                    "type": "boolean",
-                                    "default": false
-                                }
-                            }
+                            "enum": [0,1],
+                            "enumLabels": ["Off", "On"]
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "Warning Sounds": {
-                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled"
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled",
+                            "true": 1,
+                            "false": 0
+                        }
                     }
                 },
                 "inverseCapabilitiesTransformations": {
@@ -7713,35 +7934,6 @@
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
                                 "input": "pvParam.iMaxSpeed"
-                            }
-                        }
-                    },
-                    "Acceleration": {
-                        "value": {
-                            "transform": {
-                                "type": "fluid.transforms.binaryOp",
-                                "left": {
-                                    "transform": {
-                                        "type": "fluid.transforms.linearScale",
-                                        "inputPath": "http://registry\\.gpii\\.net/common/initDelay",
-                                        "factor": 1000
-                                    }
-                                },
-                                "right": {
-                                    "transform": {
-                                        "type": "fluid.transforms.linearScale",
-                                        "inputPath": "http://registry\\.gpii\\.net/common/cursorAcceleration",
-                                        "factor": 1000,
-                                        "offset": 1000
-                                    }
-                                },
-                                "operator": "+"
-                            }
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam.iTimeToMaxSpeed"
                             }
                         }
                     }
@@ -9223,7 +9415,13 @@
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.StartWithShortcut": "WinEnterLaunchEnabled",
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.TextVerbosityLevel": "VerbosityLevel"
                 }
-            },
+            }/*,
+ * This settings handler block has been commented out since these settings have become
+ * unstable as a result of https://issues.gpii.net/browse/GPII-4231.
+ * https://issues.gpii.net/browse/GPII-4462 will track work to potentially rewrite this
+ * settings handler back in C# and remove the instability. It's also possible
+ * that this instability has resulted from missing "update"/"configure"/"restore" blocks as seen
+ * with the magnifier
             "configureSystemSettings": {
                 "type": "gpii.windows.systemSettingsHandler",
                 "liveness": "live",
@@ -9275,6 +9473,7 @@
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.EnableSystemAutoStart": "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled.value"
                 }
             }
+*/
         },
         "launchHandlers": {
             "launcher": {
@@ -9320,14 +9519,7 @@
                 ],
                 "capabilitiesTransformations": {
                     "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
-                        "value": {
-                            transform: {
-                                type: "fluid.transforms.condition",
-                                conditionPath: "http://registry\\.gpii\\.net/common/nightScreen",
-                                "true": 1,
-                                "false": 0
-                            }
-                        }
+                        "value": "http://registry\\.gpii\\.net/common/nightScreen"
                     }
                 },
                 "supportedSettings": {
@@ -9338,16 +9530,12 @@
                             "type": "object",
                             "properties": {
                                 "value": {
-                                    "enum": [0, 1],
-                                    "enumLabels": ["Off", "On"],
-                                    "default": 0
+                                    "type": "boolean",
+                                    "default": false
                                 }
                             }
                         }
                     }
-                },
-                "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/nightScreen": "SystemSettings_Display_BlueLight_ManualToggleQuickAction.value"
                 }
             }
         },
@@ -9733,13 +9921,17 @@
                         "schema": {
                             "title": "Screen resolution",
                             "description": "Screen resolution of the default display.",
-                            "type": "array"
-                            // TODO: Discuss and fix this.
-                            // TODO: Not sure about this type
-                            // TODO: This must be filled in on the fly with available screen resolutions
-                            //"items": {
-                            //    "enum": []
-                            //}
+                            "type": "object",
+                            // Although in other contexts we've accepted an array, the windows display settings handler
+                            // throws a hard fail unless this is an object. See:
+                            //
+                            // https://github.com/GPII/windows/blob/97953e9b2f19fa0524d5c667291e4e3e6641fb9f/gpii/node_modules/displaySettingsHandler/src/displaySettingsHandler.js#L223
+                            //
+                            "properties": {
+                                "width": { type:  "integer", required:  true },
+                                "height": { type:  "integer", required:  true },
+                                "additionalProperties": false
+                            }
                         }
                     }
                 }
@@ -10634,14 +10826,12 @@
                             "default": false
                         }
                     },
+                    // TODO: Add a sensible default.
                     "ApplicationSettings.AppBar.optToolbarBackColour.$t": {
                         "schema": {
                             "title": "Toolbar color",
-                            "description": "Changes the ammount of time for considering a click when hovering over a key",
-                            "type": "integer",
-                            "default": 1000,
-                            "minimum": 500,
-                            "maximum": 3000
+                            "description": "Changes the amount of time for considering a click when hovering over a key.",
+                            "type": "string"
                         }
                     },
                     "ApplicationSettings.AppBar.RunOnStartUp.$t": {
@@ -12401,14 +12591,6 @@
                     "path": "net.gpii.uioPlus"
                 },
                 "supportedSettings": {
-                    "captionsEnabled": {
-                        "schema": {
-                            "title": "Captions",
-                            "description": "Request videos to display captions.",
-                            "type": "boolean",
-                            "default": false
-                        }
-                    },
                     "characterSpace": {
                         "schema": {
                             "title": "Character Space",
@@ -12540,7 +12722,6 @@
                     }
                 },
                 "capabilitiesTransformations": {
-                    "captionsEnabled": "http://registry\\.gpii\\.net/common/captions/enabled",
                     "characterSpace": {
                         "transform": {
                             "type": "fluid.transforms.round",

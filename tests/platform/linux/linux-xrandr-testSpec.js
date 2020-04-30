@@ -35,10 +35,10 @@ gpii.tests.acceptance.linux.xrandr.testDefs = fluid.freezeRecursive([
             "gpii.xrandr": {
                 "some.app.id": [{
                     "settings": {
-                        "screen-resolution": {
+                        "screen-resolution": [{
                             "width": 800,
                             "height": 600
-                        }
+                        }]
                     }
                 }]
             }
