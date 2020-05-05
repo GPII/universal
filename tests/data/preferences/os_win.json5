@@ -262,11 +262,6 @@
                         "InsertSpace": 0,
                         "Dock": 0
                     },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.mirrorScreen": {
-                        "ScreenMirrorConfig": {
-                            "value": false
-                        }
-                    },
                     "http://registry.gpii.net/applications/com.microsoft.windows.soundSentry": {
                         "WindowsEffect": 2
                     },
