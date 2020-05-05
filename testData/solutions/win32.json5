@@ -5131,57 +5131,6 @@
             }
         ]
     },
-    "com.microsoft.windows.mirrorScreen": {
-        "name": "Windows Screen Mirroring",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "win32",
-                    "version": ">=5.0"
-                }
-            ]
-        },
-        "settingsHandlers": {
-            "configure": {
-                "type": "gpii.windows.nativeSettingsHandler",
-                "liveness": "live",
-                "options": {
-                    "functionName": "ScreenMirror"
-                },
-                "supportedSettings": {
-                    "ScreenMirrorConfig": {
-                        "schema": {
-                            "title": "Screen mirroring",
-                            "description": "Mirrors the primary screen into a secondary screen.",
-                            "type": "object",
-                            "properties": {
-                                "value": {
-                                    "type": "boolean",
-                                    "default": false
-                                }
-                            }
-                        }
-                    }
-                },
-                "capabilitiesTransformations": {
-                    "ScreenMirrorConfig": {
-                        "value": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mirrorScreen.ScreenMirror"
-                    }
-                },
-                "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mirrorScreen.ScreenMirror": "ScreenMirrorConfig.value"
-                }
-            }
-        },
-        "configure": [
-            "settings.configure"
-        ],
-        "isInstalled": [
-            {
-                "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ]
-    },
     "com.microsoft.windows.cursors": {
         "name": "Windows Cursors",
         "contexts": {
