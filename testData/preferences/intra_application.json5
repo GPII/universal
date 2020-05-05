@@ -10,9 +10,6 @@
             "SolidColor": { r:  128, g: 128, b: 128 }, // Transformed to "SolidColorConfig" setting
             "WallpaperStyle": "6" // Transformed to "Scaling" setting
           },
-          "http://registry.gpii.net/applications/com.microsoft.windows.mirrorScreen": {
-            "ScreenMirror": true // Transformed to "ScreenMirrorConfig" setting
-          },
           "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": {
             "DoubleClickTime": 500, // Transformed to "DoubleClickTimeConfig" setting
             "ScrollChars": 5, // Transformed to "ScrollCharsConfig" setting
