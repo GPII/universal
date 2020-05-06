@@ -1343,14 +1343,15 @@
 
                     // --- Text Processing - Indicate Newlines When ------------
 
-                    "Options.IndicateNewlinesAndParagraphs": {
-                        "schema": {
-                            "title": "Indicate Newlines and Paragraphs",
-                            "description": "Whether/how to indicate the presence of new lines and paragraphs.",
-                            "type": "integer"
-                        },
-                        "label": "bitmask"
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Options.IndicateNewlinesAndParagraphs": {
+                    //     "schema": {
+                    //         "title": "Indicate Newlines and Paragraphs",
+                    //         "description": "Whether/how to indicate the presence of new lines and paragraphs.",
+                    //         "type": "integer"
+                    //     },
+                    //     "label": "bitmask"
+                    // },
 
                     // --- Text Processing - Phonetic Announcement ------------
 
@@ -1697,16 +1698,17 @@
 
                     // -------------- --------------------------- ----------------
 
-                    "Options.SpellingAttributeOverride": {
-                        // NOTE-TODO: Unknown setting format, but when it's selected
-                        // in the menu "Detect Spelling While Navigating" the
-                        // value is set to "|messageVoice|BuzzerShort.wav|messageVoice|"
-                        "schema": {
-                            "title": "Spelling Attribute Override",
-                            "description": "Overrides the behavior when a spelling mistake is found. Complete functionality is unknown.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Options.SpellingAttributeOverride": {
+                    //     // NOTE-TODO: Unknown setting format, but when it's selected
+                    //     // in the menu "Detect Spelling While Navigating" the
+                    //     // value is set to "|messageVoice|BuzzerShort.wav|messageVoice|"
+                    //     "schema": {
+                    //         "title": "Spelling Attribute Override",
+                    //         "description": "Overrides the behavior when a spelling mistake is found. Complete functionality is unknown.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "Options.IndicateMistypedWord": {
                         "schema": {
                             "title": "Indicate Mistyped Words",
@@ -1716,15 +1718,16 @@
                             "default": 1
                         }
                     },
-                    "Options.GrammarAttributeOverride": {
-                        // NOTE-TODO: The format of the settign is unknown, but
-                        // when the setting is activated is set to: "1|messageVoice||messageVoice|"
-                        "schema": {
-                            "title": "Grammar and Advanced Proofing",
-                            "description": "Enable or disable 'Grammar and Advanced Proofing' feature.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Options.GrammarAttributeOverride": {
+                    //     // NOTE-TODO: The format of the settign is unknown, but
+                    //     // when the setting is activated is set to: "1|messageVoice||messageVoice|"
+                    //     "schema": {
+                    //         "title": "Grammar and Advanced Proofing",
+                    //         "description": "Enable or disable 'Grammar and Advanced Proofing' feature.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "Options.IgnoreSpellingAndGrammarErrorsDuringSayAll": {
                         "schema": {
                             "title": "Apply options during SayAll",
@@ -1818,168 +1821,190 @@
                     //    - "Status Information"
                     //    - "Toasts"
                     //    - "ToolTip"
-
-                    "OutputModes.CONTROL_GROUP_NAME": {
-                        "schema": {
-                            "title": "Control Group Name Verbosity",
-                            "description": "How verbose \"control group names\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.APPLICATION_START_MESSAGE": {
-                        "schema": {
-                            "title": "Application Start Message Verbosity",
-                            "description": "How verbose \"application start message\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.CONTROL_DESCRIPTION": {
-                        "schema": {
-                            "title": "Control Description Verbosity",
-                            "description": "How verbose \"Control Description\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.CONTROL_NAME": {
-                        "schema": {
-                            "title": "Control Name Verbosity",
-                            "description": "How verbose \"Control Name\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.CONTROLTYPE": {
-                        "schema": {
-                            "title": "Control Type Verbosity",
-                            "description": "How verbose \"Control Type\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.DIALOG_NAME": {
-                        "schema": {
-                            "title": "Dialog Name Verbosity",
-                            "description": "How verbose \"Dialog Name\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.DIALOG_TEXT": {
-                        "schema": {
-                            "title": "Dialog Text Verbosity",
-                            "description": "How verbose \"Dialog Text\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.DOCUMENT_NAME": {
-                        "schema": {
-                            "title": "Document Name Verbosity",
-                            "description": "How verbose \"Document Name\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.ERROR_MESSAGE": {
-                        "schema": {
-                            "title": "Error Message Verbosity",
-                            "description": "How verbose \"Error Message\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.HELP_BALLOON": {
-                        "schema": {
-                            "title": "Help Balloon Verbosity",
-                            "description": "How verbose \"Help Balloon\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.HELP_MESSAGE": {
-                        "schema": {
-                            "title": "Help Message Verbosity",
-                            "description": "How verbose \"Help Message\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.ITEM_NUMBER": {
-                        "schema": {
-                            "title": "Item Number Verbosity",
-                            "description": "How verbose \"Item Number\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.ITEM_STATE": {
-                        "schema": {
-                            "title": "Item State Verbosity",
-                            "description": "How verbose \"Item State\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.JAWS_MESSAGE": {
-                        "schema": {
-                            "title": "JAWS Message Verbosity",
-                            "description": "How verbose \"JAWS Message\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.MOUSE_ECHO": {
-                        "schema": {
-                            "title": "Mouse Echo Verbosity",
-                            "description": "How verbose \"Mouse Echo\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.POSITION_INFORMATION": {
-                        "schema": {
-                            "title": "Position Information Verbosity",
-                            "description": "How verbose \"Position Information\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.SCREEN_MESSAGE": {
-                        "schema": {
-                            "title": "Screen Message Verbosity",
-                            "description": "How verbose \"Screen Message\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.SELECT": {
-                        "schema": {
-                            "title": "Selection Verbosity",
-                            "description": "How verbose \"Selection\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.SELECTED_ITEM": {
-                        "schema": {
-                            "title": "Selected Item Verbosity",
-                            "description": "How verbose \"Selected Item\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.SMART_HELP_MESSAGES": {
-                        "schema": {
-                            "title": "Smart Help Messages Verbosity",
-                            "description": "How verbose \"Smart Help Messages\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.STATUS_INFORMATION": {
-                        "schema": {
-                            "title": "Status Information Verbosity",
-                            "description": "How verbose \"Status Information\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.TOASTS": {
-                        "schema": {
-                            "title": "Toasts Verbosity",
-                            "description": "How verbose \"Toasts\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
-                    "OutputModes.TOOLTIP": {
-                        "schema": {
-                            "title": "Tooltip Verbosity",
-                            "description": "How verbose \"Tooltip\" announcements should be.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.CONTROL_GROUP_NAME": {
+                    //     "schema": {
+                    //         "title": "Control Group Name Verbosity",
+                    //         "description": "How verbose \"control group names\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.APPLICATION_START_MESSAGE": {
+                    //     "schema": {
+                    //         "title": "Application Start Message Verbosity",
+                    //         "description": "How verbose \"application start message\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.CONTROL_DESCRIPTION": {
+                    //     "schema": {
+                    //         "title": "Control Description Verbosity",
+                    //         "description": "How verbose \"Control Description\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.CONTROL_NAME": {
+                    //     "schema": {
+                    //         "title": "Control Name Verbosity",
+                    //         "description": "How verbose \"Control Name\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.CONTROLTYPE": {
+                    //     "schema": {
+                    //         "title": "Control Type Verbosity",
+                    //         "description": "How verbose \"Control Type\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.DIALOG_NAME": {
+                    //     "schema": {
+                    //         "title": "Dialog Name Verbosity",
+                    //         "description": "How verbose \"Dialog Name\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.DIALOG_TEXT": {
+                    //     "schema": {
+                    //         "title": "Dialog Text Verbosity",
+                    //         "description": "How verbose \"Dialog Text\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.DOCUMENT_NAME": {
+                    //     "schema": {
+                    //         "title": "Document Name Verbosity",
+                    //         "description": "How verbose \"Document Name\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.ERROR_MESSAGE": {
+                    //     "schema": {
+                    //         "title": "Error Message Verbosity",
+                    //         "description": "How verbose \"Error Message\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.HELP_BALLOON": {
+                    //     "schema": {
+                    //         "title": "Help Balloon Verbosity",
+                    //         "description": "How verbose \"Help Balloon\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.HELP_MESSAGE": {
+                    //     "schema": {
+                    //         "title": "Help Message Verbosity",
+                    //         "description": "How verbose \"Help Message\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.ITEM_NUMBER": {
+                    //     "schema": {
+                    //         "title": "Item Number Verbosity",
+                    //         "description": "How verbose \"Item Number\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.ITEM_STATE": {
+                    //     "schema": {
+                    //         "title": "Item State Verbosity",
+                    //         "description": "How verbose \"Item State\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.JAWS_MESSAGE": {
+                    //     "schema": {
+                    //         "title": "JAWS Message Verbosity",
+                    //         "description": "How verbose \"JAWS Message\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.MOUSE_ECHO": {
+                    //     "schema": {
+                    //         "title": "Mouse Echo Verbosity",
+                    //         "description": "How verbose \"Mouse Echo\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.POSITION_INFORMATION": {
+                    //     "schema": {
+                    //         "title": "Position Information Verbosity",
+                    //         "description": "How verbose \"Position Information\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.SCREEN_MESSAGE": {
+                    //     "schema": {
+                    //         "title": "Screen Message Verbosity",
+                    //         "description": "How verbose \"Screen Message\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.SELECT": {
+                    //     "schema": {
+                    //         "title": "Selection Verbosity",
+                    //         "description": "How verbose \"Selection\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.SELECTED_ITEM": {
+                    //     "schema": {
+                    //         "title": "Selected Item Verbosity",
+                    //         "description": "How verbose \"Selected Item\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.SMART_HELP_MESSAGES": {
+                    //     "schema": {
+                    //         "title": "Smart Help Messages Verbosity",
+                    //         "description": "How verbose \"Smart Help Messages\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.STATUS_INFORMATION": {
+                    //     "schema": {
+                    //         "title": "Status Information Verbosity",
+                    //         "description": "How verbose \"Status Information\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.TOASTS": {
+                    //     "schema": {
+                    //         "title": "Toasts Verbosity",
+                    //         "description": "How verbose \"Toasts\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "OutputModes.TOOLTIP": {
+                    //     "schema": {
+                    //         "title": "Tooltip Verbosity",
+                    //         "description": "How verbose \"Tooltip\" announcements should be.",
+                    //         "type": "string"
+                    //     }
+                    // },
 
                     // =========================================================
 
@@ -2176,27 +2201,29 @@
 
                     // --------------- Say All Scheme -----------------------
 
-                    "Options.SayAllScheme": {
-                        // NOTE-TODO: Setting can be a selection from multiple schemas available in the
-                        // UI.
-                        "schema": {
-                            "title": "\"Say All\" Scheme",
-                            "description": "Which \"Say All\" scheme to use.",
-                            "type": "string"
-                        }
-                    },
-                    "Options.SayAllSchemes": {
-                        // NOTE-TODO: This setting range can't be known ahead of time because it should
-                        // be parsed, since it's a text of the following form:
-                        //     - "Classic|Text Only|Text With Sounds"
-                        // created using a combination of the user selected schemes to be placed in the
-                        // menu.
-                        "schema": {
-                            "title": "\"Say All\" Schemes",
-                            "description": "Which \"Say All\" schemes to display in the \"Select Scheme\" menu.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Options.SayAllScheme": {
+                    //     // NOTE-TODO: Setting can be a selection from multiple schemas available in the
+                    //     // UI.
+                    //     "schema": {
+                    //         "title": "\"Say All\" Scheme",
+                    //         "description": "Which \"Say All\" scheme to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Options.SayAllSchemes": {
+                    //     // NOTE-TODO: This setting range can't be known ahead of time because it should
+                    //     // be parsed, since it's a text of the following form:
+                    //     //     - "Classic|Text Only|Text With Sounds"
+                    //     // created using a combination of the user selected schemes to be placed in the
+                    //     // menu.
+                    //     "schema": {
+                    //         "title": "\"Say All\" Schemes",
+                    //         "description": "Which \"Say All\" schemes to display in the \"Select Scheme\" menu.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "Options.SayBlankLineCount": {
                         "schema": {
                             "title": "Say Blank Line Count",
@@ -2956,22 +2983,23 @@
 
                     // ---- Braille Flash Messages - Verbosity Levels  -----
 
-                    "Braille.BrailleVerbosity": {
-                        "schema": {
-                            "title": "Braille Verbosity",
-                            "description": "Sets braille verbosity for Flash messages.",
-                            "enum": [
-                                0,
-                                1,
-                                2
-                            ],
-                            "enumLabels": [
-                                "Beginner, Highest",
-                                "Intermediate",
-                                "Advanced, Lowest"
-                            ]
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Braille.BrailleVerbosity": {
+                    //     "schema": {
+                    //         "title": "Braille Verbosity",
+                    //         "description": "Sets braille verbosity for Flash messages.",
+                    //         "enum": [
+                    //             0,
+                    //             1,
+                    //             2
+                    //         ],
+                    //         "enumLabels": [
+                    //             "Beginner, Highest",
+                    //             "Intermediate",
+                    //             "Advanced, Lowest"
+                    //         ]
+                    //     }
+                    // },
 
                     // ---- Braille - Flash Messages - Verbosity Levels - Items to brailed  -----
 
@@ -3620,580 +3648,662 @@
                     // is muted or not, and the second the keylabel used for
                     // describing it.
 
-                    "KeyLabels.Add": {
-                        "schema": {
-                            "title": "Manage Add Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Apps": {
-                        "schema": {
-                            "title": "Manage Apps Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Attn": {
-                        "schema": {
-                            "title": "Manage Attn Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Back": {
-                        "schema": {
-                            "title": "Manage Back Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Cancel": {
-                        "schema": {
-                            "title": "Manage Cancel Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Capital": {
-                        "schema": {
-                            "title": "Manage Capital Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Clear": {
-                        "schema": {
-                            "title": "Manage Clear Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Control": {
-                        "schema": {
-                            "title": "Manage Control Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.CrSel": {
-                        "schema": {
-                            "title": "Manage CrSel Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Decimal": {
-                        "schema": {
-                            "title": "Manage Decimal Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Delete": {
-                        "schema": {
-                            "title": "Manage Delete Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Divide": {
-                        "schema": {
-                            "title": "Manage Divide Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Down": {
-                        "schema": {
-                            "title": "Manage Down Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.End": {
-                        "schema": {
-                            "title": "Manage End Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.ErEOF": {
-                        "schema": {
-                            "title": "Manage ErEOF Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Escape": {
-                        "schema": {
-                            "title": "Manage Escape Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Execute": {
-                        "schema": {
-                            "title": "Manage Execute Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.ExSel": {
-                        "schema": {
-                            "title": "Manage ExSel Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F1": {
-                        "schema": {
-                            "title": "Manage F1 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F10": {
-                        "schema": {
-                            "title": "Manage F10 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F11": {
-                        "schema": {
-                            "title": "Manage F11 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F12": {
-                        "schema": {
-                            "title": "Manage F12 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F13": {
-                        "schema": {
-                            "title": "Manage F13 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F14": {
-                        "schema": {
-                            "title": "Manage F14 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F15": {
-                        "schema": {
-                            "title": "Manage F15 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F16": {
-                        "schema": {
-                            "title": "Manage F16 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F17": {
-                        "schema": {
-                            "title": "Manage F17 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F18": {
-                        "schema": {
-                            "title": "Manage F18 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F19": {
-                        "schema": {
-                            "title": "Manage F19 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F2": {
-                        "schema": {
-                            "title": "Manage F2 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F20": {
-                        "schema": {
-                            "title": "Manage F20 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F21": {
-                        "schema": {
-                            "title": "Manage F21 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F22": {
-                        "schema": {
-                            "title": "Manage F22 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F23": {
-                        "schema": {
-                            "title": "Manage F23 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F3": {
-                        "schema": {
-                            "title": "Manage F3 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F4": {
-                        "schema": {
-                            "title": "Manage F4 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F5": {
-                        "schema": {
-                            "title": "Manage F5 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F6": {
-                        "schema": {
-                            "title": "Manage F6 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F7": {
-                        "schema": {
-                            "title": "Manage F7 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F8": {
-                        "schema": {
-                            "title": "Manage F8 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.F9": {
-                        "schema": {
-                            "title": "Manage F9 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Help": {
-                        "schema": {
-                            "title": "Manage Help Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Home": {
-                        "schema": {
-                            "title": "Manage Home Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Insert": {
-                        "schema": {
-                            "title": "Manage Insert Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Left": {
-                        "schema": {
-                            "title": "Manage Left Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Letters": {
-                        "schema": {
-                            "title": "Manage Letters Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.LWin": {
-                        "schema": {
-                            "title": "Manage LWin Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Menu": {
-                        "schema": {
-                            "title": "Manage Menu Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.ModifiedPrintable": {
-                        "schema": {
-                            "title": "Manage ModifiedPrintable Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Multiply": {
-                        "schema": {
-                            "title": "Manage Multiply Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Next": {
-                        "schema": {
-                            "title": "Manage Next Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Numbers": {
-                        "schema": {
-                            "title": "Manage Numbers Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.NumLock": {
-                        "schema": {
-                            "title": "Manage NumLock Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.NumPad0": {
-                        "schema": {
-                            "title": "Manage NumPad0 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.NumPad1": {
-                        "schema": {
-                            "title": "Manage NumPad1 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.NumPad2": {
-                        "schema": {
-                            "title": "Manage NumPad2 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.NumPad3": {
-                        "schema": {
-                            "title": "Manage NumPad3 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.NumPad4": {
-                        "schema": {
-                            "title": "Manage NumPad4 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.NumPad5": {
-                        "schema": {
-                            "title": "Manage NumPad5 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.NumPad6": {
-                        "schema": {
-                            "title": "Manage NumPad6 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.NumPad7": {
-                        "schema": {
-                            "title": "Manage NumPad7 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.NumPad8": {
-                        "schema": {
-                            "title": "Manage NumPad8 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.OEM_clear": {
-                        "schema": {
-                            "title": "Manage OEM_clear Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.PA1": {
-                        "schema": {
-                            "title": "Manage PA1 Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Pause": {
-                        "schema": {
-                            "title": "Manage Pause Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Play": {
-                        "schema": {
-                            "title": "Manage Play Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Print": {
-                        "schema": {
-                            "title": "Manage Print Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Prior": {
-                        "schema": {
-                            "title": "Manage Prior Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Return": {
-                        "schema": {
-                            "title": "Manage Return Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Right": {
-                        "schema": {
-                            "title": "Manage Right Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.RWin": {
-                        "schema": {
-                            "title": "Manage RWin Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Scroll": {
-                        "schema": {
-                            "title": "Manage Scroll Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Select": {
-                        "schema": {
-                            "title": "Manage Select Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Separator": {
-                        "schema": {
-                            "title": "Manage Separator Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Shift": {
-                        "schema": {
-                            "title": "Manage Shift Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.SnapShot ": {
-                        "schema": {
-                            "title": "Manage SnapShot Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Space": {
-                        "schema": {
-                            "title": "Manage Space Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Subtract": {
-                        "schema": {
-                            "title": "Manage Subtract Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Symbols": {
-                        "schema": {
-                            "title": "Manage Symbols Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Tab": {
-                        "schema": {
-                            "title": "Manage Tab Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Up": {
-                        "schema": {
-                            "title": "Manage Up Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
-                    "KeyLabels.Zoom": {
-                        "schema": {
-                            "title": "Manage Zoom Keylabel",
-                            "description": "Change Keylabel and Muting.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Add": {
+                    //     "schema": {
+                    //         "title": "Manage Add Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Apps": {
+                    //     "schema": {
+                    //         "title": "Manage Apps Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Attn": {
+                    //     "schema": {
+                    //         "title": "Manage Attn Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Back": {
+                    //     "schema": {
+                    //         "title": "Manage Back Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Cancel": {
+                    //     "schema": {
+                    //         "title": "Manage Cancel Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Capital": {
+                    //     "schema": {
+                    //         "title": "Manage Capital Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Clear": {
+                    //     "schema": {
+                    //         "title": "Manage Clear Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Control": {
+                    //     "schema": {
+                    //         "title": "Manage Control Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.CrSel": {
+                    //     "schema": {
+                    //         "title": "Manage CrSel Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Decimal": {
+                    //     "schema": {
+                    //         "title": "Manage Decimal Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Delete": {
+                    //     "schema": {
+                    //         "title": "Manage Delete Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Divide": {
+                    //     "schema": {
+                    //         "title": "Manage Divide Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Down": {
+                    //     "schema": {
+                    //         "title": "Manage Down Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.End": {
+                    //     "schema": {
+                    //         "title": "Manage End Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.ErEOF": {
+                    //     "schema": {
+                    //         "title": "Manage ErEOF Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Escape": {
+                    //     "schema": {
+                    //         "title": "Manage Escape Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Execute": {
+                    //     "schema": {
+                    //         "title": "Manage Execute Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.ExSel": {
+                    //     "schema": {
+                    //         "title": "Manage ExSel Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F1": {
+                    //     "schema": {
+                    //         "title": "Manage F1 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F10": {
+                    //     "schema": {
+                    //         "title": "Manage F10 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F11": {
+                    //     "schema": {
+                    //         "title": "Manage F11 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F12": {
+                    //     "schema": {
+                    //         "title": "Manage F12 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F13": {
+                    //     "schema": {
+                    //         "title": "Manage F13 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F14": {
+                    //     "schema": {
+                    //         "title": "Manage F14 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F15": {
+                    //     "schema": {
+                    //         "title": "Manage F15 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F16": {
+                    //     "schema": {
+                    //         "title": "Manage F16 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F17": {
+                    //     "schema": {
+                    //         "title": "Manage F17 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F18": {
+                    //     "schema": {
+                    //         "title": "Manage F18 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F19": {
+                    //     "schema": {
+                    //         "title": "Manage F19 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F2": {
+                    //     "schema": {
+                    //         "title": "Manage F2 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F20": {
+                    //     "schema": {
+                    //         "title": "Manage F20 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F21": {
+                    //     "schema": {
+                    //         "title": "Manage F21 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F22": {
+                    //     "schema": {
+                    //         "title": "Manage F22 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F23": {
+                    //     "schema": {
+                    //         "title": "Manage F23 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F3": {
+                    //     "schema": {
+                    //         "title": "Manage F3 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F4": {
+                    //     "schema": {
+                    //         "title": "Manage F4 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F5": {
+                    //     "schema": {
+                    //         "title": "Manage F5 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F6": {
+                    //     "schema": {
+                    //         "title": "Manage F6 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F7": {
+                    //     "schema": {
+                    //         "title": "Manage F7 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F8": {
+                    //     "schema": {
+                    //         "title": "Manage F8 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.F9": {
+                    //     "schema": {
+                    //         "title": "Manage F9 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Help": {
+                    //     "schema": {
+                    //         "title": "Manage Help Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Home": {
+                    //     "schema": {
+                    //         "title": "Manage Home Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Insert": {
+                    //     "schema": {
+                    //         "title": "Manage Insert Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Left": {
+                    //     "schema": {
+                    //         "title": "Manage Left Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Letters": {
+                    //     "schema": {
+                    //         "title": "Manage Letters Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.LWin": {
+                    //     "schema": {
+                    //         "title": "Manage LWin Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Menu": {
+                    //     "schema": {
+                    //         "title": "Manage Menu Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.ModifiedPrintable": {
+                    //     "schema": {
+                    //         "title": "Manage ModifiedPrintable Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Multiply": {
+                    //     "schema": {
+                    //         "title": "Manage Multiply Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Next": {
+                    //     "schema": {
+                    //         "title": "Manage Next Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Numbers": {
+                    //     "schema": {
+                    //         "title": "Manage Numbers Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.NumLock": {
+                    //     "schema": {
+                    //         "title": "Manage NumLock Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.NumPad0": {
+                    //     "schema": {
+                    //         "title": "Manage NumPad0 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.NumPad1": {
+                    //     "schema": {
+                    //         "title": "Manage NumPad1 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.NumPad2": {
+                    //     "schema": {
+                    //         "title": "Manage NumPad2 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.NumPad3": {
+                    //     "schema": {
+                    //         "title": "Manage NumPad3 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.NumPad4": {
+                    //     "schema": {
+                    //         "title": "Manage NumPad4 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.NumPad5": {
+                    //     "schema": {
+                    //         "title": "Manage NumPad5 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.NumPad6": {
+                    //     "schema": {
+                    //         "title": "Manage NumPad6 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.NumPad7": {
+                    //     "schema": {
+                    //         "title": "Manage NumPad7 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.NumPad8": {
+                    //     "schema": {
+                    //         "title": "Manage NumPad8 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.OEM_clear": {
+                    //     "schema": {
+                    //         "title": "Manage OEM_clear Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.PA1": {
+                    //     "schema": {
+                    //         "title": "Manage PA1 Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Pause": {
+                    //     "schema": {
+                    //         "title": "Manage Pause Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Play": {
+                    //     "schema": {
+                    //         "title": "Manage Play Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Print": {
+                    //     "schema": {
+                    //         "title": "Manage Print Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Prior": {
+                    //     "schema": {
+                    //         "title": "Manage Prior Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Return": {
+                    //     "schema": {
+                    //         "title": "Manage Return Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Right": {
+                    //     "schema": {
+                    //         "title": "Manage Right Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.RWin": {
+                    //     "schema": {
+                    //         "title": "Manage RWin Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Scroll": {
+                    //     "schema": {
+                    //         "title": "Manage Scroll Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Select": {
+                    //     "schema": {
+                    //         "title": "Manage Select Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Separator": {
+                    //     "schema": {
+                    //         "title": "Manage Separator Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Shift": {
+                    //     "schema": {
+                    //         "title": "Manage Shift Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.SnapShot ": {
+                    //     "schema": {
+                    //         "title": "Manage SnapShot Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Space": {
+                    //     "schema": {
+                    //         "title": "Manage Space Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Subtract": {
+                    //     "schema": {
+                    //         "title": "Manage Subtract Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Symbols": {
+                    //     "schema": {
+                    //         "title": "Manage Symbols Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Tab": {
+                    //     "schema": {
+                    //         "title": "Manage Tab Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Up": {
+                    //     "schema": {
+                    //         "title": "Manage Up Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "KeyLabels.Zoom": {
+                    //     "schema": {
+                    //         "title": "Manage Zoom Keylabel",
+                    //         "description": "Change Keylabel and Muting.",
+                    //         "type": "string"
+                    //     }
+                    // },
 
                     // ----------- Keyboard - Touch Keyboard -------
 
@@ -4270,132 +4380,150 @@
 
                     // ---------------- Research It ----------------
 
-                    "Research It Options.Primary": {
-                        "schema": {
-                            "title": "Primary Research Option",
-                            "description": "Defines the primary research option.",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude1": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude1\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude2": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude2\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude3": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude3\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude4": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude4\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude5": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude5\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude6": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude6\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude7": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude7\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude8": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude8\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude9": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude9\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude10": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude10\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude11": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude11\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude12": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude12\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude13": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude13\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude14": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude14\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude15": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude15\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude16": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude16\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
-                    "Research It Exclusions.Exclude17": {
-                        "schema": {
-                            "title": "Research Exclusions \"Exclude17\"",
-                            "description": "Defines a exclusion for \"Research It\".",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Options.Primary": {
+                    //     "schema": {
+                    //         "title": "Primary Research Option",
+                    //         "description": "Defines the primary research option.",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude1": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude1\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude2": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude2\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude3": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude3\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude4": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude4\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude5": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude5\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude6": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude6\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude7": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude7\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude8": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude8\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude9": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude9\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude10": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude10\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude11": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude11\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude12": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude12\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude13": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude13\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude14": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude14\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude15": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude15\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude16": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude16\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Research It Exclusions.Exclude17": {
+                    //     "schema": {
+                    //         "title": "Research Exclusions \"Exclude17\"",
+                    //         "description": "Defines a exclusion for \"Research It\".",
+                    //         "type": "string"
+                    //     }
+                    // },
 
                     // ------------------ Text Analyzer ------------------
 
@@ -4420,22 +4548,24 @@
                             "default": 0
                         }
                     },
-                    "Options.TextAnalyserTypeFlags": {
-                        "schema": {
-                            "title": "Text Analyser Type",
-                            "description": "Indicates how the text analyzer should threat different symbols.",
-                            "type": "integer"
-                        },
-                        "label": "bitmask"
-                    },
-                    "Options.TextAnalyserSymbolFlags": {
-                        "schema": {
-                            "title": "Text Analyser Symbols",
-                            "description": "Indicates the symbols the text analyzer should check.",
-                            "type": "integer"
-                        },
-                        "label": "bitmask"
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Options.TextAnalyserTypeFlags": {
+                    //     "schema": {
+                    //         "title": "Text Analyser Type",
+                    //         "description": "Indicates how the text analyzer should threat different symbols.",
+                    //         "type": "integer"
+                    //     },
+                    //     "label": "bitmask"
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "Options.TextAnalyserSymbolFlags": {
+                    //     "schema": {
+                    //         "title": "Text Analyser Symbols",
+                    //         "description": "Indicates the symbols the text analyzer should check.",
+                    //         "type": "integer"
+                    //     },
+                    //     "label": "bitmask"
+                    // },
 
                     // ------------------ Convenient OCR ------------------
 
@@ -5797,15 +5927,16 @@
                             "default": 2
                         }
                     },
-                    "DEU-Global.Rate": {
-                        "schema": {
-                            // NOTE: This setting should only be used through the exposed application specific
-                            // term, this setting itself should not be modified by the user.
-                            "title": "Rate",
-                            "description": "Speech rate for all announcements (scale varies by synthesizer).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "DEU-Global.Rate": {
+                    //     "schema": {
+                    //         // NOTE: This setting should only be used through the exposed application specific
+                    //         // term, this setting itself should not be modified by the user.
+                    //         "title": "Rate",
+                    //         "description": "Speech rate for all announcements (scale varies by synthesizer).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "DEU-Global.SpellRateDelta": {
                         "schema": {
                             "title": "The spell rate delta",
@@ -5939,15 +6070,16 @@
                             "default": 2
                         }
                     },
-                    "ENU-Global.Rate": {
-                        "schema": {
-                            // NOTE: This setting should only be used through the exposed application specific
-                            // term, this setting itself should not be modified by the user.
-                            "title": "Rate",
-                            "description": "Speech rate for all announcements (scale varies by synthesizer).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ENU-Global.Rate": {
+                    //     "schema": {
+                    //         // NOTE: This setting should only be used through the exposed application specific
+                    //         // term, this setting itself should not be modified by the user.
+                    //         "title": "Rate",
+                    //         "description": "Speech rate for all announcements (scale varies by synthesizer).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ENU-Global.SpellRateDelta": {
                         "schema": {
                             "title": "The spell rate delta",
@@ -6083,15 +6215,16 @@
                             "default": 2
                         }
                     },
-                    "ENG-Global.Rate": {
-                        "schema": {
-                            // NOTE: This setting should only be used through the exposed application specific
-                            // term, this setting itself should not be modified by the user.
-                            "title": "Rate",
-                            "description": "Speech rate for all announcements (scale varies by synthesizer).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ENG-Global.Rate": {
+                    //     "schema": {
+                    //         // NOTE: This setting should only be used through the exposed application specific
+                    //         // term, this setting itself should not be modified by the user.
+                    //         "title": "Rate",
+                    //         "description": "Speech rate for all announcements (scale varies by synthesizer).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ENG-Global.SpellRateDelta": {
                         "schema": {
                             "title": "The spell rate delta",
@@ -6227,15 +6360,16 @@
                             "default": 2
                         }
                     },
-                    "ESM-Global.Rate": {
-                        "schema": {
-                            // NOTE: This setting should only be used through the exposed application specific
-                            // term, this setting itself should not be modified by the user.
-                            "title": "Rate",
-                            "description": "Speech rate for all announcements (scale varies by synthesizer).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ESM-Global.Rate": {
+                    //     "schema": {
+                    //         // NOTE: This setting should only be used through the exposed application specific
+                    //         // term, this setting itself should not be modified by the user.
+                    //         "title": "Rate",
+                    //         "description": "Speech rate for all announcements (scale varies by synthesizer).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ESM-Global.SpellRateDelta": {
                         "schema": {
                             "title": "The spell rate delta",
@@ -6387,15 +6521,16 @@
                             "default": 2
                         }
                     },
-                    "ESN-Global.Rate": {
-                        "schema": {
-                            // NOTE: This setting should only be used through the exposed application specific
-                            // term, this setting itself should not be modified by the user.
-                            "title": "Rate",
-                            "description": "Speech rate for all announcements (scale varies by synthesizer).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ESN-Global.Rate": {
+                    //     "schema": {
+                    //         // NOTE: This setting should only be used through the exposed application specific
+                    //         // term, this setting itself should not be modified by the user.
+                    //         "title": "Rate",
+                    //         "description": "Speech rate for all announcements (scale varies by synthesizer).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ESN-Global.SpellRateDelta": {
                         "schema": {
                             "title": "The spell rate delta",
@@ -6547,15 +6682,16 @@
                             "default": 2
                         }
                     },
-                    "FIN-Global.Rate": {
-                        "schema": {
-                            // NOTE: This setting should only be used through the exposed application specific
-                            // term, this setting itself should not be modified by the user.
-                            "title": "Rate",
-                            "description": "Speech rate for all announcements (scale varies by synthesizer).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FIN-Global.Rate": {
+                    //     "schema": {
+                    //         // NOTE: This setting should only be used through the exposed application specific
+                    //         // term, this setting itself should not be modified by the user.
+                    //         "title": "Rate",
+                    //         "description": "Speech rate for all announcements (scale varies by synthesizer).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FIN-Global.SpellRateDelta": {
                         "schema": {
                             "title": "The spell rate delta",
@@ -6677,15 +6813,16 @@
                             "default": 2
                         }
                     },
-                    "FRA-Global.Rate": {
-                        "schema": {
-                            // NOTE: This setting should only be used through the exposed application specific
-                            // term, this setting itself should not be modified by the user.
-                            "title": "Rate",
-                            "description": "Speech rate for all announcements (scale varies by synthesizer).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FRA-Global.Rate": {
+                    //     "schema": {
+                    //         // NOTE: This setting should only be used through the exposed application specific
+                    //         // term, this setting itself should not be modified by the user.
+                    //         "title": "Rate",
+                    //         "description": "Speech rate for all announcements (scale varies by synthesizer).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FRA-Global.SpellRateDelta": {
                         "schema": {
                             "title": "The spell rate delta",
@@ -6819,15 +6956,16 @@
                             "default": 2
                         }
                     },
-                    "FRC-Global.Rate": {
-                        "schema": {
-                            // NOTE: This setting should only be used through the exposed application specific
-                            // term, this setting itself should not be modified by the user.
-                            "title": "Rate",
-                            "description": "Speech rate for all announcements (scale varies by synthesizer).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FRC-Global.Rate": {
+                    //     "schema": {
+                    //         // NOTE: This setting should only be used through the exposed application specific
+                    //         // term, this setting itself should not be modified by the user.
+                    //         "title": "Rate",
+                    //         "description": "Speech rate for all announcements (scale varies by synthesizer).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FRC-Global.SpellRateDelta": {
                         "schema": {
                             "title": "The spell rate delta",
@@ -6961,13 +7099,14 @@
                             "default": 1
                         }
                     },
-                    "ITA-Global.Rate": {
-                        "schema": {
-                            "title": "JAWS Cursor Rate",
-                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ITA-Global.Rate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Rate",
+                    //         "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ITA-Global.SynthLangString": {
                         "schema": {
                             "title": "JAWS Cursor Language",
@@ -7089,15 +7228,16 @@
                             "default": 2
                         }
                     },
-                    "PTB-Global.Rate": {
-                        "schema": {
-                            // NOTE: This setting should only be used through the exposed application specific
-                            // term, this setting itself should not be modified by the user.
-                            "title": "Rate",
-                            "description": "Speech rate for all announcements (scale varies by synthesizer).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "PTB-Global.Rate": {
+                    //     "schema": {
+                    //         // NOTE: This setting should only be used through the exposed application specific
+                    //         // term, this setting itself should not be modified by the user.
+                    //         "title": "Rate",
+                    //         "description": "Speech rate for all announcements (scale varies by synthesizer).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "PTB-Global.SpellRateDelta": {
                         "schema": {
                             "title": "The spell rate delta",
@@ -7231,13 +7371,14 @@
                             "default": 1
                         }
                     },
-                    "DEU-JAWSCursor.Rate": {
-                        "schema": {
-                            "title": "JAWS Cursor Rate",
-                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "DEU-JAWSCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Rate",
+                    //         "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "DEU-JAWSCursor.SynthLangString": {
                         "schema": {
                             "title": "JAWS Cursor Language",
@@ -7361,13 +7502,14 @@
                             "default": 1
                         }
                     },
-                    "ENU-JAWSCursor.Rate": {
-                        "schema": {
-                            "title": "JAWS Cursor Rate",
-                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ENU-JAWSCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Rate",
+                    //         "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ENU-JAWSCursor.SynthLangString": {
                         "schema": {
                             "title": "JAWS Cursor Language",
@@ -7493,13 +7635,14 @@
                             "default": 1
                         }
                     },
-                    "ENG-JAWSCursor.Rate": {
-                        "schema": {
-                            "title": "JAWS Cursor Rate",
-                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ENG-JAWSCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Rate",
+                    //         "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ENG-JAWSCursor.SynthLangString": {
                         "schema": {
                             "title": "JAWS Cursor Language",
@@ -7625,13 +7768,14 @@
                             "default": 1
                         }
                     },
-                    "ESM-JAWSCursor.Rate": {
-                        "schema": {
-                            "title": "JAWS Cursor Rate",
-                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ESM-JAWSCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Rate",
+                    //         "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ESM-JAWSCursor.SynthLangString": {
                         "schema": {
                             "title": "JAWS Cursor Language",
@@ -7773,13 +7917,14 @@
                             "default": 1
                         }
                     },
-                    "ESN-JAWSCursor.Rate": {
-                        "schema": {
-                            "title": "JAWS Cursor Rate",
-                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ESN-JAWSCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Rate",
+                    //         "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ESN-JAWSCursor.SynthLangString": {
                         "schema": {
                             "title": "JAWS Cursor Language",
@@ -7921,13 +8066,14 @@
                             "default": 1
                         }
                     },
-                    "FIN-JAWSCursor.Rate": {
-                        "schema": {
-                            "title": "JAWS Cursor Rate",
-                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FIN-JAWSCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Rate",
+                    //         "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FIN-JAWSCursor.SynthLangString": {
                         "schema": {
                             "title": "JAWS Cursor Language",
@@ -8039,13 +8185,14 @@
                             "default": 1
                         }
                     },
-                    "FRA-JAWSCursor.Rate": {
-                        "schema": {
-                            "title": "JAWS Cursor Rate",
-                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FRA-JAWSCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Rate",
+                    //         "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FRA-JAWSCursor.SynthLangString": {
                         "schema": {
                             "title": "JAWS Cursor Language",
@@ -8169,13 +8316,14 @@
                             "default": 1
                         }
                     },
-                    "FRC-JAWSCursor.Rate": {
-                        "schema": {
-                            "title": "JAWS Cursor Rate",
-                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FRC-JAWSCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Rate",
+                    //         "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FRC-JAWSCursor.SynthLangString": {
                         "schema": {
                             "title": "JAWS Cursor Language",
@@ -8299,13 +8447,14 @@
                             "default": 1
                         }
                     },
-                    "ITA-JAWSCursor.Rate": {
-                        "schema": {
-                            "title": "JAWS Cursor Rate",
-                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ITA-JAWSCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Rate",
+                    //         "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ITA-JAWSCursor.SynthLangString": {
                         "schema": {
                             "title": "JAWS Cursor Language",
@@ -8427,13 +8576,14 @@
                             "default": 1
                         }
                     },
-                    "PTB-JAWSCursor.Rate": {
-                        "schema": {
-                            "title": "JAWS Cursor Rate",
-                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "PTB-JAWSCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Rate",
+                    //         "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "PTB-JAWSCursor.SynthLangString": {
                         "schema": {
                             "title": "JAWS Cursor Language",
@@ -8557,13 +8707,14 @@
                             "default": 1
                         }
                     },
-                    "DEU-Keyboard.Rate": {
-                        "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "DEU-Keyboard.Rate": {
+                    //     "schema": {
+                    //         "title": "Keyboard rate",
+                    //         "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "DEU-Keyboard.SynthLangString": {
                         "schema": {
                             "title": "Keyboard language",
@@ -8687,13 +8838,14 @@
                             "default": 1
                         }
                     },
-                    "ENU-Keyboard.Rate": {
-                        "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ENU-Keyboard.Rate": {
+                    //     "schema": {
+                    //         "title": "Keyboard rate",
+                    //         "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ENU-Keyboard.SynthLangString": {
                         "schema": {
                             "title": "Keyboard language",
@@ -8819,13 +8971,14 @@
                             "default": 1
                         }
                     },
-                    "ENG-Keyboard.Rate": {
-                        "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ENG-Keyboard.Rate": {
+                    //     "schema": {
+                    //         "title": "Keyboard rate",
+                    //         "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ENG-Keyboard.SynthLangString": {
                         "schema": {
                             "title": "Keyboard language",
@@ -8951,13 +9104,14 @@
                             "default": 1
                         }
                     },
-                    "ESM-Keyboard.Rate": {
-                        "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ESM-Keyboard.Rate": {
+                    //     "schema": {
+                    //         "title": "Keyboard rate",
+                    //         "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ESM-Keyboard.SynthLangString": {
                         "schema": {
                             "title": "Keyboard language",
@@ -9099,13 +9253,14 @@
                             "default": 1
                         }
                     },
-                    "ESN-Keyboard.Rate": {
-                        "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ESN-Keyboard.Rate": {
+                    //     "schema": {
+                    //         "title": "Keyboard rate",
+                    //         "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ESN-Keyboard.SynthLangString": {
                         "schema": {
                             "title": "Keyboard language",
@@ -9247,13 +9402,14 @@
                             "default": 1
                         }
                     },
-                    "FIN-Keyboard.Rate": {
-                        "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FIN-Keyboard.Rate": {
+                    //     "schema": {
+                    //         "title": "Keyboard rate",
+                    //         "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FIN-Keyboard.SynthLangString": {
                         "schema": {
                             "title": "Keyboard language",
@@ -9365,13 +9521,14 @@
                             "default": 1
                         }
                     },
-                    "FRA-Keyboard.Rate": {
-                        "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FRA-Keyboard.Rate": {
+                    //     "schema": {
+                    //         "title": "Keyboard rate",
+                    //         "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FRA-Keyboard.SynthLangString": {
                         "schema": {
                             "title": "Keyboard language",
@@ -9495,13 +9652,14 @@
                             "default": 1
                         }
                     },
-                    "FRC-Keyboard.Rate": {
-                        "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FRC-Keyboard.Rate": {
+                    //     "schema": {
+                    //         "title": "Keyboard rate",
+                    //         "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FRC-Keyboard.SynthLangString": {
                         "schema": {
                             "title": "Keyboard language",
@@ -9625,13 +9783,14 @@
                             "default": 1
                         }
                     },
-                    "ITA-Keyboard.Rate": {
-                        "schema": {
-                            "title": "JAWS Cursor Rate",
-                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ITA-Keyboard.Rate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Rate",
+                    //         "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ITA-Keyboard.SynthLangString": {
                         "schema": {
                             "title": "JAWS Cursor Language",
@@ -9753,13 +9912,14 @@
                             "default": 1
                         }
                     },
-                    "PTB-Keyboard.Rate": {
-                        "schema": {
-                            "title": "Keyboard rate",
-                            "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "PTB-Keyboard.Rate": {
+                    //     "schema": {
+                    //         "title": "Keyboard rate",
+                    //         "description": "Speech rate for announcements related to the keyboard (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "PTB-Keyboard.SynthLangString": {
                         "schema": {
                             "title": "Keyboard language",
@@ -9885,13 +10045,14 @@
                             "default": 1
                         }
                     },
-                    "DEU-MenuAndDialog.Rate": {
-                        "schema": {
-                            "title": "MenuAndDialog rate",
-                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "DEU-MenuAndDialog.Rate": {
+                    //     "schema": {
+                    //         "title": "MenuAndDialog rate",
+                    //         "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "DEU-MenuAndDialog.SynthLangString": {
                         "schema": {
                             "title": "MenuAndDialog language",
@@ -10015,13 +10176,14 @@
                             "default": 1
                         }
                     },
-                    "ENU-MenuAndDialog.Rate": {
-                        "schema": {
-                            "title": "MenuAndDialog rate",
-                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ENU-MenuAndDialog.Rate": {
+                    //     "schema": {
+                    //         "title": "MenuAndDialog rate",
+                    //         "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ENU-MenuAndDialog.SynthLangString": {
                         "schema": {
                             "title": "MenuAndDialog language",
@@ -10147,13 +10309,14 @@
                             "default": 1
                         }
                     },
-                    "ENG-MenuAndDialog.Rate": {
-                        "schema": {
-                            "title": "MenuAndDialog rate",
-                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ENG-MenuAndDialog.Rate": {
+                    //     "schema": {
+                    //         "title": "MenuAndDialog rate",
+                    //         "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ENG-MenuAndDialog.SynthLangString": {
                         "schema": {
                             "title": "MenuAndDialog language",
@@ -10279,13 +10442,14 @@
                             "default": 1
                         }
                     },
-                    "ESM-MenuAndDialog.Rate": {
-                        "schema": {
-                            "title": "MenuAndDialog rate",
-                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ESM-MenuAndDialog.Rate": {
+                    //     "schema": {
+                    //         "title": "MenuAndDialog rate",
+                    //         "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ESM-MenuAndDialog.SynthLangString": {
                         "schema": {
                             "title": "MenuAndDialog language",
@@ -10427,13 +10591,14 @@
                             "default": 1
                         }
                     },
-                    "ESN-MenuAndDialog.Rate": {
-                        "schema": {
-                            "title": "MenuAndDialog rate",
-                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ESN-MenuAndDialog.Rate": {
+                    //     "schema": {
+                    //         "title": "MenuAndDialog rate",
+                    //         "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ESN-MenuAndDialog.SynthLangString": {
                         "schema": {
                             "title": "MenuAndDialog language",
@@ -10575,13 +10740,14 @@
                             "default": 1
                         }
                     },
-                    "FIN-MenuAndDialog.Rate": {
-                        "schema": {
-                            "title": "MenuAndDialog rate",
-                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FIN-MenuAndDialog.Rate": {
+                    //     "schema": {
+                    //         "title": "MenuAndDialog rate",
+                    //         "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FIN-MenuAndDialog.SynthLangString": {
                         "schema": {
                             "title": "MenuAndDialog language",
@@ -10693,13 +10859,14 @@
                             "default": 1
                         }
                     },
-                    "FRA-MenuAndDialog.Rate": {
-                        "schema": {
-                            "title": "MenuAndDialog rate",
-                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FRA-MenuAndDialog.Rate": {
+                    //     "schema": {
+                    //         "title": "MenuAndDialog rate",
+                    //         "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FRA-MenuAndDialog.SynthLangString": {
                         "schema": {
                             "title": "MenuAndDialog language",
@@ -10823,13 +10990,14 @@
                             "default": 1
                         }
                     },
-                    "FRC-MenuAndDialog.Rate": {
-                        "schema": {
-                            "title": "MenuAndDialog rate",
-                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FRC-MenuAndDialog.Rate": {
+                    //     "schema": {
+                    //         "title": "MenuAndDialog rate",
+                    //         "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FRC-MenuAndDialog.SynthLangString": {
                         "schema": {
                             "title": "MenuAndDialog language",
@@ -10953,13 +11121,14 @@
                             "default": 1
                         }
                     },
-                    "PTB-MenuAndDialog.Rate": {
-                        "schema": {
-                            "title": "MenuAndDialog rate",
-                            "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "PTB-MenuAndDialog.Rate": {
+                    //     "schema": {
+                    //         "title": "MenuAndDialog rate",
+                    //         "description": "Speech rate for announcements related to the MenuAndDialog (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "PTB-MenuAndDialog.SynthLangString": {
                         "schema": {
                             "title": "MenuAndDialog language",
@@ -11085,13 +11254,14 @@
                             "default": 1
                         }
                     },
-                    "DEU-Message.Rate": {
-                        "schema": {
-                            "title": "Message rate",
-                            "description": "Speech rate for message announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "DEU-Message.Rate": {
+                    //     "schema": {
+                    //         "title": "Message rate",
+                    //         "description": "Speech rate for message announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "DEU-Message.SynthLangString": {
                         "schema": {
                             "title": "Message language",
@@ -11215,13 +11385,14 @@
                             "default": 1
                         }
                     },
-                    "ENU-Message.Rate": {
-                        "schema": {
-                            "title": "Message rate",
-                            "description": "Speech rate for message announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ENU-Message.Rate": {
+                    //     "schema": {
+                    //         "title": "Message rate",
+                    //         "description": "Speech rate for message announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ENU-Message.SynthLangString": {
                         "schema": {
                             "title": "Message language",
@@ -11347,13 +11518,14 @@
                             "default": 1
                         }
                     },
-                    "ENG-Message.Rate": {
-                        "schema": {
-                            "title": "Message rate",
-                            "description": "Speech rate for message announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ENG-Message.Rate": {
+                    //     "schema": {
+                    //         "title": "Message rate",
+                    //         "description": "Speech rate for message announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ENG-Message.SynthLangString": {
                         "schema": {
                             "title": "Message language",
@@ -11479,13 +11651,14 @@
                             "default": 1
                         }
                     },
-                    "ESM-Message.Rate": {
-                        "schema": {
-                            "title": "Message rate",
-                            "description": "Speech rate for message announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ESM-Message.Rate": {
+                    //     "schema": {
+                    //         "title": "Message rate",
+                    //         "description": "Speech rate for message announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ESM-Message.SynthLangString": {
                         "schema": {
                             "title": "Message language",
@@ -11627,13 +11800,14 @@
                             "default": 1
                         }
                     },
-                    "ESN-Message.Rate": {
-                        "schema": {
-                            "title": "Message rate",
-                            "description": "Speech rate for message announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ESN-Message.Rate": {
+                    //     "schema": {
+                    //         "title": "Message rate",
+                    //         "description": "Speech rate for message announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ESN-Message.SynthLangString": {
                         "schema": {
                             "title": "Message language",
@@ -11775,13 +11949,14 @@
                             "default": 1
                         }
                     },
-                    "FIN-Message.Rate": {
-                        "schema": {
-                            "title": "Message rate",
-                            "description": "Speech rate for message announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FIN-Message.Rate": {
+                    //     "schema": {
+                    //         "title": "Message rate",
+                    //         "description": "Speech rate for message announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FIN-Message.SynthLangString": {
                         "schema": {
                             "title": "Message language",
@@ -11893,13 +12068,14 @@
                             "default": 1
                         }
                     },
-                    "FRA-Message.Rate": {
-                        "schema": {
-                            "title": "Message rate",
-                            "description": "Speech rate for message announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FRA-Message.Rate": {
+                    //     "schema": {
+                    //         "title": "Message rate",
+                    //         "description": "Speech rate for message announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FRA-Message.SynthLangString": {
                         "schema": {
                             "title": "Message language",
@@ -12023,13 +12199,14 @@
                             "default": 1
                         }
                     },
-                    "FRC-Message.Rate": {
-                        "schema": {
-                            "title": "Message rate",
-                            "description": "Speech rate for message announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FRC-Message.Rate": {
+                    //     "schema": {
+                    //         "title": "Message rate",
+                    //         "description": "Speech rate for message announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FRC-Message.SynthLangString": {
                         "schema": {
                             "title": "Message language",
@@ -12153,13 +12330,14 @@
                             "default": 1
                         }
                     },
-                    "PTB-Message.Rate": {
-                        "schema": {
-                            "title": "Message rate",
-                            "description": "Speech rate for message announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "PTB-Message.Rate": {
+                    //     "schema": {
+                    //         "title": "Message rate",
+                    //         "description": "Speech rate for message announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "PTB-Message.SynthLangString": {
                         "schema": {
                             "title": "Message language",
@@ -12285,13 +12463,14 @@
                             "default": 1
                         }
                     },
-                    "DEU-PCCursor.Rate": {
-                        "schema": {
-                            "title": "PCCursor rate",
-                            "description": "Speech rate for PCCursor announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "DEU-PCCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "PCCursor rate",
+                    //         "description": "Speech rate for PCCursor announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "DEU-PCCursor.SynthLangString": {
                         "schema": {
                             "title": "PCCursor language",
@@ -12415,13 +12594,14 @@
                             "default": 1
                         }
                     },
-                    "ENU-PCCursor.Rate": {
-                        "schema": {
-                            "title": "PCCursor rate",
-                            "description": "Speech rate for PCCursor announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ENU-PCCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "PCCursor rate",
+                    //         "description": "Speech rate for PCCursor announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ENU-PCCursor.SynthLangString": {
                         "schema": {
                             "title": "PCCursor language",
@@ -12547,13 +12727,14 @@
                             "default": 1
                         }
                     },
-                    "ENG-PCCursor.Rate": {
-                        "schema": {
-                            "title": "PCCursor rate",
-                            "description": "Speech rate for PCCursor announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ENG-PCCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "PCCursor rate",
+                    //         "description": "Speech rate for PCCursor announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ENG-PCCursor.SynthLangString": {
                         "schema": {
                             "title": "PCCursor language",
@@ -12679,13 +12860,14 @@
                             "default": 1
                         }
                     },
-                    "ESM-PCCursor.Rate": {
-                        "schema": {
-                            "title": "PCCursor rate",
-                            "description": "Speech rate for PCCursor announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ESM-PCCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "PCCursor rate",
+                    //         "description": "Speech rate for PCCursor announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ESM-PCCursor.SynthLangString": {
                         "schema": {
                             "title": "PCCursor language",
@@ -12827,13 +13009,14 @@
                             "default": 1
                         }
                     },
-                    "ESN-PCCursor.Rate": {
-                        "schema": {
-                            "title": "PCCursor rate",
-                            "description": "Speech rate for PCCursor announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "ESN-PCCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "PCCursor rate",
+                    //         "description": "Speech rate for PCCursor announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "ESN-PCCursor.SynthLangString": {
                         "schema": {
                             "title": "PCCursor language",
@@ -12975,13 +13158,14 @@
                             "default": 1
                         }
                     },
-                    "FIN-PCCursor.Rate": {
-                        "schema": {
-                            "title": "PCCursor rate",
-                            "description": "Speech rate for PCCursor announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FIN-PCCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "PCCursor rate",
+                    //         "description": "Speech rate for PCCursor announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FIN-PCCursor.SynthLangString": {
                         "schema": {
                             "title": "PCCursor language",
@@ -13093,13 +13277,14 @@
                             "default": 1
                         }
                     },
-                    "FRA-PCCursor.Rate": {
-                        "schema": {
-                            "title": "PCCursor rate",
-                            "description": "Speech rate for PCCursor announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FRA-PCCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "PCCursor rate",
+                    //         "description": "Speech rate for PCCursor announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FRA-PCCursor.SynthLangString": {
                         "schema": {
                             "title": "PCCursor language",
@@ -13223,13 +13408,14 @@
                             "default": 1
                         }
                     },
-                    "FRC-PCCursor.Rate": {
-                        "schema": {
-                            "title": "PCCursor rate",
-                            "description": "Speech rate for PCCursor announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "FRC-PCCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "PCCursor rate",
+                    //         "description": "Speech rate for PCCursor announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "FRC-PCCursor.SynthLangString": {
                         "schema": {
                             "title": "PCCursor language",
@@ -13353,13 +13539,14 @@
                             "default": 1
                         }
                     },
-                    "PTB-PCCursor.Rate": {
-                        "schema": {
-                            "title": "PCCursor rate",
-                            "description": "Speech rate for PCCursor announcements (scale varies by synth).",
-                            "type": "integer"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of a default value.
+                    // "PTB-PCCursor.Rate": {
+                    //     "schema": {
+                    //         "title": "PCCursor rate",
+                    //         "description": "Speech rate for PCCursor announcements (scale varies by synth).",
+                    //         "type": "integer"
+                    //     }
+                    // },
                     "PTB-PCCursor.SynthLangString": {
                         "schema": {
                             "title": "PCCursor language",
