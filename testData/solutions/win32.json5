@@ -204,20 +204,20 @@
 
                     // ----------------------- User ---------------------------
 
-                    "Options.ProgressBarUpdateInterval": {
-                        "schema": {
-                            "title": "Progress Bar Update Interval",
-                            "description": "How often to announce progress bar updates, in milliseconds. Set to 0 to disable update announcements, and 1 to announce all.",
-                            "type": "integer",
-                            "default": 5000,
-                            "minimum": 0
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Options.ProgressBarUpdateInterval": {
+                    //     "schema": {
+                    //         "title": "Progress Bar Update Interval",
+                    //         "description": "How often to announce progress bar updates, in milliseconds. Set to 0 to disable update announcements, and 1 to announce all.",
+                    //         "type": "integer",
+                    //         "default": 5000,
+                    //         "minimum": 0
+                    //     }
+                    // },
                     "Options.TypingEcho": {
                         "schema": {
                             "title": "Typing echo",
                             "description": "How to announce typed words and/or characters.",
-                            "type": "number",
                             "default": 1,
                             "enum": [
                                 0,
@@ -237,7 +237,6 @@
                         "schema": {
                             "title": "Screen Echo",
                             "description": "Specifies how much text is read when information on the screen changes.",
-                            "type": "number",
                             "default": 1,
                             "enum": [
                                 0,
@@ -256,7 +255,6 @@
                         "schema": {
                             "title": "Typing Interrupt",
                             "description": "Whether to stop speaking when the user types.",
-                            "type": "number",
                             "default": 1,
                             "enum": [
                                 0,
@@ -273,7 +271,6 @@
                         "schema": {
                             "title": "Insert Key Mode",
                             "description": "The operating mode of the insert key.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -290,7 +287,6 @@
                         "schema": {
                             "title": "Key Repeat",
                             "description": "Whether or not to allow repeated keys.  Repeated keys are allowed by default.",
-                            "type": "number",
                             "default": 1,
                             "enum": [
                                 0,
@@ -670,42 +666,46 @@
                             "default": 0
                         }
                     },
-                    "HTML.DocPresModeMaxLineLength": {
-                        // NOTE: Doesn't appear to have relevant min-max values.
-                        "schema": {
-                              "title": "Maximum Line Lenght",
-                              "description": "Stablish a maximum line length.",
-                              "type": "integer",
-                              "default": 500
-                          }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "HTML.DocPresModeMaxLineLength": {
+                    //     // NOTE: Doesn't appear to have relevant min-max values.
+                    //     "schema": {
+                    //           "title": "Maximum Line Lenght",
+                    //           "description": "Stablish a maximum line length.",
+                    //           "type": "integer",
+                    //           "default": 500
+                    //       }
+                    // },
 
                     // -----------------------------------------------------------
 
-                    "HTML.TextBlockLength": {
-                        "schema": {
-                            "title": "Text Block Length",
-                            "description": "The number of consecutive characters that must appear in a web page for JAWS to treat this as a block of text.",
-                            "type": "integer",
-                            "default": 25
-                        }
-                    },
-                    "HTML.LinesPerPage": {
-                        "schema": {
-                            "title": "Lines per Page",
-                            "description": "The number of consecutive lines to be considered as a page for JAWS.",
-                            "type": "integer",
-                            "default": 25
-                        }
-                    },
-                    "HTML.MaxLineLength": {
-                        "schema": {
-                            "title": "Max Line Length",
-                            "description": "The maximum number of characters which can appear on a line of a paragraph.",
-                            "type": "integer",
-                            "default": 150
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "HTML.TextBlockLength": {
+                    //     "schema": {
+                    //         "title": "Text Block Length",
+                    //         "description": "The number of consecutive characters that must appear in a web page for JAWS to treat this as a block of text.",
+                    //         "type": "integer",
+                    //         "default": 25
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "HTML.LinesPerPage": {
+                    //     "schema": {
+                    //         "title": "Lines per Page",
+                    //         "description": "The number of consecutive lines to be considered as a page for JAWS.",
+                    //         "type": "integer",
+                    //         "default": 25
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "HTML.MaxLineLength": {
+                    //     "schema": {
+                    //         "title": "Max Line Length",
+                    //         "description": "The maximum number of characters which can appear on a line of a paragraph.",
+                    //         "type": "integer",
+                    //         "default": 150
+                    //     }
+                    // },
                     "HTML.ScreenFollowsVCursor": {
                         "schema": {
                             "title": "Screen Follows Virtual Cursor",
@@ -801,7 +801,6 @@
                         "schema": {
                             "title": "Filter Consecutive Duplicate Links",
                             "description": "Whether to skip (not announce) consecutive duplicate links.",
-                            "type": "number",
                             "enum": [
                                 0,
                                 1
@@ -1060,19 +1059,20 @@
                             "default": 0
                         }
                     },
-                    "HTML.PageRefreshFilter": {
-                        // NOTE-TODO: Even if the setting is an integer the values
-                        // that is possible to set through the interface are three:
-                        //    - Refresh As Needed: 0
-                        //    - Refresh Every 60 Seconds: 60000
-                        //    - Suppress All Refreshes: -1
-                        "schema": {
-                            "title": "Page Refresh Filter",
-                            "description": "How often, in milliseconds, to allow all refreshes. Set to 0 to allow all refreshes without any delay.",
-                            "type": "integer",
-                            "default": 0
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "HTML.PageRefreshFilter": {
+                    //     // NOTE-TODO: Even if the setting is an integer the values
+                    //     // that is possible to set through the interface are three:
+                    //     //    - Refresh As Needed: 0
+                    //     //    - Refresh Every 60 Seconds: 60000
+                    //     //    - Suppress All Refreshes: -1
+                    //     "schema": {
+                    //         "title": "Page Refresh Filter",
+                    //         "description": "How often, in milliseconds, to allow all refreshes. Set to 0 to allow all refreshes without any delay.",
+                    //         "type": "integer",
+                    //         "default": 0
+                    //     }
+                    // },
                     "Options.VirtualDocumentLinkActivationMethod": {
                         "schema": {
                             "title": "Link Activation",
@@ -1271,7 +1271,6 @@
                         "schema": {
                             "title": "Repetitions",
                             "description": "Whether or not to count repeated characters.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -1287,7 +1286,6 @@
                         "schema": {
                             "title": "Indicate Caps",
                             "description": "When to indicate the presence of capital letters.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -1359,7 +1357,6 @@
                         "schema": {
                             "title": "Spell Phonetic Always",
                             "description": "How to announce word spellings.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -1407,7 +1404,6 @@
                         "schema": {
                             "title": "Mixed Case processing",
                             "description": "Whether to announce words with embedded capital letters (such as \"MixedCase\") as separate words.",
-                            "type": "number",
                             "default": 1,
                             "enum": [
                                 0,
@@ -1423,7 +1419,6 @@
                         "schema": {
                             "title": "Dictionary",
                             "description": "Whether words, phrases, abbreviations, or symbols should be processed through a global or application specific dictionary to determine proper pronunciation. This is enabled by default.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -1439,7 +1434,6 @@
                         "schema": {
                             "title": "Language Detection",
                             "description": "Whether to enable automatic Language detection.",
-                            "type": "number",
                             "default": 1,
                             "enum": [
                                 0,
@@ -1485,7 +1479,6 @@
                         "schema": {
                             "title": "Enhanced Edit Support",
                             "description": "Whether to activate or deactivate enhanced edit support.",
-                            "type": "number",
                             "enum": [
                                 0,
                                 1
@@ -1501,7 +1494,6 @@
                         "schema": {
                             "title": "Say Selected First",
                             "description": "Whether to announce the selected text first.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -1517,7 +1509,6 @@
                         "schema": {
                             "title": "Say Window Type First",
                             "description": "Whether to announce the type of window before announcing the window title/text.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -1533,7 +1524,6 @@
                         "schema": {
                             "title": "Say State First",
                             "description": "Whether to announce the window state before title/text.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -1549,7 +1539,6 @@
                         "schema": {
                             "title": "Indentation",
                             "description": "Whether or not to announce indentation.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -1568,7 +1557,6 @@
                         "schema": {
                             "title": "Say Numeric Dates",
                             "description": "How to announce numeric dates. With no translation, dates are read as numbers. With some translation, dd-mm-yy values are read as text. With extended translation, both dd-mm-yy and dd-mm values are read as text.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -1586,7 +1574,6 @@
                         "schema": {
                             "title": "Numbers",
                             "description": "How to announce numbers.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -1642,7 +1629,6 @@
                         "schema": {
                             "title": "Say Dollars",
                             "description": "Whether to announce currency symbols.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -1768,7 +1754,6 @@
                         "schema": {
                             "title": "Verbosity",
                             "description": "How verbose announcements should be.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -2098,7 +2083,6 @@
                         "schema": {
                             "title": "Scheme",
                             "description": "Whether or not to intercept CreateDIBSection Note that this value is only read once per JAWS session at startup thus changing this value while JAWS is running has no effect.",
-                            "type": "string",
                             "enum": [
                                 "Attributes and Colors",
                                 "Classic",
@@ -2168,7 +2152,6 @@
                         "schema": {
                             "title": "\"Say All\" Mode",
                             "description": "Sets the amount of text which \"Say All\" sends to the synthesizer as a single unit.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -2186,7 +2169,6 @@
                         "schema": {
                             "title": "Line Pauses",
                             "description": "Whether to pause at end of a line.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -2228,7 +2210,6 @@
                         "schema": {
                             "title": "Say Blank Line Count",
                             "description": "In \"Say All\" mode, whether to announce the number of blank lines.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -2245,7 +2226,6 @@
                         "schema": {
                             "title": "\"Say All\" Announces Capitals",
                             "description": "In \"Say All\" mode, announce an initial capital letter or capitalized word.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -2261,7 +2241,6 @@
                         "schema": {
                             "title": "\"Say All\" Ignores Shift Keys",
                             "description": "Allows sticky keys to be used, i.e.: ignores shift keys during SayAll. User can use left/right arrow to do same functions.",
-                            "type": "number",
                             "enum": [
                                 0,
                                 1
@@ -2385,20 +2364,21 @@
 
                     // ---------- Braille General - Language -----------------------
 
-                    "Braille.TranslatorMode": {
-                        "schema": {
-                            // NOTE: This setting is a number assigned from a combination of
-                            // the three menus "Language", "Output" and "Input".
-                            // When the Input and Output have another value than
-                            // "Computer Braille", the combination of the three values is
-                            // used to generate an integer that represents the current translation
-                            // mode.
-                            "title": "Language",
-                            "description": "Language to use for the translation.",
-                            "type": "integer",
-                            "default": 19
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.TranslatorMode": {
+                    //     "schema": {
+                    //         // NOTE: This setting is a number assigned from a combination of
+                    //         // the three menus "Language", "Output" and "Input".
+                    //         // When the Input and Output have another value than
+                    //         // "Computer Braille", the combination of the three values is
+                    //         // used to generate an integer that represents the current translation
+                    //         // mode.
+                    //         "title": "Language",
+                    //         "description": "Language to use for the translation.",
+                    //         "type": "integer",
+                    //         "default": 19
+                    //     }
+                    // },
                     "Braille.Grade2Translation": {
                         "schema": {
                             "title": "Translate to language",
@@ -2659,7 +2639,6 @@
                         "schema": {
                             "title": "Braille Mode",
                             "description": "Use this option to control the format of the information sent to the braille display. When Line mode is selected, JAWS sends the line of text at the current cursor position to the braille display. When Structured mode is selected, JAWS sends information to the display that is relevant to the current cursor position. The information sent includes things such as control type, dialog name, or number of items in a list. When Speech Output mode is selected, JAWS sends the same text to the display that it sends to the synthesizer.",
-                            "type": "number",
                             "default": 1,
                             "enum": [
                                 0,
@@ -2774,62 +2753,69 @@
 
                     // ---- Braille Marking - Dot Pattern Values -----
 
-                    "Braille.BrailleHighlightDots": {
-                        "schema": {
-                            "title": "Dot Pattern Values - Highlight",
-                            "description": "Dot pattern to be used for highlighted text.",
-                            "type": "integer",
-                            "default": 125
-                        }
-                    },
-                    "Braille.BrailleBoldDots": {
-                        "schema": {
-                            "title": "Dot Pattern Values - Bold",
-                            "description": "Dot pattern to be used for bold text.",
-                            "type": "integer",
-                            "default": 12
-                        }
-                    },
-                    "Braille.BrailleExtMarkingDots": {
-                        "schema": {
-                            "title": "Dot Pattern Values - Markings",
-                            "description": "Dot pattern to be used for marked text.",
-                            "type": "integer",
-                            "default": 15
-                        }
-                    },
-                    "Braille.BrailleItalicDots": {
-                        "schema": {
-                            "title": "Dot Pattern Values - Italic",
-                            "description": "Dot pattern to be used for italic text.",
-                            "type": "integer",
-                            "default": 24
-                        }
-                    },
-                    "Braille.BrailleNormalTextDots": {
-                        "schema": {
-                            "title": "Dot Pattern Values - Normal Text",
-                            "description": "Dot pattern to be used for normal text.",
-                            "type": "integer",
-                            "default": 1345
-                        }
-                    },
-                    "Braille.BrailleStrikeoutDots": {
-                        "schema": {
-                            "title": "Dot Pattern Values - Strikeout",
-                            "description": "Dot pattern to be used for strikeout text.",
-                            "type": "integer",
-                            "default": 234
-                        }
-                    },
-                    "Braille.BrailleUnderlineDots": {
-                        "schema": {
-                            "title": "Dot Pattern Values - Underline",
-                            "description": "Dot pattern to be used for underline text.",
-                            "type": "integer",
-                            "default": 136
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BrailleHighlightDots": {
+                    //     "schema": {
+                    //         "title": "Dot Pattern Values - Highlight",
+                    //         "description": "Dot pattern to be used for highlighted text.",
+                    //         "type": "integer",
+                    //         "default": 125
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BrailleBoldDots": {
+                    //     "schema": {
+                    //         "title": "Dot Pattern Values - Bold",
+                    //         "description": "Dot pattern to be used for bold text.",
+                    //         "type": "integer",
+                    //         "default": 12
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BrailleExtMarkingDots": {
+                    //     "schema": {
+                    //         "title": "Dot Pattern Values - Markings",
+                    //         "description": "Dot pattern to be used for marked text.",
+                    //         "type": "integer",
+                    //         "default": 15
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BrailleItalicDots": {
+                    //     "schema": {
+                    //         "title": "Dot Pattern Values - Italic",
+                    //         "description": "Dot pattern to be used for italic text.",
+                    //         "type": "integer",
+                    //         "default": 24
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BrailleNormalTextDots": {
+                    //     "schema": {
+                    //         "title": "Dot Pattern Values - Normal Text",
+                    //         "description": "Dot pattern to be used for normal text.",
+                    //         "type": "integer",
+                    //         "default": 1345
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BrailleStrikeoutDots": {
+                    //     "schema": {
+                    //         "title": "Dot Pattern Values - Strikeout",
+                    //         "description": "Dot pattern to be used for strikeout text.",
+                    //         "type": "integer",
+                    //         "default": 234
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BrailleUnderlineDots": {
+                    //     "schema": {
+                    //         "title": "Dot Pattern Values - Underline",
+                    //         "description": "Dot pattern to be used for underline text.",
+                    //         "type": "integer",
+                    //         "default": 136
+                    //     }
+                    // },
 
                     "Braille.FilterControlCharacters": {
                         "schema": {
@@ -2864,80 +2850,87 @@
 
                     // ---- Braille Cursor -----
 
-                    "Braille.BraillePCCursorDots": {
-                        "schema": {
-                            "title": "PC Cursor Dot Pattern",
-                            "description": "The dot pattern to use for the PC cursor.",
-                            "type": "integer",
-                            "default": 78
-                        }
-                    },
-                    "Braille.BraillePCCursorBlinkRate": {
-                        "schema": {
-                            "title": "PC Cursor blink rate",
-                            "description": "Stablish the braille cursor blinking rate.",
-                            "type": "integer",
-                            // NOTE: The actual menu has 3 entries, with different values reserved
-                            // for each one:
-                            //    - "Braille Cursor is Always Up": 0
-                            //    - "Braille Cursor is Always Down": -1
-                            //    - "Braille Cursor is Blinking": Integer
-                            "default": 500
-                        }
-                    },
-                    "Braille.BrailleJAWSCursorDots": {
-                        "schema": {
-                            "title": "JAWS Cursor Dot Pattern",
-                            "description": "The dot pattern to use for the JAWS cursor.",
-                            "type": "integer",
-                            "default": 78
-                        }
-                    },
-                    "Braille.BrailleJAWSCursorBlinkRate": {
-                        "schema": {
-                            "title": "JAWS Cursor blink rate",
-                            "description": "Stablish the JAWS braille cursor blinking rate.",
-                            "type": "integer",
-                            // NOTE: The actual menu has 3 entries, with different values reserved
-                            // for each one:
-                            //    - "Braille Cursor is Always Up": 0
-                            //    - "Braille Cursor is Always Down": -1
-                            //    - "Braille Cursor is Blinking": Integer
-                            "default": 500
-                        }
-                    },
-                    "Braille.BrailleInvisibleCursorDots": {
-                        "schema": {
-                            "title": "Invisible Cursor Dot Pattern",
-                            "description": "The dot pattern to use for the \"Invisible Cursor\".",
-                            "type": "integer",
-                            "default": 78
-                        }
-                    },
-                    "Braille.BrailleInvisibleCursorBlinkRate": {
-                        "schema": {
-                            "title": "JAWS Cursor blink rate",
-                            "description": "Stablish the JAWS braille cursor blinking rate.",
-                            "type": "integer",
-                            // NOTE: The actual menu has 3 entries, with different values reserved
-                            // for each one:
-                            //    - "Braille Cursor is Always Up": 0
-                            //    - "Braille Cursor is Always Down": -1
-                            //    - "Braille Cursor is Blinking": Integer
-                            "default": 500
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BraillePCCursorDots": {
+                    //     "schema": {
+                    //         "title": "PC Cursor Dot Pattern",
+                    //         "description": "The dot pattern to use for the PC cursor.",
+                    //         "type": "integer",
+                    //         "default": 78
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BraillePCCursorBlinkRate": {
+                    //     "schema": {
+                    //         "title": "PC Cursor blink rate",
+                    //         "description": "Stablish the braille cursor blinking rate.",
+                    //         "type": "integer",
+                    //         // NOTE: The actual menu has 3 entries, with different values reserved
+                    //         // for each one:
+                    //         //    - "Braille Cursor is Always Up": 0
+                    //         //    - "Braille Cursor is Always Down": -1
+                    //         //    - "Braille Cursor is Blinking": Integer
+                    //         "default": 500
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BrailleJAWSCursorDots": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor Dot Pattern",
+                    //         "description": "The dot pattern to use for the JAWS cursor.",
+                    //         "type": "integer",
+                    //         "default": 78
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BrailleJAWSCursorBlinkRate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor blink rate",
+                    //         "description": "Stablish the JAWS braille cursor blinking rate.",
+                    //         "type": "integer",
+                    //         // NOTE: The actual menu has 3 entries, with different values reserved
+                    //         // for each one:
+                    //         //    - "Braille Cursor is Always Up": 0
+                    //         //    - "Braille Cursor is Always Down": -1
+                    //         //    - "Braille Cursor is Blinking": Integer
+                    //         "default": 500
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BrailleInvisibleCursorDots": {
+                    //     "schema": {
+                    //         "title": "Invisible Cursor Dot Pattern",
+                    //         "description": "The dot pattern to use for the \"Invisible Cursor\".",
+                    //         "type": "integer",
+                    //         "default": 78
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BrailleInvisibleCursorBlinkRate": {
+                    //     "schema": {
+                    //         "title": "JAWS Cursor blink rate",
+                    //         "description": "Stablish the JAWS braille cursor blinking rate.",
+                    //         "type": "integer",
+                    //         // NOTE: The actual menu has 3 entries, with different values reserved
+                    //         // for each one:
+                    //         //    - "Braille Cursor is Always Up": 0
+                    //         //    - "Braille Cursor is Always Down": -1
+                    //         //    - "Braille Cursor is Blinking": Integer
+                    //         "default": 500
+                    //     }
+                    // },
 
                     // ---- Braille UNKNOWN -----
 
-                    "Braille.BrailleCursorBlinkRate": {
-                        "schema": {
-                            "title": "Braille Cursor Blink Rate",
-                            "description": "Speed, in milliseconds, at which the cursor on the braille display should blink.",
-                            "type": "integer",
-                            "default": 500
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.BrailleCursorBlinkRate": {
+                    //     "schema": {
+                    //         "title": "Braille Cursor Blink Rate",
+                    //         "description": "Speed, in milliseconds, at which the cursor on the braille display should blink.",
+                    //         "type": "integer",
+                    //         "default": 500
+                    //     }
+                    // },
 
                     "Braille.BrailleKeyInterruptSpeech": {
                         "schema": {
@@ -2972,14 +2965,16 @@
                             "default": 1
                         }
                     },
-                    "Braille.MessageTime": {
-                        "schema": {
-                            "title": "Flash Message Timeout",
-                            "description": "How long in milliseconds a flash message is going to be displayed in the Braille display.",
-                            "type": "integer",
-                            "default": 5000
-                        }
-                    },
+
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.MessageTime": {
+                    //     "schema": {
+                    //         "title": "Flash Message Timeout",
+                    //         "description": "How long in milliseconds a flash message is going to be displayed in the Braille display.",
+                    //         "type": "integer",
+                    //         "default": 5000
+                    //     }
+                    // },
 
                     // ---- Braille Flash Messages - Verbosity Levels  -----
 
@@ -3222,15 +3217,16 @@
                             "default": 1
                         }
                     },
-                    "Braille.StructuredModeInclusionFlags": {
-                        "schema": {
-                            "title": "Structure Mode Inclusion Flags",
-                            "description": "Store in a bitmask the elements to be included in 'Braille Structure Mode'.",
-                            "type": "integer",
-                            "default": 8191
-                        },
-                        "label": "bitmask"
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.StructuredModeInclusionFlags": {
+                    //     "schema": {
+                    //         "title": "Structure Mode Inclusion Flags",
+                    //         "description": "Store in a bitmask the elements to be included in 'Braille Structure Mode'.",
+                    //         "type": "integer",
+                    //         "default": 8191
+                    //     },
+                    //     "label": "bitmask"
+                    // },
 
                     // ------------------------------------------------------------------
 
@@ -3286,14 +3282,15 @@
                             "default": 0
                         }
                     },
-                    "Braille.UseHowManyStatusCells": {
-                        "schema": {
-                            "title": "Use How Many Status Cells",
-                            "description": "How many cells to use for status information if the display defines none of its own..",
-                            "type": "integer",
-                            "default": 4
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Braille.UseHowManyStatusCells": {
+                    //     "schema": {
+                    //         "title": "Use How Many Status Cells",
+                    //         "description": "How many cells to use for status information if the display defines none of its own..",
+                    //         "type": "integer",
+                    //         "default": 4
+                    //     }
+                    // },
                     "Braille.DotFirmness": {
                         // NOTE-TODO: This setting appears to have a bug,
                         // when the slide is moved isn't deleted from the configuration file, but
@@ -3378,7 +3375,6 @@
                         "schema": {
                             "title": "Say Cursor Shape Change",
                             "description": "Whether to announce a change in the shape of the cursor.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -3390,101 +3386,112 @@
                             ]
                         }
                     },
-                    "Options.CaretBlinkRate": {
-                        "schema": {
-                            "title": "Caret Blink Rate",
-                            "description": "How fast the caret blinks, in milliseconds.",
-                            "type": "integer",
-                            "default": 53,
-                            "minimum": 1
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Options.CaretBlinkRate": {
+                    //     "schema": {
+                    //         "title": "Caret Blink Rate",
+                    //         "description": "How fast the caret blinks, in milliseconds.",
+                    //         "type": "integer",
+                    //         "default": 53,
+                    //         "minimum": 1
+                    //     }
+                    // },
 
                     // ---------- Caret And Cursor: Vertical Caret Dimensions ----------
 
-                    "OSM.MouseClickFudgeX": {
-                        "schema": {
-                            "title": "Mouse Click Fudge X",
-                            "description": "Number of pixels to the right of the current JAWS cursor at which a mouse click should be simulated",
-                            "type": "integer",
-                            "default": 1
-                        }
-                    },
-                    "OSM.MouseClickFudgeY": {
-                        "schema": {
-                            "title": "Mouse Click Fudge Y",
-                            "description": "Number of pixels below the current JAWS cursor at which a mouse click should be simulated",
-                            "type": "integer",
-                            "default": -2
-                        }
-                    },
-                    "OSM.VertCaretMinY": {
-                        "schema": {
-                            "title": "Vertical Caret Minimum Y Dimension",
-                            "description": "Minimum number pixels of height for the 'Vertical Caret'",
-                            "type": "integer",
-                            "default": 4
-                        }
-                    },
-                    "OSM.VertCaretMinX": {
-                        "schema": {
-                            "title": "Vertical Caret Minimum X Dimension",
-                            "description": "Minimum number pixels of width for the 'Vertical Caret'",
-                            "type": "integer",
-                            "default": 1
-                        }
-                    },
-                    "OSM.VertCaretMaxY": {
-                        "schema": {
-                            "title": "Vertical Caret Maximum Y Dimension",
-                            "description": "Maximum number pixels of height for the 'Vertical Caret'",
-                            "type": "integer",
-                            "default": 110
-                        }
-                    },
-                    "OSM.VertCaretMaxX": {
-                        "schema": {
-                            "title": "Vertical Caret Maximum X Dimension",
-                            "description": "Maximum number pixels of width for the 'Vertical Caret'",
-                            "type": "integer",
-                            "default": 4
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.MouseClickFudgeX": {
+                    //     "schema": {
+                    //         "title": "Mouse Click Fudge X",
+                    //         "description": "Number of pixels to the right of the current JAWS cursor at which a mouse click should be simulated",
+                    //         "type": "integer",
+                    //         "default": 1
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.MouseClickFudgeY": {
+                    //     "schema": {
+                    //         "title": "Mouse Click Fudge Y",
+                    //         "description": "Number of pixels below the current JAWS cursor at which a mouse click should be simulated",
+                    //         "type": "integer",
+                    //         "default": -2
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.VertCaretMinY": {
+                    //     "schema": {
+                    //         "title": "Vertical Caret Minimum Y Dimension",
+                    //         "description": "Minimum number pixels of height for the 'Vertical Caret'",
+                    //         "type": "integer",
+                    //         "default": 4
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.VertCaretMinX": {
+                    //     "schema": {
+                    //         "title": "Vertical Caret Minimum X Dimension",
+                    //         "description": "Minimum number pixels of width for the 'Vertical Caret'",
+                    //         "type": "integer",
+                    //         "default": 1
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.VertCaretMaxY": {
+                    //     "schema": {
+                    //         "title": "Vertical Caret Maximum Y Dimension",
+                    //         "description": "Maximum number pixels of height for the 'Vertical Caret'",
+                    //         "type": "integer",
+                    //         "default": 110
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.VertCaretMaxX": {
+                    //     "schema": {
+                    //         "title": "Vertical Caret Maximum X Dimension",
+                    //         "description": "Maximum number pixels of width for the 'Vertical Caret'",
+                    //         "type": "integer",
+                    //         "default": 4
+                    //     }
+                    // },
 
                     // ------- Caret And Cursor: Horizontal Caret Dimensions ----------
 
-                    "OSM.HorizCaretMinY": {
-                        "schema": {
-                            "title": "Horizontal Caret Minimum Y Dimension",
-                            "description": "Minimum number pixels of height for the 'Horizontal Caret'",
-                            "type": "integer",
-                            "default": 1
-                        }
-                    },
-                    "OSM.HorizCaretMinX": {
-                        "schema": {
-                            "title": "Horizontal Caret Minimum X Dimension",
-                            "description": "Minimum number pixels of width for the 'Horizontal Caret'",
-                            "type": "integer",
-                            "default": 4
-                        }
-                    },
-                    "OSM.HorizCaretMaxY": {
-                        "schema": {
-                            "title": "Horizontal Caret Maximum Y Dimension",
-                            "description": "Maximum number pixels of height for the 'Horizontal Caret'",
-                            "type": "integer",
-                            "default": 4
-                        }
-                    },
-                    "OSM.HorizCaretMaxX": {
-                        "schema": {
-                            "title": "Horizontal Caret Maximum X Dimension",
-                            "description": "Maximum number pixels of width for the 'Horizontal Caret'",
-                            "type": "integer",
-                            "default": 14
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.HorizCaretMinY": {
+                    //     "schema": {
+                    //         "title": "Horizontal Caret Minimum Y Dimension",
+                    //         "description": "Minimum number pixels of height for the 'Horizontal Caret'",
+                    //         "type": "integer",
+                    //         "default": 1
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.HorizCaretMinX": {
+                    //     "schema": {
+                    //         "title": "Horizontal Caret Minimum X Dimension",
+                    //         "description": "Minimum number pixels of width for the 'Horizontal Caret'",
+                    //         "type": "integer",
+                    //         "default": 4
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.HorizCaretMaxY": {
+                    //     "schema": {
+                    //         "title": "Horizontal Caret Maximum Y Dimension",
+                    //         "description": "Maximum number pixels of height for the 'Horizontal Caret'",
+                    //         "type": "integer",
+                    //         "default": 4
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.HorizCaretMaxX": {
+                    //     "schema": {
+                    //         "title": "Horizontal Caret Maximum X Dimension",
+                    //         "description": "Maximum number pixels of width for the 'Horizontal Caret'",
+                    //         "type": "integer",
+                    //         "default": 14
+                    //     }
+                    // },
 
                     // ------------------- Synthesizer -------------------
 
@@ -3492,7 +3499,6 @@
                         "schema": {
                             "title": "Simultaneous Synth and Wave",
                             "description": "Whether to enable smoother playing of WAV files when using the DEC Talk Access 32 software synthesizer. This option is only available in Default.jcf. Changes to this setting take effect the next time you start JAWS.  Disabled by default.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -3504,15 +3510,16 @@
                             ]
                         }
                     },
-                    "Options.SynthesizerResetFrequency": {
-                        "schema": {
-                            "title": "Synthesizer Reset Frequency",
-                            "description": "How often to reset communication with the synthesizer, in milliseconds.",
-                            "type": "integer",
-                            "default": 2000,
-                            "minimum": 0
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Options.SynthesizerResetFrequency": {
+                    //     "schema": {
+                    //         "title": "Synthesizer Reset Frequency",
+                    //         "description": "How often to reset communication with the synthesizer, in milliseconds.",
+                    //         "type": "integer",
+                    //         "default": 2000,
+                    //         "minimum": 0
+                    //     }
+                    // },
 
                     // ---------------- Punctuation ------------------
 
@@ -3559,7 +3566,6 @@
                         "schema": {
                             "title": "JAWS Insert Key",
                             "description": "Whether/which insert keys can be used as a JAWS Insert.",
-                            "type": "number",
                             "default": 3,
                             "enum": [
                                 0,
@@ -3579,7 +3585,6 @@
                         "schema": {
                             "title": "Initial State of NumLock Key",
                             "description": "The initial state of the NumLock key.",
-                            "type": "number",
                             "enum": [
                                 0,
                                 1,
@@ -3597,7 +3602,6 @@
                         "schema": {
                             "title": "Use Extended Keys",
                             "description": "Whether to distinguish between extended and number pad keys.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -3613,7 +3617,6 @@
                         "schema": {
                             "title": "Generalize Modifiers",
                             "description": "Differentiate Between Left and Right Paired Keys.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -4575,22 +4578,24 @@
                     //  -https://docs.microsoft.com/es-es/windows/win32/intl/language-identifier-constants-and-strings
                     //
 
-                    "OCR.PrimaryRecognitionLanguage": {
-                        "schema": {
-                            "title": "Primary OCR Recognition Language",
-                            "description": "Indicates the primary language for OCR.",
-                            "type": "integer",
-                            "default": 1033
-                        }
-                    },
-                    "OCR.SecondaryRecognitionLanguage": {
-                        "schema": {
-                            "title": "Secondary OCR Recognition Language",
-                            "description": "Indicates the secondary language for OCR.",
-                            "type": "integer",
-                            "default": 1033
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OCR.PrimaryRecognitionLanguage": {
+                    //     "schema": {
+                    //         "title": "Primary OCR Recognition Language",
+                    //         "description": "Indicates the primary language for OCR.",
+                    //         "type": "integer",
+                    //         "default": 1033
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OCR.SecondaryRecognitionLanguage": {
+                    //     "schema": {
+                    //         "title": "Secondary OCR Recognition Language",
+                    //         "description": "Indicates the secondary language for OCR.",
+                    //         "type": "integer",
+                    //         "default": 1033
+                    //     }
+                    // },
 
                     // --------------------- Gestures -----------------------
 
@@ -4946,30 +4951,33 @@
                             "default": 0
                         }
                     },
-                    "OSM.TextOutDelay": {
-                        "schema": {
-                            "title": "Text Out Delay",
-                            "description": "The number of milliseconds to wait before announcing newly written text. Setting this to a non-zero value may cause terminal programs to respond in a less choppy fashion.",
-                            "type": "integer",
-                            "default": 0
-                        }
-                    },
-                    "OSM.PixelsPerSpace": {
-                        "schema": {
-                            "title": "Pixels Per Space",
-                            "description": "When simulating spaces in blank portions of a line, the number of pixels used to represent each space.",
-                            "type": "integer",
-                            "default": 8
-                        }
-                    },
-                    "OSM.PixelsPerTab": {
-                        "schema": {
-                            "title": "Pixels Per Tab",
-                            "description": "The number of pixels per tab, used to estimate the number of tab spaces contained within the blank portion of a line.",
-                            "type": "integer",
-                            "default": 10
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.TextOutDelay": {
+                    //     "schema": {
+                    //         "title": "Text Out Delay",
+                    //         "description": "The number of milliseconds to wait before announcing newly written text. Setting this to a non-zero value may cause terminal programs to respond in a less choppy fashion.",
+                    //         "type": "integer",
+                    //         "default": 0
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.PixelsPerSpace": {
+                    //     "schema": {
+                    //         "title": "Pixels Per Space",
+                    //         "description": "When simulating spaces in blank portions of a line, the number of pixels used to represent each space.",
+                    //         "type": "integer",
+                    //         "default": 8
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.PixelsPerTab": {
+                    //     "schema": {
+                    //         "title": "Pixels Per Tab",
+                    //         "description": "The number of pixels per tab, used to estimate the number of tab spaces contained within the blank portion of a line.",
+                    //         "type": "integer",
+                    //         "default": 10
+                    //     }
+                    // },
                     "OSM.TrackFocusRect": {
                         "schema": {
                             "title": "Track Focus Rectangle",
@@ -4985,22 +4993,24 @@
                             "default": 1
                         }
                     },
-                    "OSM.LeftMargin": {
-                        "schema": {
-                            "title": "Left Margin in Pixels",
-                            "description": "Ignores the distance specified in pixels from the left border of the window.",
-                            "type": "integer",
-                            "default": 0
-                        }
-                    },
-                    "OSM.UnderlineProximity": {
-                        "schema": {
-                            "title": "Underline Proximity",
-                            "description": "How far away in pixels can an underline be before being considered an actual underline.",
-                            "type": "integer",
-                            "default": 0
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.LeftMargin": {
+                    //     "schema": {
+                    //         "title": "Left Margin in Pixels",
+                    //         "description": "Ignores the distance specified in pixels from the left border of the window.",
+                    //         "type": "integer",
+                    //         "default": 0
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.UnderlineProximity": {
+                    //     "schema": {
+                    //         "title": "Underline Proximity",
+                    //         "description": "How far away in pixels can an underline be before being considered an actual underline.",
+                    //         "type": "integer",
+                    //         "default": 0
+                    //     }
+                    // },
                     "FSCasts.EnableNotifications": {
                         "schema": {
                             "title": "FSCast Notifications",
@@ -5124,14 +5134,15 @@
 
                     // ------------ GLOBAL ------------
 
-                    "OSM.PixelsPerBlankLine": {
-                        "schema": {
-                            "title": "Pixels Per Blank Line",
-                            "description": "how many pixels (high) per blank line",
-                            "type": "integer",
-                            "default": 13
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.PixelsPerBlankLine": {
+                    //     "schema": {
+                    //         "title": "Pixels Per Blank Line",
+                    //         "description": "how many pixels (high) per blank line",
+                    //         "type": "integer",
+                    //         "default": 13
+                    //     }
+                    // },
                     "Voice Profiles.ActiveVoiceProfileName": {
                         "schema": {
                             "title": "Active Voice Profile Name",
@@ -5144,7 +5155,6 @@
                         "schema": {
                             "title": "Abbreviations",
                             "description": "Whether to expand abbreviations.  If this is enabled, abbreviations with a title attribute will have their title read instead of the on screen text.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -5160,7 +5170,6 @@
                         "schema": {
                             "title": "Acronyms",
                             "description": "If this is enabled, acronyms with a title attribute will have their title read instead of the on screen text.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -5217,54 +5226,60 @@
                             "default": 1
                         }
                     },
-                    "HTML.TblMaxCellTextLength": {
-                        "schema": {
-                            "title": "Table Maximum Cell Text Length",
-                            "description": "A cell is considered a valid data cell if it contains upto this number of characters.",
-                            "type": "integer",
-                            "default": 250
-                        }
-                    },
-                    "HTML.TblMinCellTextLength": {
-                        "schema": {
-                            "title": "Table Minimum Cell Text Length",
-                            "description": "A cell is considered a valid data cell if it contains at least this number of characters.",
-                            "type": "integer",
-                            "default": 1
-                        }
-                    },
-                    "HTML.TblMinTextColumns": {
-                        "schema": {
-                            "title": "Table Minimum Text Columns",
-                            "description": "This option specifies the minimum number of columns which must contain text in order for the table to be considered a data table.",
-                            "type": "integer",
-                            "default": 2
-                        }
-                    },
-                    "HTML.TblMinTextRows": {
-                        "schema": {
-                            "title": "Table Minimum Text Rows",
-                            "description": "This option specifies the minimum number of rows which must contain text in order for the table to be considered a data table.",
-                            "type": "integer",
-                            "default": 2
-                        }
-                    },
-                    "HTML.TblMinValidDataRows": {
-                        "schema": {
-                            "title": "Table Minimum Valid Data Rows",
-                            "description": "Next options used for configuring how data tables are detected This option specifies the minimum number of valid data rows that a table must contain in order for it to be considered a data table.",
-                            "type": "integer",
-                            "default": 2
-                        }
-                    },
-                    "HTML.TblValidRowThreshold": {
-                        "schema": {
-                            "title": "Table Valid Row Threshold",
-                            "description": "This option specifies the minimum number of cells that a row must contain in order for it to be considered a valid data row.",
-                            "type": "integer",
-                            "default": 2
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "HTML.TblMaxCellTextLength": {
+                    //     "schema": {
+                    //         "title": "Table Maximum Cell Text Length",
+                    //         "description": "A cell is considered a valid data cell if it contains upto this number of characters.",
+                    //         "type": "integer",
+                    //         "default": 250
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "HTML.TblMinCellTextLength": {
+                    //     "schema": {
+                    //         "title": "Table Minimum Cell Text Length",
+                    //         "description": "A cell is considered a valid data cell if it contains at least this number of characters.",
+                    //         "type": "integer",
+                    //         "default": 1
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "HTML.TblMinTextColumns": {
+                    //     "schema": {
+                    //         "title": "Table Minimum Text Columns",
+                    //         "description": "This option specifies the minimum number of columns which must contain text in order for the table to be considered a data table.",
+                    //         "type": "integer",
+                    //         "default": 2
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "HTML.TblMinTextRows": {
+                    //     "schema": {
+                    //         "title": "Table Minimum Text Rows",
+                    //         "description": "This option specifies the minimum number of rows which must contain text in order for the table to be considered a data table.",
+                    //         "type": "integer",
+                    //         "default": 2
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "HTML.TblMinValidDataRows": {
+                    //     "schema": {
+                    //         "title": "Table Minimum Valid Data Rows",
+                    //         "description": "Next options used for configuring how data tables are detected This option specifies the minimum number of valid data rows that a table must contain in order for it to be considered a data table.",
+                    //         "type": "integer",
+                    //         "default": 2
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "HTML.TblValidRowThreshold": {
+                    //     "schema": {
+                    //         "title": "Table Valid Row Threshold",
+                    //         "description": "This option specifies the minimum number of cells that a row must contain in order for it to be considered a valid data row.",
+                    //         "type": "integer",
+                    //         "default": 2
+                    //     }
+                    // },
                     "HTML.UseLegacyIESupport": {
                         "schema": {
                             "title": "Use Legacy IE Support",
@@ -5305,37 +5320,39 @@
                             "default": "cap"
                         }
                     },
-                    "Options.CaretDetect": {
-                        "schema": {
-                            "title": "Caret Detect",
-                            "description": "How many cursor blinks are used to locate the caret.",
-                            "type": "integer",
-                            "default": 1,
-                            "minimum": 1
-                        }
-                    },
-                    "Options.CaretDetectTimeOut": {
-                        "schema": {
-                            "title": "Caret Detect Timeout",
-                            "description": "The number of milliseconds before JAWS for Windows will give up looking for the caret.",
-                            "type": "integer",
-                            "default": 250,
-                            "minimum": 0
-                        }
-                    },
-                    "OSM.CaretTimeOut": {
-                        "schema": {
-                            "title": "Caret Time Out",
-                            "description": "The time in milliseconds to wait before redrawing the caret.",
-                            "type": "integer",
-                            "default": 1000
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Options.CaretDetect": {
+                    //     "schema": {
+                    //         "title": "Caret Detect",
+                    //         "description": "How many cursor blinks are used to locate the caret.",
+                    //         "type": "integer",
+                    //         "default": 1,
+                    //         "minimum": 1
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Options.CaretDetectTimeOut": {
+                    //     "schema": {
+                    //         "title": "Caret Detect Timeout",
+                    //         "description": "The number of milliseconds before JAWS for Windows will give up looking for the caret.",
+                    //         "type": "integer",
+                    //         "default": 250,
+                    //         "minimum": 0
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "OSM.CaretTimeOut": {
+                    //     "schema": {
+                    //         "title": "Caret Time Out",
+                    //         "description": "The time in milliseconds to wait before redrawing the caret.",
+                    //         "type": "integer",
+                    //         "default": 1000
+                    //     }
+                    // },
                     "Options.Case": {
                         "schema": {
                             "title": "Case",
                             "description": "Whether to indicate the case of spoken text with a change of inflection.",
-                            "type": "number",
                             "default": 1,
                             "enum": [
                                 0,
@@ -5362,7 +5379,6 @@
                         "schema": {
                             "title": "Indicate Attributes on Dialogs and Menus",
                             "description": "Whether to announce attributes in dialogs and menus if the scheme allows for it.",
-                            "type": "number",
                             "default": 0,
                             // TODO: All of these 0,1 examples are a firm use case for an application-specific transform mechanism so that our JSON payloads can use true/false.
                             "enum": [
@@ -5379,7 +5395,6 @@
                         "schema": {
                             "title": "JAWS Punctuation Enabled",
                             "description": "Which punctuation marks to speak.",
-                            "type": "number",
                             "default": 2,
                             "enum": [
                                 0,
@@ -5399,7 +5414,6 @@
                         "schema": {
                             "title": "Left Shift Skip Back",
                             "description": "How the shift keys should behave in \"Say All\" mode.",
-                            "type": "number",
                             "default": 1,
                             "enum": [
                                 0,
@@ -5449,7 +5463,6 @@
                         "schema": {
                             "title": "Process Tooltip Event",
                             "description": "Whether or not to process tooltip events.",
-                            "type": "number",
                             "default": 1,
                             "enum": [
                                 0,
@@ -5465,7 +5478,6 @@
                         "schema": {
                             "title": "Reading Interrupt",
                             "description": "Whether to interrupt speech when a key that is bound to a macro is pressed.",
-                            "type": "number",
                             "default": 1,
                             "enum": [
                                 0,
@@ -5481,7 +5493,6 @@
                         "schema": {
                             "title": "Skim Reading Indication",
                             "description": "Whether or not to indicate (via a beep) when skimming over text units for which the regular expression returns FALSE.",
-                            "type": "number",
                             "default": 1,
                             "enum": [
                                 0,
@@ -5545,7 +5556,6 @@
                         "schema": {
                             "title": "Synthesizer",
                             "description": "The synthesizer to use/ Available synthesizers are listed in JfW.INI",
-                            "type": "string",
                             "enum": ["Synth1"],
                             "enumLabels": ["Default speech synthesizer"],
                             "default": "Synth1"
@@ -5555,7 +5565,6 @@
                         "schema": {
                             "title": "Tether Jaws to PC",
                             "description": "Whether or not to tether the JAWS cursor to the PC cursor.  If this is set to 'on', whenever the Pc cursor moves, the Jaws cursor will follow it. If this is set to 'off', the JAWS cursor is indifferent to PC cursor movements (this is the default).",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -5588,7 +5597,6 @@
                         "schema": {
                             "title": "Use Virtual Info in Forms Mode",
                             "description": "Whether to use information from the virtual HTML area for prompts in Forms mode. Warning: this will not always result in accurate information, particularly on pages where there are errors in the HTML coding which result in forms mode and virtual mode being out of synchronization.",
-                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -5599,7 +5607,7 @@
                                 "on"
                             ]
                         }
-                    },
+                    }
                     // No documentation or onscreen option. Disabled for now.
                     // "Options.UseWindowsKeyboardHook": {
                     //     "schema": {
@@ -5617,15 +5625,16 @@
                     //         ]
                     //     }
                     // },
-                    "Options.VIRTUALMSAAREFRESH": {
-                        "schema": {
-                            "title": "Virtual MSAA Refresh",
-                            "description": "How often (in milliseconds) should an embedded ActiveX control cause the Virtual HTML area to be updated when receiving rapid ValueChange events from MSAA.  Set to -1 to disable refreshes.",
-                            "type": "integer",
-                            "default": 0,
-                            "minimum": -1
-                        }
-                    }
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Options.VIRTUALMSAAREFRESH": {
+                    //     "schema": {
+                    //         "title": "Virtual MSAA Refresh",
+                    //         "description": "How often (in milliseconds) should an embedded ActiveX control cause the Virtual HTML area to be updated when receiving rapid ValueChange events from MSAA.  Set to -1 to disable refreshes.",
+                    //         "type": "integer",
+                    //         "default": 0,
+                    //         "minimum": -1
+                    //     }
+                    // }
                 },
                 "capabilitiesTransformations": {
                     "Options\\.confirmWhenExitingJAWS": {
@@ -5885,15 +5894,16 @@
                             "default": "ENU"
                         }
                     },
-                    "Options.Factory": {
-                        "schema": {
-                            // NOTE: Setting purpose isn't known and should remain private
-                            "title": "Factory",
-                            "description": "Unknown.",
-                            "type": "integer",
-                            "default": 0
-                        }
-                    },
+                    // GPII-4226 Leaving out for now due to lack of either a minimum or maximum value.
+                    // "Options.Factory": {
+                    //     "schema": {
+                    //         // NOTE: Setting purpose isn't known and should remain private
+                    //         "title": "Factory",
+                    //         "description": "Unknown.",
+                    //         "type": "integer",
+                    //         "default": 0
+                    //     }
+                    // },
 
                     // =======================================================
 
