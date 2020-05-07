@@ -235,8 +235,8 @@ The tests are run in one of two ways, using the following commands:
 
 ### Coverage Reporting
 
-The preferred way to consistently generate a code coverage report is to use Vagrant as described above.  When you
-start a VM using `vagrant up` and run `npm run test:vagrant`, the full test suite will run in the VM, and at then end of
+The preferred way to consistently generate a code coverage report is to use Vagrant as described above.  When you start
+a VM using `vagrant up` and run `npm run test:vagrant`, the full test suite will run in the VM, and at then end of
 the run:
 
 1. A summary of the report will be displayed to the console.
