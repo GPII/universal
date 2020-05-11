@@ -6789,22 +6789,6 @@
             }
         },
         "configure": [
-            // Remove current system wallpaper files.
-            {
-                "type": "gpii.windows.rm",
-                "path": "${{environment}.APPDATA}\\Microsoft\\Windows\\Themes\\CachedFiles",
-                "options": {
-                    "recursive": true,
-                    "silent": true
-                }
-            },
-            {
-                "type": "gpii.windows.rm",
-                "path": "${{environment}.APPDATA}\\Microsoft\\Windows\\Themes\\TranscodedWallpaper",
-                "options": {
-                    "silent": true
-                }
-            },
             // Set the "restore" theme.
             "settings.configure-theme",
             // Set the high-contrast theme.
