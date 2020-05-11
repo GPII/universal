@@ -156,36 +156,38 @@
                             "default": 1
                         }
                     },
-                    "Options.DisableHideAltKey": {
-                        "schema": {
-                            "title": "",
-                            "description": "Disable hide keyboard navigation indicators until I use the ALT Key.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
-                    "Options.IgnoreColorsSpecifiedOnWebPages": {
-                        "schema": {
-                            "title": "",
-                            "description": "Ignore colors specified on web pages.",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
-                        }
-                    },
+                    // GPII-4226 Leaving out for now, needs a non-empty title
+                    // "Options.DisableHideAltKey": {
+                    //     "schema": {
+                    //         "title": "",
+                    //         "description": "Disable hide keyboard navigation indicators until I use the ALT Key.",
+                    //         "enum": [
+                    //             0,
+                    //             1
+                    //         ],
+                    //         "enumLabels": [
+                    //             "off",
+                    //             "on"
+                    //         ],
+                    //         "default": 0
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, needs a non-empty title
+                    // "Options.IgnoreColorsSpecifiedOnWebPages": {
+                    //     "schema": {
+                    //         "title": "",
+                    //         "description": "Ignore colors specified on web pages.",
+                    //         "enum": [
+                    //             0,
+                    //             1
+                    //         ],
+                    //         "enumLabels": [
+                    //             "off",
+                    //             "on"
+                    //         ],
+                    //         "default": 0
+                    //     }
+                    // },
                     "Options.DisableLanguageBar": {
                         "schema": {
                             "title": "Language Bar",
@@ -347,210 +349,234 @@
                     //   - Medium: "0|1|0"
                     //   - Low: "0|0|1"
 
-                    "VirtualCursorVerbosity.BlockQuotation": {
-                        "schema": {
-                            "title": "Announce Block Quotation",
-                            "description": "Announce Start and End of Block Quotations.",
-                            "type": "string",
-                            "default": "1|1|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.Feed": {
-                        "schema": {
-                            "title": "Announce Feed",
-                            "description": "Announce Start and End of Feeds.",
-                            "type": "string",
-                            "default": "1|1|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.Figure": {
-                        "schema": {
-                            "title": "Announce Figure",
-                            "description": "Announce Start and End of Figures.",
-                            "type": "string",
-                            "default": "1|1|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.FlashObject": {
-                        "schema": {
-                            "title": "Announce Flash Object",
-                            "description": "Announce Start and End of Flash Objects.",
-                            "type": "string",
-                            "default": "1|0|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.Frame": {
-                        "schema": {
-                            "title": "Announce Frame",
-                            "description": "Announce Start and End of Frame.",
-                            "type": "string",
-                            "default": "1|0|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.GroupBox": {
-                        "schema": {
-                            "title": "Announce Group Box",
-                            "description": "Announce Start and End of Group Box.",
-                            "type": "string",
-                            "default": "1|1|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.List": {
-                        "schema": {
-                            "title": "Announce List",
-                            "description": "Announce Start and End of List.",
-                            "type": "string",
-                            "default": "1|1|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.Log": {
-                        "schema": {
-                            "title": "Announce Log",
-                            "description": "Announce Start and End of Log.",
-                            "type": "string",
-                            "default": "1|1|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.Note": {
-                        "schema": {
-                            "title": "Announce Note",
-                            "description": "Announce Start and End of Note.",
-                            "type": "string",
-                            "default": "1|1|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.ApplicationRegion": {
-                        "schema": {
-                            "title": "Announce Application Region",
-                            "description": "Announce Start and End of Application Region.",
-                            "type": "string",
-                            "default": "0|0|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.ArticleRegion": {
-                        "schema": {
-                            "title": "Announce Article Region",
-                            "description": "Announce Start and End of Article Region.",
-                            "type": "string",
-                            "default": "1|1|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.BannerRegion": {
-                        "schema": {
-                            "title": "Announce Banner Region",
-                            "description": "Announce Start and End of Banner Region.",
-                            "type": "string",
-                            "default": "1|0|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.ComplementaryRegion": {
-                        "schema": {
-                            "title": "Announce Complementary Region",
-                            "description": "Announce Start and End of Complementary Region.",
-                            "type": "string",
-                            "default": "1|0|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.ContentInfoRegion": {
-                        "schema": {
-                            "title": "Announce Content Info Region",
-                            "description": "Announce Start and End of Content Info.",
-                            "type": "string",
-                            "default": "1|0|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.DocumentRegion": {
-                        "schema": {
-                            "title": "Announce Article Region",
-                            "description": "Announce Start and End of Document Region.",
-                            "type": "string",
-                            "default": "0|0|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.FormRegion": {
-                        "schema": {
-                            "title": "Announce Form Regions",
-                            "description": "Announce Start and End of Form Regions.",
-                            "type": "string",
-                            "default": "1|0|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.MainRegion": {
-                        "schema": {
-                            "title": "Announce Main Region",
-                            "description": "Announce Start and End of Main Region.",
-                            "type": "string",
-                            "default": "1|1|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.NavigationRegion": {
-                        "schema": {
-                            "title": "Navigation Region",
-                            "description": "Announce Start and End of Navigation Regions.",
-                            "type": "string",
-                            "default": "1|0|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.Region": {
-                        "schema": {
-                            "title": "Announce Region",
-                            "description": "Announce Start and End of 'Regions'.",
-                            "type": "string",
-                            "default": "1|0|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.SearchRegion": {
-                        "schema": {
-                            "title": "Announce Search Regions",
-                            "description": "Announce Start and End of Search Regions.",
-                            "type": "string",
-                            "default": "1|0|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.TableOrGrid": {
-                        "schema": {
-                            "title": "Announce Table or Grids",
-                            "description": "Announce Start and End of \"Tables or Grids\".",
-                            "type": "string",
-                            "default": "1|1|1"
-                        }
-                    },
-                    "VirtualCursorVerbosity.TabPanel": {
-                        "schema": {
-                            "title": "Announce Tab Panels",
-                            "description": "Announce Start and End of Tab Panels.",
-                            "type": "string",
-                            "default": "1|1|0"
-                        }
-                    },
-                    "VirtualCursorVerbosity.Toolbar": {
-                        "schema": {
-                            "title": "Announce Toolbars",
-                            "description": "Announce Start and End of Toolbars.",
-                            "type": "string",
-                            "default": "1|1|0"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.BlockQuotation": {
+                    //     "schema": {
+                    //         "title": "Announce Block Quotation",
+                    //         "description": "Announce Start and End of Block Quotations.",
+                    //         "type": "string",
+                    //         "default": "1|1|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.Feed": {
+                    //     "schema": {
+                    //         "title": "Announce Feed",
+                    //         "description": "Announce Start and End of Feeds.",
+                    //         "type": "string",
+                    //         "default": "1|1|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.Figure": {
+                    //     "schema": {
+                    //         "title": "Announce Figure",
+                    //         "description": "Announce Start and End of Figures.",
+                    //         "type": "string",
+                    //         "default": "1|1|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.FlashObject": {
+                    //     "schema": {
+                    //         "title": "Announce Flash Object",
+                    //         "description": "Announce Start and End of Flash Objects.",
+                    //         "type": "string",
+                    //         "default": "1|0|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.Frame": {
+                    //     "schema": {
+                    //         "title": "Announce Frame",
+                    //         "description": "Announce Start and End of Frame.",
+                    //         "type": "string",
+                    //         "default": "1|0|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.GroupBox": {
+                    //     "schema": {
+                    //         "title": "Announce Group Box",
+                    //         "description": "Announce Start and End of Group Box.",
+                    //         "type": "string",
+                    //         "default": "1|1|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.List": {
+                    //     "schema": {
+                    //         "title": "Announce List",
+                    //         "description": "Announce Start and End of List.",
+                    //         "type": "string",
+                    //         "default": "1|1|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.Log": {
+                    //     "schema": {
+                    //         "title": "Announce Log",
+                    //         "description": "Announce Start and End of Log.",
+                    //         "type": "string",
+                    //         "default": "1|1|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.Note": {
+                    //     "schema": {
+                    //         "title": "Announce Note",
+                    //         "description": "Announce Start and End of Note.",
+                    //         "type": "string",
+                    //         "default": "1|1|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.ApplicationRegion": {
+                    //     "schema": {
+                    //         "title": "Announce Application Region",
+                    //         "description": "Announce Start and End of Application Region.",
+                    //         "type": "string",
+                    //         "default": "0|0|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.ArticleRegion": {
+                    //     "schema": {
+                    //         "title": "Announce Article Region",
+                    //         "description": "Announce Start and End of Article Region.",
+                    //         "type": "string",
+                    //         "default": "1|1|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.BannerRegion": {
+                    //     "schema": {
+                    //         "title": "Announce Banner Region",
+                    //         "description": "Announce Start and End of Banner Region.",
+                    //         "type": "string",
+                    //         "default": "1|0|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.ComplementaryRegion": {
+                    //     "schema": {
+                    //         "title": "Announce Complementary Region",
+                    //         "description": "Announce Start and End of Complementary Region.",
+                    //         "type": "string",
+                    //         "default": "1|0|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.ContentInfoRegion": {
+                    //     "schema": {
+                    //         "title": "Announce Content Info Region",
+                    //         "description": "Announce Start and End of Content Info.",
+                    //         "type": "string",
+                    //         "default": "1|0|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.DocumentRegion": {
+                    //     "schema": {
+                    //         "title": "Announce Article Region",
+                    //         "description": "Announce Start and End of Document Region.",
+                    //         "type": "string",
+                    //         "default": "0|0|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.FormRegion": {
+                    //     "schema": {
+                    //         "title": "Announce Form Regions",
+                    //         "description": "Announce Start and End of Form Regions.",
+                    //         "type": "string",
+                    //         "default": "1|0|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.MainRegion": {
+                    //     "schema": {
+                    //         "title": "Announce Main Region",
+                    //         "description": "Announce Start and End of Main Region.",
+                    //         "type": "string",
+                    //         "default": "1|1|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.NavigationRegion": {
+                    //     "schema": {
+                    //         "title": "Navigation Region",
+                    //         "description": "Announce Start and End of Navigation Regions.",
+                    //         "type": "string",
+                    //         "default": "1|0|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.Region": {
+                    //     "schema": {
+                    //         "title": "Announce Region",
+                    //         "description": "Announce Start and End of 'Regions'.",
+                    //         "type": "string",
+                    //         "default": "1|0|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.SearchRegion": {
+                    //     "schema": {
+                    //         "title": "Announce Search Regions",
+                    //         "description": "Announce Start and End of Search Regions.",
+                    //         "type": "string",
+                    //         "default": "1|0|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.TableOrGrid": {
+                    //     "schema": {
+                    //         "title": "Announce Table or Grids",
+                    //         "description": "Announce Start and End of \"Tables or Grids\".",
+                    //         "type": "string",
+                    //         "default": "1|1|1"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.TabPanel": {
+                    //     "schema": {
+                    //         "title": "Announce Tab Panels",
+                    //         "description": "Announce Start and End of Tab Panels.",
+                    //         "type": "string",
+                    //         "default": "1|1|0"
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to an enum
+                    // "VirtualCursorVerbosity.Toolbar": {
+                    //     "schema": {
+                    //         "title": "Announce Toolbars",
+                    //         "description": "Announce Start and End of Toolbars.",
+                    //         "type": "string",
+                    //         "default": "1|1|0"
+                    //     }
+                    // },
 
                     // --- WEB / HTML / PDF - Reading - Custom Placemarker Page Summary ---
 
-                    "options.CustomPageSummary": {
-                        "schema": {
-                            "title": "",
-                            "description": "Announce Start and End of Toolbars.",
-                            "enum": [
-                                1,
-                                2,
-                                0
-                            ],
-                            "enumLabels": [
-                                "Speak Placemarkers On Page Load",
-                                "List Placemarkers in Results Viewer On Page Load",
-                                "Do nothing"
-                            ],
-                            "default": 0
-                        }
-                    },
+                    // GPII-4226 Leaving out for now, needs a non-empty title
+                    // "options.CustomPageSummary": {
+                    //     "schema": {
+                    //         "title": "",
+                    //         "description": "Announce Start and End of Toolbars.",
+                    //         "enum": [
+                    //             1,
+                    //             2,
+                    //             0
+                    //         ],
+                    //         "enumLabels": [
+                    //             "Speak Placemarkers On Page Load",
+                    //             "List Placemarkers in Results Viewer On Page Load",
+                    //             "Do nothing"
+                    //         ],
+                    //         "default": 0
+                    //     }
+                    // },
 
                     // ----------------------------------------------------------
 
@@ -842,35 +868,38 @@
                             "default": 1
                         }
                     },
-                    "HTML.LinkText": {
-                        "schema": {
-                            "title": "",
-                            "description": "Select what to speak for an image.",
-                            "enum": [
-                                0,
-                                1,
-                                2,
-                                3,
-                                4
-                            ],
-                            "enumLabels": [
-                                "Title",
-                                "Screen Text",
-                                "Tool Tip",
-                                "Longest of Above",
-                                "The first attribute found in the order list"
-                            ],
-                            "default": 1
-                        }
-                    },
-                    "HTML.CustomTextLinkAttrs": {
-                        "schema": {
-                            "title": "Custom Text Link Attributes",
-                            "description": "Specify the order in which attributes of text links should be searched.",
-                            "type": "string",
-                            "default": "text|title|alt|href"
-                        }
-                    },
+                    // GPII-4226 Leaving out for now, needs a non-empty title
+                    // "HTML.LinkText": {
+                    //     "schema": {
+                    //         "title": "",
+                    //         "description": "Select what to speak for an image.",
+                    //         "enum": [
+                    //             0,
+                    //             1,
+                    //             2,
+                    //             3,
+                    //             4
+                    //         ],
+                    //         "enumLabels": [
+                    //             "Title",
+                    //             "Screen Text",
+                    //             "Tool Tip",
+                    //             "Longest of Above",
+                    //             "The first attribute found in the order list"
+                    //         ],
+                    //         "default": 1
+                    //     }
+                    // },
+                    // GPII-4226 Leaving out for now, should be converted to a user facing array of strings along with
+                    // a transform to convert it to the appropriate format for the settings handler.
+                    // "HTML.CustomTextLinkAttrs": {
+                    //     "schema": {
+                    //         "title": "Custom Text Link Attributes",
+                    //         "description": "Specify the order in which attributes of text links should be searched.",
+                    //         "type": "string",
+                    //         "default": "text|title|alt|href"
+                    //     }
+                    // },
                     "HTML.IncludeGraphicLinks": {
                         "schema": {
                             "title": "Include Image Links",
@@ -966,7 +995,7 @@
 
                     "HTML.IndicateColSpan": {
                         "schema": {
-                            "title": "Indicate ColSpan for Braille",
+                            "title": "Indicate ColSpan",
                             "description": "Whether to announce column spans when reading table data in web pages.",
                             "enum": [
                                 0,
@@ -1105,14 +1134,15 @@
                             "default": 1
                         }
                     },
-                    "HTML.CustomButtonAttrs": {
-                        "schema": {
-                            "title": "Custom Button Attributes",
-                            "description": "Specify the order in which attributes of Buttons should be searched.",
-                            "type": "string",
-                            "default": "text|title|alt|href"
-                        }
-                    },
+                    // GPII-4226 This should be converted to the intra-application transform style (aka "alias").
+                    // "HTML.CustomButtonAttrs": {
+                    //     "schema": {
+                    //         "title": "Custom Button Attributes",
+                    //         "description": "Specify the order in which attributes of Buttons should be searched.",
+                    //         "type": "string",
+                    //         "default": "text|title|alt|href"
+                    //     }
+                    // },
                     "HTML.IndicateElementAttributes": {
                         "schema": {
                             "title": "Indicate Element Attributes",
@@ -2101,9 +2131,9 @@
                                 "ProofReading (Attributes, Font Info and color)",
                                 "SayAll Text Only",
                                 "SayAll Text With Sounds",
-                                "Wsual Studio .Net",
+                                "Visual Studio .Net",
                                 "Visual Studio .Net (Colors)",
-                                "Wsual Studio .Net (Indent)",
+                                "Visual Studio .Net (Indent)",
                                 "Web RentACrowd",
                                 "Word Classic"
                             ],
@@ -2125,9 +2155,9 @@
                                 "ProofReading (Attributes, Font Info and color)",
                                 "SayAll Text Only",
                                 "SayAll Text With Sounds",
-                                "Wsual Studio .Net",
+                                "Visual Studio .Net",
                                 "Visual Studio .Net (Colors)",
-                                "Wsual Studio .Net (Indent)",
+                                "Visual Studio .Net (Indent)",
                                 "Web RentACrowd",
                                 "Word Classic"
                             ],
