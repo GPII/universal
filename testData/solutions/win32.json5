@@ -4632,7 +4632,7 @@
                     "Touch.TapEventDurationMax": {
                         "schema": {
                             "title": "Explore Delay",
-                            "description": "Sets the maximum duration of the tapping event.",
+                            "description": "Sets the maximum duration of a user's screen touch that will be considered as a 'tap'",
                             "type": "integer",
                             "default": 210,
                             "minimum": 160,
