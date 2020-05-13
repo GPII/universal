@@ -7821,22 +7821,6 @@
                                 }
                             }
                         }
-                    },
-                    "Acceleration": {
-                        "schema": {
-                            "title": "Mouse keys acceleration",
-                            "description": "Acceleration of mouse keys",
-                            "type": "object",
-                            "properties": {
-                                "path": { "type":  "string"},
-                                "value": {
-                                    "type": "number",
-                                    "minimum": -1000,
-                                    // TODO: Not clear how to describe this setting
-                                    "maximum": 1000
-                                }
-                            }
-                        }
                     }
                 },
                 "capabilitiesTransformations": {
