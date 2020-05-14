@@ -370,7 +370,7 @@ gpii.tests.windows.builtIn = [
                             "MaxSpeed": {
                                 "path": "pvParam.iMaxSpeed",
                                 "value": 100
-                            },
+                            }
                             // See solution spec in win32.json
                             // "Acceleration": {
                             //     "path": "pvParam.iTimeToMaxSpeed",
