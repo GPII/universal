@@ -5867,8 +5867,8 @@
                 "liveness": "manualRestart",
                 "options": {
                     // TODO: Create a base grade for JAWS and version-specific variations.  Make JAWS 2019 the default.  Restart version-detection discussions and "capability" discussions.
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
-                    "foldername": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
+                    "defaultSettingsFilePath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
+                    "voiceProfilesDirPath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
                 },
                 "supportedSettings": {
                     // -------- Options ----------

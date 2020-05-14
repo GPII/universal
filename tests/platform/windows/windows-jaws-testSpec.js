@@ -129,8 +129,8 @@ gpii.tests.windows.jaws.testDefs = [
                             // "ENU-PCCursor.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
-                            "foldername": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
+                            "defaultSettingsFilePath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
+                            "voiceProfilesDirPath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
                         }
                     }
                 ]
@@ -199,8 +199,8 @@ gpii.tests.windows.jaws.testDefs = [
                             // "ENU-PCCursor.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
-                            "foldername": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
+                            "defaultSettingsFilePath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
+                            "voiceProfilesDirPath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
                         }
                     }
                 ]
@@ -268,8 +268,8 @@ gpii.tests.windows.jaws.testDefs = [
                             // "ENU-MenuAndDialog.SynthLangString": "French"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
-                            "foldername": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
+                            "defaultSettingsFilePath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
+                            "voiceProfilesDirPath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
                         }
                     }
                 ]
@@ -336,8 +336,8 @@ gpii.tests.windows.jaws.testDefs = [
                             // "ENU-MenuAndDialog.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
-                            "foldername": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
+                            "defaultSettingsFilePath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
+                            "voiceProfilesDirPath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
                         }
                     }
                 ]
@@ -405,8 +405,8 @@ gpii.tests.windows.jaws.testDefs = [
                             // "ENU-MenuAndDialog.SynthLangString": "French Canadian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
-                            "foldername": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
+                            "defaultSettingsFilePath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
+                            "voiceProfilesDirPath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
                         }
                     }
                 ]
