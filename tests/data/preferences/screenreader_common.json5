@@ -12,7 +12,7 @@
                     "http://registry.gpii.net/common/punctuationVerbosity": "all" ,
                     "http://registry.gpii.net/common/screenReaderTTS/enabled": true ,
                     "http://registry.gpii.net/common/trackingTTS": ["mouse", "caret"],
-                    "http://registry.gpii.net/common/speechRate": 400 ,
+                    "http://registry.gpii.net/common/speechRate": 400,
                     "http://registry.gpii.net/common/auditoryOutLanguage": "en-BS",
                     "http://registry.gpii.net/common/pitch": 0.1,
                     "http://registry.gpii.net/common/volumeTTS": 0.7
