@@ -1,0 +1,53 @@
+/*
+ * A fixture to test many JAWS settings at once by setting them to something other than the default.
+ */
+{
+    "flat": {
+        "name": "Javier",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
+                        "Options.PrimaryLanguage": "ESN",
+
+                        "ESM-Message.Rate": 90,
+                        "ESM-Message.Punctuation": 1,
+                        "ESM-PCCursor.Rate": 90,
+                        "ESM-PCCursor.Punctuation": 1,
+
+                        "ESM-JAWSCursor.Rate": 90,
+                        "ESM-JAWSCursor.Punctuation": 1,
+
+                        "ESM-Keyboard.Rate": 90,
+                        "ESM-Keyboard.Punctuation": 1,
+
+                        "ESM-Global.Rate": 90,
+                        "ESM-Global.Punctuation": 1,
+
+                        "ESM-MenuAndDialog.Rate": 90,
+                        "ESM-MenuAndDialog.Punctuation": 1,
+
+                        "ESN-Message.Rate": 90,
+                        "ESN-Message.Punctuation": 1,
+
+                        "ESN-PCCursor.Rate": 90,
+                        "ESN-PCCursor.Punctuation": 1,
+
+                        "ESN-JAWSCursor.Rate": 90,
+                        "ESN-JAWSCursor.Punctuation": 1,
+
+                        "ESN-Keyboard.Rate": 90,
+                        "ESN-Keyboard.Punctuation": 1,
+
+                        "ESN-Global.Rate": 90,
+                        "ESN-Global.Punctuation": 1,
+
+                        "ESN-MenuAndDialog.Rate": 90,
+                        "ESN-MenuAndDialog.Punctuation": 1
+                    }
+                }
+            }
+        }
+    }
+}

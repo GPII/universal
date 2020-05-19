@@ -370,11 +370,12 @@ gpii.tests.windows.builtIn = [
                             "MaxSpeed": {
                                 "path": "pvParam.iMaxSpeed",
                                 "value": 100
-                            },
-                            "Acceleration": {
-                                "path": "pvParam.iTimeToMaxSpeed",
-                                "value": 1000
                             }
+                            // See solution spec in win32.json
+                            // "Acceleration": {
+                            //     "path": "pvParam.iTimeToMaxSpeed",
+                            //     "value": 1000
+                            // }
                         },
                         "options": {
                             "getAction": "SPI_GETMOUSEKEYS",
