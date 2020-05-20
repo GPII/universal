@@ -6175,7 +6175,7 @@
                     // Available: "Tracking.AlignFlags: ["Centered within the zoom window", "Centered within the zoom window", "***"]"
                     "PRIMARY.hMarginSmooth": {
                         "schema": {
-                            "title": "Mouse horizontal edge marning",
+                            "title": "Mouse horizontal edge margin",
                             "description": "Specifies the edge margin of mouse within the zoom window.",
                             "type": "integer",
                             "minimum": 0,
@@ -6186,7 +6186,7 @@
                     // Available: "Tracking.AlignFlags: ["Centered within the zoom window", "Centered within the zoom window", "***"]"
                     "PRIMARY.vMarginSmooth": {
                         "schema": {
-                            "title": "Mouse vertical edge marning",
+                            "title": "Mouse vertical edge margin",
                             "description": "Specifies the edge margin of mouse within the zoom window.",
                             "type": "integer",
                             "minimum": 0,
@@ -6197,7 +6197,7 @@
                     // Available: "Tracking.AlignFlags: ["Centered within the zoom window", "Centered within the zoom window", "***"]"
                     "PRIMARY.hMarginCaretSmooth": {
                         "schema": {
-                            "title": "Text cursor horizontal edge marning",
+                            "title": "Text cursor horizontal edge margin",
                             "description": "Specifies the edge margin of cursor within the zoom window.",
                             "type": "integer",
                             "minimum": 0,
@@ -6208,7 +6208,7 @@
                     // Available: "Tracking.AlignFlags: ["Centered within the zoom window", "Centered within the zoom window", "***"]"
                     "PRIMARY.vMarginCaretSmooth": {
                         "schema": {
-                            "title": "Text cursor edge marning",
+                            "title": "Text cursor edge margin",
                             "description": "Specifies the edge margin of text cursor within the zoom window.",
                             "type": "integer",
                             "minimum": 0,
