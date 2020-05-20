@@ -42,7 +42,6 @@
 
                         // [VocalizerExpressive-Spanish Speech - Screen Reader]
                         // ==================================================================
-                        "VocalizerExpressive-Spanish Speech - Screen Reader.Speaker": "",
                         "VocalizerExpressive-Spanish Speech - Screen Reader.Valid": 1,
                         "VocalizerExpressive-Spanish Speech - Screen Reader.SettingsValid": 1,
                         "VocalizerExpressive-Spanish Speech - Screen Reader.Muted": 0,
@@ -52,7 +51,6 @@
                         "VocalizerExpressive-Spanish Speech - Screen Reader.Pitch": 40,
 
                         // [VocalizerExpressive-Spanish Speech - DocReader]
-                        "VocalizerExpressive-Spanish Speech - DocReader.Speaker": "",
                         "VocalizerExpressive-Spanish Speech - DocReader.Valid": 1,
                         "VocalizerExpressive-Spanish Speech - DocReader.SettingsValid": 1,
                         "VocalizerExpressive-Spanish Speech - DocReader.Muted": 0,

@@ -82,7 +82,6 @@ gpii.tests.windows.zoomtext.testDefs = [
 
                             // [VocalizerExpressive-Dutch Speech - Screen Reader]
                             // ==================================================================
-                            "VocalizerExpressive-Dutch Speech - Screen Reader.Speaker": "Default",
                             "VocalizerExpressive-Dutch Speech - Screen Reader.Valid": 1,
                             "VocalizerExpressive-Dutch Speech - Screen Reader.SettingsValid": 1,
                             "VocalizerExpressive-Dutch Speech - Screen Reader.Muted": 0,
@@ -92,7 +91,6 @@ gpii.tests.windows.zoomtext.testDefs = [
                             "VocalizerExpressive-Dutch Speech - Screen Reader.Pitch": 35,
 
                             // [VocalizerExpressive-Dutch Speech - DocReader]
-                            "VocalizerExpressive-Dutch Speech - DocReader.Speaker": "Default",
                             "VocalizerExpressive-Dutch Speech - DocReader.Valid": 1,
                             "VocalizerExpressive-Dutch Speech - DocReader.SettingsValid": 1,
                             "VocalizerExpressive-Dutch Speech - DocReader.Muted": 0,

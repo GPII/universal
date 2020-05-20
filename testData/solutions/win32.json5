@@ -220,7 +220,6 @@
                         "schema": {
                             "title": "Pointer locator display mode",
                             "description": "Changes when to display the pointer locator.",
-                            "type": "integer",
                             "enum": [
                                 1,
                                 3,
@@ -237,15 +236,16 @@
                         }
                     },
                     // Bitmask Setting
-                    "PointerScheme.PtrEnhModifier": {
-                        // TODO: Unknown
-                        "schema": {
-                            "title": "Pointer Scheme pointer modifiers",
-                            "description": "Bitmask holding 'pointer behavior modifiers'.",
-                            "type": "integer"
-                        },
-                        "label": "bitmask"
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "PointerScheme.PtrEnhModifier": {
+                    //     // TODO: Unknown
+                    //     "schema": {
+                    //         "title": "Pointer Scheme pointer modifiers",
+                    //         "description": "Bitmask holding 'pointer behavior modifiers'.",
+                    //         "type": "integer"
+                    //     },
+                    //     "label": "bitmask"
+                    // },
                     // [CursorScheme]
                     "CursorScheme.CursorEnhEnable": {
                         "schema": {
@@ -371,15 +371,16 @@
                         }
                     },
                     // Bitmask Setting
-                    "CursorScheme.PtrEnhModifier": {
-                        // TODO: Unknown
-                        "schema": {
-                            "title": "Cursor Scheme pointer modifiers",
-                            "description": "Bitmask holding 'pointer behavior modifiers'.",
-                            "type": "integer"
-                        },
-                        "label": "bitmask"
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "CursorScheme.PtrEnhModifier": {
+                    //     // TODO: Unknown
+                    //     "schema": {
+                    //         "title": "Cursor Scheme pointer modifiers",
+                    //         "description": "Bitmask holding 'pointer behavior modifiers'.",
+                    //         "type": "integer"
+                    //     },
+                    //     "label": "bitmask"
+                    // },
                     // [ColorScheme]
                     "ColorScheme.ColorSchEnable": {
                         "schema": {
@@ -442,95 +443,99 @@
                             "default": 100
                         }
                     },
-                    "ColorScheme.ColorSchType": {
-                        "schema": {
-                            "title": "Color effect",
-                            "description": "Selects a effect to be used in screen colors.",
-                            "enum": [
-                                0,
-                                2048,
-                                16,
-                                1,
-                                2,
-                                4
-                            ],
-                            "enumLabels": [
-                                "Invert Brightness",
-                                "Invert Colors",
-                                "Dyed",
-                                "Two-Color",
-                                "Replace Color"
-                            ]
-                        }
-                    },
-                    "ColorScheme.ColorSchDye": {
-                        "schema": {
-                            "title": "Color hue map",
-                            "description": "Selects a color hue in which all screen colors are going to be mapped.",
-                            "enum": [
-                                16740194,
-                                65535,
-                                65280,
-                                16776960,
-                                6451199,
-                                16744703
-                            ],
-                            "enumLabels": [
-                                "Light Red",
-                                "Yellow",
-                                "Green",
-                                "Cyan",
-                                "Light Blue",
-                                "Light Magenta"
-                            ]
-                        }
-                    },
-                    "ColorScheme.ColorSchTwoColorOne": {
-                        "schema": {
-                            "title": "Two-Color effect foreground color",
-                            "description": "Color to be selected as foreground color in the two-color effect.",
-                            "enum": [
-                                32768,
-                                8388736,
-                                8388608,
-                                128,
-                                4934475,
-                                0
-                            ],
-                            "enumLabels": [
-                                "Dark Green",
-                                "Dark Magenta",
-                                "Dark Blue",
-                                "Dark Red",
-                                "Dark Gray",
-                                "Black"
-                            ]
-                        }
-                    },
-                    "ColorScheme.ColorSchTwoColorTwo": {
-                        "schema": {
-                            "title": "Two-Color effect background color",
-                            "description": "Color to be selected as background color in the two-color effect.",
-                            "enum": [
-                                65535,
-                                8454016,
-                                16776960,
-                                16762566,
-                                16762623,
-                                11842740,
-                                16777215
-                            ],
-                            "enumLabels": [
-                                "Yellow",
-                                "Ligth Green",
-                                "Cyan",
-                                "Slate Blue",
-                                "Rose",
-                                "Ligth Gray",
-                                "White"
-                            ]
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "ColorScheme.ColorSchType": {
+                    //     "schema": {
+                    //         "title": "Color effect",
+                    //         "description": "Selects a effect to be used in screen colors.",
+                    //         "enum": [
+                    //             0,
+                    //             2048,
+                    //             16,
+                    //             1,
+                    //             2,
+                    //             4
+                    //         ],
+                    //         "enumLabels": [
+                    //             "Invert Brightness",
+                    //             "Invert Colors",
+                    //             "Dyed",
+                    //             "Two-Color",
+                    //             "Replace Color"
+                    //         ]
+                    //     }
+                    // },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "ColorScheme.ColorSchDye": {
+                    //     "schema": {
+                    //         "title": "Color hue map",
+                    //         "description": "Selects a color hue in which all screen colors are going to be mapped.",
+                    //         "enum": [
+                    //             16740194,
+                    //             65535,
+                    //             65280,
+                    //             16776960,
+                    //             6451199,
+                    //             16744703
+                    //         ],
+                    //         "enumLabels": [
+                    //             "Light Red",
+                    //             "Yellow",
+                    //             "Green",
+                    //             "Cyan",
+                    //             "Light Blue",
+                    //             "Light Magenta"
+                    //         ]
+                    //     }
+                    // },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "ColorScheme.ColorSchTwoColorOne": {
+                    //     "schema": {
+                    //         "title": "Two-Color effect foreground color",
+                    //         "description": "Color to be selected as foreground color in the two-color effect.",
+                    //         "enum": [
+                    //             32768,
+                    //             8388736,
+                    //             8388608,
+                    //             128,
+                    //             4934475,
+                    //             0
+                    //         ],
+                    //         "enumLabels": [
+                    //             "Dark Green",
+                    //             "Dark Magenta",
+                    //             "Dark Blue",
+                    //             "Dark Red",
+                    //             "Dark Gray",
+                    //             "Black"
+                    //         ]
+                    //     }
+                    // },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "ColorScheme.ColorSchTwoColorTwo": {
+                    //     "schema": {
+                    //         "title": "Two-Color effect background color",
+                    //         "description": "Color to be selected as background color in the two-color effect.",
+                    //         "enum": [
+                    //             65535,
+                    //             8454016,
+                    //             16776960,
+                    //             16762566,
+                    //             16762623,
+                    //             11842740,
+                    //             16777215
+                    //         ],
+                    //         "enumLabels": [
+                    //             "Yellow",
+                    //             "Ligth Green",
+                    //             "Cyan",
+                    //             "Slate Blue",
+                    //             "Rose",
+                    //             "Ligth Gray",
+                    //             "White"
+                    //         ]
+                    //     }
+                    // },
                     "ColorScheme.ColorSchReplaceColor": {
                         "schema": {
                             "title": "Color to be replaced",
@@ -727,15 +732,16 @@
                         }
                     },
                     // Bitmask setting
-                    "FocusScheme.FocusENHModifier": {
-                        // TODO: Unknown
-                        "schema": {
-                            "title": "Focus Modifiers",
-                            "description": "Bitmask holding 'focus behavior modifiers'.",
-                            "type": "integer"
-                        },
-                        "label": "bitmask"
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "FocusScheme.FocusENHModifier": {
+                    //     // TODO: Unknown
+                    //     "schema": {
+                    //         "title": "Focus Modifiers",
+                    //         "description": "Bitmask holding 'focus behavior modifiers'.",
+                    //         "type": "integer"
+                    //     },
+                    //     "label": "bitmask"
+                    // },
                     // [EchoTyping]
                     "EchoTyping.Mode": {
                         "schema": {
@@ -925,15 +931,16 @@
 
                     // [Microsoft David Desktop - English (United States)-English Speech - Screen Reader]
                     // ==================================================================
-                    "Microsoft David Desktop - English (United States)-English Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - Default.
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "Microsoft David Desktop - English (United States)-English Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - Default.
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "Microsoft David Desktop - English (United States)-English Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -1021,15 +1028,16 @@
                         }
                     },
                     // [Microsoft David Desktop - English (United States)-English Speech - DocReader]
-                    "Microsoft David Desktop - English (United States)-English Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - Default.
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "Microsoft David Desktop - English (United States)-English Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - Default.
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "Microsoft David Desktop - English (United States)-English Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -1119,15 +1127,16 @@
 
                     // [Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader]
                     // ==================================================================
-                    "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - Default.
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - Default.
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -1215,15 +1224,16 @@
                         }
                     },
                     // [Microsoft Zira Desktop - English (United States)-English Speech - DocReader]
-                    "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - Default.
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - Default.
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -1313,17 +1323,18 @@
 
                     // [msmobile-English Speech - Screen Reader]
                     // ==================================================================
-                    "msmobile-English Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Microsoft David, United States"
-                        //  - "Microsoft Mark, United States"
-                        //  - "Microsoft Zira, United States"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "msmobile-English Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Microsoft David, United States"
+                    //     //  - "Microsoft Mark, United States"
+                    //     //  - "Microsoft Zira, United States"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "msmobile-English Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -1422,17 +1433,18 @@
                     },
                     // [msmobile-English Speech - DocReader]
                     // ==================================================================
-                    "msmobile-English Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Microsoft David, United States"
-                        //  - "Microsoft Mark, United States"
-                        //  - "Microsoft Zira, United States"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "msmobile-English Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Microsoft David, United States"
+                    //     //  - "Microsoft Mark, United States"
+                    //     //  - "Microsoft Zira, United States"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "msmobile-English Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -1532,17 +1544,18 @@
 
                     // [VocalizerExpressive-English Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-English Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Tom Compact, United States",
-                        //  - "Zoe Compact, United States",
-                        //  - "Malcolm Compact, British"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-English Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Tom Compact, United States",
+                    //     //  - "Zoe Compact, United States",
+                    //     //  - "Malcolm Compact, British"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-English Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -1641,17 +1654,18 @@
                     },
                     // [VocalizerExpressive-English Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-English Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Tom Compact, United States",
-                        //  - "Zoe Compact, United States",
-                        //  - "Malcolm Compact, British"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-English Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Tom Compact, United States",
+                    //     //  - "Zoe Compact, United States",
+                    //     //  - "Malcolm Compact, British"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-English Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -1751,15 +1765,16 @@
 
                     // [VocalizerExpressive-German Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-German Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Anna Compact",
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-German Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Anna Compact",
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-German Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -1854,15 +1869,16 @@
                     },
                     // [VocalizerExpressive-German Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-German Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Anna Compact",
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-German Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Anna Compact",
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-German Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -1958,15 +1974,16 @@
 
                     // [VocalizerExpressive-French Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-French Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Audrey Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-French Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Audrey Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-French Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -2061,15 +2078,16 @@
                     },
                     // [VocalizerExpressive-French Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-French Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Anna Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-French Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Anna Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-French Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -2165,15 +2183,16 @@
 
                     // [VocalizerExpressive-Spanish Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Spanish Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Jorge Compact, Castilian"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Spanish Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Jorge Compact, Castilian"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Spanish Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -2268,15 +2287,16 @@
                     },
                     // [VocalizerExpressive-Spanish Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Spanish Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Jorge Compact, Castilian"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Spanish Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Jorge Compact, Castilian"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Spanish Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -2372,15 +2392,16 @@
 
                     // [VocalizerExpressive-Dutch Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Dutch Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Claire Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Dutch Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Claire Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Dutch Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -2475,15 +2496,16 @@
                     },
                     // [VocalizerExpressive-Dutch Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Dutch Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Claire Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Dutch Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Claire Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Dutch Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -2579,15 +2601,16 @@
 
                     // [VocalizerExpressive-Arabic Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Arabic Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Tarik Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Arabic Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Tarik Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Arabic Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -2682,15 +2705,16 @@
                     },
                     // [VocalizerExpressive-Arabic Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Arabic Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Tarik Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Arabic Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Tarik Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Arabic Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -2786,16 +2810,17 @@
 
                     // [VocalizerExpressive-Portuguese Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Portuguese Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Felipe Compact, Brazilian"
-                        //  - "Catarina Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Portuguese Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Felipe Compact, Brazilian"
+                    //     //  - "Catarina Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Portuguese Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -2892,16 +2917,17 @@
                     },
                     // [VocalizerExpressive-Portuguese Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Portuguese Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Felipe Compact, Brazilian"
-                        //  - "Catarina Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Portuguese Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Felipe Compact, Brazilian"
+                    //     //  - "Catarina Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Portuguese Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -2999,15 +3025,16 @@
 
                     // [VocalizerExpressive-Czech Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Czech Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Zuzana Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Czech Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Zuzana Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Czech Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -3102,15 +3129,16 @@
                     },
                     // [VocalizerExpressive-Czech Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Czech Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Zuzana Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Czech Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Zuzana Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Czech Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -3206,15 +3234,16 @@
 
                     // [VocalizerExpressive-Danish Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Danish Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Sara Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Danish Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Sara Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Danish Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -3309,15 +3338,16 @@
                     },
                     // [VocalizerExpressive-Danish Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Danish Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Sara Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Danish Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Sara Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Danish Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -3413,15 +3443,16 @@
 
                     // [VocalizerExpressive-Finnish Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Finnish Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Satu Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Finnish Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Satu Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Finnish Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -3516,15 +3547,16 @@
                     },
                     // [VocalizerExpressive-Finnish Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Finnish Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Satu Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Finnish Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Satu Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Finnish Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -3620,15 +3652,16 @@
 
                     // [VocalizerExpressive-Hebrew Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Hebrew Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Carmit Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Hebrew Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Carmit Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Hebrew Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -3723,15 +3756,16 @@
                     },
                     // [VocalizerExpressive-Hebrew Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Hebrew Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Carmit Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Hebrew Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Carmit Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Hebrew Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -3827,15 +3861,16 @@
 
                     // [VocalizerExpressive-Hungarian Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Hungarian Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Mariska Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Hungarian Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Mariska Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Hungarian Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -3930,15 +3965,16 @@
                     },
                     // [VocalizerExpressive-Hungarian Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Hungarian Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Mariska Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Hungarian Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Mariska Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Hungarian Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -4034,15 +4070,16 @@
 
                     // [VocalizerExpressive-Italian Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Italian Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Alice Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Italian Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Alice Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Italian Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -4137,15 +4174,16 @@
                     },
                     // [VocalizerExpressive-Italian Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Italian Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Alice Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Italian Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Alice Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Italian Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -4241,15 +4279,16 @@
 
                     // [VocalizerExpressive-Korean Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Korean Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Sora Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Korean Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Sora Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Korean Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -4344,15 +4383,16 @@
                     },
                     // [VocalizerExpressive-Korean Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Korean Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Sora Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Korean Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Sora Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Korean Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -4448,15 +4488,16 @@
 
                     // [VocalizerExpressive-Norwegian Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Norwegian Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Henrik Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Norwegian Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Henrik Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Norwegian Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -4551,15 +4592,16 @@
                     },
                     // [VocalizerExpressive-Norwegian Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Norwegian Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Henrik Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Norwegian Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Henrik Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Norwegian Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -4655,15 +4697,16 @@
 
                     // [VocalizerExpressive-Polish Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Polish Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Krzysztof Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Polish Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Krzysztof Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Polish Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -4758,15 +4801,16 @@
                     },
                     // [VocalizerExpressive-Polish Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Polish Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Krzysztof Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Polish Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Krzysztof Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Polish Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -4862,15 +4906,16 @@
 
                     // [VocalizerExpressive-Romanian Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Romanian Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Ioana Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Romanian Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Ioana Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Romanian Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -4965,15 +5010,16 @@
                     },
                     // [VocalizerExpressive-Romanian Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Romanian Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Ioana Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Romanian Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Ioana Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Romanian Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -5069,15 +5115,16 @@
 
                     // [VocalizerExpressive-Swedish Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Swedish Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Oskar Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Swedish Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Oskar Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Swedish Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -5172,15 +5219,16 @@
                     },
                     // [VocalizerExpressive-Swedish Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Swedish Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Oskar Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Swedish Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Oskar Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Swedish Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -5277,15 +5325,16 @@
 
                     // [VocalizerExpressive-Slovak Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Slovak Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Laura Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Slovak Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Laura Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Slovak Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -5380,15 +5429,16 @@
                     },
                     // [VocalizerExpressive-Slovak Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Slovak Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Laura Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Slovak Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Laura Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Slovak Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -5484,15 +5534,16 @@
 
                     // [VocalizerExpressive-Turkish Speech - Screen Reader]
                     // ==================================================================
-                    "VocalizerExpressive-Turkish Speech - Screen Reader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Yelda Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Turkish Speech - Screen Reader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Yelda Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Turkish Speech - Screen Reader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -5587,15 +5638,16 @@
                     },
                     // [VocalizerExpressive-Turkish Speech - DocReader]
                     // ==================================================================
-                    "VocalizerExpressive-Turkish Speech - DocReader.Speaker": {
-                        // NOTE: Possible known values:
-                        //  - "Yelda Compact"
-                        "schema": {
-                            "title": "Voice Name",
-                            "description": "Specifies the voice name to use.",
-                            "type": "string"
-                        }
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "VocalizerExpressive-Turkish Speech - DocReader.Speaker": {
+                    //     // NOTE: Possible known values:
+                    //     //  - "Yelda Compact"
+                    //     "schema": {
+                    //         "title": "Voice Name",
+                    //         "description": "Specifies the voice name to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "VocalizerExpressive-Turkish Speech - DocReader.Valid": {
                         "schema": {
                             "title": "Valid",
@@ -5690,15 +5742,16 @@
                     },
 
                     // [Tracking]
-                    "Tracking.AlignFlags": {
-                        // TODO: Unknown
-                        "schema": {
-                            "title": "Align Flags",
-                            "description": "Bitmask holding 'align flags'.",
-                            "type": "integer"
-                        },
-                        "label": "bitmask"
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "Tracking.AlignFlags": {
+                    //     // TODO: Unknown
+                    //     "schema": {
+                    //         "title": "Align Flags",
+                    //         "description": "Bitmask holding 'align flags'.",
+                    //         "type": "integer"
+                    //     },
+                    //     "label": "bitmask"
+                    // },
                     "Tracking.RouteMouse": {
                         "schema": {
                             "title": "Route pointer into view when it's moved",
@@ -5734,15 +5787,16 @@
                     // NOTE: UI values to bitmask:
                     //   - "Hold Shift key to move only horizontally or vertically": 0
                     //   - "Hold Ctrl key to stay within the active window": 1
-                    "MagEngine.MouseConstraint": {
-                        "schema": {
-                            "title": "Pointer Constraint",
-                            "description": "Specifies desired pointer movement constratins.",
-                            "type": "integer",
-                            "default": 0
-                        },
-                        "label": "bitmask"
-                    },
+                    // GPII-830 Commenting out for now due to lack of a minimum or maximum value.
+                    // "MagEngine.MouseConstraint": {
+                    //     "schema": {
+                    //         "title": "Pointer Constraint",
+                    //         "description": "Specifies desired pointer movement constratins.",
+                    //         "type": "integer",
+                    //         "default": 0
+                    //     },
+                    //     "label": "bitmask"
+                    // },
                     // [Smooth Panning]
                     "Smooth Panning.Enabled": {
                         "schema": {
@@ -5786,15 +5840,16 @@
                         }
                     },
                     // [BACKGROUND]
-                    "BACKGROUND.WindowFlags": {
-                        // TODO: Unknown
-                        "schema": {
-                            "title": "Window Flags",
-                            "description": "Bitmask holding 'window flags'.",
-                            "type": "integer"
-                        },
-                        "label": "bitmask"
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "BACKGROUND.WindowFlags": {
+                    //     // TODO: Unknown
+                    //     "schema": {
+                    //         "title": "Window Flags",
+                    //         "description": "Bitmask holding 'window flags'.",
+                    //         "type": "integer"
+                    //     },
+                    //     "label": "bitmask"
+                    // },
                     // [PRIMARY]
                     "PRIMARY.magPower": {
                         "schema": {
@@ -5965,15 +6020,16 @@
                             "default": 0
                         }
                     },
-                    "PRIMARY.WindowFlags": {
-                        // TODO: Unknown
-                        "schema": {
-                            "title": "Window Flags",
-                            "description": "Bitmask holding 'Window Flags'.",
-                            "type": "integer"
-                        },
-                        "label": "bitmask"
-                    },
+                    // GPII-830 Commenting out for now due to missing default value.
+                    // "PRIMARY.WindowFlags": {
+                    //     // TODO: Unknown
+                    //     "schema": {
+                    //         "title": "Window Flags",
+                    //         "description": "Bitmask holding 'Window Flags'.",
+                    //         "type": "integer"
+                    //     },
+                    //     "label": "bitmask"
+                    // },
                     // [STATIC 1]
                     "STATIC 1.magPower": {
                         "schema": {

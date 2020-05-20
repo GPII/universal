@@ -30,7 +30,6 @@
 
                         // [VocalizerExpressive-French Speech - Screen Reader]
                         // ==================================================================
-                        "VocalizerExpressive-French Speech - Screen Reader.Speaker": "",
                         "VocalizerExpressive-French Speech - Screen Reader.Valid": 1,
                         "VocalizerExpressive-French Speech - Screen Reader.SettingsValid": 1,
                         "VocalizerExpressive-French Speech - Screen Reader.Muted": 0,
@@ -40,7 +39,6 @@
                         "VocalizerExpressive-French Speech - Screen Reader.Pitch": 30,
 
                         // [VocalizerExpressive-French Speech - DocReader]
-                        "VocalizerExpressive-French Speech - DocReader.Speaker": "",
                         "VocalizerExpressive-French Speech - DocReader.Valid": 1,
                         "VocalizerExpressive-French Speech - DocReader.SettingsValid": 1,
                         "VocalizerExpressive-French Speech - DocReader.Muted": 0,

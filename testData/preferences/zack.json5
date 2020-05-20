@@ -30,7 +30,6 @@
 
                         // [Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader]
                         // ==================================================================
-                        "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Speaker": "Default",
                         "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Valid": 1,
                         "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.SettingsValid": 1,
                         "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Muted": 0,
@@ -40,7 +39,6 @@
                         "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Pitch": 40,
 
                         // [Microsoft Zira Desktop - English (United States)-English Speech - DocReader]
-                        "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Speaker": "Default",
                         "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Valid": 1,
                         "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.SettingsValid": 1,
                         "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Muted": 0,
