@@ -109,6 +109,20 @@ payload structure to start a matchMaking process.
 * **return:** Return http status code 200 when Cloud Based Flow Manager itself is running. Otherwise, return http status
  code 500.
 
+### Retrieve the revision of the Cloud Based Flow Manager (GET /revision)
+
+* **description**: Serve the full `SHA256` of the revision of the source code repository used by this deployment of the
+ cloud based components of the GPII.
+* **route:** `/revision`
+* **method:** `GET`
+* **return:** A JSON document containing the revision:
+
+```json
+{
+    "sha256": "2602bdf868aec49993d8780feec42d4e9f995e21"
+}
+```
+
 ### Get an access token (POST /access_token)
 
 * **description**: Access tokens are credentials used to protect user preferences. An access token represents an
