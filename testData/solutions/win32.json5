@@ -18,6 +18,8 @@
                 },
                 "supportedSettings": {
                     // [Preferences]
+                    // TODO In the future (especially with the LSR), these types of repeated on/off enum values will
+                    // be inherited rather than defined repeatedly.
                     "Preferences.SmartInvert": {
                         "schema": {
                             "title": "Use Smart Invert",
