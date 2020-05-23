@@ -1,0 +1,6 @@
+{
+    "name": "wget",
+    "url": "https://chocolatey.org/api/v2/package/Wget/1.19.4",
+    "filename": "Wget.1.19.4.nupkg",
+    "packageType": "chocolatey"
+}

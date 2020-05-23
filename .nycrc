@@ -113,6 +113,11 @@
     "!**/gpii/node_modules/userListeners/src/listeners.js",
     "!**/gpii/node_modules/userListeners/src/pcsc.js",
     "!**/gpii/node_modules/userListeners/src/usb.js",
+    "!**/gpii/node_modules/gpii-iod/src/installOnDemand.js",
+    "!**/gpii/node_modules/gpii-iod/src/iodSettingsHandler.js",
+    "!**/gpii/node_modules/gpii-iod/src/packageDataSource.js",
+    "!**/gpii/node_modules/gpii-iod/src/packageInstaller.js",
+    "!**/gpii/node_modules/gpii-iod/src/packages.js",
     "testData",
     "tests",
     "reports",
@@ -125,7 +130,7 @@
     "gpii.js",
     "Gruntfile.js"
   ],
-  "reporter": "none",
+  "reporter": "lcov",
   "report-dir": "reports",
   "temp-directory": "coverage",
   "clean": false
