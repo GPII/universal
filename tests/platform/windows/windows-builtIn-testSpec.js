@@ -109,18 +109,6 @@ gpii.tests.windows.builtIn = [
                             "functionName": "Volume"
                         }
                     }
-                ],
-                "com.microsoft.windows.mirrorScreen": [
-                    {
-                        "settings": {
-                            "ScreenMirrorConfig": {
-                                "value": false
-                            }
-                        },
-                        "options": {
-                            "functionName": "ScreenMirror"
-                        }
-                    }
                 ]
             },
             "gpii.windows.spiSettingsHandler": {
@@ -382,11 +370,12 @@ gpii.tests.windows.builtIn = [
                             "MaxSpeed": {
                                 "path": "pvParam.iMaxSpeed",
                                 "value": 100
-                            },
-                            "Acceleration": {
-                                "path": "pvParam.iTimeToMaxSpeed",
-                                "value": 1000
                             }
+                            // See solution spec in win32.json
+                            // "Acceleration": {
+                            //     "path": "pvParam.iTimeToMaxSpeed",
+                            //     "value": 1000
+                            // }
                         },
                         "options": {
                             "getAction": "SPI_GETMOUSEKEYS",
@@ -822,7 +811,8 @@ gpii.tests.windows.builtIn = [
                         "Async": true,
                         "CheckResult": true
                     }
-                }],
+                }]/*,
+ * These settings have been commented out for https://issues.gpii.net/browse/GPII-4462
                 "com.microsoft.windows.narrator": [{
                     "settings": {
                         "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
@@ -836,7 +826,7 @@ gpii.tests.windows.builtIn = [
                         "Async": true,
                         "CheckResult": true
                     }
-                }]
+                }]*/
             }
         },
         gradeNames: "gpii.test.integration.actionHandlersAware.windows"

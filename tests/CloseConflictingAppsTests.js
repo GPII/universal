@@ -42,21 +42,16 @@ gpii.tests.conflictingApps.jawsHandlerEntry = function (running) {
                 "setTrue": [
                     {
                         "type": "gpii.launch.exec",
-                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
+                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2019.exe\\}\""
                     }
                 ],
                 "setFalse": [
                     {
                         "type": "gpii.windows.closeProcessByName",
-                        "filename": "jfw.exe"
-                    },
-                    {
-                        "type": "gpii.windows.closeProcessByName",
-                        "filename": "fsSynth32.exe"
-                    },
-                    {
-                        "type": "gpii.windows.closeProcessByName",
-                        "filename": "jhookldr.exe"
+                        "filename": "jfw.exe",
+                        "options": {
+                            "closeWindow": true
+                        }
                     }
                 ]
             }
@@ -112,38 +107,43 @@ gpii.tests.conflictingApps.testDefs = [
                 "com.freedomscientific.jaws": [
                     {
                         "settings": {
-                            "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Options.SayAllIndicateCaps": 1,
                             "Options.TypingEcho": 2
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                         }
-                    },
-
+                    }
+                ]
+            },
+            "gpii.settingsHandlers.JAWSSettingsHandler": {
+                "com.freedomscientific.jaws": [
                     {
                         "settings": {
-                            "ENU-Global.Rate": 400,
-                            "ENU-Global.Punctuation": 3,
-                            "ENU-Global.Pitch": 11,
-                            "ENU-Message.Rate": 400,
-                            "ENU-Message.Punctuation": 3,
-                            "ENU-Message.Pitch": 11,
-                            "ENU-Keyboard.Rate": 400,
-                            "ENU-Keyboard.Punctuation": 3,
-                            "ENU-Keyboard.Pitch": 11,
-                            "ENU-PCCursor.Rate": 400,
-                            "ENU-PCCursor.Punctuation": 3,
-                            "ENU-PCCursor.Pitch": 11,
-                            "ENU-JAWSCursor.Rate": 400,
-                            "ENU-JAWSCursor.Punctuation": 3,
-                            "ENU-JAWSCursor.Pitch": 11,
-                            "ENU-MenuAndDialog.Rate": 400,
-                            "ENU-MenuAndDialog.Punctuation": 3,
-                            "ENU-MenuAndDialog.Pitch": 11
+                            // NOTE: Commented until GPII-4336 is addressed
+                            // ============================================
+                            // "ENU-Global.Rate": 400,
+                            // "ENU-Global.Punctuation": 3,
+                            // "ENU-Global.Pitch": 11,
+                            // "ENU-Message.Rate": 400,
+                            // "ENU-Message.Punctuation": 3,
+                            // "ENU-Message.Pitch": 11,
+                            // "ENU-Keyboard.Rate": 400,
+                            // "ENU-Keyboard.Punctuation": 3,
+                            // "ENU-Keyboard.Pitch": 11,
+                            // "ENU-PCCursor.Rate": 400,
+                            // "ENU-PCCursor.Punctuation": 3,
+                            // "ENU-PCCursor.Pitch": 11,
+                            // "ENU-JAWSCursor.Rate": 400,
+                            // "ENU-JAWSCursor.Punctuation": 3,
+                            // "ENU-JAWSCursor.Pitch": 11,
+                            // "ENU-MenuAndDialog.Rate": 400,
+                            // "ENU-MenuAndDialog.Punctuation": 3,
+                            // "ENU-MenuAndDialog.Pitch": 11
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "defaultSettingsFilePath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
+                            "voiceProfilesDirPath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
                         }
                     }
                 ]
@@ -166,38 +166,43 @@ gpii.tests.conflictingApps.testDefs = [
                 "com.freedomscientific.jaws": [
                     {
                         "settings": {
-                            "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Options.SayAllIndicateCaps": 1,
                             "Options.TypingEcho": 2
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                         }
-                    },
-
+                    }
+                ]
+            },
+            "gpii.settingsHandlers.JAWSSettingsHandler": {
+                "com.freedomscientific.jaws": [
                     {
                         "settings": {
-                            "ENU-Global.Rate": 400,
-                            "ENU-Global.Punctuation": 3,
-                            "ENU-Global.Pitch": 11,
-                            "ENU-Message.Rate": 400,
-                            "ENU-Message.Punctuation": 3,
-                            "ENU-Message.Pitch": 11,
-                            "ENU-Keyboard.Rate": 400,
-                            "ENU-Keyboard.Punctuation": 3,
-                            "ENU-Keyboard.Pitch": 11,
-                            "ENU-PCCursor.Rate": 400,
-                            "ENU-PCCursor.Punctuation": 3,
-                            "ENU-PCCursor.Pitch": 11,
-                            "ENU-JAWSCursor.Rate": 400,
-                            "ENU-JAWSCursor.Punctuation": 3,
-                            "ENU-JAWSCursor.Pitch": 11,
-                            "ENU-MenuAndDialog.Rate": 400,
-                            "ENU-MenuAndDialog.Punctuation": 3,
-                            "ENU-MenuAndDialog.Pitch": 11
+                            // NOTE: Commented until GPII-4336 is addressed
+                            // ============================================
+                            // "ENU-Global.Rate": 400,
+                            // "ENU-Global.Punctuation": 3,
+                            // "ENU-Global.Pitch": 11,
+                            // "ENU-Message.Rate": 400,
+                            // "ENU-Message.Punctuation": 3,
+                            // "ENU-Message.Pitch": 11,
+                            // "ENU-Keyboard.Rate": 400,
+                            // "ENU-Keyboard.Punctuation": 3,
+                            // "ENU-Keyboard.Pitch": 11,
+                            // "ENU-PCCursor.Rate": 400,
+                            // "ENU-PCCursor.Punctuation": 3,
+                            // "ENU-PCCursor.Pitch": 11,
+                            // "ENU-JAWSCursor.Rate": 400,
+                            // "ENU-JAWSCursor.Punctuation": 3,
+                            // "ENU-JAWSCursor.Pitch": 11,
+                            // "ENU-MenuAndDialog.Rate": 400,
+                            // "ENU-MenuAndDialog.Punctuation": 3,
+                            // "ENU-MenuAndDialog.Pitch": 11
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "defaultSettingsFilePath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
+                            "voiceProfilesDirPath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
                         }
                     }
                 ]
