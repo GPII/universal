@@ -20194,7 +20194,7 @@
                 ],
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
-                        // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
+                        // (highContrast.enabled && highContrastTheme) && (highContrastTheme != "regular-contrast")
                         "value": {
                             "transform": {
                                 "type": "fluid.transforms.binaryOp",
@@ -20202,10 +20202,10 @@
                                     "transform": {
                                         "type": "fluid.transforms.binaryOp",
                                         "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
-                                        "left": false,
-                                        "operator": "||",
+                                        "left": true,
+                                        "operator": "&&",
                                         "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                                        "right": false
+                                        "right": true
                                     }
                                 },
                                 "operator": "&&",
