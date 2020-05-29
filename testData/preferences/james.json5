@@ -1,0 +1,36 @@
+/*
+ * A fixture to test many JAWS settings at once by setting them to something other than the default.
+ */
+{
+    "flat": {
+        "name": "James",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
+                        "Options.PrimaryLanguage": "ENU",
+
+                        "ENU-Message.Rate": 140,
+                        "ENU-Message.Punctuation": 1,
+
+                        "ENU-PCCursor.Rate": 140,
+                        "ENU-PCCursor.Punctuation": 1,
+
+                        "ENU-JAWSCursor.Rate": 140,
+                        "ENU-JAWSCursor.Punctuation": 1,
+
+                        "ENU-Keyboard.Rate": 140,
+                        "ENU-Keyboard.Punctuation": 1,
+
+                        "ENU-Global.Rate": 140,
+                        "ENU-Global.Punctuation": 1,
+
+                        "ENU-MenuAndDialog.Rate": 140,
+                        "ENU-MenuAndDialog.Punctuation": 1
+                    }
+                }
+            }
+        }
+    }
+}

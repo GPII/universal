@@ -137,13 +137,15 @@
                         "DuckAudio": 1,
                         "WinEnterLaunchEnabled": 1,
                         "VerbosityLevel": 3,
-                        "DetailedFeedback": 1,
+                        "DetailedFeedback": 1/*,
+* These settings have been commented out for https://issues.gpii.net/browse/GPII-4462
                         "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
                             "value": true
                         },
                         "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
                             "value": true
                         }
+*/
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.typingEnhancement": {
                         "EnableAutocorrection": true,
@@ -259,11 +261,6 @@
                         "UseTextPrediction": 0,
                         "InsertSpace": 0,
                         "Dock": 0
-                    },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.mirrorScreen": {
-                        "ScreenMirrorConfig": {
-                            "value": false
-                        }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.soundSentry": {
                         "WindowsEffect": 2

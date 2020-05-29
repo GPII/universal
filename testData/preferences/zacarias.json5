@@ -1,0 +1,64 @@
+// # Zacarias.json5
+//
+// This preference set changes several preferences from ZoomText 2019
+//
+// ## Testing
+//
+// This changes the following settings from the AT software:
+//
+//      - Voice Language: French
+//      - Synthesizer: Vocalizer Expressive
+//      - Voice Settings:
+//          + Rate: 90 WPM.
+//          + Volume: 80%.
+//          + Pitch: 30%.
+//
+//      - Keyboard Echo: Words
+//      - Mouse Echo: Disabled
+//      - Pointer Scheme: Yellow with Full Crosshairs
+//      - Zoom Level: 1.6
+{
+    "flat": {
+        "name": "Zacarias",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.aisquared.zoomtext": {
+                        "ZtSpeech.SapiProductName": "VocalizerExpressive-French",
+                        "ZtSpeech.Language": 12,
+
+                        // [VocalizerExpressive-French Speech - Screen Reader]
+                        // ==================================================================
+                        "VocalizerExpressive-French Speech - Screen Reader.Valid": 1,
+                        "VocalizerExpressive-French Speech - Screen Reader.SettingsValid": 1,
+                        "VocalizerExpressive-French Speech - Screen Reader.Muted": 0,
+                        "VocalizerExpressive-French Speech - Screen Reader.Voice": 0,
+                        "VocalizerExpressive-French Speech - Screen Reader.Rate": 90,
+                        "VocalizerExpressive-French Speech - Screen Reader.Volume": 80,
+                        "VocalizerExpressive-French Speech - Screen Reader.Pitch": 30,
+
+                        // [VocalizerExpressive-French Speech - DocReader]
+                        "VocalizerExpressive-French Speech - DocReader.Valid": 1,
+                        "VocalizerExpressive-French Speech - DocReader.SettingsValid": 1,
+                        "VocalizerExpressive-French Speech - DocReader.Muted": 0,
+                        "VocalizerExpressive-French Speech - DocReader.Voice": 0,
+                        "VocalizerExpressive-French Speech - DocReader.Rate": 90,
+                        "VocalizerExpressive-French Speech - DocReader.Volume": 80,
+                        "VocalizerExpressive-French Speech - DocReader.Pitch": 30,
+
+                        "EchoTyping.Mode": 32770,
+                        "EchoMouse.HoverMode": 0,
+                        "EchoMouse.LineMode": 0,
+
+                        "PointerScheme.PtrEnhEnable": 1,
+                        "PointerScheme.PtrEnhIndex": 1,
+
+                        "PRIMARY.magPower": 160,
+                        "STATIC 1.magPower": 160
+                    }
+                }
+            }
+        }
+    }
+}
