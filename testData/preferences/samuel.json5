@@ -1,0 +1,79 @@
+// # Samuel.json5
+//
+// This preference set changes several preferences from ZoomText 2019
+//
+// ## Testing
+//
+// This changes the following settings from the AT software:
+//
+//      - Voice Language: Spanish
+//      - Synthesizer: Vocalizer Expressive
+//      - Voice Settings:
+//          + Rate: 120 WPM.
+//          + Volume: 70%.
+//          + Pitch: 35%.
+//
+//      - Color Scheme: Black and White
+//
+//      - Keyboard Echo: Words
+//      - Mouse Echo:
+//          + Hover: Enabled
+//          + Echo the whole line: Enabled
+//
+//      - Pointer Scheme: Giant Green
+//      - Zoom Level: 1.4
+//      - Navigation Settings - Mouse - "Router Pointer into view when it is moved": Enabled.
+//      - Navigation Settings - Mouse - "Route pointer over the active control": Enabled
+//      - Navigation Settings - Mouse - "Hold Shit key to move only horizontally or vertically": Enabled
+//      - Navigation Settings - Mouse - "Hold Ctrl key to stay within the active window": Enabled
+{
+    "flat": {
+        "name": "Samuel",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.aisquared.zoomtext": {
+                        "ZtSpeech.SapiProductName": "VocalizerExpressive-Spanish",
+                        "ZtSpeech.Language": 10,
+
+                        "ColorScheme.ColorSchEnable": 1,
+                        "ColorScheme.ColorSchIndex": 5,
+
+                        // [VocalizerExpressive-Spanish Speech - Screen Reader]
+                        // ==================================================================
+                        "VocalizerExpressive-Spanish Speech - Screen Reader.Valid": 1,
+                        "VocalizerExpressive-Spanish Speech - Screen Reader.SettingsValid": 1,
+                        "VocalizerExpressive-Spanish Speech - Screen Reader.Muted": 0,
+                        "VocalizerExpressive-Spanish Speech - Screen Reader.Voice": 0,
+                        "VocalizerExpressive-Spanish Speech - Screen Reader.Rate": 120,
+                        "VocalizerExpressive-Spanish Speech - Screen Reader.Volume": 85,
+                        "VocalizerExpressive-Spanish Speech - Screen Reader.Pitch": 40,
+
+                        // [VocalizerExpressive-Spanish Speech - DocReader]
+                        "VocalizerExpressive-Spanish Speech - DocReader.Valid": 1,
+                        "VocalizerExpressive-Spanish Speech - DocReader.SettingsValid": 1,
+                        "VocalizerExpressive-Spanish Speech - DocReader.Muted": 0,
+                        "VocalizerExpressive-Spanish Speech - DocReader.Voice": 0,
+                        "VocalizerExpressive-Spanish Speech - DocReader.Rate": 120,
+                        "VocalizerExpressive-Spanish Speech - DocReader.Volume": 85,
+                        "VocalizerExpressive-Spanish Speech - DocReader.Pitch": 40,
+
+                        "EchoTyping.Mode": 32770,
+                        "EchoMouse.HoverMode": 1,
+                        "EchoMouse.LineMode": 1,
+                        "EchoMouse.Enabled": 1,
+
+                        "PointerScheme.PtrEnhEnable": 1,
+                        "PointerScheme.PtrEnhIndex": 6,
+
+                        "PRIMARY.magPower": 225,
+                        "STATIC 1.magPower": 225,
+
+                        "MagEngine.MouseConstraint": 3
+                    }
+                }
+            }
+        }
+    }
+}
