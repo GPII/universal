@@ -526,7 +526,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1018,7 +1018,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1237,7 +1237,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1456,7 +1456,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
