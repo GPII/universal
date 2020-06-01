@@ -29633,41 +29633,14 @@
                             "title": "Screen DPI",
                             "description": "Screen DPI of the default display.",
                             "type": "number",
-                            "minimum": 1,
+                            // This is a relative value, where '0' is the recommended setting.
+                            "minimum": -3,
                             "maximum": 5
-                            // Taken from dpiWindows10.js, may not be appropriate
                         }
                     }
                 },
                 "capabilitiesTransformations": {
-                    // The common term goes from -2 to 4, our setting goes from 1 to 5, so we add 3 and multiply by 5/7
-                    "screen-dpi": {
-                        transform: {
-                            "type": "fluid.transforms.round",
-                            "input": {
-                                transform: {
-                                    type: "fluid.transforms.binaryOp",
-                                    left: {
-                                        transform: {
-                                            type: "fluid.transforms.binaryOp",
-                                            left: 5,
-                                            right: 7,
-                                            operator: "/"
-                                        }
-                                    },
-                                    right: {
-                                        transform: {
-                                            type: "fluid.transforms.binaryOp",
-                                            leftPath: "http://registry\\.gpii\\.net/common/DPIScale",
-                                            right: 3,
-                                            operator: "+"
-                                        }
-                                    },
-                                    operator: "*"
-                                }
-                            }
-                        }
-                    }
+                    "screen-dpi": "http://registry\\.gpii\\.net/common/DPIScale"
                 }
             }
         },
