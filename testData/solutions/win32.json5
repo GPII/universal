@@ -32607,12 +32607,12 @@
                                     "defaultInputPath": "contrastTheme",
                                     "defaultOutputValue": "default",
                                     "match": {
-                                        "bw": "black-white", 
-                                        "wb": "white-black", 
-                                        "by": "black-yellow", 
-                                        "yb": "yellow-black", 
-                                        "lgdg":"grey-black", 
-                                        "gw": "grey-white", 
+                                        "bw": "black-white",
+                                        "wb": "white-black",
+                                        "by": "black-yellow",
+                                        "yb": "yellow-black",
+                                        "lgdg":"grey-black",
+                                        "gw": "grey-white",
                                         "bbr": "black-brown"
                                     }
                                 }
