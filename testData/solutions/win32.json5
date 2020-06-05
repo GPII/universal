@@ -32569,7 +32569,88 @@
                         }
                     }
                 },
-                "inverseCapabilitiesTransformations": {}
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/characterSpace": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "characterSpace",
+                            "offset": 1
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/highContrast/enabled": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "contrastTheme",
+                                    "operator": "!==",
+                                    "right": "default"
+                                }
+                            },
+                            "true": "true",
+                            "false": "false"
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/highContrastTheme": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "contrastTheme",
+                                    "operator": "!==",
+                                    "right": "default"
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.valueMapper",
+                                    "defaultInputPath": "contrastTheme",
+                                    "defaultOutputValue": "default",
+                                    "match": {
+                                        "bw": "black-white", 
+                                        "wb": "white-black", 
+                                        "by": "black-yellow", 
+                                        "yb": "yellow-black", 
+                                        "lgdg":"grey-black", 
+                                        "gw": "grey-white", 
+                                        "bbr": "black-brown"
+                                    }
+                                }
+                            },
+                            "false": "default"
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/fontSize": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "scale": 2,
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "fontSize",
+                                    "right": 12,
+                                    "operator": "*"
+                                }
+                            }
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/inputsLarger/enabled": "inputsLargerEnabled",
+                    "http://registry\\.gpii\\.net/common/lineSpace": "lineSpace",
+                    "http://registry\\.gpii\\.net/common/highlightColor": "selectionTheme",
+                    "http://registry\\.gpii\\.net/common/selfVoicing/enabled": "selfVoicingEnabled",
+                    "http://registry\\.gpii\\.net/common/simplifiedUi/enabled": "simplifiedUiEnabled",
+                    "http://registry\\.gpii\\.net/common/syllabification/enabled": "syllabificationEnabled",
+                    "http://registry\\.gpii\\.net/common/tableOfContents": "tableOfContentsEnabled",
+                    "http://registry\\.gpii\\.net/common/wordSpace": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "offset": -1,
+                            "inputPath": "wordSpace"
+                        }
+                    }
+                }
             }
         },
         "isInstalled": [

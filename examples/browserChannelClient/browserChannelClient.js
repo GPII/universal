@@ -24,7 +24,7 @@ var socket = new ws("ws://localhost:8081/browserChannel"); // eslint-disable-lin
 // When the connection is done, the client tells to the flow manager its id
 
 socket.on("open", function () {
-    console.log("## Socket connected");
+    console.log("## browserChannelClient: Socket connected");
     socket.send(JSON.stringify({
         type: "connect",
         payload: {
@@ -34,16 +34,16 @@ socket.on("open", function () {
 });
 
 socket.on("message", function (data) {
-    console.log("## Received the following message: " + data);
+    console.log("## browserChannelClient: Received the following message: " + data);
     var message = JSON.parse(data);
     // Right after sending the id to the flow manager, the server will return back
     // the current settings in the system (if any)
     if (message.type === "connectionSucceeded") {
-        console.log("## Got initial settings ", message.payload, " on connection");
+        console.log("## browserChannelClient: Got initial settings ", message.payload, " on connection");
     }
     // By listening to this message type, the client will be notified when the system has
     // new settings to be applied on the client side
     else if (message.type === "onSettingsChanged") {
-        console.log("## Got changed settings ", message.payload);
+        console.log("## browserChannelClient: Got changed settings ", message.payload);
     }
 });
