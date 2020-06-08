@@ -1,0 +1,7 @@
+CloudRevisionGetTests.js
+
+Description:
+This is a series of tests of the cloud based flow manager's /revision endpoint and its GET handler using test (mock) revision files.
+
+Requirements:
+GPII is installed and running a local "clouBased" flow manager.

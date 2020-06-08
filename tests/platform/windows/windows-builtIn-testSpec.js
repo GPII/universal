@@ -370,11 +370,12 @@ gpii.tests.windows.builtIn = [
                             "MaxSpeed": {
                                 "path": "pvParam.iMaxSpeed",
                                 "value": 100
-                            },
-                            "Acceleration": {
-                                "path": "pvParam.iTimeToMaxSpeed",
-                                "value": 1000
                             }
+                            // See solution spec in win32.json
+                            // "Acceleration": {
+                            //     "path": "pvParam.iTimeToMaxSpeed",
+                            //     "value": 1000
+                            // }
                         },
                         "options": {
                             "getAction": "SPI_GETMOUSEKEYS",
@@ -525,7 +526,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -810,7 +811,8 @@ gpii.tests.windows.builtIn = [
                         "Async": true,
                         "CheckResult": true
                     }
-                }],
+                }]/*,
+ * These settings have been commented out for https://issues.gpii.net/browse/GPII-4462
                 "com.microsoft.windows.narrator": [{
                     "settings": {
                         "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
@@ -824,7 +826,7 @@ gpii.tests.windows.builtIn = [
                         "Async": true,
                         "CheckResult": true
                     }
-                }]
+                }]*/
             }
         },
         gradeNames: "gpii.test.integration.actionHandlersAware.windows"
@@ -1016,7 +1018,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1235,7 +1237,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1454,7 +1456,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",

@@ -72,7 +72,7 @@
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.cursors": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -137,13 +137,15 @@
                         "DuckAudio": 1,
                         "WinEnterLaunchEnabled": 1,
                         "VerbosityLevel": 3,
-                        "DetailedFeedback": 1,
+                        "DetailedFeedback": 1/*,
+* These settings have been commented out for https://issues.gpii.net/browse/GPII-4462
                         "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
                             "value": true
                         },
                         "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
                             "value": true
                         }
+*/
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.typingEnhancement": {
                         "EnableAutocorrection": true,

@@ -12,7 +12,7 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
                         "Braille.AttributeRotationDelay": 500,
-                        "Braille.AutoPanMode": 6,
+                        "Braille.AutoPanMode": 2,
                         "Braille.BrailleMessages": 0,
                         "Braille.BrailleMode": 2,
                         "Braille.BrailleSleepMode": 1,
@@ -96,8 +96,7 @@
                         "Options.SaySelectedFirst": 1,
                         "Options.SayStateFirst": 1,
                         "Options.SayWindowTypeFirst": 1,
-                        // TODO: Fix this
-                        "Options.Scheme": "no idea",
+                        "Options.Scheme": "Classic",
                         "Options.ScreenEcho": 2,
                         "Options.SimultaneousSynthAndWave": 1,
                         "Options.SingleDigitThreshold": 7,
@@ -123,8 +122,8 @@
                         "Options.UseExtendedKeys": 1,
                         "Options.UseVirtualInfoInFormsMode": 1,
                         "Options.Verbosity": 2,
-                        "Options.VTcolor": 9999,
-                        "Options.VTspacing": 15,
+                        "Options.VTcolor": 11393254,
+                        "Options.VTspacing": 8,
                         "Options.VTstyle": 2,
                         "Options.VTthickness": 10,
                         "Options.VTtransparency": 50,
@@ -140,12 +139,12 @@
                         "OSM.UnderlineProximity": 5,
 
                         "Touch.FlickVelocityMin": 99,
-                        "Touch.TapEventDurationMax": 99,
-                        "Touch.TapInterEventDurationMax": 99,
-                        "Touch.TapTranslationMax": 99
-                    },
-                    "http://registry.gpii.net/applications/com.freedomscientific.jaws/enabled": true
-                }
+                        "Touch.TapEventDurationMax": 170,
+                        "Touch.TapInterEventDurationMax": 300,
+                        "Touch.TapTranslationMax": 50
+                    }
+                },
+                "http://registry.gpii.net/applications/com.freedomscientific.jaws/enabled": true
             }
         }
     }
