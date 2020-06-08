@@ -25037,7 +25037,7 @@
                             title: "Hand Cursor",
                             description: "The 'hand' cursor icon.",
                             type: "string",
-                            default: ""
+                            default: "%SystemRoot%\\cursors\\aero_link.cur"
                         }
                     },
                     "Help": {
@@ -25304,12 +25304,12 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\busy_i.ani"
+                                    "output": "%SystemRoot%\\cursors\\aero_link.cur"
                                 }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\wait_im.cur"
+                                    "output": "%SystemRoot%\\cursors\\aero_link_im.cur"
                                 }, {
-                                    "output": "%SystemRoot%\\cursors\\wait_l.cur"
+                                    "output": "%SystemRoot%\\cursors\\aero_link_l.cur"
                                 }
                             ]
                         }
@@ -26491,7 +26491,7 @@
                 ],
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
-                        // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
+                        // (highContrast.enabled === true) && (highContrastTheme !== "regular-contrast")
                         "value": {
                             "transform": {
                                 "type": "fluid.transforms.binaryOp",
@@ -26499,10 +26499,8 @@
                                     "transform": {
                                         "type": "fluid.transforms.binaryOp",
                                         "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
-                                        "left": false,
-                                        "operator": "||",
-                                        "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                                        "right": false
+                                        "operator": "===",
+                                        "right": true
                                     }
                                 },
                                 "operator": "&&",
