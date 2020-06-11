@@ -13,7 +13,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
-                    "filename": "${{environment}.AppData}\\Freedom Scientific\\ZoomText\\2019\\Config\\zten-US.zxc",
+                    "filename": "${{environment}.AppData}\\Freedom Scientific\\ZoomText\\2020\\Config\\zten-US.zxc",
                     "encoding": "utf16le"
                 },
                 "supportedSettings": {
@@ -6315,7 +6315,7 @@
                 "liveness": "manualRestart",
                 "options": {
                     // TODO: Create a base grade for JAWS and version-specific variations.  Make JAWS 2019 the default.  Restart version-detection discussions and "capability" discussions.
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\enu\\DEFAULT.JCF"
                 },
                 "supportedSettings": {
                     // ------------------- Basic Settings ---------------------
@@ -12164,8 +12164,8 @@
                 "liveness": "manualRestart",
                 "options": {
                     // TODO: Create a base grade for JAWS and version-specific variations.  Make JAWS 2019 the default.  Restart version-detection discussions and "capability" discussions.
-                    "defaultSettingsFilePath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF",
-                    "voiceProfilesDirPath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles"
+                    "defaultSettingsFilePath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\enu\\DEFAULT.JCF",
+                    "voiceProfilesDirPath": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\VoiceProfiles"
                 },
                 "supportedSettings": {
                     // -------- Options ----------
@@ -23285,7 +23285,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
-                    "filename": "${{environment}.PROGRAMDATA}\\Freedom Scientific\\JAWS\\2019\\SETTINGS\\Init\\JFW.INI"
+                    "filename": "${{environment}.PROGRAMDATA}\\Freedom Scientific\\JAWS\\2020\\SETTINGS\\Init\\JFW.INI"
                 },
                 "supportedSettings": {
                     // -----------------------      -------------------------

@@ -118,7 +118,7 @@ gpii.tests.windows.zoomtext.testDefs = [
                             "Tracking.RouteMouse": 0
                         },
                         "options": {
-                            "filename": "${{environment}.AppData}\\Freedom Scientific\\ZoomText\\2019\\Config\\zten-US.zxc",
+                            "filename": "${{environment}.AppData}\\Freedom Scientific\\ZoomText\\2020\\Config\\zten-US.zxc",
                             "encoding": "utf16le"
                         }
                     }
@@ -142,7 +142,7 @@ gpii.tests.windows.zoomtext.testDefs = [
                             "STATIC 1.magPower": 160
                         },
                         "options": {
-                            "filename": "${{environment}.AppData}\\Freedom Scientific\\ZoomText\\2019\\Config\\zten-US.zxc",
+                            "filename": "${{environment}.AppData}\\Freedom Scientific\\ZoomText\\2020\\Config\\zten-US.zxc",
                             "encoding": "utf16le"
                         }
                     }
