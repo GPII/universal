@@ -142,9 +142,9 @@
                         "Touch.TapEventDurationMax": 170,
                         "Touch.TapInterEventDurationMax": 300,
                         "Touch.TapTranslationMax": 50
-                    }
-                },
-                "http://registry.gpii.net/applications/com.freedomscientific.jaws/enabled": true
+                    },
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws/enabled": true
+                }
             }
         }
     }

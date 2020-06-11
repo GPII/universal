@@ -1,0 +1,18 @@
+/*
+
+    Test Fusion in the only way we can, i.e. starting and stopping it.
+
+*/
+{
+    "flat": {
+        "name": "Fusion",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.fusion/enabled": true
+                }
+            }
+        }
+    }
+}
