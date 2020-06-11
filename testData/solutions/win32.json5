@@ -6290,7 +6290,7 @@
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_CURRENT_USER",
-                "path": "Software\\Freedom Scientific\\ZoomText\\2019",
+                "path": "Software\\Freedom Scientific\\ZoomText\\2020",
                 "subPath": "installedDesktop",
                 "dataType": "REG_SZ"
             }
