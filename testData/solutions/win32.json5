@@ -25988,7 +25988,8 @@
         },
         "stop": [],
         "update": [
-            "settings.configure"
+            "settings.configure",
+            "start"
         ],
         "restore": [
             "settings.configure",
