@@ -25988,7 +25988,8 @@
         },
         "stop": [],
         "update": [
-            "settings.configure"
+            "settings.configure",
+            "start"
         ],
         "restore": [
             "settings.configure",
@@ -26491,16 +26492,62 @@
                 ],
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
-                        // (highContrast.enabled === true) && (highContrastTheme !== "regular-contrast")
+                        // GPII-4505 - We are going to apply a few edge cases of logic here to support both:
+                        // 1. The fact that the QSS only sends up the high contrast theme setting at the moment, and is
+                        //    unlikely to change this soon, using the special value "regular-contrast" to determine
+                        //    whether or not the high contrast is enabled.  ( If the value is regular-contrast, it should
+                        //    not be enabled. )
+                        // 2. The fact that probably the correct way to determine if the high contrast theme is on is the
+                        //    actual windows settings which turns it on and off, and which will be captured during the
+                        //    process of a capture tool snapshot. In this case, if `enabled` is equal to false, the
+                        //    high contrast really shouldn't turn on, depsite a high contrast theme setting being saved.
+                        //
+                        // To work around both these use cases for the near future, we will turn on the high contrast
+                        // if highContrast.enabled is not false and if highContrastTheme is not regular-contrast.  Do
+                        // note that this will cause problems for users who go their preference set up by doing a system
+                        // capture when high contrast was off, and then beginning to use the qss.  But it's unlikely this
+                        // problem will present itself anytime soon.
+                        //
+                        //
+                        // ON
+                        // "http://registry.gpii.net/common/highContrastTheme": "yellow-black",
+                        // "http://registry.gpii.net/common/highContrast/enabled": true
+                        //
+                        // OFF
+                        // "http://registry.gpii.net/common/highContrastTheme": "yellow-black",
+                        // "http://registry.gpii.net/common/highContrast/enabled": false
+                        //
+                        // OFF
+                        // "http://registry.gpii.net/common/highContrastTheme": "regular-contrast",
+                        // "http://registry.gpii.net/common/highContrast/enabled": true
+                        //
+                        // OFF
+                        // "http://registry.gpii.net/common/highContrastTheme": "regular-contrast",
+                        // "http://registry.gpii.net/common/highContrast/enabled": false
+                        //
+                        // ON
+                        // "http://registry.gpii.net/common/highContrastTheme": "yellow-black"
+                        //
+                        // OFF
+                        // "http://registry.gpii.net/common/highContrastTheme": "regular-contrast"
+                        //
+                        // ON
+                        // "http://registry.gpii.net/common/highContrast/enabled": true
+                        //
+                        // OFF
+                        // "http://registry.gpii.net/common/highContrast/enabled": false
+                        //
+                        // (highContrast.enabled !== false) && (highContrastTheme !== "regular-contrast")
                         "value": {
                             "transform": {
                                 "type": "fluid.transforms.binaryOp",
                                 "left": {
                                     "transform": {
                                         "type": "fluid.transforms.binaryOp",
+                                        "left": true, // If `enabled` is missing use `true` to support QSS case
                                         "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
-                                        "operator": "===",
-                                        "right": true
+                                        "operator": "!==",
+                                        "right": false
                                     }
                                 },
                                 "operator": "&&",
