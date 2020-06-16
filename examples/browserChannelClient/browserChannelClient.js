@@ -21,6 +21,8 @@ var ws = require("ws");
 
 var socket = new ws("ws://localhost:8081/browserChannel"); // eslint-disable-line new-cap
 
+var changeSetting = false;
+
 // When the connection is done, the client tells to the flow manager its id
 
 socket.on("open", function () {
@@ -39,11 +41,31 @@ socket.on("message", function (data) {
     // Right after sending the id to the flow manager, the server will return back
     // the current settings in the system (if any)
     if (message.type === "connectionSucceeded") {
+        changeSetting = true;
         console.log("## browserChannelClient: Got initial settings ", message.payload, " on connection");
     }
     // By listening to this message type, the client will be notified when the system has
     // new settings to be applied on the client side
     else if (message.type === "onSettingsChanged") {
         console.log("## browserChannelClient: Got changed settings ", message.payload);
+    }
+    // Log acknowledgement that the "changeSettings" message was sent
+    else if (message.type === "changeSettingsReceived") {
+        console.log("## browserChannelClient: ChangeSettings was successfully sent ", message.payload);
+    }
+
+    // Change two settings, and be done.
+    if (changeSetting) {
+        changeSetting = false;
+        socket.send(JSON.stringify({
+            type: "changeSettings",
+            payload: {
+                settings: {
+                    characterSpace: 1,
+                    clickToSelectEnabled: false,
+                    contrastTheme: "default"
+                }
+            }
+        }));
     }
 });

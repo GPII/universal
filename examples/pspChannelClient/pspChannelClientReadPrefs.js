@@ -53,7 +53,7 @@ socket.on("message", function (data) {
                 "type": "pullModel",
                 value: {
                     settingControls: {
-                        "http://registry\\.gpii\\.net/common/DPIScale": {
+                        "http://registry\\.gpii\\.net/common/magnification": {
                             value: 1
                         }
                     }
