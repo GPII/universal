@@ -32622,6 +32622,51 @@
                             "offset": 1
                         }
                     },
+                    "http://registry\\.gpii\\.net/common/highContrast/enabled": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "contrastTheme",
+                                    "operator": "!==",
+                                    "right": "default"
+                                }
+                            },
+                            "true": "true",
+                            "false": "false"
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/highContrastTheme": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "contrastTheme",
+                                    "operator": "!==",
+                                    "right": "default"
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.valueMapper",
+                                    "defaultInputPath": "contrastTheme",
+                                    "defaultOutputValue": "default",
+                                    "match": {
+                                        "bw": "black-white",
+                                        "wb": "white-black",
+                                        "by": "black-yellow",
+                                        "yb": "yellow-black",
+                                        "lgdg":"grey-black",
+                                        "gw": "grey-white",
+                                        "bbr": "black-brown"
+                                    }
+                                }
+                            },
+                            "false": "regular-contrast"
+                        }
+                    },
                     "http://registry\\.gpii\\.net/common/fontSize": {
                         "transform": {
                             "type": "fluid.transforms.round",
