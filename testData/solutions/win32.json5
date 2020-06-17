@@ -26261,7 +26261,7 @@
                             "description": "Slow keys interval time in milliseconds",
                             "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": { "type":  "string", "required": false},
                                 "value": {
                                     "required": true,
                                     "type": "integer",
@@ -27699,7 +27699,7 @@
                             "description": "Speed of mouse keys",
                             "type": "object",
                             "properties": {
-                                "path": { "type":  "string"},
+                                "path": { "type":  "string", "required": false},
                                 "value": {
                                     "type": "number",
                                     "minimum": 10,
