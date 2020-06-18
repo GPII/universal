@@ -99,6 +99,7 @@
                         "LensHeight": 50,
                         "LensWidth": 50
                     },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.magnifier/enabled": true,
                     "http://registry.gpii.net/applications/com.microsoft.windows.screenResolution": {
                         "screen-resolution": {
                             "width": 800,
