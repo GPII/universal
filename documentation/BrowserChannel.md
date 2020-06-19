@@ -5,14 +5,34 @@ This document describes how the __Browser Channel__ and the __WebSockets__ setti
 This feature consists on:
 
 * A route in the Flow Manager that serves as the entry point for clients: `/browserChannel`
-* The component behind this route is the _gpii.settingsHandlers.webSockets.component_
+* The components behind this route are the _gpii.flowManager.browserChannel.handler_
+  and the _gpii.settingsHandlers.webSockets.component_
 
 ## The browser channel
 
-This handler processes every request to `http://localhost:8081/browserChannel` and is responsible for:
+This handler processes every request to `ws://localhost:8081/browserChannel` and is responsible for:
 
 * Processing every request and determining whether a client is allowed or not to connect
-* Registering and removing the clients as they are connecting or disconnecting
+* Registering and removing the clients as they connect or disconnect.
+* Processing modifications of settings that are caused by other aspects of the system, e.g. a new user logs in.
+
+The browser channel handler supports the following request messages and sends the
+associated responses.  When an error occurs, the handler sends an response and
+closes the web sockets connection.
+
+* A client sends a connection request.  In this example, the client is UIO+:
+  * request: `{type: "connect", solutionId: "net.gpii.uioPlus"}`
+  * response: `{type: "connectionSucceeded, "payload": {initial settings values for the solutionId}}`
+* Client sends a request to change settings values:
+  * request: `{type: "changeSettings", "payload": {settings values to change}}`
+  * response: `{type: "changeSettingsReceived", "payload": {settings values after changing}}`
+* Some other component of the system changes a setting relevant to connected clients:
+  * response: `{type: "onChangeSettings", "payload:" {settings values after changing}}`
+* Error response when connecting with an unknown solution:
+  * response: `{isError: true, message: "Rejecting a connection request from _solutionId_.
+  The solution id was not found in the solutions registry"}`
+* Error response when trying to connect more than once:
+  * response: `{isError: true, message: "Connection already established - cannot send a second connect message"}`
 
 ## The WebSockets settings handler
 
@@ -21,8 +41,7 @@ of the system.  The settings handler is an instance of `gpii.settingsHandler.web
 in _gpii/node_modules/settingsHandlers/src/WebSocketsComponent.js_.
 
 This component stores the information about clients and keeps a list of settings for every solution that makes use of
-this settings handler.  Also, this component create notifications for every connected client at any time when the
-settings change.
+this settings handler.  Also, this component notifies connecteds client at any time when the settings change.
 
 ## Usage
 
@@ -69,30 +88,34 @@ The workflow between the client and server can be summarised as follows:
   the *id* of the client, in this instance `net.gpii.uioPlus`.
 * The client will be registered if the solution's id can be found of the solutions registry, otherwise, the registration
   will be rejected and the system will emit en error, and the client will disconnect.
-* When the flow manager emits either the _connectionSucceeded_ (after being registered) or the _onSettingsChanged_
-  (after a user login/logout) signal to the client, it is delivering the current available settings for the client in
-  the following way:
-
+* The client can request changes to its settings by sending a _changeSettings_ message type.  If successful, the client
+  is sent a _changeSettingsReceived_ message type.
+* When a _connectionSucceeded_, _changeSettingsReceived_, or an _onSettingsChanged_ signal is sent to the client, the
+  current available settings for the client are sent as well, e.g.:
     ```json
     {
-        "screenReaderTTS/enabled":false,
-        "highContrast/enabled":true,
-        "invertColours":false,
-        "magnifierEnabled":true,
-        "magnification":2,
-        "fontSize":"medium",
-        "simplifier":false,
-        "highContrastTheme":"white-black"
+        "characterSpace":1,
+        "clickToSelectEnabled":false,
+        "contrastTheme":"wb",
+        "fontSize":1.1,
+        "inputsLargerEnabled":false,
+        "lineSpace":1,
+        "selectionTheme":"default",
+        "selfVoicingEnabled":false,
+        "simplifiedUiEnabled":false,
+        "syllabificationEnabled":false,
+        "tableOfContentsEnabled":false,
+        "wordSpace":1
     }
     ```
-* When a client disconnects, it'll be removed from the list of registered clients
+* When a client disconnects, it is removed from the list of registered clients
 
 ## Running the sample client
 
-The client has been checked in to [../examples/browserChannelClient](../examples/browserChannelClient). To try it out, first
-start the GPII in the CloudBased browserChannel test configuration from the root of universal with
+An example client is avaiable at [../examples/browserChannelClient](../examples/browserChannelClient). To try it out, first
+start the GPII test configuration from the root of universal with
 
-    node gpii.js gpii/configs gpii.config.cloudBased.production
+    npm start
 
 Then start the client from [../examples/browserChannelClient](../examples/browserChannelClient) with
 
