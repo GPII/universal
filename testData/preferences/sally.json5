@@ -18,7 +18,7 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.windows.soundSentry": {
-                        "WindowsEffect": 2
+                        "WindowsEffect": "2"
                     }
                 }
             }

@@ -720,13 +720,13 @@ gpii.tests.windows.builtIn = [
                 }],
                 "com.microsoft.windows.soundSentry": [{
                     "settings": {
-                        "WindowsEffect": 2
+                        "WindowsEffect": "2"
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
                         "path": "Control Panel\\Accessibility\\SoundSentry",
                         "dataTypes": {
-                            "WindowsEffect": "REG_DWORD"
+                            "WindowsEffect": "REG_SZ"
                         }
                     }
                 }],
