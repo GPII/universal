@@ -32532,8 +32532,10 @@
                     },
                     "contrastTheme": {
                         "transform": {
-                            // Use the same condition for applying a high contrast theme to windows:
-                            // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
+                            // Use the same conditions for applying a high
+                            // contrast theme as specified for the
+                            // "com.microsoft.windows.highContrast" solution:
+                            // (highContrast.enabled !== false) && (highContrastTheme !== "regular-contrast")
                             "type": "fluid.transforms.condition",
                             "condition": {
                                 "transform": {
@@ -32542,9 +32544,8 @@
                                         "transform": {
                                             "type": "fluid.transforms.binaryOp",
                                             "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
-                                            "left": false,
-                                            "operator": "||",
-                                            "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                            "left": true,
+                                            "operator": "!==",
                                             "right": false
                                         }
                                     },
