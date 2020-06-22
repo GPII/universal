@@ -41,7 +41,7 @@ of the system.  The settings handler is an instance of `gpii.settingsHandler.web
 in _gpii/node_modules/settingsHandlers/src/WebSocketsComponent.js_.
 
 This component stores the information about clients and keeps a list of settings for every solution that makes use of
-this settings handler.  Also, this component notifies connecteds client at any time when the settings change.
+this settings handler.  Also, this component notifies connected clients whenever their settings change.
 
 ## Usage
 
