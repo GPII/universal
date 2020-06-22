@@ -29387,7 +29387,7 @@
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Control Panel\\Accessibility\\SoundSentry",
                     "dataTypes": {
-                        "WindowsEffect": "REG_DWORD"
+                        "WindowsEffect": "REG_SZ"
                     }
                 },
                 "supportedSettings": {
@@ -29396,10 +29396,10 @@
                             "title": "SoundSentry",
                             "description": "Selects the desired visual notification for sounds.",
                             "enum": [
-                                0,
-                                1,
-                                2,
-                                3
+                                "0",
+                                "1",
+                                "2",
+                                "3"
                             ],
                             "enumLabels": [
                                 "No visual alert",
