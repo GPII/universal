@@ -9,7 +9,7 @@
             ]
         },
         "capabilities": [
-            "http://registry.gpii.net/common/magnification/enabled"
+            "http://registry\\.gpii\\.net/common/magnification/enabled"
         ],
         "settingsHandlers": {
             "configuration": {

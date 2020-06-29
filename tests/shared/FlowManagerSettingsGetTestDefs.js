@@ -477,7 +477,7 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
                             "org.gnome.desktop.a11y.magnifier": {
                                 "active": true,
                                 "settings": {
-                                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier/enabled": true,                                  
+                                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier/enabled": true,
                                     "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
                                         "mag-factor": 1.5,
                                         "screen-position": "full-screen"
