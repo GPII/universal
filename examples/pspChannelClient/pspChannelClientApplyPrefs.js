@@ -24,19 +24,22 @@ var socket = new ws("ws://localhost:8081/pspChannel"); // eslint-disable-line ne
 
 // When the connection is done, the server will send the initial data of the current session if any
 socket.on("open", function () {
-    console.log("## Socket connected");
+    console.log("## pspChannelClientApplyPrefs: Socket connected");
 });
 
 socket.on("message", function (data) {
     var message = JSON.parse(data);
-    console.log("## Received the following message: " + JSON.stringify(message, null, 4));
+    console.log("## pspChannelClientApplyPrefs: Received the following message: " + JSON.stringify(message, null, 4));
 
     if (message.type === "preferencesApplied") {
-        console.log("Preferences have been applied");
+        console.log("## pspChannelClientApplyPrefs: Preferences have been applied");
         socket.close();
         return;
-    };
+    } else {
+        console.log("## pspChannelClientApplyPrefs: Message type '" + message.type + "' not 'preferencesApplied'");
+    }
 
+    console.log("## pspChannelClientApplyPrefs: Sending 'modelChanged' request");
     socket.send(JSON.stringify(
         {
             "type": "modelChanged",

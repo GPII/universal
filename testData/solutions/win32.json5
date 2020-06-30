@@ -24825,7 +24825,7 @@
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             "type": "object",
                             "properties": {
-                                "path": { "type":  "string"},
+                                "path": { "type":  "string", "required": false},
                                 "value": {
                                     "type": "string",
                                     "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg"
@@ -24888,7 +24888,7 @@
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": { "type":  "string", "required": false},
                                 "value": {
                                     "type": "string",
                                     "required": true,
@@ -26246,7 +26246,7 @@
                             "description": "Enable/Disable filter keys",
                             "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": { "type":  "string", "required": false},
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -26261,7 +26261,7 @@
                             "description": "Slow keys interval time in milliseconds",
                             "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": { "type":  "string", "required": false},
                                 "value": {
                                     "required": true,
                                     "type": "integer",
@@ -26476,7 +26476,7 @@
                             "description": "Whether to enable/disable High Contrast",
                             "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": { "type":  "string", "required": false},
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -26741,7 +26741,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "default": 0,
@@ -26820,7 +26820,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "type": "number",
@@ -27036,7 +27036,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "type": "boolean",
@@ -27109,7 +27109,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "enum": [0, 1],
@@ -27170,7 +27170,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "type": "boolean",
@@ -27684,7 +27684,7 @@
                             "description": "Enable/Disable mouse keys",
                             "type": "object",
                             "properties": {
-                                "path": { "type":  "string", "required": true},
+                                "path": { "type":  "string", "required": false},
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -27699,7 +27699,7 @@
                             "description": "Speed of mouse keys",
                             "type": "object",
                             "properties": {
-                                "path": { "type":  "string"},
+                                "path": { "type":  "string", "required": false},
                                 "value": {
                                     "type": "number",
                                     "minimum": 10,
@@ -27821,7 +27821,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 // This one is already in use in the QSS and can't be booleanised yet.
                                 "value": {
@@ -27880,7 +27880,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -27949,7 +27949,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -28003,7 +28003,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -28057,7 +28057,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -28116,7 +28116,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -28170,7 +28170,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -28224,7 +28224,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -28313,7 +28313,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -28371,7 +28371,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -28433,7 +28433,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -28490,7 +28490,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -28544,7 +28544,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -28684,7 +28684,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": {
                                     "required": true,
@@ -29780,7 +29780,7 @@
                                             }
                                         }
                                     ],
-                                    "required": true
+                                    "required": false
                                 },
                                 "value": { "type":  "boolean", "required":  true}
                             }
@@ -32532,8 +32532,10 @@
                     },
                     "contrastTheme": {
                         "transform": {
-                            // Use the same condition for applying a high contrast theme to windows:
-                            // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
+                            // Use the same conditions for applying a high
+                            // contrast theme as specified for the
+                            // "com.microsoft.windows.highContrast" solution:
+                            // (highContrast.enabled !== false) && (highContrastTheme !== "regular-contrast")
                             "type": "fluid.transforms.condition",
                             "condition": {
                                 "transform": {
@@ -32542,9 +32544,8 @@
                                         "transform": {
                                             "type": "fluid.transforms.binaryOp",
                                             "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
-                                            "left": false,
-                                            "operator": "||",
-                                            "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                            "left": true,
+                                            "operator": "!==",
                                             "right": false
                                         }
                                     },
@@ -32614,7 +32615,88 @@
                         }
                     }
                 },
-                "inverseCapabilitiesTransformations": {}
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/characterSpace": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "characterSpace",
+                            "offset": 1
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/highContrast/enabled": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "contrastTheme",
+                                    "operator": "!==",
+                                    "right": "default"
+                                }
+                            },
+                            "true": "true",
+                            "false": "false"
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/highContrastTheme": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "contrastTheme",
+                                    "operator": "!==",
+                                    "right": "default"
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.valueMapper",
+                                    "defaultInputPath": "contrastTheme",
+                                    "defaultOutputValue": "default",
+                                    "match": {
+                                        "bw": "black-white",
+                                        "wb": "white-black",
+                                        "by": "black-yellow",
+                                        "yb": "yellow-black",
+                                        "lgdg":"grey-black",
+                                        "gw": "grey-white",
+                                        "bbr": "black-brown"
+                                    }
+                                }
+                            },
+                            "false": "regular-contrast"
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/fontSize": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "scale": 2,
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "fontSize",
+                                    "right": 12,
+                                    "operator": "*"
+                                }
+                            }
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/inputsLarger/enabled": "inputsLargerEnabled",
+                    "http://registry\\.gpii\\.net/common/lineSpace": "lineSpace",
+                    "http://registry\\.gpii\\.net/common/highlightColor": "selectionTheme",
+                    "http://registry\\.gpii\\.net/common/selfVoicing/enabled": "selfVoicingEnabled",
+                    "http://registry\\.gpii\\.net/common/simplifiedUi/enabled": "simplifiedUiEnabled",
+                    "http://registry\\.gpii\\.net/common/syllabification/enabled": "syllabificationEnabled",
+                    "http://registry\\.gpii\\.net/common/tableOfContents": "tableOfContentsEnabled",
+                    "http://registry\\.gpii\\.net/common/wordSpace": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "offset": -1,
+                            "inputPath": "wordSpace"
+                        }
+                    }
+                }
             }
         },
         "isInstalled": [

@@ -25,27 +25,29 @@ var readRequestCount = 0;
 
 // When the connection is done, the server will send the initial data of the current session if any
 socket.on("open", function () {
-    console.log("## Socket connected");
+    console.log("## pspChannelClientReadPrefs: Socket connected");
 });
 
 socket.on("message", function (data) {
     var message = JSON.parse(data);
-    console.log("## Received the following message: " + JSON.stringify(message, null, 4));
+    console.log("## pspChannelClientReadPrefs: Received the following message: " + JSON.stringify(message, null, 4));
 
     if (message.type === "preferenceReadSuccess") {
-        console.log("Preference has been read");
+        console.log("## pspChannelClientReadPrefs: Preference has been read");
         socket.close();
         return;
-    };
-    if (message.type === "preferenceReadFail") {
-        console.log("Preference cannot be read");
+    } else if (message.type === "preferenceReadFail") {
+        console.log("## pspChannelClientReadPrefs: Preference cannot be read");
         socket.close();
         return;
-    };
+    } else {
+        console.log("## pspChannelClientReadPrefs: Message type '" + message.type + "' not reading success/failure");
+    }
 
     if (readRequestCount === 0) {
         readRequestCount++;
         // Only send the read request once
+        console.log("## pspChannelClientReadPrefs: Sending 'pullModel' request");
         socket.send(JSON.stringify(
             {
                 "type": "pullModel",
