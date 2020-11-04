@@ -1,0 +1,29 @@
+name: gpii-universal tests
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    env:
+      HEADLESS: true
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: Run npm install
+      run: npm install
+
+    - name: Pass linter
+      run: $(npm bin)/grunt lint
+
+    - name: Run node tests
+      run: npm run test:node
+
+    - name: Run browser tests
+      run: npm run test:browser
