@@ -98,17 +98,18 @@ gpii.tests.windows.builtIn = [
                         "options": {
                             "functionName": "DoubleClickHeight"
                         }
-                    },
-                    {
-                        "settings": {
-                            "Volume": {
-                                "value": 0.7
-                            }
-                        },
-                        "options": {
-                            "functionName": "Volume"
-                        }
                     }
+                    // TODO: Disabled due to GPII-4518
+                    //{
+                    //    "settings": {
+                    //        "Volume": {
+                    //            "value": 0.7
+                    //        }
+                    //    },
+                    //    "options": {
+                    //        "functionName": "Volume"
+                    //    }
+                    //}
                 ]
             },
             "gpii.windows.spiSettingsHandler": {

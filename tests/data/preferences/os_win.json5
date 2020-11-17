@@ -264,12 +264,13 @@
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.soundSentry": {
                         "WindowsEffect": "2"
-                    },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.volumeControl": {
-                        "Volume": {
-                            "value": 0.7
-                        }
                     }
+                    // TODO: Disabled due to GPII-4518
+                    //"http://registry.gpii.net/applications/com.microsoft.windows.volumeControl": {
+                    //    "Volume": {
+                    //        "value": 0.7
+                    //    }
+                    //}
                 }
             }
         }
