@@ -94,7 +94,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "Options.SayAllIgnoreShiftKeys": 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
@@ -132,7 +132,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-PCCursor.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
@@ -159,7 +159,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "Options.SayAllIgnoreShiftKeys": 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
@@ -197,7 +197,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-PCCursor.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
@@ -248,7 +248,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-MenuAndDialog.SynthLangString": "French"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
@@ -261,7 +261,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "Options.TypingEcho": 3
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]
@@ -312,7 +312,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-MenuAndDialog.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
@@ -324,7 +324,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "Options.SayAllIgnoreShiftKeys": 0
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]
@@ -375,7 +375,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-MenuAndDialog.SynthLangString": "French"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
@@ -388,7 +388,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "Options.TypingEcho": 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2020\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]
