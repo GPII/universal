@@ -178,17 +178,18 @@ gpii.tests.journal.initialSettings = {
                 "options": {
                     "functionName": "DoubleClickHeight"
                 }
-            },
-            {
-                "settings": {
-                    "Volume": {
-                        "value": 0.5
-                    }
-                },
-                "options": {
-                    "functionName": "Volume"
-                }
             }
+            // TODO: Disabled due to GPII-4518
+            //{
+            //    "settings": {
+            //        "Volume": {
+            //            "value": 0.5
+            //        }
+            //    },
+            //    "options": {
+            //        "functionName": "Volume"
+            //    }
+            //}
         ]
     }
 };
