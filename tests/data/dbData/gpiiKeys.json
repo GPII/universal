@@ -2,7 +2,7 @@
     {
         "_id": "gpii_key_no_prefs_safe",
         "type": "gpiiKey",
-        "schemaVersion": "0.2",
+        "schemaVersion": "0.3",
         "prefsSafeId": null,
         "prefsSetId": null,
         "revoked": false,

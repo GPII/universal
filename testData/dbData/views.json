@@ -11,6 +11,15 @@
             "findInfoByAccessToken": {
                 "map": "function(doc) {\n if (doc.type === 'gpiiAppInstallationAuthorization' && doc.revoked === false) {\n var record = { authorization: doc };\n if (doc.clientCredentialId) {\n record._id = doc.clientCredentialId;\n } \n emit(doc.accessToken, record);\n }\n }"
             },
+            "findRelatedDocsForPrefsSafe": {
+                "map": "function(doc) {if (doc.type === 'gpiiKey' || doc.type === 'gpiiCloudSafeCredential') emit(doc.prefsSafeId, null)}"
+            },
+            "listPrefsSafes": {
+                "map": "function(doc) {if (doc.type === 'prefsSafe') emit(doc._id, {'name': doc.name, 'email': doc.email, 'created': doc.timestampCreated, 'updated': doc.timestampUpdated})}"
+            },
+            "expressUserSafeLoginLookup": {
+                "map": "function(doc) {if (doc.type === 'gpiiCloudSafeCredential') {emit(doc.gpiiExpressUserId, null);}}"
+            },
             "findSnapsetPrefsSafes": {
                 "map": "function(doc) {if (doc.type === 'prefsSafe' && doc.prefsSafeType === 'snapset') { emit(doc._id, doc); }}"
             },
@@ -22,6 +31,20 @@
             },
             "findDocsBySchemaVersion": {
                 "map": "function(doc) {emit(doc.schemaVersion, doc); }"
+            }
+        }
+    },
+    {
+        "_id": "_design/lookup",
+        "views": {
+            "byUsernameOrEmail": {
+                "map": "function (doc) {\n if (doc.type === 'user') { emit(doc.username, doc); \n emit(doc.email, doc); \n } \n}"
+            },
+            "byVerificationCode": {
+                "map": "function (doc) {\n if (doc.type === 'user' && doc.verification_code) { emit(doc.verification_code, doc); \n } \n}"
+            },
+            "byResetCode": {
+                "map": "function (doc) {\n if (doc.type === 'user' && doc.reset_code) { emit(doc.reset_code, doc); \n } \n}"
             }
         }
     }

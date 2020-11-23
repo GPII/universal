@@ -21,7 +21,7 @@ Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Key_Grant)
         "accessToken": "gpii-app-installation-accessToken-1",
         "clientCredential": {
             "type": "clientCredential",
-            "schemaVersion": "0.2",
+            "schemaVersion": "0.3",
             "clientId": "gpiiAppInstallationClient-1",
             "oauth2ClientId": "net.gpii.ajc.bakersfield",
             "oauth2ClientSecret": "client_secret_ajc_bakersfield",
@@ -37,7 +37,7 @@ Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Key_Grant)
         },
         "authorization": {
             "type": "gpiiAppInstallationAuthorization",
-            "schemaVersion": "0.2",
+            "schemaVersion": "0.3",
             "clientId": "gpiiAppInstallationClient-1",
             "gpiiKey": "chrome_high_contrast",
             "accessToken": "gpii-app-installation-accessToken-1",
