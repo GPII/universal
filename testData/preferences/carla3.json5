@@ -1,0 +1,15 @@
+// For manual testing of one variant of GPII-4468 - that a prefs set which only mentions /enabled: true will
+// get started and stopped correctly
+{
+    "flat": {
+        "name": "Carla 3",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.magnifier/enabled": true
+                 }
+            }
+        }
+    }
+}

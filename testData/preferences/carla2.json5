@@ -1,0 +1,37 @@
+// For manual testing of one variant of GPII-4468 - that a prefs set which explicitly mentions /enabled: true will
+// get started and stopped correctly
+{
+    "flat": {
+        "name": "Carla 2",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                        "show-cross-hairs": true,
+                        "lens-mode": false,
+                        "mag-factor": 2,
+                        "mouse-tracking": "proportional",
+                        "screen-position": "right-half",
+                        "scroll-at-edges": true
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.magnifier/enabled": true,
+                    "http://registry.gpii.net/applications/com.microsoft.windows.magnifier": {
+                        "Magnification": 200,
+                        "ZoomIncrement": 50,
+                        "Invert": 0,
+                        "FollowMouse": 1,
+                        "FollowFocus": 1,
+                        "FollowCaret": 1,
+                        "MagnificationMode": 1
+                    },
+                    "http://registry.gpii.net/common/fontSize": 24,
+                    "http://registry.gpii.net/common/magnification": 2.0,
+                    "http://registry.gpii.net/common/tracking": ["mouse"],
+                    "http://registry.gpii.net/common/invertColours": true,
+                    "http://registry.gpii.net/common/tableOfContents": false
+                }
+            }
+        }
+    }
+}

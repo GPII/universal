@@ -8,6 +8,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/magnification/enabled"
+        ],
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
@@ -6219,9 +6222,6 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/magnification"
-                ],
                 "capabilitiesTransformations": {
                     "Preferences\\.PromptOnExit": {
                         "literalValue": 0

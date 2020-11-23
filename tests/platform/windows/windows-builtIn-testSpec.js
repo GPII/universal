@@ -24,6 +24,8 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.windows");
 
+fluid.logObjectRenderChars = 102400;
+
 gpii.tests.windows.builtIn = [
     {
         name: "Testing os_win using default matchmaker",
