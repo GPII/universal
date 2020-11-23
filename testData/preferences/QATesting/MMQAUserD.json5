@@ -1,0 +1,22 @@
+/*
+User D - NP Set used for manual QA testing.
+
+User with only Windows Magnifier settings
+*/
+
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
+                        "Magnification": 150,
+                        "FollowCaret": true,
+                        "Invert": true
+                    }
+                }
+            }
+        }
+    }
+}

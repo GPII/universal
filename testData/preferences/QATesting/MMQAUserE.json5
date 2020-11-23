@@ -1,0 +1,27 @@
+/*
+User E - NP Set used for manual QA testing.
+
+User with common terms only, but some that are matching more transformations in NVDA than jaws
+
+Equals JAWS settings:
+* punctuation verbosity: 1
+* speechrate: 0.375
+
+Equals NVDA settings:
+* speech.symbolLevel: 100
+* speech.espeak.rate: 6.4 (100 - 80 / 3.10)
+*/
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/punctuationVerbosity": "some",
+                    "http://registry.gpii.net/common/speechRate": 100,
+                    "http://registry.gpii.net/common/speakTutorialMessages": true // Not supported by JAWS
+                }
+            }
+        }
+    }
+}

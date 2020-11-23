@@ -1,0 +1,31 @@
+/*
+User C - NP Set used for manual QA testing.
+
+User with only GNOME Shell Magnifier settings in their NP set
+(Linux OS with Gnome(Fedora for example) setup is needed to test this use case)
+
+
+Common settings:
+The gnome mag settings translated into windows settings should be:
+* 250% magnification level
+* FollowFocus: true
+* FollowMouse: true
+*/
+
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                        "mag-factor": 2.5,
+                        "show-cross-hairs": true,
+                        "focus-tracking": true,
+                        "mouse-tracking": true
+                    }
+                }
+            }
+        }
+    }
+}

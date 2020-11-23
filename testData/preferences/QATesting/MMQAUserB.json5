@@ -1,0 +1,36 @@
+/*
+User B - NP Set used for manual QA testing.
+
+Has common terms screen Reader settings (that matches NVDA better than jaws) and
+JAWS specific screen reader settings (at least one of them matching the common terms ones)
+
+Common settings:
+Equals JAWS settings:
+* options\\.SayAllIndicateCaps: false
+* speechrate: 0.375
+
+Equals NVDA settings:
+* speech.espeak.rate: 6.4 (100 - 80 / 3.10)
+* speech.espeak.sayCapForCapitals: true
+* keyboard.speakTypedCharacters: true
+* presentation.reportHelpBalloons: true
+*/
+
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/speechRate": 100,
+                    "http://registry.gpii.net/common/announceCapitals": true,
+                    "http://registry.gpii.net/common/keyEcho": true,
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
+                        "options\\.SayAllIndicateCaps": false // JAWS equivalent of announceCapitals
+                    },
+                    "http://registry.gpii.net/common/speakTutorialMessages": true // Not supported by JAWS
+                }
+            }
+        }
+    }
+}
