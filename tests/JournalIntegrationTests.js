@@ -17,6 +17,7 @@ var gpii = fluid.registerNamespace("gpii");
 
 var jqUnit = require("node-jqunit");
 var kettle = require("kettle");
+
 kettle.loadTestingSupport();
 
 fluid.require("%gpii-universal");
@@ -298,50 +299,48 @@ fluid.defaults("gpii.tests.journal.testCaseHolder", {
 
 // Used on the first run where the settings handler crashes the whole system
 gpii.tests.journal.solutionsRegistryOverlay = {
-    win32: {
-        "com.microsoft.windows.cursors": {
-            settingsHandlers: {
-                explode: {
-                    type: "gpii.tests.journal.explodingSettingsHandler",
-                    supportedSettings: {
-                        AppStarting: {}
-                    },
-                    capabilitiesTransformations: {
-                        AppStarting: {
-                            transform: {
-                                type: "fluid.transforms.value",
-                                inputPath: "http://registry\\.gpii\\.net/common/cursorSize",
-                                outputPath: "value"
-                            }
-                        }
-                    }
+    "com.microsoft.windows.cursors": {
+        settingsHandlers: {
+            explode: {
+                type: "gpii.tests.journal.explodingSettingsHandler",
+                supportedSettings: {
+                    AppStarting: {}
                 },
-                maybeThrow: {
-                    type: "gpii.tests.journal.throwingSettingsHandler",
-                    supportedSettings: {
-                        AppStarting: {}
-                    },
-                    capabilitiesTransformations: {
-                        AppStarting: {
-                            transform: {
-                                type: "fluid.transforms.value",
-                                inputPath: "http://registry\\.gpii\\.net/common/cursorSize",
-                                outputPath: "value"
-                            }
+                capabilitiesTransformations: {
+                    AppStarting: {
+                        transform: {
+                            type: "fluid.transforms.value",
+                            inputPath: "http://registry\\.gpii\\.net/common/cursorSize",
+                            outputPath: "value"
                         }
-                    }
-                },
-                configure: {
-                    supportedSettings: {
-                        AppStarting: {}
                     }
                 }
             },
-            restore: ["settings.maybeThrow", "settings.configure"],
-            // It's necessary to execute settings.maybeThrow otherwise its entry does not appear in the snapshotted solutions
-            // registry block entered into the journal, and hence it cannot be found on the next turn
-            configure: ["settings.configure", "settings.maybeThrow", "settings.explode"]
-        }
+            maybeThrow: {
+                type: "gpii.tests.journal.throwingSettingsHandler",
+                supportedSettings: {
+                    AppStarting: {}
+                },
+                capabilitiesTransformations: {
+                    AppStarting: {
+                        transform: {
+                            type: "fluid.transforms.value",
+                            inputPath: "http://registry\\.gpii\\.net/common/cursorSize",
+                            outputPath: "value"
+                        }
+                    }
+                }
+            },
+            configure: {
+                supportedSettings: {
+                    AppStarting: {}
+                }
+            }
+        },
+        restore: ["settings.maybeThrow", "settings.configure"],
+        // It's necessary to execute settings.maybeThrow otherwise its entry does not appear in the snapshotted solutions
+        // registry block entered into the journal, and hence it cannot be found on the next turn
+        configure: ["settings.configure", "settings.maybeThrow", "settings.explode"]
     }
 };
 

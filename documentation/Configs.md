@@ -84,3 +84,18 @@ for the reset API and how to use it.
 **Purpose**: This config fetches default settings from a remote URL. The default URL is set to
 `https://raw.githubusercontent.com/GPII/universal/master/testData/defaultSettings/defaultSettings.win32.json5`
 in this config. See [Reset Computer](ResetComputer.md) for what are default settings.
+
+### Load Solutions from the Repository in Production Contexts
+
+**Config file**: [`%flowManager/configs/gpii.config.local.flowManager.loadSolutionsFromRepository.json5`](../gpii/node_modules/flowManager/configs/gpii.config.local.flowManager.loadSolutionsFromRepository.json5)
+
+**Purpose**: This add-on config is for use in production where the cloud based
+flow manager supports a valid `/revision` end point, and where the local
+flow manager loads solutions registries from both its local hard drive and from
+the source code repository.  See [SolutionsRegistryDataSource](SolutionsRegistryDataSource.md#local-flow-manager-solutions-registry-data-source)
+for more details.
+
+In addition, for development testing, the default is to assume there is no valid
+revision, and no request for the revision is made (see [GpiiRevisionRequester.js](../gpii/node_modules/flowManager/src/GpiiRevisionRequester.js)).
+This is done by setting the requester's `cloudURL` option to `null`.  This
+effectively stops the process of loading solutions from the repository.

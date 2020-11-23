@@ -1,5 +1,5 @@
 /**
-GPII Production Config tests
+GPII Production Config tests - Cloud Status
 
 Requirements:
 * an internet connection
@@ -10,7 +10,7 @@ Requirements:
 ---
 
 Copyright 2015 Raising the Floor - International
-Copyright 2018, 2019 OCAD University
+Copyright 2018-2020 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -36,38 +36,18 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
-require("../shared/DevelopmentTestDefs.js");
 require("./ProductionTestsUtils.js");
 
-// Flowmanager tests for:
-// /user/%gpiiKey/login and /user/%gpiiKey/logout (as defined in gpii.tests.development.testDefs),
+gpii.tests.productionConfigTesting.validGpiiRevision = require(
+    fluid.module.resolvePath(
+        "%gpii-universal/gpii-revision.json"
+    )
+);
+
+// Flowmanager tests for these http endpoints:
 // /health,
 // /ready,
-gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
-    var testDef = fluid.extend(true, {}, testDefIn, {
-        name: "Flow Manager production tests -- status, login, and logout",
-        config: gpii.tests.productionConfigTesting.config,
-        expect: 6,
-        components: {
-            healthRequest: {
-                type: "gpii.tests.productionConfigTesting.cloudStatusRequest",
-                options: {
-                    path: "/health",
-                    expectedPayload: {"isHealthy": true}
-                }
-            },
-            readyRequest: {
-                type: "gpii.tests.productionConfigTesting.cloudStatusRequest",
-                options: {
-                    path: "/ready",
-                    expectedPayload: {"isReady": true}
-                }
-            }
-        },
-        sequenceGrade: "gpii.tests.productionConfigTesting.cloudStatusSequence"
-    });
-    return testDef;
-});
+// /revision
 
 fluid.defaults("gpii.tests.productionConfigTesting.cloudStatus", {
     gradeNames: ["fluid.test.sequenceElement"],
@@ -83,6 +63,11 @@ fluid.defaults("gpii.tests.productionConfigTesting.cloudStatus", {
         }, {
             event: "{readyRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testResponse"
+        }, {
+            func: "{revisionRequest}.sendToCBFM"
+        }, {
+            event: "{revisionRequest}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testResponse"
         },
         { funcName: "fluid.log", args: ["Cloud status tests end"]}
     ]
@@ -94,12 +79,38 @@ fluid.defaults("gpii.tests.productionConfigTesting.cloudStatusSequence", {
         cloudStatus: {
             gradeNames: "gpii.tests.productionConfigTesting.cloudStatus",
             priority: "after:startServer"
-        },
-        loginLogout: {
-            gradeNames: "gpii.tests.development.loginLogout",
-            priority: "after:cloudStatus"
         }
     }
 });
+
+gpii.tests.productionConfigTesting.testDefs = [{
+    name: "Flow Manager production tests -- Cloud status",
+    config: gpii.tests.productionConfigTesting.config,
+    expect: 6,
+    components: {
+        healthRequest: {
+            type: "gpii.tests.productionConfigTesting.cloudStatusRequest",
+            options: {
+                path: "/health",
+                expectedPayload: {"isHealthy": true}
+            }
+        },
+        readyRequest: {
+            type: "gpii.tests.productionConfigTesting.cloudStatusRequest",
+            options: {
+                path: "/ready",
+                expectedPayload: {"isReady": true}
+            }
+        },
+        revisionRequest: {
+            type:  "gpii.tests.productionConfigTesting.cloudStatusRequest",
+            options: {
+                path: "/revision",
+                expectedPayload: gpii.tests.productionConfigTesting.validGpiiRevision
+            }
+        }
+    },
+    sequenceGrade: "gpii.tests.productionConfigTesting.cloudStatusSequence"
+}];
 
 gpii.test.runServerTestDefs(gpii.tests.productionConfigTesting.testDefs);
