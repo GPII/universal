@@ -26,8 +26,10 @@ module.exports = [
     "windows/windows-builtIn-testSpec.js",
     "windows/windows-jaws-testSpec.js",
     "windows/windows-nvda-testSpec.js",
-    "windows/windows-magic-testSpec.js",
+    // TODO: Make the MAGic tests something other than a copy of the JAWS tests.
+    //"windows/windows-magic-testSpec.js",
     "windows/windows-uioPlus-testSpec.js",
+    "windows/windows-zoomtext-testSpec.js",
     "windows/windows-readWrite12-testSpec.js",
     "windows/windows-dynamicDeviceReporter-testSpec.js",
     "windows/windows-learningTools-testSpec.js"

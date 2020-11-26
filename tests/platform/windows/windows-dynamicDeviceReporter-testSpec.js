@@ -127,21 +127,21 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "speech.espeak.rate": 17,
+                            "speech.espeak.rate": 40,
                             "speech.espeak.volume": 80,
                             "speech.espeak.pitch": 60,
-                            "speech.espeak.rateBoost": true,
+                            "speech.espeak.rateBoost": "True",
                             "speech.synth": "espeak",
                             "speech.outputDevice": "Microsoft Sound Mapper",
                             "speech.symbolLevel": 300,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "reviewCursor.followFocus": false,
-                            "reviewCursor.followCaret": true,
-                            "reviewCursor.followMouse": true,
-                            "keyboard.speakTypedWords": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false,
-                            "speech.espeak.sayCapForCapitals": true
+                            "speech.espeak.voice": "en-us",
+                            "reviewCursor.followFocus": "False",
+                            "reviewCursor.followCaret": "True",
+                            "reviewCursor.followMouse": "True",
+                            "keyboard.speakTypedWords": "True",
+                            "keyboard.speakTypedCharacters": "False",
+                            "presentation.reportHelpBalloons": "False",
+                            "speech.espeak.sayCapForCapitals": "True"
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"

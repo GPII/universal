@@ -1,0 +1,9 @@
+windows-zoomtext-testSpec.js
+
+Descriptions:
+This will run the acceptance tests for the ZoomText 10.1 (AiSquared). It uses 4 NP sets: zoomtext_application.json, zoomtext_common.json, zoomtext_common2.json and zoomtext_common3.json
+
+Prerequisites:
+* ZoomText needs to be installed
+
+Only works with ZoomText 10.1

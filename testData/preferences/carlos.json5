@@ -1,0 +1,25 @@
+//# Carlos
+//
+// This preference set sets the Windows color filters to 'Grayscale inverted', and also
+// enables the feature for toggling the color filters using the shortcut: "Windows + Ctrl+ C".
+//
+//## Testing
+//
+// Color should change when the user is logged in, the screen color should change to 'Grayscale inverted',
+// and the setting 'Allow the shortcut key to toggle filter on or off' should be turned on.
+{
+    "flat": {
+        "name": "Carlos",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.colorFilters": {
+                        "FilterType": 2,
+                        "ShortcutKeyEnable": true
+                    }
+                }
+            }
+        }
+    }
+}

@@ -20,8 +20,8 @@
                     "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
                         "Enabled": true
                     },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningSounds": {
-                        "Enabled": true
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningSound": {
+                        "Sound on Activation": 1
                     }
                 }
             }

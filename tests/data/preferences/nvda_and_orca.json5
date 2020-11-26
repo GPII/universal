@@ -1,0 +1,43 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/org.nvda-project": {
+                        "speech.synth": "espeak",
+                        "speech.outputDevice": "Microsoft Sound Mapper",
+                        "speech.symbolLevel": 300,
+                        "speech.espeak.rate": 40,
+                        "speech.espeak.voice": "en-us",
+                        "speech.espeak.pitch": 60,
+                        "speech.espeak.volume": 80,
+                        "reviewCursor.followFocus": "False",
+                        "reviewCursor.followCaret": "True",
+                        "reviewCursor.followMouse": "True",
+                        "keyboard.speakTypedWords": "True",
+                        "speech.espeak.rateBoost": "True",
+                        "keyboard.speakTypedCharacters": "False",
+                        "presentation.reportHelpBalloons": "False",
+                        "speech.espeak.sayCapForCapitals": "True",
+                        "virtualBuffers.autoSayAllOnPageLoad": "False"
+                    },
+                    "http://registry.gpii.net/applications/org.gnome.orca": {
+                        "sayAllStyle": 1,
+                        "enableEchoByWord": 1,
+                        "enableEchoByCharacter": 0,
+                        "voices.default.rate": 102.27272727272727,
+                        "enableTutorialMessages": 0,
+                        "voices.default.family": {
+                            "locale": "en",
+                            "name": "en-westindies"
+                        },
+                        "voices.default.average-pitch": 1,
+                        "voices.default.gain": 7,
+                        "verbalizePunctuationStyle": 0
+                    }
+                }
+            }
+        }
+    }
+}

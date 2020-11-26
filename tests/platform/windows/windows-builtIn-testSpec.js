@@ -82,7 +82,7 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "DoubleClickWidthConfig": {
-                                "value": 32
+                                "value": 4
                             }
                         },
                         "options": {
@@ -92,35 +92,24 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "DoubleClickHeightConfig": {
-                                "value": 32
+                                "value": 4
                             }
                         },
                         "options": {
                             "functionName": "DoubleClickHeight"
                         }
-                    },
-                    {
-                        "settings": {
-                            "Volume": {
-                                "value": 0.7
-                            }
-                        },
-                        "options": {
-                            "functionName": "Volume"
-                        }
                     }
-                ],
-                "com.microsoft.windows.mirrorScreen": [
-                    {
-                        "settings": {
-                            "ScreenMirrorConfig": {
-                                "value": false
-                            }
-                        },
-                        "options": {
-                            "functionName": "ScreenMirror"
-                        }
-                    }
+                    // TODO: Disabled due to GPII-4518
+                    //{
+                    //    "settings": {
+                    //        "Volume": {
+                    //            "value": 0.7
+                    //        }
+                    //    },
+                    //    "options": {
+                    //        "functionName": "Volume"
+                    //    }
+                    //}
                 ]
             },
             "gpii.windows.spiSettingsHandler": {
@@ -285,7 +274,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "EnhancePrecisionConfig": {
                                 "path": "pvParam",
-                                "value": [0, 0, 1]
+                                "value": [6, 10, 1]
                             }
                         },
                         "options": {
@@ -382,11 +371,12 @@ gpii.tests.windows.builtIn = [
                             "MaxSpeed": {
                                 "path": "pvParam.iMaxSpeed",
                                 "value": 100
-                            },
-                            "Acceleration": {
-                                "path": "pvParam.iTimeToMaxSpeed",
-                                "value": 1000
                             }
+                            // See solution spec in win32.json
+                            // "Acceleration": {
+                            //     "path": "pvParam.iTimeToMaxSpeed",
+                            //     "value": 1000
+                            // }
                         },
                         "options": {
                             "getAction": "SPI_GETMOUSEKEYS",
@@ -424,11 +414,12 @@ gpii.tests.windows.builtIn = [
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
                                 "value": true
-                            },
-                            "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
-                                "value": 1000
                             }
+                            // TODO: Reenable this once we can confirm a safe range of values that work with the SPI settings handler.
+                            // "BounceKeysInterval": {
+                            //     "path": "pvParam.iBounceMSec",
+                            //     "value": 0
+                            // }
                         },
                         "options": {
                             "getAction": "SPI_GETFILTERKEYS",
@@ -536,7 +527,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -634,36 +625,39 @@ gpii.tests.windows.builtIn = [
                             "DetailedFeedback": "REG_DWORD"
                         }
                     }
-                }, { // TypingEnhancement
-                    "settings": {
-                        "EnableAutocorrection": 1,
-                        "EnableSpellchecking": 1,
-                        "EnableTextPrediction": 1,
-                        "EnablePredictionSpaceInsertion": 1,
-                        "EnableDoubleTapSpace": 1,
-                        "EnableKeyAudioFeedback": 1,
-                        "EnableAutoShiftEngage": 1,
-                        "EnableShiftLock": 1,
-                        "EnableCompatibilityKeyboard": 1,
-                        "EnableDesktopModeAutoInvoke": 1
-                    },
-                    "options": {
-                        "hKey": "HKEY_CURRENT_USER",
-                        "path": "Software\\Microsoft\\TabletTip\\1.7",
-                        "dataTypes": {
-                            "EnableAutocorrection": "REG_DWORD",
-                            "EnableSpellchecking": "REG_DWORD",
-                            "EnableTextPrediction": "REG_DWORD",
-                            "EnablePredictionSpaceInsertion": "REG_DWORD",
-                            "EnableDoubleTapSpace": "REG_DWORD",
-                            "EnableKeyAudioFeedback": "REG_DWORD",
-                            "EnableAutoShiftEngage": "REG_DWORD",
-                            "EnableShiftLock": "REG_DWORD",
-                            "EnableCompatibilityKeyboard": "REG_DWORD",
-                            "EnableDesktopModeAutoInvoke": "REG_DWORD"
-                        }
-                    }
-                }],
+                }
+                // TODO: Confirm working individually using programatic tests.
+                // { // TypingEnhancement
+                //     "settings": {
+                //         "EnableAutocorrection": true,
+                //         "EnableSpellchecking": true,
+                //         "EnableTextPrediction": true,
+                //         "EnablePredictionSpaceInsertion": true,
+                //         "EnableDoubleTapSpace": true,
+                //         "EnableKeyAudioFeedback": true,
+                //         "EnableAutoShiftEngage": true,
+                //         "EnableShiftLock": true,
+                //         "EnableCompatibilityKeyboard": true,
+                //         "EnableDesktopModeAutoInvoke": true
+                //     },
+                //     "options": {
+                //         "hKey": "HKEY_CURRENT_USER",
+                //         "path": "Software\\Microsoft\\TabletTip\\1.7",
+                //         "dataTypes": {
+                //             "EnableAutocorrection": "REG_DWORD",
+                //             "EnableSpellchecking": "REG_DWORD",
+                //             "EnableTextPrediction": "REG_DWORD",
+                //             "EnablePredictionSpaceInsertion": "REG_DWORD",
+                //             "EnableDoubleTapSpace": "REG_DWORD",
+                //             "EnableKeyAudioFeedback": "REG_DWORD",
+                //             "EnableAutoShiftEngage": "REG_DWORD",
+                //             "EnableShiftLock": "REG_DWORD",
+                //             "EnableCompatibilityKeyboard": "REG_DWORD",
+                //             "EnableDesktopModeAutoInvoke": "REG_DWORD"
+                //         }
+                //     }
+                // }
+                ],
                 "com.microsoft.windows.onscreenKeyboard": [{
                     "settings": {
                         "NavigationMode": 0,
@@ -727,16 +721,17 @@ gpii.tests.windows.builtIn = [
                 }],
                 "com.microsoft.windows.soundSentry": [{
                     "settings": {
-                        "WindowsEffect": 2
+                        "WindowsEffect": "2"
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
                         "path": "Control Panel\\Accessibility\\SoundSentry",
                         "dataTypes": {
-                            "WindowsEffect": "REG_DWORD"
+                            "WindowsEffect": "REG_SZ"
                         }
                     }
                 }],
+                // TODO: Break this apart and test each setting individually
                 "com.microsoft.windows.shortcutWarningMessage": [{
                     "settings": {
                         "Warning Sounds": 1
@@ -817,7 +812,8 @@ gpii.tests.windows.builtIn = [
                         "Async": true,
                         "CheckResult": true
                     }
-                }],
+                }]/*,
+ * These settings have been commented out for https://issues.gpii.net/browse/GPII-4462
                 "com.microsoft.windows.narrator": [{
                     "settings": {
                         "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
@@ -831,7 +827,7 @@ gpii.tests.windows.builtIn = [
                         "Async": true,
                         "CheckResult": true
                     }
-                }]
+                }]*/
             }
         },
         gradeNames: "gpii.test.integration.actionHandlersAware.windows"
@@ -982,11 +978,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": false
-                            },
-                            "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
-                                "value": 0
+                                "value": true
                             }
                         },
                         "options": {
@@ -1027,7 +1019,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1205,11 +1197,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": false
-                            },
-                            "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
-                                "value": 0
+                                "value": true
                             }
                         },
                         "options": {
@@ -1250,7 +1238,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1428,11 +1416,7 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "FilterKeysEnable": {
                                 "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
-                                "value": false
-                            },
-                            "BounceKeysInterval": {
-                                "path": "pvParam.iBounceMSec",
-                                "value": 0
+                                "value": true
                             }
                         },
                         "options": {
@@ -1473,7 +1457,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1538,127 +1522,6 @@ gpii.tests.windows.builtIn = [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "osk.exe"
-                            }
-                        ]
-                    }
-                }]
-            }
-        }
-    }, {
-        name: "Testing os_gnome using default matchmaker",
-        gpiiKey: "os_gnome",
-        initialState: {
-            "gpii.windows.enableRegisteredAT": {
-                "com.microsoft.windows.magnifier": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        "verifySettings": true,
-                        retryOptions: {
-                            rewriteEvery: 0,
-                            numRetries: 20,
-                            retryInterval: 1000
-                        },
-                        "registryName": "magnifierpane",
-                        "getState": [
-                            {
-                                "type": "gpii.processReporter.find",
-                                "command": "Magnify.exe"
-                            }
-                        ]
-                    }
-                }],
-                "com.microsoft.windows.onscreenKeyboard": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        "registryName": "osk",
-                        "getState": [
-                            {
-                                "type": "gpii.processReporter.find",
-                                "command": "osk.exe"
-                            }
-                        ]
-                    }
-                }]
-            }
-        },
-        settingsHandlers: {
-            "gpii.windows.registrySettingsHandler": {
-                "com.microsoft.windows.magnifier": [{ // magnifier stuff
-                    "settings": {
-                        "Magnification": 150,
-                        "MagnificationMode": 2
-                    },
-                    "options": {
-                        "hKey": "HKEY_CURRENT_USER",
-                        "path": "Software\\Microsoft\\ScreenMagnifier",
-                        "dataTypes": {
-                            "Magnification": "REG_DWORD",
-                            "Invert": "REG_DWORD",
-                            "FollowFocus": "REG_DWORD",
-                            "FollowCaret": "REG_DWORD",
-                            "FollowMouse": "REG_DWORD",
-                            "MagnificationMode": "REG_DWORD"
-                        }
-                    }
-                }],
-                "com.microsoft.windows.cursors": [{ // cursor size stuff
-                    "settings": {
-                        "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
-                        "Help": "%SystemRoot%\\cursors\\help_l.cur",
-                        "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
-                        "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
-                        "NWPen": "%SystemRoot%\\cursors\\pen_l.cur",
-                        "SizeNS": "%SystemRoot%\\cursors\\size4_l.cur",
-                        "SizeWE": "%SystemRoot%\\cursors\\size3_l.cur",
-                        "SizeAll": "%SystemRoot%\\cursors\\move_l.cur",
-                        "UpArrow": "%SystemRoot%\\cursors\\up_l.cur",
-                        "SizeNESW": "%SystemRoot%\\cursors\\size1_l.cur",
-                        "SizeNWSE": "%SystemRoot%\\cursors\\size2_l.cur",
-                        "AppStarting": "%SystemRoot%\\cursors\\wait_l.cur"
-                    },
-                    "options": {
-                        "hKey": "HKEY_CURRENT_USER",
-                        "path": "Control Panel\\Cursors",
-                        "dataTypes": {
-                            "Arrow": "REG_SZ",
-                            "Hand": "REG_SZ",
-                            "Help": "REG_SZ",
-                            "AppStarting": "REG_SZ",
-                            "No": "REG_SZ",
-                            "NWPen": "REG_SZ",
-                            "SizeAll": "REG_SZ",
-                            "SizeNESW": "REG_SZ",
-                            "SizeNS": "REG_SZ",
-                            "SizeNWSE": "REG_SZ",
-                            "SizeWE": "REG_SZ",
-                            "UpArrow": "REG_SZ",
-                            "Wait": "REG_SZ"
-                        }
-                    }
-                }]
-            },
-            "gpii.windows.enableRegisteredAT": {
-                "com.microsoft.windows.magnifier": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        "verifySettings": true,
-                        retryOptions: {
-                            rewriteEvery: 0,
-                            numRetries: 20,
-                            retryInterval: 1000
-                        },
-                        "registryName": "magnifierpane",
-                        "getState": [
-                            {
-                                "type": "gpii.processReporter.find",
-                                "command": "Magnify.exe"
                             }
                         ]
                     }

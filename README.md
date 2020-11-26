@@ -62,7 +62,7 @@ The Flow Manager with the `gpii.config.cloudBased.flowManager.production` config
  preferences (default: `http://localhost:8081`)
 * `GPII_DATASOURCE_HOSTNAME`: The host name of CouchDB (default: `http://localhost`)
 * `GPII_DATASOURCE_PORT`: The port of CouchDB (default: 5984)
-* `GPII_CLOUD_URL`: The URL to GPII Cloud (default: `http://localhost:8084`). Used by untrusted local flow manager
+* `GPII_CLOUD_URL`: The URL to GPII Cloud (default: `http://localhost:8084`). Used by an untrusted local flow manager
  to communicate with GPII Cloud.
 
 #### Example:
@@ -235,8 +235,8 @@ The tests are run in one of two ways, using the following commands:
 
 ### Coverage Reporting
 
-The preferred way to consistently generate a code coverage report is to use Vagrant as described above.  When you
-start a VM using `vagrant up` and run `npm run test:vagrant`, the full test suite will run in the VM, and at then end of
+The preferred way to consistently generate a code coverage report is to use Vagrant as described above.  When you start
+a VM using `vagrant up` and run `npm run test:vagrant`, the full test suite will run in the VM, and at then end of
 the run:
 
 1. A summary of the report will be displayed to the console.

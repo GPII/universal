@@ -1,0 +1,55 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.aisquared.zoomtext": {
+                        // [Preferences]
+                        "Preferences.SmartInvert": 1,
+
+                        // [ZtSpeech]
+                        "ZtSpeech.SapiProductName": "VocalizerExpressive-Dutch",
+                        "ZtSpeech.Language": 12,
+
+                        // [VocalizerExpressive-Dutch Speech - Screen Reader]
+                        // ==================================================================
+                        "VocalizerExpressive-Dutch Speech - Screen Reader.Valid": 1,
+                        "VocalizerExpressive-Dutch Speech - Screen Reader.SettingsValid": 1,
+                        "VocalizerExpressive-Dutch Speech - Screen Reader.Muted": 0,
+                        "VocalizerExpressive-Dutch Speech - Screen Reader.Voice": 0,
+                        "VocalizerExpressive-Dutch Speech - Screen Reader.Rate": 120,
+                        "VocalizerExpressive-Dutch Speech - Screen Reader.Volume": 70,
+                        "VocalizerExpressive-Dutch Speech - Screen Reader.Pitch": 35,
+
+                        // [VocalizerExpressive-Dutch Speech - DocReader]
+                        "VocalizerExpressive-Dutch Speech - DocReader.Valid": 1,
+                        "VocalizerExpressive-Dutch Speech - DocReader.SettingsValid": 1,
+                        "VocalizerExpressive-Dutch Speech - DocReader.Muted": 0,
+                        "VocalizerExpressive-Dutch Speech - DocReader.Voice": 0,
+                        "VocalizerExpressive-Dutch Speech - DocReader.Rate": 120,
+                        "VocalizerExpressive-Dutch Speech - DocReader.Volume": 70,
+                        "VocalizerExpressive-Dutch Speech - DocReader.Pitch": 35,
+
+                        // [Magnifier]
+                        "PRIMARY.magPower": 140,
+                        "STATIC 1.magPower": 140,
+
+                        // [EchoTyping]
+                        "EchoTyping.Mode": 32769,
+                        // [EchoMouse]
+                        "EchoMouse.HoverMode": 1,
+                        "EchoMouse.LineMode": 0,
+
+                        // [PointerScheme]
+                        "PointerScheme.PtrEnhEnable": 1,
+                        "PointerScheme.PtrEnhIndex": 2,
+
+                        // [Tracking]
+                        "Tracking.RouteMouse": 0
+                    }
+                }
+            }
+        }
+    }
+}
