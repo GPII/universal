@@ -36214,8 +36214,11 @@
         },
         "settingsHandlers": {
             "configure": {
-                "type": "gpii.settingsHandlers.noSettings",
+                "type": "gpii.settingsHandlers.webSockets",
                 "liveness": "live",
+                "options": {
+                  "path": "net.gpii.morphic"
+                },
                 "supportedSettings": {
                     "qss.showQssOnStart": {
                         "schema": {
@@ -36287,6 +36290,11 @@
                     }
                 }
             }
-        }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
     }
 }
