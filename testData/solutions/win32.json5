@@ -36220,7 +36220,7 @@
                   "path": "net.gpii.morphic"
                 },
                 "supportedSettings": {
-                    "qss.showQssOnStart": {
+                    "showQssOnStart": {
                         "schema": {
                             "title": "Show QSS on Start",
                             "description": "Determines if the QSS will be shown automatically on Morphic's startup",
@@ -36228,51 +36228,92 @@
                             "default": false
                         }
                     },
-                    "qss.alwaysUseChrome": {
+                    "tooltipDisplayDelay": {
+                        "schema": {
+                            "title": "QSS button tooltip delay",
+                            "description": "Defines the delay in milliseconds before the tooltip is shown after a QSS button is selected",
+                            "type": "integer",
+                            "default": 500,
+                            "minimum": 1,
+                            "maximum": 10000
+                        }
+                    },
+                    "scaleFactor": {
+                        "schema": {
+                            "title": "QSS scaling factor",
+                            "description": "The scaling factor for the QSS",
+                            "type": "number",
+                            "default": 1.2,
+                            "minimum": 1,
+                            "maximum": 2
+                        }
+                    },
+                    "alwaysUseChrome": {
                         "schema": {
                             "title": "Always Use Chrome",
-                            "description": "Determines if Morphic should always use Chrome for launching external services.",
+                            "description": "Determines if Morphic should always use Chrome for launching external services",
                             "type": "boolean",
                             "default": false
                         }
                     },
-                    "qss.buttonList": {
+                    "appBarQss": {
+                        "schema": {
+                            "title": "Dock to bottom",
+                            "description": "Make the QSS dock to the bottom of the screen, so application windows are positioned above it",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "buttonList": {
                         "schema": {
                             "title": "QSS Button List",
                             "description": "List of the desired list of buttons shown in QSS",
                             "type": "array",
                             "default": [
-                                "language",
-                                "translate-tools",
                                 "screen-zoom",
                                 "text-zoom",
-                                "screen-capture",
-                                "office-simplification",
                                 "high-contrast",
-                                "read-aloud",
+                                "color-vision",
+                                "mouse",
                                 "volume",
+                                "||",
+                                "read-aloud",
+                                "snipping-tool",
+                                "office-simplification",
                                 "launch-documorph",
-                                "cloud-folder-open",
                                 "usb-open",
-                                "separator-visible",
+                                "||",
                                 "service-more",
                                 "service-save",
                                 "service-undo",
-                                "service-dummy",
                                 "service-reset-all",
                                 "service-close"
                             ]
                         }
                     },
-                    "qss.closeQssOnClickOutside": {
+                    "morePanelList": {
+                        "schema": {
+                            "title": "QSS More Panel Button List",
+                            "description": "List of the desired list of buttons shown in the More Panel",
+                            "type": "array",
+                            // The more panel is able to allocate 3 rows of buttons.
+                            // Each row can contain 8 buttons. At this moment there are no default buttons.
+                            "default": [
+                                [ /* first row of buttons */ ],
+                                [ /* second row of buttons */ ],
+                                [ /* third row of buttons */ ]
+                            ]
+                        }
+                    },
+                    "closeQssOnClickOutside": {
                         "schema": {
                             "title": "Hide QSS on Outside Click",
                             "description": "Whether to hide the QSS when a user clicks outside of it",
                             "type": "boolean",
-                            "default": true
+                            "default": false
                         }
                     },
-                    "qss.disableRestartWarning": {
+                    "disableRestartWarning": {
                         "schema": {
                             "title": "Disable restart warnings",
                             "description": "Whether to disable the displaying of notifications that suggest some applications may need to be restarted in order for a changed setting to be fully applied. An example for such setting is `Language`. If set to `true`, such notifications will NOT be displayed.",
@@ -36280,7 +36321,7 @@
                             "default": true
                         }
                     },
-                    "qss.openQssShortcut": {
+                    "openQssShortcut": {
                         "schema": {
                             "title": "Open QSS Shortcut",
                             "description": "The shortcut that open the QSS. For posible values refer to: https://electronjs.org/docs/api/accelerator",
