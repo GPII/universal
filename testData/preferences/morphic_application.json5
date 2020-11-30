@@ -1,7 +1,9 @@
-// # morphic_application.json5
-//
-// ## Preference set for Morphic QSS Integration/Acceptance tests.
-//
+/* # morphic_application.json5
+ *
+ * ## Preference set used for manually testing Morphic QSS
+ * but also used by the Integration/Acceptance tests.
+ *
+ */
 {
     "flat": {
         "name": "morphic_application",
