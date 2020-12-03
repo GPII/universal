@@ -32,7 +32,6 @@ gpii.tests.windows.morphic.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "showQssOnStart": false,
                             "tooltipDisplayDelay": 2000,
                             "scaleFactor": 1,
                             "alwaysUseChrome": true,
