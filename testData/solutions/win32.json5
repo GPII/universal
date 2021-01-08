@@ -36220,14 +36220,6 @@
                   "path": "net.gpii.morphic"
                 },
                 "supportedSettings": {
-                    "showQssOnStart": {
-                        "schema": {
-                            "title": "Show QSS on Start",
-                            "description": "Determines if the QSS will be shown automatically on Morphic's startup",
-                            "type": "boolean",
-                            "default": false
-                        }
-                    },
                     "tooltipDisplayDelay": {
                         "schema": {
                             "title": "QSS button tooltip delay",
