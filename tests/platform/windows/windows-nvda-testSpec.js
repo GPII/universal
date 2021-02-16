@@ -79,21 +79,21 @@ gpii.tests.windows.nvda.testDef = [
                 "org.nvda-project": [
                     {
                         "settings": {
-                            "speech.espeak.rate": 17,
+                            "speech.espeak.rate": 40,
                             "speech.espeak.volume": 80,
                             "speech.espeak.pitch": 60,
-                            "speech.espeak.rateBoost": true,
+                            "speech.espeak.rateBoost": "True",
                             "speech.synth": "espeak",
                             "speech.outputDevice": "Microsoft Sound Mapper",
                             "speech.symbolLevel": 300,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "reviewCursor.followFocus": false,
-                            "reviewCursor.followCaret": true,
-                            "reviewCursor.followMouse": true,
-                            "keyboard.speakTypedWords": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false,
-                            "speech.espeak.sayCapForCapitals": true
+                            "speech.espeak.voice": "en-us",
+                            "reviewCursor.followFocus": "False",
+                            "reviewCursor.followCaret": "True",
+                            "reviewCursor.followMouse": "True",
+                            "keyboard.speakTypedWords": "True",
+                            "keyboard.speakTypedCharacters": "False",
+                            "presentation.reportHelpBalloons": "False",
+                            "speech.espeak.sayCapForCapitals": "True"
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
@@ -114,21 +114,21 @@ gpii.tests.windows.nvda.testDef = [
                 "org.nvda-project": [
                     {
                         "settings": {
-                            "speech.espeak.rate": 17,
+                            "speech.espeak.rate": 40,
                             "speech.espeak.volume": 80,
                             "speech.espeak.pitch": 60,
-                            "speech.espeak.rateBoost": true,
+                            "speech.espeak.rateBoost": "True",
                             "speech.synth": "espeak",
                             "speech.outputDevice": "Microsoft Sound Mapper",
                             "speech.symbolLevel": 300,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "reviewCursor.followFocus": false,
-                            "reviewCursor.followCaret": true,
-                            "reviewCursor.followMouse": true,
-                            "keyboard.speakTypedWords": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false,
-                            "speech.espeak.sayCapForCapitals": true
+                            "speech.espeak.voice": "en-us",
+                            "reviewCursor.followFocus": "False",
+                            "reviewCursor.followCaret": "True",
+                            "reviewCursor.followMouse": "True",
+                            "keyboard.speakTypedWords": "True",
+                            "keyboard.speakTypedCharacters": "False",
+                            "presentation.reportHelpBalloons": "False",
+                            "speech.espeak.sayCapForCapitals": "True"
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
@@ -149,46 +149,19 @@ gpii.tests.windows.nvda.testDef = [
                 "org.nvda-project": [
                     {
                         "settings": {
-                            "speech.espeak.rate": 17,
-                            "speech.espeak.volume": 75,
-                            "speech.espeak.pitch": 15,
-                            "speech.espeak.rateBoost": true,
+                            "speech.espeak.rate": 40,
+                            "speech.espeak.volume": 70,
+                            "speech.espeak.pitch": 10,
+                            "speech.espeak.rateBoost": "True",
                             "speech.symbolLevel": 300,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "reviewCursor.followFocus": false,
-                            "reviewCursor.followCaret": true,
-                            "reviewCursor.followMouse": true,
-                            "keyboard.speakTypedWords": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false,
-                            "speech.espeak.sayCapForCapitals": true
-                        },
-                        "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
-                        }
-                    }
-                ]
-            },
-            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
-        }
-    }, {
-        name: "Testing screenreader_orca",
-        gpiiKey: "screenreader_orca",
-        initialState: {
-            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
-        },
-        settingsHandlers: {
-            "gpii.settingsHandlers.INISettingsHandler": {
-                "org.nvda-project": [
-                    {
-                        "settings": {
-                            "speech.symbolLevel": 300,
-                            "speech.espeak.rate": 17,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "keyboard.speakTypedWords": true,
-                            "speech.espeak.rateBoost": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false
+                            "speech.espeak.voice": "en-us",
+                            "reviewCursor.followFocus": "False",
+                            "reviewCursor.followCaret": "True",
+                            "reviewCursor.followMouse": "True",
+                            "keyboard.speakTypedWords": "True",
+                            "keyboard.speakTypedCharacters": "False",
+                            "presentation.reportHelpBalloons": "False",
+                            "speech.espeak.sayCapForCapitals": "True"
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"

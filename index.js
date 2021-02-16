@@ -32,7 +32,6 @@ require("./gpii/node_modules/preferencesServer");
 require("./gpii/node_modules/ontologyHandler");
 require("./gpii/node_modules/matchMakerFramework");
 require("./gpii/node_modules/flatMatchMaker");
-require("./gpii/node_modules/contextManager");
 require("./gpii/node_modules/journal");
 require("./gpii/node_modules/eventLog");
 require("./gpii/node_modules/processReporter");

@@ -6,9 +6,6 @@
   "exclude": [
     "!**/gpii/node_modules/accessRequester/index.js",
     "!**/gpii/node_modules/accessRequester/src/accessRequester.js",
-    "!**/gpii/node_modules/contextManager/index.js",
-    "!**/gpii/node_modules/contextManager/src/ContextManager.js",
-    "!**/gpii/node_modules/contextManager/src/ContextManagerUtilities.js",
     "!**/gpii/node_modules/couchConnector/index.js",
     "!**/gpii/node_modules/couchConnector/src/js/couchConnector.js",
     "!**/gpii/node_modules/deviceReporter/index.js",

@@ -47,18 +47,18 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                     {
                         "settings": {
                             "sayAllStyle": 1,
-                            "enableSpeech": true,
-                            "enableEchoByWord": true,
-                            "enableEchoByCharacter": false,
+                            "enableSpeech": 1,
+                            "enableEchoByWord": 1,
+                            "enableEchoByCharacter": 0,
                             "voices.default.rate": 102.27272727272727,
-                            "voices.default.gain": 7.5,
-                            "enableTutorialMessages": false,
+                            "voices.default.gain": 7,
+                            "enableTutorialMessages": 0,
                             "voices.default.family": {
                                 "locale": "en",
                                 "name": "en-westindies"
                             },
                             "verbalizePunctuationStyle": 0,
-                            "voices.default.average-pitch": 1.5
+                            "voices.default.average-pitch": 1.0
                         },
                         "options": {
                             "user": "screenreader_common"
@@ -106,77 +106,20 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                     {
                         "settings": {
                             "sayAllStyle": 1,
-                            "enableEchoByWord": true,
-                            "enableEchoByCharacter": false,
+                            "enableEchoByWord": 1,
+                            "enableEchoByCharacter": 0,
                             "voices.default.rate": 102.27272727272727,
-                            "voices.default.gain": 7.5,
-                            "enableTutorialMessages": false,
+                            "voices.default.gain": 7,
+                            "enableTutorialMessages": 0,
                             "voices.default.family": {
                                 "locale": "en",
                                 "name": "en-westindies"
                             },
                             "verbalizePunctuationStyle": 0,
-                            "voices.default.average-pitch": 1.5
+                            "voices.default.average-pitch": 1.0
                         },
                         "options": {
                             "user": "screenreader_orca"
-                        }
-                    }
-                ]
-            },
-            "gpii.gsettings.launch": {
-                "org.gnome.orca": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "key": "screen-reader-enabled"
-                    }
-                }]
-            }
-        },
-        deviceReporters: {
-            "gpii.packageKit.find": {
-                "expectInstalled": ["orca"]
-            }
-        }
-    },
-    {
-        name: "Testing screenreader_nvda using Flat matchmaker",
-        gpiiKey: "screenreader_nvda",
-        initialState: {
-            "gpii.gsettings.launch": {
-                "org.gnome.orca": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "key": "screen-reader-enabled"
-                    }
-                }]
-            }
-        },
-        settingsHandlers: {
-            "gpii.orca": {
-                "some.app.id": [
-                    {
-                        "settings": {
-                            "sayAllStyle": 1,
-                            "enableSpeech": true,
-                            "enableEchoByWord": true,
-                            "enableEchoByCharacter": false,
-                            "voices.default.rate": 101.84090909090908,
-                            "enableTutorialMessages": false,
-                            "voices.default.family": {
-                                "locale": "en",
-                                "name": "en-westindies"
-                            },
-                            "verbalizePunctuationStyle": 0
-                        },
-                        "options": {
-                            "user": "screenreader_nvda"
                         }
                     }
                 ]

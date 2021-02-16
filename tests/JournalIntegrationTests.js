@@ -1,5 +1,5 @@
 /**
-GPII Context Integration Tests
+GPII Journal Integration Tests
 
 Copyright 2016 Raising the Floor - International
 
@@ -56,7 +56,13 @@ gpii.tests.journal.initialSettings = {
                 "MagnificationMode": 4,
                 "FollowFocus": 0,
                 "FollowCaret": 1,
-                "FollowMouse": 1
+                "FollowMouse": 1,
+                "FollowNarrator": 1,
+                "FadeToMagIcon": 0,
+                "ZoomIncrement": 100,
+                "UseBitmapSmoothing": 1,
+                "LensHeight": 30,
+                "LensWidth": 30
             },
             "options": {
                 "mockSync": true,
@@ -68,7 +74,13 @@ gpii.tests.journal.initialSettings = {
                     "FollowFocus": "REG_DWORD",
                     "FollowCaret": "REG_DWORD",
                     "FollowMouse": "REG_DWORD",
-                    "MagnificationMode": "REG_DWORD"
+                    "FollowNarrator": "REG_DWORD",
+                    "MagnificationMode": "REG_DWORD",
+                    "FadeToMagIcon": "REG_DWORD",
+                    "ZoomIncrement": "REG_DWORD",
+                    "UseBitmapSmoothing": "REG_DWORD",
+                    "LensHeight": "REG_DWORD",
+                    "LensWidth": "REG_DWORD"
                 }
             }
         }
@@ -103,7 +115,8 @@ gpii.tests.journal.initialSettings = {
                     }
                 }
             }
-        ],
+        ]/*,
+  *  These settings have been commented out for https://issues.gpii.net/browse/GPII-4462
         "com.microsoft.windows.narrator": [
             {
                 "settings": {
@@ -116,6 +129,7 @@ gpii.tests.journal.initialSettings = {
                 }
             }
         ]
+  */
     },
     "gpii.windows.enableRegisteredAT": {
         "com.microsoft.windows.magnifier": [{
@@ -289,7 +303,7 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 explode: {
                     type: "gpii.tests.journal.explodingSettingsHandler",
                     supportedSettings: {
-                        cursorSize: {}
+                        AppStarting: {}
                     },
                     capabilitiesTransformations: {
                         AppStarting: {
@@ -304,7 +318,7 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 maybeThrow: {
                     type: "gpii.tests.journal.throwingSettingsHandler",
                     supportedSettings: {
-                        cursorSize: {}
+                        AppStarting: {}
                     },
                     capabilitiesTransformations: {
                         AppStarting: {
@@ -318,7 +332,7 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 },
                 configure: {
                     supportedSettings: {
-                        cursorSize: {}
+                        AppStarting: {}
                     }
                 }
             },

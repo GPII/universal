@@ -12,17 +12,6 @@
                         "font": "Cantarell 18"
                     },
                     "http://registry.gpii.net/common/fontSize": 18,
-                    "http://registry.gpii.net/common/foregroundColor": "white",
-                    "http://registry.gpii.net/common/backgroundColor": "black",
-                    "http://registry.gpii.net/common/fontFaceFontName": ["Comic Sans"],
-                    "http://registry.gpii.net/common/fontFaceGenericFontFace": "sans serif",
-                    "http://registry.gpii.net/common/adaptationPreference": [
-                        {
-                            "adaptationType": "caption",
-                            "language": "en"
-                        },
-                        {}
-                    ],
                     "http://registry.gpii.net/common/tableOfContents": false
                 }
             }

@@ -15,8 +15,6 @@
 //  * SuperNova is prioritised on Windows,
 //  * Mobile Accessibility for Android is prioritised over other Android accessibility features,
 //  * Rule-Based Matchmaker.
-// * lower ambient light conditions:
-//  * the same as the above, but with a magnification of 200% and high contrast.
 {
     "flat": {
         "name": "Li",
@@ -27,8 +25,7 @@
                     "http://registry.gpii.net/common/screenReaderTTS/enabled": true,
                     "http://registry.gpii.net/common/speechRate": 200,
                     "http://registry.gpii.net/common/magnification/enabled": true,
-                    "http://registry.gpii.net/common/magnification": 1.5,
-                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                    "http://registry.gpii.net/common/magnification": 1.5
                 },
                 "metadata": [
                     {
@@ -48,8 +45,7 @@
                     "http://registry.gpii.net/common/speechRate": 200,
                     "http://registry.gpii.net/common/magnification/enabled": true,
                     "http://registry.gpii.net/common/magnification": 2,
-                    "http://registry.gpii.net/common/highContrast/enabled": true,
-                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                    "http://registry.gpii.net/common/highContrast/enabled": true
                 },
                 "metadata": [
                     {
@@ -59,13 +55,6 @@
                             "http://registry.gpii.net/applications/es.codefactory.android.app.ma"
                         ],
                         "value": 1024
-                    }
-                ],
-                "conditions": [
-                    {
-                        "type": "http://registry.gpii.net/conditions/inRange",
-                        "min": 400,
-                        "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
                     }
                 ]
             }
