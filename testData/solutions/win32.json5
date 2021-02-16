@@ -1,4 +1,35 @@
 {
+    "net.gpii.test.iod": {
+        "name": "Install on demand demo package",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "install": {
+                "type": "gpii.iod.settingsHandler",
+                "capabilities": [
+                    "http://registry\.gpii\.net/applications/net\.gpii\.test\.iod"
+                ],
+                "options": {
+                },
+//                "capabilitiesTransformations": {
+//                    "package1": "http://registry\\.gpii\\.net/applications/net\\.gpii\\.test\\.iod"
+//                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+
     "com.aisquared.zoomtext": {
         "name": "ZoomText",
         "contexts": {

@@ -210,5 +210,9 @@
 
     {
         "id": "com.microsoft.office"
+    },
+
+    {
+        "id": "net.gpii.test.iod"
     }
 ]

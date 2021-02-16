@@ -38,6 +38,7 @@ require("./gpii/node_modules/processReporter");
 require("./gpii/node_modules/gpii-db-operation");
 require("./gpii/node_modules/userListeners");
 require("./gpii/node_modules/gpii-ini-file");
+require("./gpii/node_modules/gpii-iod");
 
 gpii.loadTestingSupport = function () {
     fluid.contextAware.makeChecks({

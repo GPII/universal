@@ -7,6 +7,7 @@
     "homepage": "http://gpii.net/",
     "dependencies": {
         "body-parser": "1.18.3",
+        "bonjour": "3.5",
         "connect-ensure-login": "0.1.1",
         "express": "4.16.4",
         "express-handlebars": "3.0.0",
@@ -41,6 +42,7 @@
         "browserify": "16.2.3",
         "gpii-express": "1.0.15",
         "gpii-grunt-lint-all": "1.0.5",
+        "gpii-iodServer": "stegru/gpii-iod#GPII-2972",
         "gpii-testem": "2.1.7",
         "grunt": "1.0.3",
         "grunt-markdownlint": "2.1.0",

@@ -1,0 +1,15 @@
+{
+    "name": "nvda",
+    "description": "NVDA 2019.2",
+    "url": "https://chocolatey.org/api/v2/package/nvda/2019.2",
+    "filename": "nvda.2019.2.nupkg",
+    "packageType": "chocolatey",
+    "isInstalled": {
+        "installed": true
+    },
+    "start": "\"c:\\Program Files (x86)\\NVDA\\nvda.exe\"",
+    "stop": {
+        cmd: "taskkill",
+        args: "/f /im nvda.exe"
+    }
+}
