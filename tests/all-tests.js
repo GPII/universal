@@ -81,7 +81,8 @@ var testIncludes = [
     "../gpii/node_modules/singleInstance/test/SingleInstanceTests.js",
     "../gpii/node_modules/solutionsRegistry/test/all-tests.js",
     "../gpii/node_modules/transformer/test/TransformerTests.js",
-    "../gpii/node_modules/userListeners/test/all-tests.js"
+    "../gpii/node_modules/userListeners/test/all-tests.js",
+    "../gpii/node_modules/gpii-iod/test/all-tests.js"
 ];
 
 fluid.each(testIncludes, function (path) {
