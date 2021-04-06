@@ -1,0 +1,10 @@
+{
+    "name": "demo-package",
+    "description": "Installs a small demo application",
+    "url": "https://github.com/stegru/gpii-iod/raw/GPII-2972/testData/packages/demo-package.1.0.0.nupkg",
+    "filename": "demo-package.1.0.0.nupkg",
+    "packageType": "chocolatey",
+    "isInstalled": {
+        "installed": true
+    }
+}
