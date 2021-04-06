@@ -13,7 +13,7 @@
             "install": {
                 "type": "gpii.iod.settingsHandler",
                 "capabilities": [
-                    "http://registry\.gpii\.net/applications/net\.gpii\.test\.iod"
+                    "http://registry\\.gpii\\.net/applications/net\\.gpii\\.test\\.iod"
                 ],
                 "options": {}
             }
