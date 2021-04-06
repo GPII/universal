@@ -15,11 +15,7 @@
                 "capabilities": [
                     "http://registry\.gpii\.net/applications/net\.gpii\.test\.iod"
                 ],
-                "options": {
-                },
-//                "capabilitiesTransformations": {
-//                    "package1": "http://registry\\.gpii\\.net/applications/net\\.gpii\\.test\\.iod"
-//                }
+                "options": {}
             }
         },
         "isInstalled": [
