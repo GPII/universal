@@ -1,4 +1,3 @@
-
 {
     "flat": {
         "contexts": {
@@ -6,7 +5,7 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/net.gpii.test.iod": {
-                        "language.it-it": {},
+                        "language.it-it": {}
                     },
                     "http://registry.gpii.net/common/language": "it-it"
                 }
