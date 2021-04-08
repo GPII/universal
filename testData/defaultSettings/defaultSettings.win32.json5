@@ -17,7 +17,12 @@
                     "SwapMouseButtons": 0,
                     "DoubleClickTime": 500
                 },
-                "http://registry.gpii.net/common/cursorSize": 0
+                "http://registry.gpii.net/common/cursorSize": 0,
+                "http://registry.gpii.net/applications/net.gpii.test.iod": {
+                    "smartMouse": {},
+                    "envSerial": {},
+                    "smartBuddy": {}
+                }
             }
         }
     }
