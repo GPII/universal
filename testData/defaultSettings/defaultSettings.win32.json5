@@ -21,7 +21,7 @@
                 "http://registry.gpii.net/applications/net.gpii.test.iod": {
                     "smartMouse": {},
                     "envSerial": {},
-                    "smartBuddy": {}
+                    "focusBuddy": {}
                 }
             }
         }
