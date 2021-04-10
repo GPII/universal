@@ -1,0 +1,7 @@
+This configuration file is used for testing the Morphic QSS in Windows
+
+It includes to the basic localInstall setup for acceptance tests which includes
+the standard development config file (running GPII locally, using development setup).
+
+This config sets the device reporter file to be 'morphic.json', which will report
+Morphic as being installed on the system.

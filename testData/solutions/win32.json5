@@ -1,4 +1,31 @@
 {
+    "net.gpii.test.iod": {
+        "name": "Install on demand demo package",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "install": {
+                "type": "gpii.iod.settingsHandler",
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/applications/net\\.gpii\\.test\\.iod"
+                ],
+                "options": {}
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+
     "com.aisquared.zoomtext": {
         "name": "ZoomText",
         "contexts": {
@@ -36196,6 +36223,134 @@
                 application: "Word"
             }
         ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "net.gpii.morphic": {
+        "name": "Morphic",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.settingsHandlers.webSockets",
+                "liveness": "live",
+                "options": {
+                  "path": "net.gpii.morphic"
+                },
+                "supportedSettings": {
+                    "tooltipDisplayDelay": {
+                        "schema": {
+                            "title": "QSS button tooltip delay",
+                            "description": "Defines the delay in milliseconds before the tooltip is shown after a QSS button is selected",
+                            "type": "integer",
+                            "default": 500,
+                            "minimum": 1,
+                            "maximum": 10000
+                        }
+                    },
+                    "scaleFactor": {
+                        "schema": {
+                            "title": "QSS scaling factor",
+                            "description": "The scaling factor for the QSS",
+                            "type": "number",
+                            "default": 1.2,
+                            "minimum": 1,
+                            "maximum": 2
+                        }
+                    },
+                    "alwaysUseChrome": {
+                        "schema": {
+                            "title": "Always Use Chrome",
+                            "description": "Determines if Morphic should always use Chrome for launching external services",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "appBarQss": {
+                        "schema": {
+                            "title": "Dock to bottom",
+                            "description": "Make the QSS dock to the bottom of the screen, so application windows are positioned above it",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "buttonList": {
+                        "schema": {
+                            "title": "QSS Button List",
+                            "description": "List of the desired list of buttons shown in QSS",
+                            "type": "array",
+                            "default": [
+                                "screen-zoom",
+                                "text-zoom",
+                                "high-contrast",
+                                "color-vision",
+                                "mouse",
+                                "volume",
+                                "||",
+                                "read-aloud",
+                                "snipping-tool",
+                                "office-simplification",
+                                "launch-documorph",
+                                "usb-open",
+                                "||",
+                                "service-more",
+                                "service-save",
+                                "service-undo",
+                                "service-reset-all",
+                                "service-close"
+                            ]
+                        }
+                    },
+                    "morePanelList": {
+                        "schema": {
+                            "title": "QSS More Panel Button List",
+                            "description": "List of the desired list of buttons shown in the More Panel",
+                            "type": "array",
+                            // The more panel is able to allocate 3 rows of buttons.
+                            // Each row can contain 8 buttons. At this moment there are no default buttons.
+                            "default": [
+                                [ /* first row of buttons */ ],
+                                [ /* second row of buttons */ ],
+                                [ /* third row of buttons */ ]
+                            ]
+                        }
+                    },
+                    "closeQssOnClickOutside": {
+                        "schema": {
+                            "title": "Hide QSS on Outside Click",
+                            "description": "Whether to hide the QSS when a user clicks outside of it",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "disableRestartWarning": {
+                        "schema": {
+                            "title": "Disable restart warnings",
+                            "description": "Whether to disable the displaying of notifications that suggest some applications may need to be restarted in order for a changed setting to be fully applied. An example for such setting is `Language`. If set to `true`, such notifications will NOT be displayed.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "openQssShortcut": {
+                        "schema": {
+                            "title": "Open QSS Shortcut",
+                            "description": "The shortcut that open the QSS. For posible values refer to: https://electronjs.org/docs/api/accelerator",
+                            "type": "string",
+                            "default": "Shift+Ctrl+AltOrOption+SuperOrCmd+M"
+                        }
+                    }
+                }
+            }
+        },
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"

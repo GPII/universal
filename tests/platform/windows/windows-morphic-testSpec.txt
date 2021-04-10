@@ -1,0 +1,8 @@
+windows-morphic-testSpec.txt
+
+Descriptions:
+
+* Solution: Morphic QuickStrip
+* Device reporter file: morphic.json
+* preference sets:
+ * morphic_application

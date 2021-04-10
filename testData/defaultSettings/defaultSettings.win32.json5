@@ -2,7 +2,6 @@
     "contexts": {
         "gpii-default": {
             "preferences": {
-                "http://registry.gpii.net/common/language": "en-US",
                 "http://registry.gpii.net/common/DPIScale": 0,
                 "http://registry.gpii.net/common/highContrast/enabled": false,
                 "http://registry.gpii.net/common/highContrastTheme": "regular-contrast",
@@ -18,7 +17,20 @@
                     "SwapMouseButtons": 0,
                     "DoubleClickTime": 500
                 },
-                "http://registry.gpii.net/common/cursorSize": 0
+                "http://registry.gpii.net/common/cursorSize": 0,
+                "http://registry.gpii.net/applications/net.gpii.test.iod": {
+                    "smartMouse": {},
+                    "envSerial": {},
+                    "focusBuddy": {}
+                },
+                "http://registry.gpii.net/applications/net.gpii.morphic": {
+                    "tooltipDisplayDelay": 500,
+                    "scaleFactor": 1.2,
+                    "alwaysUseChrome": false,
+                    "appBarQss": false,
+                    "closeQssOnClickOutside": false,
+                    "disableRestartWarning": true
+                }
             }
         }
     }

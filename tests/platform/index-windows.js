@@ -25,6 +25,7 @@ module.exports = [
     "windows/windows-brightness-testSpec.js",
     "windows/windows-builtIn-testSpec.js",
     "windows/windows-jaws-testSpec.js",
+    "windows/windows-morphic-testSpec.js",
     "windows/windows-nvda-testSpec.js",
     // TODO: Make the MAGic tests something other than a copy of the JAWS tests.
     //"windows/windows-magic-testSpec.js",
