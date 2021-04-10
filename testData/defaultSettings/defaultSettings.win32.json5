@@ -22,6 +22,14 @@
                     "smartMouse": {},
                     "envSerial": {},
                     "focusBuddy": {}
+                },
+                "http://registry.gpii.net/applications/net.gpii.morphic": {
+                    "tooltipDisplayDelay": 500,
+                    "scaleFactor": 1.2,
+                    "alwaysUseChrome": false,
+                    "appBarQss": false,
+                    "closeQssOnClickOutside": false,
+                    "disableRestartWarning": true
                 }
             }
         }
